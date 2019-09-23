@@ -40,27 +40,27 @@ public class AdminServer implements IAdminServer
 		List<Admin> list=userMapper.select(where, null, null, null);
 		return list;
 	}
-	@Override
+	
 	public List<Admin> getuserByusername(String username) {
 		String where="username='"+username+"'";
 		return userMapper.select(where, null, null, null);
 	}
-	@Override
+	
 	public List<Admin> getuserAll() {
 		String orderBy="creat_time";
 		return userMapper.select(null, orderBy, null, null);
 	}
-	@Override
+	
 	public Integer updatePwd(Admin admin) {	
 		return userMapper.updatePwd(admin);
 	}
 
-	@Override
+
 	public List<Admin> getuserByid(Integer id) {
 		String where="id="+id;
 		return userMapper.select(where, null, null, null);
 	}
-	@Override
+	
 	public List<Admin> getuserByRiole(Integer userRole) {
 		String where="user_role="+userRole;
 		return userMapper.select(where, null, null, null);

@@ -24,19 +24,19 @@ public class XgkcpServerImpl implements IXgkcpServer {
 	@Autowired
 	public XgkcpMapper xgkcpMapper;
 
-	/**
-	 * 获取结果相关信息，按测评名称如：MBTI 查询（cpName）
-	 */
-	@Override
 	public List<Xgkcp> getCpResult(String cpName) {
 		String where="cp_name ='"+cpName+"'";
 		return xgkcpMapper.select(where, null, null, null);
 	}
 
-	@Override
 	public List<Xgkcp> getCpType(String cpName) {
 		String where="cp_name ='"+cpName+"'";
 		return xgkcpMapper.selectType(where, null, null, null);
 	}
+
+	/**
+	 * 获取结果相关信息，按测评名称如：MBTI 查询（cpName）
+	 */
+	
 
 }

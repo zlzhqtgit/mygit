@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cn.hqtzytb.entity.AdminRole;
 import cn.hqtzytb.mapper.AdminRoleMapper;
 
@@ -34,16 +33,16 @@ public class AdminRoleServer implements IAdminRoleServer
 		return adminRoleMapper.delete(role);
 	}
 
-	@Override
+	
 	public List<AdminRole> getAdminRoleAll() {		
 		return adminRoleMapper.select(null, null, null, null);
 	}
-	@Override
+	
 	public List<AdminRole> getAdminRoleByid(Integer roleId) {
 		String where="role_id="+roleId;
 		return adminRoleMapper.select(where, null, null, null);
 	}
-	@Override
+	
 	public List<AdminRole> getAdminRoleByName(String roleName) {
 		String where="role_name='"+roleName+"'";
 		return adminRoleMapper.select(where, null, null, null);

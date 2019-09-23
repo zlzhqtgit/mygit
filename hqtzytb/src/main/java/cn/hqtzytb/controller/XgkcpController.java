@@ -2,12 +2,12 @@ package cn.hqtzytb.controller;
 
 
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ import cn.hqtzytb.entity.XgkcpResult;
 import cn.hqtzytb.exception.MyRuntimeException;
 import cn.hqtzytb.service.IXgkcpResultServer;
 import cn.hqtzytb.service.IXgkcpServer;
-import net.sf.json.JSON;
+
 import net.sf.json.JSONArray;
 
 
@@ -198,15 +198,15 @@ public class XgkcpController {
 		if(cpType.equals("霍兰德")){
 			//排序以后截取前3个类型代码
 			List<String> mobileList = cpFengshu.entrySet().stream()
-			            .sorted((Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) -> o2.getValue() - o1.getValue())
-			            .map(entry -> entry.getKey()).collect(Collectors.toList())
-			            .subList(0, 3);		
+		            .sorted((Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) -> o2.getValue() - o1.getValue())
+		            .map(entry -> entry.getKey()).collect(Collectors.toList())
+		            .subList(0, 3);		
 			//查询数据库，查出相关的兴趣代码及相关信息
 			List<XgkcpResult> reportUrl=xgkcpResultServer.ReportUrl(mobileList, cpType);	
 			//渲染到页面				
 			String[][] str={{"R","0","现实型"},{"I","0","研究型"},{"A","0","艺术型"},{"S","0","社会型"},{"E","0","企业型"},{"C","0","常规型"}};		
 			String fs="";
-			Iterator iter = cpFengshu.entrySet().iterator(); //获得map的Iterator			
+			//Iterator iter = cpFengshu.entrySet().iterator(); //获得map的Iterator			
 			for(int i=0;i<str.length;i++){				
 				str[i][1]=cpFengshu.get(str[i][0]).toString();						
 				fs +=str[i][0]+","+str[i][1]+","+str[i][2]+"-";		
