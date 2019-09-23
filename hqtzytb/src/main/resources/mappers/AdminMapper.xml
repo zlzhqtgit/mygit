@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<mapper namespace="cn.hqtzytb.mapper.AdminMapper">
+	<!-- 添加用户信息 -->
+	<!-- Integer insert(Admin admin); -->
+		<insert id="insert" parameterType="cn.hqtzytb.entity.Admin" useGeneratedKeys="true" keyProperty="id">
+				insert into admin_user(
+					username,password,user_sex,phone,email,user_role,			
+					comment,uuid,creat_time					
+				)values(
+				#{username},#{password},
+					#{userSex},#{phone},					
+					#{email},#{userRole},#{comment},					
+					#{uuid},#{creatTime}
+				)		
+		</insert>	
+		<!-- Integer update(Admin admin); -->
+		<update id="update" parameterType="cn.hqtzytb.entity.Admin" >
+				update  admin_user set
+				username=#{username},password=#{password},user_sex=#{userSex},phone=#{phone},email=#{email},user_role=#{userRole},comment=#{comment},uuid=#{uuid},creat_time=#{creatTime}				
+				where
+					id=#{id}		
+		</update>	
+		<!-- Integer updatePwd(Admin admin); -->
+		<update id="updatePwd" parameterType="cn.hqtzytb.entity.Admin" >
+				update  admin_user set
+				password=#{password},creat_time=#{creatTime}				
+				where
+					id=#{id}		
+		</update>
+		<!-- Integer delete(Admin admin) -->	
+		<delete id="delete" parameterType="cn.hqtzytb.entity.Admin">
+			delete from admin_user 
+			where
+					id=#{id}
+		</delete>
+		<!--查询收货地址  -->
+		<select id="select" resultType="cn.hqtzytb.entity.Admin">
+			select  id,username,password,user_sex as userSex,phone,email,user_role as userRole,comment,uuid,creat_time as creatTime from admin_user 
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>				
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
