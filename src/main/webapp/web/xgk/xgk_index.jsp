@@ -531,7 +531,7 @@
 							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above</a>
 						</li>
 						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above</a>
+							<a href="">s a massive cliff 604 metres (1982 feet) above</a>
 						</li>
 					</ul>
 				</div>
