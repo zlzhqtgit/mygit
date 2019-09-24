@@ -17,8 +17,7 @@
 
 <body>
 <!-- 页面顶部-->
-<c:import url="header.jsp"></c:import>	
-		
+<c:import url="header.jsp"></c:import>			
 		<main class="container">
 			<section class="row">
 				<div class="test_instruction">
