@@ -403,8 +403,8 @@
 				    <!-- Add Pagination -->
 				    <div class="swiper-pagination"></div>
 				    <!-- Add Arrows -->
-				    <div class="swiper-button-next" style="background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_righ.png); background-color: gainsboro; opacity: .3;"></div>
-				    <div class="swiper-button-prev" style="background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_left.png); background-color: gainsboro; opacity: .3;"></div>
+				    <div class="swiper-button-next" style="background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_righ.png); background-color: gainsboro; opacity: .3;cursor: pointer;"></div>
+				    <div class="swiper-button-prev" style="background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_left.png); background-color: gainsboro; opacity: .3;cursor: pointer;"></div>
 				</div>
 			</div>
 			<script>
@@ -502,7 +502,10 @@
 			<h1 class="text-center">升学规划服务中心</h1>
 			<div class="service-center">
 				<div class="pull-left prepare">
-					<h3 class="">高考备考</h3>
+					<div class="footer_nav">
+						<h3>高考备考</h3>
+						<div class="border-bt" style="background-color: #00AEFF !important; width: 20%;margin-top:10px ;"></div>
+					</div>
 					<ul>
 						<li>
 							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above</a>
@@ -519,7 +522,10 @@
 					</ul>
 				</div>
 				<div class="pull-left">
-					<h3 class="">专家文采</h3>
+					<div class="footer_nav">
+						<h3>专家文采</h3>
+						<div class="border-bt" style="background-color: #00AEFF !important; width: 20%;margin-top:10px ;"></div>
+					</div>
 					<ul>
 						<li>
 							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above</a>
