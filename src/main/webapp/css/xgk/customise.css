@@ -1,0 +1,27 @@
+.thumbnail .answer_temp{
+	padding:0 2em;
+}
+.thumbnail h1{
+	padding-left: 2rem;
+}
+.thumbnail{
+	padding-bottom: 2em;
+}
+.options{
+	padding-left: 1em;
+	margin-bottom: 1em;
+}
+.options>div>div{
+	display: flex;
+	justify-content: flex-start;
+	
+}
+.options>div span{
+	display: inline-block;
+	width: 200px;
+	padding: .5em 0;
+}
+.options>div span label{
+	padding-left: 1em;
+}
+
