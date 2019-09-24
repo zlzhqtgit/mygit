@@ -51,6 +51,7 @@
 				<a class="next" href="javascript:void(0)"></a>
 			</div>
 			<script type="text/javascript">
+			//这是js
 				jQuery(".slideBox").slide({
 					mainCell: ".bd ul",
 					autoPlay: true
