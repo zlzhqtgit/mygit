@@ -11,7 +11,7 @@
 <meta name="keywords" content="" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/guide_select.css" />	
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/customise.css" />	
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
 
@@ -49,7 +49,7 @@
 								</div>
 							</div>
 							<p class="text-right">
-								<a class="btn btn-primary" href="${pageContext.request.contextPath}/xk/xgk_customisereport">生成我的选题报告 >></a>
+								<a class="btn btn-primary" href="${pageContext.request.contextPath}/xk/xgk_customisereport.do">生成我的选题报告 >></a>
 							</p>
 						</div>
 					</div>
