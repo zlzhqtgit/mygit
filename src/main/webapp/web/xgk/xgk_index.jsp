@@ -62,10 +62,8 @@
 			<div class="row">
 				<div class="thumbnail col-sm-6">
 					<video width="" height="" class="pull-left" controls>
-						<source src="${pageContext.request.contextPath}/img/xgk/video/GQ55LLI4.mp4" type="video/mp4">
-						</source>
-						<source src="myvideo.ogv" type="video/ogg">
-						</source>
+						<source src="${pageContext.request.contextPath}/img/xgk/video/GQ55LLI4.mp4" type="video/mp4" />						
+						<source src="myvideo.ogv" type="video/ogg" />						
 						<source src="myvideo.webm" type="video/webm">
 						</source>
 						<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">

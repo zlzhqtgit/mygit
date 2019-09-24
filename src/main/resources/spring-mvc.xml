@@ -42,7 +42,8 @@
             <mvc:exclude-mapping path="/**/hqt_login.do" /> 
             <mvc:exclude-mapping path="/main/**.do" />     
             <mvc:exclude-mapping path="/admin/**.do" /> 
-            <mvc:exclude-mapping path="/cp/**.do" />                          
+            <mvc:exclude-mapping path="/cp/**.do" />   
+            <mvc:exclude-mapping path="/xk/**.do" />                         
             <bean class="cn.hqtzytb.intercepter.LoginIntercepter" />
         </mvc:interceptor>
     </mvc:interceptors>  
