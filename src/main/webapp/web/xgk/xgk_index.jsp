@@ -408,10 +408,10 @@
 			</div>
 			<script>
 			    var consult_swiper = new Swiper('.consultents .swiper-container', {
-			      /* autoplay:{
+			      autoplay:{
 			      	delay: 2500,
 					disableOnInteraction: false,
-			      }, */
+			      },
 			      slidesPerView: 3,
 			      spaceBetween: 30,
 			      slidesPerGroup: 3,
