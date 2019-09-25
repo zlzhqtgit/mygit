@@ -26,44 +26,48 @@
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>
 
+		<style type="text/css">
+			banner .swiper-container { width: 100%; height: 100%; margin-left: auto; margin-right: auto; }
+		    banner .swiper-slide { text-align: center; font-size: 18px; background: #fff; }
+		    banner .swiper-slide a{ display: block; width: 100%; }
+		    banner .swiper-slide img { width: 100%; }
+		    banner .swiper-button-prev, .swiper-container-rtl .swiper-button-next{ background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_left.png); background-color: gainsboro; opacity: .3;cursor: pointer;left: 10px;right: auto;padding: 4em 2em; }
+		    banner .swiper-button-next, .swiper-container-rtl .swiper-button-prev{ background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_righ.png); background-color: gainsboro; opacity: .3;cursor: pointer;right: 10px;left: auto;padding: 4em 2em; }
+		</style>
 		<banner class="">
-			<div id="slideBox" class="slideBox">
-				<div class="hd">
-					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
-				</div>
-				<div class="bd">
-					<ul>
-						<li>
-							<a href="" target=""><img src="${pageContext.request.contextPath}/img/xgk/banner1.jpg" /></a>
-						</li>
-						<li>
-							<a href="" target=""><img src="${pageContext.request.contextPath}/img/xgk/timg.jpg" /></a>
-						</li>
-						<li>
-							<a href="" target=""><img src="${pageContext.request.contextPath}/img/xgk/banner.jpg" /></a>
-						</li>
-					</ul>
-				</div>
-
-				<!-- 下面是前/后按钮代码，如果不需要删除即可 -->
-				<a class="prev" href="javascript:void(0)"></a>
-				<a class="next" href="javascript:void(0)"></a>
+			 <!-- Swiper -->
+			<div class="swiper-container">
+			    <div class="swiper-wrapper">
+			      <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
+			      <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/banner1.jpg"/></a></div>
+			      <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div>
+			    </div>
+			    <!-- Add Pagination -->
+			    <div class="swiper-pagination"></div>
+			    <!-- Add Arrows -->
+			    <div class="swiper-button-next"></div>
+			    <div class="swiper-button-prev"></div>
 			</div>
-			<script type="text/javascript">
-			//这是js
-				jQuery(".slideBox").slide({
-					mainCell: ".bd ul",
-					autoPlay: true
-				});
+			<script>
+			    var swiperBanner = new Swiper('banner .swiper-container', {
+			      slidesPerView: 1,
+			      spaceBetween: 30,
+			      loop: true,
+			      pagination: {
+			        el: '.swiper-pagination',
+			        clickable: true,
+			      },
+			      navigation: {
+			        nextEl: '.swiper-button-next',
+			        prevEl: '.swiper-button-prev',
+			      },
+			    });
 			</script>
 		</banner>
+		
 		<section class="container">
 			<h1 class="text-center">视频课程</h1>
-			<div class="row">
+			<div class="row video_box">
 				<div class="thumbnail col-sm-6">
 					<video width="" height="" class="pull-left" controls>
 						<source src="${pageContext.request.contextPath}/img/xgk/video/GQ55LLI4.mp4" type="video/mp4" />						
@@ -77,7 +81,7 @@
 					</video>
 					<div class="caption"> 
 						<h3>视频简介</h3>
-						<p>点击这里下载视频点击这里下载视频点击这里下载视频...</p>
+						<p class="margin_top1">点击这里下载视频点击这里下载视频点击这里下载视频...</p>
 						<div class="font_mark">
 							<div class="pull-left text-left"><span class="glyphicon glyphicon-user text-muted"></span>超人</div>
 							<div class="pull-left text-right"><span class="glyphicon glyphicon-heart-empty text-danger"></span>9527</div>
@@ -87,67 +91,62 @@
 					</div>
 				</div>
 
-				<div class="pull-left section-content  col-sm-6">
+				<div class="section-content  col-sm-6">
 					<p>The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Lysefjorden, opposite the Kjerag plateau, in Forsand, Ryfylke, Norway. The top of the cliff is approximately 25 by 25 metres (82 by 82 feet) square and almost flat, and is a famous tourist attraction in Norway.The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Lysefjorden, opposite the Kjerag plateau, in Forsand, Ryfylke, Norway. </p>
 					<p class="text-center margin_top"><button type="button" class="btn btn-primary">更多视频 >></button></p>
 				</div>
-				<div class="clearfix"></div>
 			</div>
 		</section>
 		
 		<section class="container" style="background-color:white;">
 			<h1 class="text-center">公司业务</h1>
 			<style type="text/css">
-				<!-- Demo styles -->
-			  <style>
-			    .bussiness .swiper-container {
-			      width: 100%;
-			      height: 100%;
-			    }
-			    .bussiness .swiper-slide {
-			      text-align: center;
-			      font-size: 18px;
-			     /*  background: #fff; */
-			      height: 300px;
-			
-			      /* Center slide text vertically */
-			      display: -webkit-box;
-			      display: -ms-flexbox;
-			      display: -webkit-flex;
-			      display: flex;
-			      -webkit-box-pack: center;
-			      -ms-flex-pack: center;
-			      -webkit-justify-content: center;
-			      justify-content: center;
-			      -webkit-box-align: center;
-			      -ms-flex-align: center;
-			      -webkit-align-items: center;
-			      align-items: center;
-				  transition: 300ms;
-				  transform: scale(0.8);
-			    }
-			    .bussiness .swiper-slide img{
-        			width: 100%;
-       			}
-				.bussiness .swiper-slide-active,.swiper-slide-duplicate-active{
-			      transform: scale(1);
-			      z-index: 99999999;
-				}
-			  </style>
+				.bussiness .swiper-container { width: 100%; height: 100%; }
+				.bussiness .swiper-slide { text-align: center; font-size: 18px; border: 1px solid #eee; transition: 300ms; transform: scale(.8); }
+				.bussiness .swiper-slide img { width: 100%; }
+				.bussiness .swiper-slide-active, .swiper-slide-duplicate-active { border: 1px solid #eee; transform: scale(1); z-index: 99999999; }
 			</style>
-			<div class="bussiness">
-			  	<div class="swiper-container">
-				    <div class="swiper-wrapper">
-				      <div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify01.png"/></div>
-				      <div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify02.png"/></div>
-				      <div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/></div>
-				      <div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify04.png"/></div>
-				      <div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify05.png"/></div>
-				      <div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify01.png"/></div>				      
-				    </div>
-				    <!-- Add Pagination -->
-				    <div class="swiper-pagination"></div>
-				 </div>
+			<div class="bussiness" style="background-color: white;padding: 40px 0;">
+				<div id="item_tit" class="item_tit text-center margin_bot" style="width: 8em;margin: 0 auto;">
+					<h3>志愿填报</h3>
+					<div class="margin_bot1" style="margin-top:10px ;position: relative;border-top: 3px solid #00AEFF;"><span class="glyphicon glyphicon-play" style="transform:rotate(90deg);"></span></div>
+				</div>
+				<div class="swiper-container" style="height: 384px;">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="">
+								<img src="${pageContext.request.contextPath}/img/xgk/certify01.png"/>
+							</div>
+							<div class="padding-side">
+								<input type="hidden" name="" id="" value="志愿填报" />
+								<h3 class="margin_top1">这是比较大的一句话1</h3>
+								<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="">
+								<img src="${pageContext.request.contextPath}/img/xgk/certify02.png"/>
+							</div>
+							<div class="padding-side">
+								<input type="hidden" name="" id="" value="选科指导" />
+								<h3 class="margin_top1">这是比较大的一句话2</h3>
+								<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<div class="">
+								<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
+							</div>
+							<div class="padding-side">
+								<input type="hidden" name="" id="" value="升学规划" />
+								<h3 class="margin_top1">这是比较大的一句话3</h3>
+								<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
+							</div>
+						</div>
+					</div>
+					<!-- Add Pagination -->
+					<div class="swiper-pagination"></div>
+				</div>
 			</div>		
 		  <!-- Initialize Swiper -->
 		  <script>

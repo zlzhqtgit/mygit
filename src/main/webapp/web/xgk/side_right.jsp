@@ -25,7 +25,7 @@
 					<a href="">VIP</a>
 				</div>
 			</div>
-			<div class="text-center mark-box">
+			<div class="text-center mark-box" href="">
 				<span class="btn-mark">
 					<img src="${pageContext.request.contextPath}/img/xgk/search.png" >
 				</span>
