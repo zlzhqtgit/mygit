@@ -123,7 +123,7 @@
 											
 										</li>
 									</ol>
-									<table border="" cellspacing="" cellpadding="" style="margin: 0 auto;">
+									<table border=""  style="margin: 0 auto;">
 										<tr><th>类型</th><th>喜欢的活动</th><th>重视</th><th>职业环境要求</th><th>典型职业</th></tr>
 										<tr>
 											<td class="text-center">现实型<div>R(realistic)</div></td>
@@ -176,7 +176,7 @@
 										<p>${hldreport[0].tzVocation}</p>
 									</div>
 								</div>
-								<table border="" cellspacing="" cellpadding="">
+								<table border="" >
 									<tr><th>代码</th><th>适合的典型专业</th><th>适合的典型职业</th></tr>
 									<c:forEach items="${hldreport}" var="c" step="1" begin="1">
 										<tr>

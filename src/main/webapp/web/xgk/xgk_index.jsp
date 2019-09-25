@@ -65,15 +65,14 @@
 					<video width="" height="" class="pull-left" controls>
 						<source src="${pageContext.request.contextPath}/img/xgk/video/GQ55LLI4.mp4" type="video/mp4" />						
 						<source src="myvideo.ogv" type="video/ogg" />						
-						<source src="myvideo.webm" type="video/webm">
-						</source>
+						<source src="myvideo.webm" type="video/webm" />					
 						<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
 							<param name="movie" value="myvideo.swf" />
 							<param name="flashvars" value="autostart=true&amp;file=myvideo.swf" />
-						</object> 当前浏览器不支持 video直接播放，点击这里下载视频：
-						<a href="myvideo.webm">下载视频</a>
+						</object> 
+						当前浏览器不支持 video直接播放，点击这里下载视频：<a href="myvideo.webm" >下载视频</a>
 					</video>
-					<div class="caption">
+					<div class="caption"> 
 						<h3>视频简介</h3>
 						<p>点击这里下载视频点击这里下载视频点击这里下载视频...</p>
 						<div class="font_mark">

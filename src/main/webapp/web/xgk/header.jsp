@@ -25,7 +25,7 @@
 					<nav id="navdh" class="">
 						<a id="1" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a>
 						<a id="2" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a>
-						<a id="3" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do"">选科指导</a>
+						<a id="3" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a>
 						<a id="4" href="">职业库</a>
 						<a id="5" href="">高校专业</a>
 						<a id="6" href="">学科推荐</a>
