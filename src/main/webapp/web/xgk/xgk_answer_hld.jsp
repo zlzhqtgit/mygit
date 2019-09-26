@@ -23,19 +23,19 @@
 				<div class="test_instruction">
 					<h2 class="text-primary fontwei">霍兰德职业兴趣测评</h2>
 					<div class="thumbnail">
-						<div class="caption answer_temp">
-							<div class="user_say">
+						<div class="caption answer_temp  margin_top1">
+							<div class="user_say padding-side2">
 								<span class="glyphicon glyphicon-user text-muted"  style="font-size: 2em;margin-right:10px;line-height: 2em;"></span><span class="text-muted">您好！</span>
 							</div>
-							<h5 class="fontwei tindent" >在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。沃尔沃S90豪华轿车，以斯堪的纳维亚设计诠释北欧豪华，满载人性化创新科技，以智能引领驾驶的未来。旅程的每一步，行车随心掌控，安全如影随性，风采自信彰显。Thumbnail label驭劲悍双擎，引燃驰骋豪情</h5>
-							<div class="padding-side">
+							<h5 class="fontwei tindent padding-side2" >在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。沃尔沃S90豪华轿车，以斯堪的纳维亚设计诠释北欧豪华，满载人性化创新科技，以智能引领驾驶的未来。旅程的每一步，行车随心掌控，安全如影随性，风采自信彰显。Thumbnail label驭劲悍双擎，引燃驰骋豪情</h5>
+							<div class="padding-side2 margin_top1">
 								<ol style="padding-left: 2em;list-style: disc;">
 									<li>职业兴趣测评主要探索你的职业兴趣，每个人的职业兴趣和喜好都不尽相同，因此，你的回答没有“好、坏”与“对、错”之分。</li>
 									<li>本测评共计60道题目，请你判断每题的描述与自己的实际情况的符合程度，凭第一感觉作答。</li>
 									<li>为了让你对自己有真实的认识，答题时请依据你的日常实际表现，而不是你期望的理想表现作答，这会为你将来的专业，职业选择提供重要的参考。</li>
 								</ol>
 							</div>
-							<p class="text-right margin_top margin_bot"><a href="${pageContext.request.contextPath}/cp/xgk_answer.do?cpid=1" class="btn btn-primary" role="button">开始答题</a></p>
+							<p class="text-right margin_top margin_bot padding-side2"><a href="${pageContext.request.contextPath}/cp/xgk_answer.do?cpid=1" class="btn btn-primary" role="button">开始答题</a></p>
 						</div>
 					</div>
 				</div>
