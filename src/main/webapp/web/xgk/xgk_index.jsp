@@ -15,7 +15,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/swiper.min.js" type="text/javascript" charset="utf-8"></script>	
-<script src="${pageContext.request.contextPath}/js/web/xgk/jquery.SuperSlide.2.1.3.js" type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>
 <style type="text/css">
 	h1{font-size: 4em;}
