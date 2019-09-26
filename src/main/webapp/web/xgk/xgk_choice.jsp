@@ -18,22 +18,23 @@
 	<!-- 页面顶部-->
 	<c:import url="header.jsp"></c:import>	
 		<main class="container">
-			<div class="test_instruction">
+			<div class="test_instruction margin_top">
 				<section class="row">
-					<div class="thumbnail">
+					<!-- thumbnail -->
+					<div class="col-md-6 " style="padding:0">
 						<img style="width: 100%;" src="${pageContext.request.contextPath}/img/xgk/car.jpg" >
 						<div class="caption">
-							<h3 class="text-center">霍兰德职业兴趣测评</h3>
-							<p style="text-indent: 2em;">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
-							<p class="text-right"><a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do" class="btn bg-primary" role="button">开始测试 >></a></p>
+							<h3 class="text-center fontwei margin_top1">霍兰德职业兴趣测评</h3>
+							<p class="margin_top1 texts_hide">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
+							<p class="text-right margin_top"><a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do" class="btn bg-primary" role="button">开始测试 >></a></p>
 						</div>
 					</div>
-					<div class="thumbnail">
+					<div class="col-md-6" style="padding:0">
 						<img style="width: 100%;" src="${pageContext.request.contextPath}/img/xgk/car.jpg" >
 						<div class="caption">
-							<h3 class="text-center">MBTI职业性格测评</h3>
-							<p style="text-indent: 2em;">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
-							<p class="text-right"><a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do" class="btn bg-primary" role="button">开始测试 >></a></p>
+							<h3 class="text-center fontwei margin_top1">MBTI职业性格测评</h3>
+							<p class="margin_top1 texts_hide">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
+							<p class="text-right margin_top"><a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do" class="btn bg-primary" role="button">开始测试 >></a></p>
 						</div>
 					</div>
 					

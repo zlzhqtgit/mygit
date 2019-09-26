@@ -8,10 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<footer>
+		<footer style="padding-bottom:2em">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 list">
+					<div class="col-md-4 list" style="padding-left: 4em;">
 						<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg">
 					</div>
 					<div class="col-md-2 list">
@@ -100,16 +100,18 @@
 			<div class="clearfix"></div>
 			<div class="company-info container">
 				<div class="row">
-					<div class="col-md-5">
+					<div class="col-md-6" style="padding-left: 4em;">
 						<p>微信：xdl6666</p>
 						<p>邮箱：401375488@qq.com</p>
 						<p>电话：0851-84721064</p>
 						<p>时间：9：00-18：00</p>
 						<p>公司地址：贵阳是观山湖区世纪金源国际财富中心B栋10楼</p>
 					</div>
-					<div class="copyright col-md-7">
-						<p><span class="glyphicon glyphicon-copyright-mark"></span>2019copyright</p>
-						<p>电信与信息服务许可证：</p>
+					<div class="copyright col-md-6">
+						<div id="" style="margin-top: 3em;">
+							<p><span class="glyphicon glyphicon-copyright-mark"></span>2019copyright All Rights Reserved 贵州好前途教育科技有限公司</p>
+							<p>电信与信息服务经营许可证：</p>
+						</div>
 					</div>
 				</div>
 			</div>
