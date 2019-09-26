@@ -26,7 +26,7 @@
 						<div class="caption">
 							<h3 class="text-center fontwei margin_top1">霍兰德职业兴趣测评</h3>
 							<p class="margin_top1 texts_hide">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
-							<p class="text-right margin_top"><a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do" class="btn bg-primary" role="button">开始测试 >></a></p>
+							<p class="text-right margin_top margin_bot"><a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do" class="btn btn-primary" role="button">开始测试 >></a></p>
 						</div>
 					</div>
 					<div class="col-md-6" style="padding:0">
@@ -34,7 +34,7 @@
 						<div class="caption">
 							<h3 class="text-center fontwei margin_top1">MBTI职业性格测评</h3>
 							<p class="margin_top1 texts_hide">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
-							<p class="text-right margin_top"><a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do" class="btn bg-primary" role="button">开始测试 >></a></p>
+							<p class="text-right margin_top margin_bot"><a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do" class="btn btn-primary" role="button">开始测试 >></a></p>
 						</div>
 					</div>
 					

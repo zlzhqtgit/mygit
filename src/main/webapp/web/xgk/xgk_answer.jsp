@@ -28,14 +28,16 @@
 			     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			      <div class="modal-dialog">
 			       <div class="modal-content">
+			       <!-- <div class=""><img alt="" src=""/></div> -->
 			        <div class="modal-header  text-danger bg-warning">
 			         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			         <h4 class="modal-title" id="myModalLabel">你还有相关的测评题目没做，题目编号为：</h4>
 			        </div>
 			        <p id="un_complate" class="modal-body" style="word-wrap : break-word;width: 100%;"></p >
-			        <div class="modal-footer">
-			         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
-			        </div>
+			        <p class="modal-footer">
+			         <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">继续答题</button> -->
+			         <a href="" class="btn btn-primary" data-dismiss="modal">继续答题</a>
+			        </p>
 			       </div><!-- /.modal-content -->
 			      </div><!-- /.modal -->
 			     </div>
@@ -56,7 +58,7 @@
 						<div id="tm_box" class="side_choise">							
 							<div id="" class="btn-group">
 								<button type="button" id="dropdown_btn" onclick="sff()" class="btn btn-default dropdown-toggle">
-							    01-20 <span class="caret"></span>
+							    01-20 <span class="caret" style="margin-left: 10px;"></span>
 							  </button>
 							<div id="tmdhdiv" class="dropdown-menu"></div>
 						</div>
@@ -69,12 +71,12 @@
 					        });
 					       };
 						</script>						
-						<div class="caption answer_temp">
+						<div class="caption answer_temp" style="padding-top:8em;padding-bottom:2em;">
 							<h4 id="tm"></h4>						
-							<div class="choise" style="margin-left: 55px;">
-								<div id="tmxs"> </div>								
+							<div class="choise margin_top1" style="margin-left: 55px;">
+								<div id="tmxs"> </div>
 							</div>
-							<p class="text-right">
+							<p class="text-right margin-top" style="padding-right:2em">
 								<a id="syt" onclick="syt()" class="btn btn-default" role="button">上一题</a>
 								<a id="xyt" onclick="xyt()" class="btn btn-default btn-primary" role="button">下一题</a>
 								<a id="tjda" onclick="tjda()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">提交</a>

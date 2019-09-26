@@ -52,6 +52,14 @@
 			      slidesPerView: 1,
 			      spaceBetween: 30,
 			      loop: true,
+			      autoplay:{
+			      	delay: 2500,
+					disableOnInteraction: false,
+			      }, 
+			      effect : 'fade',
+			      fadeEffect: {
+			        crossFade: true,
+			      },
 			      pagination: {
 			        el: '.swiper-pagination',
 			        clickable: true,
@@ -64,13 +72,13 @@
 			</script>
 		</banner>
 		
-		<section class="container">
+		<section class="container margin_top">
 			<h1 class="text-center">视频课程</h1>
-			<div class="row video_box">
+			<div class="row video_box margin_top1">
 				<div class="thumbnail col-sm-6">
 					<video width="" height="" class="pull-left" controls>
 						<source src="${pageContext.request.contextPath}/img/xgk/video/GQ55LLI4.mp4" type="video/mp4" />						
-						<source src="myvideo.ogv" type="video/ogg" />						
+						<source src="myvideo.ogv" type="video/ogg" />
 						<source src="myvideo.webm" type="video/webm" />					
 						<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
 							<param name="movie" value="myvideo.swf" />
@@ -97,7 +105,7 @@
 			</div>
 		</section>
 		
-		<section class="container" style="background-color:white;">
+		<section class="container">
 			<h1 class="text-center">公司业务</h1>
 			<style type="text/css">
 				.bussiness .swiper-container { width: 100%; height: 100%; }
@@ -105,65 +113,85 @@
 				.bussiness .swiper-slide img { width: 100%; }
 				.bussiness .swiper-slide-active, .swiper-slide-duplicate-active { border: 1px solid #eee; transform: scale(1); z-index: 99999999; }
 			</style>
-			<div class="bussiness" style="background-color: white;padding: 40px 0;">
-				<div id="item_tit" class="item_tit text-center margin_bot" style="width: 8em;margin: 0 auto;">
-					<h3>志愿填报</h3>
-					<div class="margin_bot1" style="margin-top:10px ;position: relative;border-top: 3px solid #00AEFF;"><span class="glyphicon glyphicon-play" style="transform:rotate(90deg);"></span></div>
-				</div>
-				<div class="swiper-container" style="height: 384px;">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<div class="">
-								<img src="${pageContext.request.contextPath}/img/xgk/certify01.png"/>
-							</div>
-							<div class="padding-side">
-								<input type="hidden" name="" id="" value="志愿填报" />
-								<h3 class="margin_top1">这是比较大的一句话1</h3>
-								<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="">
-								<img src="${pageContext.request.contextPath}/img/xgk/certify02.png"/>
-							</div>
-							<div class="padding-side">
-								<input type="hidden" name="" id="" value="选科指导" />
-								<h3 class="margin_top1">这是比较大的一句话2</h3>
-								<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
-							</div>
-						</div>
-						<div class="swiper-slide">
-							<div class="">
-								<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
-							</div>
-							<div class="padding-side">
-								<input type="hidden" name="" id="" value="升学规划" />
-								<h3 class="margin_top1">这是比较大的一句话3</h3>
-								<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
-							</div>
+			<div class="bussiness_bg" style="height: 520px;background-color: #fff;">
+				
+				<div class="bussiness container" style="padding: 0; width: 100%;">
+					<div class="" style="">
+						<div id="item_tit" class="item_tit text-center margin_bot" style="width: 8em;margin: 0 auto;">
+							<h3 class="text-white">志愿填报</h3>
+							<div class="margin_bot1" style="margin-top:10px ;position: relative;border-top: 3px solid #fff;"><span class="glyphicon glyphicon-play text-white" style="transform:rotate(90deg);"></span></div>
 						</div>
 					</div>
-					<!-- Add Pagination -->
-					<div class="swiper-pagination"></div>
+					<div class="swiper-container" style="height: 384px;">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<div class="">
+									<img src="${pageContext.request.contextPath}/img/xgk/certify01.png"/>
+								</div>
+								<div class="padding-side">
+									<input type="hidden" name="" id="" value="志愿填报" />
+									<h3 class="margin_top1">这是比较大的一句话1</h3>
+									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="">
+									<img src="${pageContext.request.contextPath}/img/xgk/certify02.png"/>
+								</div>
+								<div class="padding-side">
+									<input type="hidden" name="" id="" value="选科指导" />
+									<h3 class="margin_top1">这是比较大的一句话2</h3>
+									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="">
+									<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
+								</div>
+								<div class="padding-side">
+									<input type="hidden" name="" id="" value="升学规划" />
+									<h3 class="margin_top1">这是比较大的一句话3</h3>
+									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
+								</div>
+							</div>
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination"></div>
+					</div>
 				</div>
-			</div>		
-		  <!-- Initialize Swiper -->
-		  <script>
-		    var swiper = new Swiper('.bussiness .swiper-container', {
-		      slidesPerView: 3,
-		      spaceBetween: 30,
-			  centeredSlides: true,
-			  loop: true,
-		      autoplay:{
-		      	delay: 2500,
-				disableOnInteraction: false,
-		      }, 
-		      pagination: {
-		        el: '.bussiness .swiper-pagination',
-		        clickable: true,
-		      },
-		    });
-		  </script>
+				
+			</div>
+
+			<!-- Initialize Swiper -->
+			<script>
+				var swiper = new Swiper('.bussiness .swiper-container', {
+					slidesPerView: 3,
+					spaceBetween: 30,
+					centeredSlides: true,
+					loop: true,
+					on:{
+			    	    slideChange: function(){
+				    	    var index=this.realIndex;
+				    	    var input_val=$(this.slides).parent().find('.swiper-slide').eq(index).find('input').val();
+				    	    $('.item_tit h3').text(input_val);
+				    	},
+		    	  	},
+			        autoplay:{
+			      	  delay: 2500,
+					  disableOnInteraction: false,
+			        },
+					pagination: {
+						el: '.bussiness .swiper-pagination',
+						clickable: true,
+					},
+				});
+				
+				var item_tit=$('.bussiness #item_tit');
+				var tit= $('.bussiness .swiper-wrapper .swiper-slide-active').find('input').val();
+				console.log(tit)
+				$('.bussiness #item_tit h3').text(tit);
+			</script>
+			<div class="clearfix"></div>
 		</section>
 
 		<section class="container">
