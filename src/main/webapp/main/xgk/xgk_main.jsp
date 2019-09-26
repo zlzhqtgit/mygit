@@ -31,12 +31,12 @@
 	</div><input type="button"  id="addBtn" value="对比" ><br>
 	<table class="table-b">
 				<thead>
-					<tr class="text-c">								
+					<!-- <tr class="text-c">								
 						<th>分类</th>						
-					</tr>
+					</tr> -->
 				</thead>
 				<tbody>					
-						<tr style="border: 2px solid #a51d1d;">
+					<!-- 	<tr style="border: 2px solid #a51d1d;">
 						<td>报考专业数</td>												
 						</tr>	
 						<tr style="border: 2px solid #a51d1d;">
@@ -47,7 +47,7 @@
 						</tr>	
 						<tr style="border: 2px solid #a51d1d;">
 						<td>不同的专业</td>												
-						</tr>								
+						</tr>	 -->							
 				</tbody>
 			</table>
 		

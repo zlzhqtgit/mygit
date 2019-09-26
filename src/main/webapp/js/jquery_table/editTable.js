@@ -12,7 +12,14 @@ $(document).ready(function() {
 	var mytime=now.toLocaleString();     //获取当前时间
     $("#addBtn").bind("click", function(){
     	var rs = document.querySelectorAll("input[type='checkbox']:checked"); 
+    	var theadstr='<table class="table-b"><thead><tr class="text-c"><th>分类</th></tr></thead>'+
+    				 '<tbody><tr style="border: 2px solid #a51d1d;"><td>报考专业数</td></tr>'+
+    		         '<tr style="border: 2px solid #a51d1d;"><td>专业大类</td></tr>'+	
+    		         '<tr style="border: 2px solid #a51d1d;"><td>专业小类</td></tr>'+	
+    		         '<tr style="border: 2px solid #a51d1d;"><td>不同的专业</td></tr></tbody>';
     	if(rs.length > 1){
+    		$("thead").append(theadstr);
+    		$("tbody").append(tbodystr);
     		for(var i=0;i<rs.length;i++){
     			alert(rs[i].value);
     		}    		
