@@ -10,41 +10,29 @@
 $(document).ready(function() { 
 	var now=new Date();
 	var mytime=now.toLocaleString();     //获取当前时间
-    $("#addBtn").bind("click", function(){  
+    $("#addBtn").bind("click", function(){
+    	var rs = document.querySelectorAll("input[type='checkbox']:checked"); 
+    	if(rs.length > 1){
+    		for(var i=0;i<rs.length;i++){
+    			alert(rs[i].value);
+    		}    		
+    	}
     	//alert($("tbody tr").length);
-    	if($("tbody tr").length==1){
+    	/*if($("tbody tr").length==1){
     		if($("tbody tr td").length==1){
     			$("tbody tr").remove();
     		}    		
     		 $("tbody").append("<tr class='text-c va-m'>"+
-			"<td><input type='checkbox'></td>"+						
-			"<td><input type='text' id='iniName' name='iniName' class='input_initd1' ></td>"+
-			"<td><input type='text' id='iniNumber' name='iniNumber' class='input_initd1' ></td>"+
-			"<td><input type='text' id='iniAdress' name='iniAdress' class='input_initd1' ></td>"+
-			"<td><input type='text' id='transTime' name='transTime' class='input_initd1' disabled='disabled' value='0'></td>"+
-			"<td><input type='text' id='20'class='input_initd' readonly unselectable='on' value='"+mytime+"'></td>"+
-			"<td class='del-col'>"+
-				"<a style='text-decoration:none' class='Hui-save' onClick='typeini_save()' href='javascript:;' title='保存'></a>"+ 
-				"<a style='text-decoration:none' class='delBtn' href='javascript:void(0);' title='删除'><i class='Hui-iconfont'>&#xe6e2;</i></a>"+
-			"</td>"+
+			"<td><input type='checkbox'></td>"+			
 		"</tr>");            
     		 delTr();    	
     		$("tbody tr:odd").css("background-color","#EEEEEE");
     	}else{
-    		 $("<tr class='text-c va-m'><td><input type='checkbox'></td>"+						
-			"<td><input type='text' id='iniName' name='iniName' class='input_initd1' ></td>"+
-			"<td><input type='text' id='iniNumber' name='iniNumber' class='input_initd1' ></td>"+
-			"<td><input type='text' id='iniAdress' name='iniAdress' class='input_initd1' ></td>"+
-			"<td><input type='text' id='transTime' name='transTime' class='input_initd1' disabled='disabled' value='0'></td>"+
-			"<td><input type='text' id='20'class='input_initd' readonly unselectable='on' value='"+mytime+"'></td>"+
-    					"<td class='del-col'>"+
-    					"<a style='text-decoration:none' class='Hui-save' onClick='typeini_save()' href='javascript:;' title='保存'></a>"+ 
-    					"<a style='text-decoration:none' class='delBtn' href='javascript:void(0);' title='删除'><i class='Hui-iconfont'>&#xe6e2;</i></a>"+
-    					"</td>"+
+    		 $("<tr class='text-c va-m'><td><input type='checkbox'></td>"+			
     				"</tr>").insertAfter($("tbody tr:last"));                       
     		 delTr();		 
     		$("tbody tr:odd").css("background-color","#EEEEEE");
-    	}        
+    	}       */ 
     });    
 	delTr();	
    }); 
