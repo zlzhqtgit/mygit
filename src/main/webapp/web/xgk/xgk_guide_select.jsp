@@ -18,10 +18,10 @@
 <body>
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>	
-	<main class="container">
+	<main class="container margin_top">
 			<section class="row">
-				<div class="margin-top">
-					<div class="thumbnail ">
+				<div class="margin_top">
+					<div class="thumbnail">
 						<div class="caption answer_temp">
 							<div class="user_say">
 								<span class="glyphicon glyphicon-user text-muted"  style="font-size: 2em;margin-right:10px;line-height: 2em;"></span><span class="text-muted fontwei">您好！请选择你的选课方式</span>

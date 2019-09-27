@@ -194,6 +194,8 @@
 										    series: [
 										        {
 										            name:'就业平均值',
+										            barGap:'80%',/*多个并排柱子设置柱子之间的间距*/
+									  	            barCategoryGap:'40%',/*多个并排柱子设置柱子之间的间距*/
 										            type:'bar',
 										            data:[2.0, 4.9, 3.0, 2.5]
 										        },
@@ -369,7 +371,7 @@
 										<p class="tindent">
 											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
 										</p>
-										<div id="major" style="width: 600px;height:500px; margin: 0 auto;"></div>
+										<div id="major" style="width: 600px;height:420px; margin: 0 auto;"></div>
 										<script type="text/javascript">
 											var option = {
 												title: {
@@ -479,7 +481,7 @@
 										<p class="">
 											以下图示仅表示推荐专业的报考的匹配度
 										</p>
-										<div id="xkxz" style="width: 600px;height:600px; margin: 0 auto;"></div>
+										<div id="xkxz" style="width: 600px;height:420px; margin: 0 auto;"></div>
 										<script type="text/javascript">
 											var option = {
 												title: {

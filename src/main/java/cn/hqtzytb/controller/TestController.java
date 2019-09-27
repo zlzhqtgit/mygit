@@ -27,4 +27,9 @@ public class TestController {
 			return  "web/xgk/xgk_error_servers";
 						
 	}
+	@RequestMapping("/report_hld.do")	
+	public String report_hld(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/xgk/report/report_hld";
+						
+	}
 }
