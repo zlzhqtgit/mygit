@@ -3,123 +3,155 @@ package cn.hqtzytb.entity;
 import java.io.Serializable;
 
 /**
-* @Title: XgkcpResult.java
-* @Package cn.hqtzytb.entity
-* @Description:(测评报告实体类)
-* @author: ZhouLingZhang
-* @date 2019年9月11日
-* @Copyright:好前途教育
-* @version V1.0
-*/
+ * @Title: XgkcpResult.java
+ * @Package cn.hqtzytb.entity
+ * @Description:(测评报告实体类)
+ * @author: ZhouLingZhang
+ * @date 2019年9月11日
+ * @Copyright:好前途教育
+ * @version V1.0
+ */
 public class XgkcpResult implements Serializable {
-	
+
 	/**
-	* @Fields serialVersionUID :(用一句话描述这个变量表示什么)
+	* @Fields serialVersionUID :(对象序列化)
 	*/
-	private static final long serialVersionUID = -7966161870934570286L;
-	private Integer tzId;//id
-	private String tzName;//测评结果名称
-	private String tzType;//测评名称：如MBTI
-	private String tzMajor;//适用的专业
-	private String tzVocation;//适用的职业
-	private String tzReport;//报告存放地址
+	private static final long serialVersionUID = -5324682786713503250L;
+	private Integer personalityId;// id
+	private String personalityCode;// 测评结果编码
+	private String personalityName;// 测评结果名称
+	private String testName;// 测评名称
+	private String personalityBrief;// 简要描述
+	private String personalityDetial;// 详细描述
+	private String personalitySpecialty;// 典型专业
+	private String personalityVocation;// 典型职业
 	/**
-	* 创建一个新的实例 XgkcpResult.
+	* 创建一个新的实例 personality.
 	*
 	*/
 	public XgkcpResult() {
 		super();
 	}
 	/**
-	* 创建一个新的实例 XgkcpResult.
+	* 创建一个新的实例 personality.
 	*
-	* @param tzId
-	* @param tzName
-	* @param tzType
-	* @param tzMajor
-	* @param tzVocation
-	* @param tzReport
+	* @param personalityId
+	* @param personalityCode
+	* @param personalityName
+	* @param testName
+	* @param personalityBrief
+	* @param personalityDetial
+	* @param personalitySpecialty
+	* @param personalityVocation
 	*/
-	public XgkcpResult(Integer tzId, String tzName, String tzType, String tzMajor, String tzVocation, String tzReport) {
+	public XgkcpResult(Integer personalityId, String personalityCode, String personalityName, String testName,
+			String personalityBrief, String personalityDetial, String personalitySpecialty,
+			String personalityVocation) {
 		super();
-		this.tzId = tzId;
-		this.tzName = tzName;
-		this.tzType = tzType;
-		this.tzMajor = tzMajor;
-		this.tzVocation = tzVocation;
-		this.tzReport = tzReport;
+		this.personalityId = personalityId;
+		this.personalityCode = personalityCode;
+		this.personalityName = personalityName;
+		this.testName = testName;
+		this.personalityBrief = personalityBrief;
+		this.personalityDetial = personalityDetial;
+		this.personalitySpecialty = personalitySpecialty;
+		this.personalityVocation = personalityVocation;
 	}
 	/**
-	 * @return the tzId
+	 * @return the personalityId
 	 */
-	public Integer getTzId() {
-		return tzId;
+	public Integer getPersonalityId() {
+		return personalityId;
 	}
 	/**
-	 * @param tzId the tzId to set
+	 * @param personalityId the personalityId to set
 	 */
-	public void setTzId(Integer tzId) {
-		this.tzId = tzId;
+	public void setPersonalityId(Integer personalityId) {
+		this.personalityId = personalityId;
 	}
 	/**
-	 * @return the tzName
+	 * @return the personalityCode
 	 */
-	public String getTzName() {
-		return tzName;
+	public String getPersonalityCode() {
+		return personalityCode;
 	}
 	/**
-	 * @param tzName the tzName to set
+	 * @param personalityCode the personalityCode to set
 	 */
-	public void setTzName(String tzName) {
-		this.tzName = tzName;
+	public void setPersonalityCode(String personalityCode) {
+		this.personalityCode = personalityCode;
 	}
 	/**
-	 * @return the tzType
+	 * @return the personalityName
 	 */
-	public String getTzType() {
-		return tzType;
+	public String getPersonalityName() {
+		return personalityName;
 	}
 	/**
-	 * @param tzType the tzType to set
+	 * @param personalityName the personalityName to set
 	 */
-	public void setTzType(String tzType) {
-		this.tzType = tzType;
+	public void setPersonalityName(String personalityName) {
+		this.personalityName = personalityName;
 	}
 	/**
-	 * @return the tzMajor
+	 * @return the testName
 	 */
-	public String getTzMajor() {
-		return tzMajor;
+	public String getTestName() {
+		return testName;
 	}
 	/**
-	 * @param tzMajor the tzMajor to set
+	 * @param testName the testName to set
 	 */
-	public void setTzMajor(String tzMajor) {
-		this.tzMajor = tzMajor;
+	public void setTestName(String testName) {
+		this.testName = testName;
 	}
 	/**
-	 * @return the tzVocation
+	 * @return the personalityBrief
 	 */
-	public String getTzVocation() {
-		return tzVocation;
+	public String getPersonalityBrief() {
+		return personalityBrief;
 	}
 	/**
-	 * @param tzVocation the tzVocation to set
+	 * @param personalityBrief the personalityBrief to set
 	 */
-	public void setTzVocation(String tzVocation) {
-		this.tzVocation = tzVocation;
+	public void setPersonalityBrief(String personalityBrief) {
+		this.personalityBrief = personalityBrief;
 	}
 	/**
-	 * @return the tzReport
+	 * @return the personalityDetial
 	 */
-	public String getTzReport() {
-		return tzReport;
+	public String getPersonalityDetial() {
+		return personalityDetial;
 	}
 	/**
-	 * @param tzReport the tzReport to set
+	 * @param personalityDetial the personalityDetial to set
 	 */
-	public void setTzReport(String tzReport) {
-		this.tzReport = tzReport;
+	public void setPersonalityDetial(String personalityDetial) {
+		this.personalityDetial = personalityDetial;
+	}
+	/**
+	 * @return the personalitySpecialty
+	 */
+	public String getPersonalitySpecialty() {
+		return personalitySpecialty;
+	}
+	/**
+	 * @param personalitySpecialty the personalitySpecialty to set
+	 */
+	public void setPersonalitySpecialty(String personalitySpecialty) {
+		this.personalitySpecialty = personalitySpecialty;
+	}
+	/**
+	 * @return the personalityVocation
+	 */
+	public String getPersonalityVocation() {
+		return personalityVocation;
+	}
+	/**
+	 * @param personalityVocation the personalityVocation to set
+	 */
+	public void setPersonalityVocation(String personalityVocation) {
+		this.personalityVocation = personalityVocation;
 	}
 	/* (非 Javadoc)
 	* <p>Title: toString</p>
@@ -129,8 +161,10 @@ public class XgkcpResult implements Serializable {
 	*/
 	@Override
 	public String toString() {
-		return "XgkcpResult [tzId=" + tzId + ", tzName=" + tzName + ", tzType=" + tzType + ", tzMajor=" + tzMajor
-				+ ", tzVocation=" + tzVocation + ", tzReport=" + tzReport + "]";
+		return "personality [personalityId=" + personalityId + ", personalityCode=" + personalityCode
+				+ ", personalityName=" + personalityName + ", testName=" + testName + ", personalityBrief="
+				+ personalityBrief + ", personalityDetial=" + personalityDetial + ", personalitySpecialty="
+				+ personalitySpecialty + ", personalityVocation=" + personalityVocation + "]";
 	}
-	
+
 }

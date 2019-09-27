@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<mapper namespace="cn.hqtzytb.mapper.UserFeatureMapper">
+	<!-- 添加用户测评结果信息 -->
+	<!-- 	Integer insert(UserFeature userFeature); -->
+		<insert id="insert" parameterType="cn.hqtzytb.entity.UserFeature" useGeneratedKeys="true" keyProperty="featureId">
+				insert into UserFeature(
+					uid,evaluation_type,evaluation_fraction,evaluation_time			
+				)values(
+				#{uid},#{evaluationType},#{evaluationFraction},#{evaluationTime}
+				)		
+		</insert>
+		<!-- Integer update(UserFeature userFeature); -->
+		<update id="update" parameterType="cn.hqtzytb.entity.UserFeature" >
+				update  UserFeature set
+				evaluation_type=#{evaluationType},evaluation_fraction=#{evaluationFraction},evaluation_time=#{evaluationTime}
+				where
+					feature_id=#{featureId}		
+		</update>			
+		<!--查询收货地址  -->
+		<select id="select" resultType="cn.hqtzytb.entity.UserFeature">
+			select  
+					feature_id as featureId,
+					uid,
+					evaluation_type as evaluationType,
+					evaluation_fraction as evaluationFraction,
+					evaluation_time as evaluationTime
+			from UserFeature 
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>		
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	

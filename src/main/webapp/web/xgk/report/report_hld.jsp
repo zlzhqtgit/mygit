@@ -170,19 +170,19 @@
 									</table>
 								</li>
 								<div>
-									<h4 class="fontwei">由测评得分可知，您的职业兴趣代码是：${hldreport[0].tzName}</h4>
+									<h4 class="fontwei">由测评得分可知，您的职业兴趣代码是：${hldreport[0].personalityCode}</h4>
 									<div class="">
-										<p>${hldreport[0].tzMajor}</p>
-										<p>${hldreport[0].tzVocation}</p>
+										<p>${hldreport[0].personalitySpecialty}</p>
+										<p>${hldreport[0].personalityVocation}</p>
 									</div>
 								</div>
 								<table border="" >
 									<tr><th>代码</th><th>适合的典型专业</th><th>适合的典型职业</th></tr>
 									<c:forEach items="${hldreport}" var="c" step="1" begin="1">
 										<tr>
-											<td>${c.tzName}</td>
-											<td>${c.tzMajor}</td>
-											<td>${c.tzVocation}</td>
+											<td>${c.personalityCode}</td>
+											<td>${c.personalitySpecialty}</td>
+											<td>${c.personalityVocation}</td>
 										</tr>
 									</c:forEach>									
 								</table>

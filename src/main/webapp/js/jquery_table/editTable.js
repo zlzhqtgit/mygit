@@ -1,59 +1,56 @@
-//需要首先通过Jq来解决内容部分奇偶行的背景色不同
-
-	//找到表格的内容区域中所有的奇数行
-	//使用even是为了把通过tbody tr返回的所有tr元素中，
-	//在数组里面下标是偶数的元素返回，因为这些元素，
-	//实际上才是我们期望的tbody里面的奇数行
-	
-
-/*下面兩段开始添加删除行**/
-$(document).ready(function() { 
-	var now=new Date();
-	var mytime=now.toLocaleString();     //获取当前时间
-    $("#addBtn").bind("click", function(){
-    	var rs = document.querySelectorAll("input[type='checkbox']:checked"); 
-    	var theadstr='<table class="table-b"><thead><tr class="text-c"><th>分类</th></tr></thead>'+
-    				 '<tbody><tr style="border: 2px solid #a51d1d;"><td>报考专业数</td></tr>'+
-    		         '<tr style="border: 2px solid #a51d1d;"><td>专业大类</td></tr>'+	
-    		         '<tr style="border: 2px solid #a51d1d;"><td>专业小类</td></tr>'+	
-    		         '<tr style="border: 2px solid #a51d1d;"><td>不同的专业</td></tr></tbody>';
-    	if(rs.length > 1){
-    		$("thead").append(theadstr);
-    		$("tbody").append(tbodystr);
-    		for(var i=0;i<rs.length;i++){
-    			alert(rs[i].value);
-    		}    		
-    	}
-    	//alert($("tbody tr").length);
-    	/*if($("tbody tr").length==1){
-    		if($("tbody tr td").length==1){
-    			$("tbody tr").remove();
-    		}    		
-    		 $("tbody").append("<tr class='text-c va-m'>"+
-			"<td><input type='checkbox'></td>"+			
-		"</tr>");            
-    		 delTr();    	
-    		$("tbody tr:odd").css("background-color","#EEEEEE");
-    	}else{
-    		 $("<tr class='text-c va-m'><td><input type='checkbox'></td>"+			
-    				"</tr>").insertAfter($("tbody tr:last"));                       
-    		 delTr();		 
-    		$("tbody tr:odd").css("background-color","#EEEEEE");
-    	}       */ 
-    });    
-	delTr();	
-   }); 
- 
- //删除
- function delTr(){
-	$(".delBtn").click(function(){
-		$(this).parent().parent().remove();
-	});
+//自定义选科对比表格
+//xgkXk(e)选科组合点击事件
+//hideTable()控制table的显示和隐藏
+//delTd(e)点击a标签执行方法
+//del(id)删除指定的列
+function xgkxk(e){	 
+	 var rs = document.querySelectorAll("input[type='checkbox']:checked");
+	 if(rs.length > 4){ 
+	    alert("只能对比4个组合"); 
+	    e.checked=false;
+	 }else{
+		 if(e.checked==true){
+		    	$("thead tr").append("<th>"+e.value+"<a name='"+e.id+"' onclick='delTd(this)' class='delBtn' href='javascript:void(0);'>删除</a></th>");
+		    	$("#major-nub").append("<td>"+e.value+"</td>");
+		    	$("#major-max").append("<td>"+e.value+"</td>");
+		    	$("#major-min").append("<td>"+e.value+"</td>");
+		    	$("#major-no").append("<td>"+e.value+"</td>"); 
+		    }else{    		
+		    	var rs = document.getElementsByName(e.id);
+		    	var id=$(rs).parent().prevAll().length;
+		    	alert(id);
+		    	del(id);
+		    	e.checked=false;
+		    } 
+		    	hidetable();   	  
+	 }    
+}; 
+ //控制table在checkbox选中少于2个时候隐藏
+function hidetable(){
+    var rs = document.querySelectorAll("input[type='checkbox']:checked");
+    if(rs.length > 1){ 
+    	$('#tableid').css('display','block');      		
+    }else{
+    	$('#tableid').css('display','none');
+    }  	     
+}
+ //a标签删除
+ function delTd(e){		
+		var id=$(e).parent().prevAll().length;
+		var boxid=$(e).attr("name");		
+		del(id);	
+		var rs = document.getElementById(boxid); 	
+		rs.checked = false;	
+		hidetable();
  }
-
- /*
- function even(){
- 	$("tbody tr:even").css("background-color","#ECE9D8");
- }*/
+ //执行删除操作
+function del(id){
+	var table = document.getElementById("tableid");//获得要操作的table对象
+	table.rows[0].deleteCell(id);//先获取到要操作的第几行（3代表第四行）ID代表列，
+	table.rows[1].deleteCell(id);
+	table.rows[2].deleteCell(id);
+	table.rows[3].deleteCell(id);
+	table.rows[4].deleteCell(id);
+}
 
 

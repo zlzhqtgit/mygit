@@ -3,18 +3,21 @@
 	<mapper namespace="cn.hqtzytb.mapper.XgkcpResultMapper">	
 		<!--查询测评结果对应相关信息  -->
 		<select id="select" resultType="cn.hqtzytb.entity.XgkcpResult">
-			select  tz_id as tzId,tz_name as tzName,tz_type as tzType,tz_major as tzMajor,tz_vocation as tzVocation,tz_report as tzReport  from tz_library 
+			select  
+				personality_id as personalityId,
+				personality_code as personalityCode,
+				personality_name as personalityName,
+				test_name as testName,
+				personality_brief as personalityBrief,
+				personality_detial as personalityDetial,
+				personality_specialty as personalitySpecialty,
+				personality_vocation as personalityVocation				  
+			from Personality 
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>	
-		<!--查询测评结果类型不重复信息  -->
-		<select id="selectReportUrl" resultType="cn.hqtzytb.entity.XgkcpResult">
-			select  tz_name as tzName,tz_major as tzMajor,tz_vocation as tzVocation,tz_report as tzReport  from tz_library
-				<if test="where != null">where ${where}</if>
-		 		<if test="orderBy != null">order by  ${orderBy}</if> 
-		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
-		</select>			
+		
 	</mapper>
 	
 	
