@@ -22,4 +22,9 @@ public class TestController {
 			return  "web/xgk/xgk_error_404";
 						
 	}
+	@RequestMapping("/xgk_error_servers.do")	
+	public String showhqtXgk500(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/xgk/xgk_error_servers";
+						
+	}
 }

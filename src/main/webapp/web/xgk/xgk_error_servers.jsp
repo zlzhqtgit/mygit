@@ -25,11 +25,11 @@
                 	
                    	<div id="da-error-pin"></div>
                     <div id="da-error-code">
-                    	error <span>404</span>                    
+                    	error <span>500</span>
                     </div>
                 
-                	<h1 class="da-error-heading">哎哟喂！页面让狗狗叼走了！</h1>
-                    <p>大家可以到狗狗没有叼过的地方看看！</p>
+                	<h1 class="da-error-heading">哎哟喂！服务器错误！</h1>
+                    <p>线索：1.该网站正在进行维护&nbsp 2.该网站有程序错误</p>
                     <p> 
 	                    <a href="${pageContext.request.contextPath}/cp/xgk_index.do" >首页</a>
 	                    <a href="${pageContext.request.contextPath}/cp/xgk_choice.do" >认知测评</a>
