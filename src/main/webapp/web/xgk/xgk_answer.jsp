@@ -71,9 +71,9 @@
 					        });
 					       };
 						</script>						
-						<div class="caption answer_temp" style="padding-top:8em;padding-bottom:2em;">
+						<div class="caption answer_temp" style="padding-top:4em;padding-bottom:2em;">
 							<h4 class="padding-side2" id="tm"></h4>						
-							<div class="choise margin_top padding-side2" style="/* margin-left: 55px; */">
+							<div class="choise margin_top padding-side2" style=" margin-left: 2em;">
 								<div id="tmxs"> </div>
 							</div>
 							<p class="text-right margin_top" style="padding-right:2em">
@@ -137,7 +137,13 @@
 					       console.log(question[i]);
 					       items +='<a>'+question[i]+'</ a>' ;
 					      }
-					      $("#un_complate").html(items); 
+					     
+					      if(items==""){
+					    	  //$('#myModal').hide();
+					    	  $('#identifier').modal('hide');
+					      }else{
+					    	 $("#un_complate").html(items);  
+					      }
 						/* alert("你还有相关的测评题目没做，题目编号为：" + cpname); */
 						tu(strone-1,id);
 						$('#current').text(strone);
