@@ -5,7 +5,7 @@
 	<!-- 添加用户测评结果信息 -->
 	<!-- 	Integer insert(UserFeature userFeature); -->
 		<insert id="insert" parameterType="cn.hqtzytb.entity.UserFeature" useGeneratedKeys="true" keyProperty="featureId">
-				insert into UserFeature(
+				insert into user_feature(
 					uid,evaluation_type,evaluation_fraction,evaluation_time			
 				)values(
 				#{uid},#{evaluationType},#{evaluationFraction},#{evaluationTime}
@@ -13,7 +13,7 @@
 		</insert>
 		<!-- Integer update(UserFeature userFeature); -->
 		<update id="update" parameterType="cn.hqtzytb.entity.UserFeature" >
-				update  UserFeature set
+				update  user_feature set
 				evaluation_type=#{evaluationType},evaluation_fraction=#{evaluationFraction},evaluation_time=#{evaluationTime}
 				where
 					feature_id=#{featureId}		
@@ -26,7 +26,7 @@
 					evaluation_type as evaluationType,
 					evaluation_fraction as evaluationFraction,
 					evaluation_time as evaluationTime
-			from UserFeature 
+			from user_feature 
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		

@@ -12,7 +12,7 @@
 				personality_detial as personalityDetial,
 				personality_specialty as personalitySpecialty,
 				personality_vocation as personalityVocation				  
-			from Personality 
+			from personality 
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
