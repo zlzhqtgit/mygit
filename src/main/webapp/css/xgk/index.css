@@ -582,7 +582,7 @@ background: #9f0303;
     border-radius: 5px;
 }
 #tm{
-width: 500px;
+/* width: 500px; */
 }
 #un_complate a{
 	display: inline-block;
@@ -638,4 +638,27 @@ width: 500px;
 }
 .text-white{
 	color: #fff;
+}
+/*自定义选科对比表  */
+.el_customise th{
+	position: relative;
+}
+.el_customise th span.glyphicon{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1em;
+	height: 1em;
+	line-height: 1em;
+	background-color: #666666;
+	color: white;
+	opacity: .6;
+	box-shadow: -1px 1px 6px #666;
+	cursor: pointer;
+}
+.el_customise th span.glyphicon:hover{
+	background-color: #9F0303;
+}
+.el_customise th span.glyphicon:hover+div{
+	border: 1px solid red;
 }

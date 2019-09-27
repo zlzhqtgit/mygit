@@ -18,9 +18,9 @@
 <body>
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>	
-	<main class="container">
+	<main class="container margin_top">
 			<section class="row">
-				<div class="">
+				<div class="margin_top">
 					<div class="thumbnail">
 						<div class="caption answer_temp">
 							<div class="user_say">

@@ -30,7 +30,7 @@
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<div class="panel-heading fontwei">霍兰德职业兴趣测试报告</div>
-					<div class="panel-body report">
+					<div class="panel-body report" style="padding: 2em 4em;">
 							<ul>
 								<li>
 									<h4 class="fontwei">阅读注意事项：</h4>
@@ -68,14 +68,13 @@
 												    },
 												    tooltip: {},
 												    legend: {//图例组件
-												        data: ['预算分配（Allocated Budget）', '实际开销（Actual Spending）']
+												        data: ['平均成绩', '实际得分']
 												    },
 												    radar: {
 												        // shape: 'circle',
 												        name: {
 												            textStyle: {
-												                color: '#fff',
-												                backgroundColor: '#999',
+												                color: '#333',
 												                borderRadius: 3,
 												                padding: [3, 5]
 												           }
@@ -90,26 +89,26 @@
 												        ]
 												    },
 												    series: [{
-												        name: '预算 vs 开销（Budget vs spending）',
+												        name: '',
 												        type: 'radar',
 												        // areaStyle: {normal: {}},
 												        data : [
 												            {
 												                value : [2, 2, 4, 5, 6, 7],
-												                name : '预算分配（Allocated Budget）',
+												                name : '平均成绩',
 												                label:[{
 												                	position:"bottom"
 												                }]
 												            },
 												             {
 												                value : [cpfs[0][1],cpfs[1][1], cpfs[2][1], cpfs[3][1], cpfs[4][1],cpfs[5][1]],
-												                name : '所得分数'
+												                name : '实际得分'
 												            }
 												        ]
 												    }]
 												};									
 										        // 使用刚指定的配置项和数据显示图表。
-										        myChart.setOption(option);										       
+										        myChart.setOption(option);	       
 										    </script>
 									</div>
 									<p class="fontwei">
@@ -124,7 +123,7 @@
 										</li>
 									</ol>
 									<table border=""  style="margin: 0 auto;">
-										<tr><th>类型</th><th>喜欢的活动</th><th>重视</th><th>职业环境要求</th><th>典型职业</th></tr>
+										<tr><th>类型</th><th>喜欢的活动</th><th style="width:200px">重视</th><th>职业环境要求</th><th>典型职业</th></tr>
 										<tr>
 											<td class="text-center">现实型<div>R(realistic)</div></td>
 											<td>用手、工具、机器制造或修理东西。愿意从事实物性的工作、体力活动，喜欢户外活动或操作机器，而不喜欢在办公室工作</td>

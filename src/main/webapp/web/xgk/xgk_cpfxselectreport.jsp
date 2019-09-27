@@ -19,6 +19,7 @@
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>			
 
+		
 		<main class="container">
 			<section class="row">
 				<p class="text-right">
@@ -193,6 +194,8 @@
 										    series: [
 										        {
 										            name:'就业平均值',
+										            barGap:'80%',/*多个并排柱子设置柱子之间的间距*/
+									  	            barCategoryGap:'40%',/*多个并排柱子设置柱子之间的间距*/
 										            type:'bar',
 										            data:[2.0, 4.9, 3.0, 2.5]
 										        },
@@ -299,6 +302,14 @@
 										// 使用刚指定的配置项和数据显示图表。
 										tech_require.setOption(option);
 									</script>
+									<table class="" style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
+										<tr><th></th><th>学历要求</th><th>专业知识</th><th>专业技能</th><th>工作年限</th><th>工作能力</th><th>组织能力</th><th>策划能力</th></tr>
+										<tr><td>1-2基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										<tr><td>2-3基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										<tr><td>3-4基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										<tr><td>4-5基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										<tr><td>5-6基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+									</table>
 								</div>
 							</li>
 
@@ -307,57 +318,47 @@
 								<div class="">
 									<div class="">
 										<h4 class="fontwei">1、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
+										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										</table>
 									</div>
 									<div class="">
 										<h4 class="fontwei">2、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
+										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										</table>
 									</div>
 									<div class="">
 										<h4 class="fontwei">3、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
+										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										</table>
 									</div>
 									<div class="">
 										<h4 class="fontwei">4、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-								</div>
-							</li>
-
-							<li>
-								<h2 class="fontwei margin_bot1">专业课程</h2>
-								<div class="">
-									<div class="">
-										<h4 class="fontwei">1、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">2、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">3、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">4、生物学</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
+										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										</table>
 									</div>
 								</div>
 							</li>
@@ -370,7 +371,7 @@
 										<p class="tindent">
 											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
 										</p>
-										<div id="major" style="width: 600px;height:500px; margin: 0 auto;"></div>
+										<div id="major" style="width: 600px;height:420px; margin: 0 auto;"></div>
 										<script type="text/javascript">
 											var option = {
 												title: {
@@ -399,7 +400,10 @@
 													type: 'value',
 													min:0,
 													max:100,
-													boundaryGap: [0, 0.01]
+													boundaryGap: [0, 0.01],
+													splitLine: { //坐标轴在 grid 区域中的分隔线
+												        show: false,
+												    },
 												},
 												yAxis: {
 													type: 'category',
@@ -407,6 +411,7 @@
 													axisTick: {//坐标轴刻度相关设置。
 												        show: false
 												    },
+												    
 												},
 												series: [
 													{
@@ -476,57 +481,81 @@
 										<p class="">
 											以下图示仅表示推荐专业的报考的匹配度
 										</p>
-										<div id="xkxz" style="width: 600px;height:600px; margin: 0 auto;"></div>
+										<div id="xkxz" style="width: 600px;height:420px; margin: 0 auto;"></div>
 										<script type="text/javascript">
 											var option = {
 												title: {
-													text: '学科选择与专业报考概率',
-													subtext: '数据来自网络',
+													text: '专业学科适配量表',
+//													subtext: '数据来自网络',
 													x:'center',
 											        y:'top',
 											        textAlign:'left'
 												},
 												tooltip: {
-													trigger: 'item',
-													formatter: "{a} <br/>{b}: {c} ({d}%)"
+													trigger: 'axis',
+													axisPointer: {
+														type: 'shadow'
+													}
 												},
-												legend: {
-													orient: 'vertical',
-													x: 'left',
-													data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+//												legend: {//图例
+//													data: ['2011年'],
+//												},
+												grid: {//网格
+													left: '1%',
+													right: '4%',
+													bottom: '3%',
+													containLabel: true
+												},
+												xAxis: {
+													type: 'value',
+													min:0,
+													max:100,
+													splitLine: { //坐标轴在 grid 区域中的分隔线
+												        show: false,
+												    },
+													boundaryGap: [0, 0.01]
+												},
+												yAxis: {
+													type: 'category',
+													data: ['巴西','印尼','美国','印度','中国','生物'],
+													axisTick: {//坐标轴刻度相关设置。
+												        show: false
+												    },
 												},
 												series: [
 													{
-														name:'访问来源',
-														type:'pie',
-														radius: ['50%', '70%'],
-														avoidLabelOverlap: false,
-														label: {
+														name: '2011年',
+														type: 'bar',
+														data: [55, 88, 33, 44, 66, 77],
+														barWidth:40,
+														barCategoryGap:'50%',//柱图间距
+														itemStyle: {
 															normal: {
-																show: false,
-																position: 'center'
-															},
-															emphasis: {
-																show: true,
-																textStyle: {
-																	fontSize: '30',
-																	fontWeight: 'bold'
+																color: function(params) {
+							                                        let colorList = [
+							                                            "#c23531",
+							                                            "#2f4554",
+							                                            "#61a0a8",
+							                                            "#d48265",
+							                                            "#91c7ae",
+							                                            "#749f83",
+							                                            "#6e7074",
+							                                        ];
+							                                        return colorList[params.dataIndex];
+							                                   	},
+																label: {
+																	show: true, //开启显示
+																	color:"#ddd",
+																	position: 'insideRight', //在上方显示
+																	distance: 20,
+																	textStyle: { //数值样式
+																		color: 'white',
+																		fontSize: 16
+																	}
 																}
 															}
-														},
-														labelLine: {
-															normal: {
-																show: false
-															}
-														},
-														data:[
-															{value:335, name:'直接访问'},
-															{value:310, name:'邮件营销'},
-															{value:234, name:'联盟广告'},
-															{value:135, name:'视频广告'},
-															{value:1548, name:'搜索引擎'}
-														]
-													}
+														}
+													},
 												]
 											};
 											var myChart = echarts.init(document.getElementById('xkxz'));
@@ -638,6 +667,7 @@
 			</section>
 
 		</main>
+
 
 				
 		

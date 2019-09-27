@@ -21,7 +21,7 @@
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>
 
-		<main class="container" style="height: 500px;">
+		<main class="container" style="height: 500px;margin-bottom:2em;">
 			<section class="row">
 				<!--/模态框-->
 			    <div class="">
@@ -72,11 +72,11 @@
 					       };
 						</script>						
 						<div class="caption answer_temp" style="padding-top:8em;padding-bottom:2em;">
-							<h4 id="tm"></h4>						
-							<div class="choise margin_top1" style="margin-left: 55px;">
+							<h4 class="padding-side2" id="tm"></h4>						
+							<div class="choise margin_top padding-side2" style="/* margin-left: 55px; */">
 								<div id="tmxs"> </div>
 							</div>
-							<p class="text-right margin-top" style="padding-right:2em">
+							<p class="text-right margin_top" style="padding-right:2em">
 								<a id="syt" onclick="syt()" class="btn btn-default" role="button">上一题</a>
 								<a id="xyt" onclick="xyt()" class="btn btn-default btn-primary" role="button">下一题</a>
 								<a id="tjda" onclick="tjda()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">提交</a>
