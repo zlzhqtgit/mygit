@@ -17,7 +17,7 @@
 <body>
 	<!-- 页面顶部-->
 	<c:import url="header.jsp"></c:import>	
-		<main class="container">
+		<main class="container margin_top margin_bot">
 			<div class="test_instruction margin_top">
 				<section class="row">
 					<!-- thumbnail -->

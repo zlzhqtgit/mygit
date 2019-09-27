@@ -112,7 +112,7 @@
 				.bussiness .swiper-slide img { width: 100%; }
 				.bussiness .swiper-slide-active, .swiper-slide-duplicate-active { border: 1px solid #eee; transform: scale(1); z-index: 99999999; }
 			</style>
-			<div class="bussiness_bg" style="height: 520px;background-color: #fff;">
+			<div class="bussiness_bg" style="height: 568px;background-color: #fff;">
 				
 				<div class="bussiness container" style="padding: 0; width: 100%;">
 					<div class="" style="">
@@ -138,7 +138,7 @@
 									<img src="${pageContext.request.contextPath}/img/xgk/certify02.png"/>
 								</div>
 								<div class="padding-side">
-									<input type="hidden" name="" id="" value="选科指导" />
+									<input type="hidden" name="" id="" value="新高考" />
 									<h3 class="margin_top1">这是比较大的一句话2</h3>
 									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
 								</div>
@@ -149,6 +149,16 @@
 								</div>
 								<div class="padding-side">
 									<input type="hidden" name="" id="" value="升学规划" />
+									<h3 class="margin_top1">这是比较大的一句话3</h3>
+									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
+								</div>
+							</div>
+							<div class="swiper-slide">
+								<div class="">
+									<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
+								</div>
+								<div class="padding-side">
+									<input type="hidden" name="" id="" value="精准教学" />
 									<h3 class="margin_top1">这是比较大的一句话3</h3>
 									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
 								</div>
