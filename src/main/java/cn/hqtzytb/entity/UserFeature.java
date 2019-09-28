@@ -14,13 +14,15 @@ import java.util.Date;
 */
 public class UserFeature implements Serializable  {
 	
+	
 	/**
-	* @Fields serialVersionUID :(对象序列化)
+	* @Fields serialVersionUID :(用一句话描述这个变量表示什么)
 	*/
-	private static final long serialVersionUID = 1415911098620734912L;
+	private static final long serialVersionUID = 9196150262358894556L;
 	private Integer featureId; //用户特征表ID
 	private Integer uid; //关联用户id
 	private String evaluationType;// 测评类型
+	private String evaluationName;//测评的结果名称
 	private String evaluationFraction;//测评的分数
 	private Date evaluationTime;//测评的时间
 	/**
@@ -36,15 +38,17 @@ public class UserFeature implements Serializable  {
 	* @param featureId
 	* @param uid
 	* @param evaluationType
+	* @param evaluationName
 	* @param evaluationFraction
 	* @param evaluationTime
 	*/
-	public UserFeature(Integer featureId, Integer uid, String evaluationType, String evaluationFraction,
-			Date evaluationTime) {
+	public UserFeature(Integer featureId, Integer uid, String evaluationType, String evaluationName,
+			String evaluationFraction, Date evaluationTime) {
 		super();
 		this.featureId = featureId;
 		this.uid = uid;
 		this.evaluationType = evaluationType;
+		this.evaluationName = evaluationName;
 		this.evaluationFraction = evaluationFraction;
 		this.evaluationTime = evaluationTime;
 	}
@@ -85,6 +89,18 @@ public class UserFeature implements Serializable  {
 		this.evaluationType = evaluationType;
 	}
 	/**
+	 * @return the evaluationName
+	 */
+	public String getEvaluationName() {
+		return evaluationName;
+	}
+	/**
+	 * @param evaluationName the evaluationName to set
+	 */
+	public void setEvaluationName(String evaluationName) {
+		this.evaluationName = evaluationName;
+	}
+	/**
 	 * @return the evaluationFraction
 	 */
 	public String getEvaluationFraction() {
@@ -117,7 +133,8 @@ public class UserFeature implements Serializable  {
 	@Override
 	public String toString() {
 		return "UserFeature [featureId=" + featureId + ", uid=" + uid + ", evaluationType=" + evaluationType
-				+ ", evaluationFraction=" + evaluationFraction + ", evaluationTime=" + evaluationTime + "]";
+				+ ", evaluationName=" + evaluationName + ", evaluationFraction=" + evaluationFraction
+				+ ", evaluationTime=" + evaluationTime + "]";
 	}
-
+	
 }

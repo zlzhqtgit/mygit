@@ -6,15 +6,15 @@
 	<!-- 	Integer insert(UserFeature userFeature); -->
 		<insert id="insert" parameterType="cn.hqtzytb.entity.UserFeature" useGeneratedKeys="true" keyProperty="featureId">
 				insert into user_feature(
-					uid,evaluation_type,evaluation_fraction,evaluation_time			
+					uid,evaluation_type,evaluation_name,evaluation_fraction,evaluation_time			
 				)values(
-				#{uid},#{evaluationType},#{evaluationFraction},#{evaluationTime}
+				#{uid},#{evaluationType},#{evaluationName},#{evaluationFraction},#{evaluationTime}
 				)		
 		</insert>
 		<!-- Integer update(UserFeature userFeature); -->
 		<update id="update" parameterType="cn.hqtzytb.entity.UserFeature" >
 				update  user_feature set
-				evaluation_type=#{evaluationType},evaluation_fraction=#{evaluationFraction},evaluation_time=#{evaluationTime}
+				evaluation_type=#{evaluationType},evaluation_name=#{evaluationName},evaluation_fraction=#{evaluationFraction},evaluation_time=#{evaluationTime}
 				where
 					feature_id=#{featureId}		
 		</update>			
@@ -24,6 +24,7 @@
 					feature_id as featureId,
 					uid,
 					evaluation_type as evaluationType,
+					evaluation_name as evaluationName,
 					evaluation_fraction as evaluationFraction,
 					evaluation_time as evaluationTime
 			from user_feature 

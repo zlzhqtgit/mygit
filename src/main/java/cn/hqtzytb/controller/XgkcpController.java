@@ -63,7 +63,6 @@ public class XgkcpController {
 	@RequestMapping("/xgk_answer.do")
 	public String showhqtCpAnswer(ModelMap map, Integer cpid, HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) throws MyRuntimeException {
-
 		try {
 			// 获取session里的用户名
 			// UserAdmin username = (UserAdmin) session.getAttribute("user");
@@ -74,7 +73,6 @@ public class XgkcpController {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：进入答题页面  错误信息: " + e);
 			throw new MyRuntimeException(e);
 		}
-
 	}
 
 	/**
@@ -187,14 +185,11 @@ public class XgkcpController {
 		// 重session里面提取分数与测评类型
 		String testName = (String) session.getAttribute("cpName");
 		Map<String, Integer> cpFengshu = (Map<String, Integer>) session.getAttribute("cpResult");
+		GetCommonUser get=new GetCommonUser();
 		String cpresult = "";
 		// 判断测评类型
 		if (testName.equals("霍兰德")) {
-			// 排序以后截取前3个类型代码
-			List<String> mobileList = cpFengshu
-					.entrySet().stream().sorted((Map.Entry<String, Integer> o1,
-							Map.Entry<String, Integer> o2) -> o2.getValue() - o1.getValue())
-					.map(entry -> entry.getKey()).collect(Collectors.toList()).subList(0, 3);
+			List<String> mobileList=get.gethld(cpFengshu);
 			// 查询数据库，查出相关的兴趣代码及相关信息
 			List<XgkcpResult> reportResult = xgkcpResultServer.resultReport(mobileList, testName);
 			// 渲染到页面
@@ -210,30 +205,7 @@ public class XgkcpController {
 			map.addAttribute("hldreport", reportResult);
 			map.addAttribute("report", "report_hld");
 		} else {
-			// 判断第一层面E-I,属于那种，如果分数相同取I
-			if (cpFengshu.get("E") > cpFengshu.get("I")) {
-				cpresult += "E";
-			} else {
-				cpresult += "I";
-			}
-			// 判断第二层面S-N,属于那种，如果分数相同取N
-			if (cpFengshu.get("S") > cpFengshu.get("N")) {
-				cpresult += "S";
-			} else {
-				cpresult += "N";
-			}
-			// 判断第三层面T-F,属于那种，如果分数相同取F
-			if (cpFengshu.get("T") > cpFengshu.get("F")) {
-				cpresult += "T";
-			} else {
-				cpresult += "F";
-			}
-			// 判断第四层面J-P,属于那种，如果分数相同取P
-			if (cpFengshu.get("J") > cpFengshu.get("P")) {
-				cpresult += "J";
-			} else {
-				cpresult += "P";
-			}
+			cpresult=get.getMbti(cpFengshu);
 			// 组合以上结果渲染到页面
 			map.addAttribute("report", "report_" + cpresult);
 		}
@@ -256,6 +228,7 @@ public class XgkcpController {
 	public ResponseResult<Void> handleCpResult(Integer id, @RequestParam(value = "cpda") String cpda,
 			HttpSession session, HttpServletRequest request) {
 		ResponseResult<Void> rr;
+		GetCommonUser get=new GetCommonUser();
 		Map<String, Integer> cpResult = new HashMap<String, Integer>();
 		// 判断测评类型
 		String cpName = "霍兰德";
@@ -287,6 +260,12 @@ public class XgkcpController {
 			session.setAttribute("cpName", cpName);
 			session.setAttribute("cpResult", cpResult);
 			UserFeature userFeature=new UserFeature();
+			if(id==1){
+				List<String> mobileList=get.gethld(cpResult);
+				userFeature.setEvaluationName(mobileList.get(0)+mobileList.get(1)+mobileList.get(2));
+			}else{				
+				userFeature.setEvaluationName(get.getMbti(cpResult));
+			}			
 			userFeature.setUid(2);
 			userFeature.setEvaluationType(cpName);
 			userFeature.setEvaluationFraction(cpResult.toString());

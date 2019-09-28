@@ -33,7 +33,7 @@
 										<p class="tindent">已经有确定的学科选择，想进一步了解专业、职业与学科之间的匹配程度。</p>
 									</div>
 								</a>
-								<a href="${pageContext.request.contextPath}/xk/xgk_cpfxselectreport.do" class="">
+								<a href="" onclick="usercp()" class="">
 									<div class="select_r">
 										<h2 class="fontwei text-center">测评分析选科</h2>
 										<p class="tindent">没有确定的学科选择，想通过测评分析推测出适合的学科、专业和职业。</p>
@@ -53,5 +53,22 @@
 <script type="text/javascript">
 var id="${id}";
 $( "#xgk"+id).addClass( "active" );
+function usercp(){
+	var url = "../xk/xgk_cpxk.do";
+	var data = "";
+	$.ajax({
+		"url": url,
+		"data": data,
+		"type": "POST",
+		"dataType": "json",
+		"success": function(obj) {
+			if(obj.state == 0) {
+				alert(obj.message);
+				return;
+			}			
+			location.href = "../xk/xgk_cpfxselectreport.do?personalityCode="+obj.message;
+		}
+	});
+}
 </script>
 </html>

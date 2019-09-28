@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<mapper namespace="cn.hqtzytb.mapper.SpecialtyMapper">	
+		<!--查询测评结果对应相关信息  -->
+		<select id="select" resultType="cn.hqtzytb.entity.Specialty">
+			select  
+					id,specialty_id as specialtyId,
+					specialty_name as specialtyName,
+					specialty_intro as specialtyIntro,
+					specialty_major_name as specialtyMajor_name,
+					specialty_class_name as specialtyClassName,
+					specialty_divided as specialtyDivided,
+					specialty_disciplines as specialtyDisciplines,
+					major_courses as majorCourses,
+					specialty_objective as specialtyObjective,
+					specialty_employment as specialtyEmployment,
+					specialty_requirement as specialtyRequirement,
+					physics_performance as physicsPerformance,
+					chemistry_performance as chemistryPerformance,
+					biology_performance as biologyPerformance,
+					politic_performance as politicPerformance,
+					history_performance as historyPerformance,
+					geography_performance as geographyPerformance,
+					chinese_performance as chinesePerformance,
+					math_performance as mathPerformance,
+					foreign_performance as foreignPerformance
+			from specialty b 
+					LEFT JOIN  personality_specialty e  on b.specialty_id=e.specialtyt_id  
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>			
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
