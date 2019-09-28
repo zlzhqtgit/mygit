@@ -36,16 +36,16 @@
 									<div class="options">
 										<div class="">
 											<div class="">
-												<span class=""><input type="radio" name="" id="physics" value="" /><label for="physics">物理</label></span>
-												<span class=""><input type="radio" name="" id="policy" value="" /><label for="policy">政治</label></span>
+												<span class=""><input type="checkbox" name="" id="physics" value="" /><label for="physics">物理</label></span>
+												<span class=""><input type="checkbox" name="" id="policy" value="" /><label for="policy">政治</label></span>
 											</div>
 											<div class="">
-												<span class=""><input type="radio" name="" id="chemistry" value="" /><label for="chemistry">化学</label></span>
-												<span class=""><input type="radio" name="" id="history" value="" /><label for="history">历史</label></span>
+												<span class=""><input type="checkbox" name="" id="chemistry" value="" /><label for="chemistry">化学</label></span>
+												<span class=""><input type="checkbox" name="" id="history" value="" /><label for="history">历史</label></span>
 											</div>
 											<div class="">
-												<span class=""><input type="radio" name="" id="biology" value="" /><label for="biology">生物</label></span>
-												<span class=""><input type="radio" name="" id="geography" value="" /><label for="geography">地理</label></span>
+												<span class=""><input type="checkbox" name="" id="biology" value="" /><label for="biology">生物</label></span>
+												<span class=""><input type="checkbox" name="" id="geography" value="" /><label for="geography">地理</label></span>
 											</div>
 										</div>
 									</div>

@@ -662,3 +662,6 @@ background: #9f0303;
 .el_customise th span.glyphicon:hover+div{
 	border: 1px solid red;
 }
+label{
+	font-family: KaiTi,'STKaiti';
+}
