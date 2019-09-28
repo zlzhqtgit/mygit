@@ -93,8 +93,8 @@
 									</p>
 									<div class="">
 										<h3 class="text-primary margin_bot1">自定义选科对比表</h3>
-										<table class="margin_top1 text-center" style="margin: 0 auto;" border="" cellspacing="" cellpadding="5">
-											<tr><th></th><th>学科组合1</th><th>学科组合1</th><th>学科组合1</th><th>学科组合1</th></tr>
+										<table class="el_customise margin_top1 text-center" style="margin: 0 auto;width: 100%;" border="" cellspacing="" cellpadding="5">
+											<tr><th></th><th><span class="glyphicon glyphicon-remove"></span>学科组合1<span class="glyphicon glyphicon-remove"></span></th><th>学科组合1<span class="glyphicon glyphicon-remove"></span></th><th>学科组合1<span class="glyphicon glyphicon-remove"></span></th><th>学科组合1<span class="glyphicon glyphicon-remove"></span></th></tr>
 											<tr><td>报考专业数</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 											<tr><td>专业大类</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 											<tr><td>专业小类</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
