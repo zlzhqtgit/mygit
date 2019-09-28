@@ -60,16 +60,18 @@ input{
 	padding: 2px 6px;
 }
 .head-top{
-	position: relative;
 	background-color: #f9f9f9;
 }
 .user{
-	position: absolute;
-	right: 60px;
-	bottom: 0;
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 3em;
 }
 .user>img{
 	max-width: 36px;
+}
+.user a{
+	line-height: 2em;
 }
 .head-bottom{
 	background-color: #f9f9f9;
@@ -98,9 +100,8 @@ nav a:hover{
 	text-decoration: none;
 }
 .search{
-	position: absolute;
-	right: 0;
-	top: 12px;
+	display: flex;
+	justify-content: flex-end;
 }
 .search input{
 	width: 24em;
@@ -661,4 +662,7 @@ background: #9f0303;
 }
 .el_customise th span.glyphicon:hover+div{
 	border: 1px solid red;
+}
+label{
+	font-family: KaiTi,'STKaiti';
 }

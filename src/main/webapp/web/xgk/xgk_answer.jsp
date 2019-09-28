@@ -137,10 +137,11 @@
 					       console.log(question[i]);
 					       items +='<a>'+question[i]+'</ a>' ;
 					      }
-					     
-					      if(items==""){
+					      $("#un_complate").html(items);
+					      
+					      if(items=''){
 					    	  //$('#myModal').hide();
-					    	  $('#identifier').modal('hide');
+					    	  $('#myModal').modal('hide');
 					      }else{
 					    	 $("#un_complate").html(items);  
 					      }
