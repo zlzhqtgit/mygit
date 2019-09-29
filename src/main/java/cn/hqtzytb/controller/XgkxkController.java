@@ -141,6 +141,7 @@ public class XgkxkController {
 			List<UserFeature> featurelist=userFeatureServer.getUserFeatureByUid(2);
 		    List<Specialty> specialtylist=specialtyServer.getSpecialtyByPCode(personalityCode);
 		    System.out.println(specialtylist.size());
+		    map.addAttribute("specialtylist", specialtylist);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_cpfxselectreport";
 		} catch (Exception e){

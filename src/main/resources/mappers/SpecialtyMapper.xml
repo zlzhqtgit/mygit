@@ -30,7 +30,8 @@
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
-		</select>			
+		</select>	
+				
 	</mapper>
 	
 	

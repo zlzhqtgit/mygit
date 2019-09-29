@@ -15,17 +15,15 @@
 					<div class="logo">
 						<img src="${pageContext.request.contextPath}/img/xgk/logo.jpg" alt="贵州好前途教育科技有限公司">
 					</div>
-					<nav class="">
-						<a href="index.html">首页</a>
-						<a href="test_choice.html">认知测评</a>
-						<a href="guide_select.html">选科指导</a>
-						<a href="">职业库</a>
-						<a href="">高校专业</a>
-						<a href="">学科推荐</a>
-						<a href="">升学规划</a>
-						<a href="">志愿填报</a>
-
-						
+					<nav id="navdh" class="">
+						<a id="xgk1" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a>
+						<a id="xgk2" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a>
+						<a id="xgk3" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a>
+						<a id="xgk4" href="">职业库</a>
+						<a id="xgk5" href="">高校专业</a>
+						<a id="xgk6" href="">学科推荐</a>
+						<a id="xgk7" href="">升学规划</a>
+						<a id="xgk8" href="">志愿填报</a>						
 					</nav>
 				</div>
 				<div class="head-top col-md-4 margin_top margin_bot1">
@@ -43,11 +41,9 @@
 						</div>
 						<div class="clearfix"></div>
 					</div>
-				</div>
-				
+				</div>				
 			</div>
 		</header>
-
 </body>
 <script type="text/javascript">
 $("#navdh a").click(function(){	
