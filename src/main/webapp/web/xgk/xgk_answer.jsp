@@ -139,12 +139,12 @@
 					      }
 					      $("#un_complate").html(items);
 					      
-					      if(items=''){
+					     /* if(items=''){
 					    	  //$('#myModal').hide();
 					    	  $('#myModal').modal('hide');
 					      }else{
 					    	 $("#un_complate").html(items);  
-					      }
+					      } */
 						/* alert("你还有相关的测评题目没做，题目编号为：" + cpname); */
 						tu(strone-1,id);
 						$('#current').text(strone);
