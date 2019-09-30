@@ -13,13 +13,13 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script> 
 </head>
 
 <body>
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>			
-
-		
 		<main class="container">
 			<section class="row">
 				<p class="text-right">
@@ -46,34 +46,19 @@
 					<div class="panel-heading fontwei">测评分析选课报告</div>
 					<div class="panel-body report">
 						<ul>
-
 							<li>
 								<h2 class="fontwei margin_bot1">推荐职业介绍</h2>
 								<div class="">
-									<div class="">
-										<h4 class="fontwei">1、生物学家</h4>
-										<p class="tindent">
-											职业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">1、生物学家</h4>
-										<p class="tindent">
-											职业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">1、生物学家</h4>
-										<p class="tindent">
-											职业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">1、生物学家</h4>
-										<p class="tindent">
-											职业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
+									<c:forEach items="${vocationLClist}" var="c" varStatus="start">
+										<div class="">
+											<h4 class="fontwei">&emsp;&emsp;${start.count}、${c.industryName}</h4>											
+												<c:forEach items="${vocationlist}" var="b" varStatus="startb">																									
+													<c:if test="${c.industryName eq b.industryName}">
+															&emsp;&emsp;<a title="查看" href="javascript:;" onclick="enrollment_select('${b.vocationName}详情','xgk_vocation.do?vocationId=${b.vocationId}','4','1200','600')">${b.vocationName}</a>
+													</c:if>																										
+												</c:forEach>											
+										</div>
+									</c:forEach>			
 								</div>
 							</li>
 
@@ -271,8 +256,7 @@
 										        symbol:'circle',
 										        symbolSize:16,
 										        smooth: true,
-										        data: [44, 88, 22, 88, 30, 55, 66],
-										        
+										        data: [44, 88, 22, 88, 30, 55, 66]										        
 										    },
 										    {
 										        name: '语言学家',
@@ -303,12 +287,32 @@
 										tech_require.setOption(option);
 									</script>
 									<table class="" style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
-										<tr><th></th><th>学历要求</th><th>专业知识</th><th>专业技能</th><th>工作年限</th><th>工作能力</th><th>组织能力</th><th>策划能力</th></tr>
-										<tr><td>1-2基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										<tr><td>2-3基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										<tr><td>3-4基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										<tr><td>4-5基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										<tr><td>5-6基础</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										<tr>
+											<th>职业名称</th>
+											<th>学历要求</th>
+											<th>专业知识</th>
+											<th>专业技能</th>
+											<th>工作年限</th>
+											<th>工作能力</th>
+											<th>组织能力</th>
+											<th>策划能力</th>
+										</tr>										
+											<c:forEach items="${vocationLClist}" var="c" varStatus="start">																						
+												<c:forEach items="${vocationlist}" var="b" varStatus="startb">																									
+													<c:if test="${c.industryName eq b.industryName}">
+														<tr>
+															<td>${b.vocationName}</td>
+															<td>${b.educationQalification}</td>
+															<td>${b.specialtyKnow}</td>
+															<td>${b.specialtySkill}</td>
+															<td>${b.workYear}</td>
+															<td>${b.workAchieved}</td>
+															<td>${b.organizationAbility}</td>
+															<td>${b.planAbility}</td>
+														</tr>	
+													</c:if>																										
+												</c:forEach>									
+										</c:forEach>										
 									</table>
 								</div>
 							</li>
@@ -320,14 +324,14 @@
 											<h4 class="fontwei">&emsp;&emsp;${start.count}、${c.specialtyDisciplines}</h4>											
 												<c:forEach items="${specialtylist}" var="b" varStatus="startb">																									
 													<c:if test="${c.specialtyDisciplines eq b.specialtyDisciplines}">
-															&emsp;&emsp;&emsp;&emsp;<a>${b.specialtyName}</a>
+															&emsp;&emsp;&emsp;&emsp;<a title="查看" href="javascript:;" onclick="enrollment_select('${b.specialtyName}详情','xgk_specialty.do?specialtyId=${b.specialtyId}','4','1200','600')">${b.specialtyName}</a>
 													</c:if>																										
 												</c:forEach>											
 										</div>
 									</c:forEach>								
 								</div>
 							</li>
-
+							<!-- 专业适配度 -->
 							<li>
 								<h2 class="fontwei margin_bot1">专业适配度</h2>
 								<div class="">
@@ -353,31 +357,14 @@
 												<td>${b.historyPerformance}%</td>
 												<td>${b.geographyPerformance}%</td>
 												<td>${b.biologyPerformance}%</td>
-												<td><a href="###">查看详情</a></td>
+												<td><a title="查看详情" href="javascript:;" onclick="enrollment_select('${b.specialtyName}招生要求','xgk_cpEnrollment.do?includeMajor=${b.specialtyName}','4','1200','600')">查看详情</a></td>
 											</c:if>
 											</tr>
 										</c:forEach>
 									</c:forEach>										
 									</table>
 								</div>
-							</li>
-							<li>
-								<h2 class="fontwei margin_bot1">专业报考要</h2>
-								<div class="">
-									<c:forEach items="${largeClasslist}" var="c" varStatus="start">
-										<c:forEach items="${specialtylist}" var="b" varStatus="startb">	
-											<c:if test="${c.specialtyDisciplines eq b.specialtyDisciplines}">
-												<div class="">
-													<h4 class="fontwei">&emsp;&emsp;${start.count}、${b.specialtyName}</h4>											
-													<p class="tindent">
-													专业介绍：${b.specialtyRequirement}
-													</p>																					
-												</div>
-											</c:if>
-										</c:forEach>
-									</c:forEach>	
-								</div>
-							</li>
+							</li>							
 							<li>
 								<h2 class="fontwei margin_bot1">单科学科选择与专业匹配度</h2>
 								<div class="">
@@ -564,16 +551,10 @@
 									myChart.setOption(option);
 								</script>
 							</li>
-
 						</ul>
 					</div>
 			</section>
-
-		</main>
-
-
-				
-		
+		</main>		
 <!-- 页面底部-->
 <c:import url="side_right.jsp"></c:import>	
 <!-- 页面底部-->
@@ -582,5 +563,8 @@
 <script type="text/javascript">
 var id="${id}";
 $( "#xgk"+id).addClass( "active" );
+function enrollment_select(title,url,id,w,h){	
+	layer_show(title,url,w,h);
+}
 </script>
 </html>

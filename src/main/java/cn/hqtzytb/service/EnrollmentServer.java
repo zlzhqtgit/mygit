@@ -26,9 +26,9 @@ public class EnrollmentServer implements IEnrollmentServer {
 
 	
 	@Override
-	public List<Enrollment> getMajor(String includeMajor, String eProvince,String eEducation) {
-		String where="enrollment_major LIKE '%" +includeMajor+ "%' or include_major LIKE '%"
-				+ includeMajor + "%' AND e_province='"+eProvince+"' and e_education='"+eEducation+"'";
+	public List<Enrollment> getMajor(String includeMajor, String eProvince) {
+		String where="(enrollment_major LIKE '%" +includeMajor+ "%' or include_major LIKE '%"
+				+ includeMajor + "%') AND e_province='"+eProvince+"'";
 		return enrollmentMapper.select(where, null, null, null);
 	}
 

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<mapper namespace="cn.hqtzytb.mapper.VocationMapper">	
+		<!--查询测评结果对应相关信息  -->
+		<select id="select" resultType="cn.hqtzytb.entity.Vocation">
+			select  
+					v_id as vId,vocation_id as vocationId,
+					vocation_name as vocationName,
+					industry_name as industryName,
+					vocation_brief as vocationBrief,
+					prospect,
+					work_experience as workExperience,
+					work_content as workContent,
+					education_credential as educationCredential,
+					relation_specialty as relationSpecialty,
+					education_qalification as educationQalification,
+					specialty_know as specialtyKnow,
+					specialty_skill as specialtySkill,
+					work_year as workYear,
+					work_achieved as workAchieved,
+					organization_ability as organizationAbility,
+					plan_ability as planAbility
+			from vocation b 
+					LEFT JOIN  personality_vocation e  on b.vocation_id=e.vocations_id  
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>	
+				<!--查询测评结果对应相关信息  -->
+		<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Vocation">
+			select DISTINCT(b.industry_name) industryName
+			from vocation b 
+					LEFT JOIN personality_vocation e  on b.vocation_id=e.vocations_id 
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>	
+		<select id="selectId" resultType="cn.hqtzytb.entity.Vocation">
+			select  				
+					vocation_brief as vocationBrief,
+					prospect,
+					work_experience as workExperience,
+					work_content as workContent,
+					education_credential as educationCredential,
+					relation_specialty as relationSpecialty
+			from vocation 					 
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	

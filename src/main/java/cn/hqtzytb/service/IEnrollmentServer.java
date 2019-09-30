@@ -7,5 +7,5 @@ import cn.hqtzytb.entity.Enrollment;
 
 public interface IEnrollmentServer
 {
-	List<Enrollment> getMajor(String includeMajor,String eProvince,String eEducation);		
+	List<Enrollment> getMajor(String includeMajor,String eProvince);		
 }

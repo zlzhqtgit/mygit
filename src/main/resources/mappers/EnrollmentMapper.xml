@@ -5,13 +5,14 @@
 		<!--查询测评结果对应相关信息  -->
 		<select id="select" resultType="cn.hqtzytb.entity.Enrollment">
 			select  
-					e_id as e_id,e_year as e_year,
-					e_province as e_province,
-					e_education as e_education,
-					universities_name as universities_name,
-					enrollment_major as enrollment_major,
-					preferred_subject as preferred_subject,
-					reelection_subjects as reelection_subjects
+					e_id as eId,e_year as eYear,
+					e_province as eProvince,
+					e_education as eEducation,
+					universities_name as universitiesName,
+					enrollment_major as enrollmentMajor,
+					include_major as includeMajor,
+					preferred_subject as preferredSubject,
+					reelection_subjects as reelectionSubjects
 			from enrollment_requirements					
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
