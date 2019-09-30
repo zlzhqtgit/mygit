@@ -8,5 +8,6 @@ public interface ISpecialtyServer
 {
 
 	List<Specialty> getSpecialtyByPCode(String personalityCode);
+	List<Specialty> getLargeClassByPCode(String personalityCode);
 	
 }

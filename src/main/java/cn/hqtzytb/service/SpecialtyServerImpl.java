@@ -25,8 +25,13 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 
 	@Override
 	public List<Specialty> getSpecialtyByPCode(String personalityCode) {
-		String where="e.personality_id='"+personalityCode+"' LIMIT 20";
+		String where="e.personality_id='"+personalityCode+"'";
 		return specialtyMapper.select(where, null, null, null);
+	}
+	@Override
+	public List<Specialty> getLargeClassByPCode(String personalityCode) {
+		String where="e.personality_id='"+personalityCode+"' LIMIT 6";
+		return specialtyMapper.selectLargeClass(where, null, null, null);
 	}
 	
 	

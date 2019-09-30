@@ -18,4 +18,6 @@ import cn.hqtzytb.entity.Specialty;
 public interface SpecialtyMapper {
 	List<Specialty> select(@Param("where") String where, @Param("orderBy") String orderBy,
 			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
+	List<Specialty> selectLargeClass(@Param("where") String where, @Param("orderBy") String orderBy,
+		@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
 }

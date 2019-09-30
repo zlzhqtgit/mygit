@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/web/xgk/dropdown.js" type="text/javascript" charset="utf-8"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/itempool.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -28,21 +27,21 @@
 			     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			      <div class="modal-dialog">
 			       <div class="modal-content">
-			       <!-- <div class=""><img alt="" src=""/></div> -->
+			       <div class=""><img alt="" src=""/></div>
 			        <div class="modal-header  text-danger bg-warning">
 			         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			         <h4 class="modal-title" id="myModalLabel">你还有相关的测评题目没做，题目编号为：</h4>
 			        </div>
 			        <p id="un_complate" class="modal-body" style="word-wrap : break-word;width: 100%;"></p >
 			        <p class="modal-footer">
-			         <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">继续答题</button> -->
+			         
 			         <a href="" class="btn btn-primary" data-dismiss="modal">继续答题</a>
 			        </p>
-			       </div><!-- /.modal-content -->
-			      </div><!-- /.modal -->
+			       </div>
+			      </div>
 			     </div>
 			    </div>
-			    <!--/模态框-->
+			     
 			
 				<div class="test_instruction">
 
@@ -109,6 +108,7 @@
 				var strone;
 				//点击提交实现的方法
 				function tjda() {
+					
 					var val = $('input[name="cpda"]:checked').val();
 					if(val == null) {
 
@@ -124,13 +124,14 @@
 							cont++;
 							cpname += cpda[i][0] + "-";
 							if(cont==1){
-								strone=cpda[i][0];
+								strone=cpda[i][0];							
 							}
 						}
-					}
+					}					
 					if(flag == false) {
+						cont=0;
 						//模态框弹出未完成的题目
-					       var question=(cpname.split('-'));
+					      var question=(cpname.split('-'));
 						//var question1=question.pop();
 					      var items='';
 					      for (i=0;i<question.length-1;i++) {
@@ -139,17 +140,17 @@
 					      }
 					      $("#un_complate").html(items);
 					      
-					     /* if(items=''){
+					     if(items==''){
 					    	  //$('#myModal').hide();
-					    	  $('#myModal').modal('hide');
+					    	 $('#myModal').remove();
 					      }else{
 					    	 $("#un_complate").html(items);  
-					      } */
+					      } 
 						/* alert("你还有相关的测评题目没做，题目编号为：" + cpname); */
 						tu(strone-1,id);
 						$('#current').text(strone);
 						$("#progress").css("width",100/len*(strone)+"%");
-						ti(strone-1);
+						ti(strone-1);						
 					} else {
 						//location.href="../cp/indexno.do?cpda="+JSON.stringify(cpda);
 						var url = "../cp/xgk_result.do";

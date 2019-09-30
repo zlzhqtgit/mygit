@@ -137,11 +137,12 @@ public class XgkxkController {
 		try
 		{
 			//获取session里的用户名
-			//UserAdmin username =  (UserAdmin) session.getAttribute("user");	
-			List<UserFeature> featurelist=userFeatureServer.getUserFeatureByUid(2);
+			//UserAdmin username =  (UserAdmin) session.getAttribute("user");			
 		    List<Specialty> specialtylist=specialtyServer.getSpecialtyByPCode(personalityCode);
+		    List<Specialty> largeClasslist=specialtyServer.getLargeClassByPCode(personalityCode);
 		    System.out.println(specialtylist.size());
 		    map.addAttribute("specialtylist", specialtylist);
+		    map.addAttribute("largeClasslist", largeClasslist);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_cpfxselectreport";
 		} catch (Exception e){
@@ -175,5 +176,31 @@ public class XgkxkController {
 		}
 		return rr;
 	}
-
+	/**
+	* @Title: handlezsyq
+	* @Description: (这里用一句话描述这个方法的作用)
+	* @param @param session
+	* @param @param request
+	* @param @return    
+	* @return ResponseResult<Void>    
+	* @throws
+	 */
+	@RequestMapping(value = "/xgk_zsyqselect.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseResult<Void> handlezsyq(String includeMajor,String eProvince,String eEducation,HttpSession session, HttpServletRequest request) {
+		ResponseResult<Void> rr=null;
+		try{
+			
+			List<UserFeature> featurelist=userFeatureServer.getUserFeatureByUid(2);
+			if(featurelist.size()>0){				
+				rr = new ResponseResult<Void>(ResponseResult.STATE_OK,featurelist.get(0).getEvaluationName());
+			}else{
+				rr = new ResponseResult<Void>(ResponseResult.ERR,"你还没有进行测评");
+			}			
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：获取测评报告信息  错误信息: " + e);
+			rr = new ResponseResult<Void>(ResponseResult.ERR, "数据存在异常，请联系工作人员处理！");
+		}
+		return rr;
+	}
 }

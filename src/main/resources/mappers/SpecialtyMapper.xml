@@ -31,7 +31,15 @@
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>	
-				
+				<!--查询测评结果对应相关信息  -->
+		<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Specialty">
+			select DISTINCT(b.specialty_disciplines) specialtyDisciplines
+			from specialty b 
+					LEFT JOIN  personality_specialty e  on b.specialty_id=e.specialtyt_id
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>	
 	</mapper>
 	
 	

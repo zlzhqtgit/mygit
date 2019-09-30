@@ -14,7 +14,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/guide_select.css" />		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
-
 <body>
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>	

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<mapper namespace="cn.hqtzytb.mapper.EnrollmentMapper">	
+		<!--查询测评结果对应相关信息  -->
+		<select id="select" resultType="cn.hqtzytb.entity.Enrollment">
+			select  
+					e_id as e_id,e_year as e_year,
+					e_province as e_province,
+					e_education as e_education,
+					universities_name as universities_name,
+					enrollment_major as enrollment_major,
+					preferred_subject as preferred_subject,
+					reelection_subjects as reelection_subjects
+			from enrollment_requirements					
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>				
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	

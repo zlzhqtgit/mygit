@@ -312,168 +312,72 @@
 									</table>
 								</div>
 							</li>
-
 							<li>
 								<h2 class="fontwei margin_bot1">推荐专业介绍</h2>
 								<div class="">
-									<div class="">
-										<h4 class="fontwei">1、生物学</h4>
-										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										</table>
-									</div>
-									<div class="">
-										<h4 class="fontwei">2、生物学</h4>
-										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										</table>
-									</div>
-									<div class="">
-										<h4 class="fontwei">3、生物学</h4>
-										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										</table>
-									</div>
-									<div class="">
-										<h4 class="fontwei">4、生物学</h4>
-										<table style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-											<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										</table>
-									</div>
+									<c:forEach items="${largeClasslist}" var="c" varStatus="start">
+										<div class="">
+											<h4 class="fontwei">&emsp;&emsp;${start.count}、${c.specialtyDisciplines}</h4>											
+												<c:forEach items="${specialtylist}" var="b" varStatus="startb">																									
+													<c:if test="${c.specialtyDisciplines eq b.specialtyDisciplines}">
+															&emsp;&emsp;&emsp;&emsp;<a>${b.specialtyName}</a>
+													</c:if>																										
+												</c:forEach>											
+										</div>
+									</c:forEach>								
 								</div>
 							</li>
 
 							<li>
 								<h2 class="fontwei margin_bot1">专业适配度</h2>
 								<div class="">
-									<div class="">
-										<h4 class="fontwei">1、生物学报考要求</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-										<div id="major" style="width: 600px;height:420px; margin: 0 auto;"></div>
-										<script type="text/javascript">
-											var option = {
-												title: {
-													text: '专业学科适配量表',
-//													subtext: '数据来自网络',
-													x:'center',
-											        y:'top',
-											        textAlign:'left'
-												},
-												tooltip: {
-													trigger: 'axis',
-													axisPointer: {
-														type: 'shadow'
-													}
-												},
-//												legend: {//图例
-//													data: ['2011年'],
-//												},
-												grid: {//网格
-													left: '1%',
-													right: '4%',
-													bottom: '3%',
-													containLabel: true
-												},
-												xAxis: {
-													type: 'value',
-													min:0,
-													max:100,
-													boundaryGap: [0, 0.01],
-													splitLine: { //坐标轴在 grid 区域中的分隔线
-												        show: false,
-												    },
-												},
-												yAxis: {
-													type: 'category',
-													data: ['巴西','印尼','美国','印度','中国','生物'],
-													axisTick: {//坐标轴刻度相关设置。
-												        show: false
-												    },
-												    
-												},
-												series: [
-													{
-														name: '2011年',
-														type: 'bar',
-														data: [55, 88, 33, 44, 66, 77],
-														barWidth:40,
-														barCategoryGap:'50%',//柱图间距
-														itemStyle: {
-															normal: {
-																color: function(params) {
-							                                        let colorList = [
-							                                            "#c23531",
-							                                            "#2f4554",
-							                                            "#61a0a8",
-							                                            "#d48265",
-							                                            "#91c7ae",
-							                                            "#749f83",
-							                                            "#6e7074",
-							                                        ];
-							                                        return colorList[params.dataIndex];
-							                                   	},
-																label: {
-																	show: true, //开启显示
-																	color:"#ddd",
-																	position: 'insideRight', //在上方显示
-																	distance: 20,
-																	textStyle: { //数值样式
-																		color: 'white',
-																		fontSize: 16
-																	}
-																}
-															}
-														}
-													},
-												]
-											};
-											var myChart = echarts.init(document.getElementById('major'));
-											myChart.setOption(option);
-										</script>
-									</div>
-									<div class="">
-										<h4 class="fontwei">2、生物学报考要求</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">3、生物学报考要求</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
-									<div class="">
-										<h4 class="fontwei">4、生物学报考要求</h4>
-										<p class="tindent">
-											专业介绍：这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍这是一个专业介绍
-										</p>
-									</div>
+									<table class="" style="margin: 0 auto;width: 95%;" border="" cellspacing="" cellpadding="">
+										<tr>											
+											<th>专业名称</th>
+											<th>物理要求</th>
+											<th>化学要求</th>
+											<th>政治要求</th>
+											<th>历史要求</th>
+											<th>地理要求</th>
+											<th>生物要求</th>
+											<th>专业选考科目要求</th>
+										</tr>
+									<c:forEach items="${largeClasslist}" var="c" varStatus="start">
+										<c:forEach items="${specialtylist}" var="b" varStatus="startb">	
+											<tr>												
+											<c:if test="${c.specialtyDisciplines eq b.specialtyDisciplines}">												
+												<td>${b.specialtyName}</td>
+												<td>${b.physicsPerformance}%</td>
+												<td>${b.chemistryPerformance}%</td>
+												<td>${b.politicPerformance}%</td>
+												<td>${b.historyPerformance}%</td>
+												<td>${b.geographyPerformance}%</td>
+												<td>${b.biologyPerformance}%</td>
+												<td><a href="###">查看详情</a></td>
+											</c:if>
+											</tr>
+										</c:forEach>
+									</c:forEach>										
+									</table>
 								</div>
 							</li>
-
+							<li>
+								<h2 class="fontwei margin_bot1">专业报考要</h2>
+								<div class="">
+									<c:forEach items="${largeClasslist}" var="c" varStatus="start">
+										<c:forEach items="${specialtylist}" var="b" varStatus="startb">	
+											<c:if test="${c.specialtyDisciplines eq b.specialtyDisciplines}">
+												<div class="">
+													<h4 class="fontwei">&emsp;&emsp;${start.count}、${b.specialtyName}</h4>											
+													<p class="tindent">
+													专业介绍：${b.specialtyRequirement}
+													</p>																					
+												</div>
+											</c:if>
+										</c:forEach>
+									</c:forEach>	
+								</div>
+							</li>
 							<li>
 								<h2 class="fontwei margin_bot1">单科学科选择与专业匹配度</h2>
 								<div class="">
@@ -567,8 +471,7 @@
 										保存选科测评报告并打印，或在不改变职业和专业选择的前提下，使用相似学科组合作为最终选科，并生成选科报告。
 									</h3>
 								</div>
-							</li>
-
+							</li>							
 							<li>
 								<h2 class="fontwei margin_bot1">其它相似学科组合及报考概率</h2>
 								<style type="text/css">
