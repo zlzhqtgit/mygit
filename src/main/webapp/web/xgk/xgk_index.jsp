@@ -68,6 +68,12 @@
 			        prevEl: '.swiper-button-prev',
 			      },
 			    });
+			    $('banner .swiper-slide').mouseenter(function () {
+			    	swiperBanner.autoplay.stop();
+		    	})
+		    	$('banner .swiper-slide').mouseleave(function () {
+		    		swiperBanner.autoplay.start();
+		    	})
 			</script>
 		</banner>
 		
@@ -108,7 +114,7 @@
 			<h1 class="text-center">公司业务</h1>
 			<style type="text/css">
 				.bussiness .swiper-container { width: 100%; height: 100%; }
-				.bussiness .swiper-slide { text-align: center; font-size: 18px; border: 1px solid #eee; transition: 300ms; transform: scale(.8); }
+				.bussiness .swiper-slide {display:block; text-decoration:none; text-align: center; font-size: 18px; border: 1px solid #eee; transition: 300ms; transform: scale(.8); }
 				.bussiness .swiper-slide img { width: 100%; }
 				.bussiness .swiper-slide-active, .swiper-slide-duplicate-active { border: 1px solid #eee; transform: scale(1); z-index: 99999999; }
 			</style>
@@ -123,7 +129,7 @@
 					</div>
 					<div class="swiper-container" style="height: 384px;">
 						<div class="swiper-wrapper">
-							<div class="swiper-slide">
+							<a href="" class="swiper-slide">
 								<div class="">
 									<img src="${pageContext.request.contextPath}/img/xgk/certify01.png"/>
 								</div>
@@ -132,8 +138,8 @@
 									<h3 class="margin_top1">这是比较大的一句话1</h3>
 									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
 								</div>
-							</div>
-							<div class="swiper-slide">
+							</a>
+							<a href="" class="swiper-slide">
 								<div class="">
 									<img src="${pageContext.request.contextPath}/img/xgk/certify02.png"/>
 								</div>
@@ -142,8 +148,8 @@
 									<h3 class="margin_top1">这是比较大的一句话2</h3>
 									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
 								</div>
-							</div>
-							<div class="swiper-slide">
+							</a>
+							<a href="" class="swiper-slide">
 								<div class="">
 									<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
 								</div>
@@ -152,8 +158,8 @@
 									<h3 class="margin_top1">这是比较大的一句话3</h3>
 									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
 								</div>
-							</div>
-							<div class="swiper-slide">
+							</a>
+							<a href="" class="swiper-slide">
 								<div class="">
 									<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
 								</div>
@@ -162,7 +168,7 @@
 									<h3 class="margin_top1">这是比较大的一句话3</h3>
 									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
 								</div>
-							</div>
+							</a>
 						</div>
 						<!-- Add Pagination -->
 						<div class="swiper-pagination"></div>
@@ -194,10 +200,15 @@
 						clickable: true,
 					},
 				});
+				$('.bussiness .swiper-slide').mouseenter(function () {
+					swiper.autoplay.stop();
+		    	})
+		    	$('.bussiness .swiper-slide').mouseleave(function () {
+		    		swiper.autoplay.start();
+		    	})
 				
 				var item_tit=$('.bussiness #item_tit');
 				var tit= $('.bussiness .swiper-wrapper .swiper-slide-active').find('input').val();
-				console.log(tit)
 				$('.bussiness #item_tit h3').text(tit);
 			</script>
 			<div class="clearfix"></div>
@@ -252,6 +263,8 @@
 			    .consultents .thumbnail .caption p{
 			    	margin:20px 0;
 			    }
+			    .consultents .bussiness .swiper-container-horizontal,
+			    .consultents .swiper-container-horizontal > .swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{bottom: -5px;}
 			</style>
 			<div class="consultents">
 				<div class="swiper-container">
@@ -464,6 +477,12 @@
 			        prevEl: '.consultents .swiper-button-prev',
 			      },
 			    });
+			    $('.consultents .swiper-slide').mouseenter(function () {
+			    	consult_swiper.autoplay.stop();
+		    	})
+		    	$('.consultents .swiper-slide').mouseleave(function () {
+		    		consult_swiper.autoplay.start();
+		    	})
 			</script>
 		</section>
 
@@ -532,6 +551,12 @@
 					}
 				
 				})
+				$('#certify .swiper-slide').mouseenter(function () {
+					certifySwiper.autoplay.stop();
+		    	})
+		    	$('#certify .swiper-slide').mouseleave(function () {
+		    		certifySwiper.autoplay.start();
+		    	})
 				</script>
 		</section>	
 		

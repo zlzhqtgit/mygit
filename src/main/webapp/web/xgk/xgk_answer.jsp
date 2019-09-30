@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/js/web/xgk/itempool.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
@@ -23,25 +23,17 @@
 		<main class="container" style="height: 500px;margin-bottom:2em;">
 			<section class="row">
 				<!--/模态框-->
-			    <div class="">
-			     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			      <div class="modal-dialog">
-			       <div class="modal-content">
-			       <div class=""><img alt="" src=""/></div>
-			        <div class="modal-header  text-danger bg-warning">
-			         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			         <h4 class="modal-title" id="myModalLabel">你还有相关的测评题目没做，题目编号为：</h4>
-			        </div>
-			        <p id="un_complate" class="modal-body" style="word-wrap : break-word;width: 100%;"></p >
-			        <p class="modal-footer">
-			         
-			         <a href="" class="btn btn-primary" data-dismiss="modal">继续答题</a>
-			        </p>
-			       </div>
-			      </div>
-			     </div>
-			    </div>
-			     
+			    <div class="" id="Modal">
+					<div class="bg-model"></div>
+					<div class="Modal_box">
+						<div class=""><img style="width:100%" alt="" src="${pageContext.request.contextPath}/img/xgk/model.png"/></div>
+						<p id="un_complate" class="modal-body" style="word-wrap : break-word;width: 100%;"></p >
+				        <p class="modal-footer">
+				        	<a class="btn btn-primary" >继续答题</a>
+				        </p>
+					</div>
+				</div>
+			    <!--/模态框--> 
 			
 				<div class="test_instruction">
 
@@ -78,7 +70,7 @@
 							<p class="text-right margin_top" style="padding-right:2em">
 								<a id="syt" onclick="syt()" class="btn btn-default" role="button">上一题</a>
 								<a id="xyt" onclick="xyt()" class="btn btn-default btn-primary" role="button">下一题</a>
-								<a id="tjda" onclick="tjda()" class="btn btn-primary" data-toggle="modal" data-target="#myModal">提交</a>
+								<a id="tjda" onclick="tjda()" class="btn btn-primary" >提交</a>
 							</p>
 							<p class="text-right"><span id="current">1</span>/<span id="total">60</span></p>
 							<input id="num" type="hidden" value="0" />							
@@ -106,9 +98,14 @@
 				var cpda = new Array();
 				var cont=0;
 				var strone;
+				
+				$("#Modal a").on('click',closeModal);
+				function closeModal(){				
+					$("#Modal").css("display","none");
+				}
 				//点击提交实现的方法
 				function tjda() {
-					
+					$('#myModal').show();
 					var val = $('input[name="cpda"]:checked').val();
 					if(val == null) {
 
@@ -126,8 +123,9 @@
 							if(cont==1){
 								strone=cpda[i][0];							
 							}
+							
 						}
-					}					
+					}				
 					if(flag == false) {
 						cont=0;
 						//模态框弹出未完成的题目
@@ -135,22 +133,21 @@
 						//var question1=question.pop();
 					      var items='';
 					      for (i=0;i<question.length-1;i++) {
-					       console.log(question[i]);
+					       //console.log(question[i]);
 					       items +='<a>'+question[i]+'</ a>' ;
 					      }
-					      $("#un_complate").html(items);
-					      
 					     if(items==''){
-					    	  //$('#myModal').hide();
-					    	 $('#myModal').remove();
+					    	 $("#Modal").css("display","none");
 					      }else{
-					    	 $("#un_complate").html(items);  
-					      } 
+					    	 $("#un_complate").html(items);
+					    	 $("#Modal").css("display","block");					    	
+					      }
+					    
 						/* alert("你还有相关的测评题目没做，题目编号为：" + cpname); */
-						tu(strone-1,id);
-						$('#current').text(strone);
-						$("#progress").css("width",100/len*(strone)+"%");
-						ti(strone-1);						
+					     tu(strone-1,id);
+							$('#current').text(strone);
+							//$("#progress").css("width",100/len*(strone)+"%");
+							ti(strone-1);
 					} else {
 						//location.href="../cp/indexno.do?cpda="+JSON.stringify(cpda);
 						var url = "../cp/xgk_result.do";
@@ -206,7 +203,7 @@
 					} else {
 						$("#syt").removeAttr("disabled");
 					}					
-					$("#progress").css("width",100/len*(nu+1)+"%");
+					$("#progress").css("width",100/len*(nu)+"%");
 				});
 
 				//点击下一題按钮
@@ -219,8 +216,7 @@
 					} else {
 						return;
 					}
-					console.log(100/len*(nu+1));
-					$("#progress").css("width",100/len*(nu+1)+"%");
+					$("#progress").css("width",100/len*(nu)+"%");
 				}
 				//点击上一题按钮
 				function syt() {
@@ -236,7 +232,7 @@
 					}else{
 						return;
 					}					
-					$("#progress").css("width",100/len*(nu+1)+"%");
+					$("#progress").css("width",100/len*(nu)+"%");
 					
 				}
 				//控制上一题，下一题启用状态
