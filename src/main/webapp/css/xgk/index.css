@@ -83,7 +83,8 @@ nav a{
 	font-size:20px;
 	display:inline-block;
 	text-align:center;
-	width:86px;
+	width:120px;
+	font-weight:300;
 }
 nav a:hover{
 	padding: 6px 20px;
