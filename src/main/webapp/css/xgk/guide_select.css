@@ -25,7 +25,19 @@
 }
 .select_options>a>div p{
 	position: relative;
-　　line-height: 20px; 
-　　max-height: 80px;
+	line-height: 20px; 
+	max-height: 80px;
 }
-.
+.choose_items{
+	border-top: 1px solid #e5e5e5;
+}
+.choose_items label{
+	padding-left: .5em;
+}
+.choose_items ul{
+	display: flex;
+}
+.choose_items ul li{
+	margin-bottom: .6em;
+	padding: 0 1em;
+}
