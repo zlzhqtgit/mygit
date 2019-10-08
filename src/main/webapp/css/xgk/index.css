@@ -688,6 +688,7 @@ label{
 	position: fixed;
 	z-index: 9999;
 	width: 36vw;
+	top:20%;
 	left: 30%;
 	background-color: #fff;
 }
