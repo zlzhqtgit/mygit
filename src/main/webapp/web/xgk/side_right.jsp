@@ -11,7 +11,7 @@
 		<div class="side-right">
 			<div class="text-center mark-box">
 				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/search.png" >
+					<img src="${pageContext.request.contextPath}/img/xgk/rside1.png" >
 				</span>
 				<div class="">
 					<a href="">线上课程</a>
@@ -19,7 +19,7 @@
 			</div>
 			<div class="text-center mark-box">
 				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/search.png" >
+					<img src="${pageContext.request.contextPath}/img/xgk/rside2.png" >
 				</span>
 				<div class="">
 					<a href="">VIP</a>
@@ -27,7 +27,7 @@
 			</div>
 			<div class="text-center mark-box" href="">
 				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/search.png" >
+					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
 				</span>
 				<div class="">
 					<a href="">在线客服</a>
@@ -35,7 +35,7 @@
 			</div>
 			<div class="text-center mark-box backtop">
 				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/search.png" >
+					<img src="${pageContext.request.contextPath}/img/xgk/rside4.png" >
 				</span>
 				<div class="">
 					<a href="">回到顶部</a>

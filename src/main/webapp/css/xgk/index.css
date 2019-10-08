@@ -299,6 +299,7 @@ footer a:hover{
 }
 .mark-box{
 	display:block;
+	cursor: pointer;
 	margin: 3px 0;
 	background-color: white;
 	padding: 7px 2px;
