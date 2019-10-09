@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.hqtzytb.entity.Enrollment;
@@ -26,6 +27,7 @@ import cn.hqtzytb.service.IEnrollmentServer;
 import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.service.IUserFeatureServer;
 import cn.hqtzytb.service.IVocationServer;
+import net.sf.json.JSONArray;
 
 
 
@@ -142,21 +144,54 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_cpfxselectreport.do")	
-	public String showhqtCpfxselectreport(ModelMap map,String personalityCode,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCpfxselectreportone(ModelMap map,String personalityCode,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
-		{
-			//获取session里的用户名
-			//UserAdmin username =  (UserAdmin) session.getAttribute("user");			
-		    List<Specialty> specialtylist=specialtyServer.getSpecialtyByPCode(personalityCode);
-		    List<Specialty> largeClasslist=specialtyServer.getLargeClassByPCode(personalityCode);
-		    List<Vocation> vocationlist=vocationServer.getVocationByCode(personalityCode);
-		    List<Vocation> vocationLClist=vocationServer.getLargeClassByPCode(personalityCode);
-		    
-		    map.addAttribute("specialtylist", specialtylist);
-		    map.addAttribute("largeClasslist", largeClasslist);
-		    map.addAttribute("vocationlist", vocationlist);
-		    map.addAttribute("vocationLClist", vocationLClist);
-		    System.out.println(vocationlist);
+		{		
+		    List<Vocation> vocationlist=vocationServer.getVocationByCode(personalityCode);	
+		    if(personalityCode.length()==3){
+		    	map.addAttribute("personalityType", "霍兰德");
+		    }else{
+		    	map.addAttribute("personalityType", "MBTI");
+		    }
+		    map.addAttribute("vocationlist", vocationlist);		  
+		    map.addAttribute("personalityCode", personalityCode);	
+		    map.addAttribute("pdcheck", 1);	
+			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
+			return  "web/xgk/xgk_cpfxselectreport";
+		} catch (Exception e){
+			logger.error("访问路径："+request.getRequestURI()+"操作：进入测评选科报告页面  错误信息: "+e);
+			throw new MyRuntimeException(e);
+		}							
+	}
+	@RequestMapping("/xgk_cpfxselectreport_two.do")	
+	public String showhqtCpfxselectreporttwo(ModelMap map,@RequestParam(value="vocationbox") String vocationbox,String personalityCode,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+		try
+		{	
+			//获取传过来的职业，并转化为数组
+			String[] arr = vocationbox.split(",");
+			//拼接成查询的字符串
+			String where="";
+			for(int i=0;i<arr.length;i++){
+				if(i<arr.length-1){
+					where +="vocation_id='"+arr[i]+"' or ";
+				}else{
+					where +="vocation_id='"+arr[i]+"'";
+				}				
+			}
+			if(personalityCode.length()==3){
+		    	map.addAttribute("personalityType", "霍兰德");
+		    }else{
+		    	map.addAttribute("personalityType", "MBTI");
+		    }
+			 List<Specialty> largeClasslist=specialtyServer.getLargeClassByvocation(where);
+			 List<Specialty> specialtylist=specialtyServer.getSpecialtyByvocation(where);
+			 map.addAttribute("specialtylist", specialtylist);		
+			 map.addAttribute("largeClasslist", largeClasslist);	
+			 List<Vocation> vocationlist=vocationServer.getVocationByCode(personalityCode);		
+			 List<Vocation> vocationlistbyid=vocationServer.getVocationByIdtwo(where);	
+			 map.addAttribute("vocationlist", vocationlist);
+			 map.addAttribute("vocationlistbyid", vocationlistbyid);
+			 map.addAttribute("personalityCode", personalityCode);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_cpfxselectreport";
 		} catch (Exception e){

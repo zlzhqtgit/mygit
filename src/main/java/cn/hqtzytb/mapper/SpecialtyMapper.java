@@ -18,8 +18,12 @@ import cn.hqtzytb.entity.Specialty;
 public interface SpecialtyMapper {
 	List<Specialty> select(@Param("where") String where, @Param("orderBy") String orderBy,
 			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
+	List<Specialty> selectvoction(@Param("where") String where, @Param("orderBy") String orderBy,
+			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
 	List<Specialty> selectLargeClass(@Param("where") String where, @Param("orderBy") String orderBy,
 		@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
 	List<Specialty> selectId(@Param("where") String where, @Param("orderBy") String orderBy,
+			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
+	List<Specialty> selectLargeClassByvocation(@Param("where") String where, @Param("orderBy") String orderBy,
 			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
 }

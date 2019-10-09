@@ -31,11 +31,48 @@
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>	
+		<select id="selectvoction" resultType="cn.hqtzytb.entity.Specialty">
+			select  
+					id,specialty_id as specialtyId,
+					specialty_name as specialtyName,
+					specialty_intro as specialtyIntro,
+					specialty_major_name as specialtyMajor_name,
+					specialty_class_name as specialtyClassName,
+					specialty_divided as specialtyDivided,
+					specialty_disciplines as specialtyDisciplines,
+					major_courses as majorCourses,
+					specialty_objective as specialtyObjective,
+					specialty_employment as specialtyEmployment,
+					specialty_requirement as specialtyRequirement,
+					physics_performance as physicsPerformance,
+					chemistry_performance as chemistryPerformance,
+					biology_performance as biologyPerformance,
+					politic_performance as politicPerformance,
+					history_performance as historyPerformance,
+					geography_performance as geographyPerformance,
+					chinese_performance as chinesePerformance,
+					math_performance as mathPerformance,
+					foreign_performance as foreignPerformance
+			from specialty b 
+					LEFT JOIN  vocation_specility e  on b.specialty_id=e.specialtyt_id  
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>	
 				<!--查询测评结果对应相关信息  -->
 		<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Specialty">
 			select DISTINCT(b.specialty_disciplines) specialtyDisciplines
 			from specialty b 
 					LEFT JOIN  personality_specialty e  on b.specialty_id=e.specialtyt_id
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>
+				<!--查询测评结果对应相关信息  -->
+		<select id="selectLargeClassByvocation" resultType="cn.hqtzytb.entity.Specialty">
+			select DISTINCT(b.specialty_divided) specialtyDivided
+			from specialty b 
+					LEFT JOIN  vocation_specility e  on b.specialty_id=e.specialtyt_id
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		

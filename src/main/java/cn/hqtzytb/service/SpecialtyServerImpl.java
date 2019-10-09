@@ -38,6 +38,14 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 	public List<Specialty> getSpecialtyById(String specialtyId) {
 		String where="specialty_id='"+specialtyId+"'";
 		return specialtyMapper.selectId(where, null, null, null);
+	}	
+	@Override
+	public List<Specialty> getSpecialtyByvocation(String where) {		
+		return specialtyMapper.selectvoction(where, null, null, null);
+	}	
+	@Override
+	public List<Specialty> getLargeClassByvocation(String where) {		
+		return specialtyMapper.selectLargeClassByvocation(where, null, null, null);
 	}
 	
 	

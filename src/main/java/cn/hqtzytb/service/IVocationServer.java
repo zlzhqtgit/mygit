@@ -10,6 +10,7 @@ public interface IVocationServer
 	List<Vocation> getVocationByCode(String personalityCode);
 	List<Vocation> getLargeClassByPCode(String personalityCode);
 	List<Vocation> getVocationById(String vocationId);
+	List<Vocation> getVocationByIdtwo(String where);
 	
 	
 }

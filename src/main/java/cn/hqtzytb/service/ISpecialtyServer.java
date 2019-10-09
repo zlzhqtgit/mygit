@@ -9,6 +9,8 @@ public interface ISpecialtyServer
 
 	List<Specialty> getSpecialtyByPCode(String personalityCode);
 	List<Specialty> getLargeClassByPCode(String personalityCode);
+	List<Specialty> getLargeClassByvocation(String where);
 	List<Specialty> getSpecialtyById(String specialtyId);
+	List<Specialty> getSpecialtyByvocation(String where);
 	
 }

@@ -42,6 +42,11 @@ public class VocationServerImpl implements IVocationServer {
 		String where="vocation_id='"+vocationId+"'";
 		return vocationMapper.selectId(where, null, null, null);
 	}
+	@Override
+	public List<Vocation> getVocationByIdtwo(String where) {
+		// TODO Auto-generated method stub
+		return vocationMapper.selectId(where, null, null, null);
+	}
 
 	
 
