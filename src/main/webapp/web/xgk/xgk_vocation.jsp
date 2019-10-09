@@ -14,18 +14,28 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-<div>
-	<h2>职业介绍</h2>
-	<p>${vocationlist[0].vocationBrief}</p>
-	<h2>职业前景</h2>
-	<p>${vocationlist[0].prospect}</p>
-	<h2>工作经验</h2>
-	<p>${vocationlist[0].workExperience}</p>
-	<h2>工作内容</h2>
-	<p>${vocationlist[0].workContent}</p>
-	<h2>教育要求</h2>
-	<p>${vocationlist[0].relationSpecialty}</p>
-</div>
+	<div class="padding-side2 margin_top margin_bot">
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3>职业介绍</h3></div>
+		  	<div class="panel-body">${vocationlist[0].vocationBrief}</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading"><h3>职业前景</h3></div>
+		  	<div class="panel-body">${vocationlist[0].prospect}</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3>工作经验</h3></div>
+		  	<div class="panel-body">${vocationlist[0].workExperience}</div>
+		</div>
+		<div class="panel panel-warning">
+			<div class="panel-heading"><h3>工作内容</h3></div>
+		  	<div class="panel-body">${vocationlist[0].workContent}</div>
+		</div>
+		<div class="panel panel-danger">
+			<div class="panel-heading"><h3>教育要求</h3></div>
+		  	<div class="panel-body">${vocationlist[0].relationSpecialty}</div>
+		</div>
+	</div>
 	
 </body>
 </html>

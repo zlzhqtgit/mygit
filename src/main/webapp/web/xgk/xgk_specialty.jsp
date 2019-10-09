@@ -14,15 +14,23 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-<div>
-	<h2>专业介绍</h2>
-	<p>${specialtylist[0].specialtyIntro}</p>
-	<h2>培养目标</h2>
-	<p>${specialtylist[0].specialtyObjective}</p>
-	<h2>就业前景</h2>
-	<p>${specialtylist[0].specialtyEmployment}</p>
-	<h2>报考要求</h2>
-	<p>${specialtylist[0].specialtyRequirement}</p>
+<div class="padding-side2 margin_top margin_bot">
+	<div class="panel panel-success">
+		<div class="panel-heading"><h3>专业介绍</h3></div>
+	  	<div class="panel-body">${specialtylist[0].specialtyIntro}</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading"><h3>培养目标</h3></div>
+	  	<div class="panel-body">${specialtylist[0].specialtyObjective}</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading"><h3>就业前景</h3></div>
+	  	<div class="panel-body">${specialtylist[0].specialtyEmployment}</div>
+	</div>
+	<div class="panel panel-warning">
+		<div class="panel-heading"><h3>报考要求</h3></div>
+	  	<div class="panel-body">${specialtylist[0].specialtyRequirement}</div>
+	</div>
 </div>
 	
 </body>
