@@ -35,14 +35,15 @@
 							<span class="fontwei">用户名</span>
 						</div>
 						<p class="margin_top1">							
-								你的测评类型为 :   ${personalityType} 你的测评结果为：${personalityCode}							   
+								<span class="padding-side text-muted">你的测评类型为 :<label class="text-danger">${personalityType}</label></span>
+								<span class="padding-side text-muted">你的测评结果为：<label class="text-danger">${personalityCode}</label></span>
 						</p>
 						<div class="img margin_top1 text-center margin_bot1" style="padding: 2em 0;">
 							<img src="${pageContext.request.contextPath}/img/xgk/guide_select.png" style="" />
 						</div>
 						<div class="">							
 									<p class="">根据你的测评结果我们为你推荐如下职业，你可以根据自己的喜好选择相应的职业（最多可选6种）生成自己的选科报告。</p>
-									<p class="" style="    color: #e01616;">(注：以下职业是通过你的测评结果为你推荐，结果仅供参考使用)</p>
+									<p class="text-danger">(注：以下职业是通过你的测评结果为你推荐，结果仅供参考使用)</p>
 									<div class="options">
 										<div class="">
 											<div class="" style="    margin-left: 35px;">
@@ -68,7 +69,7 @@
 					<!-- Default panel contents -->
 					<div class="panel-heading fontwei">测评分析选课报告</div>
 					<c:if test="${pdcheck==1}">
-						<label>请选择相对应的职业</label>
+						<p class="text-center margin_top1"><label class="text-danger">请选择相对应的职业</label></p>
 					</c:if>
 					<c:if test="${pdcheck != 1}">	
 					<label>你选择的职业是：
@@ -82,7 +83,7 @@
 								<h2 class="fontwei margin_bot1">职业技能要求</h2>
 								<div class="">
 									<div id="tech_require" style="width: 78%;height:400px;margin: 0 auto;" class=""></div>
-									<label style="margin-left: 150px;">注:以上列举了前4个职业的职业技能要求数据,更多职业的职业技能要求请参考下列的图表。</label>									
+									<p class="text-danger" style="margin-left: 150px;">注:以上列举了前4个职业的职业技能要求数据,更多职业的职业技能要求请参考下列的图表。</p>									
 									<table id="vocationtb" class="" style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
 										<tr>
 											<th>职业名称</th>
@@ -117,12 +118,14 @@
 								<div class="">
 									<c:forEach items="${largeClasslist}" var="c" varStatus="start">
 										<div class="">
-											<h4 class="fontwei">&emsp;&emsp;${start.count}、${c.specialtyDivided}</h4>											
-												<c:forEach items="${specialtylist}" var="b" varStatus="startb">																									
+											<h4 class="fontwei">&emsp;&emsp;${start.count}、${c.specialtyDivided}</h4>
+											<ul>										
+												<c:forEach items="${specialtylist}" var="b" varStatus="startb">													
 													<c:if test="${c.specialtyDivided eq b.specialtyDivided}">
-															&emsp;&emsp;&emsp;&emsp;<a title="查看" href="javascript:;" onclick="enrollment_select('${b.specialtyName}详情','xgk_specialty.do?specialtyId=${b.specialtyId}','4','1200','600')">${b.specialtyName}</a>
-													</c:if>																										
-												</c:forEach>											
+														<li class="padding-side pull-left"><a title="查看" href="javascript:;" onclick="enrollment_select('${b.specialtyName}详情','xgk_specialty.do?specialtyId=${b.specialtyId}','4','1200','600')">${b.specialtyName}</a></li>
+													</c:if>
+												</c:forEach>
+											</ul>	
 										</div>
 									</c:forEach>								
 								</div>
@@ -157,7 +160,7 @@
 											</c:if>
 											</tr>
 										</c:forEach>
-									</c:forEach>										
+									</c:forEach>
 									</table>
 								</div>
 							</li>							
