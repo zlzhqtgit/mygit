@@ -27,7 +27,7 @@ import cn.hqtzytb.service.IEnrollmentServer;
 import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.service.IUserFeatureServer;
 import cn.hqtzytb.service.IVocationServer;
-import net.sf.json.JSONArray;
+
 
 
 
@@ -119,11 +119,12 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_customisereport.do")	
-	public String showhqtCustomisereport(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCustomisereport(ModelMap map,String str,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
 		{
 			//获取session里的用户名
-			//UserAdmin username =  (UserAdmin) session.getAttribute("user");			
+			//UserAdmin username =  (UserAdmin) session.getAttribute("user");	
+			System.out.println(str);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：自定义选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_customisereport";
 		} catch (Exception e){
@@ -163,6 +164,20 @@ public class XgkxkController {
 			throw new MyRuntimeException(e);
 		}							
 	}
+	/**	  
+	* @Title: showhqtCpfxselectreporttwo
+	* @Description: (选择职业生成选科报告)
+	* @param @param map
+	* @param @param vocationbox
+	* @param @param personalityCode
+	* @param @param session
+	* @param @param request
+	* @param @param response
+	* @param @return
+	* @param @throws MyRuntimeException    
+	* @return String    
+	* @throws
+	 */
 	@RequestMapping("/xgk_cpfxselectreport_two.do")	
 	public String showhqtCpfxselectreporttwo(ModelMap map,@RequestParam(value="vocationbox") String vocationbox,String personalityCode,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
@@ -192,7 +207,7 @@ public class XgkxkController {
 			 map.addAttribute("vocationlist", vocationlist);
 			 map.addAttribute("vocationlistbyid", vocationlistbyid);
 			 map.addAttribute("personalityCode", personalityCode);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("username")+" 模块名：生成测评选科报告页面  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_cpfxselectreport";
 		} catch (Exception e){
 			logger.error("访问路径："+request.getRequestURI()+"操作：进入测评选科报告页面  错误信息: "+e);

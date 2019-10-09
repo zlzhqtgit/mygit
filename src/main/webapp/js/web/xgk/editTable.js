@@ -3,15 +3,43 @@
 //hideTable()控制table的显示和隐藏
 //delTd(e)点击a标签执行方法
 //del(id)删除指定的列
-
+//customxk()自定义选科选择科目判断
+function customxk(){
+	var str="";
+	var rss = document.querySelectorAll("input[name='custombox']:checked");		
+	if(rss.length != 3){
+		alert("选择学科(必须选择3种)");
+	}else{
+		for(var i=0;i<rss.length;i++){
+			str+=rss[i].value;
+		}
+		return location.href="../xk/xgk_customisereport.do?str="+str;
+		/*var url = "../xk/xgk_customisereport.do";
+		var data = "str="+str;
+		$.ajax({
+			"url": url,
+			"data": data,
+			"type": "POST",
+			"dataType": "json",
+			"success": function(obj) {
+				if(obj.state == 0) {
+					alert(obj.message);
+					return;
+				}
+				alert(obj.message);
+				location.href = "../cp/xgk_report.do";
+			}
+		});*/
+	}
+}
 function xgkxk(e){	 
-	 var rs = document.querySelectorAll("input[type='checkbox']:checked");
+	 var rs = document.querySelectorAll("input[name='coursesetbox']:checked");
 	 if(rs.length > 4){ 
 	    alert("只能对比4个组合"); 
 	    e.checked=false;
 	 }else{
 		 if(e.checked==true){
-		    	$("thead tr").append("<th>"+e.value+"<a name='"+e.id+"' onclick='delTd(this)' class='delBtn' href='javascript:void(0);'>删除</a></th>");
+		    	$("thead tr").append("<th style='width: 218px;'><span class='glyphicon glyphicon-remove'></span>"+e.value+"<span class='glyphicon glyphicon-remove' name='"+e.id+"' onclick='delTd(this)'></span></th>");
 		    	$("#major-nub").append("<td>"+e.value+"</td>");
 		    	$("#major-max").append("<td>"+e.value+"</td>");
 		    	$("#major-min").append("<td>"+e.value+"</td>");
@@ -30,9 +58,9 @@ function xgkxk(e){
 function hidetable(){
     var rs = document.querySelectorAll("input[type='checkbox']:checked");
     if(rs.length > 1){ 
-    	$('#tableid').css('display','block');      		
+    	$('#table-div').css('display','block');      		
     }else{
-    	$('#tableid').css('display','none');
+    	$('#table-div').css('display','none');
     }  	     
 }
  //a标签删除
