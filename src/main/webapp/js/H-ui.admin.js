@@ -202,7 +202,8 @@ function layer_show(title,url,w,h){
 		maxmin: true,
 		shade:0.4,
 		title: title,
-		content: url
+		content: url,
+		scrollbar: false
 	});
 }
 /*关闭弹出框口*/
