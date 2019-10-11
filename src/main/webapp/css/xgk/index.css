@@ -13,7 +13,7 @@ html, body {
 }
 img{ border:0;  }
 a{ text-decoration:none; color:#333;  }
-a:hover{ color:#1974A1;  }
+a:hover{ color:#1974A1; text-decoration: none; }
 ul{
 	list-style: none;
 }
@@ -78,23 +78,33 @@ input{
 	position: relative;
 	padding: 20px 0;
 }
-nav a{
+nav ul li a{text-decoration: none;}
+nav>ul>li ul{
+	display: none;
+}
+nav>ul>li>a{
 	padding: 6px 8px;
 	font-size:20px;
 	display:inline-block;
 	text-align:center;
-	width:120px;
-	font-weight:300;
+	width:96px;
 }
-nav a:hover{
-	padding: 6px 20px;
+nav>ul>li>a:hover{
+	padding: 6px 8px;
 	background-color: #999;
 	color: white;
 	border-radius: 1em;
 	text-decoration: none;
 }
+nav>ul::after{content: '';clear: both;}
+nav>ul>li{float: left;}
+nav>ul>li:hover .child{display: block;}
+nav>ul>li>ul{position: absolute;z-index: 9;background-color: #fff;border-radius: 8px;box-shadow: -1px 2px 10px #ddd;}
+nav>ul>li>ul>li{text-align: center;}
+nav>ul>li>ul>li>a{padding: 6px 8px;width: 96px;display: block;text-decoration: none;}
+nav>ul>li>ul>li>a:hover{text-decoration: none;}
 .active{
-	padding: 6px 20px;
+	/* padding: 6px 20px; */
 	background-color: #3b8bec;
 	color: white;
 	border-radius: 1em;
@@ -693,3 +703,7 @@ label{
 	left: 30%;
 	background-color: #fff;
 }
+.options label{
+	cursor: pointer;
+}
+.report th{text-align:left;}

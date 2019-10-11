@@ -14,7 +14,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-	<div class="padding-side2 margin_top margin_bot">
+	<div class="padding-side2 margin_top margin_bot vocation_info">
 		<div class="panel panel-success">
 			<div class="panel-heading"><h3>职业介绍</h3></div>
 		  	<div class="panel-body">${vocationlist[0].vocationBrief}</div>

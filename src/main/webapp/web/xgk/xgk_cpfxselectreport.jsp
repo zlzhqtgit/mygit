@@ -28,7 +28,7 @@
 				<div class="panel panel-default">
 
 					<div class="panel-body">
-						<h1 class="text-primary fontwei">测评分析选课报告</h1>
+						<h1 class="text-primary fontwei">测评分析选科报告</h1>
 
 						<div class="margin_top1">
 							<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;">
@@ -41,7 +41,7 @@
 						<div class="img margin_top1 text-center margin_bot1" style="padding: 2em 0;">
 							<img src="${pageContext.request.contextPath}/img/xgk/guide_select.png" style="" />
 						</div>
-						<div class="">							
+						<div class="">
 									<p class="">根据你的测评结果我们为你推荐如下职业，你可以根据自己的喜好选择相应的职业（最多可选6种）生成自己的选科报告。</p>
 									<p class="text-danger">(注：以下职业是通过你的测评结果为你推荐，结果仅供参考使用)</p>
 									<div class="options">
@@ -53,9 +53,9 @@
 														<a title="查看" href="javascript:;" onclick="enrollment_select('${b.vocationName}详情','xgk_vocation.do?vocationId=${b.vocationId}','4','1200','600')">
 															<label for="whs">${b.vocationName}</label>
 														</a>
-													</span>																							
-												</c:forEach>											
-											</div>											
+													</span>
+												</c:forEach>
+											</div>
 										</div>
 									</div>
 									<p class="text-right">
@@ -67,49 +67,53 @@
 
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
-					<div class="panel-heading fontwei">测评分析选课报告</div>
+					<div class="panel-heading fontwei">测评分析选科报告</div>
 					<c:if test="${pdcheck==1}">
-						<p class="text-center margin_top1"><label class="text-danger">请选择相对应的职业</label></p>
+						<div class="text-center bg-warning" style="padding:1em 0;"><label class="text-danger">请在上方选择相对应的职业并点击“生成报告”按钮</label><div>
 					</c:if>
 					<c:if test="${pdcheck != 1}">	
-					<label>你选择的职业是：
-						<c:forEach items="${vocationlistbyid}" var="b" varStatus="startb">
-							${b.vocationName}
-						</c:forEach>
+					<label class="padding-side margin_top">你选择的职业是：
+						<span class="text-danger">
+							<c:forEach items="${vocationlistbyid}" var="b" varStatus="startb">
+								${b.vocationName}&nbsp;&nbsp;
+							</c:forEach>
+						</span>
 					</label>		
 					<div class="panel-body report">
 						<ul>							
 							<li>
 								<h2 class="fontwei margin_bot1">职业技能要求</h2>
 								<div class="">
-									<div id="tech_require" style="width: 78%;height:400px;margin: 0 auto;" class=""></div>
+									<div id="tech_require" style="max-width: 60%;height:400px;margin: 0 auto;" class=""></div>
 									<p class="text-danger" style="margin-left: 150px;">注:以上列举了前4个职业的职业技能要求数据,更多职业的职业技能要求请参考下列的图表。</p>									
-									<table id="vocationtb" class="" style="margin: 0 auto;" border="" cellspacing="" cellpadding="">
-										<tr>
-											<th>职业名称</th>
-											<th>学历要求</th>
-											<th>专业知识</th>
-											<th>专业技能</th>
-											<th>工作年限</th>
-											<th>工作能力</th>
-											<th>组织能力</th>
-											<th>策划能力</th>
-										</tr>																															
-												<c:forEach items="${vocationlistbyid}" var="b" varStatus="startb">																									
-													
-														<tr>
-															<td>${b.vocationName}</td>
-															<td>${b.educationQalification}</td>
-															<td>${b.specialtyKnow}</td>
-															<td>${b.specialtySkill}</td>
-															<td>${b.workYear}</td>
-															<td>${b.workAchieved}</td>
-															<td>${b.organizationAbility}</td>
-															<td>${b.planAbility}</td>
-														</tr>	
-																																						
-												</c:forEach>									
-																				
+									<table id="vocationtb" class="table table-hover padding-side2" style="margin: 0 auto; width:94%;" border="0" cellspacing="" cellpadding="">
+										<thead>
+											<tr>
+												<th>职业名称</th>
+												<th>学历要求</th>
+												<th>专业知识</th>
+												<th>专业技能</th>
+												<th>工作年限</th>
+												<th>工作能力</th>
+												<th>组织能力</th>
+												<th>策划能力</th>
+											</tr>
+										</thead>																															
+										<tbody>
+											<c:forEach items="${vocationlistbyid}" var="b" varStatus="startb">																									
+												<tr>
+													<td>${b.vocationName}</td>
+													<td>${b.educationQalification}</td>
+													<td>${b.specialtyKnow}</td>
+													<td>${b.specialtySkill}</td>
+													<td>${b.workYear}</td>
+													<td>${b.workAchieved}</td>
+													<td>${b.organizationAbility}</td>
+													<td>${b.planAbility}</td>
+												</tr>	
+																																				
+										</c:forEach>
+										</tbody>									
 									</table>
 								</div>
 							</li>
@@ -134,7 +138,7 @@
 							<li>
 								<h2 class="fontwei margin_bot1">专业适配度</h2>
 								<div class="">
-									<table class="" style="margin: 0 auto;width: 95%;" border="" cellspacing="" cellpadding="">
+									<table class="table table-hover padding-side2" style="margin: 0 auto; width:94%;" border="0" cellspacing="" cellpadding="">
 										<tr>											
 											<th>专业名称</th>
 											<th>物理要求</th>
@@ -168,10 +172,10 @@
 								<h2 class="fontwei margin_bot1">单科学科选择与专业匹配度</h2>
 								<div class="">
 									<div class="">
-										<p class="">
+										<p class="text-muted">
 											以下图示仅表示推荐专业的报考的匹配度
 										</p>
-										<div id="xkxz" style="width: 600px;height:420px; margin: 0 auto;"></div>
+										<div id="xkxz" style="max-width: 600px;height:420px; margin: 0 auto;"></div>
 										<script type="text/javascript">
 											var option = {
 												title: {

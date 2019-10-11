@@ -13,17 +13,25 @@
 				
 				<div class="head-bottom col-md-8">
 					<div class="logo">
-						<img src="${pageContext.request.contextPath}/img/xgk/logo.jpg" alt="贵州好前途教育科技有限公司">
+						<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.jpg" alt="贵州好前途教育科技有限公司"></a>
 					</div>
 					<nav id="navdh" class="">
-						<a id="xgk1" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a>
-						<a id="xgk2" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a>
-						<a id="xgk3" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a>
-						<a id="xgk4" href="">职业库</a>
-						<a id="xgk5" href="">高校专业</a>
-						<a id="xgk6" href="">学科推荐</a>
-						<a id="xgk7" href="">升学规划</a>
-						<a id="xgk8" href="">志愿填报</a>						
+						<ul>
+							<li><a id="xgk1" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
+							<li><a id="xgk2" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
+							<li><a id="xgk3" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
+							<li><a id="xgk4" href="">职业库</a></li>
+							<li>
+								<a id="xgk5" href="sch_search.html">高校专业</a>
+								<ul class="child">
+									<li><a href="">院校查询</a></li>
+									<li><a href="">专业查询</a></li>
+								</ul>
+							</li>
+							<li><a id="xgk6"  href="">学科推荐</a></li>
+							<li><a id="xgk7" href="">升学规划</a></li>
+							<li><a id="xgk8" href="">志愿填报</a></li>
+						</ul>
 					</nav>
 				</div>
 				<div class="head-top col-md-4 margin_top margin_bot1">
