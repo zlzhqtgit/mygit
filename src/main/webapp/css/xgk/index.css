@@ -144,6 +144,13 @@ nav>ul>li>ul>li>a:hover{text-decoration: none;}
 	max-width: 34px;
 }
 
+banner .swiper-container { width: 100%; height: 100%; margin-left: auto; margin-right: auto;}
+banner .swiper-slide { text-align: center; font-size: 18px; background: #fff; }
+banner .swiper-slide a{ display: block; width: 100%; }
+banner .swiper-slide img { width: 100%; }
+banner .swiper-button-prev, .swiper-container-rtl .swiper-button-next{ background-image: url(../../img/xgk/arrows_left.png); background-color: gainsboro; opacity: .3;cursor: pointer;left: 10px;right: auto;padding: 4em 2em; }
+banner .swiper-button-next, .swiper-container-rtl .swiper-button-prev{ background-image: url(../../img/xgk/arrows_righ.png); background-color: gainsboro; opacity: .3;cursor: pointer;right: 10px;left: auto;padding: 4em 2em; }
+
 .video_box{
 	display: flex;
 	justify-content: center;
@@ -707,3 +714,151 @@ label{
 	cursor: pointer;
 }
 .report th{text-align:left;}
+.container{max-width:1170px}
+.login_head{
+	display: flex;
+	justify-content: flex-end;
+}
+.login_head>nav>ul>li>a{
+	width: initial;
+	font-size: 18px;
+}
+banner form{
+	padding: 2em;
+	max-width: 36em;
+	min-width: 30em;
+	position: absolute;
+	top: 2em;
+	right: 5em;
+	z-index: 9999999;
+	border-radius: 2em;
+}
+banner form fieldset legend{
+	border: 0;
+}
+banner form fieldset input{
+	background-color: #f9f9f9;
+	border: none;
+	padding: 1em 0;
+	padding-left: 2.4em;
+}
+banner form fieldset>div{
+	position: relative;
+}
+banner form fieldset>div .glyphicon{
+	position: absolute;
+	top: 1.2em;
+	left: .6em;
+}
+banner form fieldset input{
+	width: 100%;
+}
+.thirds_login>span{
+	position: relative;
+}
+.thirds_login>span::before{
+	content: '';
+	height: 1px;
+	width: 100%;
+	background-color: #00AEFF;
+	position: absolute;
+	top: 10px;
+	left: -150px;
+}
+.thirds_login>span::after{
+	content: '';
+	height: 1px;
+	width: 100%;
+	background-color: #00AEFF;
+	position: absolute;
+	top: 10px;
+	right: -150px;
+}
+.others_acc{
+	display: flex;
+	justify-content: space-around;
+}
+.others_acc img{
+	max-width: 2em;
+}
+
+.bg1{
+	position: relative;
+	background-image: url(../../img/xgk/pic1.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 750px;
+	color: white;
+}
+.bg1>.words{
+	position: absolute;
+	top: 200px;
+	left: 90px;
+	width: 300px;
+}
+.sense{
+	margin-bottom: 150px;
+}
+.check_detail{
+	margin-top: 52px;
+	padding-left: 58px;
+}
+.check_detail a{
+	font-size: 22px;
+}
+.check_detail a:hover{color: orange;}
+.bg2{
+	position: relative;
+	background-image: url(../../img/xgk/pic2.jpg);
+	height: 500px;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.bg2>.words{
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	width: 300px;
+}
+
+.bg3{
+	position: relative;
+	background-image: url(../../img/xgk/pic3.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	height: 980px;
+}
+.bg3>.words{
+	position: absolute;
+	bottom: 200px;
+	right: 200px;
+	width: 300px;
+}
+.case_searvice{
+	position: absolute;
+	width: 300px;
+	top: 86px;
+	right: 124px;
+	/*background-color: #ddd;*/
+}
+.others{
+	position: absolute;
+	left: 140px;
+	top: 50px;
+	width: 300px;
+}
+.login h1{
+	font-weight: bold;
+	font-size: 60px;
+}
+.text-white{
+	color: #fff;
+}
+.login_btn{
+	width: 100%;
+	background-color: #2580eb;
+	border-radius: 6px;
+	color: #fff;
+	border: 0;
+	padding: 1em;
+}
