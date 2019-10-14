@@ -32,4 +32,9 @@ public class TestController {
 			return  "web/xgk/report/report_hld";
 						
 	}
+	@RequestMapping("/xgk_login.do")	
+	public String xgk_login(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/xgk/xgk_login";
+						
+	}
 }
