@@ -14,13 +14,11 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.countup.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
-
 
 </head>
 <body>
