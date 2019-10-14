@@ -43,7 +43,7 @@
 			
 		</main>
 <!-- 页面底部-->
-<c:import url="side_right.jsp"></c:import>	
+<c:import url="../public/side_right.jsp"></c:import>	
 <!-- 页面底部-->
 <c:import url="footer.jsp"></c:import>	
 </body>

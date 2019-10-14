@@ -17,20 +17,20 @@
 					</div>
 					<nav id="navdh" class="">
 						<ul>
-							<li><a id="xgk1" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
-							<li><a id="xgk2" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
-							<li><a id="xgk3" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
-							<li><a id="xgk4" href="">职业库</a></li>
+							<li><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
+							<li><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
+							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
+							<li><a id="xgk4" name="dh" href="#">职业库</a></li>
 							<li>
-								<a id="xgk5" href="sch_search.html">高校专业</a>
+								<a id="xgk5" name="dh" href="sch_search.html">高校专业</a>
 								<ul class="child">
 									<li><a href="">院校查询</a></li>
 									<li><a href="">专业查询</a></li>
 								</ul>
 							</li>
-							<li><a id="xgk6"  href="">学科推荐</a></li>
-							<li><a id="xgk7" href="">升学规划</a></li>
-							<li><a id="xgk8" href="">志愿填报</a></li>
+							<li><a id="xgk6" name="dh" href="#">学科推荐</a></li>
+							<li><a id="xgk7" name="dh" href="#">升学规划</a></li>
+							<li><a id="xgk8" name="dh" href="#">志愿填报</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -58,6 +58,19 @@ $("#navdh a").click(function(){
 	sessionStorage.setItem('xgkid',this.id); //设置数据	
 });
 var sessionData = sessionStorage.getItem('xgkid'); //取出数据
-$( "#"+sessionData).addClass( "active" );
+if(sessionData==null){
+	$( "#xgk1").addClass( "active" );
+}else{
+	var sdf=document.getElementsByName("dh");
+	var dahref=window.location.href;
+	for(var i=0;i<sdf.length;i++){		
+		 if(sdf[i].href==dahref){			
+			sessionStorage.setItem('xgkid',sdf[i].id);	
+			sessionData = sessionStorage.getItem('xgkid');
+		}		
+	}
+	$( "#"+sessionData).addClass( "active" );
+}
+
 </script>
 </html>

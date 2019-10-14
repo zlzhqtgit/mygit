@@ -22,7 +22,7 @@
 <c:import url="header.jsp"></c:import>
 <c:import url="report/${report}.jsp"></c:import>
 <!-- 页面右侧-->
-<c:import url="side_right.jsp"></c:import>
+<c:import url="../public/side_right.jsp"></c:import>
 <!-- 页面底部-->
 <c:import url="footer.jsp"></c:import>	
 </body> 
