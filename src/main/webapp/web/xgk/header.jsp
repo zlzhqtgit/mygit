@@ -35,10 +35,19 @@
 					</nav>
 				</div>
 				<div class="head-top col-md-4 margin_top margin_bot1">
-					<div class="user">
-						<img src="${pageContext.request.contextPath}/img/xgk/user.png">
-						<span class="padding-side"><a href="">登陆</a> / <a href="">注册</a></span>
-					</div>
+					<c:if test="${username==null}">
+						<div class="user">
+							<img src="${pageContext.request.contextPath}/img/xgk/user.png">
+							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="">注册</a></span>
+						</div>
+					</c:if>
+					<c:if test="${username!=null}">
+						<div class="user">
+							<img src="${pageContext.request.contextPath}/img/xgk/user.png">
+							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="">退出</a></span>
+						</div>
+					</c:if>
+					
 					<div class="search margin_top1">
 						<div class="pull-left input_box">
 							<span class="search_mark"><img src="${pageContext.request.contextPath}/img/xgk/search.png"></span>
@@ -71,6 +80,9 @@ if(sessionData==null){
 	}
 	$( "#"+sessionData).addClass( "active" );
 }
-
+function xgkLogin(){
+	var nowUrl=window.location.href;	
+	location.href = "../user/xgk_login.do?nowUrl="+nowUrl;
+}
 </script>
 </html>

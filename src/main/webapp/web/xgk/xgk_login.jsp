@@ -36,30 +36,26 @@
 			</nav>
 		</header>
 		
-		<banner class="">
-			
-			
-			
+		<banner class="">		
 			 <!-- Swiper -->
-			<div class="swiper-container">
-				
-				<form action="" method="post" style="background-color: #ffffff;">
+			<div class="swiper-container">				
+				<form action="" method="post" style="background-color: #ffffff;" onsubmit="return false">
 				<fieldset id="">
 					<legend class="text-primary"><h3>臻选高考云端系统</h3></legend>
 					<div class="">
-						<input id="mobile" onblur="check_mobile ()" type="text" value="" placeholder="手机号"/>
+						<input id="mobile" onblur="check_mobile ()" type="text"  value="" placeholder="手机号"/>
 						<span class="glyphicon glyphicon-phone text-muted"></span>
 						<div id="tip1" class="tip text-danger"></div>
 					</div>
 					<div class="margin_top1">
-						<input id="password" onblur="check_pwd ()" type="password" value="" placeholder="密码"/>
+						<input id="password" onblur="check_pwd ()" type="password" id="password" value="" placeholder="密码"/>
 						<span class="glyphicon glyphicon-tag text-muted"></span>
 						<div id="tip2" class="tip text-danger"></div>
 					</div>
 				</fieldset>
 				
 				<div class="text-center margin_bot margin_top1">
-					<input class="login_btn" type="submit" name="" id="subm" value="登录" />
+					<input class="login_btn" type="button" name="" onclick="login()"  id="subm" value="登录" />
 				</div>
 				<div class="forget margin_top1 clearfix">
 					<a href="" class="text-primary pull-left">忘记密码？</a>
@@ -71,9 +67,7 @@
 					</div>
 					<ul class="others_acc margin_top">
 						<li><a href=""><img src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></a></li>
-						<li><a href=""><img src="${pageContext.request.contextPath}/img/xgk/wechat.jpg"/></a></li>
-						<!--<li><a href="">淘宝</a></li>
-						<li><a href="">支付宝</a></li>-->
+						<li><a href=""><img src="${pageContext.request.contextPath}/img/xgk/wechat.jpg"/></a></li>					
 					</ul>
 				</div>
 			</form>
@@ -218,5 +212,46 @@
 		
 		<c:import url="footer.jsp"></c:import>	
 	</body>
+<script type="text/javascript">
+function login(){
+	var nowUrl="${nowUrl}";
+	if(nowUrl==null){
+		nowUrl="../cp/xgk_index.do";
+	}
+	var tip1=$('#tip1').text();
+	var mobile=$("#mobile").val();
+	var pwd_tip=$('#tip2').text();
+	var pwd=$("#password").val();
+	if (mobile=='') {
+		$('#tip1').text('手机号不能为空')
+	} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+		$('#tip1').text('手机号码有误，请重新输入');      
+    } else if (pwd=='') {
+		$('#tip2').text('密码不能为空');
+	} else if(!(/^(\w){6,20}$/).test(pwd)){
+		//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+		$('#tip2').text('密码只能输入6-20个字母、数字、下划线_ ');		
+	}else{
+		var url = "../user/xgk_userLogin.do";
+		var phone=$("#mobile").val();
+		var password=$("#password").val();		
+		var data = "phone="+phone+"&password="+password;		
+		$.ajax({
+			"url" : url,
+			"data" : data,
+			"type" : "POST",
+			"dataType" : "json",
+			"success" : function(obj) {
+				if (obj.state == 0) {
+					alert(obj.message);
+					return;
+				}else{
+					location.href = nowUrl;
+				}
+			}
+		});  
+    }
+}
+</script>
 </html>
 

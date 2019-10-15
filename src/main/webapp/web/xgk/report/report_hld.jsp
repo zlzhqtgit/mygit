@@ -21,7 +21,7 @@
 						</div>
 						<div class="margin_top1">
 							<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;">
-							<span class="fontwei">用户名</span>
+							<span class="fontwei">${username}</span>
 						</div>
 						<p class="margin_top1">为了让你对自己有一个深入的了解，下面是关于你本次霍兰德职业兴趣测评的报告！</p>
 					</div>
