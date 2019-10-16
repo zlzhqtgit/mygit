@@ -17,6 +17,9 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.alibaba.fastjson.JSONObject;
 import com.hqtzytb.util.Status;
 import cn.hqtzytb.entity.User;
@@ -29,6 +32,7 @@ import net.sf.json.JSONArray;
  * @CreateDate 2017年12月26日 上午11:41:37
  * @Descriptions
  */
+
 @ServerEndpoint(value = "/ChatOnLine", configurator = HttpSessionConfigurator.class)
 public class ChatScoket {
 	
@@ -93,8 +97,11 @@ public class ChatScoket {
 				this.msgString = getMsgJson(null, message, 0, chatContent, "left", "4", this.user.getId().toString());
 				singleChat(session, msgString);
 			} else { // 2.1如果没有客服在线 向当前访客推送消息
-				this.message = "对不起，客服<font color='red'>不在线</font>，有事请留言，谢谢!";
-				this.msgString = getMsgJson(null, message, 0, null, null, null, null);
+				this.message = "您好，欢迎来到好前途，我们通过精准识别人才的内在职业优势，帮助企业找到合适的人才，"+
+								"放在合适的岗位，做到“人岗高度匹配”，让人才发挥最佳工作绩效，为企业创造最大效益！"+
+								"欢迎咨询，我们专家团队随时为您服务！或者直接致电：400-996-8831，期待您的来电。";
+				this.chatContent = "您好，有什么可以帮助您?";
+				this.msgString = getMsgJson(null, message, 0, chatContent, null, null, null);
 				singleChat(session, msgString);
 			}
 
@@ -131,7 +138,7 @@ public class ChatScoket {
 			} else { // 如果客服不在线
 				this.msgString = getMsgJson(null, null, 0, chatContent, "right", user.getId().toString(), "4");// myself
 				singleChat(session, msgString);// 将消息推送给当前游客自身
-				this.message = "对不起，客服<font color='red'>不在线</font>，有事请留言，谢谢!";// 系统消息
+				this.message = "对不起，客服正忙，请留下你的联系方式、姓名，我们工作人员会尽快和你联系，谢谢!";// 系统消息
 				this.msgString = getMsgJson(null, message, 0, null, null, null, null);// 只推送系统提示消息
 				singleChat(session, msgString);// 将消息推送给当前游客自身
 			}
