@@ -55,6 +55,10 @@ header{
 .bg-primary{
 	background-color:#3b8bec;
 }
+.bg-danger{
+	background-color: #d9534f;
+	color: white;
+}
 a{
 	text-decoration: none;
 } 

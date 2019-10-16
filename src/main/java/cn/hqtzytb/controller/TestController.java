@@ -42,4 +42,9 @@ public class TestController {
 			return  "web/xgk/xgk_chat";
 						
 	}
+	@RequestMapping("/xgk_chat_admin.do")	
+	public String xgk_chat_admin(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/public/xgk_chat_admin";
+						
+	}
 }
