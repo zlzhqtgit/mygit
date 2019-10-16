@@ -14,7 +14,7 @@
 					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
 				</span>
 				<div class="">
-				<a href="${pageContext.request.contextPath}/web/public/chat.jsp"  target="_blank">在线客服</a>
+				<a href="${pageContext.request.contextPath}/web/xgk_chat.do"  target="_blank">在线客服</a>
 				</div>
 			</div>
 			<div class="text-center mark-box">

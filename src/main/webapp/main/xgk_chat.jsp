@@ -1,110 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<% pageContext.setAttribute("basePath", request.getContextPath());%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<% pageContext.setAttribute("basePath", request.getContextPath());%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>在线聊天</title>
+<meta charset=utf-8>
+<title>好前途后台登录页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/public/xgk_chat.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
-
-
 <body>
-	<div class="main">
-		<!-- 左侧栏 显示在线人数和其他相关信息 -->
-		<div class="User-Info">
-			<!-- ********************左侧显示当前用户信息*********************** -->
-			<div class="currentUser">
-			<c:choose>
-				<c:when test="${user.id eq '4'}">
-					<img src="${pageContext.request.contextPath}/img/public/test.jpg" class="userImage" >&nbsp;&nbsp;
-				<span class="userName" id="onlineName"></span>
-				<p style="margin-left: 50px;" >当前咨询人数：<strong id="count"></strong></p>
-				</c:when>
-				<c:otherwise>
-				<img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="userImage">&nbsp;&nbsp;
-				<span class="userName" id="onlineName"></span>
-				</c:otherwise>
-			</c:choose>
-			</div>
-			<!-- 当前在线用户列表 -->
-			<div class="user-list" id="userList">				
-			</div>
-			<p style="margin-left: 5px;">
-				技术支持：<a href="#">XXXX科技有限公司</a>
-			</p>
-		</div>
-
-
-		<!-- 展示聊天信息 -->
-		<div class="chat-bg" >
-			<header class="header-title" id="title">标题</header>
-			
-			<!-- *********************展示聊天内容************************** -->
-			<section class="chat-box">
-				<div class="bubbleDiv" id="talkInfo">				
+	<div class="dialog margin_top" style="height: 600px;">
+			<div class="chat_header clearfix bg-primary">
+				<div class="clearfix pull-left">
+					<span class="pull-left glyphicon glyphicon-user padding-side"></span>
+					<span class="pull-left">						
+						<div class="">
+							<label style="color: red">客服96966</label>正在为您服务
+						</div>
+						<div class="">
+							联系电话：0851-88546461
+						</div>
+					</span>
 				</div>
-			</section>
-			
-			<footer class="chat-edit clearfix"> 
-			<!-- 上传文件图片按钮 -->
-			  <span class="uploadImg fl">
-			    <input type="file" name="uploadfile" class="uploadfile">
-			  </span> 
-			 <!-- *********************输入聊天内容，并发送************************** -->
-			 <textarea id="chatContent" rows="4" class="chat-info" placeholder="想咨询他什么内容..."></textarea> <!-- <p class="chat-info" placeholder="想咨询他什么内容..." contenteditable="true"></p> -->
-			 <button class="send-btn fr" id="subsend" onclick="subSend()" >发送</button>
-			 
-			</footer>
+				<a class="btn btn-default" href="">结束沟通</a>
+			</div>
+			<div class="body clearfix">
+				<div class="body_left pull-left" style="    width: 70%;">
+					<div class="chat_record" style="    height: 350px;text-align: center;    overflow: auto;">
+						<header class="header-title text-center margin_bot margin_top" id="title"style="background-color: #f9f9f9;padding: .4em;">标题</header>
+						<section class="chat-box">
+							<div class="bubbleDiv" id="talkInfo">				
+							</div>
+						</section>						
+						
+					</div>
+					<div class="">
+						<div class="tool_list padding-side">
+							<a href=""><span class="glyphicon glyphicon-info-sign text-muted"></span></a>
+							<a href=""><span class="glyphicon glyphicon-font text-muted"></span></a>
+							<a href=""><span class="glyphicon glyphicon-picture text-muted"></span></a>
+							<a href=""><span class="glyphicon glyphicon-folder-close text-muted"></span></a>
+							<a href=""><span class="glyphicon glyphicon-transfer text-muted"></span></a>
+						</div>
+						<div class="padding-side">
+							<textarea id="chatContent" rows="4" class="chat-info" placeholder="想咨询他什么内容..."></textarea>
+						</div>
+						<div class="text-right padding-side margin_bot1">
+							<a class="btn btn-primary" href="javascript:;" id="subsend" onclick="subSend()">发送 | <span class="glyphicon glyphicon-chevron-down"></span></a>
+						</div>
+					</div>
+				</div>
+				<div class="body_right pull-left">
+					<div class="currentUser">				
+						<img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="userImage" style="width: 50px;"><br>
+						<span class="userName" id="onlineName"></span>					
+					</div>
+				</div>
+			</div>
 		</div>
-		
-	</div>
-	<script src="${basePath}/static/js/chat.js"></script>
-	
-	<script>
-	 //客服图像
-    //var leftImgSrc = 'http://120.76.230.93:8063/Upload/2017/0914/20170914092809690_55e736d12f2eb9384eade4fed6628535e4dd6ffe.jpg';
-    var adminImgSrc = "${pageContext.request.contextPath}/img/public/test.jpg";
-    
-    //访客图像
-    //var rightImgSrc = 'http://120.76.230.93:8063/Upload/2017/1116/20171116180954252_img.png';
-    var userImgSrc ="${pageContext.request.contextPath}/img/public/test4.jpg";
-    	
+</body>
+<script>
+	 //客服图像    
+    var adminImgSrc = "${pageContext.request.contextPath}/img/public/test.jpg";    
+    //访客图像    
+    var userImgSrc ="${pageContext.request.contextPath}/img/public/test4.jpg";    	
 	var tempName = "";
 	var ws = null;
 	var target = null;
 	//获取登录用户信息
-	var administrator = '${userJson}';
-	//alert(administrator);
-	if (administrator == "" || administrator == undefined || administrator.length == 0){
-		window.location.href="${basePath}/web/login.do";
-	}
+	var administrator = '${userJson}';	
 	var user =JSON.parse(administrator);//由JSON字符串转换为JSON对象
 	tempName = user.username; //取出用户名
 	console.log(user);
 	
 	/* *************************************   进入该页面直接打开websocket通讯连接   **************************************/
- window.onload = function() {
-		// 判断是否是管理员登陆
-		if (tempName == "100005") {
-			//显示当前用户名
-			$("#onlineName").html("客服：<strong>" + tempName+ "</strong>");
-		} else {
-			//显示当前用户名
-			$("#onlineName").html(tempName);
-			$("#title").html("欢迎使用在线咨询服务");
-			//加载聊天信息
-			chatRecord(user.id, 4);
-			//显示系统消息
-			/*  var systemMessage='<div class="bubbleItem">'+
-            '<span class="bubble2 centerBubble">'+
-              '<font size="1px" color="#888" >'+
-                 '--------------------以上是聊天记录消息-------------------</font></span></div>';
-			 $("#talkInfo").append(systemMessage); */
-		}
-
+ window.onload = function() {		
+		//显示当前用户名
+		$("#onlineName").html(tempName);
+		$("#title").html("欢迎使用在线咨询服务");
+		//加载聊天信息
+		chatRecord(user.id, 4);
 		target = "ws://localhost:8080/hqtzytb/ChatOnLine";
 		//判断当前浏览器是否支持websocket通讯
 		if ('WebSocket' in window) {
@@ -114,19 +95,13 @@
 		} else {
 			alert('对不起，该浏览器不支持websocket！！！');
 			return;
-		}
-		
+		}		
 		/* ******************************************当websocket创建成功时，即会触发onopen事件 *******************************/
-		ws.onopen = function(){  
-			
-		};
-		
+		ws.onopen = function(){};		
 		/* ******************************************解析后台传回的消息,并予以展示 *******************************/
 		 ws.onmessage = function(event) {
-			 var msg = JSON.parse(event.data);
-			//eval("var msg=" + event.data + ";");
-			console.log(msg);
-			
+			 var msg = JSON.parse(event.data);			
+			console.log(msg);			
 			/* --------------------- 显示系统提示信息 ------------------------ */
 			if (undefined != msg.message) {
 				if (msg.type == "error") { //消息发送失败的系统提示
@@ -385,8 +360,10 @@ function changeText(){
 			var $textContent = textContent;
 			var $imgSrc = imgSrc;
 			var block;
+			var date = new Date();
+			var time=getTime(date);			
 			block = '<div class="bubbleItem">' + '<div class="left-head">'
-					+ '<img src="'+ imgSrc +'" alt="doctor"/>' + '</div>'
+					+ '<img src="'+ imgSrc +'" alt="doctor"/><span class="kf-name">客服1</span><span class="kf-time">' +time+ '</span></div>'
 					+ '<span class="bubble leftBubble">' + $textContent
 					+ '<span class="topLevel"></span></span>' + '</div>';
 			return block;
@@ -396,15 +373,36 @@ function changeText(){
 		function createRight(imgSrc, textContent) {
 			var $textContent = textContent;
 			var block;
+			var date = new Date();
+			var time=getTime(date);	
 			block = '<div class="bubbleItem clearfix">'
 					+ '<span class="bubble rightBubble" >' + $textContent
 					+ '<span class="topLevel"></span></span>'
 					+ '<div class="right-head">'
-					+ '<img src="'+ imgSrc +'" alt="doctor"/>' + '</div>'
+					+ '<span class="kf-time">' +time+ '</span><span class="kf-name">'+tempName+'</span><img src="'+ imgSrc +'" alt="doctor"/>' + '</div>'
 					+ '</div>';
 			return block;
 		};
-	</script>
+		function getTime(date){     	//获取时间        	
+        	var month=date.getMonth();
+        	var day=date.getDate();
+            var hour=date.getHours();
+            var minute=date.getMinutes();
+            var second=date.getSeconds();
+            //这样写显示时间在1~9会挤占空间；所以要在1~9的数字前补零;
+            if (hour<10) {
+            	hour='0'+hour;
+            }
+            if (minute<10) {
+            	minute='0'+minute;
+            }
+            if (second<10) {
+            	second='0'+second;
+            }
+            var x=date.getDay();//获取星期
+            var time=month+'-'+day+'-'+hour+':'+minute+':'+second;
+             return time;
+        }
 
-</body>
+	</script>
 </html>

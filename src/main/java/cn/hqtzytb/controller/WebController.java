@@ -29,13 +29,13 @@ public class WebController {
 	
 	private  static final  Logger logger = LogManager.getLogger(WebController.class.getName());
 	//用户登录
-		@RequestMapping(value = "/login.do")
+		@RequestMapping(value = "/xgk_chat.do")
 		public String login(HttpSession session,HttpServletRequest request,String name,String password,Integer userId){		
 			User user = null;
 			System.out.println("controller类中用户登录方法中获取用户名和密码："+name+"/"+password);
 			//判断是否有用户登陆  参数为null时,自动生成游客信息；否则，使用用户登录
 			if (name == null || password == null) {
-				logger.info("日志\t"+new Date().toLocaleString()+":\t生成游客信息。");
+				logger.info("日志\t"+new Date().toString()+":\t生成游客信息。");
 				user=getUser();
 				JSONObject userJson = JSONObject.fromObject(user);
 				session.setAttribute("userJson", userJson);//提供给前端页面使用
@@ -52,10 +52,8 @@ public class WebController {
 //					logger.info("用户名和密码错误，重新登录。");
 //					return "index";
 //				}
-			}
-			
-			return "web/public/chat";
-			
+			}			
+			return "web/public/xgk_chat";			
 		}
 		/**
 		 * 生成游客信息
@@ -63,7 +61,7 @@ public class WebController {
 		 */
 		public User getUser(){
 			User user= new User();
-			user.setId(20);
+			user.setId(getUUID());
 			user.setUsername(getTempName());
 			return user;
 		}
@@ -72,8 +70,8 @@ public class WebController {
 		 * 生成唯一序列码
 		 * @return String
 		 */
-		public String getUUID(){
-			return UUID.randomUUID().toString().replaceAll("-", "");
+		public Integer getUUID(){
+			return (int)((Math.random()*9+1)*10000000);
 		}
 		
 		/**
