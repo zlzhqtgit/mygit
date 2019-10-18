@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import cn.hqtzytb.entity.UserChat;
 import net.sf.json.JSONObject;
@@ -25,15 +26,17 @@ public class WebController {
 	private  static final  Logger logger = LogManager.getLogger(WebController.class.getName());
 	//用户登录
 		@RequestMapping(value = "/hqt_chat.do")
-		public String login(HttpSession session,HttpServletRequest request,Integer userId){		
+		public String login(ModelMap map,HttpSession session,String username,String id,HttpServletRequest request,Integer userId){	
+			System.out.println(username+":dfsdf:"+id);
 			UserChat userChat= new UserChat();
 			userChat.setId(getUUID());
-			userChat.setAdminid("4");
+			userChat.setAdminid(id);
 			userChat.setUsername(getTempName());
 			userChat.setUsertype("3");
 			JSONObject userJson = JSONObject.fromObject(userChat);
 			session.setAttribute("userJson", userJson);//提供给前端页面使用
-			session.setAttribute("userChat", userChat);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)			
+			session.setAttribute("userChat", userChat);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+			map.addAttribute("chatName", username);
 			return "web/public/hqt_chat";			
 		}
 		

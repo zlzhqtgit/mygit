@@ -20,7 +20,7 @@
 					<span class="pull-left glyphicon glyphicon-user padding-side"></span>
 					<span class="pull-left">						
 						<div class="">
-							<label style="color: red">客服96966</label>正在为您服务
+							<label style="color: red" id="kfname">客服96966</label>正在为您服务
 						</div>
 						<div class="">
 							联系电话：0851-88546461
@@ -71,15 +71,19 @@
 	var tempName = "";
 	var ws = null;
 	var target = null;
+	
 	//获取登录用户信息
 	var administrator = '${userJson}';	
 	var user =JSON.parse(administrator);//由JSON字符串转换为JSON对象
 	tempName = user.username; //取出用户名
-	console.log(user);	
+	console.log(user);
+	var kfname="${chatName}"+"客服";
 	/* *************************************   进入该页面直接打开websocket通讯连接   **************************************/
  window.onload = function() {		
 		//显示当前用户名
 		$("#onlineName").html(tempName);
+		
+		$("#kfname").html(kfname);
 		//$("#title").html("欢迎使用在线咨询服务");
 		//加载聊天信息
 		//chatRecord(user.id, 6);
@@ -210,7 +214,7 @@
 			var date = new Date();
 			var time=getTime(date);			
 			block = '<div class="bubbleItem">' + '<div class="left-head">'
-					+ '<img src="'+ imgSrc +'" alt="doctor"/><span class="kf-name">客服1</span><span class="kf-time">' +time+ '</span></div>'
+					+ '<img src="'+ imgSrc +'" alt="doctor"/><span class="kf-name">'+kfname+'</span><span class="kf-time">' +time+ '</span></div>'
 					+ '<span class="bubble leftBubble">' + $textContent
 					+ '<span class="topLevel"></span></span>' + '</div>';
 			return block;

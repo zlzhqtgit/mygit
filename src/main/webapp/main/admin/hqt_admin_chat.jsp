@@ -143,7 +143,7 @@
 			/*------------------------- 展示服务端推送的即时聊天信息 --------------------*/
 			if (undefined != msg.chatContent) { //判断消息不为空				 
 					//判断消息发送者是否是管理员
-					if (msg.formUID == "4") { //消息的发送者是管理员的话，显示在右边
+					if (msg.formUID == admin.id) { //消息的发送者是管理员的话，显示在右边
 						chat("rightBubble",adminImgSrc,msg.chatContent);
 					} else {  //如果不是管理员的话
 						var toUID = $('.selected').find('.userId').val();//获取当前选中的用户ID
@@ -201,8 +201,7 @@ function changeText(){
 				if (ToID == undefined) { //判断是否选中聊天对象
 					alert("请选择聊天对象");
 					return;
-				}
-
+				}				
 				obj = {
 					say : admin.id, //说话人的名称
 					message : message, //聊天消息
@@ -259,7 +258,7 @@ function changeText(){
 								$.each(result, function(index, temp) {
 								
 										 //判断当发送者是否是管理员
-										 if (temp.mfromUserID == "4") { //发送者是管理员，显示在右边
+										 if (temp.mfromUserID == admin.id) { //发送者是管理员，显示在右边
 											 chat("rightBubble", adminImgSrc,temp.mcontent);
 										} else { //发送者不是管理员  ，显示在左边
 											chat("leftBubble", userImgSrc,temp.mcontent);

@@ -90,7 +90,7 @@ public class ChatScoket {
 				this.msgString = getMsgJson(userlist, message, onlineCount, null, null, null, null);				
 				singleChat(adminSession, msgString);
 				
-			} else { // 2.1如果没有客服在线 向当前访客推送消息
+			}  // 2.1如果没有客服在线 向当前访客推送消息
 				// 向当前登录用户推送消息
 				this.message = "欢迎<font color='blue'>  " + this.userChat.getUsername() + "</font> 使用在线咨询服务";
 				this.msgString = getMsgJson(null, message, 0, null, null, null, null);
@@ -101,7 +101,7 @@ public class ChatScoket {
 				this.chatContent = "亲，您好，我是好前途的周老师，请问有什么可以帮到您？如没及时回复，可加微信：17784160219，电话：17784160219 或者留下的的联系方式我们客服人员将尽快和你联系，谢谢！";
 				this.msgString = getMsgJson(null, message, 0, chatContent, "left", this.userChat.getAdminid(), this.userChat.getId());
 				singleChat(session, msgString);			
-			}
+			
 		}
 	}
 

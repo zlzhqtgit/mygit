@@ -7,30 +7,50 @@
  <meta charset=utf-8>
 <title>Insert title here</title>
 <script type="text/javascript">
-function chat2() {	
-	window.open ('${pageContext.request.contextPath}/web/hqt_chat.do','好前途在线咨询平台', 'height=605, width=800, top=200px, left=520px, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') 
+window.onload = function() {
+	var url = "../admin/side_right.do";
+	var data ="";
+	$.ajax({
+		"url" : url,
+		"data" : data,
+		"type" : "POST",
+		"dataType" : "json",
+		"success" : function(obj) {
+			if (obj.state == 0) {				
+			}else{
+				var d=obj.data;
+				
+				var str="";
+				for(var i=0;i<d.length;i++){					
+					str+='<li><a href="javascript:;"  onclick="chat2('+d[i].username+','+d[i].id+')">'+d[i].username+'客服</a></li>';
+				}
+				
+				$("#chatmove").html(str);
+			}				
+		}
+	}); 
+}
+function chat2(username,id) {	
+	window.open ('${pageContext.request.contextPath}/web/hqt_chat.do?username='+username+'&id='+id,'好前途在线咨询平台', 'height=605, width=800, top=200px, left=520px, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') 
 }
 </script>
 </head>
 <body>
 		<div class="side-right">
-			<div class="text-center mark-box online_server" href="">
+			<div class="text-center mark-box qq_server" href="">
 				<span class="btn-mark">
 					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
 				</span>
 				<div class="">
-					<a href="javascript:;"  onclick="chat2()">在线客服</a>
-				</div>			
+				<a href="javascript:;"  onclick="chat2()">在线客服</a>
+				</div>		
 				<div class="submenu">
-					<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> QQ在线客服 </div>
+					<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> 在线客服 </div>
 					<div class="submenu_con">
 						<div class="">
 							<div class="serve_class">精准教学</div>
-							<ul class="">
-								<li><a href="">客服1</a></li>
-								<li><a href="">客服2</a></li>
-								<li><a href="">客服3</a></li>
-								<li><a href="">客服4</a></li>
+							<ul class="" id="chatmove">
+								
 							</ul>
 						</div>
 						<div class="">
@@ -69,30 +89,7 @@ function chat2() {
 				</span>
 				<div class="">
 					<a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">电话咨询</a>
-				</div>
-				<div class="submenu">
-					<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> QQ在线客服 </div>
-					<div class="submenu_con">
-						<div class="">
-							<div class="serve_class">精准教学</div>
-							<ul class="">
-								<li><a href="">客服1</a></li>
-								<li><a href="">客服2</a></li>
-								<li><a href="">客服3</a></li>
-								<li><a href="">客服4</a></li>
-							</ul>
-						</div>
-						<div class="">
-							<div class="serve_class">升学规划</div>
-							<ul class="">
-								<li><a href="">客服1</a></li>
-								<li><a href="">客服2</a></li>
-								<li><a href="">客服3</a></li>
-								<li><a href="">客服4</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				</div>				
 			</div>
 			
 			<div class="text-center mark-box qq_server" href="">
@@ -102,7 +99,7 @@ function chat2() {
 				<div class="">
 					<a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">QQ客服</a>
 				</div>
-				<div class="submenu">
+				<!-- <div class="submenu">
 					<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> QQ在线客服 </div>
 					<div class="submenu_con">
 						<div class="">
@@ -124,7 +121,7 @@ function chat2() {
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="text-center mark-box backtop">
 				<span class="btn-mark">

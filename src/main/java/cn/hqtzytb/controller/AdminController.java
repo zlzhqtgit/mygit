@@ -433,6 +433,21 @@ public class AdminController
 			return  "main/admin/hqt_admin_chat";
 		}					
 	}
+	@RequestMapping(value = "/side_right.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseResult<List<Admin>> handleAdminSideRight(HttpSession session,HttpServletRequest request)
+	{	
+		ResponseResult<List<Admin>> rr;		
+		try {			
+			//查询用户名是否存在
+			List<Admin> adminlist=adminServer.getuserAll();			
+			rr=new ResponseResult<List<Admin>>(ResponseResult.STATE_OK,adminlist);			
+		} catch (Exception e) {
+			logger.error("访问路径："+request.getRequestURI()+"操作：添加区库信息  错误信息: "+e);
+			rr=new ResponseResult<List<Admin>>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+		}
+		return rr;
+	}
 	/**	
 	* @Title: showhqtadminList
 	* @Description: (用户浏览页面)
