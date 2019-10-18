@@ -28,6 +28,7 @@ public class MessageServiceImpl implements MessageService {
 	//新增聊天信息
 	@Override
 	public int saveMessage(Message message) {
+		System.out.println("fdsfseee");
 		return messageMapper.saveMessage(message);
 	}
 

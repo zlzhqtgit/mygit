@@ -27,7 +27,7 @@ public class Tool {
 			e.printStackTrace();
 			return "游客000!";
 		}*/
-		return "admin";
+		return "100005";
 		
 	}
 

@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import cn.hqtzytb.entity.ResponseResult;
+import cn.hqtzytb.entity.UserChat;
 import cn.hqtzytb.entity.Admin;
 import cn.hqtzytb.entity.AdminRole;
 import cn.hqtzytb.exception.MyRuntimeException;
 import cn.hqtzytb.service.IAdminRoleServer;
 import cn.hqtzytb.service.IAdminServer;
+import net.sf.json.JSONObject;
 
 
 
@@ -53,14 +53,15 @@ public class AdminController
 	 */	
 	@RequestMapping("/hqt_admin_password.do")	
 	public String showhqtadminPassword(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response){
-		if(session.getAttribute("username")==null){
+		if(session.getAttribute("adminname")==null){
 			GetCommonUser.getlogin(response, request);			
 			return null;
 		}else{
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：用户密码修改  操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户密码修改  操作：进入模块  状态：OK!");
 			return  "main/admin/hqt_admin_password";
 		}					
 	}
+	
 	/**
 	 * @throws MyRuntimeException 
 	* @Title: showHqtadmin
@@ -77,11 +78,11 @@ public class AdminController
 	public String showHqtadmin(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
 		try
 		{
-			if(session.getAttribute("username")==null){
+			if(session.getAttribute("adminname")==null){
 				GetCommonUser.getlogin(response, request);
 				return null;
 			}else{
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户管理模块  操作：进入模块  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户管理模块  操作：进入模块  状态：OK!");
 				return  "main/admin/hqt_admin";
 			}		
 		} catch (Exception e){
@@ -106,11 +107,11 @@ public class AdminController
 		
 		try
 		{
-			if(session.getAttribute("username")==null){
+			if(session.getAttribute("adminname")==null){
 				GetCommonUser.getlogin(response, request);
 				return null;
 			}else{
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户管理主页模块  操作：进入模块  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户管理主页模块  操作：进入模块  状态：OK!");
 				return "main/admin/hqt_admin_index";
 			}	
 		} catch (Exception e){
@@ -132,13 +133,13 @@ public class AdminController
 	 */
 	@RequestMapping("/hqt_admin_add.do")	
 	public String hqtadminAdd(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response){		
-		if(session.getAttribute("username")==null){
+		if(session.getAttribute("adminname")==null){
 			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{
 			List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleAll();
 			map.addAttribute("adminRoleList", adminRoleList);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：进入添加用户模块   操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：进入添加用户模块   操作：进入模块  状态：OK!");
 			return "main/admin/hqt_admin_add";
 		}			
 	}
@@ -156,7 +157,7 @@ public class AdminController
 	 */
 	@RequestMapping("/hqt_admin_edit.do")	
 	public String hqtAdminedit(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response,Integer id){		
-		if(session.getAttribute("username")==null){
+		if(session.getAttribute("adminname")==null){
 			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{
@@ -166,7 +167,7 @@ public class AdminController
 				map.addAttribute("adminRoleList", adminRoleList);
 				map.addAttribute("adminList",adminList);
 			}
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：编辑用户模块  操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：编辑用户模块  操作：进入模块  状态：OK!");
 			return "main/admin/hqt_admin_edit";
 		}				
 	}
@@ -211,11 +212,11 @@ public class AdminController
 				admin.setCreatTime(creatTime);
 				adminServer.insert(admin);			
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户添加成功!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户资料添加   操作：添加用户  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料添加   操作：添加用户  状态：OK!");
 			} else
 			{
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "用户名已存在，请重新输入......");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户资料添加   操作：添加用户  状态：Failed!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料添加   操作：添加用户  状态：Failed!");
 			}
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：用户资料添加  错误信息: "+e);
@@ -239,7 +240,7 @@ public class AdminController
 			List<Admin> adminList=adminServer.getuserByusername(username);
 			if(adminList.size()>0 && !adminList.get(0).getId().equals(id)){
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "用户已存在不能被修改!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户资料修改   操作：修改资料  状态：Failed!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料修改   操作：修改资料  状态：Failed!");
 			}else{				
 				Date creatTime=new Date();
 				Admin admin=new Admin();			
@@ -255,7 +256,7 @@ public class AdminController
 				admin.setId(id);
 				adminServer.update(admin);			
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户修改成功!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户资料修改   操作：修改资料  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料修改   操作：修改资料  状态：OK!");
 			}
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：用户资料修改  错误信息: "+e);
@@ -283,7 +284,7 @@ public class AdminController
 			List<Admin> adminlist=adminServer.getuserByid(id);
 			if(adminlist.size()<=0){
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户不存在!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：密码重置   操作：重置密码  状态：Failed!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：密码重置   操作：重置密码  状态：Failed!");
 			}else{
 				GetCommonUser get=new GetCommonUser();
 				Date creatTime=new Date();
@@ -294,7 +295,7 @@ public class AdminController
 				admin.setId(id);
 				adminServer.updatePwd(admin);				
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户:"+adminlist.get(0).getUsername()+" 的密码已被重置为(111111)!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：密码重置   操作：用户"+adminlist.get(0).getUsername()+"重置密码  状态：OK! ");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：密码重置   操作：用户"+adminlist.get(0).getUsername()+"重置密码  状态：OK! ");
 			}
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：用户密码重置  错误信息: "+e);
@@ -321,7 +322,7 @@ public class AdminController
 			List<Admin> adminlist=adminServer.getuserByid(id);
 			if(adminlist.size()<=0){
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户不存在!");	
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户密码修改 操作：修改密码  状态：Failed! ");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户密码修改 操作：修改密码  状态：Failed! ");
 			}else{
 				GetCommonUser get=new GetCommonUser();			
 				Date creatTime=new Date();
@@ -332,7 +333,7 @@ public class AdminController
 				admin.setId(id);
 				adminServer.updatePwd(admin);			
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户:"+adminlist.get(0).getUsername()+" 的密码已被修改!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：用户密码修改 操作：修改密码  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户密码修改 操作：修改密码  状态：OK!");
 			}
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：用户密码修改  错误信息: "+e);
@@ -360,7 +361,7 @@ public class AdminController
 			admin.setId(id);
 			adminServer.delete(admin); 	
 			rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户已被删除!");	
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：删除用户 操作：删除用户  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：删除用户 操作：删除用户  状态：OK!");
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：删除用户  错误信息: "+e);
 			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
@@ -385,19 +386,21 @@ public class AdminController
 		ResponseResult<Void> rr;		
 		try {			
 			//查询用户名是否存在
-			List<Admin> adminlist=adminServer.getuserByusername(username);			
+			Admin adminlist=adminServer.queryAdmin(username);
+			System.out.println(adminlist);
 			//判断用户名是否存在
-			if (adminlist.size()<= 0){
+			if (adminlist == null){
 				rr=new ResponseResult<Void>(ResponseResult.ERR,"用户名不存在!请重新输入...");
 				logger.info("用户名："+username+" 模块名：登录模块 操作：登录  状态：Failed! ");
 			}else{			
 				GetCommonUser get=new GetCommonUser();				
-				String md5Password = get.getEncrpytedPassword(password,adminlist.get(0).getUuid());
-				if(adminlist.get(0).getPassword().equals(md5Password)){
-					session.setAttribute("uid", adminlist.get(0).getId());
-					session.setAttribute("username", adminlist.get(0).getUsername());
-					List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleByid(adminlist.get(0).getUserRole());
-					session.setAttribute("adminRole",adminRoleList.get(0).getRoleName());				
+				String md5Password = get.getEncrpytedPassword(password,adminlist.getUuid());
+				if(adminlist.getPassword().equals(md5Password)){
+					session.setAttribute("adminId", adminlist.getId());
+					session.setAttribute("adminname", adminlist.getUsername());
+					List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleByid(adminlist.getUserRole());					
+					session.setAttribute("adminRole",adminRoleList.get(0).getRoleName());
+					
 					rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "登录成功");				
 					logger.info("用户名："+username+" 模块名：登录模块 操作：登录  状态：OK!");
 				}else{
@@ -411,7 +414,25 @@ public class AdminController
 		}
 		return rr;
 	}
-	
+	@RequestMapping("/hqt_admin_chat.do")	
+	public String showhqtadminChat(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response){
+		if(session.getAttribute("adminname")==null){
+			GetCommonUser.getlogin(response, request);			
+			return null;
+		}else{
+			Admin adminlist=adminServer.queryAdmin(session.getAttribute("adminname").toString());
+			JSONObject adminJson = JSONObject.fromObject(adminlist);
+			session.setAttribute("adminJson", adminJson);//提供给前端页面使用			
+			UserChat userChat=new UserChat();
+			userChat.setId(session.getAttribute("adminId").toString());
+			userChat.setUsername(session.getAttribute("adminname").toString());
+			userChat.setUsertype("1");
+			userChat.setAdminid(session.getAttribute("adminId").toString());
+			session.setAttribute("userChat", userChat);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户密码修改  操作：进入模块  状态：OK!");
+			return  "main/admin/hqt_admin_chat";
+		}					
+	}
 	/**	
 	* @Title: showhqtadminList
 	* @Description: (用户浏览页面)
@@ -425,13 +446,13 @@ public class AdminController
 	 */
 	@RequestMapping("/hqt_admin_list.do")	
 	public String showhqtadminList(ModelMap map,HttpSession session,HttpServletResponse response,HttpServletRequest request){
-		if(session.getAttribute("username")==null){			
+		if(session.getAttribute("adminname")==null){			
 			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{				
 			List<Admin> adminAlllist=adminServer.getuserAll();
 			map.addAttribute("adminAlllist",adminAlllist);		
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：用户资料模块  操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料模块  操作：进入模块  状态：OK!");
 			return "main/admin/hqt_admin_list";
 		}			
 	}
@@ -448,13 +469,13 @@ public class AdminController
 	 */
 	@RequestMapping("/hqt_admin_role.do")	
 	public String showhqtadminRole(ModelMap map,HttpSession session,HttpServletResponse response,HttpServletRequest request){
-		if(session.getAttribute("username")==null){
+		if(session.getAttribute("adminname")==null){
 			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{			
 			List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleAll();	
 			map.addAttribute("adminRoleList", adminRoleList);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：用户角色模块  操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户角色模块  操作：进入模块  状态：OK!");
 			return "main/admin/hqt_admin_role";
 		}		
 	}
@@ -471,11 +492,11 @@ public class AdminController
 	 */
 	@RequestMapping("/hqt_admin_roleadd.do")	
 	public String showhqtadminRoleadd(ModelMap map,HttpSession session,HttpServletResponse response,HttpServletRequest request){	
-		if(session.getAttribute("username")==null){
+		if(session.getAttribute("adminname")==null){
 			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：添加用户角色模块  操作：添加角色  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：添加用户角色模块  操作：添加角色  状态：OK!");
 			return "main/admin/hqt_admin_roleadd";
 		}
 				
@@ -494,7 +515,7 @@ public class AdminController
 	 */
 	@RequestMapping("/hqt_admin_roleedit.do")	
 	public String showhqtadminRoleedit(ModelMap map,HttpSession session,HttpServletResponse response,HttpServletRequest request,Integer roleId){	
-		if(session.getAttribute("username")==null){
+		if(session.getAttribute("adminname")==null){
 			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{
@@ -502,7 +523,7 @@ public class AdminController
 				List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleByid(roleId);
 				map.addAttribute("adminRoleList",adminRoleList);
 			}
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：编辑用户角色模块  操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：编辑用户角色模块  操作：进入模块  状态：OK!");
 			return "main/admin/hqt_admin_roleedit";
 		}				
 	}
@@ -528,7 +549,7 @@ public class AdminController
 			List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleByName(roleName);
 			if(adminRoleList.size() >0 && adminRoleList.get(0).getRoleId()!=roleId){
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "角色名称已存在!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：修改用户角色模块  操作：修改角色  状态：Failed!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：修改用户角色模块  操作：修改角色  状态：Failed!");
 			}else{			
 				AdminRole role=new AdminRole();			
 				role.setRoleName(roleName);
@@ -536,7 +557,7 @@ public class AdminController
 				role.setRoleId(roleId);	
 				adminRoleServer.update(role);			
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "角色修改成功!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：修改用户角色模块  操作：修改角色  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：修改用户角色模块  操作：修改角色  状态：OK!");
 			}			
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：修改用户角色模块  错误信息: "+e);
@@ -563,13 +584,13 @@ public class AdminController
 			List<Admin> adminList=adminServer.getuserByRiole(roleId);		
 			if(adminList.size()>0){
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "该角色被用户使用中不能被删除!");	
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：删除用户角色模块  操作：删除角色  状态：Failed!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：删除用户角色模块  操作：删除角色  状态：Failed!");
 			}else{				
 				AdminRole role=new AdminRole();				
 				role.setRoleId(roleId);
 				adminRoleServer.delete(role);			
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "角色已被删除!");	
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：删除用户角色模块  操作：删除角色  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：删除用户角色模块  操作：删除角色  状态：OK!");
 			}			
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：删除用户角色模块  错误信息: "+e);
@@ -603,10 +624,10 @@ public class AdminController
 				role.setComment(comment);
 				adminRoleServer.insert(role);			
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "角色添加成功!");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：添加用户角色模块  操作：添加角色  状态：OK!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：添加用户角色模块  操作：添加角色  状态：OK!");
 			} else{
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "角色名已存在，请重新输入......");
-				logger.info("用户名："+session.getAttribute("username")+" 模块名：添加用户角色模块  操作：添加角色  状态：Failed!");
+				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：添加用户角色模块  操作：添加角色  状态：Failed!");
 			}			
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：删除用户角色模块  错误信息: "+e);

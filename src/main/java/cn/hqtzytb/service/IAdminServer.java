@@ -16,4 +16,5 @@ public interface IAdminServer
 	List<Admin> getuserByid(Integer id);
 	List<Admin> getuserByRiole(Integer userRole);
 	List<Admin> getuserAll();
+	Admin queryAdmin(String username);
 }

@@ -6,6 +6,11 @@
 <head>
  <meta charset=utf-8>
 <title>Insert title here</title>
+<script type="text/javascript">
+function chat2() {	
+	window.open ('${pageContext.request.contextPath}/web/hqt_chat.do','好前途在线咨询平台', 'height=605, width=800, top=200px, left=520px, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') 
+}
+</script>
 </head>
 <body>
 		<div class="side-right">
@@ -14,7 +19,7 @@
 					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
 				</span>
 				<div class="">
-				<a href="${pageContext.request.contextPath}/web/xgk_chat.do"  target="_blank">在线客服</a>
+				<a href="javascript:;"  onclick="chat2()">在线客服</a>
 				</div>
 			</div>
 			<div class="text-center mark-box">

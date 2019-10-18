@@ -5,47 +5,39 @@
 <html>
 <head>
 <meta charset=utf-8>
-<title>在线聊天窗口</title>
+<title>好前途在线咨询平台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/public/xgk_chat.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-	<div class="dialog margin_top clearfix">
-			<div class="user_list pull-left">
-				<div class="user1 bg-danger">
-					<a class="text-white" href="">
-						<span class="glyphicon glyphicon-user"></span>
-						<span class="username">游客666666</span>
-					</a>
+	<div class="dialog margin_top" style="height: 600px;">
+			<div class="chat_header clearfix bg-primary">
+				<div class="clearfix pull-left">
+					<span class="pull-left glyphicon glyphicon-user padding-side"></span>
+					<span class="pull-left">						
+						<div class="">
+							<label style="color: red">客服96966</label>正在为您服务
+						</div>
+						<div class="">
+							联系电话：0851-88546461
+						</div>
+					</span>
 				</div>
-				<div class="user1 bg-danger">
-					<a class="text-white" href="">
-						<span class="glyphicon glyphicon-user"></span>
-						<span class="username">游客666666</span>
-					</a>
-				</div>
+				<a class="btn btn-default" href="">结束沟通</a>
 			</div>
-			<div class="area_chat pull-left">
-				<div class="chat_tit bg-danger padding-side">
-					<label><h3>欢迎使用在线咨询服务</h3></label>
-				</div>
-				<div class="" style="height: 310px;">
-					<div class="text-center text-muted margin_top1">
-						<span class="no_record">暂无聊天记录</span>
+			<div class="body clearfix">
+				<div class="body_left pull-left" style="    width: 70%;">
+					<div class="chat_record" style="    height: 350px;text-align: center;    overflow: auto;">
+						<!-- <header class="header-title text-center margin_bot margin_top" id="title"style="background-color: #f9f9f9;padding: .4em;">标题</header> -->
+						<section class="chat-box">
+							<div class="bubbleDiv" id="talkInfo">				
+							</div>
+						</section>	
 					</div>
-					<div class="text-center margin_bot1  margin_top1">
-						欢迎<span class="text-primary">游客666666</span>使用在线咨询服务
-					</div>
-					<div class="padding-side2">
-						<span class=""><img style="max-width: 3em;" src="${pageContext.request.contextPath}/img/xgk/user.png"/></span>
-						<span class="bg-info">您好，有什么可以帮助您？</span>
-					</div>
-				</div>
 					<div class="">
 						<div class="tool_list padding-side">
 							<a href=""><span class="glyphicon glyphicon-info-sign text-muted"></span></a>
@@ -55,12 +47,19 @@
 							<a href=""><span class="glyphicon glyphicon-transfer text-muted"></span></a>
 						</div>
 						<div class="padding-side">
-							<textarea name="" rows="" cols="">111111</textarea>
+							<textarea id="chatContent" rows="4" class="chat-info" placeholder="想咨询他什么内容..."></textarea>
 						</div>
 						<div class="text-right padding-side margin_bot1">
-							<a class="btn btn-primary" href="">发送 | <span class="glyphicon glyphicon-chevron-down"></span></a>
+							<a class="btn btn-primary" href="javascript:;" id="subsend" onclick="subSend()">发送 </a>
 						</div>
 					</div>
+				</div>
+				<div class="body_right pull-left">
+					<div class="currentUser">				
+						<img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="userImage" style="width: 50px;"><br>
+						<span class="userName" id="onlineName"></span>					
+					</div>
+				</div>
 			</div>
 		</div>
 </body>
@@ -81,9 +80,9 @@
  window.onload = function() {		
 		//显示当前用户名
 		$("#onlineName").html(tempName);
-		$("#title").html("欢迎使用在线咨询服务");
+		//$("#title").html("欢迎使用在线咨询服务");
 		//加载聊天信息
-		chatRecord(user.id, 4);
+		//chatRecord(user.id, 6);
 		target = "ws://localhost:8080/hqtzytb/ChatOnLine";
 		//判断当前浏览器是否支持websocket通讯
 		if ('WebSocket' in window) {
@@ -114,7 +113,7 @@
 				$("#talkInfo").scrollTop(999999);
 			} 						
 			/*------------------------- 展示服务端推送的即时聊天信息 --------------------*/
-			if (undefined != msg.chatContent) { //判断消息不为空				
+			if (undefined != msg.chatContent) { //判断消息不为空						
 				if (user.id == msg.formUID) {  // 消息发送者是当前用户   显示在右侧
 					chat("rightBubble",userImgSrc,msg.chatContent);
 				} else { //否则，消息显示在左侧
@@ -151,7 +150,7 @@
 					type : 2
 				// 1 表示客服给游客发消息  2 表示游客给客服发消息
 				}
-				ws.send(JSON.stringify(obj));
+			ws.send(JSON.stringify(obj));
 			$("#chatContent").val("");//清空文本域框内容
 			$("#chatContent").focus();//文本域框获取焦点事件
 		}		
@@ -238,6 +237,12 @@
             var minute=date.getMinutes();
             var second=date.getSeconds();
             //这样写显示时间在1~9会挤占空间；所以要在1~9的数字前补零;
+             if (month<10) {
+            	 month='0'+month;
+            }
+            if (day<10) {
+            	day='0'+day;
+            }
             if (hour<10) {
             	hour='0'+hour;
             }
@@ -248,7 +253,7 @@
             	second='0'+second;
             }
             var x=date.getDay();//获取星期
-            var time=month+'-'+day+'-'+hour+':'+minute+':'+second;
+            var time=month+'-'+day+' '+hour+':'+minute+':'+second;
              return time;
         }
 
