@@ -114,22 +114,26 @@
 				if (undefined != msg.userList) {
 					$("#userList").html("");					
 					var userInfo;
+					var adminId="${adminId}";
 					var tempUser;
+					var cont=0;
 					$.each(msg.userList, function(index, temp) {
-						if (index == 0) { //设置默认选中第一个人
-							 userInfo='<div class="user-item selected" title="'+temp.username+'" ><img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="head"style="width: 40px;"> &nbsp;&nbsp;<span class="userName">'
-							            +temp.username+'</span><input type="hidden" value="'+temp.id+'" class="userId"/>'
-							            +'<div class="close"><span class="closeBtn">×</span></div></div>';
-						     $("#title").html(temp.username);//默认将该用户名加载到标题
-	                         $('.chat-info').val(''); //清空输入框
-	                         $(".bubbleDiv").html('');//清空聊天框
-						     chatRecord(admin.id, temp.id)//默认加载该用户的聊天信息 		     
-						}else{
-							userInfo='<div class="user-item" title="'+temp.username+'" ><img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="head"style="width: 40px;"> &nbsp;&nbsp;<span class="userName">'
-							         +temp.username+'</span><input type="hidden" value="'+temp.id+'" class="userId"/> '+'<div class="close"><span class="closeBtn">×</span></div></div>';
-						}
-						
-						$("#userList").append(userInfo);
+						if(temp.adminid==adminId){
+							if (cont == 0) { //设置默认选中第一个人
+								 userInfo='<div class="user-item selected" title="'+temp.username+'" ><img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="head"style="width: 40px;"> &nbsp;&nbsp;<span class="userName">'
+								            +temp.username+'</span><input type="hidden" value="'+temp.id+'" class="userId"/>'
+								            +'<div class="close"><span class="closeBtn">×</span></div></div>';
+							     $("#title").html(temp.username);//默认将该用户名加载到标题
+		                         $('.chat-info').val(''); //清空输入框
+		                         $(".bubbleDiv").html('');//清空聊天框
+							     chatRecord(temp.adminid, temp.id)//默认加载该用户的聊天信息 	
+							     cont++;
+							}else{
+								userInfo='<div class="user-item" title="'+temp.username+'" ><img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="head"style="width: 40px;"> &nbsp;&nbsp;<span class="userName">'
+								         +temp.username+'</span><input type="hidden" value="'+temp.id+'" class="userId"/> '+'<div class="close"><span class="closeBtn">×</span></div></div>';
+							}							
+							$("#userList").append(userInfo);
+						}						
 					}); 
 				}
 
@@ -244,7 +248,7 @@ function changeText(){
 		/* 加载聊天记录信息  fromUID:发送者的id  toUID：接受者id*/
 		function chatRecord(fromUID, toUID) {
 					$.ajax({
-						url : "${basePath}/Message/queryChatMessage",
+						url : "${basePath}/Message/queryChatMessage.do",
 						type : "get",
 						data : {
 							fromUID : fromUID,
@@ -255,8 +259,7 @@ function changeText(){
 						success : function(result) {
 							console.log(result);
 							if (result.length != 0) {
-								$.each(result, function(index, temp) {
-								
+								$.each(result, function(index, temp) {								
 										 //判断当发送者是否是管理员
 										 if (temp.mfromUserID == admin.id) { //发送者是管理员，显示在右边
 											 chat("rightBubble", adminImgSrc,temp.mcontent);
@@ -264,7 +267,6 @@ function changeText(){
 											chat("leftBubble", userImgSrc,temp.mcontent);
 										}
 								});
-
 								var systemMessage = '<div class="bubbleItem">'
 										+ '<span class="bubble2 centerBubble">'
 										+ '<font size="1px" color="#888" >'
@@ -274,7 +276,6 @@ function changeText(){
 										+ '<span class="bubble2 centerBubble">'
 										+ '<font size="1px" color="#888" >'
 										+ '--------------------暂无聊天记录-------------------</font></span></div>';
-
 							}
 							$("#talkInfo").append(systemMessage);
 						}

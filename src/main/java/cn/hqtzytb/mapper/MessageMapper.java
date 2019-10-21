@@ -34,7 +34,7 @@ public interface MessageMapper {
 	 * @param toUID   接收者ID
 	 * @return List<Message>
 	 */
-	public List<Message> queryMessage(@Param("fromUID")String fromUID,@Param("toUID")String toUID);
+	public List<Message> queryMessage(Message message);
 	
 	/**
 	 * 删除聊天记录

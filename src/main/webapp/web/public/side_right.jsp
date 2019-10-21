@@ -18,20 +18,18 @@ window.onload = function() {
 		"success" : function(obj) {
 			if (obj.state == 0) {				
 			}else{
-				var d=obj.data;
-				
+				var d=obj.data;				
 				var str="";
 				for(var i=0;i<d.length;i++){					
-					str+='<li><a href="javascript:;"  onclick="chat2('+d[i].username+','+d[i].id+')">'+d[i].username+'客服</a></li>';
-				}
-				
+					str+='<li><a href="javascript:;"  onclick="chat2('+d[i].id+')">'+d[i].username+'客服</a></li>';
+				}			
 				$("#chatmove").html(str);
 			}				
 		}
 	}); 
 }
-function chat2(username,id) {	
-	window.open ('${pageContext.request.contextPath}/web/hqt_chat.do?username='+username+'&id='+id,'好前途在线咨询平台', 'height=605, width=800, top=200px, left=520px, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') 
+function chat2(id) {	
+	window.open ('${pageContext.request.contextPath}/web/hqt_chat.do?id='+id,'好前途在线咨询平台', 'height=605, width=800, top=200px, left=520px, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') 
 }
 </script>
 </head>

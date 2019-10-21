@@ -11,19 +11,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	查询所有消息
 	<select id="queryAll" resultMap="messageMap">
 		SELECT * FROM user_messages
-	</select>
-
-	查询对应的聊天信息
-	<select id="queryMessage" resultMap="messageMap" parameterType="string">
-		SELECT
-		<include refid="messageSQL" />
-		FROM user_messages m 
-		WHERE 
-		(m.`m_Fromuser`=#{fromUID} AND m.`m_Touser`=#{toUID}) 
-		OR
-		(m.`m_Fromuser`=#{toUID} AND m.`m_Touser`=#{fromUID})
-		ORDER BY m.`m_Time`
 	</select> -->
+
+	<!-- 查询对应的聊天信息 -->
+	<select id="queryMessage" resultType="cn.hqtzytb.entity.Message" >
+		SELECT	m_content as mContent,m_time as mTime,m_fromuser as mFromuser,m_touser as mTouser
+		FROM user_messages 
+		WHERE 
+		(m_fromuser=#{mFromuser} AND m_touser=#{mTouser}) 
+		OR
+		(m_fromuser=#{mTouser} AND m_touser=#{mFromuser})
+		ORDER BY m_Time
+	</select> 
     
 	<!-- 2.主键id是自增，但是参数中不能省去，否则报错（该配置返回新增后可以获取主键ID主键，同时返回受影响的行数） -->	
 	<insert id="saveMessage" parameterType="cn.hqtzytb.entity.Message" useGeneratedKeys="true" keyProperty="mId">

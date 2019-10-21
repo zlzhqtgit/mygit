@@ -37,7 +37,8 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping(value = "/queryChatMessage.do", method = RequestMethod.GET)
 	public List<Message> queryChatMessage(String fromUID, String toUID) {		
-		List<Message> mList = messageService.queryMessage(fromUID, toUID);		
+		List<Message> mList = messageService.queryMessage(fromUID, toUID);	
+		System.out.println(mList);
 		return mList;
 	}
 

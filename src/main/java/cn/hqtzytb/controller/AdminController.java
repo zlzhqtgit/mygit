@@ -241,22 +241,28 @@ public class AdminController
 			if(adminList.size()>0 && !adminList.get(0).getId().equals(id)){
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "用户已存在不能被修改!");
 				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料修改   操作：修改资料  状态：Failed!");
-			}else{				
-				Date creatTime=new Date();
-				Admin admin=new Admin();			
-				admin.setUsername(username);
-				admin.setPassword(adminByid.get(0).getPassword());
-				admin.setUserSex(userSex);
-				admin.setPhone(phone);
-				admin.setEmail(email);
-				admin.setUserRole(userRole);
-				admin.setComment(comment);
-				admin.setUuid(adminByid.get(0).getUuid());
-				admin.setCreatTime(creatTime);		
-				admin.setId(id);
-				adminServer.update(admin);			
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户修改成功!");
-				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料修改   操作：修改资料  状态：OK!");
+			}else{	
+				List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleByName("在线客服");
+				if(adminRoleList.get(0).getRoleId()==userRole && adminRoleList.size()==6){
+					rr = new ResponseResult<Void>(ResponseResult.ERR, "在线客服已达上限，请重新设置，上限值为6个用户。");
+					logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料修改   操作：修改资料  状态：Failed(达到上限值)!");
+				}else{
+					Date creatTime=new Date();
+					Admin admin=new Admin();			
+					admin.setUsername(username);
+					admin.setPassword(adminByid.get(0).getPassword());
+					admin.setUserSex(userSex);
+					admin.setPhone(phone);
+					admin.setEmail(email);
+					admin.setUserRole(userRole);
+					admin.setComment(comment);
+					admin.setUuid(adminByid.get(0).getUuid());
+					admin.setCreatTime(creatTime);		
+					admin.setId(id);
+					adminServer.update(admin);			
+					rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户修改成功!");
+					logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户资料修改   操作：修改资料  状态：OK!");
+				}				
 			}
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：用户资料修改  错误信息: "+e);
@@ -321,7 +327,7 @@ public class AdminController
 		try{						
 			List<Admin> adminlist=adminServer.getuserByid(id);
 			if(adminlist.size()<=0){
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "用户不存在!");	
+				rr = new ResponseResult<Void>(ResponseResult.ERR, "用户不存在!");	
 				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户密码修改 操作：修改密码  状态：Failed! ");
 			}else{
 				GetCommonUser get=new GetCommonUser();			
@@ -438,12 +444,17 @@ public class AdminController
 	public ResponseResult<List<Admin>> handleAdminSideRight(HttpSession session,HttpServletRequest request)
 	{	
 		ResponseResult<List<Admin>> rr;		
-		try {			
-			//查询用户名是否存在
-			List<Admin> adminlist=adminServer.getuserAll();			
-			rr=new ResponseResult<List<Admin>>(ResponseResult.STATE_OK,adminlist);			
+		try {		
+			List<AdminRole> adminRoleList=adminRoleServer.getAdminRoleByName("在线客服");
+			if(adminRoleList.size()>0){
+				//查询用户名是否存在
+				List<Admin> adminlist=adminServer.getuserByRiole(adminRoleList.get(0).getRoleId());	
+				rr=new ResponseResult<List<Admin>>(ResponseResult.STATE_OK,adminlist);
+			}else{
+				rr=new ResponseResult<List<Admin>>(ResponseResult.STATE_OK,"暂无客服人员");
+			}						
 		} catch (Exception e) {
-			logger.error("访问路径："+request.getRequestURI()+"操作：添加区库信息  错误信息: "+e);
+			logger.error("访问路径："+request.getRequestURI()+"操作：查询相关的客服人员  错误信息: "+e);
 			rr=new ResponseResult<List<Admin>>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
 		}
 		return rr;

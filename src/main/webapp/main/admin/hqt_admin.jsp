@@ -49,12 +49,14 @@
                     	<li class="subnav-li" href="${pageContext.request.contextPath}/admin/hqt_admin_password.do" data-id="6"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">修改密码</span></a></li>                        
                     </ul>
                 </li>
+                <c:if test="${adminRole eq '在线客服'}">
                  <li class="nav-li last-nav-li">
                 	<a href="javascript:;" class="ue-clear"><i class="nav-ivon"></i><span class="nav-text">咨询中心</span></a>
                     <ul class="subnav">
                     	<li class="subnav-li" href="${pageContext.request.contextPath}/admin/hqt_admin_chat.do" data-id="7"><a href="javascript:;" class="ue-clear"><i class="subnav-icon"></i><span class="subnav-text">打开客服咨询</span></a></li>                        
                     </ul>
-                </li>               
+                </li>     
+                </c:if>                          
             </ul>
             <div class="tree-list outwindow">
             	<div class="tree ztree"></div>

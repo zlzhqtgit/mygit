@@ -233,10 +233,8 @@ public class ChatScoket {
 	/**
 	 * 对特定用户发送消息
 	 * 
-	 * @param session
-	 *            信息接收者session
-	 * @param infoChat
-	 *            聊天信息
+	 * @param session    信息接收者session
+	 * @param infoChat   聊天信息
 	 */
 	private void singleChat(Session session, String infoChat) {
 		try {

@@ -34,7 +34,7 @@ public interface MessageService {
 	 * @param toUID   接收者ID
 	 * @return List<Message>
 	 */
-	public List<Message> queryMessage(String fromUID,String toUID);
+	public List<Message> queryMessage(String mFromuser,String mTouser);
 	
 
 	/**

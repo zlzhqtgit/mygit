@@ -34,8 +34,11 @@ public class MessageServiceImpl implements MessageService {
 
 	//按需查询查询聊天信息
 	@Override
-	public List<Message> queryMessage(String fromUID, String toUID) {
-		return messageMapper.queryMessage(fromUID, toUID);
+	public List<Message> queryMessage(String mFromuser, String mTouser) {
+		Message message=new Message();
+		message.setmFromuser(mFromuser);
+		message.setmTouser(mTouser);
+		return messageMapper.queryMessage(message);
 	}
 
 	//删除聊天记录
