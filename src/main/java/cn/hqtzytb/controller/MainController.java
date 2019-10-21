@@ -28,12 +28,12 @@ public class MainController {
 	private  static final  Logger logger = LogManager.getLogger(AdminController.class.getName());
 	@RequestMapping("/admin.do")	
 	public String showIndexno(HttpSession session,HttpServletResponse response,HttpServletRequest request){	
-		if(session.getAttribute("username")==null){
+		if(session.getAttribute("adminname")==null){
 			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{
 			
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：添加用户模块  操作：进入模块  状态：OK!");
+			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：添加用户模块  操作：进入模块  状态：OK!");
 			return "main/hqt_main";	
 		}	
 						

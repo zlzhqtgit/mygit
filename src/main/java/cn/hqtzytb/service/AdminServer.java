@@ -14,22 +14,22 @@ import cn.hqtzytb.mapper.AdminMapper;
 public class AdminServer implements IAdminServer
 {
 	@Autowired
-	public AdminMapper userMapper;
+	public AdminMapper adminMapper;
 
 	public Admin insert(Admin admin)
 	{
-		userMapper.insert(admin);
+		adminMapper.insert(admin);
 		return admin;
 	}
 
 	public Integer update(Admin admin)
 	{		
-		return userMapper.update(admin);
+		return adminMapper.update(admin);
 	}
 
 	public Integer delete(Admin admin)
 	{		
-		return userMapper.delete(admin);
+		return adminMapper.delete(admin);
 	}
 
 	public List<Admin> getuser(Date date)
@@ -37,33 +37,37 @@ public class AdminServer implements IAdminServer
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(date);
 		String where="creat_time>='"+format+"'";	
-		List<Admin> list=userMapper.select(where, null, null, null);
+		List<Admin> list=adminMapper.select(where, null, null, null);
 		return list;
 	}
 	
 	public List<Admin> getuserByusername(String username) {
 		String where="username='"+username+"'";
-		return userMapper.select(where, null, null, null);
+		return adminMapper.select(where, null, null, null);
 	}
 	
 	public List<Admin> getuserAll() {
 		String orderBy="creat_time";
-		return userMapper.select(null, orderBy, null, null);
+		return adminMapper.select(null, orderBy, null, null);
 	}
 	
 	public Integer updatePwd(Admin admin) {	
-		return userMapper.updatePwd(admin);
+		return adminMapper.updatePwd(admin);
 	}
 
 
 	public List<Admin> getuserByid(Integer id) {
 		String where="id="+id;
-		return userMapper.select(where, null, null, null);
+		return adminMapper.select(where, null, null, null);
 	}
 	
 	public List<Admin> getuserByRiole(Integer userRole) {
 		String where="user_role="+userRole;
-		return userMapper.select(where, null, null, null);
+		return adminMapper.select(where, null, null, null);
+	}
+	@Override
+	public Admin queryAdmin(String username) {		
+		return adminMapper.queryAdmin(username);
 	}
 	
 	

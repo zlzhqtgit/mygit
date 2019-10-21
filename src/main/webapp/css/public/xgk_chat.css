@@ -186,20 +186,17 @@ textarea{
 	background-color: #d9534f;
 	color: white;
 }
-.user_list{
+/* .user_list{
 	width: 30%;
 	position: relative;
 }
 .user_list::before{
 	content: '';
 	width: 100%;
-	height: 542px;
+	height: 520px;
 	position: absolute;
 	border: 1px solid #d9534f;
-}
-.user_list div::before{
-	content: '';
-}
+} */
 .user1{
 	padding: 1em;
 	position: relative;
@@ -248,3 +245,14 @@ textarea{
 	height: 1px;
 	background-color: #999;
 }
+
+.user-item {
+	border: 1px solid #dad4af;
+    padding: 5px;
+    background-color: #ad9c9c;
+    cursor: pointer;
+}
+.selected{
+	   background-color: #e2c959;
+}
+   

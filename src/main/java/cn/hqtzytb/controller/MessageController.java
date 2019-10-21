@@ -41,9 +41,10 @@ public class MessageController {
 		return mList;
 	}
 
-	@RequestMapping("/save")
+	@RequestMapping("/save.do")
 	public String saveMessage() {
-		Message message = new Message(null, "测试controller", new Date(), "4", "1");
+		System.out.println(123);
+		Message message = new Message("测试controller", new Date(), "4", "1");
 		 messageService.saveMessage(message);		
 		return null;
 	}

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import cn.hqtzytb.entity.Admin;
 
 
+
 public interface AdminMapper
 {
 	Integer insert(Admin admin);
@@ -16,4 +17,11 @@ public interface AdminMapper
 			@Param("offset")Integer offset,
 			@Param("countPerPage")Integer countPerPage);
 	Integer updatePwd(Admin admin);
+	/**
+	 * 查询单个用户(用于登陆验证)
+	 * @param userName 用户名
+	 * @param password 密码
+	 * @return User
+	 */
+	public Admin queryAdmin(@Param("username")String username);
 }

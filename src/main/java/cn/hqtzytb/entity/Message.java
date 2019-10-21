@@ -42,16 +42,14 @@ public class Message implements Serializable{
 	* @param mFromuser
 	* @param mTouser
 	*/
-	public Message(Integer mId, String mContent, Date mTime, String mFromuser, String mTouser) {
-		super();
-		this.mId = mId;
+	public Message(String mContent, Date mTime, String mFromuser, String mTouser) {
+		super();		
 		this.mContent = mContent;
 		this.mTime = mTime;
 		this.mFromuser = mFromuser;
 		this.mTouser = mTouser;
 	}
-
-
+	
 
 
 
