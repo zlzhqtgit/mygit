@@ -45,6 +45,17 @@ public class TestController {
 	@RequestMapping("/xgk_chat_admin.do")	
 	public String xgk_chat_admin(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
 			return  "web/public/xgk_chat_admin";
-						
+	}
+	@RequestMapping("/xgk_learn_ability.do")	
+	public String xgk_learn_ability(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/xgk/xgk_learn_ability";
+	}
+	@RequestMapping("/register.do")	
+	public String register(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/public/register";
+	}
+	@RequestMapping("/reset_pwd.do")	
+	public String reset_pwd(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/public/reset_pwd";
 	}
 }

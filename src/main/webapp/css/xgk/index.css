@@ -929,3 +929,91 @@ banner form fieldset input{
 	border: 0;
 	padding: 1em;
 }
+.register_box {
+	/*border: 1px solid #999;*/
+}
+.reg_process{
+	border: 1px solid #3b8bec;
+	background-color: #fff;
+}
+.reg_process ul{margin: 0;}
+.reg_process ul li{
+	position: relative;
+	width: 33.333%;
+	padding: 1em 0;
+	text-align: center;
+}
+.reg_process ul li::before{
+	content: '';
+	position: absolute;
+	z-index: 2;
+	right: -80px;
+	top: -15px;
+	height: 0;
+	width: 0;
+	border: 44px solid;
+	border-color: transparent transparent transparent #fff;
+}
+.reg_process ul li::after{
+	content: '';
+	position: absolute;
+	z-index: 1;
+	right: -56px;
+	top: -1px;
+	height: 0;
+	width: 0;
+	border: 28px solid;
+	border-color: transparent transparent 	transparent #3b8bec;
+}
+.reg_process ul li:last-child::after{
+	border: 0;
+}
+.current{
+	background-color: #3b8bec;
+}
+.current{
+	color: #fff;
+}
+.reg_process ul li.current::before{
+	content: '';
+	position: absolute;
+	z-index: 2;
+	right: -50px;
+	top: 0;
+	height: 0;
+	width: 0;
+	border: 28px solid;
+	border-color: transparent transparent transparent #3b8bec;
+}
+.status{
+	border: 1px solid #999;
+	border-top: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.status ul{padding: 1em 1em;}
+.status ul li a{
+	display: block;
+	text-align: center;
+	width: 10em;
+	padding: .6em;
+	border: 1px solid #3b8bec;
+	border-radius: 6px;
+	box-shadow: 0px 2px 6px #999;
+}
+.status ul li a.active{
+	color: #fff;
+}
+.step2 label{
+	width: 6em;
+}
+.reg_tip{
+	position: absolute; 
+	right: -12em;
+	bottom: 0;
+	border: 1px solid gray;
+	width: 300px;
+	border-radius: 10px;
+	padding: 1em;
+}
