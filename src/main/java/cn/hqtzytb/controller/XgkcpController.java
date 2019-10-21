@@ -277,5 +277,10 @@ public class XgkcpController {
 		}
 		return rr;
 	}
+	
+	@RequestMapping("/xgk_guide_xuanke.do")	
+	public String xgk_guide_xuanke(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+			return  "web/public/xgk_guide_xuanke";
+	}
 
 }
