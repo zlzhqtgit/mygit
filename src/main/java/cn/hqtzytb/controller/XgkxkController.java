@@ -144,76 +144,18 @@ public class XgkxkController {
 	* @return String    
 	* @throws
 	 */
-	@RequestMapping("/xgk_cpfxselectreport.do")	
+	@RequestMapping("/xgk_guide_xuanke.do")	
 	public String showhqtCpfxselectreportone(ModelMap map,String personalityCode,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
-		{		
-		    List<Vocation> vocationlist=vocationServer.getVocationByCode(personalityCode);	
-		    if(personalityCode.length()==3){
-		    	map.addAttribute("personalityType", "霍兰德");
-		    }else{
-		    	map.addAttribute("personalityType", "MBTI");
-		    }
-		    map.addAttribute("vocationlist", vocationlist);		  
-		    map.addAttribute("personalityCode", personalityCode);	
-		    map.addAttribute("pdcheck", 1);	
+		{				   
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
-			return  "web/xgk/xgk_cpfxselectreport";
+			return  "web/xgk/xgk_guide_xuanke";
 		} catch (Exception e){
 			logger.error("访问路径："+request.getRequestURI()+"操作：进入测评选科报告页面  错误信息: "+e);
 			throw new MyRuntimeException(e);
 		}							
 	}
-	/**	  
-	* @Title: showhqtCpfxselectreporttwo
-	* @Description: (选择职业生成选科报告)
-	* @param @param map
-	* @param @param vocationbox
-	* @param @param personalityCode
-	* @param @param session
-	* @param @param request
-	* @param @param response
-	* @param @return
-	* @param @throws MyRuntimeException    
-	* @return String    
-	* @throws
-	 */
-	@RequestMapping("/xgk_cpfxselectreport_two.do")	
-	public String showhqtCpfxselectreporttwo(ModelMap map,@RequestParam(value="vocationbox") String vocationbox,String personalityCode,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
-		try
-		{	
-			//获取传过来的职业，并转化为数组
-			String[] arr = vocationbox.split(",");
-			//拼接成查询的字符串
-			String where="";
-			for(int i=0;i<arr.length;i++){
-				if(i<arr.length-1){
-					where +="vocation_id='"+arr[i]+"' or ";
-				}else{
-					where +="vocation_id='"+arr[i]+"'";
-				}				
-			}
-			if(personalityCode.length()==3){
-		    	map.addAttribute("personalityType", "霍兰德");
-		    }else{
-		    	map.addAttribute("personalityType", "MBTI");
-		    }
-			 List<Specialty> largeClasslist=specialtyServer.getLargeClassByvocation(where);
-			 List<Specialty> specialtylist=specialtyServer.getSpecialtyByvocation(where);
-			 map.addAttribute("specialtylist", specialtylist);		
-			 map.addAttribute("largeClasslist", largeClasslist);	
-			 List<Vocation> vocationlist=vocationServer.getVocationByCode(personalityCode);		
-			 List<Vocation> vocationlistbyid=vocationServer.getVocationByIdtwo(where);	
-			 map.addAttribute("vocationlist", vocationlist);
-			 map.addAttribute("vocationlistbyid", vocationlistbyid);
-			 map.addAttribute("personalityCode", personalityCode);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：生成测评选科报告页面  操作：进入模块  状态：OK!");
-			return  "web/xgk/xgk_cpfxselectreport";
-		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入测评选科报告页面  错误信息: "+e);
-			throw new MyRuntimeException(e);
-		}							
-	}
+	
 	/**
 	* @Title: handleCpXk
 	* @Description: (测评选科报告)

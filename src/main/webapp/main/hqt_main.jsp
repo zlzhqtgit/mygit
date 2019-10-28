@@ -47,7 +47,7 @@ window.onload=function(){
                 <ul class="nav ue-clear">
                     <li><a id="nav_user" onclick="change('${pageContext.request.contextPath}/main/xgk_index.do')">新高考</a></li>
                     <li><a onclick="change('${pageContext.request.contextPath}/main/zytb_index.do')">志愿填报</a></li>   
-                    <li><a id="nav_user" onclick="change('${pageContext.request.contextPath}/admin/hqt_admin.do')">用户管理</a></li>
+                    <li><a id="nav_user" onclick="change('${pageContext.request.contextPath}/main/hqt_user.do')">用户管理</a></li>
                     <li><a onclick="change('${pageContext.request.contextPath}/main/zytb_index.do')">系统管理</a></li>                                                      
                 </ul>
             </div>

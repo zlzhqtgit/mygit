@@ -943,7 +943,7 @@ banner form fieldset input{
 .reg_process ul{margin: 0;}
 .reg_process ul li{
 	position: relative;
-	width: 33.333%;
+	width: 50%;
 	padding: 1em 0;
 	text-align: center;
 }

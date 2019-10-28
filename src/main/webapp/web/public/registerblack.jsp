@@ -6,16 +6,16 @@
 <head>
 <meta charset=utf-8>
 <title>好前途后台登录页</title>
-<meta name="viewport" content="width=device-width, initial-scale=0.1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script> --%>
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
+
 </head>
 <body>
 		<header class="padding-side login_head">
@@ -34,19 +34,20 @@
 			<div class="register_box margin_top">
 				
 				<div class="reg_process">
-					<ul class="clearfix">						
-						<li class="pull-left current">注册信息</li>
+					<ul class="clearfix">
+						<li class="pull-left current">选择身份</li>
+						<li class="pull-left">注册信息</li>
 						<li class="pull-left">注册账号</li>
 					</ul>
 				</div>
 				
 				<div class="status margin_bot">
-					<!-- <ul class="page_step step1 margin_bot margin_top">
+					<ul class="page_step step1 margin_bot margin_top">
 						<li><a id="class1" href="javascript:void(0)" class="active wow bounceInLeft" onclick="next_step(this)">个人用户</a></li>
 						<li class="margin_top"><a id="class2" href="javascript:void(0)" onclick="next_step(this)" class=" wow bounceInRight">我是咨询师</a></li>
-					</ul> -->
+					</ul>
 					
-					<div class="page_step step2 margin_top">
+					<div class="page_step step2 margin_top hide">
 						
 						<form class="" action="" method="post">
 							<fieldset id="">
@@ -66,13 +67,6 @@
 										<label for="mobile">手机号码：</label>
 										<input id="mobile" type="text" placeholder="请填写11位手机号码"/>
 										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 手机号格式错误</span>
-									</div>
-									<div class="">
-										<label for="province">所属省份：</label>
-										<select>
-											<option value="贵州省">贵州省</option>
-										</select>										
-										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 请选择所在省份</span>
 									</div>
 									<div class="">
 										<label for="verify_code">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
@@ -126,10 +120,68 @@
 								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 							</div>
 							<div class="text-center margin_top1 margin_bot">
-								<input onclick="next_step(this)" class="btn btn-default" type="button" value="注册"/>
+								<input onclick="next_step(this)" class="btn btn-default disabled" type="button" value="注册"/>
 							</div>
 						</form>
-					</div>					
+						
+						<form class="" action="" method="post">
+							<fieldset id="">
+								<legend class="">
+									<h3 class="text-primary margin_bot1">注册新用户
+										<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
+									</h3>
+								</legend>
+								<h3 class="text-primary">填写注册信息</h3>
+								<div class="padding-side2 margin_bot margin_top1" style="position: relative;">
+									<div class="">
+										<label for="username">真实姓名：</label>
+										<input id="username" type="text" placeholder="请填写您的真实姓名"/>
+										<span class="text-muted padding-side">请填写考生真实姓名，保存后不可修改</span>
+									</div>
+									<div class="">
+										<label for="mobile">手机号码：</label>
+										<input id="mobile" type="text" placeholder="请填写11位手机号码"/>
+										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 手机号格式错误</span>
+									</div>
+									<div class="">
+										<label for="verify_code">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
+										<input id="verify_code" type="text" placeholder="请填写验证码"/>
+										<a  class="btn btn-default" href="javascript:void(0)">获取手机验证码</a>
+									</div>
+									<div class="">
+										<label for="password">密&emsp;&emsp;码：</label>
+										<input id="password" type="text" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+										<span class="glyphicon glyphicon-ok-sign text-success padding-side"> 密码强度：弱</span>
+									</div>
+									<div class="">
+										<label for="confirm">确认密码：</label>
+										<input id="confirm" type="text" placeholder="请再次输入密码"/>
+										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 两次输入的密码不相同</span>
+									</div>
+									<div class="">
+										<label for="confirm">从事职业：</label>
+										<input id="confirm" type="text" placeholder="请输入您的职业名"/>
+									</div>
+									
+									<div class="reg_tip" >
+										<h3 class="text-danger">温馨提示：</h3>
+										<div class="padding-side2">
+											本栏中的和官方的说法的呵呵和人合伙二号合法的和任何人还不如新色版额
+										</div>
+									</div>
+								</div>
+								
+							</fieldset>
+							<div class="padding-side2">
+								<input type="checkbox" name="" id="" value="" />
+								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
+							</div>
+							<div class="text-center margin_top1 margin_bot">
+								<input onclick="next_step(this)" class="btn btn-default disabled" type="button" value="注册"/>
+							</div>
+						</form>
+					</div>
+					
 					<div class="page_step step3 hide">
 						<div class="margin_top margin_bot">
 							<p class="">您的账号<label class="text-success">注册已完成 <span class="glyphicon glyphicon-ok-sign text-success"></span></label>，账号名称为您的手机号。</p>
@@ -143,30 +195,23 @@
 			</div>
 			
 			<script type="text/javascript">
-				function next_step(obj){
 					var step=$('.reg_process ul li');
-					step.removeClass('current');
-					var index=$(obj).parents('.page_step').index();
-					step.eq(index+1).addClass('current');
-					$(obj).parents('.page_step').addClass('hide');
-					var status=$(obj).attr("id");
-					if (status=='class1') {
-						$(obj).parents('.page_step').next().find("form").eq(0).removeClass("hide");
-						$(obj).parents('.page_step').next().find("form").eq(0).siblings().addClass("hide");
-					} else if(status=='class2'){
-						$(obj).parents('.page_step').next().find("form").eq(1).removeClass("hide");
-						$(obj).parents('.page_step').next().find("form").eq(1).siblings().addClass("hide");
+					function next_step(obj){
+						step.removeClass('current');
+						var index=$(obj).parents('.page_step').index();
+						step.eq(index+1).addClass('current');
+						$(obj).parents('.page_step').addClass('hide');
+						var status=$(obj).attr("id");
+						if (status=='class1') {
+							$(obj).parents('.page_step').next().find("form").eq(0).removeClass("hide");
+							$(obj).parents('.page_step').next().find("form").eq(0).siblings().addClass("hide");
+						} else if(status=='class2'){
+							$(obj).parents('.page_step').next().find("form").eq(1).removeClass("hide");
+							$(obj).parents('.page_step').next().find("form").eq(1).siblings().addClass("hide");
+						}
+						$(obj).parents('.page_step').next().removeClass('hide');
 					}
-					$(obj).parents('.page_step').next().removeClass('hide');
-				}
-				function register(obj){
-					next_step(obj);
-					var true_name,
-						mobile,
-						verify,
-						pwd,
-						year;
-				}
+				
 			</script>
 		</section>
 		
@@ -181,7 +226,8 @@
 			}); 
 			
 			$('.counter').countUp();
-		</script>		
+		</script>
+		
 		<c:import url="../xgk/footer.jsp"></c:import>	
 	</body>
 </html>

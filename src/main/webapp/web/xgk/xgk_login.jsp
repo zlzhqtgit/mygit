@@ -18,8 +18,6 @@
 <script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
-
-
 </head>
 <body>
 		<header class="padding-side login_head">
@@ -50,14 +48,13 @@
 						<span class="glyphicon glyphicon-tag text-muted"></span>
 						<div id="tip2" class="tip text-danger"></div>
 					</div>
-				</fieldset>
-				
+				</fieldset>				
 				<div class="text-center margin_bot margin_top1">
 					<input class="login_btn" type="button" name="" onclick="login()"  id="subm" value="登录" />
 				</div>
 				<div class="forget margin_top1 clearfix">
 					<a href="" class="text-primary pull-left">忘记密码？</a>
-					<a href="" class="text-primary pull-right">免费注册</a>
+					<a href="${pageContext.request.contextPath}/user/register.do" class="text-primary pull-right">免费注册</a>
 				</div>
 				<div class=" margin_top1">
 					<div class="text-primary thirds_login text-center">
@@ -84,10 +81,8 @@
 					        return false; 
 					    } else{
 					    	$('#tip1').text('');
-					    }
-						
-					}
-					
+					    }						
+					}					
 					/**
 					 * 密码规则
 					 */
@@ -104,8 +99,7 @@
 							$('#tip2').text('');
 						}
 					}
-				</script>
-				
+				</script>				
 			    <div class="swiper-wrapper">
 				    <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/banner_login1.jpg"/></a></div>
 				    <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
@@ -143,11 +137,8 @@
 //		    	$('banner .swiper-slide').mouseleave(function () {
 //		    	   swiperBanner.autoplay.start();
 //		    	})
-			</script>
-			
-		</banner>
-		
-		
+			</script>			
+		</banner>		
 		<section class="login container">
 			 <div class="bg1 margin_top1">
 			 	<div class="words">
@@ -159,9 +150,7 @@
 			 			<a class="text-white" href="">查看详情</a>
 			 		</div>
 			 	</div>
-			 </div>
-			
-			 
+			 </div>			 
 			 <div class="bg2">
 			 	<div class="words">
 			 		<h3 class="wow bounceInLeft">我是一个小标题</h3>
@@ -203,11 +192,9 @@
 			    offset: 0,  //距可视区域多少开始执行动画
 			    mobile: true,  //是否在移动设备上执行动画
 			    live: true  //一部加载的内容是否有效
-			}); 
-			
+			}); 			
 			$('.counter').countUp();
-		</script>
-		
+		</script>		
 		<c:import url="footer.jsp"></c:import>	
 	</body>
 <script type="text/javascript">

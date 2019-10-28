@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=0.2,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>新高考系统开发进度明细表</title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<script src="js/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="box container">
+			<div class="title row">
+				<h2 class="text-center">新高考系统开发进度明细表</h2>
+				<h4 class="text-center fwei">
+					开发周期：<span class="text-danger">2019-10-21 <span class="text-warning">&rArr;</span>  2019-12-01</span>
+				</h4>
+				<div class="downtime text-center fwei" id="downtime">
+					<label class="" id="content"></label>
+					<span class="bg-primary fwei" id="time" style="color: yellow;font-size: 1.2em;padding: .4em;"></span>
+				</div>
+			</div>
+			<div class="row clearfix">
+				<div class="nav pull-left" style="width: 20%;">
+					<ul class="clearfix"></ul>
+				</div>
+				<div class="bg-warning  pull-left" style="box-shadow: 0 2px 4px #999;width: 80%;">
+					<div class="">
+						<h4 class="padding-side">开发流程及人员分工：</h4>
+						<div class="bg-info clearfix">
+							<div class="pull-left padding-side">
+								<div class="">
+									<label>页面设计：</label><span class="">沈娴、常晓伟</span>
+								</div>
+								<div class="">
+									<label>页面审核：</label><span class="">沈娴、周令章</span>
+								</div>
+								<div class="">
+									<label>页面实现：</label><span class="">杨明禄</span>
+								</div>
+								<div class="">
+									<label>后端功能实现：</label><span class="">周令章</span>
+								</div>
+							</div>
+							<div class="pull-left padding-side">
+								<div class="">
+									<label>数据设计：</label><span class="">黎博士</span>
+								</div>
+								<div class="">
+									<label>数据收集：</label><span class="">邹美玲</span>
+								</div>
+								<div class="">
+									<label>后台管理系统：</label><span class="">周令章</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="detal" class="panel panel-default padding-side"></div>
+				</div>
+			</div>
+			<h4 class="row clearfix text-center" style="margin-top:1em">
+				<label class="">注意：以上是整个新高考项目的进度，主要从涉及的页面、数量、以及完成率、完成时间方面展示，不是实时更新，每到一个阶段我们会进行更新直到项目完成。</label>
+			</h4>
+		</div>
+		<script src="js/item.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var str="";
+			for (var i=0;i<hld.length;i++) {
+				str+="<li id='"+hld[i].nub+"' onclick='djsh("+i+",this)' >"+hld[i].mainname+"</li>";
+			}			
+			$(".nav ul").html(str);
+			$(document).ready(function() {
+				var str1='<h4 class="">功能包含的页面：</h4><div class="text-danger fwei">'+hld[0].name+'</div>'+
+				'<h4 class="">页面数量：</h4><div class="text-danger fwei">'+hld[0].htmlnub+'个'+'</div>'+
+				'<h4 class="">完成时间：</h4><div class="text-danger fwei">'+hld[0].time+'</div>'+
+				'<h4 class="">完成率：</h4><div class="text-danger fwei">'+hld[0].completeness+'</div>';			
+				$("#detal").html(str1);
+				$("#1").addClass('active');
+			})
+			function djsh(id,obj){				
+				var str1='<h4 class="">功能包含的页面：</h4><div class="text-danger fwei">'+hld[id].name+'</div>'+
+				'<h4 class="">页面数量：</h4><div class="text-danger fwei">'+hld[id].htmlnub+'个'+'</div>'+
+				'<h4 class="">完成时间：</h4><div class="text-danger fwei">'+hld[id].time+'</div>'+
+				'<h4 class="">完成率：</h4><div class="text-danger fwei">'+hld[id].completeness+'</div>';
+				$(obj).parent().find('li').removeClass('active');
+				$(obj).addClass('active');
+				$("#detal").html(str1);
+			}
+			//------------在此设置最终日期------------
+//			var target_time = "2019-12-1";
+			var year=2019;
+			var month=12;
+			var days=1;
+			//------------------------
+			var content=document.getElementById("content")
+			content.innerHTML="<h3>剩余时间：</h3>";
+			content.style.color="#fff"
+		</script>
+		<script src="js/down_time.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

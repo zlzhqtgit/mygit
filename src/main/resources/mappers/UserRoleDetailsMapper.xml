@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<mapper namespace="cn.hqtzytb.mapper.UserRoleDetailsMapper">
+	<!-- 添加用户信息 -->
+	<!-- Integer insert(Admin admin); -->
+		<insert id="insert" parameterType="cn.hqtzytb.entity.UserRoleDetails" useGeneratedKeys="true" keyProperty="detailsId">
+				insert into user_role_details(
+					rid,details_number,details_name,details_adress,creation_time
+				)values(
+				#{rid},#{detailsNumber},
+					#{detailsName},#{detailsAdress},					
+					#{creationTime}
+				)		
+		</insert>	
+		<!-- Integer update(Admin admin); -->
+		<update id="update" parameterType="cn.hqtzytb.entity.UserRoleDetails" >
+				update  user_role_details set
+				rid=#{rid},details_number=#{detailsNumber},details_name=#{detailsName},details_adress=#{detailsAdress},creation_time=#{creationTime}
+				where
+					details_id=#{detailsId}		
+		</update>		
+		<!-- Integer delete(Admin admin) -->	
+		<delete id="delete" parameterType="cn.hqtzytb.entity.UserRoleDetails">
+			delete from user_role_details 
+			where
+					details_id=#{detailsId}	
+		</delete>
+		<!--查询收货地址  -->
+		<select id="select" resultType="cn.hqtzytb.entity.UserRoleDetails">
+			select  
+				details_id as detailsId,rid,
+				details_number as detailsNumber,
+				details_name as detailsName,
+				details_adress as detailsAdress,
+				creation_time as creationTime,
+				role_name as roleName,
+				role_description as roleDescription
+			from user_role_details b
+			LEFT JOIN  user_role e  on e.role_id=b.rid 
+				<if test="where != null">where ${where}</if>
+		 		<if test="orderBy != null">order by  ${orderBy}</if> 
+		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>
+					
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
