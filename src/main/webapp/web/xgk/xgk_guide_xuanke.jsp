@@ -40,7 +40,7 @@
 											</div>
 											<p class="margin_bot margin_top">功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述功能区域描述</p>
 											<div class="text-center margin_bot">
-												<a class="btn btn-primary fontwei" href="learn_ability.html">开始测试</a>
+												<a class="btn btn-primary fontwei" href="${pageContext.request.contextPath}/web/xgk/xgk_learn_ability.jsp">开始测试</a>
 											</div>
 										</div>
 									</div>

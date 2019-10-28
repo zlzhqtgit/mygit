@@ -76,6 +76,7 @@ input{
 }
 .user>img{
 	max-width: 36px;
+	max-height:36px;
 }
 .user a{
 	line-height: 2em;
@@ -939,7 +940,7 @@ banner form fieldset input{
 .reg_process ul{margin: 0;}
 .reg_process ul li{
 	position: relative;
-	width: 33.333%;
+	width: 50%;
 	padding: 1em 0;
 	text-align: center;
 }

@@ -1,0 +1,52 @@
+html,body{
+	font-size: 0.8;
+}
+.title{
+	background-color: #44b549;
+	
+	color: #fff;
+}
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.fwei{
+	font-weight: bold;
+}
+.nav >ul{
+	background-color: #1B6D85;
+	width: 100%;
+}
+.nav >ul >li{
+	text-decoration: none;
+	display: block;
+	padding: .4em 0;
+	text-align: center;
+	width: 100%;
+	color: #fff;
+	margin-bottom: .4em;
+	cursor: pointer;
+	font-size: 1.2em;
+}
+.nav >ul >li>ul{
+	position: relative;
+}
+.nav >ul >li>ul>li{
+	background-color: #07c15a;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+.padding-side{
+	padding: 0 2em;
+}
+.padding-side1{
+	padding: 0 1em;
+}
+.container{
+ width: 100%;
+}
+.active{
+	background-color:orange;
+}

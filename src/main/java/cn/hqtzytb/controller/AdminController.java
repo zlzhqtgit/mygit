@@ -62,34 +62,6 @@ public class AdminController
 		}					
 	}
 	
-	/**
-	 * @throws MyRuntimeException 
-	* @Title: showHqtadmin
-	* @Description: (响应用户管理模块)
-	* @param @param map
-	* @param @param session
-	* @param @param request
-	* @param @param response
-	* @param @return    
-	* @return String    
-	* @throws
-	 */
-	@RequestMapping("/hqt_admin.do")	
-	public String showHqtadmin(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
-		try
-		{
-			if(session.getAttribute("adminname")==null){
-				GetCommonUser.getlogin(response, request);
-				return null;
-			}else{
-				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户管理模块  操作：进入模块  状态：OK!");
-				return  "main/admin/hqt_admin";
-			}		
-		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入用户管理模块   错误信息: "+e);
-			throw new MyRuntimeException(e);
-		}					
-	}
 	/**	 
 	* @Title: showhqtadminIndex
 	* @Description: (响应后台用户管理主页)

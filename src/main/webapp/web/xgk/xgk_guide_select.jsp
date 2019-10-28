@@ -64,7 +64,7 @@ function usercp(){
 				alert(obj.message);
 				return;
 			}			
-			location.href = "../xk/xgk_cpfxselectreport.do?personalityCode="+obj.message;
+			location.href = "../xk/xgk_guide_xuanke.do";
 		}
 	});
 }

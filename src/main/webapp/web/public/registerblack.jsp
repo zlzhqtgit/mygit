@@ -34,19 +34,20 @@
 			<div class="register_box margin_top">
 				
 				<div class="reg_process">
-					<ul class="clearfix">						
-						<li class="pull-left current">注册信息</li>
+					<ul class="clearfix">
+						<li class="pull-left current">选择身份</li>
+						<li class="pull-left">注册信息</li>
 						<li class="pull-left">注册账号</li>
 					</ul>
 				</div>
 				
 				<div class="status margin_bot">
-					<!-- <ul class="page_step step1 margin_bot margin_top">
+					<ul class="page_step step1 margin_bot margin_top">
 						<li><a id="class1" href="javascript:void(0)" class="active wow bounceInLeft" onclick="next_step(this)">个人用户</a></li>
 						<li class="margin_top"><a id="class2" href="javascript:void(0)" onclick="next_step(this)" class=" wow bounceInRight">我是咨询师</a></li>
-					</ul> -->
+					</ul>
 					
-					<div class="page_step step2 margin_top">
+					<div class="page_step step2 margin_top hide">
 						
 						<form class="" action="" method="post">
 							<fieldset id="">
@@ -66,13 +67,6 @@
 										<label for="mobile">手机号码：</label>
 										<input id="mobile" type="text" placeholder="请填写11位手机号码"/>
 										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 手机号格式错误</span>
-									</div>
-									<div class="">
-										<label for="province">所属省份：</label>
-										<select>
-											<option value="贵州省">贵州省</option>
-										</select>										
-										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 请选择所在省份</span>
 									</div>
 									<div class="">
 										<label for="verify_code">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
@@ -126,10 +120,68 @@
 								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 							</div>
 							<div class="text-center margin_top1 margin_bot">
-								<input onclick="next_step(this)" class="btn btn-default" type="button" value="注册"/>
+								<input onclick="next_step(this)" class="btn btn-default disabled" type="button" value="注册"/>
 							</div>
 						</form>
-					</div>					
+						
+						<form class="" action="" method="post">
+							<fieldset id="">
+								<legend class="">
+									<h3 class="text-primary margin_bot1">注册新用户
+										<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
+									</h3>
+								</legend>
+								<h3 class="text-primary">填写注册信息</h3>
+								<div class="padding-side2 margin_bot margin_top1" style="position: relative;">
+									<div class="">
+										<label for="username">真实姓名：</label>
+										<input id="username" type="text" placeholder="请填写您的真实姓名"/>
+										<span class="text-muted padding-side">请填写考生真实姓名，保存后不可修改</span>
+									</div>
+									<div class="">
+										<label for="mobile">手机号码：</label>
+										<input id="mobile" type="text" placeholder="请填写11位手机号码"/>
+										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 手机号格式错误</span>
+									</div>
+									<div class="">
+										<label for="verify_code">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
+										<input id="verify_code" type="text" placeholder="请填写验证码"/>
+										<a  class="btn btn-default" href="javascript:void(0)">获取手机验证码</a>
+									</div>
+									<div class="">
+										<label for="password">密&emsp;&emsp;码：</label>
+										<input id="password" type="text" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+										<span class="glyphicon glyphicon-ok-sign text-success padding-side"> 密码强度：弱</span>
+									</div>
+									<div class="">
+										<label for="confirm">确认密码：</label>
+										<input id="confirm" type="text" placeholder="请再次输入密码"/>
+										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 两次输入的密码不相同</span>
+									</div>
+									<div class="">
+										<label for="confirm">从事职业：</label>
+										<input id="confirm" type="text" placeholder="请输入您的职业名"/>
+									</div>
+									
+									<div class="reg_tip" >
+										<h3 class="text-danger">温馨提示：</h3>
+										<div class="padding-side2">
+											本栏中的和官方的说法的呵呵和人合伙二号合法的和任何人还不如新色版额
+										</div>
+									</div>
+								</div>
+								
+							</fieldset>
+							<div class="padding-side2">
+								<input type="checkbox" name="" id="" value="" />
+								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
+							</div>
+							<div class="text-center margin_top1 margin_bot">
+								<input onclick="next_step(this)" class="btn btn-default disabled" type="button" value="注册"/>
+							</div>
+						</form>
+					</div>
+					
 					<div class="page_step step3 hide">
 						<div class="margin_top margin_bot">
 							<p class="">您的账号<label class="text-success">注册已完成 <span class="glyphicon glyphicon-ok-sign text-success"></span></label>，账号名称为您的手机号。</p>
