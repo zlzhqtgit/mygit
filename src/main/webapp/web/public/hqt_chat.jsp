@@ -10,14 +10,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/public/xgk_chat.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+<style type="text/css">
+	.com_form p { height: 28px; line-height: 28px; position: relative; margin-top: 10px; }
+	span.emotion { width: 42px; height: 20px; padding-left: 20px; cursor: pointer }
+	span.emotion:hover { background-position: 2px -28px }
+	.qqFace { margin-top: 4px; background: #fff; padding: 2px; border: 1px #dfe6f6 solid; }
+	.qqFace table td { padding: 0px; }
+	.qqFace table td img { cursor: pointer; border: 1px #fff solid; }
+	.qqFace table td img:hover { border: 1px #0066cc solid; }
+	#show{ width: 100%; margin: 20px auto; background: #fff; padding: 5px; border: 1px solid #DDD; vertical-align: top; }
+</style>
 </head>
 <body>
-	<div class="dialog margin_top" style="height: 600px;">
+	<div class="dialog margin_top">
 			<div class="chat_header clearfix bg-primary">
 				<div class="clearfix pull-left">
-					<span class="pull-left glyphicon glyphicon-user padding-side"></span>
+					<span class="pull-left padding-side"><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="max-width: 36px;"/></span>
 					<span class="pull-left">						
 						<div class="">
 							<label style="color: red" id="kfname">客服96966</label>正在为您服务
@@ -27,11 +38,11 @@
 						</div>
 					</span>
 				</div>
-				<a class="btn btn-default" href="">结束沟通</a>
+				<!-- <a class="btn btn-default" href="">结束沟通</a> -->
 			</div>
 			<div class="body clearfix">
 				<div class="body_left pull-left" style="    width: 70%;">
-					<div class="chat_record" style="    height: 350px;text-align: center;    overflow: auto;">
+					<div class="chat_record" style="height: 350px;overflow: auto;">
 						<!-- <header class="header-title text-center margin_bot margin_top" id="title"style="background-color: #f9f9f9;padding: .4em;">标题</header> -->
 						<section class="chat-box">
 							<div class="bubbleDiv" id="talkInfo">				
@@ -40,30 +51,108 @@
 					</div>
 					<div class="">
 						<div class="tool_list padding-side">
-							<a href=""><span class="glyphicon glyphicon-info-sign text-muted"></span></a>
-							<a href=""><span class="glyphicon glyphicon-font text-muted"></span></a>
-							<a href=""><span class="glyphicon glyphicon-picture text-muted"></span></a>
-							<a href=""><span class="glyphicon glyphicon-folder-close text-muted"></span></a>
-							<a href=""><span class="glyphicon glyphicon-transfer text-muted"></span></a>
+							<span class="emotion"><img src="${pageContext.request.contextPath}/img/public/e.png" title="表情" style="max-width: 36px;"/></span>
+							<label id="chat-tuxiang" title="发送图片" for="inputImage" class="">
+	                            <input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png"
+	                                   name="file" id="inputImage" class="hidden">
+	                            <img src="${pageContext.request.contextPath}/img/public/pictures.png" title="图片" style="max-width: 36px;"/>
+	                        </label>
 						</div>
 						<div class="padding-side">
-							<textarea id="chatContent" rows="4" class="chat-info" placeholder="想咨询他什么内容..."></textarea>
+							<!-- <textarea id="chatContent" rows="4" class="chat-info" placeholder="想咨询他什么内容..."></textarea> -->
+							<div id="chatContent" name="chatContent" class="bg-info margin_top1 margin_bot1" contenteditable="true" style="width: 100%; height: 80px; padding: .6em;word-break: break-word;overflow: auto;"></div>
 						</div>
 						<div class="text-right padding-side margin_bot1">
-							<a class="btn btn-primary" href="javascript:;" id="subsend" onclick="subSend()">发送 </a>
+							<a class="btn btn-primary sub_btn" href="javascript:void(0);" id="subsend">发送 </a>
 						</div>
 					</div>
 				</div>
-				<div class="body_right pull-left">
-					<div class="currentUser">				
-						<img src="${pageContext.request.contextPath}/img/public/test4.jpg" class="userImage" style="width: 50px;"><br>
-						<span class="userName" id="onlineName"></span>					
-					</div>
+				<div class="body_right pull-left margin_top" style="width:30%;">
+					<a href="">
+						<div class="text-center"><img src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></div>
+						<div class="text-center">游客15885545</div>
+					</a>
 				</div>
 			</div>
 		</div>
 </body>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.qqFace.js" type="text/javascript" charset="utf-8"></script>
 <script>
+
+$(function(){
+	$('.emotion').qqFace({
+		id : 'facebox', 
+		assign:'chatContent', 
+		path:'emotions/'	//表情存放的路径
+	});
+	
+	$(".sub_btn").click(function(){
+		var str = $("#chatContent").html();					
+//		var str1 = $("#chatContent").text();
+		if ( str=='') {
+			console.log("请输入您要发送的信息")
+		} else{
+			var emotionbox="<div class='margin_top1 dialog_con margin_bot bg-info'><span onclick='close_preImg(this)' style='display: none;'>&times;</span>"+str+"</div>";
+			$('.chat_record').append("<div class=\"padding-side margin_top clearfix text-right\"><label class=\"pull-left padding-side\" style=\"\"/><img src=\"${pageContext.request.contextPath}/img/xgk/user.png\" style=\"max-width: 32px; \"/></label> <span class=\"text-warning\">凤姐</span> <span class=\"text-muted\">2019-10-14 今天 14：40</span></div>"+emotionbox);
+			
+//			pasteItem();
+			
+            //发送后清空输入框
+            $("#chatContent").html('');
+            
+			//聊天框默认最底部
+			$(document).ready(function () {
+				var sc_h=$(".chat_record")[0].scrollHeight;
+               	$(".chat_record").scrollTop(sc_h);
+            });
+		}
+	});
+});
+
+//发送粘贴的图片
+function pasteItem() {
+	var str = $("#chatContent").html();
+	var postImg="<div class='margin_top1 dialog_con chatmsg_imgbox margin_bot bg-info' ondblclick='preImg(this)'><span onclick='close_preImg(this)' style='display: none;'>&times;</span>"+str+"</div>";
+	$('.chat_record').append("<div class=\"padding-side margin_top clearfix\"><span class=\"pull-left padding-side\" style=\"\"/><img src=\"${pageContext.request.contextPath}/img/xgk/user.png\" style=\"max-width: 32px; \"/></span> <span class=\"text-warning\">凤姐</span> <span class=\"text-muted\">2019-10-14 今天 14：40</span></div>"+postImg);
+}
+
+//      发送图片
+function selectImg(pic){
+    if (!pic.files || !pic.files[0]) {
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+        var images = evt.target.result;
+        $(".chat_record").append( "<div class=\"padding-side margin_top clearfix text-right\"><span class=\"pull-left padding-side\" style=\"\"/><img src=\"${pageContext.request.contextPath}/img/xgk/user.png\" style=\"max-width: 32px; \"/></span> <span class=\"text-warning\">凤姐</span> <span class=\"text-muted\">2019-10-14 今天 14：40</span></div>"+
+        "<div class=\"margin_bot chatmsg_imgbox margin_top1\" ondblclick='preImg(this)'><span onclick='close_preImg(this)' style='display: none;'>&times;</span><img style='width: 100%;' src="+images +"></div>");
+        
+        //聊天框默认最底部
+        $(document).ready(function () {
+            var sc_h=$(".chat_record")[0].scrollHeight;
+            $(".chat_record").scrollTop(sc_h);
+        });
+    };
+    reader.readAsDataURL(pic.files[0]);
+}
+
+//图片预览
+function preImg (obj) {
+	var owidth=$(obj).width();
+	var objwidth=owidth*1.4
+	$(obj).css({"position":"absolute","z-index":"99","width":"700px","top":"0","box-shadow":"0 0 20px #999"});
+	$(obj).find("span").show();
+}
+
+//关闭图片预览
+function close_preImg(obj) {
+	var owidth=$(obj).width();
+	console.log(owidth)
+	$(obj).hide();
+	$(obj).parent().css({"position":"relative","width":"100%","z-index":"1","box-shadow":"0 0 0 #999"});
+}
+	
 	 //客服图像    
     var adminImgSrc = "${pageContext.request.contextPath}/img/public/test.jpg";    
     //访客图像    
@@ -102,7 +191,6 @@
 		/* ******************************************解析后台传回的消息,并予以展示 *******************************/
 		 ws.onmessage = function(event) {
 			 var msg = JSON.parse(event.data);			
-			console.log(msg);			
 			/* --------------------- 显示系统提示信息 ------------------------ */
 			if (undefined != msg.message) {
 				if (msg.type == "error") { //消息发送失败的系统提示
@@ -142,8 +230,8 @@
 			ws = null;
 		}
 		/* *************************************  发送消息到服务端  ************************************* */
-		function subSend() {
-			var message = $("#chatContent").val().trim();//获取聊天信息
+		/* function subSend() {
+			var message = $("#chatContent").html().trim();//获取聊天信息
 			if (message == "") {
 				alert("请输入聊天内容。。。。");
 				return;
@@ -157,7 +245,13 @@
 			ws.send(JSON.stringify(obj));
 			$("#chatContent").val("");//清空文本域框内容
 			$("#chatContent").focus();//文本域框获取焦点事件
-		}		
+			
+			//聊天框默认最底部
+	        $(document).ready(function () {
+	            var sc_h=$(".chat_record")[0].scrollHeight;
+	            $(".chat_record").scrollTop(sc_h);
+	        });
+		}		 */
 		/* 加载聊天记录信息  fromUID:发送者的id  toUID：接受者id*/
 		function chatRecord(fromUID, toUID) {
 					$.ajax({

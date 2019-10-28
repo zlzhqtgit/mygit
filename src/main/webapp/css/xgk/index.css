@@ -76,6 +76,7 @@ input{
 }
 .user>img{
 	max-width: 36px;
+	max-height:36px;
 }
 .user a{
 	line-height: 2em;
@@ -335,18 +336,21 @@ footer a:hover{
 	display: none;
 	position: absolute;
 	top: 0;
-	left: -154px;
-	width: 140px;
-	background-color: #fff;
+	right:60px;
+	width: 150px;
 	overflow: inherit;
-	border-radius: 10px;
-	border: 1px solid #3b8bec;
 	z-index: 100;
+}
+.submenu>div{
+	width: 140px;
+	border: 1px solid #3b8bec;
+	background-color: #fff;
+	border-radius: 10px;
 }
 .submenu::before{
 	position: absolute;
 	z-index: 99;
-	right: -17px;
+	right: -6px;
 	top: 18px;
 	content: '';
 	width: 0;
@@ -1006,7 +1010,7 @@ banner form fieldset input{
 	color: #fff;
 }
 .step2 label{
-	width: 6em;
+	width: 8em;
 }
 .reg_tip{
 	position: absolute; 

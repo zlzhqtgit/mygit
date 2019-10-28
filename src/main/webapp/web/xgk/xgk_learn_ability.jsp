@@ -21,6 +21,7 @@
 	input{
 		width: 100%;
 		border: 0;
+		text-align: center;
 	}
 </style>
 </head>
