@@ -2,10 +2,28 @@
 	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 	<mapper namespace="cn.hqtzytb.mapper.UserMapper">	
-		
+		<insert id="insert" parameterType="cn.hqtzytb.entity.User" useGeneratedKeys="true" keyProperty="id">
+				insert into user(
+					username,phone,wexin_chat,qq_chat,password,uuid,
+					belong_to,school,school_address,families,fraction,			
+					cee_year,vocation,head_url,power,creat_time			
+				)values(
+					#{username},#{phone},
+					#{wexinChat},#{qqChat},					
+					#{password},#{uuid},#{belongTo},					
+					#{school},#{schoolAddress},
+					#{families},#{fraction},					
+					#{ceeYear},#{vocation},#{headUrl},					
+					#{power},#{creatTime}					
+				)		
+		</insert>	
 		<!--查询用户  -->
 		<select id="select" resultType="cn.hqtzytb.entity.User">
-			select  id,username,password,user_sex as userSex,phone,uuid,creat_time as creatTime from user 
+			select  
+					id,username,phone,wexin_chat as wexinChat,qq_chat as qqChat,password,uuid,
+					belong_to as belongTo,school,school_address as schoolAddress,families,fraction,			
+					cee_year as ceeYear,vocation,head_url as headUrl,power,creat_time as creatTime	 
+			 from user 
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		

@@ -7,6 +7,7 @@ import cn.hqtzytb.entity.User;
 
 public interface IUserServer
 {
+	User insert(User user);
 	List<User> getuserByphone(String phone);
 	List<User> getuserAll();
 	/**

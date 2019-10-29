@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +15,8 @@
 <script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 </head>
 <body>
 		<header class="padding-side login_head">
@@ -28,8 +29,7 @@
 					<li><a href="">商务合作</a></li>
 				</ul>
 			</nav>
-		</header>
-		
+		</header>		
 		<section class="container">
 			<div class="register_box margin_top">
 				
@@ -38,17 +38,15 @@
 						<li class="pull-left current">注册信息</li>
 						<li class="pull-left">注册账号</li>
 					</ul>
-				</div>
-				
+				</div>				
 				<div class="status margin_bot">
 					<!-- <ul class="page_step step1 margin_bot margin_top">
 						<li><a id="class1" href="javascript:void(0)" class="active wow bounceInLeft" onclick="next_step(this)">个人用户</a></li>
 						<li class="margin_top"><a id="class2" href="javascript:void(0)" onclick="next_step(this)" class=" wow bounceInRight">我是咨询师</a></li>
 					</ul> -->
 					
-					<div class="page_step step2 margin_top">
-						
-						<form class="" action="" method="post">
+					<div class="page_step step2 margin_top">						
+						<form class="" action="" method="post" id="reg_form">
 							<fieldset id="">
 								<legend class="">
 									<h3 class="text-primary margin_bot1">注册新用户
@@ -59,21 +57,14 @@
 								<div class="padding-side2 margin_bot margin_top1">
 									<div class="">
 										<label for="username">真实姓名：</label>
-										<input id="username" type="text" placeholder="请填写您的真实姓名"/>
+										<input id="username" name="username" type="text" placeholder="请填写您的真实姓名"/>
 										<span class="text-muted padding-side">请填写考生真实姓名，保存后不可修改</span>
 									</div>
 									<div class="">
 										<label for="mobile">手机号码：</label>
-										<input id="mobile" type="text" placeholder="请填写11位手机号码"/>
+										<input id="phone" name="phone" type="text" placeholder="请填写11位手机号码"/>
 										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 手机号格式错误</span>
-									</div>
-									<div class="">
-										<label for="province">所属省份：</label>
-										<select>
-											<option value="贵州省">贵州省</option>
-										</select>										
-										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 请选择所在省份</span>
-									</div>
+									</div>									
 									<div class="">
 										<label for="verify_code">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
 										<input id="verify_code" type="text" placeholder="请填写验证码"/>
@@ -81,7 +72,7 @@
 									</div>
 									<div class="">
 										<label for="password">密&emsp;&emsp;码：</label>
-										<input id="password" type="text" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+										<input id="password" name="password" type="text" placeholder="请填写6-16位数字、字母或符号作为密码"/>
 										<span class="glyphicon glyphicon-ok-sign text-success padding-side"> 密码强度：弱</span>
 									</div>
 									<div class="">
@@ -89,30 +80,32 @@
 										<input id="confirm" type="text" placeholder="请再次输入密码"/>
 										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 两次输入的密码不相同</span>
 									</div>
-								</div>
-								
+								</div>								
 								<h3 class="text-primary">完善学生信息
 									<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
 								</h3>
 								<div class="padding-side2 margin_top1 margin_bot" style="position: relative;">
 									<div class="">
 										<label for="school">就读学校：</label>
-										<input id="school" type="text" placeholder="请填写你的学校名称"/>
+										<input id="school" name="school" type="text" placeholder="请填写你的学校名称"/>
 									</div>
 									<div class="">
-										<label for="object">科&emsp;&emsp;类：</label>
-										<input id="object" type="text" placeholder=""/>
+										<label for="schoolAddress">学校地址：</label>
+										<input id="schoolAddress" name="schoolAddress" type="text" placeholder="请填写你的学校名称"/>
 									</div>
 									<div class="">
-										<label for="score">分&emsp;&emsp;数：</label>
-										<input id="score" type="text" placeholder=""/>
+										<label for="families">科&emsp;&emsp;类：</label>
+										<input id="families" name="families" type="text" placeholder=""/>
 									</div>
 									<div class="">
-										<label for="year">高考年度：</label>
-										<input id="year" type="text" placeholder=""/>
+										<label for="fraction">分&emsp;&emsp;数：</label>
+										<input id="fraction" name="fraction" type="text" placeholder=""/>
+									</div>
+									<div class="">
+										<label for="ceeYear">高考年度：</label>
+										<input id="ceeYear" name="ceeYear" type="text" placeholder=""/>
 										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 请填写高考年度</span>
-									</div>
-									
+									</div>									
 									<div class="reg_tip">
 										<h3 class="text-danger">温馨提示：</h3>
 										<div class="padding-side2">
@@ -126,7 +119,7 @@
 								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 							</div>
 							<div class="text-center margin_top1 margin_bot">
-								<input onclick="next_step(this)" class="btn btn-default" type="button" value="注册"/>
+								<input onclick="register(this)" class="btn btn-default" type="button" value="注册"/>
 							</div>
 						</form>
 					</div>					
@@ -134,55 +127,61 @@
 						<div class="margin_top margin_bot">
 							<p class="">您的账号<label class="text-success">注册已完成 <span class="glyphicon glyphicon-ok-sign text-success"></span></label>，账号名称为您的手机号。</p>
 							<p class="text-center margin_top"><a class="btn btn-primary" href="">返回登录</a></p>
-						</div>
-
-						
-					</div>
-					
+						</div>					
+					</div>					
 				</div>
-			</div>
-			
-			<script type="text/javascript">
-				function next_step(obj){
-					var step=$('.reg_process ul li');
-					step.removeClass('current');
-					var index=$(obj).parents('.page_step').index();
-					step.eq(index+1).addClass('current');
-					$(obj).parents('.page_step').addClass('hide');
-					var status=$(obj).attr("id");
-					if (status=='class1') {
-						$(obj).parents('.page_step').next().find("form").eq(0).removeClass("hide");
-						$(obj).parents('.page_step').next().find("form").eq(0).siblings().addClass("hide");
-					} else if(status=='class2'){
-						$(obj).parents('.page_step').next().find("form").eq(1).removeClass("hide");
-						$(obj).parents('.page_step').next().find("form").eq(1).siblings().addClass("hide");
-					}
-					$(obj).parents('.page_step').next().removeClass('hide');
-				}
-				function register(obj){
-					next_step(obj);
-					var true_name,
-						mobile,
-						verify,
-						pwd,
-						year;
-				}
-			</script>
-		</section>
-		
-		<script type="text/javascript">
-			new WOW().init(); 
-			var wow = new WOW({  
-			    boxClass: 'wow', //需要执行动画的class 
-			    animateClass: 'animated',  //animate.css的class
-			    offset: 0,  //距可视区域多少开始执行动画
-			    mobile: true,  //是否在移动设备上执行动画
-			    live: true  //一部加载的内容是否有效
-			}); 
-			
-			$('.counter').countUp();
-		</script>		
+			</div>	
+		</section>		
 		<c:import url="../xgk/footer.jsp"></c:import>	
 	</body>
+<script type="text/javascript">
+	function next_step(e){
+			var step=$('.reg_process ul li');
+			step.removeClass('current');
+			var index=$(e).parents('.page_step').index();
+			step.eq(index+1).addClass('current');
+			$(e).parents('.page_step').addClass('hide');
+			var status=$(e).attr("id");
+			if (status=='class1') {
+				$(e).parents('.page_step').next().find("form").eq(0).removeClass("hide");
+				$(e).parents('.page_step').next().find("form").eq(0).siblings().addClass("hide");
+			} else if(status=='class2'){
+				$(e).parents('.page_step').next().find("form").eq(1).removeClass("hide");
+				$(e).parents('.page_step').next().find("form").eq(1).siblings().addClass("hide");
+			}
+			$(e).parents('.page_step').next().removeClass('hide');
+	}
+	function register(e){		
+			var url = "../user/hqt_registeradd.do";
+			var data = $("#reg_form").serialize();	
+			$.ajax({
+				"url" : url,
+				"data" : data,
+				"type" : "POST",
+				"dataType" : "json",
+				"success" : function(obj) {
+					if (obj.state == 0) {
+						layer.msg(obj.message,{icon:2,time:1000});
+						return;
+					}else{
+						layer.msg(obj.message,{icon:1,time:1000},function(){ next_step(e);});								
+					}				
+				}
+			}); 		
+	}
+	
+</script>		
+<script type="text/javascript">
+	new WOW().init(); 
+	var wow = new WOW({  
+		boxClass: 'wow', //需要执行动画的class 
+		animateClass: 'animated',  //animate.css的class
+		offset: 0,  //距可视区域多少开始执行动画
+		mobile: true,  //是否在移动设备上执行动画
+		live: true  //一部加载的内容是否有效
+	}); 
+			
+	$('.counter').countUp();
+</script>		
 </html>
 

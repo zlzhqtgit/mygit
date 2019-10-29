@@ -7,6 +7,7 @@ import cn.hqtzytb.entity.User;
 
 public interface UserMapper
 {
+	Integer insert(User user);
 	List<User> select(
 			@Param("where")String where,
 			@Param("orderBy")String orderBy,

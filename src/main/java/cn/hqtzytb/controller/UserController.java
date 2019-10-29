@@ -3,7 +3,7 @@ package cn.hqtzytb.controller;
 
 import java.util.Date;
 import java.util.List;
-
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +15,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+
+import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.UserRole;
@@ -44,6 +47,8 @@ public class UserController {
 	public IUserRoleServer userRoleServer;
 	@Autowired
 	public IUserRoleDetailsServer userRoleDetailsServer;
+	@Autowired
+	private PhotoConfig photoConfig;
 	private  static final  Logger logger = LogManager.getLogger(UserController.class.getName());
 	
 	/**
@@ -287,29 +292,7 @@ public class UserController {
 			throw new MyRuntimeException(e);
 		}	
 	}
-	/**
-	* @Title: hanldRegister
-	* @Description: (用户注册页面)
-	* @param @param map
-	* @param @param session
-	* @param @param request
-	* @param @param response
-	* @param @return
-	* @param @throws MyRuntimeException    
-	* @return String    
-	* @throws
-	 */
-	@RequestMapping("register.do")
-	public String hanldRegister(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
-		try
-		{			
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：用户注册模块  操作：进入模块  状态：OK!");
-			return "web/public/register";	
-		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入用户注册模块     错误信息: "+e);
-			throw new MyRuntimeException(e);
-		}	
-	}
+	
 	/**
 	* @Title: handleUserlogin
 	* @Description: (新高考用户登录实现方法)
@@ -355,5 +338,115 @@ public class UserController {
 		}
 		return rr;
 	}
-
+	/**
+	 * @Title: hanldRegister @Description: (用户注册页面) @param @param
+	 * map @param @param session @param @param request @param @param
+	 * response @param @return @param @throws MyRuntimeException @return
+	 * String @throws
+	 */
+	@RequestMapping("register.do")
+	public String hanldRegister(ModelMap map, HttpSession session, HttpServletRequest request,
+			HttpServletResponse response) throws MyRuntimeException {
+		try {
+			logger.info("用户名：" + session.getAttribute("username") + " 模块名：用户注册模块  操作：进入模块  状态：OK!");
+			return "web/public/register";
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：进入用户注册模块     错误信息: " + e);
+			throw new MyRuntimeException(e);
+		}
+	}
+	/**
+	* @Title: handlephotoyzm
+	* @Description: (获取短信验证码)
+	* @param @param phone
+	* @param @param session
+	* @param @return    
+	* @return ResponseResult<Void>    
+	* @throws
+	 */
+	@RequestMapping(value = "/hqt_photoyzm.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseResult<Void> handlephotoyzm(String phone, HttpSession session,HttpServletRequest request)
+	{
+		ResponseResult<Void> rr;		
+		Photo.setNewcode();
+	    String code = Integer.toString(Photo.getNewcode());	       
+	        SendSmsResponse response;	       
+			try {
+				response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
+				if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
+					session.setAttribute("photoyzm",code); 
+					rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
+					logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+				}else{
+					 rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
+					 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+				}					       
+			} catch (Exception e) {
+				logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
+				rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");			
+			}			
+		return rr;
+	}
+	/**
+	* @Title: handleRegisteradd
+	* @Description: (用户注册实现方法)
+	* @param @param username
+	* @param @param phone
+	* @param @param password
+	* @param @param school
+	* @param @param schoolAddress
+	* @param @param families
+	* @param @param fraction
+	* @param @param ceeYear
+	* @param @param session
+	* @param @param request
+	* @param @return    
+	* @return ResponseResult<Void>    
+	* @throws
+	 */
+	@RequestMapping(value = "/hqt_registeradd.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseResult<Void> handleRegisteradd(String username,String phone,String password,String school,String schoolAddress,String families,String fraction,String ceeYear, HttpSession session,HttpServletRequest request)
+	{	
+		ResponseResult<Void> rr=null;		
+		try {	
+			//查询用户名是否存在
+			User userlist=userServer.queryUser(phone);			
+			//判断用户名是否存在
+			if (userlist!=null){
+				rr=new ResponseResult<Void>(ResponseResult.ERR,"手机号已经存在!请重新输入...");
+				logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+			}else{	
+				GetCommonUser get=new GetCommonUser();			
+				Date creatTime=new Date();		
+				String uuid = UUID.randomUUID().toString().toUpperCase();
+				String md5Password = get.getEncrpytedPassword(password, uuid);
+				User user=new User();
+				user.setUsername(username);
+				user.setPhone(phone);
+				user.setWexinChat("");
+				user.setQqChat("");
+				user.setPassword(md5Password);
+				user.setUuid(uuid);
+				user.setBelongTo("2019100001");
+				user.setSchool(school);
+				user.setSchoolAddress(schoolAddress);
+				user.setFamilies(families);
+				user.setFraction(fraction);
+				user.setCeeYear(ceeYear);
+				user.setVocation("");
+				user.setHeadUrl("/img/public/head.jpg");
+				user.setPower("");
+				user.setCreatTime(creatTime);				
+				userServer.insert(user);
+				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");				
+				logger.info("用户名："+user.getUsername()+" 模块名：注册模块 操作：登录  状态：OK!");
+			}			
+		} catch (Exception e) {
+			logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
+			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+		}
+		return rr;
+	}
 }
