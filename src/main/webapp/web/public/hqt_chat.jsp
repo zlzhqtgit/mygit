@@ -41,7 +41,7 @@
 				<!-- <a class="btn btn-default" href="">结束沟通</a> -->
 			</div>
 			<div class="body clearfix">
-				<div class="body_left pull-left" style="    width: 70%;">
+				<div class="body_left pull-left" style="width: 70%;">
 					<div class="chat_record" style="height: 350px;overflow: auto;">
 						<!-- <header class="header-title text-center margin_bot margin_top" id="title"style="background-color: #f9f9f9;padding: .4em;">标题</header> -->
 						<section class="chat-box">
@@ -51,19 +51,19 @@
 					</div>
 					<div class="">
 						<div class="tool_list padding-side">
-							<span class="emotion"><img src="${pageContext.request.contextPath}/img/public/e.png" title="表情" style="max-width: 36px;"/></span>
-							<label id="chat-tuxiang" title="发送图片" for="inputImage" class="">
+							<span class="emotion"><img src="${pageContext.request.contextPath}/img/public/e.png" title="表情" style="max-width: 24px;"/></span>
+							<label id="chat-tuxiang" title="发送图片" for="inputImage" class="padding-side">
 	                            <input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png"
 	                                   name="file" id="inputImage" class="hidden">
-	                            <img src="${pageContext.request.contextPath}/img/public/pictures.png" title="图片" style="max-width: 36px;"/>
+	                            <img src="${pageContext.request.contextPath}/img/public/pictures.png" title="图片" style="max-width: 24px;"/>
 	                        </label>
 						</div>
 						<div class="padding-side">
 							<!-- <textarea id="chatContent" rows="4" class="chat-info" placeholder="想咨询他什么内容..."></textarea> -->
-							<div id="chatContent" name="chatContent" class="bg-info margin_top1 margin_bot1" contenteditable="true" style="width: 100%; height: 80px; padding: .6em;word-break: break-word;overflow: auto;"></div>
+							<div id="chatContent" name="chatContent" class="bg-info margin_top1 margin_bot1 chat-info" contenteditable="true" style=""></div>
 						</div>
 						<div class="text-right padding-side margin_bot1">
-							<a class="btn btn-primary sub_btn" href="javascript:void(0);" id="subsend">发送 </a>
+							<a class="btn btn-primary sub_btn" onclick="subSend()" href="javascript:void(0);" id="subsend">发送 </a>
 						</div>
 					</div>
 				</div>
@@ -87,7 +87,7 @@ $(function(){
 		path:'emotions/'	//表情存放的路径
 	});
 	
-	$(".sub_btn").click(function(){
+	/* $(".sub_btn").click(function(){
 		var str = $("#chatContent").html();					
 //		var str1 = $("#chatContent").text();
 		if ( str=='') {
@@ -102,13 +102,28 @@ $(function(){
             $("#chatContent").html('');
             
 			//聊天框默认最底部
-			$(document).ready(function () {
-				var sc_h=$(".chat_record")[0].scrollHeight;
-               	$(".chat_record").scrollTop(sc_h);
-            });
+			info_bottom();
 		}
-	});
+	}); */
 });
+
+
+//聊天框默认最底部
+function info_bottom(){
+	var scr_h=$(".chat_record")[0].scrollHeight;
+    $(".chat_record").scrollTop(scr_h);
+}
+
+//限制文件上传只能为图片
+function uploadImg() {
+    var _name, _fileName, personsFile;
+    personsFile = document.getElementById("inputImage");
+    _name = personsFile.value;
+    _fileName = _name.substring(_name.lastIndexOf(".") + 1).toLowerCase();
+    if (_fileName !== "png" && _fileName !== "jpg" && _fileName !== "gif") {
+        alert("上传图片格式不正确，请重新上传");
+    }
+}
 
 //发送粘贴的图片
 function pasteItem() {
@@ -122,17 +137,22 @@ function selectImg(pic){
     if (!pic.files || !pic.files[0]) {
         return;
     }
+    //限制上传格式
+    uploadImg();
     var reader = new FileReader();
     reader.onload = function (evt) {
         var images = evt.target.result;
-        $(".chat_record").append( "<div class=\"padding-side margin_top clearfix text-right\"><span class=\"pull-left padding-side\" style=\"\"/><img src=\"${pageContext.request.contextPath}/img/xgk/user.png\" style=\"max-width: 32px; \"/></span> <span class=\"text-warning\">凤姐</span> <span class=\"text-muted\">2019-10-14 今天 14：40</span></div>"+
-        "<div class=\"margin_bot chatmsg_imgbox margin_top1\" ondblclick='preImg(this)'><span onclick='close_preImg(this)' style='display: none;'>&times;</span><img style='width: 100%;' src="+images +"></div>");
-        
-        //聊天框默认最底部
-        $(document).ready(function () {
-            var sc_h=$(".chat_record")[0].scrollHeight;
-            $(".chat_record").scrollTop(sc_h);
-        });
+        var tag_img="<img class='chat_img' style='width: 100%;' src="+images +">"
+        chat("rightBubble", userImgSrc,tag_img);	
+        //$(".chat_record").append("<img class='chat_img' style='width: 100%;' src="+images +">");
+        /* $("#chatContent").append("<div class=\"chatmsg_imgbox\" ondblclick='preImg(this)'><span onclick='close_preImg(this)' style='display: none;'>&times;</span><img style='width: 100%;' src="+images +"/></div>"); */
+      /*  var block = '<div class="bubbleItem">' + '<div class="left-head">'
+		+ '<img src="'+ imgSrc +'" alt="doctor"/><span class="kf-name">'+kfname+'</span><span class="kf-time">' +time+ '</span></div>'
+		+ '<span class="bubble leftBubble">' + $textContent
+		+ '<span class="topLevel"></span></span>' + '</div>'; */
+		
+       //聊天框默认最底部
+       info_bottom();
     };
     reader.readAsDataURL(pic.files[0]);
 }
@@ -148,15 +168,17 @@ function preImg (obj) {
 //关闭图片预览
 function close_preImg(obj) {
 	var owidth=$(obj).width();
-	console.log(owidth)
 	$(obj).hide();
 	$(obj).parent().css({"position":"relative","width":"100%","z-index":"1","box-shadow":"0 0 0 #999"});
+	
+	 //聊天框默认最底部
+    info_bottom();
 }
 	
 	 //客服图像    
     var adminImgSrc = "${pageContext.request.contextPath}/img/public/test.jpg";    
     //访客图像    
-    var userImgSrc ="${pageContext.request.contextPath}/img/public/test4.jpg";    	
+    var userImgSrc ="${pageContext.request.contextPath}/img/public/test4.jpg";
 	var tempName = "";
 	var ws = null;
 	var target = null;
@@ -165,7 +187,7 @@ function close_preImg(obj) {
 	var administrator = '${userJson}';	
 	var user =JSON.parse(administrator);//由JSON字符串转换为JSON对象
 	tempName = user.username; //取出用户名
-	console.log(user);
+	//console.log(user);
 	var kfname="${chatName}"+"客服";
 	/* *************************************   进入该页面直接打开websocket通讯连接   **************************************/
  window.onload = function() {		
@@ -202,7 +224,6 @@ function close_preImg(obj) {
 					                        +'<span class="bubble2 centerBubble"><font size="3px">'
 							                + msg.message + '</font></span></div>');
 				}
-				$("#talkInfo").scrollTop(999999);
 			} 						
 			/*------------------------- 展示服务端推送的即时聊天信息 --------------------*/
 			if (undefined != msg.chatContent) { //判断消息不为空						
@@ -230,8 +251,8 @@ function close_preImg(obj) {
 			ws = null;
 		}
 		/* *************************************  发送消息到服务端  ************************************* */
-		/* function subSend() {
-			var message = $("#chatContent").html().trim();//获取聊天信息
+		function subSend() {
+			var message = $("#chatContent").html().trim();//获取聊天信息	
 			if (message == "") {
 				alert("请输入聊天内容。。。。");
 				return;
@@ -241,43 +262,37 @@ function close_preImg(obj) {
 					message : message, //聊天消息
 					type : 2
 				// 1 表示客服给游客发消息  2 表示游客给客服发消息
-				}
+				}			
 			ws.send(JSON.stringify(obj));
-			$("#chatContent").val("");//清空文本域框内容
+			$("#chatContent").html("");//清空文本域框内容
 			$("#chatContent").focus();//文本域框获取焦点事件
-			
-			//聊天框默认最底部
-	        $(document).ready(function () {
-	            var sc_h=$(".chat_record")[0].scrollHeight;
-	            $(".chat_record").scrollTop(sc_h);
-	        });
-		}		 */
+		}
+		
 		/* 加载聊天记录信息  fromUID:发送者的id  toUID：接受者id*/
 		function chatRecord(fromUID, toUID) {
-					$.ajax({
-						url : "${basePath}/Message/queryChatMessage.do",
-						type : "get",
-						data : {
-							fromUID : fromUID,
-							toUID : toUID
-						},
-						async : false,
-						scriptCharset : 'utf-8',
-						success : function(result) {
-							console.log(result);							
-							if (result.length != 0) {
-								$.each(result, function(index, temp) {					 
-									chat("rightBubble", userImgSrc,temp.mcontent);									
-								});
-								var systemMessage = '<div class="bubbleItem">'
-										+ '<span class="bubble2 centerBubble">'
-										+ '<font size="1px" color="#888" >'
-										+ '--------------------以上是聊天记录消息-------------------</font></span></div>';
-							} 
-							$("#talkInfo").append(systemMessage);
-						}
-					});
-			$("#talkInfo").scrollTop(999999);
+			$.ajax({
+				url : "${basePath}/Message/queryChatMessage.do",
+				type : "get",
+				data : {
+					fromUID : fromUID,
+					toUID : toUID
+				},
+				async : false,
+				scriptCharset : 'utf-8',
+				success : function(result) {
+					console.log(result);							
+					if (result.length != 0) {
+						$.each(result, function(index, temp) {					 
+							chat("rightBubble", userImgSrc,temp.mcontent);									
+						});
+						var systemMessage = '<div class="bubbleItem">'
+								+ '<span class="bubble2 centerBubble">'
+								+ '<font size="1px" color="#888" >'
+								+ '--------------------以上是聊天记录消息-------------------</font></span></div>';
+					} 
+					$("#talkInfo").append(systemMessage);
+				}
+			});
 		}
 
 		/* 发送聊天信息  element 判断发送者对象(自己 or 对方)  imgSrc 图像路径   leftTextContent 说话内容*/
@@ -297,6 +312,8 @@ function close_preImg(obj) {
 			} else if ($user === "rightBubble") {				
 				$box.append(createRight(imgSrc, $textContent));
 			}
+			//跳转底部
+			info_bottom();
 
 		}
 
