@@ -122,6 +122,7 @@ function uploadImg() {
     _fileName = _name.substring(_name.lastIndexOf(".") + 1).toLowerCase();
     if (_fileName !== "png" && _fileName !== "jpg" && _fileName !== "gif") {
         alert("上传图片格式不正确，请重新上传");
+        return;
     }
 }
 
@@ -137,8 +138,17 @@ function selectImg(pic){
     if (!pic.files || !pic.files[0]) {
         return;
     }
-    //限制上传格式
-    uploadImg();
+    //限制文件上传只能为图片
+    var _name, _fileName, personsFile;
+    personsFile = document.getElementById("inputImage");
+    _name = personsFile.value;
+    _fileName = _name.substring(_name.lastIndexOf(".") + 1).toLowerCase();
+    if (_fileName !== "png" && _fileName !== "jpg" && _fileName !== "gif") {
+        alert("上传图片格式不正确，请重新上传");
+        //跳出方法
+        return;
+    }
+    
     var reader = new FileReader();
     reader.onload = function (evt) {
         var images = evt.target.result;
