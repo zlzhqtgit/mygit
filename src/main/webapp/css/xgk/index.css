@@ -379,21 +379,52 @@ footer a:hover{
 	left: 0;
 }
 .submenu_con{
-	padding-bottom: 1em;
+	padding: .4em 0;
 }
 .submenu_con ul{
 	margin: 0;
 	overflow: hidden;
 }
-.submenu_con ul li:hover{
-	background-color: #ddd;
+.submenu_con ul li{
+	padding: 0 1.4em;
+	margin: .8em 0;
 }
 .submenu_con ul li a{
-	color: #333;
+	color: #fff;
 	display: block;
 	line-height: normal;
+	padding: .2em;
+	background-color: #ff6600;
+	border-radius: 8px;
 }
-
+.submenu_con ul li a:hover{
+	color: #fff;
+}
+.qq_server .submenu_con ul li{
+	margin: .2em 0;
+	padding: .4em;
+}
+.qq_server .submenu_con ul li a{
+	color: #3b8bec;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: normal;
+	padding: 0em;
+	background-color: #fff;
+	border-radius: 8px;
+	border: 1px solid #ff6600;
+}
+.qq_server .submenu_con ul li a:hover{
+	color: orangered;
+}
+.qq_server .submenu_con ul li a img{
+	margin-bottom: .3em;
+}
+.submenu_con ul li a img{
+	margin-right: 0em;
+	margin-bottom: .1em;
+}
 .btn-mark img{
 	max-width: 20px;
 }

@@ -21,7 +21,7 @@ window.onload = function() {
 				var d=obj.data;				
 				var str="";
 				for(var i=0;i<d.length;i++){					
-					str+='<li><a href="javascript:;"  onclick="chat2('+d[i].id+')">'+d[i].username+'客服</a></li>';
+					str+='<li><a href="javascript:;"  onclick="chat2('+d[i].id+')"><img src="${pageContext.request.contextPath}/img/public/searve_con.gif" style="max-width: 1.4em;border-radius: 50%;"/>'+d[i].username+'客服</a></li>';
 				}			
 				$("#chatmove").html(str);
 			}				
@@ -47,10 +47,13 @@ function chat2(id) {
 						<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> 在线客服 </div>
 						<div class="submenu_con">
 							<div class="">
-								<div class="serve_class">精准教学</div>
+								<div style="font-size: 1em;border-bottom: 1px solid #ddd;">
+									<div class="text-left padding-side">服务时间：</div>
+									<div class="text-muted">9：00-18：00</div>
+								</div>
 								<ul class="" id="chatmove"></ul>
 							</div>
-							<div class="">
+							<!-- <div class="">
 								<div class="serve_class">升学规划</div>
 								<ul class="">
 									<li><a href="">客服1</a></li>
@@ -58,7 +61,7 @@ function chat2(id) {
 									<li><a href="">客服3</a></li>
 									<li><a href="">客服4</a></li>
 								</ul>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>
@@ -87,6 +90,27 @@ function chat2(id) {
 				</span>
 				<div class="">
 					<a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">电话咨询</a>
+				</div>
+				<div class="submenu">
+					<div class="">
+						<div class="submenu_tit bg-primary" style="width: 100%;"><span class="glyphicon glyphicon-headphones"></span>&nbsp;电话咨询 </div>
+						<div class="submenu_con">
+							<div class="">
+								<div class="serve_class">精准教学</div>
+								<ul class="">
+									<li><a href="">在线客服</a></li>
+									<li><a href="">在线客服</a></li>
+								</ul>
+							</div>
+							<div class="">
+								<div class="serve_class">升学规划</div>
+								<ul class="">
+									<li><a href="">在线客服</a></li>
+									<li><a href="">在线客服</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>				
 			</div>
 			
@@ -95,28 +119,24 @@ function chat2(id) {
 					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
 				</span>
 				<div class="">
-					<a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">QQ客服</a>
+					<a href="javascript:void(0)">QQ客服</a>
 				</div>
 				<div class="submenu">
-					<div>
-						<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> QQ客服 </div>
+					<div class="">
+						<div class="submenu_tit bg-primary" style="width: 100%;"><span class="glyphicon glyphicon-headphones"></span> QQ在线客服 </div>
 						<div class="submenu_con">
 							<div class="">
 								<div class="serve_class">精准教学</div>
 								<ul class="">
-									<li><a href="">客服1</a></li>
-									<li><a href="">客服2</a></li>
-									<li><a href="">客服3</a></li>
-									<li><a href="">客服4</a></li>
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
 								</ul>
 							</div>
 							<div class="">
 								<div class="serve_class">升学规划</div>
 								<ul class="">
-									<li><a href="">客服1</a></li>
-									<li><a href="">客服2</a></li>
-									<li><a href="">客服3</a></li>
-									<li><a href="">客服4</a></li>
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
 								</ul>
 							</div>
 						</div>
@@ -141,16 +161,16 @@ function chat2(id) {
 			function menuSwitch(obj) {
 				$(obj).hover(function(){
 					timer=setTimeout(function(){
-						$(obj).find(".submenu").show() 
+						$(obj).find(".submenu").show(); 
 					},100);
 				},function(){
 					clearTimeout(timer);
-					$(this).find(".submenu").hide();
+					 $(this).find(".submenu").hide(); 
 				});
 			}
 			
 			menuSwitch(".qq_server");
-			//menuSwitch(".tel_server");
+			menuSwitch(".tel_server");
 			menuSwitch(".online_server");
 			//menuSwitch(".vip_server");
 			menuSwitch(".course_server");
