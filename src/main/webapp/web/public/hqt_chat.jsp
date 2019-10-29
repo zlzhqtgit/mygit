@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/public/xgk_chat.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ajaxfileupload.js"></script> 
 <style type="text/css">
 	.com_form p { height: 28px; line-height: 28px; position: relative; margin-top: 10px; }
 	span.emotion { width: 42px; height: 20px; padding-left: 20px; cursor: pointer }
@@ -155,6 +156,7 @@ function selectImg(pic){
        info_bottom();
     };
     reader.readAsDataURL(pic.files[0]);
+    
 }
 
 //图片预览
