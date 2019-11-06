@@ -18,6 +18,7 @@
 					<nav id="navdh" class="">
 						<ul>
 							<li><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
+							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_guide_xuanke.jsp">学科探索</a></li>
 							<li><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
 							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
 							<li><a id="xgk4" name="dh" href="#">职业库</a></li>
