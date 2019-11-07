@@ -1135,6 +1135,28 @@ banner form fieldset input{
 	color: #fff;
 	display: inline-block;
 }
+.light{
+	width: 20px;
+	height: 46px;
+	position: absolute;
+	bottom: -6px;
+	left: -40%;
+	transform: rotate(15deg);
+	-webkit-transform: rotate(15deg);
+	-webkit-animation: lighting 2s linear infinite forwards;
+	-moz-animation: lighting 2s linear infinite forwards;
+	animation: lighting 2s linear infinite forwards;
+	background:rgba(255,255,255,.4);
+	z-index: 1;
+}
+@keyframes lighting {
+	40% {
+		left:-40%
+	}
+	100% {
+		left:120%
+	}
+}
 .choise>p>span{
 	display: inline-block;
 	width: 120px;

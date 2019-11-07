@@ -185,7 +185,10 @@
 						</table>
 						
 						<div class="open-btn">
-			                <a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
+							<a class="show_more btn btn-primary" onclick="showMore()" style="margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">
+								查看更多
+								<div class="light"></div>
+							</a>
 			            </div>
 			            <script>
 					        // 点击显示更多按钮
