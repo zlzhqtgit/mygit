@@ -1113,3 +1113,42 @@ banner form fieldset input{
 	border-top: 0;
 	padding: 2em 1em;
 }
+
+.analyse_report{
+	position: relative;
+	height: 680px;
+	margin: 0 auto;
+	overflow: hidden;/*设置文案容器高度，超出部分隐藏*/
+}
+.open-btn{
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	height: 300px;
+	background: linear-gradient(180deg,rgba(255,255,255,0),#fff);/*实现渐变效果，遮罩效果*/
+	}
+.open-btn .show_more{
+	position: absolute;
+	bottom: 44px;
+	left: 44%;
+	text-decoration: none;
+	color: #fff;
+	display: inline-block;
+}
+.choise>p>span{
+	display: inline-block;
+	width: 120px;
+	box-shadow: 0 2px 4px #999;
+}
+.btn-default.active{
+	background-color: #3b8bec;
+	color: white;
+}
+.btn-default:hover{
+	background-color: #3b8bec;
+	color: white;
+}
+ .btn-default.active:hover{
+	background-color: #3b8bec;
+	color: white;
+}
