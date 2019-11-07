@@ -14,6 +14,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/public/xgk_chat.css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ajaxfileupload.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 <style type="text/css">
 	.com_form p { height: 28px; line-height: 28px; position: relative; margin-top: 10px; }
 	span.emotion { width: 42px; height: 20px; padding-left: 20px; cursor: pointer }
@@ -26,25 +28,23 @@
 </style>
 </head>
 <body>
-	<div class="dialog margin_top">
+	<div class="dialog ">
 			<div class="chat_header clearfix bg-primary">
 				<div class="clearfix pull-left">
 					<span class="pull-left padding-side"><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="max-width: 36px;"/></span>
 					<span class="pull-left">						
 						<div class="">
-							<label style="color: red" id="kfname">客服96966</label>正在为您服务
+							欢迎使用好前途在线咨询平台
 						</div>
 						<div class="">
 							联系电话：0851-88546461
 						</div>
 					</span>
-				</div>
-				<!-- <a class="btn btn-default" href="">结束沟通</a> -->
+				</div>				
 			</div>
 			<div class="body clearfix">
 				<div class="body_left pull-left" style="width: 70%;">
-					<div class="chat_record" style="height: 350px;overflow: auto;">
-						<!-- <header class="header-title text-center margin_bot margin_top" id="title"style="background-color: #f9f9f9;padding: .4em;">标题</header> -->
+					<div class="chat_record" style="height: 350px;overflow: auto;">						
 						<section class="chat-box">
 							<div class="bubbleDiv" id="talkInfo">				
 							</div>
@@ -52,27 +52,38 @@
 					</div>
 					<div class="">
 						<div class="tool_list padding-side">
-							<span class="emotion"><img src="${pageContext.request.contextPath}/img/public/e.png" title="表情" style="max-width: 24px;"/></span>
-							<label id="chat-tuxiang" title="发送图片" for="inputImage" class="padding-side">
+							<span class="emotion"><img src="${pageContext.request.contextPath}/img/public/e.jpg" title="表情" style="max-width: 34px;"/></span>
+							<label id="chat-tuxiang" title="发送图片" for="inputImage" class="">
 	                            <input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png"
-	                                   name="file" id="inputImage" class="hidden">
-	                            <img src="${pageContext.request.contextPath}/img/public/pictures.png" title="图片" style="max-width: 24px;"/>
+	                                   name="inputImage" id="inputImage" class="hidden">
+	                            <img src="${pageContext.request.contextPath}/img/public/pictures.jpg" title="图片" style="max-width: 28px;"/>
 	                        </label>
 						</div>
-						<div class="padding-side">
+						<div class="">
 							<!-- <textarea id="chatContent" rows="4" class="chat-info" placeholder="想咨询他什么内容..."></textarea> -->
-							<div id="chatContent" name="chatContent" class="bg-info margin_top1 margin_bot1 chat-info" contenteditable="true" style=""></div>
+							<div id="chatContent" name="chatContent" class="bg-info  margin_bot1 chat-info" contenteditable="true" style=""></div>
 						</div>
 						<div class="text-right padding-side margin_bot1">
 							<a class="btn btn-primary sub_btn" onclick="subSend()" href="javascript:void(0);" id="subsend">发送 </a>
 						</div>
 					</div>
 				</div>
-				<div class="body_right pull-left margin_top" style="width:30%;">
-					<a href="">
-						<div class="text-center"><img src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></div>
-						<div class="text-center">游客15885545</div>
-					</a>
+				<div class="body_right pull-left " style="width:30%;">					
+            			<div class="nav">
+                			<div class="nav-tabs text-center" style=" padding: 0.8em;">客服信息</div>                		
+            			</div>
+            			<div class="tab-content test-1">
+                			<div class="tabs show" id="service-info">
+                    			<p class="text-center" style="padding: 0.8em;margin: 40px 0 30px 0;">
+                        			<img id="userimg" src="" alt="" style="width: 50%; border-radius: 50%;">
+                    			</p>                    			
+                    			<p class="" style="margin-left: 20%;color: #121312;"><span>名称：</span><span id="username" style="color: #106ce2;font-size: 16px;"></span></p>                  				
+                    			<p class="" style="margin-left: 20%;color: #121312;"><span>电话：</span><span id="custTel" style="color: #106ce2;font-size: 16px;">17784160219</span></p>
+                			</div>
+                			<div class="tabs" id="about-us" >
+                				<img  src="${pageContext.request.contextPath}/img/public/zxkf.jpg" style="width: 100%; margin-top: 71px;"/>
+                			</div>
+            			</div>       			 	
 				</div>
 			</div>
 		</div>
@@ -86,26 +97,7 @@ $(function(){
 		id : 'facebox', 
 		assign:'chatContent', 
 		path:'emotions/'	//表情存放的路径
-	});
-	
-	/* $(".sub_btn").click(function(){
-		var str = $("#chatContent").html();					
-//		var str1 = $("#chatContent").text();
-		if ( str=='') {
-			console.log("请输入您要发送的信息")
-		} else{
-			var emotionbox="<div class='margin_top1 dialog_con margin_bot bg-info'><span onclick='close_preImg(this)' style='display: none;'>&times;</span>"+str+"</div>";
-			$('.chat_record').append("<div class=\"padding-side margin_top clearfix text-right\"><label class=\"pull-left padding-side\" style=\"\"/><img src=\"${pageContext.request.contextPath}/img/xgk/user.png\" style=\"max-width: 32px; \"/></label> <span class=\"text-warning\">凤姐</span> <span class=\"text-muted\">2019-10-14 今天 14：40</span></div>"+emotionbox);
-			
-//			pasteItem();
-			
-            //发送后清空输入框
-            $("#chatContent").html('');
-            
-			//聊天框默认最底部
-			info_bottom();
-		}
-	}); */
+	});	
 });
 
 
@@ -150,22 +142,46 @@ function selectImg(pic){
         return;
     }
     
-    var reader = new FileReader();
+    /* var reader = new FileReader();
     reader.onload = function (evt) {
         var images = evt.target.result;
         var tag_img="<img class='chat_img' style='width: 100%;' src="+images +">"
-        chat("rightBubble", userImgSrc,tag_img);	
-        //$(".chat_record").append("<img class='chat_img' style='width: 100%;' src="+images +">");
-        /* $("#chatContent").append("<div class=\"chatmsg_imgbox\" ondblclick='preImg(this)'><span onclick='close_preImg(this)' style='display: none;'>&times;</span><img style='width: 100%;' src="+images +"/></div>"); */
-      /*  var block = '<div class="bubbleItem">' + '<div class="left-head">'
-		+ '<img src="'+ imgSrc +'" alt="doctor"/><span class="kf-name">'+kfname+'</span><span class="kf-time">' +time+ '</span></div>'
-		+ '<span class="bubble leftBubble">' + $textContent
-		+ '<span class="topLevel"></span></span>' + '</div>'; */
-		
+        chat("rightBubble", userImgSrc,tag_img);		
        //聊天框默认最底部
        info_bottom();
     };
-    reader.readAsDataURL(pic.files[0]);
+    reader.readAsDataURL(pic.files[0]); */
+    var formData = new FormData();	    
+    formData.append('inputImage', $('#inputImage')[0].files[0]);
+      $.ajax({
+          url: '../web/hqt_img.do',
+          type: 'POST',
+          cache: false,
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(obj) {
+	             if (obj.state == 0) {           
+	            	 layer.msg(obj.message,{icon:2,time:2000});	
+	            	 return false;
+	             }else{
+	            	var tag_img="<img class='chat_img' style='width: 100%;' src='${pageContext.request.contextPath}"+obj.message +"'>"
+	                // chat("rightBubble", userImgSrc,tag_img);
+	            	 var obj = {
+	     					say : user.id, //说话人的名称
+	     					message : tag_img, //聊天消息
+	     					type : 2
+	     				// 1 表示客服给游客发消息  2 表示游客给客服发消息
+	     				}			
+	     			ws.send(JSON.stringify(obj));
+	                //聊天框默认最底部
+	                info_bottom();
+	                personsFile.value='';
+	                return;
+	            	 //layer.msg(obj.message,{icon:1,time:1000});
+	           	}		            	   		             
+	         }
+      });    
     
 }
 
@@ -204,12 +220,12 @@ function close_preImg(obj) {
 	/* *************************************   进入该页面直接打开websocket通讯连接   **************************************/
  window.onload = function() {		
 		//显示当前用户名
-		$("#onlineName").html(tempName);
-		
-		$("#kfname").html(kfname);
-		//$("#title").html("欢迎使用在线咨询服务");
+		$("#onlineName").html(tempName);		
+		$("#kfname").html(kfname);	
+		$("#username").html(kfname);
+		$("#userimg").attr('src',adminImgSrc); 
 		//加载聊天信息
-		//chatRecord(user.id, 6);
+		chatRecord(user.id,"${chatId}");
 		target = "ws://localhost:8080/hqtzytb/ChatOnLine";
 		//判断当前浏览器是否支持websocket通讯
 		if ('WebSocket' in window) {

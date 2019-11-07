@@ -20,17 +20,17 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd"
 		default-lazy-init="true">  
-	<!-- 自动扫描，
+	 <!-- 自动扫描，
 	扫描以com.yichuan开头包中的所有有注解的类注入spring（IOC）,但是不扫描controller -->
 	<context:component-scan base-package="cn.hqtzytb">
 	   <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
+	</context:component-scan> 
 		<!--
 		 1.util:properties表示读取外部文件并实例化
 		2.id表示名称
 		3.location表示文件位置
 		 -->
-   <util:properties id="dbConf" location="classpath:db.properties"/>
+   <util:properties id="dbConf" location="classpath:config.properties"/>
   
    <!-- 配置数据库的连接池 -->
    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -39,15 +39,34 @@
    <property name="username" value="#{dbConf.username}"/>
    <property name="password" value="#{dbConf.password}"/>
    </bean>  
-   <util:properties id="photoConf" location="classpath:photo_config.properties"/>
-  
    <!-- 配置photo的连接池 -->
    <bean id="photoConfig" class="cn.hqtzytb.entity.PhotoConfig">
-   <property name="accessKeyId" value="#{photoConf.accessKeyId}"/>
-   <property name="accessKeySecret" value="#{photoConf.accessKeySecret}"/>
-   <property name="qm_name" value="#{photoConf.qm_name}"/>
-   <property name="qm_sms" value="#{photoConf.qm_sms}"/>  
-   </bean> 	
+   <property name="accessKeyId" value="#{dbConf.accessKeyId}"/>
+   <property name="accessKeySecret" value="#{dbConf.accessKeySecret}"/>
+   <property name="qm_name" value="#{dbConf.qm_name}"/>
+   <property name="qm_sms" value="#{dbConf.qm_sms}"/>  
+   </bean>   
+   <!-- 配置WXpay的连接池 -->
+   <bean id="wxpayConfig" class="cn.hqtzytb.entity.WxpayConfig">
+   <property name="appid" value="#{dbConf.appid}"/>
+   <property name="mch_id" value="#{dbConf.mch_id}"/>
+   <property name="notify_url" value="#{dbConf.wxnotify_url}"/>
+   <property name="trade_type" value="#{dbConf.trade_type}"/>
+   <property name="key" value="#{dbConf.key}"/>
+   <property name="wxpay_url" value="#{dbConf.wxpay_url}"/>
+   </bean>
+   <!-- 配置ZFBpay的连接池 -->
+   <bean id="zfBpayConfig" class="cn.hqtzytb.entity.ZFBpayConfig">
+   <property name="app_id" value="#{dbConf.app_id}"/>
+   <property name="merchant_private_key" value="#{dbConf.merchant_private_key}"/>
+   <property name="alipay_public_key" value="#{dbConf.alipay_public_key}"/>
+   <property name="notify_url" value="#{dbConf.zfbnotify_url}"/>
+   <property name="return_url" value="#{dbConf.zfbreturn_url}"/>
+   <property name="sign_type" value="#{dbConf.sign_type}"/>
+   <property name="charset" value="#{dbConf.charset}"/>
+   <property name="gatewayUrl" value="#{dbConf.gatewayUrl}"/>
+   <property name="log_path" value="#{dbConf.log_path}"/>
+   </bean>
    <!-- 持久层接口扫描 -->
    <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
    		<property name="basePackage" value="cn.hqtzytb.mapper"></property>

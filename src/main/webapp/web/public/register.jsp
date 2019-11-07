@@ -39,12 +39,7 @@
 						<li class="pull-left">注册账号</li>
 					</ul>
 				</div>				
-				<div class="status margin_bot">
-					<!-- <ul class="page_step step1 margin_bot margin_top">
-						<li><a id="class1" href="javascript:void(0)" class="active wow bounceInLeft" onclick="next_step(this)">个人用户</a></li>
-						<li class="margin_top"><a id="class2" href="javascript:void(0)" onclick="next_step(this)" class=" wow bounceInRight">我是咨询师</a></li>
-					</ul> -->
-					
+				<div class="status margin_bot">				
 					<div class="page_step step2 margin_top">						
 						<form class="" action="" method="post" id="reg_form">
 							<fieldset id="">
@@ -67,8 +62,8 @@
 									</div>									
 									<div class="">
 										<label for="verify_code">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
-										<input id="verify_code" type="text" placeholder="请填写验证码"/>
-										<a  class="btn btn-default" href="">获取手机验证码</a>
+										<input id="verify_code" type="text" placeholder="请填写验证码"/>									
+										<input class="btn btn-default" id="phonttime" type="button" value="获取手机验证码"/>
 									</div>
 									<div class="">
 										<label for="password">密&emsp;&emsp;码：</label>
@@ -135,6 +130,42 @@
 		<c:import url="../xgk/footer.jsp"></c:import>	
 	</body>
 <script type="text/javascript">
+var waitTime = 60;
+document.getElementById("phonttime").onclick = function() {
+	var data="phone="+$("#phone").val();
+	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+	if(!reg.test($("#phone").val())){	
+		layer.msg("请输入正确格式的手机号",{icon:2,time:1000});
+	}else{
+		$.ajax({
+			url: "../user/hqt_photoyzm.do",
+	        type: "POST", 
+	        data:data,
+	        dataType: "JSON", 
+	        success: function(obj) {
+	             if (obj.state == 0) {	            	 	            	
+	            	 layer.msg(obj.message,{icon:2,time:2000});	
+	            	 return;
+	             }
+	         }
+	    });
+		 time(this);
+	}    
+}
+function time(ele) {
+    if (waitTime == 0) {
+        ele.disabled=false;
+        ele.value = "重新发送";
+        waitTime = 60;// 恢复计时
+    } else {
+        ele.disabled=true;
+        ele.value = waitTime + "秒后重新发送";
+        waitTime--;
+        setTimeout(function() {
+            time(ele)// 关键处-定时循环调用
+        }, 1000)
+    }
+}
 	function next_step(e){
 			var step=$('.reg_process ul li');
 			step.removeClass('current');
@@ -151,7 +182,11 @@
 			}
 			$(e).parents('.page_step').next().removeClass('hide');
 	}
-	function register(e){		
+	function register(e){	
+		var photeyzm="${code}";
+		var phone="${phone}";	
+		alert(photeyzm);
+		if(photeyzm==$("#verify_code").val() && phone==$("#phone").val()){
 			var url = "../user/hqt_registeradd.do";
 			var data = $("#reg_form").serialize();	
 			$.ajax({
@@ -168,6 +203,11 @@
 					}				
 				}
 			}); 		
+		}else if(photeyzm != $("#verify_code").val() && phone==$("#phone").val()){
+			layer.msg("验证码输入错误",{icon:2,time:1000});
+		}else{
+			layer.msg("验证码和手机号不匹配",{icon:2,time:1000});
+		}		
 	}
 	
 </script>		
