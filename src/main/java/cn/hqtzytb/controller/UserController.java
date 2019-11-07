@@ -370,18 +370,26 @@ public class UserController {
 	{
 		ResponseResult<Void> rr;		
 		Photo.setNewcode();
-	    String code = Integer.toString(Photo.getNewcode());	       
+	    String code = Integer.toString(Photo.getNewcode());	  
+	    System.out.println(code);
 	        SendSmsResponse response;	       
 			try {
-				response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
-				if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
-					session.setAttribute("photoyzm",code); 
-					rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
-					logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
-				}else{
-					 rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
+				User user=userServer.queryUser(phone);
+				if(user!=null){
+					 rr =new ResponseResult<Void>(ResponseResult.ERR, "该手机号已经存在，请重新输入");
 					 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
-				}					       
+				}else{
+					response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
+					if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
+						session.setAttribute("code",code); 
+						session.setAttribute("phone",phone);
+						rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
+						logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+					}else{
+						 rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
+						 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+					}					       
+				}				
 			} catch (Exception e) {
 				logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
 				rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");			

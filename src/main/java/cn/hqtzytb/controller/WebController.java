@@ -1,11 +1,13 @@
 package cn.hqtzytb.controller;
 
 
+
 import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,6 +24,7 @@ import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.UserChat;
 import cn.hqtzytb.service.AdminServer;
 import net.sf.json.JSONObject;
+
 
 /**
  * @Title: WebController.java
@@ -53,15 +56,16 @@ public class WebController {
 		session.setAttribute("userJson", userJson);// 提供给前端页面使用
 		session.setAttribute("userChat", userChat);// 提供给后台服务websocket类使用(存放对象，避免过多的json转换)
 		map.addAttribute("chatName", adminlist.get(0).getUsername());
+		map.addAttribute("chatId", adminlist.get(0).getId());
 		return "web/public/hqt_chat";
 	}
 
 	@RequestMapping(value = "/hqt_img.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handlexyghReg(HttpSession session,HttpServletRequest request,@RequestParam(value="cardPic",required=false)MultipartFile file)
+	public ResponseResult<Void> handlexyghReg(HttpSession session,HttpServletRequest request,@RequestParam(value="inputImage",required=false)MultipartFile file)
 	{
 		ResponseResult<Void> rr;		
-        try{
+        try{        	
         	String classpath = this.getClass().getResource("/").getPath(); 				
     		String path = classpath.replaceAll("WEB-INF/classes/", "")+"img/chat";
     		File file5 = new File(path);
@@ -72,7 +76,7 @@ public class WebController {
             // 获取图片后缀
             String extName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));		            					
     		file.transferTo(new File(path+"/"+now.getTime()+extName));       
-            rr =new ResponseResult<Void>(ResponseResult.STATE_OK,path+"/"+now.getTime()+extName);         
+            rr =new ResponseResult<Void>(ResponseResult.STATE_OK,"/img/chat/"+now.getTime()+extName);         
             logger.info("用户名："+session.getAttribute("username") +" 模块名：上传图片信息 操作：上传  状态：OK!");
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：上传图片信息  错误信息: "+e);
@@ -80,7 +84,10 @@ public class WebController {
 		}
 		return rr;
 	}
-
+	@RequestMapping("/weixzf.do")	
+	public String showXgkIndex(HttpSession session,HttpServletResponse response,HttpServletRequest request){			
+			return "web/public/weixzf";						
+	}
 	/**
 	 * 生成唯一序列码
 	 * 
