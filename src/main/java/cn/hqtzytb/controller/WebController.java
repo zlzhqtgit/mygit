@@ -43,7 +43,18 @@ public class WebController {
 	@Autowired
 	private AdminServer adminServer;
 
-	// 用户登录
+	/**
+	* @Title: login
+	* @Description: (前端在线客户页面)
+	* @param @param map
+	* @param @param session
+	* @param @param id
+	* @param @param request
+	* @param @param userId
+	* @param @return    
+	* @return String    
+	* @throws
+	 */
 	@RequestMapping(value = "/hqt_chat.do")
 	public String login(ModelMap map, HttpSession session, Integer id, HttpServletRequest request, Integer userId) {
 		List<Admin> adminlist = adminServer.getuserByid(id);
@@ -59,7 +70,16 @@ public class WebController {
 		map.addAttribute("chatId", adminlist.get(0).getId());
 		return "web/public/hqt_chat";
 	}
-
+	/**
+	* @Title: handlexyghReg
+	* @Description: (在线聊天图片传输)
+	* @param @param session
+	* @param @param request
+	* @param @param file
+	* @param @return    
+	* @return ResponseResult<Void>    
+	* @throws
+	 */
 	@RequestMapping(value = "/hqt_img.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseResult<Void> handlexyghReg(HttpSession session,HttpServletRequest request,@RequestParam(value="inputImage",required=false)MultipartFile file)
@@ -84,24 +104,39 @@ public class WebController {
 		}
 		return rr;
 	}
+	/**
+	* @Title: showXgkIndex
+	* @Description: (微信支付测试页面)
+	* @param @param session
+	* @param @param response
+	* @param @param request
+	* @param @return    
+	* @return String    
+	* @throws
+	 */
 	@RequestMapping("/weixzf.do")	
 	public String showXgkIndex(HttpSession session,HttpServletResponse response,HttpServletRequest request){			
 			return "web/public/weixzf";						
 	}
 	/**
-	 * 生成唯一序列码
-	 * 
-	 * @return String
+	* @Title: getUUID
+	* @Description: ( 随机生成序列号 )
+	* @param @return    
+	* @return String    
+	* @throws
 	 */
+	 
 	public String getUUID() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 
-	/**
-	 * 生成游客名称
-	 * 
-	 * @return String
-	 */
+	/**	
+	* @Title: getTempName
+	* @Description: (生成游客名称)
+	* @param @return    
+	* @return String    
+	* @throws
+	*/	
 	public String getTempName() {
 		String tempName = "游客" + (int) ((Math.random() * 9 + 1) * 100000);
 		return tempName;

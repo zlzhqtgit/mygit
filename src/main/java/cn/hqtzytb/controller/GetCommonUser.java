@@ -14,20 +14,21 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.util.DigestUtils;
 
 /**
- * 方法类-用于通用方法的调用
- * 
- * @author zhoulingzhang
- *
+* @Title: GetCommonUser.java
+* @Package cn.hqtzytb.controller
+* @Description:(用一句话描述该文件做什么)
+* @author: ZhouLingZhang
+* @date 2019年11月11日
+* @Copyright:好前途教育
+* @version V1.0
  */
 public class GetCommonUser {
 	private static final Logger logger = LogManager.getLogger(GetCommonUser.class.getName());
 
 	/**
-	 * MD5加密方法
-	 * 
+	 * MD5加密方法 
 	 * @param password密码
-	 * @param uuid
-	 *            密码加密处理的uuid
+	 * @param uuid 密码加密处理的uuid
 	 * @return MD5 返回加密好的字符串
 	 */
 	public String getEncrpytedPassword(String password, String uuid) {
@@ -75,7 +76,12 @@ public class GetCommonUser {
 	}
 
 	/**
-	 * 响应登录页面
+	* @Title: getlogin
+	* @Description: (判断登录练)
+	* @param @param response
+	* @param @param request    
+	* @return void    
+	* @throws
 	 */
 	public static void getlogin(HttpServletResponse response, HttpServletRequest request) {
 		try {
@@ -89,6 +95,5 @@ public class GetCommonUser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 }

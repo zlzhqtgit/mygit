@@ -10,7 +10,15 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 
-
+/**
+* @Title: Photo.java
+* @Package cn.hqtzytb.controller
+* @Description:(短信验证码)
+* @author: ZhouLingZhang
+* @date 2019年11月11日
+* @Copyright:好前途教育
+* @version V1.0
+ */
 public class Photo {	
 	/**
 	 * 阿里云短信服务：

@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+.sele_model {border: 1px solid #999;padding: .4em 1em;margin-left: 1em;}
+table.score_in {border: 1px solid #fff;}
+table.score_in td {	border: 1px solid #72aef6;}
+table.score_in th {	position: relative;	text-align: center;}
+table.score_in>thead {background-color: #72aef6;color: #fff;}
+table.score_in>thead>tr>th[class=first] {padding: 0;}
+table.score_in>tbody>tr>td:first-child {background-color: #72aef6;color: #fff;border: 1px solid #fff;}
+table.score_in th>div {	font-size: 14px;position: absolute;}
+.x_axis {top: 2em;right: 1em;}
+.y_axis {bottom: 1em;left: 4em;}
+table.score_in input {width: 100%;border: 0;text-align: center;color: #999;}
+table.score_in td {	text-align: center;}
+.score_ts {	margin-top: 15px;text-align: center;}
+.score_ts p {display: inline-flex;font-size: 12px;}
+.score_ts p label {	background: #19a1e4;width: 80px;height: 20px;margin-top: -3px;margin-right: 15px;}
+.score_ts_p {font-size: 14px;margin-left: 35px;}

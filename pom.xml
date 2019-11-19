@@ -7,8 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>hqtzytb Maven Webapp</name>
   <url>http://maven.apache.org</url>
-  <dependencies>
-    
+  <dependencies>    
 		<!-- spring 的依赖jar包 -->
 		<dependency>
 			<groupId>org.springframework</groupId>

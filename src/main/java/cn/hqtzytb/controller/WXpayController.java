@@ -27,7 +27,15 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import cn.hqtzytb.entity.WxpayConfig;
 
-
+/**
+* @Title: WXpayController.java
+* @Package cn.hqtzytb.controller
+* @Description:(微信支付控制层)
+* @author: ZhouLingZhang
+* @date 2019年11月11日
+* @Copyright:好前途教育
+* @version V1.0
+ */
 @Controller
 @RequestMapping("/api")
 public class WXpayController

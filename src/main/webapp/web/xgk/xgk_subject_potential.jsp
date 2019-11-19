@@ -30,7 +30,7 @@
 				<li>第一部分一共60道测题，请认真阅读题目，并在5个选项中，选择最符合你自身特点的一项。答案没有对错、好坏之分，一般完成事件在20分钟以内。</li>
 				<li>第二部分一共30道题，请认真阅读题目，并选出正确答案。</li>
 			</ul>
-			<p class="text-right padding-side2 margin_bot"><a class="btn btn-primary" href="${pageContext.request.contextPath}/web/xgk/xgk_assess_ability.jsp">开始答题</a></p>
+			<p class="text-right padding-side2 margin_bot"><a class="btn btn-primary" href="${pageContext.request.contextPath}/web/xgk/xgk_subject_assess.jsp">开始答题</a></p>
 		</div>
 	</section>
 </main>

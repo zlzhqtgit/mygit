@@ -21,11 +21,19 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Controller;
 
+/**
+* @Title: HttpClientUtils.java
+* @Package cn.hqtzytb.controller
+* @Description:(转发Http Post请求类)
+* @author: ZhouLingZhang
+* @date 2019年11月11日
+* @Copyright:好前途教育
+* @version V1.0
+ */
 @Controller
 public class HttpClientUtils {
 
 	public static String doGet(String url, Map<String, String> param) {
-
 		// 创建Httpclient对象
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 
