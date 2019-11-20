@@ -31,8 +31,8 @@
 				</ul>
 			</nav>
 		</header>
-		
-		<banner class="">		
+
+		<banner class="">
 			 <!-- Swiper -->
 			<div class="swiper-container">				
 				<form action="" method="post" style="background-color: #ffffff;" onsubmit="return false">
@@ -185,22 +185,22 @@
 			 </div>
 		</section>
 		<script type="text/javascript">
-			new WOW().init(); 
-			var wow = new WOW({  
-			    boxClass: 'wow', //需要执行动画的class 
+			new WOW().init();
+			var wow = new WOW({
+			    boxClass: 'wow', //需要执行动画的class
 			    animateClass: 'animated',  //animate.css的class
 			    offset: 0,  //距可视区域多少开始执行动画
 			    mobile: true,  //是否在移动设备上执行动画
 			    live: true  //一部加载的内容是否有效
-			}); 			
+			});
 			$('.counter').countUp();
-		</script>		
+		</script>
 		<c:import url="footer.jsp"></c:import>	
 	</body>
 <script type="text/javascript">
 function login(){
 	var nowUrl="${nowUrl}";
-	if(nowUrl==null){
+	if(nowUrl==null||nowUrl==""){
 		nowUrl="../cp/xgk_index.do";
 	}
 	var tip1=$('#tip1').text();
