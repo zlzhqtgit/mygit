@@ -408,9 +408,9 @@
 								<th>地理</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="cptbody">
 							<tr>
-								<td>能力</td>
+								<td >能力</td>
 								<td>Data</td>
 								<td>Data</td>
 								<td>Data</td>
@@ -439,8 +439,9 @@
 						</tbody>
 					</table>
 					<p class="text-right">
-						<a class="btn btn-primary fontwei"
-							href="${pageContext.request.contextPath}/web/xgk/xgk_xk_analyse_rpt.jsp">查看潜能报告</a>
+<%--						<a class="btn btn-primary fontwei"--%>
+<%--							href="${pageContext.request.contextPath}/web/xgk/xgk_xk_analyse_rpt.jsp">查看潜能报告</a>--%>
+						<a class="btn btn-primary fontwei"  href="../sub/xgk_potential_report.do">查看潜能报告</a>
 					</p>
 				</div>
 
