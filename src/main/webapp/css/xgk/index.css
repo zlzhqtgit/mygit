@@ -112,7 +112,7 @@ nav>ul>li>ul>li{text-align: center;}
 nav>ul>li>ul>li>a{padding: 6px 8px;width: 96px;display: block;text-decoration: none;}
 nav>ul>li>ul>li>a:hover{text-decoration: none;}
 .active{
-	/* padding: 6px 20px; */
+	padding: 6px 20px;
 	background-color: #3b8bec;
 	color: white;
 	border-radius: 1em;

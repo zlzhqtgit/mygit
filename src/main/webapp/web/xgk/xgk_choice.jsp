@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />	
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 </head>
 
@@ -42,7 +42,7 @@
 				</section>
 			</div>
 		</main>
-	<!-- 页面底部-->
+	<!-- 右侧边栏-->
 	<c:import url="../public/side_right.jsp"></c:import>
 	<!-- 页面底部-->
 	<c:import url="footer.jsp"></c:import>	
