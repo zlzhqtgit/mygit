@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,8 +11,9 @@
 	<meta name="keywords" content="" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>		
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript"	src="${pageContext.request.contextPath}/js/web/xgk/xgk_analyse.js"></script>
 </head>
 <body>
 <!-- 页面顶部-->
@@ -27,7 +27,7 @@
 			<div class="padding-side2 margin_top margin_bot">
 				<div class="report_box padding-side2">
 					<p class="">通过学科潜能测评结果对比分析，发现6门选考科目的适合度排序为：</p>
-					<p class="margin_top margin_bot"><a class="btn btn-primary" href="">物理</a><a class="btn btn-primary" href="">化学</a><a class="btn btn-primary" href="">生物</a></p>
+					<p class="margin_top margin_bot"><a class="btn btn-primary" href="">${analysis.sortOne}</a><a class="btn btn-primary" href="">${analysis.sortTwo}</a><a class="btn btn-primary" href="">${analysis.sortThree}</a></p>
 					<p class="">前三门科目是你的优势学科，你学习起来更感兴趣,也更容易学好，并且你对于学号这些科目更有信心；而后三门科目是你的非优势学科，在确定高考选考科目时，应当选择自己擅长的，回避自己的若是的科目。当然，你业可以根据上述各学科的发展建议提升自己想要选考科目的兴趣、能力、自信程度，并结合“学科推荐”系统中的其它维度统合分析，帮您做出最为科学、合理的决策。</p>
 					<div class="analyse_report margin_top">
 						<div id="xk_analyse_report1" class="" style="width: 600px;height:400px; margin: 3em auto;"></div>
@@ -90,7 +90,7 @@
 						                                    }
 						                                }
 						                            },
-						                            data:[50, 40, 65]
+						                            data:[65, 55, 50]
 						                        },
 						                        {
 						                            name:'平均得分',
@@ -104,6 +104,15 @@
 						                        }
 						                    ]
 						            };
+									var name="${analysis}";
+									alert(option1.xAxis[0].data[0]);
+									alert(name);
+									<%--option1.xAxis[0].data[0] = ${analysis.sortOne};--%>
+									<%--option1.xAxis[0].data[1] = ${analysis.sortTwo};--%>
+									<%--option1.xAxis[0].data[2] = ${analysis.sortThree};--%>
+									<%--option1.series[0].data[0] = ${analysis.sortOneScore};--%>
+									<%--option1.series[0].data[1] = ${analysis.sortTwoScore};--%>
+									<%--option1.series[0].data[2] = ${analysis.sortThreeScore};--%>
 									var myChart1 = echarts.init(document.getElementById('xk_analyse_report1'));
 									myChart1.setOption(option1);
 								</script>
@@ -186,10 +195,7 @@
 						</table>
 						
 						<div class="open-btn">
-							<a class="show_more btn btn-primary" onclick="showMore()" style="margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">
-								查看更多
-								<div class="light"></div>
-							</a>
+			                <a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
 			            </div>
 			            <script>
 					        // 点击显示更多按钮
@@ -225,5 +231,4 @@
 var id="${id}";
 $( "#xgk"+id).addClass( "active" );
 </script>
-
 </html>
