@@ -31,7 +31,7 @@
 										<p class="tindent">已经有确定的学科选择，想进一步了解专业、职业与学科之间的匹配程度。</p>
 									</div>
 								</a>
-								<a href="javascript:avoid(0)" onclick="usercp()" class="">
+								<a href="javascript:void(0)" onclick="usercp()" class="">
 									<div class="select_r margin_bot">
 										<h2 class="fontwei text-center">选科指导</h2>
 										<p class="tindent">没有确定的学科选择，想通过测评分析推测出适合的学科、专业和职业。</p>

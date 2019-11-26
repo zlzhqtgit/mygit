@@ -1,58 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-	<mapper namespace="cn.hqtzytb.mapper.SpecialtyMapper">	
+	<mapper namespace="cn.hqtzytb.mapper.SpecialtyMapper">
+	<resultMap id="BaseResultMap" type="cn.hqtzytb.entity.Specialty" >
+		<id column="id" property="id" />
+		<result column="specialty_id" property="specialtyId" />
+		<result column="specialty_name" property="specialtyName" />
+		<result column="specialty_intro" property="specialtyIntro" />
+		<result column="specialty_major_name" property="specialtyMajorName" />
+		<result column="specialty_class_name" property="specialtyClassName" />
+		<result column="specialty_divided" property="specialtyDivided" />
+		<result column="specialty_disciplines" property="specialtyDisciplines" />
+		<result column="specialty_education" property="specialtyEducation" />
+		<result column="study_duration" property="studyDuration" />
+		<result column="bachelor_degree" property="bachelorDegree" />
+		<result column="male_female_ratio" property="maleFemaleRatio" />
+		<result column="specialty_summary" property="specialtySummary" />
+		<result column="train_requirement" property="trainRequirement" />
+		<result column="subject_requirement" property="subjectRequirement" />
+		<result column="knowledge_ability" property="knowledgeAbility" />
+		<result column="postgraduate_direction" property="postgraduateDirection" />
+		<result column="employment_career_direction" property="employmentCareerDirection" />
+		<result column="employment_industry_distribution" property="employmentIndustryDistribution" />
+		<result column="employment_area_distribution" property="employmentAreaDistribution" />
+		<result column="major_courses" property="majorCourses" />
+		<result column="specialty_objective" property="specialtyObjective" />
+		<result column="specialty_employment" property="specialtyEmployment" />
+		<result column="specialty_requirement" property="specialtyRequirement" />
+		<result column="physics_performance" property="physicsPerformance" />
+		<result column="chemistry_performance" property="chemistryPerformance" />
+		<result column="biology_performance" property="biologyPerformance" />
+		<result column="politic_performance" property="politicPerformance" />
+		<result column="history_performance" property="historyPerformance" />
+		<result column="geography_performance" property="geographyPerformance" />
+		<result column="chinese_performance" property="chinesePerformance" />
+		<result column="math_performance" property="mathPerformance" />
+		<result column="foreign_performance" property="foreignPerformance" />
+	</resultMap>
 		<!--查询测评结果对应相关信息  -->
-		<select id="select" resultType="cn.hqtzytb.entity.Specialty">
-			select  
-					id,specialty_id as specialtyId,
-					specialty_name as specialtyName,
-					specialty_intro as specialtyIntro,
-					specialty_major_name as specialtyMajor_name,
-					specialty_class_name as specialtyClassName,
-					specialty_divided as specialtyDivided,
-					specialty_disciplines as specialtyDisciplines,
-					major_courses as majorCourses,
-					specialty_objective as specialtyObjective,
-					specialty_employment as specialtyEmployment,
-					specialty_requirement as specialtyRequirement,
-					physics_performance as physicsPerformance,
-					chemistry_performance as chemistryPerformance,
-					biology_performance as biologyPerformance,
-					politic_performance as politicPerformance,
-					history_performance as historyPerformance,
-					geography_performance as geographyPerformance,
-					chinese_performance as chinesePerformance,
-					math_performance as mathPerformance,
-					foreign_performance as foreignPerformance
-			from specialty b 
-					LEFT JOIN  personality_specialty e  on b.specialty_id=e.specialtyt_id  
-				<if test="where != null">where ${where}</if>
-		 		<if test="orderBy != null">order by  ${orderBy}</if> 
-		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		<select id="select" resultMap="BaseResultMap">
+			select
+				b.id,
+				b.specialty_id,
+				b.specialty_name,
+				b.specialty_intro,
+				b.specialty_major_name,
+				b.specialty_class_name,
+				b.specialty_divided,
+				b.specialty_disciplines,
+				b.specialty_education,
+				b.study_duration,
+				b.bachelor_degree,
+				b.male_female_ratio,
+				b.specialty_summary,
+				b.train_requirement,
+				b.subject_requirement,
+				b.knowledge_ability,
+				b.postgraduate_direction,
+				b.employment_career_direction,
+				b.employment_industry_distribution,
+				b.employment_area_distribution,
+				b.major_courses,
+				b.specialty_objective,
+				b.specialty_employment,
+				b.specialty_requirement,
+				b.physics_performance,
+				b.chemistry_performance,
+				b.biology_performance,
+				b.politic_performance,
+				b.history_performance,
+				b.geography_performance,
+				b.chinese_performance,
+				b.math_performance,
+				b.foreign_performance
+			FROM specialty b
+			LEFT JOIN  personality_specialty e  on b.specialty_id=e.specialtyt_id
+			<if test="where != null">where ${where}</if>
+			<if test="orderBy != null">order by  ${orderBy}</if>
+			<if test="offset != null">limit  ${offset},${countPerPage}</if>
 		</select>	
-		<select id="selectvoction" resultType="cn.hqtzytb.entity.Specialty">
-			select  
-					id,specialty_id as specialtyId,
-					specialty_name as specialtyName,
-					specialty_intro as specialtyIntro,
-					specialty_major_name as specialtyMajor_name,
-					specialty_class_name as specialtyClassName,
-					specialty_divided as specialtyDivided,
-					specialty_disciplines as specialtyDisciplines,
-					major_courses as majorCourses,
-					specialty_objective as specialtyObjective,
-					specialty_employment as specialtyEmployment,
-					specialty_requirement as specialtyRequirement,
-					physics_performance as physicsPerformance,
-					chemistry_performance as chemistryPerformance,
-					biology_performance as biologyPerformance,
-					politic_performance as politicPerformance,
-					history_performance as historyPerformance,
-					geography_performance as geographyPerformance,
-					chinese_performance as chinesePerformance,
-					math_performance as mathPerformance,
-					foreign_performance as foreignPerformance
+		<select id="selectvoction" resultMap="BaseResultMap">
+			select
+				b.id,
+				b.specialty_id,
+				b.specialty_name,
+				b.specialty_intro,
+				b.specialty_major_name,
+				b.specialty_class_name,
+				b.specialty_divided,
+				b.specialty_disciplines,
+				b.specialty_education,
+				b.study_duration,
+				b.bachelor_degree,
+				b.male_female_ratio,
+				b.specialty_summary,
+				b.train_requirement,
+				b.subject_requirement,
+				b.knowledge_ability,
+				b.postgraduate_direction,
+				b.employment_career_direction,
+				b.employment_industry_distribution,
+				b.employment_area_distribution,
+				b.major_courses,
+				b.specialty_objective,
+				b.specialty_employment,
+				b.specialty_requirement,
+				b.physics_performance,
+				b.chemistry_performance,
+				b.biology_performance,
+				b.politic_performance,
+				b.history_performance,
+				b.geography_performance,
+				b.chinese_performance,
+				b.math_performance,
+				b.foreign_performance
 			from specialty b 
 					LEFT JOIN  vocation_specility e  on b.specialty_id=e.specialtyt_id  
 				<if test="where != null">where ${where}</if>
@@ -90,6 +151,8 @@
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>
+
+
 	</mapper>
 	
 	

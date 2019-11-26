@@ -14,21 +14,15 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 	<style type="text/css">
-		th{position: relative;text-align: center;}
-		.table > thead > tr > th[class=first]{ padding: 0; }
-		th>div{font-size: 14px;position: absolute;}
-		.x_axis{top: 1em;right: 1em;}
-		.y_axis{bottom: 1em;left: 1em;}
-		table input{
-			width: 100%;
-			border: 0;
-			text-align: center;
-		}
-		td{text-align: center;}
-		tr td:first-of-type{
-			color: #fff;
-			background-color: #3b8bec;
-		}
+		table.score_in{border: 1px solid #fff;}
+			table.score_in td{border: 1px solid #72aef6;text-align: center;}
+			table.score_in th{position: relative;text-align: center;}
+			table.score_in > thead{background-color: #72aef6;color: #fff;}
+			table.score_in > thead > tr > th[class=first]{ padding: 0;}
+			table.score_in >tbody >tr>td:first-child{background-color: #3b8bec;color: #fff;border: 1px solid #fff;}
+			table.score_in th>div{font-size: 14px;position: absolute;}
+			.x_axis{top: 2em;right: 1em;}
+			.y_axis{bottom: 1em;left: 4em;}
 	</style>		
 </head>
 <body>
@@ -44,6 +38,7 @@
 					<div class="score_analyse">
 						<div id="major" style="width: 800px;height:600px; margin: 0 auto;"></div>
 						<script type="text/javascript">
+							var datas=[{value:335, name:'直接访问'},{value:310, name:'邮件营销'},{value:234, name:'联盟广告'},{value:135, name:'视频广告'},{value:1548, name:'搜索引擎'}];
 							var option = {
 								title:{
 									show:true,
@@ -90,27 +85,22 @@
 							                    show: true
 							                }
 							            },
-							            data:[
-							                {value:335, name:'直接访问'},
-							                {value:310, name:'邮件营销'},
-							                {value:234, name:'联盟广告'},
-							                {value:135, name:'视频广告'},
-							                {value:1548, name:'搜索引擎'}
-							            ]
+							            data:datas
 							        }
 							    ]
 							};
+							
 							var myChart = echarts.init(document.getElementById('major'));
 							myChart.setOption(option);
 						</script>
 					</div>
 					<div class="padding-side2">
 						<h3 class="fontwei margin_top margin_bot1">潜能分析</h3>
-						<table class="margin_bot" border="" cellspacing="" cellpadding="" style="margin-left:auto;margin-right: auto;">
+						<table class="score_in margin_bot" border="" cellspacing="" cellpadding="" style="margin-left:auto;margin-right: auto;">
 							<thead>
 								<tr style="background-color: #3b8bec;color: white;">
 									<th class="first" style="padding: 0;">
-										<canvas id="myCanvas" style="width: 100%;height: 100%;">您的浏览器不支持 HTML5 canvas 标签。</canvas>
+										<canvas id="myCanvas" style="width: 100%;height: 100%;display: block;">您的浏览器不支持 HTML5 canvas 标签。</canvas>
 										<script type="text/javascript">
 											//绘制表格斜线头
 											var c=document.getElementById("myCanvas");
@@ -147,6 +137,7 @@
 					<div class="score_analyse">
 						<div id="major1" style="width: 800px;height:600px; margin: 0 auto;"></div>
 						<script type="text/javascript">
+						var datas1=[{value:10, name:'直接访问'},{value:5, name:'邮件营销'},{value:20, name:'联盟广告'},{value:40, name:'视频广告'},{value:30, name:'搜索引擎'}]
 							var option = {
 								title:{
 									show:true,
@@ -193,13 +184,7 @@
 							                    show: true
 							                }
 							            },
-							            data:[
-							                {value:10, name:'直接访问'},
-							                {value:5, name:'邮件营销'},
-							                {value:20, name:'联盟广告'},
-							                {value:40, name:'视频广告'},
-							                {value:30, name:'搜索引擎'}
-							            ]
+							            data:datas1
 							        }
 							    ]
 							};

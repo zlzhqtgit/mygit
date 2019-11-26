@@ -25,4 +25,10 @@ public interface UserFeatureMapper {
 			@Param("offset")Integer offset,
 			@Param("countPerPage")Integer countPerPage);
 
+	/**
+	 * 查看学生学科潜能分析
+	 * @param uid
+	 * @return
+	 */
+	UserFeature selectPotentialAnalyseByUid(@Param("uid") Integer uid);
 }
