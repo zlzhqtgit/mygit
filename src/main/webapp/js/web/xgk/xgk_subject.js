@@ -239,6 +239,7 @@
 	}
 	//文本框触发事件，限制输入的值不能大于本次输入的成绩的满分
 	function fxshuj(e) {
+		
 		var uid = "${uid}";
 		/* if(uid==""){
 			onlogin();
@@ -252,7 +253,14 @@
 			});
 			$(e).val('');
 			$(e).focus();
-		} else {
+		}else if(e.value=="0"){
+			layer.msg("不能输入0开头", {
+				icon : 2,
+				time : 2500
+			});
+			$(e).val('');
+			$(e).focus();			
+		}else{
 			avi(e.name);
 		}							
 	}
