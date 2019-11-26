@@ -28,6 +28,16 @@ import cn.hqtzytb.exception.MyRuntimeException;
 public class MainController {
 	
 	private  static final  Logger logger = LogManager.getLogger(AdminController.class.getName());
+	/**
+	* @Title: showIndexno
+	* @Description: (后台主页面)
+	* @param @param session
+	* @param @param response
+	* @param @param request
+	* @param @return    
+	* @return String    
+	* @throws
+	 */
 	@RequestMapping("/admin.do")	
 	public String showIndexno(HttpSession session,HttpServletResponse response,HttpServletRequest request){	
 		if(session.getAttribute("adminname")==null){
@@ -40,6 +50,16 @@ public class MainController {
 		}	
 						
 	}
+	/**
+	* @Title: showXgkIndex
+	* @Description: (后台新高考主模块下的首页)
+	* @param @param session
+	* @param @param response
+	* @param @param request
+	* @param @return    
+	* @return String    
+	* @throws
+	 */
 	@RequestMapping("/xgk_index.do")	
 	public String showXgkIndex(HttpSession session,HttpServletResponse response,HttpServletRequest request){
 		if(session.getAttribute("username")==null){
@@ -52,6 +72,16 @@ public class MainController {
 		}
 							
 	}
+	/**
+	* @Title: showXgkIndex
+	* @Description: (后台新高考主模块下的主页)
+	* @param @param session
+	* @param @param response
+	* @param @param request
+	* @param @return    
+	* @return String    
+	* @throws
+	 */
 	@RequestMapping("/xgk_main.do")	
 	public String showXgkmain(HttpSession session,HttpServletResponse response,HttpServletRequest request){		
 		if(session.getAttribute("username")==null){
@@ -89,7 +119,7 @@ public class MainController {
 	/**
 	 * @throws MyRuntimeException 
 	* @Title: showHqtadmin
-	* @Description: (响应用户管理模块)
+	* @Description: (响应用户管理模块下的主页)
 	* @param @param map
 	* @param @param session
 	* @param @param request

@@ -15,10 +15,13 @@ import cn.hqtzytb.service.MessageService;
 
 
 /**
- *
- * @Author gz
- * @CreateDate 2018年1月12日 下午4:11:19
- * @Description
+* @Title: MessageController.java
+* @Package cn.hqtzytb.controller
+* @Description:(在线聊天系统消息记录)
+* @author: ZhouLingZhang
+* @date 2019年11月11日
+* @Copyright:好前途教育
+* @version V1.0
  */
 @Controller
 @RequestMapping(value = "/Message")

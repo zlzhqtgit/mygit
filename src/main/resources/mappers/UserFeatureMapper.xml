@@ -31,7 +31,23 @@
 				<if test="where != null">where ${where}</if>
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
-		</select>		
+		</select>
+
+		<!--查看学生学科潜能分析-->
+		<select id="selectPotentialAnalyseByUid" resultType="cn.hqtzytb.entity.UserFeature">
+				SELECT
+					feature_id AS featureId,
+					uid,
+					evaluation_type AS evaluationType,
+					evaluation_name AS evaluationName,
+					evaluation_fraction AS evaluationFraction,
+					evaluation_time  AS evaluationTime
+				FROM
+					user_feature
+				WHERE
+					uid = #{uid}
+					AND evaluation_name = 'QNFX'
+			</select>
 	</mapper>
 	
 	

@@ -6,10 +6,13 @@ import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpointConfig;
 
 /**
- * NAME   :  WebChat/com.amayadream.webchat.websocket
- * Author :  Amayadream
- * Date   :  2016.01.12 17:10
- * TODO   :  SpringConfigurator.class
+* @Title: HttpSessionConfigurator.java
+* @Package com.hqtzytb.websocket
+* @Description:WebChat/com.amayadream.webchat.websocket
+* @author: ZhouLingZhang
+* @date 2019年11月11日
+* @Copyright:好前途教育
+* @version V1.0
  */
 public class HttpSessionConfigurator extends ServerEndpointConfig.Configurator  {
 	

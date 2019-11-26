@@ -15,7 +15,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery_table/jquery.dataTables.min.js"></script> 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script> 
-
 </head>
 
 <body>

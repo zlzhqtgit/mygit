@@ -82,12 +82,23 @@
 		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
 			<input class="btn btn-primary radius" type="button" onclick="addUser()" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 		</div>
-	</div>
-	
+	</div>	
 </article>
 
 </body>
 <script type="text/javascript">
+function sdfsd(){
+	layer.open({
+		type: 1,
+		area: ['200px', '200px'],
+		fix: false, //不固定
+		maxmin: true,
+		shade:0.4,
+		title: "567",
+		content: $("#ddd"),
+		scrollbar: false
+	});
+}
 function addUser(){
 	var regBox = {
 	        regEmail : /^([A-Z0-9a-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/,//邮箱

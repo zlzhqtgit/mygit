@@ -24,13 +24,8 @@
 			<div class="padding-side2 margin_top">
 				<p class="tm" style="font-family: '楷体';">1、老师在课堂上讲述的地理知识，我基本全部能理解。</p>
 			<input id="num" type="hidden" value="0" />
-			<div class="choise margin_top1"  style="height: 210px;">
-				<!--<p class=""><span class="btn btn-default">符合</span><input type="hidden" name="" id="" value="" /></p>
-				<p class=""><span class="btn btn-default">大致符合</span></p>
-				<p class=""><span class="btn btn-default">一般</span></p>
-				<p class=""><span class="btn btn-default">不太符合</span></p>
-				<p class=""><span class="btn btn-default">不符合</span></p>-->
-				</div>
+			<div class="choise margin_top1"  style="height: 210px;">				
+			</div>
 			</div>
 			<div class="padding-side2 margin_top1 margin_bot">
 				<p class="text-right"><span id="current">1</span>/<span id="total">60</span></p>
@@ -81,8 +76,7 @@
 			var title=ass_items[nextnum].num+'、'+ass_items[nextnum].title;
 			for (var j=0;j<ass_items[nextnum].options.length;j++) {
 				str+='<p class=""><span class="btn btn-default ele_btn" onclick="next_question('+(nextnum)+',this)">'+ass_items[nextnum].options[j].da+'</span><input type="hidden" name="" id="" value="'+(ass_items[nextnum].options[j].sc) + '" /></p>';
-			}
-			
+			}			
 			$('.choise').html(str);
 			$('.tm').html(title);				
 			$("#progress").css("width", 100/total*(nextnum+1) + "%");
@@ -92,8 +86,7 @@
 			console.log("已经是最后一题了")
 			console.log(total_sc);
 			$('.sub_box p').html('<a class="btn btn-primary" href="${pageContext.request.contextPath}/web/xgk/xgk_as_analyse.jsp">提交</a>')
-		}
-		
+		}		
 	}
 </script>
 
