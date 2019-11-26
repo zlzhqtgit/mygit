@@ -11,8 +11,9 @@
 	<meta name="keywords" content="" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>		
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript"	src="${pageContext.request.contextPath}/js/web/xgk/xgk_analyse.js"></script>
 </head>
 <body>
 <!-- 页面顶部-->
@@ -26,7 +27,7 @@
 			<div class="padding-side2 margin_top margin_bot">
 				<div class="report_box padding-side2">
 					<p class="">通过学科潜能测评结果对比分析，发现6门选考科目的适合度排序为：</p>
-					<p class="margin_top margin_bot"><a class="btn btn-primary" href="">${analysis.sortOne}</a><a class="btn btn-primary" href="">${analysis.sortTwo}</a><a class="btn btn-primary" href="">${analysis.sortThree}</a></p>
+					<p class="margin_top margin_bot"><a class="btn btn-primary" href="" id="one">物理</a><a class="btn btn-primary" href="" id="two">化学</a><a class="btn btn-primary" href=" "id="three">生物</a></p>
 					<p class="">前三门科目是你的优势学科，你学习起来更感兴趣,也更容易学好，并且你对于学号这些科目更有信心；而后三门科目是你的非优势学科，在确定高考选考科目时，应当选择自己擅长的，回避自己的若是的科目。当然，你业可以根据上述各学科的发展建议提升自己想要选考科目的兴趣、能力、自信程度，并结合“学科推荐”系统中的其它维度统合分析，帮您做出最为科学、合理的决策。</p>
 					<div class="analyse_report margin_top">
 						<div id="xk_analyse_report1" class="" style="width: 600px;height:400px; margin: 3em auto;"></div>
@@ -103,21 +104,38 @@
 						                        }
 						                    ]
 						            };
-									var name="${analysis}";
-									alert(option1.xAxis[0].data[0]);
-									alert(name);
-									<%--option1.xAxis[0].data[0] = ${analysis.sortOne};--%>
-									<%--option1.xAxis[0].data[1] = ${analysis.sortTwo};--%>
-									<%--option1.xAxis[0].data[2] = ${analysis.sortThree};--%>
-									<%--option1.series[0].data[0] = ${analysis.sortOneScore};--%>
-									<%--option1.series[0].data[1] = ${analysis.sortTwoScore};--%>
-									<%--option1.series[0].data[2] = ${analysis.sortThreeScore};--%>
+									var list = '${list}';
+									var report = JSON.parse(list);
+									// option1.xAxis[0].data[0] = report[0].key;
+									// option1.xAxis[0].data[1] = report[1].key;
+									// option1.xAxis[0].data[2] = report[2].key;
+									option1.series[0].data[0] = report[0].value;
+									option1.series[0].data[1] = report[1].value;
+									option1.series[0].data[2] = report[2].value;
+									option1.series[1].data[0] = report[0].value/3;
+									option1.series[1].data[1] = report[1].value/3;
+									option1.series[1].data[2] = report[2].value/3;
+									for (var i=0; i<title_subject.length; i++){
+										if (title_subject[i].title == report[0].key){
+											option1.xAxis[0].data[0] = title_subject[i].subject;
+											$("#one").html(title_subject[i].subject);
+										}
+										if (title_subject[i].title == report[1].key){
+											option1.xAxis[0].data[1] = title_subject[i].subject;
+											$("#one").html(title_subject[i].subject);
+										}
+										if (title_subject[i].title == report[2].key){
+											option1.xAxis[0].data[2] = title_subject[i].subject;
+											$("#one").html(title_subject[i].subject);
+										}
+									}
 									var myChart1 = echarts.init(document.getElementById('xk_analyse_report1'));
 									myChart1.setOption(option1);
 								</script>
 						
 						<div id="xk_analyse_report2" class="" style="width: 600px;height:400px; margin: 0 auto;"></div>
 						<script type="text/javascript">
+							var name='学科兴趣';
 							option2 = {
 								title:{
 									show:true,
@@ -148,6 +166,77 @@
 							        {type: 'bar'}
 							    ]
 							};
+							// alert(option2.dataset.source[0].学科兴趣);
+							var evaluationFraction = '${evaluationFraction}';
+							var array = JSON.parse(evaluationFraction);
+							for (var i=0;i<array.length;i++){
+								if (array[i][0] == '物'){
+									if (array[i][1] == '兴趣'){
+										option2.dataset.source[0].学科兴趣 = array[i][2];
+									}
+									if (array[i][1] == '能力'){
+										option2.dataset.source[0].学科能力 = array[i][2];
+									}
+									if (array[i][1] == '自信'){
+										option2.dataset.source[0].学科自信度 = array[i][2];
+									}
+								}
+								if (array[i][0] == '化'){
+									if (array[i][1] == '兴趣'){
+										option2.dataset.source[1].学科兴趣 = array[i][2];
+									}
+									if (array[i][1] == '能力'){
+										option2.dataset.source[1].学科能力 = array[i][2];
+									}
+									if (array[i][1] == '自信'){
+										option2.dataset.source[1].学科自信度 = array[i][2];
+									}
+								}
+								if (array[i][0] == '生'){
+									if (array[i][1] == '兴趣'){
+										option2.dataset.source[2].学科兴趣 = array[i][2];
+									}
+									if (array[i][1] == '能力'){
+										option2.dataset.source[2].学科能力 = array[i][2];
+									}
+									if (array[i][1] == '自信'){
+										option2.dataset.source[2].学科自信度 = array[i][2];
+									}
+								}
+								if (array[i][0] == '政'){
+									if (array[i][1] == '兴趣'){
+										option2.dataset.source[3].学科兴趣 = array[i][2];
+									}
+									if (array[i][1] == '能力'){
+										option2.dataset.source[3].学科能力 = array[i][2];
+									}
+									if (array[i][1] == '自信'){
+										option2.dataset.source[3].学科自信度 = array[i][2];
+									}
+								}
+								if (array[i][0] == '历'){
+									if (array[i][1] == '兴趣'){
+										option2.dataset.source[4].学科兴趣 = array[i][2];
+									}
+									if (array[i][1] == '能力'){
+										option2.dataset.source[4].学科能力 = array[i][2];
+									}
+									if (array[i][1] == '自信'){
+										option2.dataset.source[4].学科自信度 = array[i][2];
+									}
+								}
+								if (array[i][0] == '地'){
+									if (array[i][1] == '兴趣'){
+										option2.dataset.source[5].学科兴趣 = array[i][2];
+									}
+									if (array[i][1] == '能力'){
+										option2.dataset.source[5].学科能力 = array[i][2];
+									}
+									if (array[i][1] == '自信'){
+										option2.dataset.source[5].学科自信度 = array[i][2];
+									}
+								}
+							}
 							var myChart2 = echarts.init(document.getElementById('xk_analyse_report2'));
 							myChart2.setOption(option2);
 						</script>
@@ -181,7 +270,7 @@
 							<thead>
 								<tr style="background-color: #3b8bec;color: #fff;"><th>学科</th><th>维度</th><th>测评得分</th><th>学科维度解释</th></tr>
 							</thead>
-							<tbody>
+							<tbody id="analyze">
 								<tr><td rowspan="4">物理</td></tr>
 								<tr><td>能力 </td><td>Data</td><td>你的物理学科能力分数为20.0处于同类人的75%以上，说明你具备学好物理学科的能力具有对物理概念和规律进行探寻的习惯，善于分析物理概念规律的内涵和外延，掌握物理因果思维程序，运用物理模型解决实际生活中的具体问题。</td></tr>
 								<tr><td>兴趣 </td><td>Data</td><td>你的物理学科兴趣分数为15.0，处于同类人群的25%--75%之间，说明你对物理学科的兴趣处于中等水平，你对物理学科的学习没有表现出极大的热情，但是也没有表现出明显的反感情绪，可以通过观察与实验的方法来激发你对物理学习的兴趣，在生活中模拟各种物理现象和规律，带着问题去主动转眼与探索，培养学科兴趣。</td></tr>
@@ -191,6 +280,50 @@
 								<tr><td>兴趣 </td><td>Data</td><td>你的化学学科兴趣分数为15.0，处于同类人群的25%--75%之间，说明你对化学学科的兴趣处于中等水平，你对化学学科的学习没有表现出极大的热情，但是也没有表实现出明显的反感情情绪。可以从注意身边一些非常熟悉的“小事”入手，是自己认识到身边处处有化学，激励自己注意周围的生活现象、自然现象，以及人类关心的各种热点问题，如环保、能演、材料、保健等，培养自己的化学兴趣。</td></tr>
 								<tr><td>自信</td><td>Data</td><td>你的化学学科自信在成都分数为欸15.0，处于同类人群的25%--75%之间，说明你的化学学科自信程度处于中等水平，说明你在学习化学学科的过程中，偶有不自信的表现。如果能够客服消极心理状态，树立“我能学好化学”的信心和勇气，就会帮助你提升化学成绩。在化学学科上，哪怕是成绩上一点小进步，也是一次成功的学习体验，要牢记这种体验。</td></tr>
 							</tbody>
+							<script type="text/javascript">
+								var evaluationFraction = '${evaluationFraction}';
+								var array = JSON.parse(evaluationFraction);
+								// var tbody = "<thead><tr style='background-color: #3b8bec;color: #fff;'><th>学科</th><th>维度</th><th>测评得分</th><th>学科维度解释</th></tr></thead><tbody>";
+								var tbody = "";
+								// <tr><td rowspan="4">物理</td></tr>
+								// <tr><td>能力 </td><td>Data</td><td>你的物理学科能力分数为20.0处于同类人的75%以上，说明你具备学好物理学科的能力具有对物理概念和规律进行探寻的习惯，善于分析物理概念规律的内涵和外延，掌握物理因果思维程序，运用物理模型解决实际生活中的具体问题。</td></tr>
+								// <tr><td>兴趣 </td><td>Data</td><td>你的物理学科兴趣分数为15.0，处于同类人群的25%--75%之间，说明你对物理学科的兴趣处于中等水平，你对物理学科的学习没有表现出极大的热情，但是也没有表现出明显的反感情绪，可以通过观察与实验的方法来激发你对物理学习的兴趣，在生活中模拟各种物理现象和规律，带着问题去主动转眼与探索，培养学科兴趣。</td></tr>
+								// <tr><td>自信 </td><td>Data</td><td>你的物理学科自信程度分数为17.0，处于同类人群的25%--75%之间，说明你的物理学科自信程度处于中等水平，你在学习物理学科的过程中，偶有不自信的表现，建立学科自信心，首先要正确地评价、认识自己，结合自己的实际情况定位，确立符合客观事实的目标，在达成目标的成功喜悦感中增强学科自信心。</td></tr>
+
+								// 标题前缀 + 科目
+								var prefix_sub_tr = "<tr><td rowspan='4'>";
+								// 标题后缀
+								var suffix_sub_tr = "</td></tr>";
+
+								// 维度前缀 + [能力、兴趣、自信]
+								var prefix_analyze_type = "<tr><td>";
+								// 维度后缀
+								var suffix_analyze_type = "</td>";
+								// 分数前缀 + 测评分数
+								var prefix_analyze_score = "<td>";
+								// 分数后缀
+								var suffix_analyze_score = "</td>";
+								// 维度分析前缀 + 内容
+								var prefix_analyze = "<td>";
+								// 维度分析后缀
+								var suffix_analyze = "</td></tr>";
+								for (var i=0; i<array.length; i++){
+									for (var j=0; j<analysis_items.length; j++){
+										//科目 + 维度 + 分数 匹配
+										// alert(i + ":[array[i]=" + array[i] + "  ]");
+										if (analysis_items[j].title == array[i][0] && analysis_items[j].type == array[i][1] && analysis_items[j].score == array[i][2]){
+											if (i%3 == 0){
+												//单科维度分析 开始 标题
+												tbody += prefix_sub_tr + analysis_items[j].subject + suffix_sub_tr ;
+											}
+											//自信 能力 兴趣
+											tbody += prefix_analyze_type + array[i][1] + suffix_analyze_type + prefix_analyze_score + array[i][2] + suffix_analyze_score + prefix_analyze + analysis_items[j].analysis + suffix_analyze;
+											continue;
+										}
+									}
+								}
+								$("#analyze").html(tbody);
+							</script>
 						</table>
 						
 						<div class="open-btn">

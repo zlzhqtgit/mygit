@@ -183,6 +183,9 @@
 			location.href = "../user/xgk_login.do?nowUrl="+ window.location.href;
 		});
 	}
+
+
+
 	//用于点击成绩分析模块里的下一步，判断是否输入了成绩，并计算学科的得分
 	function tip_input() {
 		var uid = "${uid}";
@@ -404,7 +407,7 @@
 			$('#total').text(total);
 		} else if(nextnum==total){
 			var url="xgk_potential_analysis.do";
-			var  data = "total_sc="+JSON.stringify(total_sc) + "&score=" + JSON.stringify(score);
+			var  data = "total_sc=" + JSON.stringify(total_sc) + "&score=" + JSON.stringify(score);
 			$.ajax({
 				"url":url,
 				"data":data,
@@ -412,7 +415,7 @@
 				"dataType":"json",
 				"success":function(obj){
 					if(obj.state==0){
-						alert(obj.message);
+						// alert(obj.message);
 						return;
 					} else {
 						analysis();
