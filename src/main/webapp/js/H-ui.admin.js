@@ -173,6 +173,23 @@ function removeIframeAll(){
 	}
 }
 
+//弹框
+function modelshow(title, content, type) {
+	layer.open({
+		type: type,
+		area: ['800px', '500px'],
+		fix: true, //是否跟随页面滚动
+		maxmin: true,
+		shadeClose: true, //点击阴影开关
+		shade: 0.4, //阴影透明度
+		move: 'false', //默认：.layui-layer-title
+		moveOut: false, //是否允许拖拽到窗口外
+		title: title,
+		content: content,
+		scrollbar: true
+	});
+}
+
 /*弹出层*/
 /*
 	参数解释：
@@ -206,6 +223,7 @@ function layer_show(title,url,w,h){
 		scrollbar: false
 	});
 }
+
 /*关闭弹出框口*/
 function layer_close(){
 	var index = parent.layer.getFrameIndex(window.name);
