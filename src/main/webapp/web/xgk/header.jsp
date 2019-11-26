@@ -84,7 +84,7 @@ if(sessionData==null){
 }
 function xgkLogin(){
 	var nowUrl=window.location.href;	
-	location.href = "../user/xgk_login.do?nowUrl="+nowUrl;
+	location.href = "${pageContext.request.contextPath}/user/xgk_login.do?nowUrl="+nowUrl;
 }
 </script>
 =======
