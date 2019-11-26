@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="utf-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +55,7 @@
 											ctx.moveTo(0, 0);
 											var th_height = $("[class=first]")
 													.height();
-											console.log(th_height);
+											// console.log(th_height);
 											var w = $("#myCanvas").width(), h = $(
 													"#myCanvas").height();
 											ctx.lineTo(w, h);
@@ -308,9 +308,42 @@
 						</div>
 					</div>
 					<p class="text-right  margin_bot">
-						<a class="btn btn-primary" onclick="tip_input()"
+						<a class="btn btn-primary" onclick="haveYouSubjectExploration()"
 							href="javascript:void(0)">下一步</a>
 					</p>
+					<script type="text/javascript">
+						// 判断用户是否已做过学科探索
+						function haveYouSubjectExploration() {
+							var uid = '${uid}';
+							if(uid == "" || uid == null){
+								onlogin();
+							}else{
+								var url = "/sub/xgk_subject_exploration.do";
+								var  data = "uid=" + uid;
+								$.ajax({
+									"url":url,
+									"data":data,
+									"type":"POST",
+									"dataType":"json",
+									"success":function(obj){
+										if(obj.state == 0){
+											//未做过学科探索
+											tip_input();
+										} else {
+											//已做过学科探索 弹出选项提示
+											layer.confirm('您已做过学科探索，是否继续？', {
+												icon : 3,
+												btn : [ '确定', '取消' ]
+											}, function(index) {
+												tip_input();
+												layer.close(index);
+											});
+										}
+									}
+								});
+							}
+						}
+					</script>
 				</div>
 			</div>
 		</div>
@@ -391,7 +424,7 @@
 										ctx.strokeStyle = "#fff";
 										var th_height = $("[class=first]")
 												.height();
-										console.log(th_height);
+										// console.log(th_height);
 										var w = $("#myCanvas").width(), h = $(
 												"#myCanvas").height();
 										ctx.lineTo(w, h);

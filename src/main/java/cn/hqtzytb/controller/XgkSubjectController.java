@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @ClassName: XgkSubjectController
- * @Description: 学科控制器
+ * @Description: 学科探索控制器
  * @author: wuPeiLong
  * @date: 2019年11月20日
  * @Copyright:好前途教育
@@ -65,4 +65,15 @@ public class XgkSubjectController {
     }
 
 
+
+    /**
+     * 是否经做过学科探索
+     * @param uid
+     * @return
+     */
+    @RequestMapping("/xgk_subject_exploration.do")
+    @ResponseBody
+    public ResponseResult<Void> haveYouSubjectExploration(@RequestParam(value="uid") Integer uid){
+        return iXgkSubjectService.haveYouSubjectExploration(uid);
+    }
 }
