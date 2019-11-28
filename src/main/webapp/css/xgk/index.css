@@ -835,16 +835,16 @@ background: #9f0303;
 	z-index: 11;
 }
 .Modal_box{
+	width:40vw;
 	position: fixed;
 	z-index: 9999;
 	left: 30%;
 	top: 20%;
-	
 	background-color: #fff;
 }
 .Modal_box>div{
-	width: 30em;
-	height: 30em;
+	/* width: 30em; */
+	/* height: 30em; */
 }
 .login_head{
 	display: flex;
