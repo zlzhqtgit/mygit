@@ -559,6 +559,23 @@ select{
 	border-radius: 8px;
 	border: 1px solid #999;
 }
+.major_relative a{
+	padding: .2em .6em;
+}
+.major_relative .circle{
+	z-index: 1;
+}
+.major_relative .major_con{
+	position: absolute;
+	left: 6em;
+	top: 1em;
+	z-index: 0;
+	padding: 2em 1em;
+	width: 89%;
+}
+.major_relative .major_con a{
+	color: #3b8bec;
+}
 .rank_h span{
 	display: inline-block;
 	width: 50%;
@@ -581,4 +598,20 @@ select{
 	padding-top: .5em;
 	padding-bottom: .3em;
 	border-bottom: 1px solid #999;
+}
+.list-group.search_result h4 span{
+	margin-left: 1em;
+	border-left: 1px solid  #999;
+}
+.rank_salary ul li:nth-child(1){
+	font-weight: bold;
+	color: red;
+}
+.rank_salary ul li:nth-child(2){
+	color: dodgerblue;
+	font-weight: bold;
+}
+.rank_salary ul li:nth-child(3){
+	color: green;
+	font-weight: bold;
 }

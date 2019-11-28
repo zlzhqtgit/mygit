@@ -518,7 +518,7 @@
 		    					<li>隶属于：<span>教育部</span></li>
 		    					<li>地址：<span>贵阳市观山湖区185号</span></li>
 		    				</ul>
-		    				<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址','position.html',2)">查看地图</a></p>
+		    				<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址','position.jsp',2)">查看地图</a></p>
 		    			</div>
 		    			
 		    			<div class="panel panel-primary margin_top">
