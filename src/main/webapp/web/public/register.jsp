@@ -56,9 +56,27 @@
 										<span class="text-muted padding-side">请填写考生真实姓名，保存后不可修改</span>
 									</div>
 									<div class="">
-										<label for="mobile">手机号码：</label>
-										<input id="phone" name="phone" type="text" placeholder="请填写11位手机号码"/>
-										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 手机号格式错误</span>
+										<label for="phone">手机号码：</label>
+
+										<input id="phone" name="phone" type="text" placeholder="请填写11位手机号码"
+											   autocomplete="off" maxlength="11"  onchange="determine()"
+											   onkeyup="this.value=this.value.replace(/[^0-9]/g,'')"
+											   onafterpaste="this.value=this.value.replace(/[^0-9]/g,'')"/>
+										<span class="glyphicon glyphicon-info-sign text-info padding-side" id="format"> 请输入手机号码</span>
+										<script type="text/javascript">
+											function determine() {
+												var phone = $("#phone").val();
+												var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+												if(!reg.test(phone)){
+													$('#format').css("display","inline");
+													$('#format').html("手机号格式错误,请重新输入");
+													$('#format').removeClass().addClass("glyphicon text-danger glyphicon-remove-sign padding-side");
+												} else {
+													$('#format').removeClass().addClass("glyphicon text-success glyphicon-ok-sign padding-side");
+													$('#format').html("输入正确");
+												}
+											}
+										</script>
 									</div>									
 									<div class="">
 										<label for="verify_code">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
@@ -67,13 +85,52 @@
 									</div>
 									<div class="">
 										<label for="password">密&emsp;&emsp;码：</label>
-										<input id="password" name="password" type="text" placeholder="请填写6-16位数字、字母或符号作为密码"/>
-										<span class="glyphicon glyphicon-ok-sign text-success padding-side"> 密码强度：弱</span>
+										<input id="password" name="password"  placeholder="请填写6-16位数字、字母或符号作为密码" onchange="complexity()"/>
+										<span class="glyphicon glyphicon-info-sign text-info padding-side" id="complexity" >  请输入密码</span>
+										<script type="text/javascript">
+											function complexity(){
+												var password = $("#password").val();
+												if (password.length < 6){
+													$("#complexity").html("  密码过于简单,请重新输入")
+													$("#complexity").removeClass().addClass("glyphicon glyphicon-remove-sign text-danger padding-side");
+												} else {
+													var p1 = (password.search(/[a-zA-Z]/) != -1) ? 1 : 0;
+													var p2 = (password.search(/[0-9]/) != -1) ? 1 : 0;
+													var p3 = (password.search(/[A-Z]/) != -1) ? 1 : 0;
+													var pa = p1 + p2 + p3;
+													if (pa == 1){
+														$("#complexity").html("  密码强度：弱")
+														$("#complexity").removeClass().addClass("glyphicon glyphicon-ok-sign text-success padding-side");
+													}else if (pa == 2){
+														$("#complexity").html("  密码强度：中")
+														$("#complexity").removeClass().addClass("glyphicon glyphicon-ok-sign text-success padding-side");
+													} else if(pa == 3){
+														$("#complexity").html("  密码强度：强")
+														$("#complexity").removeClass().addClass("glyphicon glyphicon-ok-sign text-success padding-side");
+													}
+												}
+
+
+											}
+										</script>
 									</div>
 									<div class="">
 										<label for="confirm">确认密码：</label>
-										<input id="confirm" type="text" placeholder="请再次输入密码"/>
-										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 两次输入的密码不相同</span>
+										<input id="confirm" type="text" placeholder="请再次输入密码" onchange="confirmPassword()" />
+										<span class="glyphicon glyphicon-info-sign text-info padding-side" id="confirmPassword">  请再次输入的密码</span>
+										<script type="text/javascript">
+											function confirmPassword() {
+												var password = $("#password").val();
+												var confirm = $("#confirm").val();
+												if (password == confirm){
+													$("#confirmPassword").html("  两次输入的密码相同")
+													$("#confirmPassword").removeClass().addClass("glyphicon glyphicon-ok-sign text-success padding-side");
+												} else {
+													$("#confirmPassword").html("  两次输入的密码不相同")
+													$("#confirmPassword").removeClass().addClass("glyphicon glyphicon-remove-sign text-danger padding-side");
+												}
+											}
+										</script>
 									</div>
 								</div>								
 								<h3 class="text-primary">完善学生信息
@@ -98,8 +155,20 @@
 									</div>
 									<div class="">
 										<label for="ceeYear">高考年度：</label>
-										<input id="ceeYear" name="ceeYear" type="text" placeholder=""/>
-										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 请填写高考年度</span>
+										<input id="ceeYear" name="ceeYear" type="text" placeholder="" onblur="gkyear()"/>
+										<span class="glyphicon glyphicon-info-sign text-info padding-side" id="gkyear"> 请填写高考年度</span>
+										<script type="text/javascript">
+											function gkyear(){
+												var year = $("#ceeYear").val();
+												if (year == null || year == ""){
+													$("#gkyear").html("  请填写高考年度");
+													$("#gkyear").removeClass().addClass("glyphicon glyphicon-remove-sign text-danger padding-side");
+												} else {
+													$("#gkyear").html("  已填写高考年度");
+													$("#gkyear").removeClass().addClass("glyphicon glyphicon-ok-sign text-success padding-side");
+												}
+											}
+										</script>
 									</div>									
 									<div class="reg_tip">
 										<h3 class="text-danger">温馨提示：</h3>
@@ -110,7 +179,7 @@
 								</div>
 							</fieldset>
 							<div class="padding-side2">
-								<input type="checkbox" name="" id="" value="" />
+								<input type="checkbox" name="" id="read" value="" />
 								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 							</div>
 							<div class="text-center margin_top1 margin_bot">
@@ -121,7 +190,7 @@
 					<div class="page_step step3 hide">
 						<div class="margin_top margin_bot">
 							<p class="">您的账号<label class="text-success">注册已完成 <span class="glyphicon glyphicon-ok-sign text-success"></span></label>，账号名称为您的手机号。</p>
-							<p class="text-center margin_top"><a class="btn btn-primary" href="">返回登录</a></p>
+							<p class="text-center margin_top"><a class="btn btn-primary" href="${pageContext.request.contextPath}/user/xgk_login.do">返回登录</a></p>
 						</div>					
 					</div>					
 				</div>
@@ -168,11 +237,11 @@ function time(ele) {
 }
 	function next_step(e){
 			var step=$('.reg_process ul li');
-			step.removeClass('current');
-			var index=$(e).parents('.page_step').index();
-			step.eq(index+1).addClass('current');
+			step.removeClass('current');//移除当前元素类 current类属性
+			var index=$(e).parents('.page_step').index();//返回指定元素相对于其他指定元素的 index 位置。
+			step.eq(index+1).addClass('current');//设置下一个同级元素 current类属性
 			$(e).parents('.page_step').addClass('hide');
-			var status=$(e).attr("id");
+			var status=$(e).attr("id");//设置或返回被选元素的属性值。
 			if (status=='class1') {
 				$(e).parents('.page_step').next().find("form").eq(0).removeClass("hide");
 				$(e).parents('.page_step').next().find("form").eq(0).siblings().addClass("hide");
@@ -182,32 +251,37 @@ function time(ele) {
 			}
 			$(e).parents('.page_step').next().removeClass('hide');
 	}
-	function register(e){	
-		var photeyzm="${code}";
-		var phone="${phone}";	
-		alert(photeyzm);
-		if(photeyzm==$("#verify_code").val() && phone==$("#phone").val()){
-			var url = "../user/hqt_registeradd.do";
-			var data = $("#reg_form").serialize();	
-			$.ajax({
-				"url" : url,
-				"data" : data,
-				"type" : "POST",
-				"dataType" : "json",
-				"success" : function(obj) {
-					if (obj.state == 0) {
-						layer.msg(obj.message,{icon:2,time:1000});
-						return;
-					}else{
-						layer.msg(obj.message,{icon:1,time:1000},function(){ next_step(e);});								
-					}				
-				}
-			}); 		
-		}else if(photeyzm != $("#verify_code").val() && phone==$("#phone").val()){
-			layer.msg("验证码输入错误",{icon:2,time:1000});
-		}else{
-			layer.msg("验证码和手机号不匹配",{icon:2,time:1000});
-		}		
+	function register(e){
+		var read = $("#read").is(':checked');
+		if(read){
+			var photeyzm="${code}";
+			var phone="${phone}";
+			alert(photeyzm + " " + phone + " === " + $("#verify_code").val() + " " + $("#phone").val());
+			if(photeyzm==$("#verify_code").val() && phone==$("#phone").val()){
+				var url = "../user/hqt_registeradd.do";
+				var data = $("#reg_form").serialize();
+				$.ajax({
+					"url" : url,
+					"data" : data,
+					"type" : "POST",
+					"dataType" : "json",
+					"success" : function(obj) {
+						if (obj.state == 0) {
+							layer.msg(obj.message,{icon:2,time:1000});
+							return;
+						}else{
+							layer.msg(obj.message,{icon:1,time:1000},function(){ next_step(e);});
+						}
+					}
+				});
+			}else if(photeyzm != $("#verify_code").val() && phone==$("#phone").val()){
+				layer.msg("验证码输入错误",{icon:2,time:1000});
+			}else{
+				layer.msg("验证码和手机号不匹配",{icon:2,time:1000});
+			}
+		} else {
+			layer.msg("请阅读《用户服务协议》和《隐私政策》",{icon:5,time:1000});
+		}
 	}
 	
 </script>		
@@ -222,6 +296,7 @@ function time(ele) {
 	}); 
 			
 	$('.counter').countUp();
-</script>		
+</script>
+
 </html>
 

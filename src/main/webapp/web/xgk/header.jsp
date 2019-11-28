@@ -19,20 +19,20 @@
 					<nav id="navdh" class="">
 						<ul>
 							<li><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
-							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
-							<li><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
-							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
-							<li><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_s.jsp">职业库</a></li>
+							<li><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
+							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
+							<li><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
+							<li><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_s.jsp">职业库</a></li>
 							<li>
-								<a id="xgk5" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_sch_search.jsp">高校专业</a>
+								<a id="xgk6" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_sch_search.jsp">高校专业</a>
 								<ul class="child">
 									<li><a href="${pageContext.request.contextPath}/web/xgk/xgk_sch_search.jsp">院校查询</a></li>
 									<li><a href="${pageContext.request.contextPath}/web/xgk/xgk_sch_major.jsp">专业查询</a></li>
 								</ul>
 							</li>
-							<li><a id="xgk6" name="dh" href="#">学科推荐</a></li>
-							<li><a id="xgk7" name="dh" href="#">升学规划</a></li>
-							<li><a id="xgk8" name="dh" href="#">志愿填报</a></li>
+							<li><a id="xgk7" name="dh" href="#">学科推荐</a></li>
+							<li><a id="xgk8" name="dh" href="#">升学规划</a></li>
+							<li><a id="xgk9" name="dh" href="#">志愿填报</a></li>
 						</ul>
 					</nav>
 				</div>
@@ -40,7 +40,7 @@
 					<c:if test="${username==null}">
 						<div class="user">
 							<img src="${pageContext.request.contextPath}/img/xgk/user.png">
-							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="">注册</a></span>
+							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
 						</div>
 					</c:if>
 					<c:if test="${username!=null}">
@@ -85,6 +85,10 @@ if(sessionData==null){
 function xgkLogin(){
 	var nowUrl=window.location.href;	
 	location.href = "${pageContext.request.contextPath}/user/xgk_login.do?nowUrl="+nowUrl;
+}
+function xgkRegister() {
+	var nowUrl=window.location.href;
+	location.href = "${pageContext.request.contextPath}/user/register.do?nowUrl="+nowUrl;
 }
 </script>
 </html>

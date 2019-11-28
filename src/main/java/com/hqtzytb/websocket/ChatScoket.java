@@ -63,7 +63,7 @@ public class ChatScoket {
 
 
 	@OnOpen
-	public void onpen(Session session, EndpointConfig config) {		
+	public void onpen(Session session, EndpointConfig config) {
 		// 获取当前登录用户的session从而获取用户信息
 		this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
 		this.userChat = (UserChat) httpSession.getAttribute("userChat"); // 从httpSession中获取当前登录的用户
