@@ -1,3 +1,4 @@
+
 	
 	//存储题目
 	var ass_items = [
@@ -464,3 +465,4 @@
 		myChart1.setOption(option);
 		sectshow(3);
 	}
+
