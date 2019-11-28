@@ -52,7 +52,7 @@ var uid="${uid}";
 function login(e){
 	if(uid==null || uid==""){		
 		layer.confirm('未登陆状态，请先进行登陆？ 确定登陆',{icon: 1, btn: ['确定登陆', '取消']},function(index){
-			location.href ="../user/xgk_login.do?nowUrl="+window.location.href;			
+			location.href ="../user/xgk_login.do?nowUrl="+window.location.href;
 		}); 	
 	}else{
 		if(e=="hld"){

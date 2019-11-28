@@ -259,10 +259,10 @@ public class XgkcpController {
 			if(id==1){
 				List<String> mobileList=get.gethld(cpResult);
 				userFeature.setEvaluationName(mobileList.get(0)+mobileList.get(1)+mobileList.get(2));
-			}else{				
+			}else{
 				userFeature.setEvaluationName(get.getMbti(cpResult));
 			}			
-			userFeature.setUid(2);
+			userFeature.setUid((int)session.getAttribute("uid"));
 			userFeature.setEvaluationType(cpName);
 			userFeature.setEvaluationFraction(cpResult.toString());
 			Date now= new Date();

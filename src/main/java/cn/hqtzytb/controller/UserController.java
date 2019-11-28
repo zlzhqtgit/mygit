@@ -311,7 +311,8 @@ public class UserController {
 		ResponseResult<Void> rr;		
 		try {			
 			//查询用户名是否存在
-			User user=userServer.queryUser(phone);			
+			User user=userServer.queryUser(phone);
+			System.out.println(user);
 			//判断用户名是否存在
 			if (user==null){
 				rr=new ResponseResult<Void>(ResponseResult.ERR,"手机号不存在!请重新输入...");

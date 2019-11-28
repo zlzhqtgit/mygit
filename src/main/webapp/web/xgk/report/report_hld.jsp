@@ -48,10 +48,11 @@
 									<div class="">
 										<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 										<div id="main" style="width: 600px;height:600px; margin: 0 auto;"></div>
-										    <script type="text/javascript">										    	
+										    
+											<script type="text/javascript">										    	
 										    	var cpFengshu="${cpFengshu}";	
 										    	var cpfs = new Array();
-										    	var words = cpFengshu.split('-');										    	
+										    	var words = cpFengshu.split('-');
 										    	for(var i=0;i<words.length;i++){
 										    		var dd=words[i].split(',');
 										    		cpfs[i] = new Array();
@@ -68,7 +69,7 @@
 												    },
 												    tooltip: {},
 												    legend: {//图例组件
-												        data: ['平均成绩', '实际得分']
+												        data: [/*'平均成绩',*/ '实际得分']
 												    },
 												    radar: {
 												        // shape: 'circle',
@@ -93,26 +94,26 @@
 												        type: 'radar',
 												        // areaStyle: {normal: {}},
 												        data : [
-												            {
+												           /* {
 												                value : [2, 2, 4, 5, 6, 7],
 												                name : '平均成绩',
 												                label:[{
 												                	position:"bottom"
 												                }]
-												            },
+												            },*/
 												             {
 												                value : [cpfs[0][1],cpfs[1][1], cpfs[2][1], cpfs[3][1], cpfs[4][1],cpfs[5][1]],
 												                name : '实际得分'
 												            }
 												        ]
 												    }]
-												};									
+												};
 										        // 使用刚指定的配置项和数据显示图表。
 										        myChart.setOption(option);	       
 										    </script>
 									</div>
 									<p class="fontwei">
-										上面雷达图呈现了你的职业兴趣测试结果，职业兴趣得分越高，表示你越倾向于该兴趣类型。下面我们将为你具体介绍六种职业兴趣，你需要特别关注自己得分最高的前三种职业兴趣：I-S-R
+										上面雷达图呈现了你的职业兴趣测试结果，职业兴趣得分越高，表示你越倾向于该兴趣类型。下面我们将为你具体介绍六种职业兴趣，你需要特别关注自己得分最高的前三种职业兴趣：${hldreport[0].personalityCode}
 									</p>
 									<ol>
 										<li>

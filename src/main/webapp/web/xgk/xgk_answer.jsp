@@ -85,6 +85,10 @@
 			</section>			
 		</main>
 
+
+
+
+
 		
 <!-- 页面底部-->
 <c:import url="../public/side_right.jsp"></c:import>	
@@ -92,36 +96,37 @@
 <c:import url="footer.jsp"></c:import>	
 </body>
 <script type="text/javascript">
-				var id ="${cpid}";					
-				var len;  //使用length获取数组长度
-				var numlen = Number($("#num").val());
-				var cpda = new Array();
-				var cont=0;
-				var strone;
+				var id ="${cpid}";//测评类型
+				var len;//霍兰德数组长度[MBTI数组长度]
+				var numlen = Number($("#num").val());//题目编号
+				var cpda = new Array();//存储答案 [0]题号 [1]存储答案 [2]是否完成的题目
+				var cont=0;//未答题数量
+				var strone;//未答题数
 				
-				$("#Modal a").on('click',closeModal);
-				function closeModal(){				
-					$("#Modal").css("display","none");
+				$("#Modal a").on('click',closeModal);//点击模态框或 a标签 隐藏Modal模态框
+				function closeModal(){
+					$("#Modal").css("display","none");//隐藏 Modal 模态框
 				}
+
 				//点击提交实现的方法
 				function tjda() {
 					$('#myModal').show();
-					var val = $('input[name="cpda"]:checked').val();
+					var val = $('input[name="cpda"]:checked').val();//选中题目的题目编号
 					if(val == null) {
 
 					} else {
-						cpda[Number($("#num").val())][1] = val;
-						$("#id" + $("#num").val()).css('background', '#23de20');
+						cpda[Number($("#num").val())][1] = val;//设置选中题目的编号进入答案数组
+						$("#id" + $("#num").val()).css('background', '#23de20');//设置背景颜色
 					}
 					var flag = true;
-					var cpname = "";
+					var cpname = "";//未答题目名字符串
 					for(var i = 0; i < cpda.length; i++) {
-						if(cpda[i][1] == 0) {
+						if(cpda[i][1] == 0) { //未答题
 							flag = false;
 							cont++;
 							cpname += cpda[i][0] + "-";
 							if(cont==1){
-								strone=cpda[i][0];							
+								strone=cpda[i][0];//第一道未答题题数
 							}
 							
 						}
@@ -137,17 +142,17 @@
 					       items +='<a>'+question[i]+'</ a>' ;
 					      }
 					     if(items==''){
-					    	 $("#Modal").css("display","none");
+					    	 $("#Modal").css("display","none");//隐藏
 					      }else{
-					    	 $("#un_complate").html(items);
-					    	 $("#Modal").css("display","block");					    	
+					    	 $("#un_complate").html(items);//显示未答题a标签
+					    	 $("#Modal").css("display","block");//显示
 					      }
 					    
 						/* alert("你还有相关的测评题目没做，题目编号为：" + cpname); */
-					     tu(strone-1,id);
-							$('#current').text(strone);
-							//$("#progress").css("width",100/len*(strone)+"%");
-							ti(strone-1);
+						tu(strone-1,id);
+						$('#current').text(strone);
+						//$("#progress").css("width",100/len*(strone)+"%");
+						ti(strone-1);
 					} else {
 						//location.href="../cp/indexno.do?cpda="+JSON.stringify(cpda);
 						var url = "../cp/xgk_result.do";
@@ -195,7 +200,7 @@
 					tmbox+='<div  class="btn-group"><button type="button" id="dropdown_btn" onclick="sff(123)" class="btn btn-default dropdown-toggle">'+((j-1)*20+1)+"-"+(len+1)+'<span class="caret"></span></button>'+
 							'<div id="123" class="dropdown-menu">'+tmdh+'</div></div>';	
 					$("#tm_box").html(tmbox);
-					
+					$("#total").html(len + 1);
 					var nu = Number($("#num").val());
 					tu(nu, id);
 					if(nu <= 0) {
@@ -239,19 +244,19 @@
 				function ti(nu) {
 					if(len <= nu) { 						
 						$("#xyt").removeClass( "btn-primary" );
-						$("#xyt	").attr("disabled", "disabled");
+						$("#xyt	").attr("disabled", "disabled");//设置下一题该禁止选中
 						$("#syt").removeAttr("disabled");
 						$("#syt").addClass( "btn-primary" );						
 					} else if(nu <= 0) {
 						$("#syt").removeClass( "btn-primary" );
-						$("#syt	").attr("disabled", "disabled");
+						$("#syt	").attr("disabled", "disabled");//设置上一题该禁止选中
 						$("#xyt").removeAttr("disabled");
 						$("#xyt").addClass( "btn-primary" );
 					} else {
-						$("#syt").removeAttr("disabled");
+						$("#syt").removeAttr("disabled");//取消上一题禁止选中
 						$("#syt").addClass( "btn-primary" );
 						$("#xyt").addClass( "btn-primary" );
-						$("#xyt").removeAttr("disabled");
+						$("#xyt").removeAttr("disabled");//取消下一题禁止选中
 					}
 					
 				}
@@ -271,13 +276,13 @@
 				}
 				//向数组里获取题目
 				function tu(nu, id) {
-					var val = $('input[name="cpda"]:checked').val();
+					var val = $('input[name="cpda"]:checked').val();//获得当前选中的 题目数
 					if(val == null) {
 
 					} else {
-						cpda[Number($("#num").val())][1] = val;
-						cpda[Number($("#num").val())][2] = 1;
-						$("#id" + $("#num").val()).css('background', 'red');
+						cpda[Number($("#num").val())][1] = val;//获得题目中的答案 放到cpada中
+						cpda[Number($("#num").val())][2] = 1;//设置当题已答题
+						$("#id" + $("#num").val()).css('background', 'red');//设置背景颜色为红色
 					}
 					var tmxsname = "";
 					if(cpda[nu][2] == 1 && cpda[nu][1] == 1) {

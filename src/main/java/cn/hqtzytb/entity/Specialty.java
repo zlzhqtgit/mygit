@@ -2,8 +2,6 @@ package cn.hqtzytb.entity;
 
 
 import java.io.Serializable;
-
-import com.sun.istack.NotNull;
 import lombok.*;
 import lombok.experimental.Accessors;
 
@@ -11,7 +9,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @ClassName: Specialty
- * @Description: 专业信息实体类
+ * @Description: 专业数据信息实体类
  * @author: wuPeiLong
  * @date: 2019年11月26日
  * @Copyright:好前途教育
@@ -23,6 +21,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor()
 @AllArgsConstructor()
 public class Specialty implements Serializable{
+
 
     private static final long serialVersionUID = 1L;
 
@@ -67,7 +66,7 @@ public class Specialty implements Serializable{
     private String specialtyDisciplines;
 
     /**
-     * 学历
+     * 学历层次
      */
     private String specialtyEducation;
 
@@ -190,6 +189,31 @@ public class Specialty implements Serializable{
      * 外语要求
      */
     private Integer foreignPerformance;
+
+    /**
+     * 第四轮学科评估A+高校
+     */
+    private String aboveA;
+
+    /**
+     * 第四轮学科评估A高校
+     */
+    private String equalA;
+
+    /**
+     * 第四轮学科评估A-高校
+     */
+    private String belowA;
+
+    /**
+     * 第四轮学科评估B+高校
+     */
+    private String aboveB;
+
+    /**
+     * 开设院校
+     */
+    private String openCollege;
 
 
 }

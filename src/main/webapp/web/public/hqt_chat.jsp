@@ -226,7 +226,7 @@ function close_preImg(obj) {
 		$("#userimg").attr('src',adminImgSrc); 
 		//加载聊天信息
 		chatRecord(user.id,"${chatId}");
-		target = "ws://localhost:8080/hqtzytb/ChatOnLine";
+		target = "ws://localhost:8080/ChatOnLine";
 		//判断当前浏览器是否支持websocket通讯
 		if ('WebSocket' in window) {
 			ws = new WebSocket(target);
