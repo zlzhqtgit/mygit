@@ -947,6 +947,35 @@ background: #9f0303;
 .register_box {
 	/*border: 1px solid #999;*/
 }
+.register_box .step2 input{
+	background-color: #e8e6e7;
+	border-radius: 1em;
+	padding: 6px 1em;
+	border: 0;
+	box-shadow: 0 1px 3px #999;
+}
+.register_box .step2 a.get_verify:hover{
+	background-color: inherit;
+}
+.register_box .step2 input:focus{ outline: none; }
+.register_box .step2 a.get_verify:hover{
+	color:#3b8bec;
+	background-color: inherit;
+}
+.register_box .step2 .reg_submit input{
+	border-radius: 1em;
+	padding: 10px 2em;
+	margin: 0;
+	width: 28em;
+	color: #fff;
+	background-color: #3b8bec;
+}
+input[type=checkbox]{
+	cursor: pointer;
+}
+.filter-box ul li a{
+	text-decoration: none;
+}
 .reg_process{
 	border: 1px solid #3b8bec;
 	background-color: #fff;
@@ -1006,7 +1035,7 @@ background: #9f0303;
 	align-items: center;
 }
 .status ul{padding: 1em 1em;}
-.status ul li a{
+.status>ul li a{
 	display: block;
 	text-align: center;
 	width: 10em;
@@ -1023,7 +1052,7 @@ background: #9f0303;
 }
 .reg_tip{
 	position: absolute; 
-	right: -12em;
+	right: 2em;
 	bottom: 0;
 	border: 1px solid gray;
 	width: 300px;
