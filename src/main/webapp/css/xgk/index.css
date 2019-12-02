@@ -959,6 +959,7 @@ background: #9f0303;
 }
 .register_box .step2 input:focus{ outline: none; }
 .register_box .step2 a.get_verify:hover{
+<<<<<<< HEAD
 	color:#666;
 	background-color: inherit;
 }
@@ -975,6 +976,18 @@ input[type=checkbox]{
 }
 .get_verify.btn{
 	color:#3b8bec;
+	background-color: inherit;
+}
+.register_box .step2 .reg_submit input{
+	border-radius: 1em;
+	padding: 10px 2em;
+	margin: 0;
+	width: 28em;
+	color: #fff;
+	background-color: #3b8bec;
+}
+input[type=checkbox]{
+	cursor: pointer;
 }
 .filter-box ul li a{
 	text-decoration: none;
