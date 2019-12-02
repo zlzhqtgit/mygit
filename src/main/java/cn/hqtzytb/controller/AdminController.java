@@ -8,6 +8,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,7 @@ public class AdminController
 	@RequestMapping("/hqt_admin_password.do")	
 	public String showhqtadminPassword(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response){
 		if(session.getAttribute("adminname")==null){
-			GetCommonUser.getlogin(response, request);			
+			GetCommonUser.getlogin(response, request);
 			return null;
 		}else{
 			logger.info("用户名："+session.getAttribute("adminname")+" 模块名：用户密码修改  操作：进入模块  状态：OK!");

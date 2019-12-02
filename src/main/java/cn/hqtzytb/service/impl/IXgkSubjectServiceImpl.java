@@ -1,6 +1,6 @@
 package cn.hqtzytb.service.impl;
 
-import cn.hqtzytb.controller.Constants;
+import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.mapper.UserFeatureMapper;

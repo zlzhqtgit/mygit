@@ -37,7 +37,7 @@
         <mvc:interceptor>
             <!-- //拦截所有的请求，这个必须写在前面，也就是写在【不拦截】的上面 -->
             <mvc:mapping path="/**/*.do" />
-            <!-- 但是排除下面这些，也就是不拦截请求 -->  
+            <!-- 但是排除下面这些，也就是不拦截请求 -->
             <mvc:exclude-mapping path="/**/admin.do" />
             <mvc:exclude-mapping path="/**/hqt_login.do" /> 
             <mvc:exclude-mapping path="/main/**.do" />     
@@ -50,11 +50,14 @@
             <mvc:exclude-mapping path="/Message/**.do" />   
             <mvc:exclude-mapping path="/api/**.do" />
             <mvc:exclude-mapping path="/sub/**.do" />
+            <mvc:exclude-mapping path="/**/*login.do" />
             <bean class="cn.hqtzytb.intercepter.LoginIntercepter" />
         </mvc:interceptor>
-    </mvc:interceptors>  
+    </mvc:interceptors>
   <mvc:annotation-driven/>
-  
+
+<!--  释放静态资源  -->
+  <mvc:default-servlet-handler/>
   
   
 </beans>

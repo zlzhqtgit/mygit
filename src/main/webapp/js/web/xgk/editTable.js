@@ -8,7 +8,7 @@ function customxk(){
 	var str="";
 	var rss = document.querySelectorAll("input[name='custombox']:checked");		
 	if(rss.length != 3){
-		alert("选择学科(必须选择3种)");
+		layer.msg("选择学科(必须选择3种)",{icon:2,time:1000});
 	}else{
 		for(var i=0;i<rss.length;i++){
 			str+=rss[i].value;

@@ -2,11 +2,12 @@ package cn.hqtzytb.service;
 
 
 import java.util.List;
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
+import javax.servlet.http.HttpSession;
 
 
-public interface IUserServer
-{
+public interface IUserServer {
 	User insert(User user);
 	List<User> getuserByphone(String phone);
 	List<User> getuserAll();
@@ -16,5 +17,7 @@ public interface IUserServer
 	 * @param password 密码
 	 * @return User
 	 */
-	public User queryUser(String phone);
+	User queryUser(String phone);
+
+	ResponseResult<Void> bindAccount(HttpSession session, String phone, String verifyCode);
 }

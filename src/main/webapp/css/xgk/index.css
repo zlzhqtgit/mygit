@@ -644,7 +644,7 @@ h3{
 .converse .hd a{
 	opacity: .3;
 	padding: 16px;
-    background-image: url(img/slider-arrow.png);
+    background-image: url(../../img/xgk/slider-arrow.png);
     background-repeat: no-repeat;
 
 }
@@ -856,7 +856,7 @@ background: #9f0303;
 }
 .bg1{
 	position: relative;
-	background-image: url(../img/pic1.jpg);
+	background-image: url(../../img/xgk/pic1.jpg);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	height: 750px;
@@ -881,7 +881,7 @@ background: #9f0303;
 .check_detail a:hover{color: orange;}
 .bg2{
 	position: relative;
-	background-image: url(../img/pic2.jpg);
+	background-image: url(../../img/xgk/pic2.jpg);
 	height: 500px;
 	background-size: 100%;
 	background-repeat: no-repeat;
@@ -895,7 +895,7 @@ background: #9f0303;
 
 .bg3{
 	position: relative;
-	background-image: url(../img/pic3.jpg);
+	background-image: url(../../img/xgk/pic3.jpg);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	height: 980px;

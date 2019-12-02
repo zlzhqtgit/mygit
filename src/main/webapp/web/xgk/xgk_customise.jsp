@@ -28,7 +28,7 @@
 						<div class="caption answer_temp">
 							<div class="user_say">
 								<span class="glyphicon glyphicon-user text-muted" style="font-size: 2em;margin-right:10px;line-height: 2em;"></span>
-								<span class="fontwei">用户名</span>
+								<span class="fontwei">${username}</span>
 							</div>
 							<div class="">
 								<div class="">

@@ -7,6 +7,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import cn.hqtzytb.utils.GetCommonUser;
+import cn.hqtzytb.utils.Photo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -252,7 +255,8 @@ public class UserController {
 	* @throws
 	 */
 	@RequestMapping("hqt_user_roledetails.do")
-	public String hanldRoleDetails(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+	public String hanldRoleDetails(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException
+	{
 		try
 		{		
 			List<UserRoleDetails> userRoleDetailslist=userRoleDetailsServer.getUserRoleDetailsAll();
@@ -318,11 +322,12 @@ public class UserController {
 				rr=new ResponseResult<Void>(ResponseResult.ERR,"手机号不存在!请重新输入...");
 				logger.info("用户手机："+phone+" 模块名：登录模块 操作：登录  状态：Failed! ");
 			}else{			
-				GetCommonUser get=new GetCommonUser();				
+				GetCommonUser get=new GetCommonUser();
 				String md5Password = get.getEncrpytedPassword(password,user.getUuid());
 				if(user.getPassword().equals(md5Password)){
 					session.setAttribute("uid", user.getId());
 					session.setAttribute("username", user.getUsername());
+					request.getSession().setAttribute("headUrl", user.getHeadUrl());
 					JSONObject userJson = JSONObject.fromObject(user);
 					session.setAttribute("userJson", userJson);//提供给前端页面使用
 					session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
@@ -382,7 +387,7 @@ public class UserController {
 				}else{
 					response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
 					if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
-						session.setAttribute("code",code); 
+						session.setAttribute("code",code);
 						session.setAttribute("phone",phone);
 						rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
 						logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
@@ -416,8 +421,7 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/hqt_registeradd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleRegisteradd(String username,String phone,String password,String school,String schoolAddress,String families,String fraction,String ceeYear, HttpSession session,HttpServletRequest request)
-	{	
+	public ResponseResult<Void> handleRegisteradd(String username,String phone,String password,String school,String schoolAddress,String families,String fraction,String ceeYear, HttpSession session,HttpServletRequest request) {
 		ResponseResult<Void> rr=null;		
 		try {	
 			//查询用户名是否存在
@@ -434,8 +438,8 @@ public class UserController {
 				User user=new User();
 				user.setUsername(username);
 				user.setPhone(phone);
-				user.setWexinChat("");
-				user.setQqChat("");
+				user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
+				user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
 				user.setPassword(md5Password);
 				user.setUuid(uuid);
 				user.setBelongTo("2019100001");
@@ -445,7 +449,7 @@ public class UserController {
 				user.setFraction(fraction);
 				user.setCeeYear(ceeYear);
 				user.setVocation("");
-				user.setHeadUrl("/img/public/head.jpg");
+				user.setHeadUrl(session.getAttribute("headUrl") == null ? "/img/public/head.jpg" : session.getAttribute("headUrl").toString());
 				user.setPower("");
 				user.setCreatTime(creatTime);				
 				userServer.insert(user);
@@ -458,4 +462,20 @@ public class UserController {
 		}
 		return rr;
 	}
+
+	/**
+	 * 微信丶QQ登陆绑定已有账户
+	 * @param session
+	 * @param phone
+	 * @param verifyCode
+	 * @return
+	 */
+	@RequestMapping("/hqt_bind_account.do")
+	@ResponseBody
+	public ResponseResult<Void> bindAccount(HttpSession session,String phone,String verifyCode){
+
+		return userServer.bindAccount(session,phone,verifyCode);
+	}
+
+
 }

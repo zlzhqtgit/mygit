@@ -18,6 +18,8 @@
 <script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 </head>
 <body>
 		<header class="padding-side login_head">
@@ -31,7 +33,6 @@
 				</ul>
 			</nav>
 		</header>
-
 		<banner class="">
 			 <!-- Swiper -->
 			<div class="swiper-container">				
@@ -61,12 +62,39 @@
 						<span class="text-primary">第三方账号登录</span>
 					</div>
 					<ul class="others_acc margin_top">
-						<li><a href=""><img src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></a></li>
-						<li><a href=""><img src="${pageContext.request.contextPath}/img/xgk/wechat.jpg"/></a></li>					
+						<li><a  href="${pageContext.request.contextPath}/qq_login.do"><img id="qqLogin" src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></a></li>
+
+						<li><a href="javascript:;"><img onclick="wechatQRCode()" src="${pageContext.request.contextPath}/img/xgk/wechat.jpg"/></a></li>
 					</ul>
+
 				</div>
+
 			</form>
 				<script type="text/javascript">
+					function wechatQRCode() {
+						var weixin = '<div id="weixin" ></div>';
+						layer.open({
+							type: 1,
+							area: ['300px', '420px'],
+							// fix: false, //不固定
+							// maxmin: true,
+							shade:false,
+							title: false,
+							content: weixin,
+							scrollbar: false
+						});
+						drawingQRCode();
+					}
+					function drawingQRCode() {
+						//生成微信二维码,工具类
+						var obj = new WxLogin({
+							id:"weixin",
+							appid:"wx7287a60bb700fd21",
+							scope:"snsapi_login",
+							redirect_uri:"http://www.txjava.cn/loginServlet"
+						});
+					}
+
 					//登录规则部分，防止XSS注入
 					/**
 					 * 手机号规则

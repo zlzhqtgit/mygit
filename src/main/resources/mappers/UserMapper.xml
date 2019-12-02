@@ -30,9 +30,69 @@
 		</select>
 		<!-- 查询单个用户信息 -->
 	 <!-- 如果参数类型parameterType是普通数据类型，那么SQL中的#{}参数名可以任意； 如果参数是对象，那么参#{}数名称必须和对象属性名一致 -->
-	 <select id="queryUser" resultType="User" parameterType="String">
-	 SELECT * FROM user u WHERE u.phone=#{phone} 
-	 </select>				
+	<select id="queryUser" resultType="User" parameterType="String">
+		SELECT * FROM user WHERE phone = #{phone}
+	</select>
+
+	<select id="selectUserListByMap" resultType="cn.hqtzytb.entity.User" parameterType="java.util.Map">
+		SELECT
+			*
+		FROM
+			user
+		<where>
+			<if test="id != null">
+				AND id = #{id}
+			</if>
+			<if test="username != null">
+				AND username = #{username}
+			</if>
+			<if test="phone != null">
+				AND phone = #{phone}
+			</if>
+			<if test="wexinChat != null">
+				AND wexin_chat = #{wexinChat}
+			</if>
+			<if test="qqChat != null">
+				AND qq_chat = #{qqChat}
+			</if>
+			<if test="password != null">
+				AND password = #{password}
+			</if>
+			<if test="uuid != null">
+				AND uuid = #{uuid}
+			</if>
+			<if test="belongTo != null">
+				AND belong_to = #{belongTo}
+			</if>
+			<if test="school != null">
+				AND school = #{school}
+			</if>
+			<if test="schoolAddress != null">
+				AND school_address = #{schoolAddress}
+			</if>
+			<if test="families != null">
+				AND families = #{families}
+			</if>
+			<if test="fraction != null">
+				AND fraction = #{fraction}
+			</if>
+			<if test="ceeYear != null">
+				AND cee_year = #{ceeYear}
+			</if>
+			<if test="vocation != null">
+				AND vocation = #{vocation}
+			</if>
+			<if test="headUrl != null">
+				AND head_url = #{headUrl}
+			</if>
+			<if test="power != null">
+				AND power = #{power}
+			</if>
+			<if test="creatTime != null">
+				AND creat_time = #{creatTime}
+			</if>
+		</where>
+	</select>
 	</mapper>
 	
 	

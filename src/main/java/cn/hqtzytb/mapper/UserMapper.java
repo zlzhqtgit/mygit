@@ -1,6 +1,8 @@
 package cn.hqtzytb.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 import cn.hqtzytb.entity.User;
 
@@ -19,5 +21,12 @@ public interface UserMapper
 	 * @param password 密码
 	 * @return User
 	 */
-	public User queryUser(@Param("phone")String phone);
+	User queryUser(@Param("phone")String phone);
+
+	/**
+	 * 依据条件查询用户信息
+	 * @param paramMap
+	 * @return
+	 */
+	List<User> selectUserListByMap(Map<String,Object> paramMap);
 }
