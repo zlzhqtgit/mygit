@@ -177,7 +177,7 @@ function chat2(id) {
 			
 			$(".backtop").on('click',scroll_top)
 			function scroll_top() {
-				$(window).scrollTop(0)
+				$("body,html").animate({scrollTop:0},500);
 			}
 		</script>
 </html>

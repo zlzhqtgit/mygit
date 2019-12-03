@@ -1371,7 +1371,7 @@ textarea{
 }
 .btn-default:hover{
 	background-color: #3b8bec;
-	color: white;
+	color: #666;
 }
  .btn-default.active:hover{
 	background-color: #3b8bec;
@@ -1404,7 +1404,7 @@ textarea{
 }
 .content_list{
 	overflow: auto;
-	height: 282px;
+	height: 470.45px;
 }
 .content_list ul{
 	padding-left: 2em;
@@ -1420,13 +1420,13 @@ textarea{
 	bottom: 0;
 	background-color: rgba(255,255,255,.5);
 }
-.user_head{
+.cenUser_head{
 	position: absolute;
 	top: -3em;
 	left: 50%;
 	right: 50%;
 }
-.user_head h3{
+.cenUser_head h3{
 	margin-top: .6em;
 }
 .focus_info{
@@ -1462,4 +1462,54 @@ textarea{
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	display: -webkit-box;
+}
+
+.zytb_tit>div{
+	padding: 0;
+}
+.zytb_tit ul li{
+	width: 207px;
+	line-height: 2.4em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.zytb_tit h3{
+	margin-top: .6em;
+	margin-bottom: .4em;
+}
+.p_relative{
+	position: relative;
+}
+
+.border{
+	border: 1px solid #999;
+}
+.tab_hd{
+	border-bottom: 3px solid #ddd;
+}
+.tab_hd li{
+	width: 50%;
+	cursor: pointer;
+	padding: 1em 2em;
+	position: relative;
+}
+.tab_hd li.current{
+	background-color: inherit;
+	color: #333;
+
+}
+.tab_hd li.current::after{
+	content: '';
+	position: absolute;
+	bottom: -3px;
+	left: 0;
+	width: 100%;
+	border-bottom: 3px solid #3b8bec;
+}
+.tab_bd>div{
+	display: none;
+}
+.tab_bd>div.current{
+	display: block;
 }

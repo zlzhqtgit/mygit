@@ -3,7 +3,6 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<title>贵州好前途教育科技有限公司</title>
@@ -446,43 +445,11 @@
 				
 			
 		</main>
-
-		<div class="side-right">
-			<div class="text-center mark-box">
-				<span class="btn-mark">
-					<img src="img/search.png" >
-				</span>
-				<div class="">
-					<a href="course.html">线上课程</a>
-				</div>
-			</div>
-			<div class="text-center mark-box">
-				<span class="btn-mark">
-					<img src="img/search.png" >
-				</span>
-				<div class="">
-					<a href="">VIP</a>
-				</div>
-			</div>
-			<div class="text-center mark-box">
-				<span class="btn-mark">
-					<img src="img/search.png" >
-				</span>
-				<div class="">
-					<a href="">在线客服</a>
-				</div>
-			</div>
-			<div class="text-center mark-box backtop">
-				<span class="btn-mark">
-					<img src="img/search.png" >
-				</span>
-				<div class="">
-					<a href="">回到顶部</a>
-				</div>
-			</div>
-		</div>
-
-		<c:import url="footer.jsp"></c:import>
+		
+		<!-- 页面底部-->
+		<c:import url="../public/side_right.jsp"></c:import>	
+		<!-- 页面底部-->
+		<c:import url="footer.jsp"></c:import>	
 
 	</body>
 
