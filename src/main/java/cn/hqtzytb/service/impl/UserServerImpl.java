@@ -69,8 +69,8 @@ public class UserServerImpl implements IUserServer {
 			result.setMessage("用户信息不存在");
 			logger.error(Constants.ERROR_HEAD_INFO + "用户信息不存在");
 		} else {
-			String wexinChat = session.getAttribute("wexinChat").toString();
-			String qqChat = session.getAttribute("qqChat").toString();
+			String wexinChat = session.getAttribute("wexinChat") == null ? null :session.getAttribute("wexinChat").toString();
+			String qqChat = session.getAttribute("qqChat") == null ? null :session.getAttribute("qqChat").toString();
 			User user = users.get(0);
 			if (user.getWexinChat() == null && StringUtils.isNotEmpty(wexinChat)){
 				user.setWexinChat(wexinChat);//绑定微信openid
@@ -78,6 +78,8 @@ public class UserServerImpl implements IUserServer {
 			if (user.getQqChat() == null && StringUtils.isNotEmpty(qqChat)){
 				user.setQqChat(qqChat);//绑定腾讯openid
 			}
+			user.setHeadUrl(session.getAttribute("headUrl").toString());
+			userMapper.updateById(user);//修改用户信息
 			session.setAttribute("uid", users.get(0).getId());
 			session.setAttribute("username", users.get(0).getUsername());
 			session.setAttribute("headUrl", users.get(0).getHeadUrl());

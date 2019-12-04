@@ -12,6 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/selectFilter.js"></script>
+		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 	</head>
 
 	<body>
@@ -36,26 +37,26 @@
 					</ul>
 					<div class="tab_bd">
 						<div class="current">
-							<form class="flex_Al_c" action="" method="post" onsubmit="" style="display: flex;justify-content: center;">
+							<form class="flex_Al_c" action="" method="post" style="display: flex;justify-content: center;">
 								<div class="" style="width: 50%;">
 									<div class="form-group margin_top">
-										<label for="name"><span class="text-danger">&lowast;</span> 手&ensp;&ensp;机 </label>
-										<input type="" name="tel" id="tel" value="" />
+										<label for="phone"><span class="text-danger">&lowast;</span> 手&ensp;&ensp;机 </label>
+										<input type="" name="tel" id="phone" value="" />
 										<span class="glyphicon text-danger padding-side"> </span>
 									</div>
 									<div class="form-group">
-										<label for="name"><span class="text-danger">&lowast;</span> 验证码 </label>
-										<input type="" name="captcha0" id="captcha0" value="" />
-										<a class="get_verify btn btn-default" href="javascript:void(0)">获取手机验证码</a>
+										<label for="verifyCode"><span class="text-danger">&lowast;</span> 验证码 </label>
+										<input type="" name="captcha0" id="verifyCode" value="" />
+										<a class="get_verify btn btn-default" href="javascript:;" onclick="sendMessages(1)">获取手机验证码</a>
 									</div>
 									<p class="margin_top margin_bot text-center">
-										<input class="btn btn-primary fontwei" type="submit" value="提交绑定"/>
+										<input class="btn btn-primary fontwei" type="button" onclick="bindAccount()" value="提交绑定"/>
 									</p>
 								</div>
 							</form>
 						</div>
 						<div class="">
-							<form class="user1" action="" method="post" onsubmit="return register1()">
+							<form class="user1" action="" method="post" >
 								<fieldset id="">
 									<legend class="">
 										<h4 class="text-primary margin_bot1 fontwei">注册新用户
@@ -75,9 +76,9 @@
 											<span class="padding-side glyphicon"></span>
 										</div>
 										<div class="form-group">
-											<label for="captcha"><span class="text-danger">&lowast;</span> 验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
-											<input id="captcha" type="text" placeholder="请填写验证码"/>
-											<a  class="get_verify btn btn-default" href="javascript:viod(0)">获取手机验证码</a>
+											<label for="verify_code"><span class="text-danger">&lowast;</span> 验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
+											<input id="verify_code" type="text" placeholder="请填写验证码"/>
+											<a  class="get_verify btn btn-default" href="javascript:;" onclick="sendMessages(2)">获取手机验证码</a>
 										</div>
 										<div class="form-group">
 											<label for="password"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
@@ -115,7 +116,7 @@
 													<input class="filter-title" type="text" readonly placeholder="pleace select"  style="background-color: transparent;border-radius: 0;box-shadow: 0 0 0;"/>
 													<i class="icon icon-filter-arrow"></i>
 												</div>
-												<select name="filter">
+												<select name="filter" id="year">
 													<option value="请选择高考年度" selected>请选择高考年度</option>
 													<option value="2020" >2020年</option>
 													<option value="2019">2019年</option>
@@ -141,9 +142,43 @@
 									<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 								</div>
 								<div class="reg_submit padding-side2 margin_top1 margin_bot">
-									<input class="btn btn-primary" type="submit" value="提交注册" id="submit1" disabled="true"/>
+									<input class="btn btn-primary" type="button" onclick="register1()" value="提交注册" id="submit1" disabled="true"/>
 								</div>
 							</form>
+							<script type="text/javascript">
+								function register(){
+									var read = $("#read").is(':checked');
+									if(read){
+										var photeyzm="${code}";
+										var phone="${phone}";
+										alert(photeyzm + " " + phone + " === " + $("#verify_code").val() + " " + $("#phone").val());
+										if(photeyzm==$("#verify_code").val() && phone==$("#phone").val()){
+											var url = "../user/hqt_registeradd.do";
+											var data = $("#reg_form").serialize();
+											$.ajax({
+												"url" : url,
+												"data" : data,
+												"type" : "POST",
+												"dataType" : "json",
+												"success" : function(obj) {
+													if (obj.state == 0) {
+														layer.msg(obj.message,{icon:2,time:1000});
+														return;
+													}else{
+														layer.msg(obj.message,{icon:1,time:1000},function(){ next_step(e);});
+													}
+												}
+											});
+										}else if(photeyzm != $("#verify_code").val() && phone==$("#phone").val()){
+											layer.msg("验证码输入错误",{icon:2,time:1000});
+										}else{
+											layer.msg("验证码和手机号不匹配",{icon:2,time:1000});
+										}
+									} else {
+										layer.msg("请阅读《用户服务协议》和《隐私政策》",{icon:5,time:1000});
+									}
+								}
+							</script>
 						</div>
 					</div>
 				</div>
@@ -189,4 +224,102 @@
 		<c:import url="footer.jsp"></c:import>	
 	
 	</body>
+
+	<script type="text/javascript">
+
+		var isSend = false;
+		//发送短信
+		function sendMessages(e) {
+			var url = "";
+			var phone = "";
+			if (e == 1){//绑定手机 短信
+				url = "/user/send_message.do";
+				phone = $("#phone").val();
+			} else {//完善信息 短信
+				url = "/user/hqt_photoyzm.do";
+				phone = $("#mobile").val();
+			}
+			var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+			if(!reg.test(phone)) {
+				layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
+			}else {
+				$.ajax({
+					url: "/user/user_is_exist.do",
+					data:"phone=" + phone,
+					type:"POST",
+					dataType:"json",
+					success:function(obj){
+						if(obj.state == 0){
+							if (e == 1){
+								//用户未注册过 弹出选项提示
+								layer.confirm('该手机号未注册账户，请完善账户信息！', {icon : 3, time : 2000});
+							} else {
+								$.ajax({
+									url: url,
+									type: "POST",
+									data: "phone=" + phone,
+									dataType: "JSON",
+									success: function(obj) {
+										if(obj.state == 0){
+											layer.msg(obj.message,{icon:3,time:2000});
+										} else {
+											isSend = true;
+											layer.msg(obj.message,{icon:6,time:2000});
+										}
+									}
+								});
+							}
+
+						} else {
+							if (e == 2){
+								layer.confirm('该手机号已注册账户，请更换手机号！', {icon : 3, time : 2000});
+							} else {
+								$.ajax({
+									url: url,
+									type: "POST",
+									data: "phone=" + phone,
+									dataType: "JSON",
+									success: function(obj) {
+										if(obj.state == 0){
+											layer.msg(obj.message,{icon:3,time:2000});
+										} else {
+											isSend = true;
+											layer.msg(obj.message,{icon:6,time:2000});
+										}
+									}
+								});
+							}
+						}
+						return;
+					}
+				});
+			}
+		}
+
+		//绑定账号
+		function bindAccount() {
+			if (isSend == false){
+				layer.msg("请先获取手机验证码",{icon:2,time:1000});
+			}
+			var phone = $("#phone").val();
+			var verifyCode = $("#verifyCode").val();
+			if (verifyCode == null || verifyCode == ""){
+				layer.msg("请输入手机验证码",{icon:2,time:1000});
+			}else {
+				$.ajax({
+					url: "/user/hqt_bind_account.do",
+					type: "POST",
+					data: "phone=" + phone + "&verifyCode=" + verifyCode,
+					dataType: "JSON",
+					success: function(obj) {
+						if(obj.state == 0){
+							layer.msg(obj.message,{icon:3,time:2000});
+						} else {
+							location.href = "../cp/xgk_index.do";
+						}
+					}
+				});
+			}
+		}
+	</script>
 </html>

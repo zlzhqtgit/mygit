@@ -51,6 +51,7 @@
             <mvc:exclude-mapping path="/api/**.do" />
             <mvc:exclude-mapping path="/sub/**.do" />
             <mvc:exclude-mapping path="/**/*login.do" />
+            <mvc:exclude-mapping path="/**/connect.do"/>
             <bean class="cn.hqtzytb.intercepter.LoginIntercepter" />
         </mvc:interceptor>
     </mvc:interceptors>

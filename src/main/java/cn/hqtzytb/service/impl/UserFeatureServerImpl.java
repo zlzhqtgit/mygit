@@ -50,7 +50,7 @@ public class UserFeatureServerImpl implements IUserFeatureServer {
 	}
 
 	@Override
-	public ResponseResult<Void> haveYouCognitionEvaluation(Integer uid, Integer type) {
+	public ResponseResult<Void> haveYouCognitionEvaluation(Integer uid, String type) {
 		String where = "";
 		if ("hld".equals(type)){
 			where += "uid = '" + uid + "' and evaluation_type = '霍兰德'";

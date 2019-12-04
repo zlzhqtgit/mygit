@@ -29,4 +29,11 @@ public interface UserMapper
 	 * @return
 	 */
 	List<User> selectUserListByMap(Map<String,Object> paramMap);
+
+	/**
+	 * 依据ID修改用户信息
+	 * @param user
+	 * @return
+	 */
+	Integer updateById(User user);
 }

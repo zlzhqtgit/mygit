@@ -224,13 +224,22 @@ public class XgkcpController {
 	@ResponseBody
 	public ResponseResult<Void> handleCpResult(Integer id, @RequestParam(value = "cpda") String cpda,
 			HttpSession session, HttpServletRequest request) {
+		System.err.println("uid:" + session.getAttribute("uid"));
+		List<UserFeature> userFeatureList = userFeatureServer.getUserFeatureByUid(Integer.valueOf(session.getAttribute("uid").toString()));
 		ResponseResult<Void> rr;
 		GetCommonUser get=new GetCommonUser();
 		Map<String, Integer> cpResult = new HashMap<String, Integer>();
 		// 判断测评类型
 		String cpName = "霍兰德";
-		if (id == 2) {
+		if (id == 2){
 			cpName = "MBTI";
+		}
+		UserFeature userFeature=new UserFeature();
+		boolean hasTest = false;//是否做过认知测评
+		for (UserFeature feature : userFeatureList) {
+			if (cpName.equals(feature.getEvaluationType())){
+				hasTest = true;
+			}
 		}
 		try {
 			// 筛选出相测评名称的所有类型结果
@@ -256,7 +265,6 @@ public class XgkcpController {
 			// 存入session,在渲染页面时候调用计算结果
 			session.setAttribute("cpName", cpName);
 			session.setAttribute("cpResult", cpResult);
-			UserFeature userFeature=new UserFeature();
 			if(id==1){
 				List<String> mobileList=get.gethld(cpResult);
 				userFeature.setEvaluationName(mobileList.get(0)+mobileList.get(1)+mobileList.get(2));
@@ -267,8 +275,12 @@ public class XgkcpController {
 			userFeature.setEvaluationType(cpName);
 			userFeature.setEvaluationFraction(cpResult.toString());
 			Date now= new Date();
-			userFeature.setEvaluationTime(now);			
-			userFeatureServer.insert(userFeature);
+			userFeature.setEvaluationTime(now);
+			if (hasTest){ //已经做过认知测评 更新
+				userFeatureServer.update(userFeature);
+			} else {//新增测评记录
+				userFeatureServer.insert(userFeature);
+			}
 			rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "题目答案已提交，正在为你生成报告......");
 			// logger.info("用户名："+username.getUsername()+" 模块名：区库设置模块 操作：添加区库信息
 			// 状态：OK!");
@@ -285,14 +297,14 @@ public class XgkcpController {
 	}
 
 	/**
-	 * 是否做过认知测评
+	 * 是否做过认知测评 [hld丶MBTI]
 	 * @param uid
 	 * @param type
 	 * @return
 	 */
 	@RequestMapping("/xgk_cognition_evaluation.do")
 	@ResponseBody
-	public ResponseResult<Void> haveYouCognitionEvaluation(@RequestParam(value="uid") Integer uid,@RequestParam(value="type") Integer type){
+	public ResponseResult<Void> haveYouCognitionEvaluation(@RequestParam(value="uid") Integer uid,@RequestParam(value="type") String type){
 		return userFeatureServer.haveYouCognitionEvaluation(uid,type);
 	}
 

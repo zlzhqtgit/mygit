@@ -39,4 +39,18 @@ public class Constants{
 	 */
 	public static final String WX_USER_INFO_URL = "https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID";
 
+	/**
+	 * 腾讯登录获取access_token路径
+	 */
+	public static final String QQ_LOGIN_TOKEN_URL = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=APPID&client_secret=APPKEY&code=CODE&redirect_uri=REDIRECT_URI";
+
+	/**
+	 * 腾讯登录获取openid路径
+	 */
+	public static final String QQ_USER_OPENID_URL = "https://graph.qq.com/oauth2.0/me?access_token=ACCESS_TOKEN";
+
+	/**
+	 * 腾讯登录获取用户信息路径
+	 */
+	public static final String QQ_USER_INFO_URL = "https://graph.qq.com/user/get_user_info?access_token=ACCESS_TOKEN&oauth_consumer_key=APPID&openid=OPENID";
 }

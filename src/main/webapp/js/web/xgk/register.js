@@ -62,7 +62,7 @@ function time(ele) {
 		}
 		$(e).parents('.page_step').next().removeClass('hide');
 	}*/
-	function register(e){
+	function register(){
 		var read = $("#read").is(':checked');
 		if(read){
 			var photeyzm="${code}";

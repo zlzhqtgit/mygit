@@ -6,6 +6,7 @@ import cn.hqtzytb.mapper.UserMapper;
 import cn.hqtzytb.service.ILoginService;
 import cn.hqtzytb.utils.HttpClientUtils;
 import cn.hqtzytb.utils.PropsUtil;
+import cn.hqtzytb.utils.QQHttpClient;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.UserInfo;
@@ -13,12 +14,19 @@ import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
 import net.sf.json.JSONObject;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
@@ -56,56 +64,52 @@ public class ILoginServiceImpl implements ILoginService {
     @Override
     public String qqLoginCallback(HttpServletRequest request, HttpServletResponse response) {
         try {
-            AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
-            String accessToken  = null;
-            String openId  = null;
-            long tokenExpireIn = 0L;
-            Date creatTime=new Date();
-            if (accessTokenObj.getAccessToken().equals("")) {
-//                我们的网站被CSRF攻击了或者用户取消了授权
-//                做一些数据统计工作
+            HttpSession session = request.getSession();
+            String code = request.getParameter("code");
+
+            //通过Authorization Code获取Access Token
+            String url = Constants.QQ_LOGIN_TOKEN_URL
+                    .replace("APPID",PropsUtil.loadProps("qqconnectconfig.properties").getProperty("app_ID"))
+                    .replace("APPKEY",PropsUtil.loadProps("qqconnectconfig.properties").getProperty("app_KEY"))
+                    .replace("CODE",code)
+                    .replace("REDIRECT_URI",PropsUtil.loadProps("qqconnectconfig.properties").getProperty("redirect_URI"));
+
+
+            String access_token = QQHttpClient.getAccessToken(url);
+            //获取回调后的 openid 值
+            url = Constants.QQ_USER_OPENID_URL.replace("ACCESS_TOKEN",access_token);
+            String openid = QQHttpClient.getOpenID(url);
+
+            //获取QQ用户信息
+            url = Constants.QQ_USER_INFO_URL.replace("ACCESS_TOKEN",access_token)
+                    .replace("APPID",PropsUtil.loadProps("qqconnectconfig.properties").getProperty("app_ID"))
+                    .replace("OPENID",openid);
+            com.alibaba.fastjson.JSONObject jsonObject = QQHttpClient.getUserInfo(url);
+            if (!"0".equals(jsonObject.getString("ret"))) {
                 logger.error(Constants.ERROR_HEAD_INFO + "QQ登录回调异常");
             } else {
-                accessToken = accessTokenObj.getAccessToken();
-                tokenExpireIn = accessTokenObj.getExpireIn();
-                request.getSession().setAttribute("accessToken", accessToken);
-                request.getSession().setAttribute("tokenExpirein", String.valueOf(tokenExpireIn));
-                OpenID openIDObj =  new OpenID(accessToken);
-                openId = openIDObj.getUserOpenID();
-                UserInfo qzoneUserInfo = new UserInfo(accessToken, openId);
-                UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
-                if (userInfoBean.getRet() == 0) {
-//                    userInfoBean.getGender());//性别
-//                    userInfoBean.getAvatar().getAvatarURL30();//头像
-//                    userInfoBean.getAvatar().getAvatarURL50();
-//                    userInfoBean.getAvatar().getAvatarURL100();
                     Map<String,Object> paramMap = new HashMap<>();
-                    paramMap.put("qqChat",openId);
+                    paramMap.put("qqChat",openid);
                     List<User> users = userMapper.selectUserListByMap(paramMap);
                     if (users.isEmpty()){ //不存在该QQ用户
-                        request.getSession().setAttribute("headUrl", userInfoBean.getAvatar().getAvatarURL50());
-                        request.getSession().setAttribute("qqChat", openId);
-                        // TODO 完善用户信息页面
-                        return "";
+                        session.setAttribute("headUrl", jsonObject.get("figureurl_qq_2"));
+                        session.setAttribute("qqChat", openid);
+                        return "web/xgk/xgk_bindingAcc";
                     } else {
-                        request.getSession().setAttribute("uid", users.get(0).getId());
-                        request.getSession().setAttribute("username", users.get(0).getUsername());
-                        request.getSession().setAttribute("headUrl", users.get(0).getHeadUrl());
+                        session.setAttribute("uid", users.get(0).getId());
+                        session.setAttribute("username", users.get(0).getUsername());
+                        session.setAttribute("headUrl", users.get(0).getHeadUrl());
                         JSONObject userJson = JSONObject.fromObject(users.get(0));
-                        request.getSession().setAttribute("userJson", userJson);//提供给前端页面使用
-                        request.getSession().setAttribute("user", users.get(0));//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+                        session.setAttribute("userJson", userJson);//提供给前端页面使用
+                        session.setAttribute("user", users.get(0));//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
                         return "web/xgk/xgk_index";
                     }
-
-                } else {
-                    logger.error("很抱歉，我们没能正确获取到您的信息，原因是： " + userInfoBean.getMsg());
-                }
             }
-        } catch (QQConnectException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             logger.error(Constants.ERROR_HEAD_INFO + "QQ登录回调异常");
         }
-        return "web/xga/xgk_error_404";
+        return "web/xgk/xgk_error_404";
     }
 
     @Override
@@ -133,7 +137,7 @@ public class ILoginServiceImpl implements ILoginService {
                 request.getSession().setAttribute("headUrl", user_json.get("headimgurl"));
                 request.getSession().setAttribute("wexinChat", openid);
                 // TODO 完善用户信息页面
-                return "";
+                return "web/xgk/xgk_bindingAcc";
             } else {
                 request.getSession().setAttribute("uid", users.get(0).getId());
                 request.getSession().setAttribute("username", users.get(0).getUsername());
@@ -147,8 +151,16 @@ public class ILoginServiceImpl implements ILoginService {
             ex.printStackTrace();
             logger.error(Constants.ERROR_HEAD_INFO + "微信登录回调异常");
         }
-        return "web/xga/xgk_error_404";
+        return "web/xgk/xgk_error_404";
     }
 
+    private static JSONObject parseJSONP(String jsonp) {
+        int startIndex = jsonp.indexOf("(");
+        int endIndex = jsonp.lastIndexOf(")");
 
+        String json = jsonp.substring(startIndex + 1, endIndex);
+
+        return JSONObject.fromObject(json);
+
+    }
 }

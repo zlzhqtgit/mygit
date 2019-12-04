@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 
@@ -328,7 +329,7 @@ public class UserController {
 				if(user.getPassword().equals(md5Password)){
 					session.setAttribute("uid", user.getId());
 					session.setAttribute("username", user.getUsername());
-					request.getSession().setAttribute("headUrl", user.getHeadUrl());
+					session.setAttribute("headUrl", user.getHeadUrl());
 					JSONObject userJson = JSONObject.fromObject(user);
 					session.setAttribute("userJson", userJson);//提供给前端页面使用
 					session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
@@ -464,6 +465,12 @@ public class UserController {
 				userServer.insert(user);
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");				
 				logger.info("用户名："+user.getUsername()+" 模块名：注册模块 操作：登录  状态：OK!");
+				JSONObject userJson = JSONObject.fromObject(user);
+				session.setAttribute("uid", user.getId());
+				session.setAttribute("username", user.getUsername());
+				session.setAttribute("headUrl", user.getHeadUrl());
+				session.setAttribute("userJson", userJson);//提供给前端页面使用
+				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
 			}			
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
@@ -487,4 +494,55 @@ public class UserController {
 	}
 
 
+	/**
+	 * 查用用户是否已注册
+	 * @param phone
+	 * @return
+	 */
+	@RequestMapping("/user_is_exist.do")
+	@ResponseBody
+	public ResponseResult<Void> userIsExist(@RequestParam(value = "phone") String phone){
+		if (userServer.queryUser(phone) == null) {//未注册
+			return new ResponseResult(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_SUCCESS);
+		}
+		return new ResponseResult(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS);
+	}
+
+	/**
+	 *
+	 * @param phone
+	 * @return
+	 */
+	@RequestMapping("/send_message.do")
+	@ResponseBody
+	public ResponseResult<Void> userIsExist(@RequestParam(value = "phone") String phone, HttpSession session, HttpServletRequest request){
+		ResponseResult<Void> rr;
+		Photo.setNewcode();
+		String code = Integer.toString(Photo.getNewcode());
+		System.out.println(code);
+		SendSmsResponse response;
+		try {
+			User user=userServer.queryUser(phone);
+			if(user == null){
+				rr =new ResponseResult<Void>(ResponseResult.ERR, "该手机号账户不存存在，请重新输入");
+				logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+			}else{
+				response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
+				if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
+					session.setAttribute("code",code);
+					session.setAttribute("phone",phone);
+					rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
+					logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Success! ");
+					System.out.println(code);
+				}else{
+					rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
+					logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+				}
+			}
+		} catch (Exception e) {
+			logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
+			rr = new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+		}
+		return rr;
+	}
 }

@@ -93,6 +93,61 @@
 			</if>
 		</where>
 	</select>
+
+	<update id="updateById" parameterType="cn.hqtzytb.entity.User">
+		update user
+		<set>
+			<if test="username != null">
+				username = #{username},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="wexinChat != null">
+				wexin_chat = #{wexinChat},
+			</if>
+			<if test="qqChat != null">
+				qq_chat = #{qqChat},
+			</if>
+			<if test="password != null">
+				password = #{password},
+			</if>
+			<if test="uuid != null">
+				uuid = #{uuid},
+			</if>
+			<if test="belongTo != null">
+				belong_to = #{belongTo},
+			</if>
+			<if test="school != null">
+				school = #{school},
+			</if>
+			<if test="schoolAddress != null">
+				school_address = #{schoolAddress},
+			</if>
+			<if test="families != null">
+				families = #{families},
+			</if>
+			<if test="fraction != null">
+				fraction = #{fraction},
+			</if>
+			<if test="ceeYear != null">
+				cee_year = #{ceeYear},
+			</if>
+			<if test="vocation != null">
+				vocation = #{vocation},
+			</if>
+			<if test="headUrl != null">
+				head_url = #{headUrl},
+			</if>
+			<if test="power != null">
+				power = #{power},
+			</if>
+			<if test="creatTime != null">
+				creat_time = #{creatTime},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
 	</mapper>
 	
 	

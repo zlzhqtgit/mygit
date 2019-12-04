@@ -18,5 +18,6 @@ public interface IUserFeatureServer
 	 * @param type
 	 * @return
 	 */
-	ResponseResult<Void> haveYouCognitionEvaluation(Integer uid, Integer type);
+	ResponseResult<Void> haveYouCognitionEvaluation(Integer uid, String type);
+
 }
