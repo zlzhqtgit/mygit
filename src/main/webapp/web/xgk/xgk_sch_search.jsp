@@ -134,7 +134,7 @@
 				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="">开始查询</a></p>
 					
 				<div class="panel panel-default">
-					<div class="panel_head">
+					<div class="panel_head padding-side2">
 						<h4 class="fontwei">共找到xx条结果</h4>
 					</div>
 				    <ul class="list-group search_result">

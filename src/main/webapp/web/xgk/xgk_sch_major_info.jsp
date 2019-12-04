@@ -42,7 +42,7 @@
 						<p class="">国际代码：010101（不可用于填报）</p>
 					</div>
 				    <div class="tab_list">
-				    	<ul class="tab_head margin_top">
+				    	<ul class="tab_head margin_top clearfix">
 				    		<li class="cur">专业概况</li>
 				    		<li>开设院校</li>
 				    		<li class="">就业概况</li>

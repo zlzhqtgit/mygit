@@ -96,7 +96,7 @@
 				
 				<div class="panel panel-default">
 				    <div class="tab_list padding-side2">
-				    	<ul class="tab_head">
+				    	<ul class="tab_head clearfix">
 				    		<li class="cur">本科专业</li>
 				    		<li>专科专业</li>
 				    	</ul>

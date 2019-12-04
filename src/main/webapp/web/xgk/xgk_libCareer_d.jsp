@@ -28,7 +28,7 @@
 					<div class="padding-side">
 						<div class="">
 							<h3 class="text-primary fontwei icon_tit">
-								<span style="background-image: url(img/1.png);"></span>职业概述
+								<span style="background-image: url(../../img/xgk/1.png);"></span>职业概述
 							</h3>
 							<ul class="padding-side margin_bot1">
 								<li>
@@ -55,10 +55,10 @@
 						</div>
 						<div class="station">
 							<h3 class="text-primary fontwei margin_bot1 icon_tit">
-								<span style="background-image: url(img/2.png);"></span>就业岗位
+								<span style="background-image: url(../../img/xgk/2.png);"></span>就业岗位
 							</h3>
 							<div class="tab_list">
-								<ul class="tab_head">
+								<ul class="tab_head clearfix">
 						    		<li class="cur">
 						    			<h4>出纳员</h4>4190-4920/月
 						    		</li>
@@ -295,7 +295,7 @@
 						</div>
 						<div class="margin_bot1 development">
 							<h3 class="text-primary fontwei icon_tit">
-								<span style="background-image: url(img/3.png);"></span>发展前景
+								<span style="background-image: url(../../img/xgk/3.png);"></span>发展前景
 							</h3>
 							<div class="row padding-side margin_top1 rank_salary">
 								<div class="col-lg-6 col-md-6 col-sm-6 border_major">
@@ -324,7 +324,7 @@
 						</div>
 						<div class="margin_bot1">
 							<h3 class="text-primary fontwei icon_tit">
-								<span style="background-image: url(img/4.png);"></span>职业视频
+								<span style="background-image: url(../../img/xgk/4.png);"></span>职业视频
 							</h3>
 							<div class="border_major margin_top1 flex_Al_c"><div class="margin_top margin_bot">暂无相关视频</div></div>
 						</div>

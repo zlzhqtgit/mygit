@@ -19,10 +19,10 @@
 		<!-- 页面头部-->
 		<c:import url="header.jsp"></c:import>
 		<div class="p_relative">
-			<div class=""><img src="img/bannerBg.png"/></div>
+			<div class=""><img src="${pageContext.request.contextPath}/img/xgk/bannerBg.png"/></div>
 			<div class="user_info">
 				<div class="text-center cenUser_head" style="width: 6em;">
-					<img src="img/user.png" style="width: 100%;"/>
+					<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 100%;"/>
 					<h3 class="fontwei">用户昵称</h3>
 				</div>
 				<div class="clearfix container">

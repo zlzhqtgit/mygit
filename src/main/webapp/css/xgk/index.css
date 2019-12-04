@@ -256,7 +256,7 @@ section>h1{
 	padding-bottom: 10px;
 }
 ul{
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 /* 双重滚动 */
 #banner {
@@ -996,7 +996,7 @@ input[type=checkbox]{
 	border: 1px solid #3b8bec;
 	background-color: #fff;
 }
-.reg_process ul{margin: 0;}
+.reg_process ul{margin: 0;overflow: hidden;}
 .reg_process ul li{
 	position: relative;
 	width: 33.333%;
@@ -1028,9 +1028,13 @@ input[type=checkbox]{
 .reg_process ul li:last-child::after{
 	border: 0;
 }
-.current{
+/* .current{
 	background-color: #3b8bec;
 	color: #fff;
+} */
+.register_box div.current{
+	background:transparent;
+	color: #333;
 }
 .reg_process ul li.current::before{
 	content: '';
@@ -1370,7 +1374,7 @@ textarea{
 	color: white;
 }
 .btn-default:hover{
-	background-color: #3b8bec;
+	background-color: #ddd;
 	color: #666;
 }
  .btn-default.active:hover{
@@ -1436,9 +1440,12 @@ textarea{
 	width: 20%;
 }
 .center_nav li{
-	padding: .6em 1em;
 	border: 1px solid #999;
 	border-top: 0;
+}
+.center_nav li a{
+	padding: .6em 1em;
+	display: block;
 }
 .center_nav li:first-child{
 	border-top: 1px solid #999;
@@ -1446,11 +1453,27 @@ textarea{
 .center_cont{
 	width: 80%;
 }
+.center_cont>ul{
+	display: none;
+}
+.center_cont>ul.current{
+	display: block;
+}
+.center_cont ul.current a{
+	color: #080808;
+}
 .center_cont li{
 	margin-bottom: 1em;
 }
 .center_cont h4{
 	border-bottom: 1px solid #2580eb;
+}
+li.current{
+	background-color: #3b8bec;
+	color: #fff;
+}
+li.current a{
+	color: #fff;
 }
 .o_row_brif{
 	text-overflow: ellipsis;
