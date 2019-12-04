@@ -1,5 +1,6 @@
 package cn.hqtzytb.mapper;
 
+import cn.hqtzytb.entity.Personality;
 import cn.hqtzytb.entity.Specialty;
 import java.util.List;
 import java.util.Map;
@@ -41,5 +42,5 @@ public interface PersonalityMapper {
 	 * @param paramMap
      * @return
      */
-	List<Specialty> selectPersonalityListByMap(Map<String, Object> paramMap);
+	List<Personality> selectPersonalityListByMap(Map<String, Object> paramMap);
 }

@@ -46,7 +46,7 @@
 					user_feature
 				WHERE
 					uid = #{uid}
-					AND evaluation_name = 'QNFX'
+					AND evaluation_type = 'QNFX'
 			</select>
 	</mapper>
 	

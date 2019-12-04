@@ -18,7 +18,7 @@
 		<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/liquidFill.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/sch_chart.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${pageContext.request.contextPath}/js/web/xgk/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
@@ -68,7 +68,7 @@
 			    		<div class="tab_b1 cur">
 			    			<div class="major_info margin_bot">
 			    				<div class="items margin_top">
-			    					<h2 class="text-primary fontwei"> <span style="background-image: url(img/1.png);"></span>学校介绍 </h2>
+			    					<h2 class="text-primary fontwei"> <span style="background-image: url(../../img/xgk/1.png);"></span>学校介绍 </h2>
 		    						<div class="p_relative">
 		    							<div class="tindent " style="height: 100px; overflow: hidden;">
 			    							在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；
@@ -95,7 +95,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/2.png);"></span>校园生活
+			    						<span style="background-image: url(../../img/xgk/2.png);"></span>校园生活
 			    					</h2>
 			    					<div class="margin_top1">
 										<style type="text/css">
@@ -225,7 +225,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/4.png);"></span>男女比例
+			    						<span style="background-image: url(../../img/xgk/4.png);"></span>男女比例
 			    					</h2>
 			    					<div class="percentage margin_top">
 			    						<div class="text-primary">
@@ -255,7 +255,7 @@
 			    			<div class="major_info margin_bot tab2">
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/1.png);"></span>院校分数线
+			    						<span style="background-image: url(../../img/xgk/1.png);"></span>院校分数线
 			    					</h2>
 			    					<p class="">
 			    						<select name="">
@@ -278,7 +278,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/2.png);"></span>招生计划
+			    						<span style="background-image: url(../../img/xgk/2.png);"></span>招生计划
 			    					</h2>
 			    					<div class="">
 			    						<table class="table table-hover">
@@ -292,7 +292,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/3.png);"></span>专业录取分数线
+			    						<span style="background-image: url(../../img/xgk/3.png);"></span>专业录取分数线
 			    					</h2>
 			    					<div class="">
 			    						<table class="table table-hover">
@@ -333,7 +333,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/2.png);"></span>师资力量
+			    						<span style="background-image: url(../../img/xgk/2.png);"></span>师资力量
 			    					</h2>
 			    					<div class="border_major">
 			    						现有院士（含双聘）18人，长江学者特聘教授43人，杰青73人，高层次人才数量居国内高校前列。
@@ -341,7 +341,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/3.png);"></span>重点专业
+			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点专业
 			    					</h2>
 			    					<table class="table table-bordered">
 			    						<thead>
@@ -357,7 +357,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/3.png);"></span>重点学科
+			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点学科
 			    					</h2>
 			    					<table class="table table-bordered">
 			    						<tr><td>一级学科国家重点学科</td><td>Data</td></tr>
@@ -367,7 +367,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(img/3.png);"></span>重点实验室及科研中心
+			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点实验室及科研中心
 			    					</h2>
 			    					<table class="table table-bordered" border="" cellspacing="" cellpadding="">
 			    						<tr><td>国家重点实验室</td><td>Data</td></tr>
@@ -383,7 +383,7 @@
 			    			<div class="major_info margin_bot">
 				    			<div class="items margin_top">
 			    					<h2 class="text-primary fontwei margin_bot1">
-			    						<span style="background-image: url(img/1.png);"></span>招生简章
+			    						<span style="background-image: url(../../img/xgk/1.png);"></span>招生简章
 			    					</h2>
 			    					<p class="">
 			    						<select name="">
@@ -427,7 +427,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei margin_bot1">
-			    						<span style="background-image: url(img/2.png);"></span>招生章程
+			    						<span style="background-image: url(../../img/xgk/2.png);"></span>招生章程
 			    					</h2>
 			    					<p class="">
 			    						<select name="">

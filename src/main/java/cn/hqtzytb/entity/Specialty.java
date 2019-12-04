@@ -148,37 +148,37 @@ public class Specialty implements Serializable{
     /**
      * 物理要求
      */
-    private Integer physicsPerformance;
+    private Double physicsPerformance;
 
     /**
      * 化学要求
      */
-    private Integer chemistryPerformance;
+    private Double chemistryPerformance;
 
     /**
      * 生物要求
      */
-    private Integer biologyPerformance;
+    private Double biologyPerformance;
 
     /**
      * 政治要求
      */
-    private Integer politicPerformance;
+    private Double politicPerformance;
 
     /**
      * 历史要求
      */
-    private Integer historyPerformance;
+    private Double historyPerformance;
 
     /**
      * 地理要求
      */
-    private Integer geographyPerformance;
+    private Double geographyPerformance;
 
     /**
      * 语文要求
      */
-    private Integer chinesePerformance;
+    private Double chinesePerformance;
 
     /**
      * 数学要求
@@ -188,12 +188,12 @@ public class Specialty implements Serializable{
     /**
      * 外语要求
      */
-    private Integer foreignPerformance;
+    private Double foreignPerformance;
 
     /**
      * 第四轮学科评估A+高校
      */
-    private String aboveA;
+    private Double aboveA;
 
     /**
      * 第四轮学科评估A高校
@@ -214,6 +214,5 @@ public class Specialty implements Serializable{
      * 开设院校
      */
     private String openCollege;
-
 
 }

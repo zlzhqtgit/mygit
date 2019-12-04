@@ -55,11 +55,37 @@ function login(e){
 			location.href ="../user/xgk_login.do?nowUrl="+window.location.href;
 		}); 	
 	}else{
-		if(e=="hld"){
-			location.href ="../cp/xgk_answer_hld.do";
-		}else{
-			location.href ="../cp/xgk_answer_mbti.do";
-		}
+		var url = "/cp/xgk_cognition_evaluation.do";
+		var  data = "uid=" + uid + "&type=" + e;
+		$.ajax({
+			"url":url,
+			"data":data,
+			"type":"POST",
+			"dataType":"json",
+			"success":function(obj){
+				if(obj.state == 0){
+					//未做过认知测评
+					if(e=="hld"){
+						location.href ="../cp/xgk_answer_hld.do";
+					}else{
+						location.href ="../cp/xgk_answer_mbti.do";
+					}
+				} else {
+					//已做过认知测评 弹出选项提示
+					layer.confirm('您已做过认知测评，是否继续？', {
+						icon : 3,
+						btn : [ '确定', '取消' ]
+					}, function(index) {
+						if(e=="hld"){
+							location.href ="../cp/xgk_answer_hld.do";
+						}else{
+							location.href ="../cp/xgk_answer_mbti.do";
+						}
+						layer.close(index);
+					});
+				}
+			}
+		});
 	}
 }
 </script>

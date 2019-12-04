@@ -1,7 +1,10 @@
 package cn.hqtzytb.service.impl;
 
 import java.util.List;
+
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.service.IUserFeatureServer;
+import cn.hqtzytb.utils.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.hqtzytb.entity.UserFeature;
@@ -46,7 +49,20 @@ public class UserFeatureServerImpl implements IUserFeatureServer {
 		return userFeatureMapper.select(where, null, null, null);
 	}
 
-	
-	
+	@Override
+	public ResponseResult<Void> haveYouCognitionEvaluation(Integer uid, Integer type) {
+		String where = "";
+		if ("hld".equals(type)){
+			where += "uid = '" + uid + "' and evaluation_type = '霍兰德'";
+		} else {
+			where += "uid = '" + uid + "' and evaluation_type = 'MBTI'";
+		}
+		List<UserFeature> userFeatures = userFeatureMapper.select(where,null,null,null);
+		if (userFeatures.isEmpty()){//未做过测评
+			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_SUCCESS);
+		}
+		return new ResponseResult<>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS);
+	}
+
 
 }

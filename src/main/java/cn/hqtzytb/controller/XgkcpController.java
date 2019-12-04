@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -282,7 +281,20 @@ public class XgkcpController {
 	
 	@RequestMapping("/xgk_guide_xuanke.do")	
 	public String xgk_guide_xuanke(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
-			return  "web/public/xgk_guide_xuanke";
+		return  "web/public/xgk_guide_xuanke";
 	}
+
+	/**
+	 * 是否做过认知测评
+	 * @param uid
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping("/xgk_cognition_evaluation.do")
+	@ResponseBody
+	public ResponseResult<Void> haveYouCognitionEvaluation(@RequestParam(value="uid") Integer uid,@RequestParam(value="type") Integer type){
+		return userFeatureServer.haveYouCognitionEvaluation(uid,type);
+	}
+
 
 }

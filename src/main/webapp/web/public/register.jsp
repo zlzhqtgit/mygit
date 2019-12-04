@@ -17,7 +17,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/selectFilter.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 </head>
 <body>
@@ -43,13 +43,13 @@
 						<li class="pull-left fontwei">注册账号</li>
 					</ul>
 				</div>
-				
+
 				<div class="status margin_bot">
 					<ul class="page_step step1 margin_bot margin_top">
 						<li><a class="active wow bounceInLeft" id="class1" href="javascript:void(0)" onclick="next_step(this)">个人用户</a></li>
 						<li class="margin_top"><a class="wow bounceInRight" id="class2" href="javascript:void(0)" onclick="next_step(this)">我是咨询师</a></li>
 					</ul>
-					
+
 					<div class="page_step step2 margin_top hide padding-side2" style="width: 100%;">
 						<form class="user1" action="" method="post" onsubmit="return register()">
 							<fieldset id="">
@@ -86,7 +86,7 @@
 										<span class="glyphicon padding-side"> </span>
 									</div>
 								</div>
-								
+
 								<h4 class="text-primary fontwei">完善学生信息
 									<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
 								</h4>
@@ -123,7 +123,7 @@
 										</div>
 										<span class="glyphicon padding-side"> </span>
 									</div>
-									
+
 									<div class="reg_tip">
 										<h4 class="text-danger fontwei">温馨提示：</h4>
 										<div class="padding-side2">
@@ -140,7 +140,7 @@
 								<input class="btn btn-default" type="submit" value="注册" id="submit" disabled="true"/>
 							</div>
 						</form>
-						
+
 						<form class="user2" action="" method="post" onsubmit="return register1()">
 							<fieldset id="">
 								<legend class="">
@@ -179,7 +179,7 @@
 										<label for="vocation">&nbsp;&nbsp;&nbsp;从事职业：</label>
 										<input id="vocation" type="text" placeholder="请输入您的职业名"/>
 									</div>
-									
+
 									<div class="reg_tip hidden-xs" >
 										<h4 class="text-danger fontwei">温馨提示：</h4>
 										<div class="padding-side2">
@@ -187,7 +187,7 @@
 										</div>
 									</div>
 								</div>
-								
+
 							</fieldset>
 							<div class="padding-side2">
 								<input type="checkbox" name="" id="checkbox1" onclick="agree('checkbox1','submit1')"/>
@@ -198,21 +198,21 @@
 							</div>
 						</form>
 					</div>
-					
+
 					<div class="page_step step3 hide">
 						<div class="margin_top margin_bot">
 							<p class="">您的账号<label class="text-success">注册已完成 <span class="glyphicon glyphicon-ok-sign text-success"></span></label>，账号名称为您的手机号。</p>
 							<p class="text-center margin_top"><a class="btn btn-primary" href="">返回登录</a></p>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</section>
 		<script type="text/javascript">
-			new WOW().init(); 
-			var wow = new WOW({  
-			    boxClass: 'wow', //需要执行动画的class 
+			new WOW().init();
+			var wow = new WOW({
+			    boxClass: 'wow', //需要执行动画的class
 			    animateClass: 'animated',  //animate.css的class
 			    offset: 0,  //距可视区域多少开始执行动画
 			    mobile: true,  //是否在移动设备上执行动画
@@ -227,9 +227,9 @@
 				}
 			});
 		</script>
-		
+
 		<script src="${pageContext.request.contextPath}/js/web/xgk/register.js" type="text/javascript" charset="utf-8"></script>
-		<c:import url="../xgk/footer.jsp"></c:import>	
+		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
 
 </html>

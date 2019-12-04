@@ -31,8 +31,8 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
         if (oldFeature == null){
             UserFeature feature = new UserFeature();
             feature.setUid(uid);
-            feature.setEvaluationName("QNFX");
-            feature.setEvaluationType("潜能分析");
+            feature.setEvaluationType(Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS);
+            feature.setEvaluationName(Constants.EVALUATION_NAME_POTENTIAL_ANALYSIS);
             feature.setEvaluationFraction(evaluationFraction);
             feature.setEvaluationTime(new Date());
             userFeatureMapper.insert(feature);

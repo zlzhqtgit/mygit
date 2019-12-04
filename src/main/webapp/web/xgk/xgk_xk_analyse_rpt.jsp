@@ -104,9 +104,8 @@
 						                        }
 						                    ]
 						            };
-									var name="${analysis}";
-									alert(option1.xAxis[0].data[0]);
-									alert(name);
+									var name="${list}";
+									alert(list)
 									<%--option1.xAxis[0].data[0] = ${analysis.sortOne};--%>
 									<%--option1.xAxis[0].data[1] = ${analysis.sortTwo};--%>
 									<%--option1.xAxis[0].data[2] = ${analysis.sortThree};--%>

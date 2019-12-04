@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import cn.hqtzytb.utils.Photo;
 import org.apache.logging.log4j.LogManager;
@@ -390,7 +391,8 @@ public class UserController {
 						session.setAttribute("code",code);
 						session.setAttribute("phone",phone);
 						rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
-						logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+						logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Success! ");
+						System.out.println(code);
 					}else{
 						 rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
 						 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
@@ -421,8 +423,15 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/hqt_registeradd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleRegisteradd(String username,String phone,String password,String school,String schoolAddress,String families,String fraction,String ceeYear, HttpSession session,HttpServletRequest request) {
-		ResponseResult<Void> rr=null;		
+	public ResponseResult<Void> handleRegisteradd(String verifyCode,String username,String phone,String password,String school,String schoolAddress,String families,String fraction,String ceeYear, HttpSession session,HttpServletRequest request) {
+		ResponseResult<Void> rr = null;
+		System.out.println(verifyCode);
+		if (!phone.equals(session.getAttribute("phone").toString())){
+			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码和手机号不匹配");
+		}
+		if (!verifyCode.equals(session.getAttribute("code").toString())){
+			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码输入错误");
+		}
 		try {	
 			//查询用户名是否存在
 			User userlist=userServer.queryUser(phone);			

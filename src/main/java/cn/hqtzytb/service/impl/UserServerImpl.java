@@ -3,23 +3,22 @@ package cn.hqtzytb.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.service.IUserServer;
 import cn.hqtzytb.utils.Constants;
-import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.mapper.UserMapper;
-
 import javax.servlet.http.HttpSession;
 
 @Service
-@Slf4j
 public class UserServerImpl implements IUserServer {
+	private  static final Logger logger = LogManager.getLogger(UserServerImpl.class.getName());
 	@Autowired
 	public UserMapper userMapper;
 
@@ -60,7 +59,7 @@ public class UserServerImpl implements IUserServer {
 		if (!verifyCode.equals(code) || !phone.equals(mobile)) {
 			result.setState(Constants.RESULT_CODE_FAIL);
 			result.setMessage("验证码错误");
-			log.error(Constants.ERROR_HEAD_INFO + "验证码错误");
+			logger.error(Constants.ERROR_HEAD_INFO + "验证码错误");
 		}
 		Map<String,Object> paramMap = new HashMap<>();
 		paramMap.put("phone",phone);
@@ -68,7 +67,7 @@ public class UserServerImpl implements IUserServer {
 		if (users.isEmpty()) {
 			result.setState(Constants.RESULT_CODE_FAIL);
 			result.setMessage("用户信息不存在");
-			log.error(Constants.ERROR_HEAD_INFO + "用户信息不存在");
+			logger.error(Constants.ERROR_HEAD_INFO + "用户信息不存在");
 		} else {
 			String wexinChat = session.getAttribute("wexinChat").toString();
 			String qqChat = session.getAttribute("qqChat").toString();

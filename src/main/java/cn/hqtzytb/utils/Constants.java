@@ -16,6 +16,9 @@ public class Constants{
 	public static final Integer RESULT_CODE_SUCCESS = 1;
 	public static final String RESULT_MESSAGE_SUCCESS = "操作成功";
 
+	public static final String EVALUATION_TYPE_POTENTIAL_ANALYSIS = "QNFX";
+	public static final String EVALUATION_NAME_POTENTIAL_ANALYSIS = "潜能分析";
+
 	/**
 	 * 初始密码
 	 */

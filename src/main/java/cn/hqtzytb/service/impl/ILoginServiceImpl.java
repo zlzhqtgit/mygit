@@ -12,11 +12,11 @@ import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
-import lombok.extern.slf4j.Slf4j;
 import net.sf.json.JSONObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -31,8 +31,9 @@ import java.util.*;
  * @Version V1.0
  */
 @Service
-@Slf4j
 public class ILoginServiceImpl implements ILoginService {
+    private  static final Logger logger = LogManager.getLogger(ILoginServiceImpl.class.getName());
+
     @Autowired
     private UserMapper userMapper;
 
@@ -48,7 +49,7 @@ public class ILoginServiceImpl implements ILoginService {
             response.sendRedirect(new Oauth().getAuthorizeURL(request));
         } catch (QQConnectException | IOException e) {
             e.printStackTrace();
-            log.error("QQ登录跳转异常",e.getMessage());
+            logger.error("QQ登录跳转异常",e.getMessage());
         }
     }
 
@@ -63,7 +64,7 @@ public class ILoginServiceImpl implements ILoginService {
             if (accessTokenObj.getAccessToken().equals("")) {
 //                我们的网站被CSRF攻击了或者用户取消了授权
 //                做一些数据统计工作
-                log.error(Constants.ERROR_HEAD_INFO + "QQ登录回调异常");
+                logger.error(Constants.ERROR_HEAD_INFO + "QQ登录回调异常");
             } else {
                 accessToken = accessTokenObj.getAccessToken();
                 tokenExpireIn = accessTokenObj.getExpireIn();
@@ -97,12 +98,12 @@ public class ILoginServiceImpl implements ILoginService {
                     }
 
                 } else {
-                    log.error("很抱歉，我们没能正确获取到您的信息，原因是： " + userInfoBean.getMsg());
+                    logger.error("很抱歉，我们没能正确获取到您的信息，原因是： " + userInfoBean.getMsg());
                 }
             }
         } catch (QQConnectException e) {
             e.printStackTrace();
-            log.error(Constants.ERROR_HEAD_INFO + "QQ登录回调异常");
+            logger.error(Constants.ERROR_HEAD_INFO + "QQ登录回调异常");
         }
         return "web/xga/xgk_error_404";
     }
@@ -112,7 +113,7 @@ public class ILoginServiceImpl implements ILoginService {
         try{
             String code = request.getParameter("code");
             if (code == null){
-                log.error(Constants.ERROR_HEAD_INFO + "用户禁止授权");
+                logger.error(Constants.ERROR_HEAD_INFO + "用户禁止授权");
             }
             String requestUrl = Constants.WX_LOGIN_TOKEN_URL
                     .replace("APPID", PropsUtil.loadProps("config.properties").getProperty("wx_login_appid"))
@@ -144,7 +145,7 @@ public class ILoginServiceImpl implements ILoginService {
             }
         } catch (Exception ex){
             ex.printStackTrace();
-            log.error(Constants.ERROR_HEAD_INFO + "微信登录回调异常");
+            logger.error(Constants.ERROR_HEAD_INFO + "微信登录回调异常");
         }
         return "web/xga/xgk_error_404";
     }
