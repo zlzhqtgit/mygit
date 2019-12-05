@@ -19,27 +19,27 @@
 			<section class="sch_search container">
 				
 				<div style="padding: 1em 100px 1em;">
-				    <form class="bs-example bs-example-form" role="form">
+				    <form class="bs-example bs-example-form" role="form" id="universities_name">
 				        <div class="input-group input-group-lg">
-				            <span class="input-group-addon"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校">
+				            <span class="input-group-addon" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
+				            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
 				        </div>
 				    </form>
 				</div>
 
 				<div class="panel panel-default">
-				    <ul class="list-group slice_list">
+				    <ul class="list-group slice_list" id="search-ui">
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
 				        		<dt>院校属性</dt>
 				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
-				        		<dd><a href="javascript:void(0)">985</a></dd>
-				        		<dd><a href="javascript:void(0)">211</a></dd>
-				        		<dd><a href="javascript:void(0)">双一流</a></dd>
-				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
+				        	<dl class="pull-left item_body" id="universities_attributes" name="0">
+				        		<dd class=""><a class="active" href="javascript:void(0)" >全部</a></dd>
+				        		<dd><a href="javascript:void(0)" >985</a></dd>
+				        		<dd><a href="javascript:void(0)" >211</a></dd>
+				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
+				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
 				        	</dl>
 				        	<div class="clearfix"></div>
 				        </li>
@@ -47,92 +47,154 @@
 				        	<dl class="pull-left item_tit">
 				        		<dt>院校类型</dt>
 				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd><a class="active" href="javascript:void(0)">综合类</a></dd>
-				        		<dd><a href="javascript:void(0)">理工类</a></dd>
-				        		<dd><a href="javascript:void(0)">师范类</a></dd>
-				        		<dd><a href="javascript:void(0)">农林类</a></dd>
-				        		<dd><a href="javascript:void(0)">政法类</a></dd>
-				        		<dd><a href="javascript:void(0)">医药类</a></dd>
-				        		<dd><a href="javascript:void(0)">财经类</a></dd>
-				        		<dd><a href="javascript:void(0)">民族类</a></dd>
-				        		<dd><a href="javascript:void(0)">语言类</a></dd>
-				        		<dd><a href="javascript:void(0)">旅游类</a></dd>
-				        		<dd><a href="javascript:void(0)">体育类</a></dd>
-				        		<dd><a href="javascript:void(0)">艺术类</a></dd>
-				        		<dd><a href="javascript:void(0)">军事类</a></dd>
+				        	<dl class="pull-left item_body" id="universities_type" name="1">
+				        		<dd><a class="active" href="javascript:void(0)" >综合类</a></dd>
+				        		<dd><a href="javascript:void(0)" >理工类</a></dd>
+				        		<dd><a href="javascript:void(0)" >师范类</a></dd>
+				        		<dd><a href="javascript:void(0)" >农林类</a></dd>
+				        		<dd><a href="javascript:void(0)" >政法类</a></dd>
+				        		<dd><a href="javascript:void(0)" >医药类</a></dd>
+				        		<dd><a href="javascript:void(0)" >财经类</a></dd>
+				        		<dd><a href="javascript:void(0)" >民族类</a></dd>
+				        		<dd><a href="javascript:void(0)" >语言类</a></dd>
+				        		<dd><a href="javascript:void(0)" >旅游类</a></dd>
+				        		<dd><a href="javascript:void(0)" >体育类</a></dd>
+				        		<dd><a href="javascript:void(0)" >艺术类</a></dd>
+				        		<dd><a href="javascript:void(0)" >军事类</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
 				        		<dt>院校省份</dt>
 				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
-				        		<dd><a href="javascript:void(0)">985</a></dd>
-				        		<dd><a href="javascript:void(0)">211</a></dd>
-				        		<dd><a href="javascript:void(0)">双一流</a></dd>
-				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
+				        	<dl class="pull-left item_body" id="province" name="2">
+				        		<dd class=""><a class="active" href="javascript:void(0)" >全部</a></dd>
+				        		<dd><a href="javascript:void(0)" >985</a></dd>
+				        		<dd><a href="javascript:void(0)" >211</a></dd>
+				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
+				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
-				        	<dl class="pull-left item_tit">
+				        	<dl class="pull-left item_tit" >
 				        		<dt>热门城市</dt>
 				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
-				        		<dd><a href="javascript:void(0)">985</a></dd>
-				        		<dd><a href="javascript:void(0)">211</a></dd>
-				        		<dd><a href="javascript:void(0)">双一流</a></dd>
-				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
+				        	<dl class="pull-left item_body" id="city" name="3">
+				        		<dd class=""><a class="active a" href="javascript:void(0)" >全部</a></dd>
+				        		<dd><a class="a" href="javascript:void(0)" >985</a></dd>
+				        		<dd><a href="javascript:void(0)" >211</a></dd>
+				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
+				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
 				        		<dt>办学性质</dt>
 				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
-				        		<dd><a href="javascript:void(0)">985</a></dd>
-				        		<dd><a href="javascript:void(0)">211</a></dd>
-				        		<dd><a href="javascript:void(0)">双一流</a></dd>
-				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
+				        	<dl class="pull-left item_body" id="universities_nature" name="4">
+				        		<dd class=""><a class="active" href="javascript:void(0)" onclick="addSearch(this)">全部</a></dd>
+				        		<dd><a href="javascript:void(0)" >985</a></dd>
+				        		<dd><a href="javascript:void(0)" >211</a></dd>
+				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
+				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
 				        		<dt>录取批次</dt>
 				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
-				        		<dd><a href="javascript:void(0)">985</a></dd>
-				        		<dd><a href="javascript:void(0)">211</a></dd>
-				        		<dd><a href="javascript:void(0)">双一流</a></dd>
-				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
+				        	<dl class="pull-left item_body" id="admission_lot" name="5">
+				        		<dd class=""><a class="active" href="javascript:void(0)" >全部</a></dd>
+				        		<dd><a href="javascript:void(0)" >985</a></dd>
+				        		<dd><a href="javascript:void(0)" >211</a></dd>
+				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
+				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
 				        		<dt>科研教学</dt>
 				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
-				        		<dd><a href="javascript:void(0)">985</a></dd>
-				        		<dd><a href="javascript:void(0)">211</a></dd>
-				        		<dd><a href="javascript:void(0)">双一流</a></dd>
-				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
+				        	<dl class="pull-left item_body" id="teaching_research" name="6">
+				        		<dd class=""><a class="active" href="javascript:void(0)" >全部</a></dd>
+				        		<dd><a href="javascript:void(0)" >985</a></dd>
+				        		<dd><a href="javascript:void(0)" >211</a></dd>
+				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
+				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
 				        	</dl>
 				        </li>
 				    </ul>
 				    
 				</div>
-				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="">开始查询</a></p>
-					
+				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="schoolSearch(2)" <%--onclick="schoolSearch()"--%>>开始查询</a></p>
+				<script type="text/javascript">
+					//条件数组
+					var search = [
+							["universities_attributes",""],
+							["universities_type",""],
+							["province",""],
+							["city",""],
+							["universities_nature",""],
+							["admission_lot",""],
+							["teaching_research",""],];
+
+					function schoolSearch(e) {
+						var where = "";
+						if (e == 1){
+							var school_name = $(".form-control").val();
+							if (school_name == ""){
+								where = "";
+							} else {
+								where = "u.universities_name like %" + $(".form-control").val() + "%";
+							}
+						} else {
+							$("#search-ui li a.active").each(function () {
+								var name = $(this).parents("dl").attr('name');
+								var id = $(this).parents("dl").attr('id');
+								var text = $(this).text();
+								console.log(id);
+								if (search[name][1] == "" && text != "全部") {
+									search[name][1] += "u." + id + "='" + text + "'";
+								} else if (search[name][1] != "" && text != "全部") {
+									search[name][1] += " or u." + id + "='" + text + "'";
+								} else {
+									search[name][1] = "";
+								}
+							})
+							var addAnd = false;
+							search.forEach(function (value) {
+								if (value[1] != ""){
+									if (addAnd){
+										where += " and " + value[1];
+									} else {
+										where = value[1];
+										addAnd = true;
+									}
+								}
+							});
+						}
+						alert(where);
+						$.ajax({
+							url: "../school/xgk_school_query.do",
+							data: "where=" + where,
+							type: "POST",
+							dataType: "json",
+							success: function (obj) {
+								if (obj.state == 1){
+									var a = obj.data;
+									for (var i=0;i<a.length;i++){
+										alert(a[i].universitiesName);
+									}
+								}
+							}
+						});
+					}
+				</script>
 				<div class="panel panel-default">
 					<div class="panel_head padding-side2">
 						<h4 class="fontwei">共找到xx条结果</h4>
@@ -238,7 +300,7 @@
 				 	</div>
 				</div>
 			</div>
-			<script src="js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+			<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
 			<!--模态框-->
 			<div class="tip_box" id="Modal">
 				<div class="bg-model"></div>
@@ -249,11 +311,11 @@
 						<table class="table table-bordered table-bordered marginauto">
 							<thead>
 								<tr><th style="vertical-align: middle;">院校</th>
-									<th><img src="img/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="img/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="img/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="img/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="img/sch_logo.png"/><div>上海外国语大学</div></th>
+									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
+									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
+									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
+									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
+									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -279,7 +341,7 @@
 					<h2 class="modal_tit text-left margin_top1 fontwei">院校录取分数对比</h2>
 					<div class="modal_content margin_top margin_bot padding-side2">
 						<table class="table table-hover table-bordered marginauto">
-							<tr><td rowspan="7" style="width: 10em;"><img src="img/sch_logo.png"/></td><td rowspan="2">年份</td><td colspan="6">录取分数</td><td colspan="2">计划招生</td></tr>
+							<tr><td rowspan="7" style="width: 10em;"><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></td><td rowspan="2">年份</td><td colspan="6">录取分数</td><td colspan="2">计划招生</td></tr>
 							<tr><td>最低分</td><td>平均分</td><td>最高分</td><td>投档线</td><td>线差</td><td>今年</td><td>往年</td></tr>
 							<tr><td>2019</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 							<tr><td>2018</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
@@ -313,6 +375,7 @@
 				$(".item_body dd a").click(function() {
 					$(this).parents("dl").children().find("a").removeClass("active");
 					$(this).addClass("active");
+
 				})
 				
 				//关闭模态框

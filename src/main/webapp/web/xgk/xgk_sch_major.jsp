@@ -178,7 +178,7 @@
 							$(this).parents("dl").children().find("a").removeClass("active");
 							$(this).addClass("active");
 						})
-				    	
+
 				    	$(document).ready(function() {
 //				    		$('.tab_body .tab_b2').hide();
 				    		$('.tab_head li').click(function(){

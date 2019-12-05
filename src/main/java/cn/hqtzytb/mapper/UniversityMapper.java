@@ -19,7 +19,7 @@ public interface UniversityMapper {
     Integer insertUniversity(University university);
     Integer updateUniversity(University university);
     Integer deleteUniversity(University university);
-    List<University> selectUniversityById(@Param("where")String where,
+    List<University> selectUniversityList(@Param("where")String where,
                                       @Param("orderBy")String orderBy,
                                       @Param("offset")Integer offset,
                                       @Param("countPerPage")Integer countPerPage);
@@ -28,7 +28,7 @@ public interface UniversityMapper {
     Integer insertUniversityRelation(UniversityRelation university);
     Integer updateUniversityRelation(UniversityRelation university);
     Integer deleteUniversityRelation(UniversityRelation university);
-    List<UniversityRelation> selectUniversityRelation(@Param("where")String where,
+    List<UniversityRelation> selectUniversityRelationList(@Param("where")String where,
                                       @Param("orderBy")String orderBy,
                                       @Param("offset")Integer offset,
                                       @Param("countPerPage")Integer countPerPage);

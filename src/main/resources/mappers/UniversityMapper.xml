@@ -5,175 +5,223 @@
 
     <insert id="insertUniversity" parameterType="cn.hqtzytb.entity.University" useGeneratedKeys="true" keyProperty="id">
         insert into university
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 id,
             </if>
-            <if test="universitiesCode != null" >
+            <if test="universitiesCode != null">
                 universities_code,
             </if>
-            <if test="universitiesName != null" >
+            <if test="universitiesName != null">
                 universities_name,
             </if>
-            <if test="province != null" >
+            <if test="province != null">
                 province,
             </if>
-            <if test="establishedTime != null" >
+            <if test="city != null">
+                city,
+            </if>
+            <if test="establishedTime != null">
                 established_time,
             </if>
-            <if test="universitiesNature != null" >
+            <if test="universitiesNature != null">
                 universities_nature,
             </if>
-            <if test="belongTo != null" >
+            <if test="belongTo != null">
                 belong_to,
             </if>
-            <if test="address != null" >
+            <if test="address != null">
                 address,
             </if>
-            <if test="mapCoordinates != null" >
+            <if test="mapCoordinates != null">
                 map_coordinates,
             </if>
-            <if test="martialBookAssociationRanking != null" >
-                martial_book_association_ranking,
+            <if test="universitiesAttributes != null">
+                universities_attributes,
             </if>
-            <if test="alumniAssociationRanking != null" >
+            <if test="universitiesType != null">
+                universities_type,
+            </if>
+            <if test="universitiesImage != null">
+                universities_image,
+            </if>
+            <if test="admissionLot != null">
+                admission_lot,
+            </if>
+            <if test="admissionProbability != null">
+                admission_probability,
+            </if>
+            <if test="universitiesWebsite != null">
+                universities_website,
+            </if>
+            <if test="alumniAssociationRanking != null">
                 alumni_association_ranking,
             </if>
-            <if test="softScienceRanking != null" >
+            <if test="martialBookAssociationRanking != null">
+                martial_book_association_ranking,
+            </if>
+            <if test="softScienceRanking != null">
                 soft_science_ranking,
             </if>
-            <if test="quacquarelliSymondsRanking != null" >
+            <if test="quacquarelliSymondsRanking != null">
                 quacquarelli_symonds_ranking,
             </if>
-            <if test="usNewsRanking != null" >
+            <if test="usNewsRanking != null">
                 us_news_ranking,
             </if>
-            <if test="createTime != null" >
-                create_time,
+            <if test="admissionAverageRanking != null">
+                admission_average_ranking,
             </if>
-            <if test="createBy != null" >
+            <if test="totalRanking != null">
+                total_ranking,
+            </if>
+            <if test="createBy != null">
                 create_by,
             </if>
-            <if test="updateTime != null" >
+            <if test="updateTime != null">
                 update_time,
             </if>
-            <if test="updateBy != null" >
+            <if test="updateBy != null">
                 update_by,
             </if>
-            <if test="universitiesIntroduction != null" >
+            <if test="universitiesIntroduction != null">
                 universities_introduction,
             </if>
-            <if test="universitiesLife != null" >
+            <if test="universitiesLife != null">
                 universities_life,
             </if>
-            <if test="roomAndBoard != null" >
+            <if test="roomAndBoard != null">
                 room_and_board,
             </if>
-            <if test="scholarships != null" >
+            <if test="scholarships != null">
                 scholarships,
             </if>
-            <if test="teachingResearch != null" >
+            <if test="teachingResearch != null">
                 teaching_research,
             </if>
-            <if test="maleFemaleRatio != null" >
+            <if test="maleFemaleRatio != null">
                 male_female_ratio,
             </if>
-            <if test="teachersResources != null" >
+            <if test="teachersResources != null">
                 teachers_resources,
             </if>
-            <if test="coreSpecialty != null" >
+            <if test="coreSpecialty != null">
                 core_specialty,
             </if>
-            <if test="coreSubject != null" >
+            <if test="coreSubject != null">
                 core_subject,
             </if>
-            <if test="coreLaboratoriesAndResearchCenters != null" >
+            <if test="coreLaboratoriesAndResearchCenters != null">
                 core_laboratories_and_research_centers,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 #{id},
             </if>
-            <if test="universitiesCode != null" >
+            <if test="universitiesCode != null">
                 #{universitiesCode},
             </if>
-            <if test="universitiesName != null" >
+            <if test="universitiesName != null">
                 #{universitiesName},
             </if>
-            <if test="province != null" >
+            <if test="province != null">
                 #{province},
             </if>
-            <if test="establishedTime != null" >
+            <if test="city != null">
+                #{city},
+            </if>
+            <if test="establishedTime != null">
                 #{establishedTime},
             </if>
-            <if test="universitiesNature != null" >
+            <if test="universitiesNature != null">
                 #{universitiesNature},
             </if>
-            <if test="belongTo != null" >
+            <if test="belongTo != null">
                 #{belongTo},
             </if>
-            <if test="address != null" >
+            <if test="address != null">
                 #{address},
             </if>
-            <if test="mapCoordinates != null" >
+            <if test="mapCoordinates != null">
                 #{mapCoordinates},
             </if>
-            <if test="martialBookAssociationRanking != null" >
-                #{martialBookAssociationRanking},
+            <if test="universitiesAttributes != null">
+                #{universitiesAttributes},
             </if>
-            <if test="alumniAssociationRanking != null" >
+            <if test="universitiesType != null">
+                #{universitiesType},
+            </if>
+            <if test="universitiesImage != null">
+                #{universitiesImage},
+            </if>
+            <if test="admissionLot != null">
+                #{admissionLot},
+            </if>
+            <if test="admissionProbability != null">
+                #{admissionProbability},
+            </if>
+            <if test="universitiesWebsite != null">
+                #{universitiesWebsite},
+            </if>
+            <if test="alumniAssociationRanking != null">
                 #{alumniAssociationRanking},
             </if>
-            <if test="softScienceRanking != null" >
+            <if test="martialBookAssociationRanking != null">
+                #{martialBookAssociationRanking},
+            </if>
+            <if test="softScienceRanking != null">
                 #{softScienceRanking},
             </if>
-            <if test="quacquarelliSymondsRanking != null" >
+            <if test="quacquarelliSymondsRanking != null">
                 #{quacquarelliSymondsRanking},
             </if>
-            <if test="usNewsRanking != null" >
+            <if test="usNewsRanking != null">
                 #{usNewsRanking},
             </if>
-            <if test="createTime != null" >
-                #{createTime},
+            <if test="admissionAverageRanking != null">
+                #{admissionAverageRanking},
             </if>
-            <if test="createBy != null" >
+            <if test="totalRanking != null">
+                #{totalRanking},
+            </if>
+            <if test="createBy != null">
                 #{createBy},
             </if>
-            <if test="updateTime != null" >
+            <if test="updateTime != null">
                 #{updateTime},
             </if>
-            <if test="updateBy != null" >
+            <if test="updateBy != null">
                 #{updateBy},
             </if>
-            <if test="universitiesIntroduction != null" >
+            <if test="universitiesIntroduction != null">
                 #{universitiesIntroduction},
             </if>
-            <if test="universitiesLife != null" >
+            <if test="universitiesLife != null">
                 #{universitiesLife},
             </if>
-            <if test="roomAndBoard != null" >
+            <if test="roomAndBoard != null">
                 #{roomAndBoard},
             </if>
-            <if test="scholarships != null" >
+            <if test="scholarships != null">
                 #{scholarships},
             </if>
-            <if test="teachingResearch != null" >
+            <if test="teachingResearch != null">
                 #{teachingResearch},
             </if>
-            <if test="maleFemaleRatio != null" >
+            <if test="maleFemaleRatio != null">
                 #{maleFemaleRatio},
             </if>
-            <if test="teachersResources != null" >
+            <if test="teachersResources != null">
                 #{teachersResources},
             </if>
-            <if test="coreSpecialty != null" >
+            <if test="coreSpecialty != null">
                 #{coreSpecialty},
             </if>
-            <if test="coreSubject != null" >
+            <if test="coreSubject != null">
                 #{coreSubject},
             </if>
-            <if test="coreLaboratoriesAndResearchCenters != null" >
+            <if test="coreLaboratoriesAndResearchCenters != null">
                 #{coreLaboratoriesAndResearchCenters},
             </if>
         </trim>
@@ -181,86 +229,110 @@
 
     <update id="updateUniversityById" parameterType="cn.hqtzytb.entity.University">
         update university
-        <set >
-            <if test="universitiesCode != null" >
+        <set>
+            <if test="universitiesCode != null">
                 universities_code = #{universitiesCode},
             </if>
-            <if test="universitiesName != null" >
+            <if test="universitiesName != null">
                 universities_name = #{universitiesName},
             </if>
-            <if test="province != null" >
+            <if test="province != null">
                 province = #{province},
             </if>
-            <if test="establishedTime != null" >
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="establishedTime != null">
                 established_time = #{establishedTime},
             </if>
-            <if test="universitiesNature != null" >
+            <if test="universitiesNature != null">
                 universities_nature = #{universitiesNature},
             </if>
-            <if test="belongTo != null" >
+            <if test="belongTo != null">
                 belong_to = #{belongTo},
             </if>
-            <if test="address != null" >
+            <if test="address != null">
                 address = #{address},
             </if>
-            <if test="mapCoordinates != null" >
+            <if test="mapCoordinates != null">
                 map_coordinates = #{mapCoordinates},
             </if>
-            <if test="martialBookAssociationRanking != null" >
-                martial_book_association_ranking = #{martialBookAssociationRanking},
+            <if test="universitiesAttributes != null">
+                universities_attributes = #{universitiesAttributes},
             </if>
-            <if test="alumniAssociationRanking != null" >
+            <if test="universitiesType != null">
+                universities_type = #{universitiesType},
+            </if>
+            <if test="universitiesImage != null">
+                universities_image = #{universitiesImage},
+            </if>
+            <if test="admissionLot != null">
+                admission_lot = #{admissionLot},
+            </if>
+            <if test="admissionProbability != null">
+                admission_probability = #{admissionProbability},
+            </if>
+            <if test="universitiesWebsite != null">
+                universities_website = #{universitiesWebsite},
+            </if>
+            <if test="alumniAssociationRanking != null">
                 alumni_association_ranking = #{alumniAssociationRanking},
             </if>
-            <if test="softScienceRanking != null" >
+            <if test="martialBookAssociationRanking != null">
+                martial_book_association_ranking = #{martialBookAssociationRanking},
+            </if>
+            <if test="softScienceRanking != null">
                 soft_science_ranking = #{softScienceRanking},
             </if>
-            <if test="quacquarelliSymondsRanking != null" >
+            <if test="quacquarelliSymondsRanking != null">
                 quacquarelli_symonds_ranking = #{quacquarelliSymondsRanking},
             </if>
-            <if test="usNewsRanking != null" >
+            <if test="usNewsRanking != null">
                 us_news_ranking = #{usNewsRanking},
             </if>
-            <if test="createTime != null" >
-                create_time = #{createTime},
+            <if test="admissionAverageRanking != null">
+                admission_average_ranking = #{admissionAverageRanking},
             </if>
-            <if test="createBy != null" >
+            <if test="totalRanking != null">
+                total_ranking = #{totalRanking},
+            </if>
+            <if test="createBy != null">
                 create_by = #{createBy},
             </if>
-            <if test="updateTime != null" >
+            <if test="updateTime != null">
                 update_time = #{updateTime},
             </if>
-            <if test="updateBy != null" >
+            <if test="updateBy != null">
                 update_by = #{updateBy},
             </if>
-            <if test="universitiesIntroduction != null" >
+            <if test="universitiesIntroduction != null">
                 universities_introduction = #{universitiesIntroduction},
             </if>
-            <if test="universitiesLife != null" >
+            <if test="universitiesLife != null">
                 universities_life = #{universitiesLife},
             </if>
-            <if test="roomAndBoard != null" >
+            <if test="roomAndBoard != null">
                 room_and_board = #{roomAndBoard},
             </if>
-            <if test="scholarships != null" >
+            <if test="scholarships != null">
                 scholarships = #{scholarships},
             </if>
-            <if test="teachingResearch != null" >
+            <if test="teachingResearch != null">
                 teaching_research = #{teachingResearch},
             </if>
-            <if test="maleFemaleRatio != null" >
+            <if test="maleFemaleRatio != null">
                 male_female_ratio = #{maleFemaleRatio},
             </if>
-            <if test="teachersResources != null" >
+            <if test="teachersResources != null">
                 teachers_resources = #{teachersResources},
             </if>
-            <if test="coreSpecialty != null" >
+            <if test="coreSpecialty != null">
                 core_specialty = #{coreSpecialty},
             </if>
-            <if test="coreSubject != null" >
+            <if test="coreSubject != null">
                 core_subject = #{coreSubject},
             </if>
-            <if test="coreLaboratoriesAndResearchCenters != null" >
+            <if test="coreLaboratoriesAndResearchCenters != null">
                 core_laboratories_and_research_centers = #{coreLaboratoriesAndResearchCenters},
             </if>
         </set>
@@ -273,10 +345,12 @@
 
     <select id="selectUniversityList"  resultType="cn.hqtzytb.entity.University">
         select
-            u.id, u.universities_code, u.universities_name, u.province, u.established_time, u.universities_nature,
-            u.belong_to, u.address, u.map_coordinates, u.martial_book_association_ranking, u.alumni_association_ranking,
-            u.soft_science_ranking, u.quacquarelli_symonds_ranking, u.us_news_ranking, create_time,
-            u.create_by, u.update_time, u.update_by,u.universities_introduction, u.universities_life, u.room_and_board, u.scholarships, u.teaching_research,
+            u.id, u.universities_code, u.universities_name, u.province, u.city, u.established_time, u.universities_nature,
+            u.belong_to, u.address, u.map_coordinates, u.universities_attributes, u.universities_type,
+            u.universities_image, u.admission_lot, u.admission_probability, u.universities_website, u.alumni_association_ranking,
+            u.martial_book_association_ranking, u.soft_science_ranking, u.quacquarelli_symonds_ranking,
+            u.us_news_ranking, u.admission_average_ranking, u.total_ranking, u.create_by, u.update_time,
+            u.update_by,u.universities_introduction, u.universities_life, u.room_and_board, u.scholarships, u.teaching_research,
             u.male_female_ratio, u.teachers_resources, u.core_specialty, u.core_subject, u.core_laboratories_and_research_centers,
             ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score, ur.admissions_brochure, ur.admissions_regulations
         from university u
@@ -366,7 +440,7 @@
         delete from university_relation where id = #{id}
     </delete>
 
-    <select id="selectUniversityRelation" resultType="cn.hqtzytb.entity.UniversityRelation">
+    <select id="selectUniversityRelationList" resultType="cn.hqtzytb.entity.UniversityRelation">
         select
             id, universities_code, college_score_line, enrollment_plan, professional_admission_score, admissions_brochure, admissions_regulations
         from university_relation

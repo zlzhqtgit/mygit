@@ -55,4 +55,5 @@ public interface SpecialtyMapper {
 	 * @return
 	 */
 	List<Specialty> selectSpecialtyListByMap(Map<String,Object> paramMap);
+
 }

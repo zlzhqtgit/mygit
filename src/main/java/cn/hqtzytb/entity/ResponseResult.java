@@ -46,20 +46,23 @@ public class ResponseResult<T> {
 	public Integer getState() {
 		return state;
 	}
-	public void setState(Integer state) {
+	public ResponseResult<T> setState(Integer state) {
 		this.state = state;
+		return this;
 	}
 	public String getMessage() {
 		return message;
 	}
-	public void setMessage(String message) {
+	public ResponseResult<T> setMessage(String message) {
 		this.message = message;
+		return this;
 	}
 	public T getData() {
 		return data;
 	}
-	public void setData(T data) {
+	public ResponseResult<T> setData(T data) {
 		this.data = data;
+		return this;
 	}
 	
 }

@@ -48,12 +48,17 @@ public class University extends UniversityRelation implements Serializable{
     private String province;
 
     /**
+     * 城市信息
+     */
+    private String city;
+
+    /**
      * 创建时间: 2019-10-01
      */
     private String establishedTime;
 
     /**
-     * 办学性质
+     * 办学性质：公办、民办、独立院校、中外合作办学
      */
     private String universitiesNature;
 
@@ -63,7 +68,7 @@ public class University extends UniversityRelation implements Serializable{
     private String belongTo;
 
     /**
-     * 地址
+     * 学校地址
      */
     private String address;
 
@@ -73,34 +78,24 @@ public class University extends UniversityRelation implements Serializable{
     private String mapCoordinates;
 
     /**
-     * 武书会排名
-     */
-    private Integer martialBookAssociationRanking;
-
-    /**
-     * 校友会排名
-     */
-    private Integer alumniAssociationRanking;
-
-    /**
-     * 软科中国两岸四地大学百强排名
-     */
-    private Integer softScienceRanking;
-
-    /**
-     * 世界大学排名:QS排名
-     */
-    private Integer quacquarelliSymondsRanking;
-
-    /**
-     * 美国大学排名:USNews
-     */
-    private Integer usNewsRanking;
-
-    /**
      * 学校介绍
      */
     private String universitiesIntroduction;
+
+    /**
+     * 院校属性
+     */
+    private String universitiesAttributes;
+
+    /**
+     * 院校类型
+     */
+    private String universitiesType;
+
+    /**
+     * 大学校图
+     */
+    private String universitiesImage;
 
     /**
      * 校园生活
@@ -148,9 +143,54 @@ public class University extends UniversityRelation implements Serializable{
     private String coreLaboratoriesAndResearchCenters;
 
     /**
-     * 创建时间
+     * 录取批次
      */
-    private Date createTime;
+    private String admissionLot;
+
+    /**
+     * 录取概率
+     */
+    private String admissionProbability;
+
+    /**
+     * 学校官网
+     */
+    private String universitiesWebsite;
+
+    /**
+     * 校友会排名
+     */
+    private Integer alumniAssociationRanking;
+
+    /**
+     * 武书会排名
+     */
+    private Integer martialBookAssociationRanking;
+
+    /**
+     * 软科中国两岸四地大学百强排名
+     */
+    private Integer softScienceRanking;
+
+    /**
+     * 世界大学排名:QS排名
+     */
+    private Integer quacquarelliSymondsRanking;
+
+    /**
+     * 美国大学排名:USNews
+     */
+    private Integer usNewsRanking;
+
+    /**
+     * 录取平均分排行
+     */
+    private Integer admissionAverageRanking;
+
+    /**
+     * 综合排名
+     */
+    private Integer totalRanking;
 
     /**
      * 创建人
