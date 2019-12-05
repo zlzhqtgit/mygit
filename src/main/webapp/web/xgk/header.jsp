@@ -39,13 +39,13 @@
 				<div class="head-top col-md-4 margin_top margin_bot1">
 					<c:if test="${username==null}">
 						<div class="user">
-							<img src="${pageContext.request.contextPath}/img/xgk/user.png" width="100%"  height="100%">
+							<img src="${pageContext.request.contextPath}/img/xgk/user.png" >
 							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
 						</div>
 					</c:if>
 					<c:if test="${username!=null}">
 						<div class="user">
-							<img src="${pageContext.request.contextPath}/img/xgk/user.png">
+							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
 							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 						</div>
 					</c:if>

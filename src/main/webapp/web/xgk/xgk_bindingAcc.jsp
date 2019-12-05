@@ -145,40 +145,6 @@
 									<input class="btn btn-primary" type="button" onclick="register1()" value="提交注册" id="submit1" disabled="true"/>
 								</div>
 							</form>
-							<script type="text/javascript">
-								function register(){
-									var read = $("#read").is(':checked');
-									if(read){
-										var photeyzm="${code}";
-										var phone="${phone}";
-										alert(photeyzm + " " + phone + " === " + $("#verify_code").val() + " " + $("#phone").val());
-										if(photeyzm==$("#verify_code").val() && phone==$("#phone").val()){
-											var url = "../user/hqt_registeradd.do";
-											var data = $("#reg_form").serialize();
-											$.ajax({
-												"url" : url,
-												"data" : data,
-												"type" : "POST",
-												"dataType" : "json",
-												"success" : function(obj) {
-													if (obj.state == 0) {
-														layer.msg(obj.message,{icon:2,time:1000});
-														return;
-													}else{
-														layer.msg(obj.message,{icon:1,time:1000},function(){ next_step(e);});
-													}
-												}
-											});
-										}else if(photeyzm != $("#verify_code").val() && phone==$("#phone").val()){
-											layer.msg("验证码输入错误",{icon:2,time:1000});
-										}else{
-											layer.msg("验证码和手机号不匹配",{icon:2,time:1000});
-										}
-									} else {
-										layer.msg("请阅读《用户服务协议》和《隐私政策》",{icon:5,time:1000});
-									}
-								}
-							</script>
 						</div>
 					</div>
 				</div>
