@@ -71,7 +71,7 @@ function chat2(id) {
 					<img src="${pageContext.request.contextPath}/img/xgk/rside1.png" >
 				</span>				
 				<div class="">
-					<a href="javascript:void(0);">线上课程</a>
+					<a href="${pageContext.request.contextPath}/web/xgk/xgk_course.jsp">线上课程</a>
 				</div>
 				
 			</div>

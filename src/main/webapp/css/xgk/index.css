@@ -1388,9 +1388,11 @@ textarea{
 	width: 100%;
 }
 .course_nav{
-	position: absolute;
-	left: -2em;
-	top: 1em;
+	position: fixed;
+	left: 18em;
+	top: 4em;
+	z-index: 9;
+	display: none;
 }
 .course_nav li{
 	width: 3em;
@@ -1398,7 +1400,6 @@ textarea{
 	padding: .4em;
 	border: 1px solid #999;
 	border-top: 0;
-	background-color: #fff;
 }
 .course_nav li:first-child{
 	border-top: 1px solid #999;

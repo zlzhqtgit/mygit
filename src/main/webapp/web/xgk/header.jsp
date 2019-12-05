@@ -32,7 +32,7 @@
 							</li>
 							<li><a id="xgk7" name="dh" href="#">学科推荐</a></li>
 							<li><a id="xgk8" name="dh" href="#">升学规划</a></li>
-							<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_voluntary.jsp"">志愿填报</a></li>
+							<li><a id="xgk9" name="dh" href="#">志愿填报</a></li>
 						</ul>
 					</nav>
 				</div>
