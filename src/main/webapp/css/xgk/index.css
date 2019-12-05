@@ -603,6 +603,14 @@ main{
 }
 .converse_info{
 	padding: 1em 2px;
+	display: block;
+	overflow: hidden;
+}
+.converse_info>img{
+	transition: all .4s;
+}
+.converse_info>img:hover{
+	transform: scale(1.1);
 }
 h3{
 	margin: 0;
