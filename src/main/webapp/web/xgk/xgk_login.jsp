@@ -25,7 +25,7 @@
 		<header class="padding-side login_head">
 			<nav class="">
 				<ul class="margin_top1">
-					<li><a href="">新手教程</a></li>
+					<li><a href="${pageContext.request.contextPath}/cp/xgk_index.do">官方首页</a></li>
 					<li><a href="">志愿填报QQ群</a></li>
 					<li><a href="">官方微信</a></li>
 					<li><a href="">开通/激活VIP</a></li>
@@ -42,17 +42,16 @@
 					<div class="">
 						<input id="mobile" onblur="check_mobile ()" type="text"  value="" placeholder="手机号"/>
 						<span class="glyphicon glyphicon-phone text-muted"></span>
-						<div id="tip1" class="tip text-danger"></div>
 					</div>
 					<div class="margin_top1">
 						<input id="password" onblur="check_pwd ()" type="password" id="password" value="" placeholder="密码"/>
 						<span class="glyphicon glyphicon-tag text-muted"></span>
-						<div id="tip2" class="tip text-danger"></div>
 					</div>
 				</fieldset>				
 				<div class="text-center margin_bot margin_top1">
 					<input class="login_btn" type="button" name="" onclick="login()"  id="subm" value="登录" />
 				</div>
+				<div class="tip text-center text-danger" id="tip1" style="height: 1em;"></div>
 				<div class="forget margin_top1 clearfix">
 					<a href="" class="text-primary pull-left">忘记密码？</a>
 					<a href="${pageContext.request.contextPath}/user/register.do" class="text-primary pull-right">免费注册</a>
@@ -103,14 +102,16 @@
 						var tip1=$('#tip1').text();
 						var mobile=$("#mobile").val();
 						if (mobile=='') {
-							$('#tip1').text('手机号不能为空')
+							$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号不能为空')
 						} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
-							$('#tip1').text('手机号码有误，请重新输入');
+							$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号码有误，请重新输入');
 					        return false; 
 					    } else{
-					    	$('#tip1').text('');
-					    }						
-					}					
+					    	$('#tip1').html('');
+					    }
+						
+					}
+					
 					/**
 					 * 密码规则
 					 */
@@ -118,13 +119,13 @@
 						var pwd_tip=$('#tip2').text();
 						var pwd=$("#password").val();
 						if (pwd=='') {
-							$('#tip2').text('密码不能为空');
+							$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码不能为空');
 						} else if(!(/^(\w){6,20}$/).test(pwd)){
 							//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
-							$('#tip2').text('密码只能输入6-20个字母、数字、下划线_ ');
+							$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码只能由6-20个字母、数字、和特殊字符组成');
 							return false; 
 						}else{
-							$('#tip2').text('');
+							$('#tip1').html('');
 						}
 					}
 				</script>				
