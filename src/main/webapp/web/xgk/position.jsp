@@ -34,8 +34,16 @@
 		//创建地图函数：
 		function createMap() {
 			var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
-			var point = new BMap.Point(106.649765, 26.617046); //定义一个中心点坐标
-			map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
+			var myGeo = new BMap.Geocoder(); 
+			// 将地址解析结果显示在地图上，并调整地图视野  
+			myGeo.getPoint("贵州师范学院", function(point){
+		          if (point) {
+		              map.centerAndZoom(point, 14);
+		              map.addOverlay(new BMap.Marker(point));
+		          }      
+		      }, "贵阳市");
+			//var point = new BMap.Point(106.649765, 26.617046); //定义一个中心点坐标
+			//map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
 			window.map = map; //将map变量存储在全局
 		}
 
