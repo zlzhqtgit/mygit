@@ -44,12 +44,9 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
     }
 
 
-    public void showPotentialReport(HttpSession session) {
+    public String showPotentialReport(HttpSession session) {
         Integer uid = (Integer) session.getAttribute("uid");
         UserFeature feature = userFeatureMapper.selectPotentialAnalyseByUid(uid);
-//        PotentialAnalysisOut analysis = getPotentialAnalysisReport(feature);
-//        System.out.println(analysis.toString());
-//        session.setAttribute("analysis",analysis);
         JSONArray jsonArray = JSON.parseArray(feature.getEvaluationFraction());
         Map<String,Integer> map = new HashMap<>();
         String subject = "";
@@ -78,8 +75,10 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
         Collections.sort(list, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
         System.out.println(list);
         System.out.println(net.sf.json.JSONArray.fromObject(list));
-        session.setAttribute("list", net.sf.json.JSONArray.fromObject(list));
+        System.out.println(JSON.toJSONString(list));
+        session.setAttribute("list", JSON.toJSONString(list));
         session.setAttribute("evaluationFraction",feature.getEvaluationFraction());
+        return "web/xgk/xgk_xk_analyse_rpt";
     }
 
     /**

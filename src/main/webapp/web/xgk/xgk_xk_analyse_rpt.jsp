@@ -21,17 +21,22 @@
 
 <main class="container">
 	<section class="row">
-		<p class="text-right"><a class="btn btn-primary" href="javascript:void(0);">打印报告</a></p>
+		<p class="text-right"><a class="btn btn-primary" href="javascript:;" onclick="print()">打印报告</a></p>
+		<script type="text/javascript">
+			function print() {
+				alert(111)
+			}
+		</script>
 		<h1 class="text-primary fontwei">学科分析报告</h1>
 		<div class="panel panel-default">
 			<div class="padding-side2 margin_top margin_bot">
 				<div class="report_box padding-side2">
 					<p class="">通过学科潜能测评结果对比分析，发现6门选考科目的适合度排序为：</p>
-					<p class="margin_top margin_bot"><a class="btn btn-primary" href="">${analysis.sortOne}</a><a class="btn btn-primary" href="">${analysis.sortTwo}</a><a class="btn btn-primary" href="">${analysis.sortThree}</a></p>
+					<p class="margin_top margin_bot"><a class="btn btn-primary" href="" id="one">物理</a><a class="btn btn-primary" href="" id="two">化学</a><a class="btn btn-primary" href="" id="three">生物</a></p>
 					<p class="">前三门科目是你的优势学科，你学习起来更感兴趣,也更容易学好，并且你对于学号这些科目更有信心；而后三门科目是你的非优势学科，在确定高考选考科目时，应当选择自己擅长的，回避自己的若是的科目。当然，你业可以根据上述各学科的发展建议提升自己想要选考科目的兴趣、能力、自信程度，并结合“学科推荐”系统中的其它维度统合分析，帮您做出最为科学、合理的决策。</p>
 					<div class="analyse_report margin_top">
 						<div id="xk_analyse_report1" class="" style="width: 600px;height:400px; margin: 3em auto;"></div>
-						<script type="text/javascript">
+							<script type="text/javascript">
 									option1 = {
 											title:{
 												show:true,
@@ -104,14 +109,27 @@
 						                        }
 						                    ]
 						            };
-									var name="${list}";
-									alert(list)
-									<%--option1.xAxis[0].data[0] = ${analysis.sortOne};--%>
-									<%--option1.xAxis[0].data[1] = ${analysis.sortTwo};--%>
-									<%--option1.xAxis[0].data[2] = ${analysis.sortThree};--%>
-									<%--option1.series[0].data[0] = ${analysis.sortOneScore};--%>
-									<%--option1.series[0].data[1] = ${analysis.sortTwoScore};--%>
-									<%--option1.series[0].data[2] = ${analysis.sortThreeScore};--%>
+									var list = ${list};
+									for (var i=0; i<subject_name_items.length; i++){
+										if (list[0].key == subject_name_items[i].title){
+											option1.xAxis[0].data[0] = subject_name_items[i].name;
+											option1.series[0].data[0] = list[0].value;
+											option1.series[1].data[0] = parseInt(list[0].value)/3;
+											$("#one").html(subject_name_items[i].name);
+										}
+										if (list[1].key == subject_name_items[i].title){
+											option1.xAxis[0].data[1] = subject_name_items[i].name;
+											option1.series[0].data[1] = list[1].value;
+											option1.series[1].data[1] = parseInt(list[1].value)/3;
+											$("#two").html(subject_name_items[i].name);
+										}
+										if (list[2].key == subject_name_items[i].title){
+											option1.xAxis[0].data[2] = subject_name_items[i].name
+											option1.series[0].data[2] = list[2].value;
+											option1.series[1].data[2] = parseInt(list[2].value)/3;
+											$("#three").html(subject_name_items[i].name);
+										}
+									}
 									var myChart1 = echarts.init(document.getElementById('xk_analyse_report1'));
 									myChart1.setOption(option1);
 								</script>
@@ -148,6 +166,29 @@
 							        {type: 'bar'}
 							    ]
 							};
+							// 地,自信,15,地,兴趣,0,地,能力,0,政,自信,5,政,兴趣,10,政,能力,0,历,自信,0,历,兴趣,0,历,能力,0,物,自信,5,物,兴趣,5,物,能力,0,化,自信,15,化,兴趣,10,化,能力,0,生,自信,10,生,兴趣,20,生,能力,0
+							var evaluation = ${evaluationFraction};
+							// alert(evaluation[0][0]);
+							// alert(option2.dataset.source[0].product);
+							for (var i=0; i<option2.dataset.source.length; i++){
+								for (var j=0; j<subject_name_items.length; j++){
+									if (option2.dataset.source[i].product == subject_name_items[j].name){
+										for (var k=0; k<evaluation.length; k++){
+											if (subject_name_items[j].title == evaluation[k][0]){
+												if (evaluation[k][1] == "自信"){
+													option2.dataset.source[i].学科自信度 = evaluation[k][2];
+												}
+												if (evaluation[k][1] == "兴趣"){
+													option2.dataset.source[i].学科兴趣 = evaluation[k][2];
+												}
+												if (evaluation[k][1] == "能力"){
+													option2.dataset.source[i].学科能力 = evaluation[k][2];
+												}
+											}
+										}
+									}
+								}
+							}
 							var myChart2 = echarts.init(document.getElementById('xk_analyse_report2'));
 							myChart2.setOption(option2);
 						</script>
@@ -181,7 +222,7 @@
 							<thead>
 								<tr style="background-color: #3b8bec;color: #fff;"><th>学科</th><th>维度</th><th>测评得分</th><th>学科维度解释</th></tr>
 							</thead>
-							<tbody>
+							<tbody id="analyse_report">
 								<tr><td rowspan="4">物理</td></tr>
 								<tr><td>能力 </td><td>Data</td><td>你的物理学科能力分数为20.0处于同类人的75%以上，说明你具备学好物理学科的能力具有对物理概念和规律进行探寻的习惯，善于分析物理概念规律的内涵和外延，掌握物理因果思维程序，运用物理模型解决实际生活中的具体问题。</td></tr>
 								<tr><td>兴趣 </td><td>Data</td><td>你的物理学科兴趣分数为15.0，处于同类人群的25%--75%之间，说明你对物理学科的兴趣处于中等水平，你对物理学科的学习没有表现出极大的热情，但是也没有表现出明显的反感情绪，可以通过观察与实验的方法来激发你对物理学习的兴趣，在生活中模拟各种物理现象和规律，带着问题去主动转眼与探索，培养学科兴趣。</td></tr>
@@ -192,11 +233,37 @@
 								<tr><td>自信</td><td>Data</td><td>你的化学学科自信在成都分数为欸15.0，处于同类人群的25%--75%之间，说明你的化学学科自信程度处于中等水平，说明你在学习化学学科的过程中，偶有不自信的表现。如果能够客服消极心理状态，树立“我能学好化学”的信心和勇气，就会帮助你提升化学成绩。在化学学科上，哪怕是成绩上一点小进步，也是一次成功的学习体验，要牢记这种体验。</td></tr>
 							</tbody>
 						</table>
-						
 						<div class="open-btn">
 			                <a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
 			            </div>
 			            <script>
+							//学科分析报告
+							var report = ${evaluationFraction};
+							var report_title_start = "<tr><td rowspan='4'>"; //标题头 加科目名字
+							var report_title_end = "</td></tr>";//标题尾
+							var report_dimension = "<tr><td>";//分析维度 加分析维度[能力|兴趣|自信]
+							var report_score = "</td><td>";//评分  加评分
+							var report_description_start = "</td><td>";//分析内容 加分析内容
+							var report_description_end = "</td></tr>";
+							var analyse_report = "";//分析报告
+							var content = "";//分析内容
+							for (var i=0; i<report.length; i++){
+								if (i%3==0){
+									for (var j=0; j<subject_name_items.length; j++){
+										if (report[i][0] == subject_name_items[j].title){
+											analyse_report += report_title_start + subject_name_items[j].name + report_title_end;
+										}
+									}
+								}
+								for (var k=0; k<analysis_items.length; k++){
+									if (report[i][0] == analysis_items[k].title && report[i][1] == analysis_items[k].type && report[i][2] == analysis_items[k].score){
+										analyse_report += report_dimension + report[i][1] + report_score + report[i][2] + report_description_start + analysis_items[k].analysis + report_description_end;
+									}
+								}
+
+							}
+							$("#analyse_report").html(analyse_report);
+
 					        // 点击显示更多按钮
 					        function showMore() {
 					            $(".analyse_report").height("auto");//取消文字容器高度限制

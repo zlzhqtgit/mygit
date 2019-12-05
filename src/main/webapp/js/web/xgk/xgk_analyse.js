@@ -357,11 +357,11 @@
     ]
 
     //学科全称
-    var title_subject = [
-        {title: "物",subject: "物理"},
-        {title: "化",subject: "化学"},
-        {title: "生",subject: "生物"},
-        {title: "政",subject: "政治"},
-        {title: "历",subject: "历史"},
-        {title: "地",subject: "地理"},
+    var subject_name_items = [
+        {title:"物",name:"物理"},
+        {title:"化",name:"化学"},
+        {title:"生",name:"生物"},
+        {title:"政",name:"政治"},
+        {title:"历",name:"历史"},
+        {title:"地",name:"地理"},
     ]

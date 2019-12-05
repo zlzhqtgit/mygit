@@ -60,8 +60,8 @@ public class XgkSubjectController {
      */
     @RequestMapping("/xgk_potential_report.do")
     public String showPotentialReport(HttpSession session, HttpServletResponse response, HttpServletRequest request){
-        iXgkSubjectService.showPotentialReport(session);
-        return "web/xgk/xgk_xk_analyse_rpt";
+
+        return iXgkSubjectService.showPotentialReport(session);
     }
 
 
