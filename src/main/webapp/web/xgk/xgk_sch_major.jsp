@@ -37,9 +37,9 @@
 				        		<dt>专业属性</dt>
 				        	</dl>
 				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="">全部</a></dd>
-				        		<dd><a href="">本科专业</a></dd>
-				        		<dd><a href="">专科专业</a></dd>
+				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
+				        		<dd><a href="javascript:void(0)">本科专业</a></dd>
+				        		<dd><a href="javascript:void(0)">专科专业</a></dd>
 				        	</dl>
 				        	<div class="clearfix"></div>
 				        </li>
@@ -48,19 +48,19 @@
 				        		<dt>学科要求</dt>
 				        	</dl>
 				        	<dl class="pull-left item_body">
-				        		<dd><a class="active" href="">综合类</a></dd>
-				        		<dd><a href="">理工类</a></dd>
-				        		<dd><a href="">师范类</a></dd>
-				        		<dd><a href="">农林类</a></dd>
-				        		<dd><a href="">政法类</a></dd>
-				        		<dd><a href="">医药类</a></dd>
-				        		<dd><a href="">财经类</a></dd>
-				        		<dd><a href="">民族类</a></dd>
-				        		<dd><a href="">语言类</a></dd>
-				        		<dd><a href="">旅游类</a></dd>
-				        		<dd><a href="">体育类</a></dd>
-				        		<dd><a href="">艺术类</a></dd>
-				        		<dd><a href="">军事类</a></dd>
+				        		<dd><a class="active" href="javascript:void(0)">综合类</a></dd>
+				        		<dd><a href="javascript:void(0)">理工类</a></dd>
+				        		<dd><a href="javascript:void(0)">师范类</a></dd>
+				        		<dd><a href="javascript:void(0)">农林类</a></dd>
+				        		<dd><a href="javascript:void(0)">政法类</a></dd>
+				        		<dd><a href="javascript:void(0)">医药类</a></dd>
+				        		<dd><a href="javascript:void(0)">财经类</a></dd>
+				        		<dd><a href="javascript:void(0)">民族类</a></dd>
+				        		<dd><a href="javascript:void(0)">语言类</a></dd>
+				        		<dd><a href="javascript:void(0)">旅游类</a></dd>
+				        		<dd><a href="javascript:void(0)">体育类</a></dd>
+				        		<dd><a href="javascript:void(0)">艺术类</a></dd>
+				        		<dd><a href="javascript:void(0)">军事类</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
@@ -68,12 +68,12 @@
 				        		<dt>本科专业类别</dt>
 				        	</dl>
 				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="">全部</a></dd>
-				        		<dd><a href="">985</a></dd>
-				        		<dd><a href="">211</a></dd>
-				        		<dd><a href="">双一流</a></dd>
-				        		<dd><a href="">行业领军</a></dd>
-				        		<dd><a href="">研究生院</a></dd>
+				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
+				        		<dd><a href="javascript:void(0)">985</a></dd>
+				        		<dd><a href="javascript:void(0)">211</a></dd>
+				        		<dd><a href="javascript:void(0)">双一流</a></dd>
+				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
@@ -81,12 +81,12 @@
 				        		<dt>专科专业类型</dt>
 				        	</dl>
 				        	<dl class="pull-left item_body">
-				        		<dd class=""><a class="active" href="">全部</a></dd>
-				        		<dd><a href="">985</a></dd>
-				        		<dd><a href="">211</a></dd>
-				        		<dd><a href="">双一流</a></dd>
-				        		<dd><a href="">行业领军</a></dd>
-				        		<dd><a href="">研究生院</a></dd>
+				        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
+				        		<dd><a href="javascript:void(0)">985</a></dd>
+				        		<dd><a href="javascript:void(0)">211</a></dd>
+				        		<dd><a href="javascript:void(0)">双一流</a></dd>
+				        		<dd><a href="javascript:void(0)">行业领军</a></dd>
+				        		<dd><a href="javascript:void(0)">研究生院</a></dd>
 				        	</dl>
 				        </li>
 				    </ul>
@@ -172,6 +172,12 @@
 							  time: 2500,
 							});
 						}
+				    	
+						//点击筛选样式
+						$(".item_body dd a").click(function() {
+							$(this).parents("dl").children().find("a").removeClass("active");
+							$(this).addClass("active");
+						})
 				    	
 				    	$(document).ready(function() {
 //				    		$('.tab_body .tab_b2').hide();

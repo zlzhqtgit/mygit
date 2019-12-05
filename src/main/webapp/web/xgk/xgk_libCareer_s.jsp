@@ -40,43 +40,43 @@
 					        		<dt>院校类型</dt>
 					        	</dl>
 					        	<dl class="pull-left item_body">
-					        		<dd><a class="active" href="">综合类</a></dd>
-					        		<dd><a href="">理工类</a></dd>
-					        		<dd><a href="">师范类</a></dd>
-					        		<dd><a href="">农林类</a></dd>
-					        		<dd><a href="">政法类</a></dd>
-					        		<dd><a href="">医药类</a></dd>
-					        		<dd><a href="">财经类</a></dd>
-					        		<dd><a href="">民族类</a></dd>
-					        		<dd><a href="">语言类</a></dd>
-					        		<dd><a href="">旅游类</a></dd>
-					        		<dd><a href="">体育类</a></dd>
-					        		<dd><a href="">艺术类</a></dd>
-					        		<dd><a href="">军事类</a></dd>
-					        		<dd><a href="">理工类</a></dd>
-					        		<dd><a href="">师范类</a></dd>
-					        		<dd><a href="">农林类</a></dd>
-					        		<dd><a href="">政法类</a></dd>
-					        		<dd><a href="">医药类</a></dd>
-					        		<dd><a href="">财经类</a></dd>
-					        		<dd><a href="">民族类</a></dd>
-					        		<dd><a href="">语言类</a></dd>
-					        		<dd><a href="">旅游类</a></dd>
-					        		<dd><a href="">体育类</a></dd>
-					        		<dd><a href="">艺术类</a></dd>
-					        		<dd><a href="">军事类</a></dd>
-					        		<dd><a href="">理工类</a></dd>
-					        		<dd><a href="">师范类</a></dd>
-					        		<dd><a href="">农林类</a></dd>
-					        		<dd><a href="">政法类</a></dd>
-					        		<dd><a href="">医药类</a></dd>
-					        		<dd><a href="">财经类</a></dd>
-					        		<dd><a href="">民族类</a></dd>
-					        		<dd><a href="">语言类</a></dd>
-					        		<dd><a href="">旅游类</a></dd>
-					        		<dd><a href="">体育类</a></dd>
-					        		<dd><a href="">艺术类</a></dd>
-					        		<dd><a href="">军事类</a></dd>
+					        		<dd><a class="active" href="javascript:void(0)">综合类</a></dd>
+					        		<dd><a href="javascript:void(0)">理工类</a></dd>
+					        		<dd><a href="javascript:void(0)">师范类</a></dd>
+					        		<dd><a href="javascript:void(0)">农林类</a></dd>
+					        		<dd><a href="javascript:void(0)">政法类</a></dd>
+					        		<dd><a href="javascript:void(0)">医药类</a></dd>
+					        		<dd><a href="javascript:void(0)">财经类</a></dd>
+					        		<dd><a href="javascript:void(0)">民族类</a></dd>
+					        		<dd><a href="javascript:void(0)">语言类</a></dd>
+					        		<dd><a href="javascript:void(0)">旅游类</a></dd>
+					        		<dd><a href="javascript:void(0)">体育类</a></dd>
+					        		<dd><a href="javascript:void(0)">艺术类</a></dd>
+					        		<dd><a href="javascript:void(0)">军事类</a></dd>
+					        		<dd><a href="javascript:void(0)">理工类</a></dd>
+					        		<dd><a href="javascript:void(0)">师范类</a></dd>
+					        		<dd><a href="javascript:void(0)">农林类</a></dd>
+					        		<dd><a href="javascript:void(0)">政法类</a></dd>
+					        		<dd><a href="javascript:void(0)">医药类</a></dd>
+					        		<dd><a href="javascript:void(0)">财经类</a></dd>
+					        		<dd><a href="javascript:void(0)">民族类</a></dd>
+					        		<dd><a href="javascript:void(0)">语言类</a></dd>
+					        		<dd><a href="javascript:void(0)">旅游类</a></dd>
+					        		<dd><a href="javascript:void(0)">体育类</a></dd>
+					        		<dd><a href="javascript:void(0)">艺术类</a></dd>
+					        		<dd><a href="javascript:void(0)">军事类</a></dd>
+					        		<dd><a href="javascript:void(0)">理工类</a></dd>
+					        		<dd><a href="javascript:void(0)">师范类</a></dd>
+					        		<dd><a href="javascript:void(0)">农林类</a></dd>
+					        		<dd><a href="javascript:void(0)">政法类</a></dd>
+					        		<dd><a href="javascript:void(0)">医药类</a></dd>
+					        		<dd><a href="javascript:void(0)">财经类</a></dd>
+					        		<dd><a href="javascript:void(0)">民族类</a></dd>
+					        		<dd><a href="javascript:void(0)">语言类</a></dd>
+					        		<dd><a href="javascript:void(0)">旅游类</a></dd>
+					        		<dd><a href="javascript:void(0)">体育类</a></dd>
+					        		<dd><a href="javascript:void(0)">艺术类</a></dd>
+					        		<dd><a href="javascript:void(0)">军事类</a></dd>
 					        	</dl>
 					        </li>
 					        <li class="list-group-item">
@@ -84,11 +84,11 @@
 					        		<dt>专业分类</dt>
 					        	</dl>
 					        	<dl class="pull-left item_body">
-					        		<dd class=""><a class="active" href="">全部</a></dd>
-					        		<dd><a href="">大专</a></dd>
-					        		<dd><a href="">本科</a></dd>
-					        		<dd><a href="">硕士</a></dd>
-					        		<dd><a href="">博士</a></dd>
+					        		<dd class=""><a class="active" href="javascript:void(0)">全部</a></dd>
+					        		<dd><a href="javascript:void(0)">大专</a></dd>
+					        		<dd><a href="javascript:void(0)">本科</a></dd>
+					        		<dd><a href="javascript:void(0)">硕士</a></dd>
+					        		<dd><a href="javascript:void(0)">博士</a></dd>
 					        	</dl>
 					        	<div class="clearfix"></div>
 					        </li>
@@ -187,6 +187,12 @@
 			    	}
 			    	$(obj).find('img').attr('src', y);
 			    }
+				
+			  //点击筛选样式
+				$(".item_body dd a").click(function() {
+					$(this).parents("dl").children().find("a").removeClass("active");
+					$(this).addClass("active");
+				})
 			</script>
 		</main>
 

@@ -54,8 +54,8 @@ dt{
 }
 .list-group-item dd{
 	float: left;
-	padding: 0 1em;
-	margin-bottom: 1em;
+	padding: 0 .4em;
+	margin-bottom: 1em;;
 }
 .item_tit{
 	width: 10%;
@@ -63,6 +63,14 @@ dt{
 }
 .item_body{
 	width: 90%;
+}
+.item_body a{
+	display: inline-block;
+	width: 5em;
+	text-align: center;
+	padding: 6px 8px;
+	border-radius: 1em;
+	text-decoration: none;
 }
 .item_body a:hover{
 	color: orangered;
