@@ -3,7 +3,7 @@
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 	<mapper namespace="cn.hqtzytb.mapper.SpecialtyMapper">
 	<resultMap id="BaseResultMap" type="cn.hqtzytb.entity.Specialty" >
-		<id column="id" jdbcType="INTEGER" property="id" />
+		<id column="id" property="id" />
 		<result column="specialty_id" property="specialtyId" />
 		<result column="specialty_name" property="specialtyName" />
 		<result column="specialty_intro" property="specialtyIntro" />
@@ -53,9 +53,9 @@
   	</sql>
 
 		<!--查询测评结果对应相关信息  -->
-		<select id="select" resultMap="BaseResultMap">
+		<select id="select" resultType="cn.hqtzytb.entity.Specialty">
 			select
-				<include refid="Base_Column_List" />
+			<include refid="Base_Column_List" />
 			FROM specialty b
 			LEFT JOIN  personality_specialty e ON b.specialty_id = e.specialtyt_id
 			<if test="where != null">where ${where}</if>
@@ -98,12 +98,13 @@
 		<!--查询测评结果对应相关信息  -->
 		<select id="selectId" resultType="cn.hqtzytb.entity.Specialty">
 			SELECT
-				specialty_id as specialtyId,
+			<include refid="Base_Column_List" />
+				/*specialty_id as specialtyId,
 				specialty_name as specialtyName,
 				specialty_intro as specialtyIntro,
 				specialty_objective as specialtyObjective,
 				specialty_employment as specialtyEmployment,
-				specialty_requirement as specialtyRequirement
+				specialty_requirement as specialtyRequirement*/
 			FROM specialty
 			<if test="where != null">where ${where}</if>
 			<if test="orderBy != null">order by  ${orderBy}</if>

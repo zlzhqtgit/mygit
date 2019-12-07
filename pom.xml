@@ -176,11 +176,11 @@
 	  </dependency>
 
 	  <!--腾讯SDK-->
-   <!--    <dependency>
+       <dependency>
 		  <groupId>com.shuzilian.xyz</groupId>
 		  <artifactId>qq-sdk4j</artifactId>
 		  <version>2.0</version>
-	  </dependency> -->
+	  </dependency>
 
 	  <!--servlet-api-->
 	  <dependency>

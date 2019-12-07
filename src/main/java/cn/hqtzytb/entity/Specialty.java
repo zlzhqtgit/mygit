@@ -193,7 +193,7 @@ public class Specialty implements Serializable{
     /**
      * 第四轮学科评估A+高校
      */
-    private Double aboveA;
+    private String aboveA;
 
     /**
      * 第四轮学科评估A高校
@@ -214,5 +214,6 @@ public class Specialty implements Serializable{
      * 开设院校
      */
     private String openCollege;
+
 
 }
