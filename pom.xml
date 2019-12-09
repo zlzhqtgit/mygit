@@ -174,27 +174,27 @@
 		  <artifactId>lombok</artifactId>
 		  <version>1.18.6</version>
 	  </dependency>
-
-	  <!--腾讯SDK-->
+<!-- 
+	  腾讯SDK
        <dependency>
 		  <groupId>com.shuzilian.xyz</groupId>
 		  <artifactId>qq-sdk4j</artifactId>
 		  <version>2.0</version>
 	  </dependency>
 
-	  <!--servlet-api-->
+	  servlet-api
 	  <dependency>
 		  <groupId>javax.servlet</groupId>
 		  <artifactId>javax.servlet-api</artifactId>
 		  <version>4.0.1</version>
 	  </dependency>
 
-	  <!--websocket-->
+	  websocket
 	  <dependency>
 		  <groupId>javax.websocket</groupId>
 		  <artifactId>javax.websocket-api</artifactId>
 		  <version>1.1</version>
-	  </dependency>
+	  </dependency> -->
 
 </dependencies>
 

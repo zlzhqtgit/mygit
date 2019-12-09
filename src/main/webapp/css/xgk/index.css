@@ -601,7 +601,7 @@ main{
 	font-size: 4em;
 }
 .converse_info{
-	padding: 1em 2px;
+	/* padding: 1em 2px; */
 	display: block;
 	overflow: hidden;
 }

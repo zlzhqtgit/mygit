@@ -112,6 +112,30 @@ dt{
 .flex_jcstart .sch_info{
 	width: auto;
 }
+
+.add_contrast,.store{
+	position: relative;
+}
+.add_contrast span,.store span{
+	display: block;
+	width: 100%;
+	height: 100%;
+	font-size: 14px;
+	color: #fff;
+}
+.add_contrast>input,.store input{
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+.btn{
+	border: 0;
+}
+
 main{
 	position: relative;
 }
@@ -247,6 +271,7 @@ footer{
 .tab2 table tr td{
 	text-align: center;
 }
+
 .major_info_head{
 	background-color: #f5f5f5;
 	padding: .5em 1em;

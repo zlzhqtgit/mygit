@@ -38,7 +38,7 @@
 				<div style="padding: 1em 100px 1em;">
 				    <form class="bs-example bs-example-form" role="form" id="universities_name">
 				        <div class="input-group input-group-lg">
-				            <span class="input-group-addon" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
+				            <span class="input-group-addon" onclick="schoolSearch(1)" style="cursor: pointer;"><span class="glyphicon glyphicon-search text-muted"></span></span>
 				            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
 				        </div>
 				    </form>
@@ -161,13 +161,14 @@
 							["teaching_research",""],];//[{"硕士点",20},{"博士点",20}]
 
 					function schoolSearch(e) {
+								console.log("1111111")
 						var where = "";
 						if (e == 1){
 							var school_name = $(".form-control").val();
 							if (school_name == ""){
 								where = "";
 							} else {
-								where = " LOCATE('" + $(".form-control").val() + "',u.universities_name) > 0";
+								where = " LOCATE('" + school_name + "',u.universities_name) > 0";
 							}
 						} else {
 							$("#search-ui li a.active").each(function () {
@@ -210,6 +211,7 @@
 							type: "POST",
 							dataType: "json",
 							success: function (obj) {
+								console.log(obj.data)
 								if (obj.state == 1){
 									var list = obj.data;
 									$("#page h4 a").html(list.length);
@@ -222,14 +224,14 @@
 										var master = 0;//硕士
 										var doctor = 0;//博士
 
-
 										var aa = "[{\"key\":\"生\",\"value\":30},{\"key\":\"化\",\"value\":25},{\"key\":\"地\",\"value\":15},{\"key\":\"政\",\"value\":15},{\"key\":\"物\",\"value\":10},{\"key\":\"历\",\"value\":0}]";
 										// var cc = JSON.stringify(aa);
 										var bb = JSON.parse(aa);
 										console.log(bb)
 										console.log(bb[0])
-										universities += "<ul class='list-group search_result'>" +
-												"<li class='list-group-item'>" +
+										var table='<table class="sch_slice" border="" cellspacing="" cellpadding=""><tr><th rowspan="2">年份</th><th colspan="6">录取分</th><th colspan="2">计划人数</th></tr><tr><th>最低分</th><th>平均分</th><th>最高分</th><th>提档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr></table>'
+										var operate='<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p> <p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid002"/></a></p> </div>'
+										universities += "<li class='list-group-item'>" +
 												"<div class=''>" +
 												"<a href='xgk_sch_info.jsp'><img alt='学校logo' src='${pageContext.request.contextPath}/img/xgk/sch_logo.png'/></a>" +
 												"</div>" +
@@ -245,7 +247,7 @@
 												"<tr><td>隶属：" + list[i].belongTo + "<span></span></td><td>硕士点数：" + master + "<span></span></td></tr>" +
 												"<tr><td>院校类型：<span></span></td><td>博士点数：" + doctor + "<span></span></td></tr>" +
 												"</table>" +
-												"</div>"
+												"</div>"+table + operate
 									}
 									$("#universities").html(universities);
 								}
@@ -271,10 +273,10 @@
 					<div class="panel_head padding-side2" id="page">
 						<h4 class="fontwei">共找到<a>0</a>条结果</h4>
 					</div>
-					<div id="universities">
+					<!-- <div id="universities"></div> -->
 						<ul class="list-group search_result">
-							<li class="list-group-item">
-								<div class="">
+							<li class="list-group-item" id="001" pname="上海外国语大学">
+								<div class="sh_logo">
 									<a href="xgk_sch_info.jsp"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a>
 								</div>
 								<div class="sch_info sch_search_info padding-side">
@@ -298,21 +300,21 @@
 									<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 								</table>
 								<div class="operate_box">
-									<p class="text-center"><a href="javascript:void(0)" class="btn btn-primary cancel">取消收藏</a></p>
-									<p class="text-center"><a href="javascript:void(0)" onclick="btn_control(this)" class="btn btn-primary" id="add_contrast">加入对比</a></p>
+									<p class="text-center"><a class="store btn cancel" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>
+									<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid001"/></a></p>
 								</div>
 							</li>
 						</ul>
-					</div>
+						
 
 				        
-				        <%--<li class="list-group-item">
-				        	<div class="">
-				        		<a href="xgk_sch_info.jsp"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a>
+				        <!-- <li class="list-group-item" id="001" pname="复旦大学">
+				        	<div class="sh_logo">
+				        		<a href="sch_info.html"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/fudan.jpg"/></a>
 				        	</div>
 				        	<div class="sch_info sch_search_info padding-side">
 				        		<div class="">
-				        			<h4>上海外国语大学 <span class=""><img src="${pageContext.request.contextPath}/img/xgk/label.png"/></span></h4>
+				        			<h4>复旦大学 <span class=""><img src="img/label.png"/></span></h4>
 				        			<p class="">录取平均分排行（本科一批）<span class="text-danger">34</span></p>
 				        		</div>
 				        		<table border="0" cellspacing="" cellpadding="">
@@ -331,10 +333,10 @@
 				        		<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 				        	</table>
 				        	<div class="operate_box">
-				        		<p class="text-center"><a href="javascript:void(0)" class="btn btn-primary cancel">取消收藏</a></p>
-				        		<p class="text-center"><a href="javascript:void(0)" onclick="btn_control(this)" class="btn btn-primary" id="add_contrast">加入对比</a></p>
+				        		<p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>
+				        		<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid001"/></a></p>
 				        	</div>
-				        </li>--%>
+				        </li> -->
 
 				    <!--分页-->
 				    <div class="text-center">
@@ -357,7 +359,7 @@
 			</section>
 			<div class="contrast panel">
 				<div class="text-right text-primary padding-side2">
-					<label class="slide_down" for="">
+					<label class="slide_down">
 						隐藏<span class="glyphicon glyphicon-chevron-down"></span>
 					</label>
 				</div>
@@ -475,65 +477,115 @@
 		    		}
 		    	}
 				
-				//加入对比
-				function add_contrast(){
-					$('.contrast').show();
-					if($('.contrast_list li').length>4){//？？大于5依旧执行添加
-						alert("最多5个元素");
-						return false;
+				/**
+				 * 收藏学校
+				 * @param {Object} obj
+				 */
+				function store(obj) {
+					var rowName=$(obj).parents('li').attr('pname');
+					if ($(obj).find('input').is(":checked")) {
+						$(obj).removeClass("btn-primary");
+						$(obj).addClass("cancel");
+						$(obj).find('span').text("取消收藏");
+						return;
+					}else{
+						$(obj).removeClass("cancel");
+						$(obj).addClass("btn-primary");
+						$(obj).find('span').text("收藏学校");
 					}
-					$('.contrast_list').append('<li><a href="javascript:void(0)"><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a><p class="text-center margin_top1"><a href="javascript:void(0)" onclick="del_contrast()" class="btn btn-primary">取消对比</a></p></li>');
 				}
 				
-				function btn_control(obj) {
-					if ($(obj).text()=='加入对比') {
-						$(obj).text('取消对比');
-						$(obj).attr('class','btn cancel text-white');
-						add_contrast(obj)
+				 var flag=false;
+					
+				//结果列表的加入对比
+				function btn_check(obj){
+					var rowId=$(obj).parents('li').attr('id');
+					//var rowName=$(obj).parents('li').attr('pname');
+					var imgUrl=$(obj).parents('li').find(".sh_logo img").attr("src");
+					if(flag==false){
+						$('.contrast').show();
+					}
+					add_contrast(rowId,imgUrl);
+					if ($('.contrast_list li').length==0) {
+						close_conbox();
+					}
+				}
+
+				//加入对比
+				function add_contrast(row_id,itemImg){
+					if ($("#btnid"+row_id).is(":checked")) {
+						$("#btnid"+row_id).parent().removeClass("btn-primary")
+						$("#btnid"+row_id).parent().addClass("cancel text-white");
+						$("#btnid"+row_id).parent().find('span').text("取消对比")
+						
+						if ($('.contrast_list li').length>4) {
+							alert("最多只能添加5个学校进行对比");
+							return false;
+						}
+						$('.contrast_list').append('<li id="comp'+row_id+'"><a href="javascript:void(0)"><img src="'+itemImg+'"/></a><p class="text-center margin_top1"><a href="javascript:void(0)" onclick="del_compare(this)" class="btn btn-primary">取消对比</a></p></li>');
 					} else{
-						$(obj).text('加入对比');
-						$(obj).attr('class','btn btn-primary');
-						//真实数据环境需更改
-						del_contrast();
+						$("#btnid"+row_id).parent().removeClass("cancel text-white");
+						$("#btnid"+row_id).parent().addClass("btn-primary");
+						$("#btnid"+row_id).parent().find('span').text("加入对比");
+						//移除当前对比中的元素
+						$("#comp"+row_id).remove();
 					}
 				}
 				
 				//取消对比
-				function del_contrast() {
-					//真实数据环境需更改
-					$('.contrast_list li').last().remove();
-					if ($('.contrast_list li').length==0) {
-						close_conbox();
+				function del_compare(obj) {
+					var thisli=$(obj).parents("li");
+					var cur_id= $(obj).parents("li").attr('id');
+					thisli.parent().find("#"+cur_id).remove();
+					var rowId=cur_id.substr(4,cur_id.length);
+					$("#btnid"+rowId).parent().removeClass("cancel text-white");
+					$("#btnid"+rowId).parent().addClass("btn-primary");
+					$("#btnid"+rowId).parent().find('span').text("加入对比");
+					document.getElementById("btnid"+rowId).checked=false;
+					
+					
+					if ($(".contrast_list li").length==0) {
+						 close_conbox();
 					}
 				}
 				
 				//清空对比
 				function clear_contrast(obj){
+					var all_check=$('.add_contrast>input[type="checkbox"]');
+					$('.add_contrast>input[type="checkbox"]').parent().removeClass("cancel text-white");
+					$('.add_contrast>input[type="checkbox"]').parent().addClass("btn-primary");
+					$('.add_contrast>input[type="checkbox"]').parent().find('span').text("加入对比")
+					
+					for (var i=0;i<all_check.length;i++) {
+						all_check[i].checked=false;
+					}
 					$(".contrast_list").children().remove();
 					setTimeout(close_conbox(),2500);
-				}
+				} 
 				
 				//弹出对比弹出框
 				function open_conbox() {
 					$('.contrast_tools').slideDown('100',change_chara);
+					flag=true;
 				}
 				
 				//关闭对比弹出框
 				function close_conbox() {
 					$('.contrast').hide();
+					flag = false;
 				}
 				
 				//院校基本情况对比
-//				function show_contrast_intro(){
-//					$('.tip_box').css('display','block');
-//				}
+ 				function show_contrast_intro(){
+ 					$('.tip_box').css('display','block');
+ 				}
 				//院校录取分数对比
-//				function show_contrast_score(){
-//					$('.tip_box').css('display','block');
-//					$('.tit_docaration h2').text('院校录取分数对比');
-//					$('.tit_docaration').next().children().remove();
-//					$('.tit_docaration').next().append('噶三歌曲歌曲干旱气候')
-//				}
+ 				function show_contrast_score(){
+ 					$('.tip_box').css('display','block');
+ 					$('.tit_docaration h2').text('院校录取分数对比');
+ 					$('.tit_docaration').next().children().remove();
+ 					$('.tit_docaration').next().append('噶三歌曲歌曲干旱气候')
+ 				}
 				
 			</script>
 		</main>
