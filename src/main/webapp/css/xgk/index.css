@@ -611,9 +611,6 @@ main{
 .converse_info>img:hover{
 	transform: scale(1.1);
 }
-h3{
-	margin: 0;
-}
 .user_right{
 	padding-left: 1em;
 }
@@ -1459,6 +1456,70 @@ textarea{
 .center_nav li:first-child{
 	border-top: 1px solid #999;
 }
+.center_nav>li:hover .sublist{
+	display: block;
+}
+.sublist{
+	display: none;
+	position: absolute;
+	top: -1px;
+	right: -150px;
+	width: 150px;
+	color: #555;
+	z-index: 99;
+	border-bottom: 1px solid #3b8bec;
+}
+.sublist>li{
+	background-color: #fff;
+	border: 1px solid #3b8bec;
+	border-bottom: 0;
+	text-align: center;
+}
+.sublist>li>a:hover{
+	background-color: #3b8bec;
+	color: #fff;
+}
+.line{
+	height: 2px;
+	background-color: #0066CC;
+}
+.pot{
+	/*position: absolute;
+	top: 0;
+	left: 0;*/
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+	top: -10px;
+	z-index: 9;
+}
+.pot>div{
+	width: 1.4em;
+	height: 1.4em;
+	text-align: center;
+	background-color: #0066CC;
+	color: #fff;
+	border-radius: 1em;
+}
+.result_cp>div{
+	width: 25%;
+	margin: .1em 0;
+	padding: 0 .2em;
+}
+.result_cp>div>a{
+	display: block;
+	border: 1px solid #0066CC;
+	border-radius: 4px;
+	padding: 1em;
+	text-align: center;
+	font-weight: bold;
+	font-family: "微软雅黑";
+
+}
+.result_cp > div > a.active:hover,
+.result_cp > div > a.active:focus{
+	color: #fff;
+}
 .center_cont{
 	width: 80%;
 }
@@ -1468,9 +1529,9 @@ textarea{
 .center_cont>ul.current{
 	display: block;
 }
-.center_cont ul.current a{
+/* .center_cont ul.current a{
 	color: #080808;
-}
+} */
 .center_cont li{
 	margin-bottom: 1em;
 }
@@ -1481,7 +1542,7 @@ li.current{
 	background-color: #3b8bec;
 	color: #fff;
 }
-li.current a{
+li.current>a{
 	color: #fff;
 }
 .o_row_brif{
