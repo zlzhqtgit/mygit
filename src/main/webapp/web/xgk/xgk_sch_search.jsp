@@ -100,8 +100,8 @@
 				        	<dl class="pull-left item_body" id="city" name="3">
 				        		<dd class=""><a class="active a" href="javascript:void(0)" >全部</a></dd>
 				        		<dd><a class="a" href="javascript:void(0)" >985</a></dd>
-				        		<dd><a href="javascript:void(0)" >211</a></dd>
-				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
+				        		<dd><a href="javascript:void(0)" >北京市</a></dd>
+				        		<dd><a href="javascript:void(0)" >上海</a></dd>
 				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
 				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
 				        	</dl>
@@ -161,7 +161,6 @@
 							["teaching_research",""],];//[{"硕士点",20},{"博士点",20}]
 
 					function schoolSearch(e) {
-								console.log("1111111")
 						var where = "";
 						if (e == 1){
 							var school_name = $(".form-control").val();
@@ -180,6 +179,7 @@
 										search[name][1] += "u." + id + "='" + text + "'";
 									} else if (search[name][1] != "" && text != "全部") {
 										search[name][1] += " OR u." + id + "='" + text + "'";
+
 									} else {
 										search[name][1] = "";
 									}
@@ -206,12 +206,11 @@
 							});
 						}
 						$.ajax({
-							url: "../school/xgk_school_query.do",
+							url: "/school/xgk_school_query.do",
 							data: "where=" + where,
 							type: "POST",
 							dataType: "json",
 							success: function (obj) {
-								console.log(obj.data)
 								if (obj.state == 1){
 									var list = obj.data;
 									$("#page h4 a").html(list.length);
@@ -223,14 +222,27 @@
 										}
 										var master = 0;//硕士
 										var doctor = 0;//博士
-
-										var aa = "[{\"key\":\"生\",\"value\":30},{\"key\":\"化\",\"value\":25},{\"key\":\"地\",\"value\":15},{\"key\":\"政\",\"value\":15},{\"key\":\"物\",\"value\":10},{\"key\":\"历\",\"value\":0}]";
-										// var cc = JSON.stringify(aa);
-										var bb = JSON.parse(aa);
-										console.log(bb)
-										console.log(bb[0])
-										var table='<table class="sch_slice" border="" cellspacing="" cellpadding=""><tr><th rowspan="2">年份</th><th colspan="6">录取分</th><th colspan="2">计划人数</th></tr><tr><th>最低分</th><th>平均分</th><th>最高分</th><th>提档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr></table>'
-										var operate='<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p> <p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid002"/></a></p> </div>'
+                                        var teachingResearchs = JSON.parse(list[i].teachingResearch) ;
+                                        for (var j=0; j<teachingResearchs.length; j++){
+                                            if (teachingResearchs[j].name == '硕士点'){
+                                                master = teachingResearchs[j].value;
+                                            }
+                                            if (teachingResearchs[j].name == '博士点'){
+                                                doctor = teachingResearchs[j].value;
+                                            }
+                                        }
+                                        // 录取批次
+                                        var admissionLotList = JSON.parse(list[i].admissionLot);
+                                        var admissionLots = "";
+                                        for (var h=0; h<admissionLotList.length; h++){
+                                            if (h == admissionLotList.length-1) {
+                                                admissionLots += admissionLotList[h];
+                                            }else {
+                                                admissionLots += admissionLotList[h] + " ";
+                                            }
+                                        }
+										var table='<table class="sch_slice" border="" cellspacing="" cellpadding=""><tr><th rowspan="2">年份</th><th colspan="6">录取分</th><th colspan="2">计划人数</th></tr><tr><th>最低分</th><th>平均分</th><th>最高分</th><th>提档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr></table>';
+										var operate='<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p> <p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid002"/></a></p> </div>';
 										universities += "<li class='list-group-item'>" +
 												"<div class=''>" +
 												"<a href='xgk_sch_info.jsp'><img alt='学校logo' src='${pageContext.request.contextPath}/img/xgk/sch_logo.png'/></a>" +
@@ -239,7 +251,7 @@
 												"<div class='sch_info sch_search_info padding-side'>" +
 												"<div class=''>" +
 												"<h4>" + list[i].universitiesName + "<span class=''><img src='${pageContext.request.contextPath}/img/xgk/label.png'/></span></h4>" +
-												"<p class=''>录取平均分排行（" + admission_lot + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
+												"<p class=''>录取平均分排行（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
 												"</div>" +
 
 												"<table border='0' cellspacing='' cellpadding=''>" +
@@ -247,13 +259,23 @@
 												"<tr><td>隶属：" + list[i].belongTo + "<span></span></td><td>硕士点数：" + master + "<span></span></td></tr>" +
 												"<tr><td>院校类型：<span></span></td><td>博士点数：" + doctor + "<span></span></td></tr>" +
 												"</table>" +
-												"</div>"+table + operate
+												"</div>" +
+                                            "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +
+                                            "<tr><th rowspan='2'>年份</th><th colspan='6'>录取分</th><th colspan='2'>计划人数</th></tr>";
+                                        universities += "<tr><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr>";
+                                        var collegeScoreLines = JSON.parse(list[i].collegeScoreLine);
+                                        for(var k=0; k< collegeScoreLines.length; k++){
+                                            universities += "<tr><td>" + collegeScoreLines[k].年份 + "</td><td>" + collegeScoreLines[k].最低分 + "</td><td>" + collegeScoreLines[k].平均分 + "</td><td>" + collegeScoreLines[k].最高分 + "</td><td>" + collegeScoreLines[k].投档线 + "</td><td>" + collegeScoreLines[k].线差 + "</td><td>" + collegeScoreLines[k].提档位次 + "</td><td>" + collegeScoreLines[k].录取人数 + "</td><td>" + collegeScoreLines[k].去年录取人数 + "</td></tr>";
+                                        }
+                                        universities += "</table>";
+                                        universities += "<div class='operate_box'> <p class='text-center'><a class='store btn cancel' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value=''/></a></p> <p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span><input type='checkbox' name='' id='btnid001'/></a></p> </div> </li> </ul>";
 									}
 									$("#universities").html(universities);
 								}
-
 							}
 						});
+						where = "";
+						console.log(where);
 					}
 
 					//分页方法
@@ -273,41 +295,9 @@
 					<div class="panel_head padding-side2" id="page">
 						<h4 class="fontwei">共找到<a>0</a>条结果</h4>
 					</div>
-					<!-- <div id="universities"></div> -->
-						<ul class="list-group search_result">
-							<li class="list-group-item" id="001" pname="上海外国语大学">
-								<div class="sh_logo">
-									<a href="xgk_sch_info.jsp"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a>
-								</div>
-								<div class="sch_info sch_search_info padding-side">
-									<div class="">
-										<h4>上海外国语大学 <span class=""><img src="${pageContext.request.contextPath}/img/xgk/label.png"/></span></h4>
-										<p class="">录取平均分排行（本科一批）<span class="text-danger">34</span></p>
-									</div>
-									<table border="0" cellspacing="" cellpadding="">
-										<tr><td>院校代号：<span></span></td><td>录取概率：<span class="text-danger">15%</span></td></tr>
-										<tr><td>隶属：<span></span></td><td>硕士点数：<span></span></td></tr>
-										<tr><td>院校类型：<span></span></td><td>博士点数：<span></span></td></tr>
-									</table>
-								</div>
-								<table class="sch_slice" border="" cellspacing="" cellpadding="">
-									<tr><th rowspan="2">年份</th><th colspan="6">录取分</th><th colspan="2">计划人数</th></tr>
-									<tr><th>最低分</th><th>平均分</th><th>最高分</th><th>提档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr>
-									<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-									<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-									<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-									<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-									<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								</table>
-								<div class="operate_box">
-									<p class="text-center"><a class="store btn cancel" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>
-									<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid001"/></a></p>
-								</div>
-							</li>
-						</ul>
-						
+					<div id="universities">
 
-				        
+                    </div>
 				        <!-- <li class="list-group-item" id="001" pname="复旦大学">
 				        	<div class="sh_logo">
 				        		<a href="sch_info.html"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/fudan.jpg"/></a>
@@ -596,5 +586,17 @@
 		<c:import url="footer.jsp"></c:import>	
 
 	</body>
-
+	<script type="text/javascript">
+		// 院校省份信息
+		var province = new Array();
+		// 热门城市信息
+		var city = new Array();
+		// 自动加载
+		$(function () {
+			// $.ajax(function () {
+			//
+			// })
+			console.log("自动加载")
+		});
+	</script>
 </html>
