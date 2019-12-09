@@ -82,17 +82,18 @@ dt{
 .begin_btn{
 	font-size: 1.4em;
 }
-.search_result{
+#universities{
 	padding: 0 1em;
 }
-.search_result li{
+#universities li{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	border-width:1px 0;
 	border-bottom: 1px solid #ddd;
 	padding: 2em 0;
 }
-.search_result img{
+#universities a img{
 	width: 130px;
 }
 .sch_info.sch_search_info>table tr td:first-child{
@@ -100,14 +101,14 @@ dt{
 	text-align: left;
 	font-weight: 100;
 }
-.search_result .btn.cancel{
+#universities .btn.cancel{
 	background-color: #666;
 }
-.search_result .btn.cancel:focus{
+#universities .btn.cancel:focus{
 	color: #fff;
 }
-.sch_info{
-	/*width: 17em;*/
+.sch_info div img {
+    width: 3em;
 }
 .flex_jcstart .sch_info{
 	width: auto;

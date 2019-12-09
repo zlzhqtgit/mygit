@@ -14,23 +14,15 @@
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jPages.js"></script>
+		<style>
+			.sch_search_info table td{
+				width:50%;
+			}
+		</style>
 	</head>
 
 	<body>
 		<c:import url="header.jsp"></c:import>
-		<script type="text/javascript">
-			$(function() {
-				/* initiate plugin assigning the desired button labels  */
-				$("div.holder").jPages({
-					containerID : "gghhh",
-					perPage     : 5,
-					first       : "首页",
-					previous    : "上一页",
-					next        : "下一页",
-					last        : "尾页"
-				});
-			});
-		</script>
 		<main class="sch_search">
 
 			<section class="sch_search container">
@@ -149,6 +141,7 @@
 				    
 				</div>
 				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="schoolSearch(2)" <%--onclick="schoolSearch()"--%>>开始查询</a></p>
+				<div id="search_result"></div>
 				<script type="text/javascript">
 					//条件数组
 					var search = [
@@ -206,7 +199,7 @@
 							});
 						}
 						$.ajax({
-							url: "/school/xgk_school_query.do",
+							url: "${pageContext.request.contextPath}/school/xgk_school_query.do",
 							data: "where=" + where,
 							type: "POST",
 							dataType: "json",
@@ -241,36 +234,30 @@
                                                 admissionLots += admissionLotList[h] + " ";
                                             }
                                         }
+                                      
+                                        var pagegrass='<div class="panel_head padding-side2" id="page"></div><div class="text-center"><div class="text-center"style="box-shadow: 0px 0px 0px #bdb8b8;"><div class="holder text-center" style="text-align: center;"></div></div></div>';
+                                        var box_head='<div class="panel panel-default" ><div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div><ul classs="search_result list-group" id="universities">';
 										var table='<table class="sch_slice" border="" cellspacing="" cellpadding=""><tr><th rowspan="2">年份</th><th colspan="6">录取分</th><th colspan="2">计划人数</th></tr><tr><th>最低分</th><th>平均分</th><th>最高分</th><th>提档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr></table>';
-										var operate='<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p> <p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid002"/></a></p> </div>';
-										universities += "<li class='list-group-item'>" +
-												"<div class=''>" +
+										var id="",btnid="btnid1";
+										var operate='<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
+										'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
+										'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+										universities += "<li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +"<div class='sh_logo'>" +
 												"<a href='xgk_sch_info.jsp'><img alt='学校logo' src='${pageContext.request.contextPath}/img/xgk/sch_logo.png'/></a>" +
-												"</div>" +
-
-												"<div class='sch_info sch_search_info padding-side'>" +
-												"<div class=''>" +
-												"<h4>" + list[i].universitiesName + "<span class=''><img src='${pageContext.request.contextPath}/img/xgk/label.png'/></span></h4>" +
+												"</div>" +"<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4>" + list[i].universitiesName + "<span class=''><img src='${pageContext.request.contextPath}/img/xgk/label.png'/></span></h4>" +
 												"<p class=''>录取平均分排行（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
-												"</div>" +
-
-												"<table border='0' cellspacing='' cellpadding=''>" +
-														"<tr><td> 院校代号：" + list[i].universitiesCode + "<span></span></td><td>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></td></tr>" +
-												"<tr><td>隶属：" + list[i].belongTo + "<span></span></td><td>硕士点数：" + master + "<span></span></td></tr>" +
-												"<tr><td>院校类型：<span></span></td><td>博士点数：" + doctor + "<span></span></td></tr>" +
-												"</table>" +
-												"</div>" +
-                                            "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +
-                                            "<tr><th rowspan='2'>年份</th><th colspan='6'>录取分</th><th colspan='2'>计划人数</th></tr>";
+												"</div>" +"<table border='0' cellspacing='' cellpadding=''>" +"<tr><td> 院校代号：" + list[i].universitiesCode + "<span></span></td><td>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></td></tr>" +
+												"<tr><td>隶属：" + list[i].belongTo + "<span></span></td><td>硕士点数：" + master + "<span></span></td></tr>" +"<tr><td>院校类型：<span></span></td><td>博士点数：" + doctor + "<span></span></td></tr>" +
+												"</table>" +"</div>" + "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='6'>录取分</th><th colspan='2'>计划人数</th></tr>";
                                         universities += "<tr><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr>";
                                         var collegeScoreLines = JSON.parse(list[i].collegeScoreLine);
                                         for(var k=0; k< collegeScoreLines.length; k++){
                                             universities += "<tr><td>" + collegeScoreLines[k].年份 + "</td><td>" + collegeScoreLines[k].最低分 + "</td><td>" + collegeScoreLines[k].平均分 + "</td><td>" + collegeScoreLines[k].最高分 + "</td><td>" + collegeScoreLines[k].投档线 + "</td><td>" + collegeScoreLines[k].线差 + "</td><td>" + collegeScoreLines[k].提档位次 + "</td><td>" + collegeScoreLines[k].录取人数 + "</td><td>" + collegeScoreLines[k].去年录取人数 + "</td></tr>";
                                         }
                                         universities += "</table>";
-                                        universities += "<div class='operate_box'> <p class='text-center'><a class='store btn cancel' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value=''/></a></p> <p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span><input type='checkbox' name='' id='btnid001'/></a></p> </div> </li> </ul>";
+                                        universities += operate+"</li>";
 									}
-									$("#universities").html(universities);
+									$("#search_result").html(box_head+universities+pagegrass+'</ul></div>');
 								}
 							}
 						});
@@ -291,77 +278,16 @@
 						});
 					});
 				</script>
-				<div class="panel panel-default" >
-					<div class="panel_head padding-side2" id="page">
-						<h4 class="fontwei">共找到<a>0</a>条结果</h4>
-					</div>
-					<div id="universities">
-
-                    </div>
-				        <!-- <li class="list-group-item" id="001" pname="复旦大学">
-				        	<div class="sh_logo">
-				        		<a href="sch_info.html"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/fudan.jpg"/></a>
-				        	</div>
-				        	<div class="sch_info sch_search_info padding-side">
-				        		<div class="">
-				        			<h4>复旦大学 <span class=""><img src="img/label.png"/></span></h4>
-				        			<p class="">录取平均分排行（本科一批）<span class="text-danger">34</span></p>
-				        		</div>
-				        		<table border="0" cellspacing="" cellpadding="">
-				        			<tr><td>院校代号：<span></span></td><td>录取概率：<span class="text-danger">15%</span></td></tr>
-				        			<tr><td>隶属：<span></span></td><td>硕士点数：<span></span></td></tr>
-				        			<tr><td>院校类型：<span></span></td><td>博士点数：<span></span></td></tr>
-				        		</table>
-				        	</div>
-				        	<table class="sch_slice" border="" cellspacing="" cellpadding="">
-				        		<tr><th rowspan="2">年份</th><th colspan="6">录取分</th><th colspan="2">计划人数</th></tr>
-				        		<tr><th>最低分</th><th>平均分</th><th>最高分</th><th>提档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr>
-				        		<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-				        		<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-				        		<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-				        		<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-				        		<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-				        	</table>
-				        	<div class="operate_box">
-				        		<p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>
-				        		<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span><input type="checkbox" name="" id="btnid001"/></a></p>
-				        	</div>
-				        </li> -->
-
-				    <!--分页-->
-				    <div class="text-center">
-						<div class="text-center"style="box-shadow: 0px 0px 0px #bdb8b8;">
-							<div class="holder text-center" style="text-align: center;"></div>
-						</div>
-<%--				    	<ul class="pagination">--%>
-<%--							<li><a href="#">&laquo;</a></li>--%>
-<%--							<li class="active"><a href="#">1</a></li>--%>
-<%--							<li class="disabled"><a href="#">2</a></li>--%>
-<%--							<li><a href="#">3</a></li>--%>
-<%--							<li><a href="#">4</a></li>--%>
-<%--							<li><a href="#">5</a></li>--%>
-<%--							<li><a href="#">&raquo;</a></li>--%>
-<%--						</ul>--%>
-				    </div>
-				    <!--/分页-->
-				</div>
 
 			</section>
-			<div class="contrast panel">
+			<div class="contrast panel" id="contrast">
 				<div class="text-right text-primary padding-side2">
 					<label class="slide_down">
 						隐藏<span class="glyphicon glyphicon-chevron-down"></span>
 					</label>
 				</div>
 				<div class="contrast_tools">
-				 	<ul class="contrast_list clearfix">
-					 	<!--<li>
-					 		<a href="javascript:void(0)" onclick="remove_contrast(this)">
-					 			<img src="img/sch_logo.png"/>
-					 		</a>
-					 		<p class="text-center margin_top1"><a href="javascript:void(0)" onclick="del_contrast(this)" class="btn btn-primary">取消对比</a></p>
-					 	</li>-->
-					</ul>
+				 	<ul class="contrast_list clearfix"></ul>
 					<div class="btn_group">
 				 		<span class="padding-side">
 				 			<p class="text-center"><a href="javascript:void(0)" onclick="modelshow($('#Modal .modal_tit').html(),$('#Modal .modal_content').html())" class="btn btn-primary">院校基本情况对比</a></p>
@@ -484,9 +410,8 @@
 						$(obj).find('span').text("收藏学校");
 					}
 				}
-				
-				 var flag=false;
-					
+				 /* $('.contrast').show(); */
+				var flag=false;
 				//结果列表的加入对比
 				function btn_check(obj){
 					var rowId=$(obj).parents('li').attr('id');
