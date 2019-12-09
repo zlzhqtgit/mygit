@@ -117,112 +117,112 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                #{id},
+                #{id,jdbcType=INTEGER},
             </if>
             <if test="universitiesCode != null">
-                #{universitiesCode},
+                #{universitiesCode,jdbcType=VARCHAR},
             </if>
             <if test="universitiesName != null">
-                #{universitiesName},
+                #{universitiesName,jdbcType=VARCHAR},
             </if>
             <if test="province != null">
-                #{province},
+                #{province,jdbcType=VARCHAR},
             </if>
             <if test="city != null">
-                #{city},
+                #{city,jdbcType=VARCHAR},
             </if>
             <if test="establishedTime != null">
-                #{establishedTime},
+                #{establishedTime,jdbcType=VARCHAR},
             </if>
             <if test="universitiesNature != null">
-                #{universitiesNature},
+                #{universitiesNature,jdbcType=VARCHAR},
             </if>
             <if test="belongTo != null">
-                #{belongTo},
+                #{belongTo,jdbcType=VARCHAR},
             </if>
             <if test="address != null">
-                #{address},
+                #{address,jdbcType=VARCHAR},
             </if>
             <if test="mapCoordinates != null">
-                #{mapCoordinates},
+                #{mapCoordinates,jdbcType=VARCHAR},
             </if>
             <if test="universitiesAttributes != null">
-                #{universitiesAttributes},
+                #{universitiesAttributes,jdbcType=VARCHAR},
             </if>
             <if test="universitiesType != null">
-                #{universitiesType},
+                #{universitiesType,jdbcType=VARCHAR},
             </if>
             <if test="universitiesImage != null">
-                #{universitiesImage},
+                #{universitiesImage,jdbcType=VARCHAR},
             </if>
             <if test="admissionLot != null">
-                #{admissionLot},
+                #{admissionLot,jdbcType=VARCHAR},
             </if>
             <if test="admissionProbability != null">
-                #{admissionProbability},
+                #{admissionProbability,jdbcType=VARCHAR},
             </if>
             <if test="universitiesWebsite != null">
-                #{universitiesWebsite},
+                #{universitiesWebsite,jdbcType=VARCHAR},
             </if>
             <if test="alumniAssociationRanking != null">
-                #{alumniAssociationRanking},
+                #{alumniAssociationRanking,jdbcType=INTEGER},
             </if>
             <if test="martialBookAssociationRanking != null">
-                #{martialBookAssociationRanking},
+                #{martialBookAssociationRanking,jdbcType=INTEGER},
             </if>
             <if test="softScienceRanking != null">
-                #{softScienceRanking},
+                #{softScienceRanking,jdbcType=INTEGER},
             </if>
             <if test="quacquarelliSymondsRanking != null">
-                #{quacquarelliSymondsRanking},
+                #{quacquarelliSymondsRanking,jdbcType=INTEGER},
             </if>
             <if test="usNewsRanking != null">
-                #{usNewsRanking},
+                #{usNewsRanking,jdbcType=INTEGER},
             </if>
             <if test="admissionAverageRanking != null">
-                #{admissionAverageRanking},
+                #{admissionAverageRanking,jdbcType=INTEGER},
             </if>
             <if test="totalRanking != null">
-                #{totalRanking},
+                #{totalRanking,jdbcType=INTEGER},
             </if>
             <if test="createBy != null">
-                #{createBy},
+                #{createBy,jdbcType=VARCHAR},
             </if>
             <if test="updateTime != null">
-                #{updateTime},
+                #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateBy != null">
-                #{updateBy},
+                #{updateBy,jdbcType=VARCHAR},
             </if>
             <if test="universitiesIntroduction != null">
-                #{universitiesIntroduction},
+                #{universitiesIntroduction,jdbcType=LONGVARCHAR},
             </if>
             <if test="universitiesLife != null">
-                #{universitiesLife},
+                #{universitiesLife,jdbcType=LONGVARCHAR},
             </if>
             <if test="roomAndBoard != null">
-                #{roomAndBoard},
+                #{roomAndBoard,jdbcType=LONGVARCHAR},
             </if>
             <if test="scholarships != null">
-                #{scholarships},
+                #{scholarships,jdbcType=LONGVARCHAR},
             </if>
             <if test="teachingResearch != null">
-                #{teachingResearch},
+                #{teachingResearch,jdbcType=LONGVARCHAR},
             </if>
             <if test="maleFemaleRatio != null">
-                #{maleFemaleRatio},
+                #{maleFemaleRatio,jdbcType=LONGVARCHAR},
             </if>
             <if test="teachersResources != null">
-                #{teachersResources},
+                #{teachersResources,jdbcType=LONGVARCHAR},
             </if>
             <if test="coreSpecialty != null">
-                #{coreSpecialty},
+                #{coreSpecialty,jdbcType=LONGVARCHAR},
             </if>
             <if test="coreSubject != null">
-                #{coreSubject},
+                #{coreSubject,jdbcType=LONGVARCHAR},
             </if>
             <if test="coreLaboratoriesAndResearchCenters != null">
-                #{coreLaboratoriesAndResearchCenters},
+                #{coreLaboratoriesAndResearchCenters,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -346,13 +346,15 @@
     <select id="selectUniversityList"  resultType="cn.hqtzytb.entity.University">
         select
             u.id, u.universities_code, u.universities_name, u.province, u.city, u.established_time, u.universities_nature,
-            u.belong_to, u.address, u.map_coordinates, u.universities_attributes, u.universities_type,
-            u.universities_image, u.admission_lot, u.admission_probability, u.universities_website, u.alumni_association_ranking,
+            u.belong_to, u.address, u.map_coordinates, u.universities_attributes, u.universities_type, u.universities_image,
+            u.universities_life, u.room_and_board, u.scholarships, u.teaching_research, u.male_female_ratio, u.teachers_resources,
+            u.core_specialty, u.core_subject, u.core_laboratories_and_research_centers, u.admission_lot, u.admission_probability,
+            u.universities_website, u.universities_phone,  u.alumni_association_ranking,
             u.martial_book_association_ranking, u.soft_science_ranking, u.quacquarelli_symonds_ranking,
-            u.us_news_ranking, u.admission_average_ranking, u.total_ranking, u.create_by, u.update_time,
-            u.update_by,u.universities_introduction, u.universities_life, u.room_and_board, u.scholarships, u.teaching_research,
-            u.male_female_ratio, u.teachers_resources, u.core_specialty, u.core_subject, u.core_laboratories_and_research_centers,
-            ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score, ur.admissions_brochure, ur.admissions_regulations
+            u.us_news_ranking, u.admission_average_ranking, u.total_ranking,
+            u.create_by, u.create_time, u.update_time, u.update_by,
+            ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score, ur.admissions_brochure,
+            ur.admissions_regulations
         from university u
         left join university_relation ur ON ur.universities_code = u.universities_code
         <if test="where != null">where ${where}</if>

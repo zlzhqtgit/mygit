@@ -158,6 +158,11 @@ public class University extends UniversityRelation implements Serializable{
     private String universitiesWebsite;
 
     /**
+     * 学校电话
+     */
+    private String universitiesPhone;
+
+    /**
      * 校友会排名
      */
     private Integer alumniAssociationRanking;
@@ -193,6 +198,11 @@ public class University extends UniversityRelation implements Serializable{
     private Integer totalRanking;
 
     /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
      * 创建人
      */
     private String createBy;
@@ -206,5 +216,6 @@ public class University extends UniversityRelation implements Serializable{
      * 修改人
      */
     private String updateBy;
+
 
 }

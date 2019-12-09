@@ -11,7 +11,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 /**
@@ -38,7 +37,7 @@ public class IUniversityServiceImpl implements IUniversityService {
 
     @Override
     public ResponseResult<List<University>> getUniversityList(String where) {
-        return new ResponseResult<List<University>>().setState(Constants.RESULT_CODE_SUCCESS).setMessage(Constants.RESULT_MESSAGE_SUCCESS).setData(universityMapper.selectUniversityList(StringUtils.isEmpty(where) ? null : where ,null,null,null));
+        return new ResponseResult<List<University>>().setState(Constants.RESULT_CODE_SUCCESS).setMessage(Constants.RESULT_MESSAGE_SUCCESS).setData(universityMapper.selectUniversityList((StringUtils.isEmpty(where) ? null : where ),null,null,null));
     }
 
     @Override
