@@ -14,6 +14,7 @@
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jPages.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/area_json.js"></script>
 		<style>
 			.sch_search_info table td{
 				width:50%;
@@ -78,11 +79,11 @@
 				        	</dl>
 				        	<dl class="pull-left item_body" id="province" name="2">
 				        		<dd class=""><a class="active" href="javascript:void(0)" >全部</a></dd>
-				        		<dd><a href="javascript:void(0)" >985</a></dd>
-				        		<dd><a href="javascript:void(0)" >211</a></dd>
-				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
-				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
+				        		<dd><a href="javascript:void(0)" >北京</a></dd>
+				        		<dd><a href="javascript:void(0)" >上海</a></dd>
+				        		<dd><a href="javascript:void(0)" >重庆</a></dd>
+				        		<dd><a href="javascript:void(0)" >四川</a></dd>
+				        		<dd><a href="javascript:void(0)" >贵州</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
@@ -91,11 +92,11 @@
 				        	</dl>
 				        	<dl class="pull-left item_body" id="city" name="3">
 				        		<dd class=""><a class="active a" href="javascript:void(0)" >全部</a></dd>
-				        		<dd><a class="a" href="javascript:void(0)" >985</a></dd>
-				        		<dd><a href="javascript:void(0)" >北京市</a></dd>
+				        		<dd><a class="a" href="javascript:void(0)" >凯里</a></dd>
+				        		<dd><a href="javascript:void(0)" >北京</a></dd>
 				        		<dd><a href="javascript:void(0)" >上海</a></dd>
-				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
+				        		<dd><a href="javascript:void(0)" >贵阳</a></dd>
+				        		<dd><a href="javascript:void(0)" >成都</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
@@ -104,11 +105,10 @@
 				        	</dl>
 				        	<dl class="pull-left item_body" id="universities_nature" name="4">
 				        		<dd class=""><a class="active" href="javascript:void(0)" onclick="addSearch(this)">全部</a></dd>
-				        		<dd><a href="javascript:void(0)" >985</a></dd>
-				        		<dd><a href="javascript:void(0)" >211</a></dd>
-				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
-				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
+				        		<dd><a href="javascript:void(0)" >公办</a></dd>
+				        		<dd><a href="javascript:void(0)" >民办</a></dd>
+				        		<dd><a href="javascript:void(0)" >独立院校</a></dd>
+				        		<dd><a href="javascript:void(0)" >中外合作办学</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
@@ -117,11 +117,9 @@
 				        	</dl>
 				        	<dl class="pull-left item_body" id="admission_lot" name="5">
 				        		<dd class=""><a class="active" href="javascript:void(0)" >全部</a></dd>
-				        		<dd><a href="javascript:void(0)" >985</a></dd>
-				        		<dd><a href="javascript:void(0)" >211</a></dd>
-				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
-				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
+				        		<dd><a href="javascript:void(0)" >本科一批</a></dd>
+				        		<dd><a href="javascript:void(0)" >本科二批</a></dd>
+				        		<dd><a href="javascript:void(0)" >高职高专</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item">
@@ -130,18 +128,24 @@
 				        	</dl>
 				        	<dl class="pull-left item_body" id="teaching_research" name="6">
 				        		<dd class=""><a class="active" href="javascript:void(0)" >全部</a></dd>
-				        		<dd><a href="javascript:void(0)" >985</a></dd>
-				        		<dd><a href="javascript:void(0)" >211</a></dd>
-				        		<dd><a href="javascript:void(0)" >双一流</a></dd>
-				        		<dd><a href="javascript:void(0)" >行业领军</a></dd>
-				        		<dd><a href="javascript:void(0)" >研究生院</a></dd>
+				        		<dd><a href="javascript:void(0)" >硕士点</a></dd>
+				        		<dd><a href="javascript:void(0)" >博士点</a></dd>
+				        		<dd><a href="javascript:void(0)" >重点专业</a></dd>
+				        		<dd><a href="javascript:void(0)" >重点实验室</a></dd>
 				        	</dl>
 				        </li>
 				    </ul>
 				    
 				</div>
 				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="schoolSearch(2)" <%--onclick="schoolSearch()"--%>>开始查询</a></p>
-				<div id="search_result"></div>
+				<div class="panel panel-default" style="display: none" id="result_count"><div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
+
+			<div id="search_result"></div>
+				<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+					<div class="holder" style="text-align: center;"></div>
+				</div>
+			</section>
+
 				<script type="text/javascript">
 					//条件数组
 					var search = [
@@ -205,6 +209,7 @@
 							dataType: "json",
 							success: function (obj) {
 								if (obj.state == 1){
+									$("#result_count").css("display","inline");//显示搜索结果数量
 									var list = obj.data;
 									$("#page h4 a").html(list.length);
 									var universities = "";
@@ -234,17 +239,36 @@
                                                 admissionLots += admissionLotList[h] + " ";
                                             }
                                         }
-                                      
-                                        var pagegrass='<div class="panel_head padding-side2" id="page"></div><div class="text-center"><div class="text-center"style="box-shadow: 0px 0px 0px #bdb8b8;"><div class="holder text-center" style="text-align: center;"></div></div></div>';
-                                        var box_head='<div class="panel panel-default" ><div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div><ul classs="search_result list-group" id="universities">';
+										var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
+                                        var attrImg = "";//院校属性 ["985","211","双一流","行业领军","研究生院"]
+										for (var f=0; f<universitiesAttributes.length; f++){
+											if (universitiesAttributes[f] == "985"){
+												attrImg += "<img src='../../img/xgk/attr/985.png'/>"
+											}
+											if (universitiesAttributes[f] == "211"){
+												attrImg += "<img src='../../img/xgk/attr/211.png'/>"
+											}
+											if (universitiesAttributes[f] == "双一流"){
+												attrImg += "<img src='../../img/xgk/attr/syl.png'/>"
+											}
+											if (universitiesAttributes[f] == "行业领军"){
+												attrImg += "<img src='../../img/xgk/attr/hylj.png'/>"
+											}
+											if (universitiesAttributes[f] == "研究生院"){
+												attrImg += "<img src='../../img/xgk/attr/yjsy.png'/>"
+											}
+										}
+                                        // var pagegrass='<div class="panel_head padding-side2" id="page"></div><div class="text-center"><div class="text-center"style="box-shadow: 0px 0px 0px #bdb8b8;"><div class="holder text-center" style="text-align: center;"></div></div></div>';
+                                        // var box_head='<div class="panel panel-default" ><div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div><ul classs="search_result list-group" id="universities">';
+										var box_head='<ul classs="search_result list-group" id="universities">';
 										var table='<table class="sch_slice" border="" cellspacing="" cellpadding=""><tr><th rowspan="2">年份</th><th colspan="6">录取分</th><th colspan="2">计划人数</th></tr><tr><th>最低分</th><th>平均分</th><th>最高分</th><th>提档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr><tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr></table>';
 										var id="",btnid="btnid1";
 										var operate='<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
 										'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
 										'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
-										universities += "<li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +"<div class='sh_logo'>" +
-												"<a href='xgk_sch_info.jsp'><img alt='学校logo' src='${pageContext.request.contextPath}/img/xgk/sch_logo.png'/></a>" +
-												"</div>" +"<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4>" + list[i].universitiesName + "<span class=''><img src='${pageContext.request.contextPath}/img/xgk/label.png'/></span></h4>" +
+										universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +"<div class='sh_logo'>" +
+												"<a href='xgk_sch_info.jsp'><img alt='学校logo' src='../../" + list[i].universitiesImage + "'/></a>" +
+												"</div>" +"<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4>" + list[i].universitiesName + "<span class=''>" + attrImg + "</span></h4>" +
 												"<p class=''>录取平均分排行（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
 												"</div>" +"<table border='0' cellspacing='' cellpadding=''>" +"<tr><td> 院校代号：" + list[i].universitiesCode + "<span></span></td><td>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></td></tr>" +
 												"<tr><td>隶属：" + list[i].belongTo + "<span></span></td><td>硕士点数：" + master + "<span></span></td></tr>" +"<tr><td>院校类型：<span></span></td><td>博士点数：" + doctor + "<span></span></td></tr>" +
@@ -255,9 +279,18 @@
                                             universities += "<tr><td>" + collegeScoreLines[k].年份 + "</td><td>" + collegeScoreLines[k].最低分 + "</td><td>" + collegeScoreLines[k].平均分 + "</td><td>" + collegeScoreLines[k].最高分 + "</td><td>" + collegeScoreLines[k].投档线 + "</td><td>" + collegeScoreLines[k].线差 + "</td><td>" + collegeScoreLines[k].提档位次 + "</td><td>" + collegeScoreLines[k].录取人数 + "</td><td>" + collegeScoreLines[k].去年录取人数 + "</td></tr>";
                                         }
                                         universities += "</table>";
-                                        universities += operate+"</li>";
+                                        universities += operate+"</li></ul>";
 									}
-									$("#search_result").html(box_head+universities+pagegrass+'</ul></div>');
+									// $("#search_result").html(box_head+universities+pagegrass+'</ul></div>');
+									$("#search_result").html(universities);
+									$("div.holder").jPages({
+										containerID : "search_result",
+										perPage     : 1,
+										first       : "首页",
+										previous    : "上一页",
+										next        : "下一页",
+										last        : "尾页"
+									});
 								}
 							}
 						});
@@ -268,18 +301,9 @@
 					//分页方法
 					$(function() {
 						/* initiate plugin assigning the desired button labels  */
-						$("div.holder").jPages({
-							containerID : "universities",
-							perPage     : 3,
-							first       : "首页",
-							previous    : "上一页",
-							next        : "下一页",
-							last        : "尾页"
-						});
+
 					});
 				</script>
-
-			</section>
 			<div class="contrast panel" id="contrast">
 				<div class="text-right text-primary padding-side2">
 					<label class="slide_down">
@@ -512,16 +536,42 @@
 
 	</body>
 	<script type="text/javascript">
-		// 院校省份信息
-		var province = new Array();
-		// 热门城市信息
-		var city = new Array();
 		// 自动加载
 		$(function () {
-			// $.ajax(function () {
-			//
-			// })
-			console.log("自动加载")
+			$.ajax({
+				url: "/school/xgk_university_province.do",
+				data: "",
+				type: "POST",
+				dataType: "json",
+				success: function(obj) {
+					if(obj.state == 1) {
+						// 加载院校省份信息
+						var provinceList = obj.data;
+						console.log(provinceList)
+						var provinces = '<dd class=""><a class="active" href="javascript:void(0)" onclick="clickActive(this)">全部</a></dd>';
+						for (var i=0; i<provinceList.length; i++){
+							provinces += '<dd><a href="javascript:void(0)" onclick="loadCity(this);clickActive(this)">' + provinceList[i] + '</a></dd>';
+						}
+						$("#province").html(provinces);
+					}
+				}
+			});
 		});
+
+		//加载城市
+		function loadCity(e) {
+			var cityList = getCityList(e.text);
+			var cities = '<dd class=""><a class="active a" href="javascript:void(0)" onclick="clickActive(this)">全部</a></dd>';
+			for (var i=0; i<cityList.length; i++){
+				cities += '<dd><a class="a" href="javascript:void(0)" onclick="clickActive(this)">' + cityList[i] + '</a></dd>';
+			}
+			$("#city").html(cities);
+		}
+
+		//点击选中
+		function  clickActive(e) {
+			$(e).parents("dl").children().find("a").removeClass("active");
+			$(e).addClass("active");
+		}
 	</script>
 </html>

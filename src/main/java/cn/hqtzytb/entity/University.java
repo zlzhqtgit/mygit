@@ -165,37 +165,37 @@ public class University extends UniversityRelation implements Serializable{
     /**
      * 校友会排名
      */
-    private Integer alumniAssociationRanking;
+    private String alumniAssociationRanking;
 
     /**
      * 武书会排名
      */
-    private Integer martialBookAssociationRanking;
+    private String martialBookAssociationRanking;
 
     /**
      * 软科中国两岸四地大学百强排名
      */
-    private Integer softScienceRanking;
+    private String softScienceRanking;
 
     /**
      * 世界大学排名:QS排名
      */
-    private Integer quacquarelliSymondsRanking;
+    private String quacquarelliSymondsRanking;
 
     /**
      * 美国大学排名:USNews
      */
-    private Integer usNewsRanking;
+    private String usNewsRanking;
 
     /**
      * 录取平均分排行
      */
-    private Integer admissionAverageRanking;
+    private String admissionAverageRanking;
 
     /**
      * 综合排名
      */
-    private Integer totalRanking;
+    private String totalRanking;
 
     /**
      * 创建时间

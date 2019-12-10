@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,19 +31,32 @@ public class UniversityController {
     @Autowired
     private IUniversityService iUniversityService;
 
+
     /**
      * 学校上传图片
      * @param universitiesCode
      * @param files
+     * @param imageType 1-校园生活 2-学校主图
      * @return
      */
     @PostMapping("/xgk_upload_image.do")
     @ResponseBody
-    public ResponseResult<Void> universityUploadImage(@RequestParam(value="universitiesCode") String universitiesCode, @RequestParam(value="files") MultipartFile[] files){
-        return  iUniversityService.universityUploadImage(universitiesCode,files);
+    public ResponseResult<Object> universityUploadImage(@RequestParam(value="universitiesCode") String universitiesCode,
+                                                        @RequestParam(value="files") MultipartFile[] files,
+                                                        @RequestParam(value="imageType") Integer imageType){
+        return  iUniversityService.universityUploadImage(universitiesCode,files,imageType);
     }
 
-
+    /**
+     * 学校删除图片
+     * @param url
+     * @return
+     */
+    @RequestMapping("/xgk_delete_image.do")
+    @ResponseBody
+    public ResponseResult<Object> universityDeleteImage(@RequestParam(value="url") String url){
+        return  iUniversityService.universityDeleteImage(url);
+    }
 
     /**
      * 显示院校查询页
@@ -92,5 +104,16 @@ public class UniversityController {
     @ResponseBody
     public ResponseResult<List<Specialty>> getSpecialtyList(String where){
         return iUniversityService.getSpecialtyList(where);
+    }
+
+
+    /**
+     * 获得院校省份信息
+     * @return
+     */
+    @RequestMapping("/xgk_university_province.do")
+    @ResponseBody
+    public ResponseResult<List<String>> getProvince(){
+        return iUniversityService.getProvince();
     }
 }

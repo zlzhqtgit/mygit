@@ -19,7 +19,7 @@
 
 <body>
 <!-- 页面顶部-->
-<c:import url="header.jsp"></c:import>			
+<c:import url="../header.jsp"></c:import>
 		<main class="container">
 			<section class="row">
 				<p class="text-right">

@@ -227,7 +227,7 @@
         </trim>
     </insert>
 
-    <update id="updateUniversityById" parameterType="cn.hqtzytb.entity.University">
+    <update id="updateUniversity" parameterType="cn.hqtzytb.entity.University">
         update university
         <set>
             <if test="universitiesCode != null">
@@ -449,5 +449,10 @@
         <if test="where != null">where ${where}</if>
         <if test="orderBy != null">order by  ${orderBy}</if>
         <if test="offset != null">limit   ${offset},${countPerPage}</if>
+    </select>
+
+
+    <select id="selectUniversityProvince" resultType="java.lang.String">
+        SELECT DISTINCT province FROM university
     </select>
 </mapper>

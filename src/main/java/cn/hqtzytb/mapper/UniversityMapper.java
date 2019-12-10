@@ -3,7 +3,6 @@ package cn.hqtzytb.mapper;
 import cn.hqtzytb.entity.University;
 import cn.hqtzytb.entity.UniversityRelation;
 import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**
@@ -32,4 +31,10 @@ public interface UniversityMapper {
                                       @Param("orderBy")String orderBy,
                                       @Param("offset")Integer offset,
                                       @Param("countPerPage")Integer countPerPage);
+
+    /**
+     * 获得院校省份信息
+     * @return
+     */
+    List<String> selectUniversityProvince();
 }
