@@ -41,7 +41,7 @@ import net.sf.json.JSONObject;
 /**
 * @Title: UserController.java
 * @Package cn.hqtzytb.controller
-* @Description:(前端用户控制层)
+* @Description:(前端用户控制层)1
 * @author: ZhouLingZhang
 * @date 2019年10月14日
 * @Copyright:好前途教育
