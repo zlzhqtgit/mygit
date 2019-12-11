@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package cn.hqtzytb.controller;
 
 import cn.hqtzytb.entity.ResponseResult;
@@ -45,7 +44,7 @@ public class LoginController {
     }
 
     /**
-     * 腾讯登录跳转
+     * 腾讯登录跳转1
      * @return
      */
     @RequestMapping("/qq_login.do")
