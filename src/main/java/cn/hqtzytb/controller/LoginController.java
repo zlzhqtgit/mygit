@@ -39,7 +39,7 @@ public class LoginController {
     }
 
     /**
-     * 腾讯登录跳转1
+     * 腾讯登录跳转
      * @return
      */
     @RequestMapping("/qq_login.do")
