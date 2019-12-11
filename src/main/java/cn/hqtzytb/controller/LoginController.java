@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package cn.hqtzytb.controller;
 
 import cn.hqtzytb.entity.ResponseResult;
