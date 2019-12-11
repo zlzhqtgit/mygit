@@ -6,24 +6,18 @@ import cn.hqtzytb.service.ILoginService;
 import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.utils.Constants;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * @ClassName: LoginController
  * @Description: 登录控制器66
  * @Author: WuPeiLong
- * @Date: 2019年11月28日
+ * @Date: 2019年11月28日45
  * @Copyright:好前途教育455
  * @Version V1.0
  */
