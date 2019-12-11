@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
-	<mapper namespace="cn.hqtzytb.mapper.SpecialtyMapper">
-	<resultMap id="BaseResultMap" type="cn.hqtzytb.entity.Specialty" >
+<mapper namespace="cn.hqtzytb.mapper.SpecialtyMapper">
+	<resultMap id="BaseResultMap" type="cn.hqtzytb.entity.Specialty">
 		<id column="id" property="id" />
 		<result column="specialty_id" property="specialtyId" />
 		<result column="specialty_name" property="specialtyName" />
@@ -43,312 +43,322 @@
 		<result column="open_college" property="openCollege" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, specialty_id, specialty_name, specialty_intro, specialty_major_name, specialty_class_name, specialty_divided,
-		specialty_disciplines, specialty_education, study_duration, bachelor_degree, male_female_ratio,
-		specialty_summary, train_requirement, subject_requirement, knowledge_ability, postgraduate_direction,
-		employment_career_direction, employment_industry_distribution, employment_area_distribution,major_courses,
-		specialty_objective, specialty_employment,specialty_requirement, physics_performance, chemistry_performance,
-		biology_performance, politic_performance, history_performance, geography_performance, chinese_performance,
-		math_performance, foreign_performance, above_a, equal_a, below_a, above_b, open_college
-  	</sql>
+		id, specialty_id, specialty_name, specialty_intro,
+		specialty_major_name, specialty_class_name, specialty_divided,
+		specialty_disciplines, specialty_education, study_duration,
+		bachelor_degree, male_female_ratio,
+		specialty_summary,
+		train_requirement, subject_requirement, knowledge_ability,
+		postgraduate_direction,
+		employment_career_direction,
+		employment_industry_distribution,
+		employment_area_distribution,major_courses,
+		specialty_objective,
+		specialty_employment,specialty_requirement, physics_performance,
+		chemistry_performance,
+		biology_performance, politic_performance,
+		history_performance, geography_performance, chinese_performance,
+		math_performance, foreign_performance, above_a, equal_a, below_a,
+		above_b, open_college
+	</sql>
 
-		<!--查询测评结果对应相关信息  -->
-		<select id="select" resultType="cn.hqtzytb.entity.Specialty">
-			select
-			<include refid="Base_Column_List" />
-			FROM specialty b
-			LEFT JOIN  personality_specialty e ON b.specialty_id = e.specialtyt_id
-			<if test="where != null">where ${where}</if>
-			<if test="orderBy != null">order by  ${orderBy}</if>
-			<if test="offset != null">limit  ${offset},${countPerPage}</if>
-		</select>
+	<!--查询测评结果对应相关信息 -->
+	<select id="select" resultType="cn.hqtzytb.entity.Specialty">
+		select
+		<include refid="Base_Column_List" />
+		FROM specialty b
+		LEFT JOIN personality_specialty e ON b.specialty_id = e.specialtyt_id
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
 
-		<select id="selectvoction" resultMap="BaseResultMap">
-			select
-				<include refid="Base_Column_List" />
-			FROM specialty b
-			LEFT JOIN  vocation_specialty e ON b.specialty_id = e.specialty_id
-			<if test="where != null">where ${where}</if>
-			<if test="orderBy != null">order by  ${orderBy}</if>
-			<if test="offset != null">limit ${offset},${countPerPage}</if>
-		</select>
+	<select id="selectvoction" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		FROM specialty b
+		LEFT JOIN vocation_specialty e ON b.specialty_id = e.specialty_id
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
 
-		<!--查询测评结果对应相关信息  -->
-		<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Specialty">
-			SELECT
-				DISTINCT(b.specialty_disciplines) specialtyDisciplines
-			FROM specialty b
-			LEFT JOIN  personality_specialty e ON b.specialty_id = e.specialtyt_id
-			<if test="where != null">where ${where}</if>
-			<if test="orderBy != null">order by  ${orderBy}</if>
-			<if test="offset != null">limit   ${offset},${countPerPage}</if>
-		</select>
+	<!--查询测评结果对应相关信息 -->
+	<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Specialty">
+		SELECT
+		DISTINCT(b.specialty_disciplines) specialtyDisciplines
+		FROM specialty b
+		LEFT JOIN personality_specialty e ON b.specialty_id = e.specialtyt_id
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
 
-		<!--查询测评结果对应相关信息  -->
-		<select id="selectLargeClassByvocation" resultType="cn.hqtzytb.entity.Specialty">
-			SELECT
-				DISTINCT(b.specialty_divided) specialtyDivided
-			FROM specialty b
-			LEFT JOIN  vocation_specialty e ON b.specialty_id = e.specialty_id
-			<if test="where != null">where ${where}</if>
-			<if test="orderBy != null">order by  ${orderBy}</if>
-			<if test="offset != null">limit   ${offset},${countPerPage}</if>
-		</select>
+	<!--查询测评结果对应相关信息 -->
+	<select id="selectLargeClassByvocation" resultType="cn.hqtzytb.entity.Specialty">
+		SELECT
+		DISTINCT(b.specialty_divided) specialtyDivided
+		FROM specialty b
+		LEFT JOIN vocation_specialty e ON b.specialty_id = e.specialty_id
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
 
-		<!--查询测评结果对应相关信息  -->
-		<select id="selectId" resultType="cn.hqtzytb.entity.Specialty">
-			SELECT
-			<include refid="Base_Column_List" />
-				/*specialty_id as specialtyId,
-				specialty_name as specialtyName,
-				specialty_intro as specialtyIntro,
-				specialty_objective as specialtyObjective,
-				specialty_employment as specialtyEmployment,
-				specialty_requirement as specialtyRequirement*/
-			FROM specialty
-			<if test="where != null">where ${where}</if>
-			<if test="orderBy != null">order by  ${orderBy}</if>
-			<if test="offset != null">limit   ${offset},${countPerPage}</if>
-		</select>
+	<!--查询测评结果对应相关信息 -->
+	<select id="selectId" resultType="cn.hqtzytb.entity.Specialty">
+		SELECT
+		<include refid="Base_Column_List" />
+		/*specialty_id as specialtyId,
+		specialty_name as specialtyName,
+		specialty_intro as specialtyIntro,
+		specialty_objective as specialtyObjective,
+		specialty_employment as specialtyEmployment,
+		specialty_requirement as specialtyRequirement*/
+		FROM specialty
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
 
-		<!--新增专业数据信息-->
-		<insert id="insertSpecialty"  parameterType="cn.hqtzytb.entity.Specialty">
-			insert into specialty
-			<trim prefix="(" suffix=")" suffixOverrides=",">
-				<if test="id != null">
-					id,
-				</if>
-				<if test="specialtyId != null">
-					specialty_id,
-				</if>
-				<if test="specialtyName != null">
-					specialty_name,
-				</if>
-				<if test="specialtyIntro != null">
-					specialty_intro,
-				</if>
-				<if test="specialtyMajorName != null">
-					specialty_major_name,
-				</if>
-				<if test="specialtyClassName != null">
-					specialty_class_name,
-				</if>
-				<if test="specialtyDivided != null">
-					specialty_divided,
-				</if>
-				<if test="specialtyDisciplines != null">
-					specialty_disciplines,
-				</if>
-				<if test="specialtyEducation != null">
-					specialty_education,
-				</if>
-				<if test="studyDuration != null">
-					study_duration,
-				</if>
-				<if test="bachelorDegree != null">
-					bachelor_degree,
-				</if>
-				<if test="maleFemaleRatio != null">
-					male_female_ratio,
-				</if>
-				<if test="specialtySummary != null">
-					specialty_summary,
-				</if>
-				<if test="trainRequirement != null">
-					train_requirement,
-				</if>
-				<if test="subjectRequirement != null">
-					subject_requirement,
-				</if>
-				<if test="knowledgeAbility != null">
-					knowledge_ability,
-				</if>
-				<if test="postgraduateDirection != null">
-					postgraduate_direction,
-				</if>
-				<if test="employmentCareerDirection != null">
-					employment_career_direction,
-				</if>
-				<if test="employmentIndustryDistribution != null">
-					employment_industry_distribution,
-				</if>
-				<if test="employmentAreaDistribution != null">
-					employment_area_distribution,
-				</if>
-				<if test="majorCourses != null">
-					major_courses,
-				</if>
-				<if test="specialtyObjective != null">
-					specialty_objective,
-				</if>
-				<if test="specialtyEmployment != null">
-					specialty_employment,
-				</if>
-				<if test="specialtyRequirement != null">
-					specialty_requirement,
-				</if>
-				<if test="physicsPerformance != null">
-					physics_performance,
-				</if>
-				<if test="chemistryPerformance != null">
-					chemistry_performance,
-				</if>
-				<if test="biologyPerformance != null">
-					biology_performance,
-				</if>
-				<if test="politicPerformance != null">
-					politic_performance,
-				</if>
-				<if test="historyPerformance != null">
-					history_performance,
-				</if>
-				<if test="geographyPerformance != null">
-					geography_performance,
-				</if>
-				<if test="chinesePerformance != null">
-					chinese_performance,
-				</if>
-				<if test="mathPerformance != null">
-					math_performance,
-				</if>
-				<if test="foreignPerformance != null">
-					foreign_performance,
-				</if>
-				<if test="aboveA != null">
-					above_a,
-				</if>
-				<if test="equalA != null">
-					equal_a,
-				</if>
-				<if test="belowA != null">
-					below_a,
-				</if>
-				<if test="aboveB != null">
-					above_b,
-				</if>
-				<if test="openCollege != null">
-					open_college,
-				</if>
-			</trim>
-			<trim prefix="values (" suffix=")" suffixOverrides=",">
-				<if test="id != null">
-					#{id},
-				</if>
-				<if test="specialtyId != null">
-					#{specialtyId},
-				</if>
-				<if test="specialtyName != null">
-					#{specialtyName},
-				</if>
-				<if test="specialtyIntro != null">
-					#{specialtyIntro},
-				</if>
-				<if test="specialtyMajorName != null">
-					#{specialtyMajorName},
-				</if>
-				<if test="specialtyClassName != null">
-					#{specialtyClassName},
-				</if>
-				<if test="specialtyDivided != null">
-					#{specialtyDivided},
-				</if>
-				<if test="specialtyDisciplines != null">
-					#{specialtyDisciplines},
-				</if>
-				<if test="specialtyEducation != null">
-					#{specialtyEducation},
-				</if>
-				<if test="studyDuration != null">
-					#{studyDuration},
-				</if>
-				<if test="bachelorDegree != null">
-					#{bachelorDegree},
-				</if>
-				<if test="maleFemaleRatio != null">
-					#{maleFemaleRatio},
-				</if>
-				<if test="specialtySummary != null">
-					#{specialtySummary},
-				</if>
-				<if test="trainRequirement != null">
-					#{trainRequirement},
-				</if>
-				<if test="subjectRequirement != null">
-					#{subjectRequirement},
-				</if>
-				<if test="knowledgeAbility != null">
-					#{knowledgeAbility},
-				</if>
-				<if test="postgraduateDirection != null">
-					#{postgraduateDirection},
-				</if>
-				<if test="employmentCareerDirection != null">
-					#{employmentCareerDirection,
-				</if>
-				<if test="employmentIndustryDistribution != null">
-					#{employmentIndustryDistribution},
-				</if>
-				<if test="employmentAreaDistribution != null">
-					#{employmentAreaDistribution},
-				</if>
-				<if test="majorCourses != null">
-					#{majorCourses},
-				</if>
-				<if test="specialtyObjective != null">
-					#{specialtyObjective},
-				</if>
-				<if test="specialtyEmployment != null">
-					#{specialtyEmployment},
-				</if>
-				<if test="specialtyRequirement != null">
-					#{specialtyRequirement},
-				</if>
-				<if test="physicsPerformance != null">
-					#{physicsPerformance},
-				</if>
-				<if test="chemistryPerformance != null">
-					#{chemistryPerformance},
-				</if>
-				<if test="biologyPerformance != null">
-					#{biologyPerformance},
-				</if>
-				<if test="politicPerformance != null">
-					#{politicPerformance},
-				</if>
-				<if test="historyPerformance != null">
-					#{historyPerformance},
-				</if>
-				<if test="geographyPerformance != null">
-					#{geographyPerformance},
-				</if>
-				<if test="chinesePerformance != null">
-					#{chinesePerformance},
-				</if>
-				<if test="mathPerformance != null">
-					#{mathPerformance},
-				</if>
-				<if test="foreignPerformance != null">
-					#{foreignPerformance},
-				</if>
-				<if test="aboveA != null">
-					#{aboveA},
-				</if>
-				<if test="equalA != null">
-					#{equalA},
-				</if>
-				<if test="belowA != null">
-					#{belowA},
-				</if>
-				<if test="aboveB != null">
-					#{aboveB},
-				</if>
-				<if test="openCollege != null">
-					#{openCollege},
-				</if>
-			</trim>
- 		</insert>
+	<!--新增专业数据信息 -->
+	<insert id="insertSpecialty" parameterType="cn.hqtzytb.entity.Specialty">
+		insert into specialty
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="specialtyId != null">
+				specialty_id,
+			</if>
+			<if test="specialtyName != null">
+				specialty_name,
+			</if>
+			<if test="specialtyIntro != null">
+				specialty_intro,
+			</if>
+			<if test="specialtyMajorName != null">
+				specialty_major_name,
+			</if>
+			<if test="specialtyClassName != null">
+				specialty_class_name,
+			</if>
+			<if test="specialtyDivided != null">
+				specialty_divided,
+			</if>
+			<if test="specialtyDisciplines != null">
+				specialty_disciplines,
+			</if>
+			<if test="specialtyEducation != null">
+				specialty_education,
+			</if>
+			<if test="studyDuration != null">
+				study_duration,
+			</if>
+			<if test="bachelorDegree != null">
+				bachelor_degree,
+			</if>
+			<if test="maleFemaleRatio != null">
+				male_female_ratio,
+			</if>
+			<if test="specialtySummary != null">
+				specialty_summary,
+			</if>
+			<if test="trainRequirement != null">
+				train_requirement,
+			</if>
+			<if test="subjectRequirement != null">
+				subject_requirement,
+			</if>
+			<if test="knowledgeAbility != null">
+				knowledge_ability,
+			</if>
+			<if test="postgraduateDirection != null">
+				postgraduate_direction,
+			</if>
+			<if test="employmentCareerDirection != null">
+				employment_career_direction,
+			</if>
+			<if test="employmentIndustryDistribution != null">
+				employment_industry_distribution,
+			</if>
+			<if test="employmentAreaDistribution != null">
+				employment_area_distribution,
+			</if>
+			<if test="majorCourses != null">
+				major_courses,
+			</if>
+			<if test="specialtyObjective != null">
+				specialty_objective,
+			</if>
+			<if test="specialtyEmployment != null">
+				specialty_employment,
+			</if>
+			<if test="specialtyRequirement != null">
+				specialty_requirement,
+			</if>
+			<if test="physicsPerformance != null">
+				physics_performance,
+			</if>
+			<if test="chemistryPerformance != null">
+				chemistry_performance,
+			</if>
+			<if test="biologyPerformance != null">
+				biology_performance,
+			</if>
+			<if test="politicPerformance != null">
+				politic_performance,
+			</if>
+			<if test="historyPerformance != null">
+				history_performance,
+			</if>
+			<if test="geographyPerformance != null">
+				geography_performance,
+			</if>
+			<if test="chinesePerformance != null">
+				chinese_performance,
+			</if>
+			<if test="mathPerformance != null">
+				math_performance,
+			</if>
+			<if test="foreignPerformance != null">
+				foreign_performance,
+			</if>
+			<if test="aboveA != null">
+				above_a,
+			</if>
+			<if test="equalA != null">
+				equal_a,
+			</if>
+			<if test="belowA != null">
+				below_a,
+			</if>
+			<if test="aboveB != null">
+				above_b,
+			</if>
+			<if test="openCollege != null">
+				open_college,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id},
+			</if>
+			<if test="specialtyId != null">
+				#{specialtyId},
+			</if>
+			<if test="specialtyName != null">
+				#{specialtyName},
+			</if>
+			<if test="specialtyIntro != null">
+				#{specialtyIntro},
+			</if>
+			<if test="specialtyMajorName != null">
+				#{specialtyMajorName},
+			</if>
+			<if test="specialtyClassName != null">
+				#{specialtyClassName},
+			</if>
+			<if test="specialtyDivided != null">
+				#{specialtyDivided},
+			</if>
+			<if test="specialtyDisciplines != null">
+				#{specialtyDisciplines},
+			</if>
+			<if test="specialtyEducation != null">
+				#{specialtyEducation},
+			</if>
+			<if test="studyDuration != null">
+				#{studyDuration},
+			</if>
+			<if test="bachelorDegree != null">
+				#{bachelorDegree},
+			</if>
+			<if test="maleFemaleRatio != null">
+				#{maleFemaleRatio},
+			</if>
+			<if test="specialtySummary != null">
+				#{specialtySummary},
+			</if>
+			<if test="trainRequirement != null">
+				#{trainRequirement},
+			</if>
+			<if test="subjectRequirement != null">
+				#{subjectRequirement},
+			</if>
+			<if test="knowledgeAbility != null">
+				#{knowledgeAbility},
+			</if>
+			<if test="postgraduateDirection != null">
+				#{postgraduateDirection},
+			</if>
+			<if test="employmentCareerDirection != null">
+				#{employmentCareerDirection,
+			</if>
+			<if test="employmentIndustryDistribution != null">
+				#{employmentIndustryDistribution},
+			</if>
+			<if test="employmentAreaDistribution != null">
+				#{employmentAreaDistribution},
+			</if>
+			<if test="majorCourses != null">
+				#{majorCourses},
+			</if>
+			<if test="specialtyObjective != null">
+				#{specialtyObjective},
+			</if>
+			<if test="specialtyEmployment != null">
+				#{specialtyEmployment},
+			</if>
+			<if test="specialtyRequirement != null">
+				#{specialtyRequirement},
+			</if>
+			<if test="physicsPerformance != null">
+				#{physicsPerformance},
+			</if>
+			<if test="chemistryPerformance != null">
+				#{chemistryPerformance},
+			</if>
+			<if test="biologyPerformance != null">
+				#{biologyPerformance},
+			</if>
+			<if test="politicPerformance != null">
+				#{politicPerformance},
+			</if>
+			<if test="historyPerformance != null">
+				#{historyPerformance},
+			</if>
+			<if test="geographyPerformance != null">
+				#{geographyPerformance},
+			</if>
+			<if test="chinesePerformance != null">
+				#{chinesePerformance},
+			</if>
+			<if test="mathPerformance != null">
+				#{mathPerformance},
+			</if>
+			<if test="foreignPerformance != null">
+				#{foreignPerformance},
+			</if>
+			<if test="aboveA != null">
+				#{aboveA},
+			</if>
+			<if test="equalA != null">
+				#{equalA},
+			</if>
+			<if test="belowA != null">
+				#{belowA},
+			</if>
+			<if test="aboveB != null">
+				#{aboveB},
+			</if>
+			<if test="openCollege != null">
+				#{openCollege},
+			</if>
+		</trim>
+	</insert>
 
-	<!--更新专业数据信息-->
+	<!--更新专业数据信息 -->
 	<update id="updateSpecialtyById" parameterType="cn.hqtzytb.entity.Specialty">
 		UPDATE specialty
 		<set>
@@ -404,13 +414,16 @@
 				postgraduate_direction = #{postgraduateDirection},
 			</if>
 			<if test="employmentCareerDirection != null">
-				employment_career_direction = #{employmentCareerDirection},
+				employment_career_direction =
+				#{employmentCareerDirection},
 			</if>
 			<if test="employmentIndustryDistribution != null">
-				employment_industry_distribution = #{employmentIndustryDistribution},
+				employment_industry_distribution =
+				#{employmentIndustryDistribution},
 			</if>
 			<if test="employmentAreaDistribution != null">
-				employment_area_distribution = #{employmentAreaDistribution},
+				employment_area_distribution =
+				#{employmentAreaDistribution},
 			</if>
 			<if test="majorCourses != null">
 				major_courses = #{majorCourses},
@@ -470,115 +483,148 @@
 		WHERE id = #{id};
 	</update>
 
-	<!--删除专业数据-->
+	<!--删除专业数据 -->
 	<delete id="deleteSpecialtyById">
-    	DELETE FROM specialty WHERE id = #{id}
-  	</delete>
+		DELETE FROM specialty WHERE id = #{id}
+	</delete>
 
-	<!--查询专业列表数据-->
-	<select id="selectSpecialtyListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+	<!--查询专业列表数据 -->
+	<select id="selectSpecialtyListByMap" parameterType="java.util.Map"
+		resultMap="BaseResultMap">
 		select
-			<include refid="Base_Column_List" />
+		<include refid="Base_Column_List" />
 		FROM specialty b
 		<where>
-			<if test="id != null" >
+			<if test="id != null">
 				AND id = #{id}
 			</if>
-			<if test="specialtyId != null" >
+			<if test="specialtyId != null">
 				AND specialty_id = #{specialtyId}
 			</if>
-			<if test="specialtyName != null" >
-				AND specialty_name LIKE '%${specialtyName}%'
+			<if test="specialtyName != null">
+				AND specialty_name LIKE
+				'%${specialtyName}%'
 			</if>
-			<if test="specialtyIntro != null" >
-				AND specialty_intro LIKE '%${specialtyIntro}%'
+			<if test="specialtyIntro != null">
+				AND specialty_intro LIKE
+				'%${specialtyIntro}%'
 			</if>
-			<if test="specialtyMajorName != null" >
-				AND specialty_major_name LIKE '%${specialtyMajorName}%'
+			<if test="specialtyMajorName != null">
+				AND specialty_major_name
+				LIKE '%${specialtyMajorName}%'
 			</if>
-			<if test="specialtyClassName != null" >
-				AND specialty_class_name LIKE '%${specialtyClassName}%'
+			<if test="specialtyClassName != null">
+				AND specialty_class_name
+				LIKE '%${specialtyClassName}%'
 			</if>
-			<if test="specialtyDivided != null" >
-				AND specialty_divided LIKE '%${specialtyDivided}%'
+			<if test="specialtyDivided != null">
+				AND specialty_divided LIKE
+				'%${specialtyDivided}%'
 			</if>
-			<if test="specialtyDisciplines != null" >
-				AND specialty_disciplines LIKE '%${specialtyDisciplines}%'
+			<if test="specialtyDisciplines != null">
+				AND specialty_disciplines
+				LIKE '%${specialtyDisciplines}%'
 			</if>
-			<if test="specialtyEducation != null" >
-				AND specialty_education LIKE '%${specialtyEducation}%'
+			<if test="specialtyEducation != null">
+				AND specialty_education LIKE
+				'%${specialtyEducation}%'
 			</if>
-			<if test="studyDuration != null" >
-				AND study_duration LIKE '%${studyDuration}%'
+			<if test="studyDuration != null">
+				AND study_duration LIKE
+				'%${studyDuration}%'
 			</if>
-			<if test="bachelorDegree != null" >
-				AND bachelor_degree LIKE '%${bachelorDegree}%'
+			<if test="bachelorDegree != null">
+				AND bachelor_degree LIKE
+				'%${bachelorDegree}%'
 			</if>
-			<if test="maleFemaleRatio != null" >
-				AND male_female_ratio LIKE '%${maleFemaleRatio}%'
+			<if test="maleFemaleRatio != null">
+				AND male_female_ratio LIKE
+				'%${maleFemaleRatio}%'
 			</if>
-			<if test="specialtySummary != null" >
-				AND specialty_summary LIKE '%${specialtySummary}%'
+			<if test="specialtySummary != null">
+				AND specialty_summary LIKE
+				'%${specialtySummary}%'
 			</if>
-			<if test="trainRequirement != null" >
-				AND train_requirement LIKE '%${trainRequirement}%'
+			<if test="trainRequirement != null">
+				AND train_requirement LIKE
+				'%${trainRequirement}%'
 			</if>
-			<if test="subjectRequirement != null" >
-				AND subject_requirement LIKE '%${subjectRequirement}%'
+			<if test="subjectRequirement != null">
+				AND subject_requirement LIKE
+				'%${subjectRequirement}%'
 			</if>
-			<if test="knowledgeAbility != null" >
-				AND knowledge_ability LIKE '%${knowledgeAbility}%'
+			<if test="knowledgeAbility != null">
+				AND knowledge_ability LIKE
+				'%${knowledgeAbility}%'
 			</if>
-			<if test="postgraduateDirection != null" >
-				AND postgraduate_direction LIKE '%${postgraduateDirection}%'
+			<if test="postgraduateDirection != null">
+				AND
+				postgraduate_direction LIKE '%${postgraduateDirection}%'
 			</if>
-			<if test="employmentCareerDirection != null" >
-				AND employment_career_direction LIKE '%${employmentCareerDirection}%'
+			<if test="employmentCareerDirection != null">
+				AND
+				employment_career_direction LIKE '%${employmentCareerDirection}%'
 			</if>
-			<if test="employmentIndustryDistribution != null" >
-				AND employment_industry_distribution LIKE '%${employmentIndustryDistribution}%'
+			<if test="employmentIndustryDistribution != null">
+				AND
+				employment_industry_distribution LIKE
+				'%${employmentIndustryDistribution}%'
 			</if>
-			<if test="employmentAreaDistribution != null" >
-				AND employment_area_distribution LIKE '%${employmentAreaDistribution}%'
+			<if test="employmentAreaDistribution != null">
+				AND
+				employment_area_distribution LIKE '%${employmentAreaDistribution}%'
 			</if>
-			<if test="majorCourses != null" >
-				AND major_courses LIKE '%${majorCourses}%'
+			<if test="majorCourses != null">
+				AND major_courses LIKE
+				'%${majorCourses}%'
 			</if>
-			<if test="specialtyObjective != null" >
-				AND specialty_objective LIKE '%${specialtyObjective}%'
+			<if test="specialtyObjective != null">
+				AND specialty_objective LIKE
+				'%${specialtyObjective}%'
 			</if>
-			<if test="specialtyEmployment != null" >
-				AND specialty_employment LIKE '%${specialtyEmployment}%'
+			<if test="specialtyEmployment != null">
+				AND specialty_employment
+				LIKE '%${specialtyEmployment}%'
 			</if>
-			<if test="specialtyRequirement != null" >
-				AND specialty_requirement LIKE '%${specialtyRequirement}%'
+			<if test="specialtyRequirement != null">
+				AND specialty_requirement
+				LIKE '%${specialtyRequirement}%'
 			</if>
-			<if test="physicsPerformance != null" >
-				AND physics_performance LIKE '%${physicsPerformance}%'
+			<if test="physicsPerformance != null">
+				AND physics_performance LIKE
+				'%${physicsPerformance}%'
 			</if>
-			<if test="chemistryPerformance != null" >
-				AND chemistry_performance LIKE '%${chemistryPerformance}%'
+			<if test="chemistryPerformance != null">
+				AND chemistry_performance
+				LIKE '%${chemistryPerformance}%'
 			</if>
-			<if test="biologyPerformance != null" >
-				AND biology_performance LIKE '%${biologyPerformance}%'
+			<if test="biologyPerformance != null">
+				AND biology_performance LIKE
+				'%${biologyPerformance}%'
 			</if>
-			<if test="politicPerformance != null" >
-				AND politic_performance LIKE '%${politicPerformance}%'
+			<if test="politicPerformance != null">
+				AND politic_performance LIKE
+				'%${politicPerformance}%'
 			</if>
-			<if test="historyPerformance != null" >
-				AND history_performance LIKE '%${historyPerformance}%'
+			<if test="historyPerformance != null">
+				AND history_performance LIKE
+				'%${historyPerformance}%'
 			</if>
-			<if test="geographyPerformance != null" >
-				AND geography_performance LIKE '%${geographyPerformance}%'
+			<if test="geographyPerformance != null">
+				AND geography_performance
+				LIKE '%${geographyPerformance}%'
 			</if>
-			<if test="chinesePerformance != null" >
-				AND chinese_performance LIKE '%${chinesePerformance}%'
+			<if test="chinesePerformance != null">
+				AND chinese_performance LIKE
+				'%${chinesePerformance}%'
 			</if>
-			<if test="mathPerformance != null" >
-				AND math_performance LIKE '%${mathPerformance}%'
+			<if test="mathPerformance != null">
+				AND math_performance LIKE
+				'%${mathPerformance}%'
 			</if>
-			<if test="foreignPerformance != null" >
-				AND foreign_performance LIKE '%${foreignPerformance}%'
+			<if test="foreignPerformance != null">
+				AND foreign_performance LIKE
+				'%${foreignPerformance}%'
 			</if>
 			<if test="aboveA != null">
 				AND above_a = #{aboveA},

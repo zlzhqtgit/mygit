@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 * @Description:(登录拦截器)
 * @author: ZhouLingZhang
 * @date 2019年9月3日
-* @Copyright:好前途教育
+* @Copyright:好前途教育1
  */
 public class LoginIntercepter implements HandlerInterceptor
 {
