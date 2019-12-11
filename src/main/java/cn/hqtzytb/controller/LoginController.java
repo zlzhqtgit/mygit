@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * @ClassName: LoginController
- * @Description: 登录控制器
+ * @Description: 登录控制器66
  * @Author: WuPeiLong
  * @Date: 2019年11月28日
  * @Copyright:好前途教育455
