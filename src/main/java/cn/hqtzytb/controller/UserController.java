@@ -7,14 +7,12 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import cn.hqtzytb.utils.Photo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -26,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-
 import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
@@ -59,8 +56,7 @@ public class UserController {
 	public IUserRoleDetailsServer userRoleDetailsServer;
 	@Autowired
 	private PhotoConfig photoConfig;
-	@Autowired
-	private IUserServer iUserServer;
+	
 
 	private  static final  Logger logger = LogManager.getLogger(UserController.class.getName());
 	
@@ -526,9 +522,9 @@ public class UserController {
 	@ResponseBody
 	public ResponseResult<Void> userIsExist(@RequestParam(value = "phone") String phone){
 		if (userServer.queryUser(phone) == null) {//未注册
-			return new ResponseResult(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_SUCCESS);
+			return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 		}
-		return new ResponseResult(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS);
+		return new ResponseResult<Void>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS);
 	}
 
 	/**

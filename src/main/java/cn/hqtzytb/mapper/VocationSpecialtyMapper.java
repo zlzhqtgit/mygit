@@ -1,8 +1,7 @@
 package cn.hqtzytb.mapper;
 
 import cn.hqtzytb.entity.Specialty;
-import java.util.List;
-import java.util.Map;
+
 
 
 /**

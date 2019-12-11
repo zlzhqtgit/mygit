@@ -143,14 +143,4 @@ public class ILoginServiceImpl implements ILoginService {
         }
         return "web/xgk/xgk_error_404";
     }
-
-    private static JSONObject parseJSONP(String jsonp) {
-        int startIndex = jsonp.indexOf("(");
-        int endIndex = jsonp.lastIndexOf(")");
-
-        String json = jsonp.substring(startIndex + 1, endIndex);
-
-        return JSONObject.fromObject(json);
-
-    }
 }
