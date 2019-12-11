@@ -56,7 +56,7 @@ public class LoginController {
     /**
      * 腾讯登录回调
      * @param request
-     * @param response
+     * @param response 
      * @return
      */
     @RequestMapping("/connect.do")
