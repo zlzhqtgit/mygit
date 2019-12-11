@@ -36,7 +36,7 @@ public class LoginController {
 
     /**
      * 微信扫码登录入口
-     * @return
+     * @return333
      */
     @RequestMapping("/wxLogin.do")
     private String wxLogin(){
