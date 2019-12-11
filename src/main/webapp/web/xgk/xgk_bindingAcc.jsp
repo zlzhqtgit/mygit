@@ -81,8 +81,8 @@
 											<a  class="get_verify btn btn-default" href="javascript:;" onclick="sendMessages(2)">获取手机验证码</a>
 										</div>
 										<div class="form-group">
-											<label for="password"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
-											<input id="password" type="password" title="请填写6-16位数字、字母或符号作为密码" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+											<label for="password22"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
+											<input id="password22" type="password" title="请填写6-16位数字、字母或符号作为密码" placeholder="请填写6-16位数字、字母或符号作为密码"/>
 											<span class="glyphicon padding-side"> </span>
 										</div>
 										<div class="form-group">

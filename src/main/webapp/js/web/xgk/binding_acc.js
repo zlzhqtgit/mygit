@@ -173,6 +173,8 @@ function register1() {
 	// if(flag == false) {
 	// 	return false;
 	// } else {
+	alert($("#password22").val());
+	console.log($("#password22").val());
 		if ($("#checkbox").is(':checked')){
 			checkName($('#username'));
 			check_mobile($('#mobile'));
@@ -182,7 +184,7 @@ function register1() {
 			check_year();
 			var url = "../user/hqt_registeradd.do";
 			// var data = $(".user1").serialize();
-			var data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#verify_code").val() + "&password=" + $("#password").val() + "&school=" + $("#school").val() + "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val() + "&ceeYear=" + $("#year").val();
+			var data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#verify_code").val() + "&password=" + $("#password22").val() + "&school=" + $("#school").val() + "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val() + "&ceeYear=" + $("#year").val();
 			$.ajax({
 				type:"POST",
 				url:url,

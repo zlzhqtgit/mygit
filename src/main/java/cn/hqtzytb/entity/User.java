@@ -125,5 +125,7 @@ public class User extends Role implements Serializable {
 	 * 创建时间
 	 */
 	private Date creatTime;
+
+	
 	
 }
