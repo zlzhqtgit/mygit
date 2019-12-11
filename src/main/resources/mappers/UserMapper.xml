@@ -148,6 +148,18 @@
 		</set>
 		where id = #{id}
 	</update>
+
+	<select id="getUserByUsername" resultType="cn.hqtzytb.entity.User">
+		SELECT
+	 		a.id,a.username,a.phone,a.wexin_chat,a.qq_chat,a.password,a.uuid,a.belong_to,a.school,a.school_address,
+	 		a.families,a.families,a.cee_year,a.vocation,a.head_url,a.power,a.province,a.rid,a.user_authority,a.creat_time
+	 		b.role_id,b.cid,b.role_name,b.role_authority,b.role_description,
+		 	c.company_id,c.company_number,c.company_name,c.company_adress,c.creation_time
+		FROM user a
+		LEFT JOIN role b on b.role_id = a.rid
+		LEFT JOIN  company c on c.company_id = b.cid
+		WHERE a.username = #{username}
+	</select>
 	</mapper>
 	
 	

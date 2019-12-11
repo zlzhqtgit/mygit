@@ -9,15 +9,27 @@ package cn.hqtzytb.utils;
  */
 public class Constants{
 
+	/**
+	 * 系统用户
+	 */
+	public static final String SYSTEM_USER = "SYSTEM_USER";
+
 	public static final String SUCCESS = "SUCCESS";
 	public static final Integer RESULT_CODE_FAIL = 0;
 	public static final String RESULT_MESSAGE_FAIL = "操作失败";
-
 	public static final Integer RESULT_CODE_SUCCESS = 1;
 	public static final String RESULT_MESSAGE_SUCCESS = "操作成功";
-
 	public static final String EVALUATION_TYPE_POTENTIAL_ANALYSIS = "QNFX";
 	public static final String EVALUATION_NAME_POTENTIAL_ANALYSIS = "潜能分析";
+	public static final String EVALUATION_TYPE_SCORE_ANALYSIS = "CJFX";
+	public static final String EVALUATION_NAME_SCORE_ANALYSIS = "成绩分析";
+
+	/**
+	 * 加密方式
+	 */
+	public static final String HMACSHA256 = "HMAC-SHA256";
+	public static final String MD5 = "MD5";
+	public static final String SHA1 = "SHA1";
 
 	/**
 	 * 初始密码

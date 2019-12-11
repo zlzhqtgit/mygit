@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.util.DigestUtils;
 
 /**
@@ -26,17 +27,18 @@ public class GetCommonUser {
 	private static final Logger logger = LogManager.getLogger(GetCommonUser.class.getName());
 
 	/**
-	 * MD5加密方法 
-	 * @param password密码
+	 * MD5加密方法
+	 * @param hashAlgorithmName 加密方式
+	 * @param password 密码
 	 * @param uuid 密码加密处理的uuid
-	 * @return MD5 返回加密好的字符串
+	 * @param hashIterations 加密次数
+	 * @return
 	 */
-	public String getEncrpytedPassword(String password, String uuid) {
-		String str = password + uuid;
-		// 对字符串进行MD5加密
-		String md5 = DigestUtils.md5DigestAsHex(str.getBytes()).toUpperCase();
-		return md5;
+	public String getEncrpytedPassword(String hashAlgorithmName,String password, String uuid,int  hashIterations) {
+		Object result = new SimpleHash(hashAlgorithmName,password,uuid,hashIterations);
+		return (result.toString()).toUpperCase();
 	}
+
 
 	public List<String> gethld(Map<String, Integer> cpFengshu) {
 		// 排序以后截取前3个类型代码
@@ -45,6 +47,7 @@ public class GetCommonUser {
 				.map(entry -> entry.getKey()).collect(Collectors.toList()).subList(0, 3);
 		return mobileList;
 	}
+
 
 	public String getMbti(Map<String, Integer> cpFengshu) {
 		String cpresult = "";

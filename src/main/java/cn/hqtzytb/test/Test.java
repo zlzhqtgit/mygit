@@ -1,6 +1,8 @@
 package cn.hqtzytb.test;
 
 
+import cn.hqtzytb.utils.Constants;
+import cn.hqtzytb.utils.GetCommonUser;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -44,6 +46,8 @@ public class Test {
         System.out.println( image.substring(image.lastIndexOf("img"),image.length())) ;
         System.out.println();
         System.out.println(new Test().getClass().getResource("/").getPath());
+//        432393A3840199E0957E15C9942769B6
+        System.out.println("123456:" + new GetCommonUser().getEncrpytedPassword(Constants.MD5,null,"8F8702B8-5C0C-4AD8-A302-3D1B8284EA0C",2048));
     }
 
 

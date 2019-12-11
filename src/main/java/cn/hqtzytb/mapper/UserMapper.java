@@ -7,8 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import cn.hqtzytb.entity.User;
 
 
-public interface UserMapper
-{
+public interface UserMapper {
 	Integer insert(User user);
 	List<User> select(
 			@Param("where")String where,
@@ -36,4 +35,11 @@ public interface UserMapper
 	 * @return
 	 */
 	Integer updateById(User user);
+
+	/**
+	 * 查询用户信息
+	 * @param username
+	 * @return
+	 */
+    User getUserByUsername(String username);
 }

@@ -67,25 +67,69 @@
    <property name="gatewayUrl" value="#{dbConf.gatewayUrl}"/>
    <property name="log_path" value="#{dbConf.log_path}"/>
    </bean>
-   <!-- 持久层接口扫描 -->
-   <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-   		<property name="basePackage" value="cn.hqtzytb.mapper"></property>
-   </bean>
-   
-   
-  <!-- SqlSessionFactoryBean的初始化 -->
-  <bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-  	<property name="dataSource" ref="dataSource"/>
-    <property name="configLocation" value="classpath:mybatis.xml"></property>
-    <!-- 引入mybatis主配置文件 -->
-  	<property name="mapperLocations"  value="classpath:mappers/*.xml"/>
 
-  </bean>
-  <!--事务注解  -->
-  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-  	<property name="dataSource" ref="dataSource"/>  	
-  </bean>
- <tx:annotation-driven transaction-manager="transactionManager"/> 
+    <!-- 持久层接口扫描 -->
+    <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+   		<property name="basePackage" value="cn.hqtzytb.mapper"></property>
+    </bean>
+   
+   
+    <!-- SqlSessionFactoryBean的初始化 -->
+    <bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+  	    <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
+        <!-- 引入mybatis主配置文件 -->
+  	    <property name="mapperLocations"  value="classpath:mappers/*.xml"/>
+    </bean>
+
+
+    <!--事务注解  -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+  	    <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--开启service事物注解-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" isolation="REPEATABLE_READ" rollback-for="Exception" />
+            <tx:method name="update*" isolation="REPEATABLE_READ" rollback-for="Exception" />
+            <tx:method name="delete*" isolation="REPEATABLE_READ" rollback-for="Exception" />
+            <tx:method name="get*" isolation="REPEATABLE_READ" read-only="true" />
+            <tx:method name="*" isolation="REPEATABLE_READ" propagation="NOT_SUPPORTED"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut expression="execution(* cn.hqtzytb.service..*(..))" id="point"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="point"/>
+    </aop:config>
+
+    <!--开启事物注解支持-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="myShiroRealm" class="cn.hqtzytb.intercepter.MyShiroRealm" >
+        <!-- 凭证匹配器(密码加密) -->
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="MD5"/>
+                <property name="hashIterations" value="1024"/>
+            </bean>
+        </property>
+    </bean>
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myShiroRealm" />
+        <property name="cacheManager" ref="cacheManager"/>
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
+<!--    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">-->
+    <bean id="shiroFilter" class="cn.hqtzytb.intercepter.MyShiroFilterFactory">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login" />
+        <property name="successUrl" value="/index" />
+        <property name="unauthorizedUrl" value="/error" />
+    </bean>
 </beans>
 
 

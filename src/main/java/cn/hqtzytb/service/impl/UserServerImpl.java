@@ -91,4 +91,9 @@ public class UserServerImpl implements IUserServer {
 		}
 		return result;
 	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		return userMapper.getUserByUsername(username);
+	}
 }

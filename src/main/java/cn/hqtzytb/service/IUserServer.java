@@ -19,5 +19,19 @@ public interface IUserServer {
 	 */
 	User queryUser(String phone);
 
+	/**
+	 * 绑定账号
+	 * @param session
+	 * @param phone
+	 * @param verifyCode
+	 * @return
+	 */
 	ResponseResult<Void> bindAccount(HttpSession session, String phone, String verifyCode);
+
+	/**
+	 * 查询用户信息
+	 * @param username
+	 * @return
+	 */
+	User getUserByUsername(String username);
 }

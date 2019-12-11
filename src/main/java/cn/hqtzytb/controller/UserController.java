@@ -13,6 +13,11 @@ import cn.hqtzytb.utils.GetCommonUser;
 import cn.hqtzytb.utils.Photo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -54,6 +59,9 @@ public class UserController {
 	public IUserRoleDetailsServer userRoleDetailsServer;
 	@Autowired
 	private PhotoConfig photoConfig;
+	@Autowired
+	private IUserServer iUserServer;
+
 	private  static final  Logger logger = LogManager.getLogger(UserController.class.getName());
 	
 	/**
@@ -312,33 +320,45 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/xgk_userLogin.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleUserlogin(String phone,String password, HttpSession session,HttpServletRequest request)
-	{	
+	public ResponseResult<Void> handleUserlogin(String phone, String password, HttpServletRequest request) {
+		Subject subject = SecurityUtils.getSubject();
 		ResponseResult<Void> rr;		
 		try {			
 			//查询用户名是否存在
-			User user=userServer.queryUser(phone);
+			User user = userServer.queryUser(phone);
 			System.out.println(user);
 			//判断用户名是否存在
-			if (user==null){
-				rr=new ResponseResult<Void>(ResponseResult.ERR,"手机号不存在!请重新输入...");
-				logger.info("用户手机："+phone+" 模块名：登录模块 操作：登录  状态：Failed! ");
-			}else{			
-				GetCommonUser get=new GetCommonUser();
-				String md5Password = get.getEncrpytedPassword(password,user.getUuid());
-				if(user.getPassword().equals(md5Password)){
-					session.setAttribute("uid", user.getId());
-					session.setAttribute("username", user.getUsername());
-					session.setAttribute("headUrl", user.getHeadUrl());
-					JSONObject userJson = JSONObject.fromObject(user);
-					session.setAttribute("userJson", userJson);//提供给前端页面使用
-					session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
-					rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "登录成功");				
-					logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：OK!");
-				}else{
-					rr = new ResponseResult<Void>(ResponseResult.ERR, "用户密码不正确");
-					logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：Failed!");
-				}			
+			if (user == null){
+				rr = new ResponseResult<Void>(ResponseResult.ERR,"手机号不存在!请重新输入...");
+				logger.info("用户手机：" + phone + " 模块名：登录模块 操作：登录  状态：Failed! ");
+			}else{
+				UsernamePasswordToken token = new UsernamePasswordToken(phone, password);
+				subject.login(token);
+				Session session= subject.getSession();
+				session.setAttribute(Constants.SYSTEM_USER,user);
+				session.setAttribute("uid", user.getId());
+				session.setAttribute("username", user.getUsername());
+				session.setAttribute("headUrl", user.getHeadUrl());
+				JSONObject userJson = JSONObject.fromObject(user);
+				session.setAttribute("userJson", userJson);//提供给前端页面使用
+				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "登录成功");
+				logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：OK!");
+//				GetCommonUser get=new GetCommonUser();
+//				String md5Password = get.getEncrpytedPassword(Constants.MD5,password,user.getUuid(),1024);
+//				if(user.getPassword().equals(md5Password)){
+//					session.setAttribute("uid", user.getId());
+//					session.setAttribute("username", user.getUsername());
+//					session.setAttribute("headUrl", user.getHeadUrl());
+//					JSONObject userJson = JSONObject.fromObject(user);
+//					session.setAttribute("userJson", userJson);//提供给前端页面使用
+//					session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+//					rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "登录成功");
+//					logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：OK!");
+//				}else{
+//					rr = new ResponseResult<Void>(ResponseResult.ERR, "用户密码不正确");
+//					logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：Failed!");
+//				}
 			}			
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：添加区库信息  错误信息: "+e);
@@ -444,10 +464,13 @@ public class UserController {
 				GetCommonUser get=new GetCommonUser();			
 				Date creatTime=new Date();		
 				String uuid = UUID.randomUUID().toString().toUpperCase();
-				String md5Password = get.getEncrpytedPassword(password, uuid);
+				String md5Password = get.getEncrpytedPassword(Constants.MD5,password, uuid,1024);
 				User user=new User();
 				user.setUsername(username);
 				user.setPhone(phone);
+				System.err.println("注册手机号：" + phone);
+				System.err.println("密码：" + password);
+				System.err.println("密码：" + md5Password);
 				user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
 				user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
 				user.setPassword(md5Password);
@@ -509,13 +532,13 @@ public class UserController {
 	}
 
 	/**
-	 *
+	 * 给已存在用户发送短信
 	 * @param phone
 	 * @return
 	 */
 	@RequestMapping("/send_message.do")
 	@ResponseBody
-	public ResponseResult<Void> userIsExist(@RequestParam(value = "phone") String phone, HttpSession session, HttpServletRequest request){
+	public ResponseResult<Void> sendMessage(@RequestParam(value = "phone") String phone, HttpSession session, HttpServletRequest request){
 		ResponseResult<Void> rr;
 		Photo.setNewcode();
 		String code = Integer.toString(Photo.getNewcode());
