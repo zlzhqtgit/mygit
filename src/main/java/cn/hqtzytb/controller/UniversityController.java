@@ -21,7 +21,7 @@ import java.util.List;
  * @Description: 大学控制器类
  * @Author: WuPeiLong
  * @Date: 2019年12月03日
- * @Copyright:好前途教育
+ * @Copyright:好前途教育33
  * @Version V1.0
  */
 @Controller
