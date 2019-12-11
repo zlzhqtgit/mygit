@@ -51,7 +51,7 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
         Map<String,Integer> map = new HashMap<>();
         String subject = "";
         Integer value = null;
-        Iterator keys = null;
+        Iterator<String> keys = null;
         for (int i=0; i<jsonArray.size(); i++){
             boolean keyIsExist = false;
             //学科名字
