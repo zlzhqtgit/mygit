@@ -17,6 +17,10 @@ a:link{
 	text-decoration: none;
 }
 a:active{text-decoration:none;}
+i {
+    font-style: normal;
+}
+
 ul{
 	list-style: none;
 }
@@ -170,7 +174,6 @@ banner form fieldset legend{
 }
 banner form fieldset input{
 	background-color: #f9f9f9;
-	border: none;
 	padding: 1em 0;
 	padding-left: 2.4em;
 }
@@ -217,8 +220,8 @@ banner .swiper-container { width: 100%; height: 100%; margin-left: auto; margin-
 banner .swiper-slide { text-align: center; font-size: 18px; background: #fff; }
 banner .swiper-slide a{ display: block; width: 100%; }
 banner .swiper-slide img { width: 100%; }
-banner .swiper-button-prev, .swiper-container-rtl .swiper-button-next{ background-image: url(../img/arrows_left.png); background-color: gainsboro; opacity: .3;cursor: pointer;left: 10px;right: auto;padding: 4em 2em; }
-banner .swiper-button-next, .swiper-container-rtl .swiper-button-prev{ background-image: url(../img/arrows_righ.png); background-color: gainsboro; opacity: .3;cursor: pointer;right: 10px;left: auto;padding: 4em 2em; }
+banner .swiper-button-prev, .swiper-container-rtl .swiper-button-next{ background-image: url(../../img/xgk/arrows_left.png); background-color: gainsboro; opacity: .3;cursor: pointer;left: 10px;right: auto;padding: 4em 2em; }
+banner .swiper-button-next, .swiper-container-rtl .swiper-button-prev{ background-image: url(../../img/xgk/arrows_righ.png); background-color: gainsboro; opacity: .3;cursor: pointer;right: 10px;left: auto;padding: 4em 2em; }
 .video_box{
 	display: flex;
 	justify-content: center;
@@ -350,15 +353,16 @@ footer{
 	background-color: #3b8bec;
 	color: white;
 }
-footer a{
+footer ul li a{
 	color: white;
 	font-size: 14px;
 	font-weight:600;
+	transition: all 0.3s ease-out 0s;
 }
-footer a:hover{
+footer li:hover a{
 	color: yellow;
 	text-decoration: none;
-	
+	margin-left: 6px;
 }
 .list img{
 	width: 120px;
@@ -1606,3 +1610,139 @@ li.current>a{
 .tab_bd>div.current{
 	display: block;
 }
+
+/*选科指导*/
+select {
+    height: 2em;
+    padding: 0 1em;
+    border: 1px solid #3b8bec;
+    border-radius: 4px;
+}
+.btn.cancel {
+    background-color: #999;
+	color: #fff;
+}
+.done_situation{
+	display: flex;
+	justify-content: space-between;
+}
+.done_situation>div{
+	width: 25%;
+}
+.doneStep{
+	height: 1em;
+}
+.done_item_wrap{
+	display: flex;
+	justify-content: space-around;
+}
+.done_item{
+	position: absolute;
+	right: -48px;
+	
+}
+.done_item .yline{
+	height: 2em;
+	border-right: 2px solid #0066CC;
+}
+.done_item .circle{
+	cursor: pointer;
+	border: 0;
+}
+.done_item{
+	animation: shaking 1s linear infinite forwards;
+	animation-iteration-count:2;
+	-webkit-animation-iteration-count:2; Safari and Chrome*/
+}
+@keyframes shaking {
+	20% {
+		transform: rotate3d(0, 0, 1, -20deg);
+	}
+	40% {
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+	60% {
+		transform: rotate3d(0, 0, 1, 20deg);
+	}
+	100% {
+		transform: rotate3d(0, 0, 1, 0deg);
+	}
+}
+.bg-warning{
+	background-color: #f4e074;
+	color: #555;
+}
+.bg-info{
+	background-color: #6bc0ea;
+}
+.s_pot{
+	width: 1em;
+	height: 1em;
+	border-radius: 50%;
+	position: absolute;
+	top: 0;
+	right: -.5em;
+	z-index: 9;
+}
+.margin0{
+	margin: 0;
+}
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus,input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus{
+	box-shadow: none !important;
+	border-color:#3b8bec !important;
+	background-color: #fff;
+}
+.box-shadow{
+	box-shadow: 0 2px 4px #ddd;
+}
+.border-radius{
+	border-radius: 2px;
+}
+.title_wrap{
+	display: flex;
+	align-items: center;
+}
+.title_wrap span{
+	display:inline-block;
+	width: 2em;
+	height: 2em; 
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-right: 1em;
+}
+.combile li{
+	width: 25%;
+	float: left;
+	text-align: center;
+	padding: 0 1em;
+	margin-bottom: .8em;
+}
+.combile1 li{
+	width: 33.33333%;
+	float: left;
+	padding: 0 1em;
+	padding-right: 3em;
+	margin-bottom: .8em;
+}
+.combile li div{
+	padding: .6em 0;
+	border-radius: 1em;
+	cursor: pointer;
+}
+.combile1 li div{
+	padding: .6em 0;
+	border-radius: 1em;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+table.combile_xuank,
+table.combile_xuank tr,
+table.combile_xuank tr th,
+table.combile_xuank td{
+	border: 1px solid #3b8bec;
+}
+table.combile_xuank{
+	text-align: center;
+}
+
