@@ -41,7 +41,7 @@ public class UniversityController {
      */
     @PostMapping("/xgk_upload_image.do")
     @ResponseBody
-    public ResponseResult<Object> universityUploadImage(@RequestParam(value="universitiesCode") String universitiesCode,
+    public ResponseResult<Void> universityUploadImage(@RequestParam(value="universitiesCode") String universitiesCode,
                                                         @RequestParam(value="files") MultipartFile[] files,
                                                         @RequestParam(value="imageType") Integer imageType){
         return  iUniversityService.universityUploadImage(universitiesCode,files,imageType);

@@ -15,7 +15,7 @@ import java.util.List;
  * @Version V1.0
  */
 public interface IUniversityService {
-    ResponseResult<Object> universityUploadImage(String universitiesCode, MultipartFile[] files, Integer imageType);
+    ResponseResult<Void> universityUploadImage(String universitiesCode, MultipartFile[] files, Integer imageType);
 
     ResponseResult<List<University>> getUniversityList(String where);
 

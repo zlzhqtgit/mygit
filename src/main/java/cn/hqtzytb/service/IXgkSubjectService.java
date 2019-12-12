@@ -15,9 +15,9 @@ import javax.servlet.http.HttpSession;
 public interface IXgkSubjectService {
 
 
-    String showPotentialReport(HttpSession session);
+    String showPotentialReport();
 
-    ResponseResult<Void> haveYouSubjectExploration(Integer uid);
+    ResponseResult<Void> haveYouSubjectExploration();
 
-    ResponseResult<Void> addPotentialAnalysis(HttpSession session, String evaluationFraction);
+    ResponseResult<Void> addPotentialAnalysis(String evaluationFraction);
 }
