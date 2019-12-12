@@ -82,8 +82,8 @@
 			<h1 class="text-center">视频课程</h1>
 			<div class="row video_box margin_top1">
 				<div class="thumbnail col-sm-6">
-					<video width="" height="" class="pull-left" controls>
-						<source src="${pageContext.request.contextPath}/img/xgk/video/GQ55LLI4.mp4" type="video/mp4" />						
+					<video width="" height="" class="pull-left" poster="${pageContext.request.contextPath}/img/xgk/car.jpg" controls>
+						<source src="${pageContext.request.contextPath}/img/xgk/video/3.mp4" type="video/mp4" />						
 						<source src="myvideo.ogv" type="video/ogg" />
 						<source src="myvideo.webm" type="video/webm" />					
 						<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
