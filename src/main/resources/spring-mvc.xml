@@ -19,12 +19,15 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-  <context:component-scan base-package="cn.hqtzytb.controller"/>   
-  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-  	<property name="prefix" value="/"/>
-  	<property name="suffix" value=".jsp"/>
-  </bean>
-<!--   多媒体文件解析器  -->
+  	<context:component-scan base-package="cn.hqtzytb.controller"/>   
+   	<!--  springMVC 释放静态资源  -->
+	<mvc:default-servlet-handler/> 
+	<!--     <mvc:resources location="/resources/" mapping="/resources/**"/> -->
+  	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  		<property name="prefix" value="/"/>
+  		<property name="suffix" value=".jsp"/>
+ 	 </bean>
+	<!--   多媒体文件解析器  -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 最大允许上传大小5MB -->
      <property name="maxUploadSize" value="5242880" />
@@ -32,42 +35,12 @@
      <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
 
-<!--    &lt;!&ndash; 配置用于session验证的拦截器 &ndash;&gt;
-    &lt;!&ndash;  如果有多个拦截器满足拦截处理的要求，则依据配置的先后顺序来执行   &ndash;&gt;
-  <mvc:interceptors>
-        <mvc:interceptor>
-            &lt;!&ndash; //拦截所有的请求，这个必须写在前面，也就是写在【不拦截】的上面 &ndash;&gt;
-            <mvc:mapping path="/**/*.do" />
-            &lt;!&ndash; 但是排除下面这些，也就是不拦截请求 &ndash;&gt;
-            <mvc:exclude-mapping path="/**/admin.do" />
-            <mvc:exclude-mapping path="/**/hqt_login.do" />
-            <mvc:exclude-mapping path="/main/**.do" />
-            <mvc:exclude-mapping path="/admin/**.do" />
-            <mvc:exclude-mapping path="/cp/**.do" />
-            <mvc:exclude-mapping path="/xk/**.do" />
-            <mvc:exclude-mapping path="/test/**.do" />
-            <mvc:exclude-mapping path="/user/**.do" />
-            <mvc:exclude-mapping path="/web/**.do" />
-            <mvc:exclude-mapping path="/Message/**.do" />
-            <mvc:exclude-mapping path="/api/**.do" />
-            <mvc:exclude-mapping path="/sub/**.do" />
-            <mvc:exclude-mapping path="/**/*login.do" />
-            <mvc:exclude-mapping path="/**/login_out.do" />
-            <mvc:exclude-mapping path="/**/connect.do"/>
-            <mvc:exclude-mapping path="/**/*.do"/>
-            <bean class="cn.hqtzytb.intercepter.LoginIntercepter" />
-        </mvc:interceptor>
-    </mvc:interceptors>-->
-
     <!--Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <!--启用shiro注解权限检查(@RequestPermissions)-->
     <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"    depends-on="lifecycleBeanPostProcessor"/>
-
-    <mvc:annotation-driven/>
-    <!--  springMVC 释放静态资源  -->
-    <mvc:default-servlet-handler/>
-  
+	<mvc:annotation-driven/>
+   
   
 </beans>
 

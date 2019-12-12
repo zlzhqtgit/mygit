@@ -6,9 +6,10 @@ package cn.hqtzytb.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -64,13 +65,10 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_guide_select.do")	
-	public String showhqtXgkGuideSelect(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
-		
+	public String showhqtXgkGuideSelect(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
 		try
 		{
-			//获取session里的用户名
-			//UserAdmin username =  (UserAdmin) session.getAttribute("user");			
-			
+			Session session = SecurityUtils.getSubject().getSession();		
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：选科指导页面     操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_guide_select";
 		} catch (Exception e){
@@ -92,11 +90,10 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_customise.do")	
-	public String showhqtCustomise(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCustomise(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
 		{
-			//获取session里的用户名
-			//UserAdmin username =  (UserAdmin) session.getAttribute("user");			
+			Session session = SecurityUtils.getSubject().getSession();	
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：自定义选科页面操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_customise";
 		} catch (Exception e){
@@ -117,11 +114,10 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_customisereport.do")	
-	public String showhqtCustomisereport(ModelMap map,String str,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCustomisereport(ModelMap map,String str,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
 		{
-			//获取session里的用户名
-			//UserAdmin username =  (UserAdmin) session.getAttribute("user");	
+			Session session = SecurityUtils.getSubject().getSession();
 			System.out.println(str);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：自定义选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_customisereport";
@@ -143,9 +139,10 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_guide_xuanke.do")	
-	public String showhqtCpfxselectreportone(ModelMap map,String personalityCode,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCpfxselectreportone(ModelMap map,String personalityCode,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
-		{				   
+		{		
+			Session session = SecurityUtils.getSubject().getSession();
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_guide_xuanke";
 		} catch (Exception e){
@@ -165,9 +162,10 @@ public class XgkxkController {
 	 */
 	@RequestMapping(value = "/xgk_cpxk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleCpXk(HttpSession session, HttpServletRequest request) {
+	public ResponseResult<Void> handleCpXk(HttpServletRequest request) {
 		ResponseResult<Void> rr=null;
 		try{
+			Session session = SecurityUtils.getSubject().getSession();
 			List<UserFeature> featurelist=userFeatureServer.getUserFeatureByUid(2);
 			if(featurelist.size()>0){				
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK,featurelist.get(0).getEvaluationName());
@@ -194,9 +192,10 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_cpEnrollment.do")	
-	public String showhqtCpEnrollment(ModelMap map,String includeMajor,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCpEnrollment(ModelMap map,String includeMajor,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
 		{
+			Session session = SecurityUtils.getSubject().getSession();
 			String includeMajors=new String(includeMajor.getBytes("ISO-8859-1"),"utf-8"); 			
 			List<Enrollment> enrollmentlist=enrollmentServer.getMajor(includeMajors, "湖南省");			
 			map.addAttribute("enrollmentlist", enrollmentlist);
@@ -222,10 +221,10 @@ public class XgkxkController {
 	* @throws
 	 */
 	@RequestMapping("/xgk_specialty.do")	
-	public String showhqtCpSpecialty(ModelMap map,String specialtyId,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCpSpecialty(ModelMap map,String specialtyId,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
 		{		
-			System.out.println(specialtyId);
+			Session session = SecurityUtils.getSubject().getSession();
 			List<Specialty> specialtylist=specialtyServer.getSpecialtyById(specialtyId);
 			map.addAttribute("specialtylist",specialtylist);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
@@ -236,9 +235,10 @@ public class XgkxkController {
 		}							
 	}
 	@RequestMapping("/xgk_vocation.do")	
-	public String showhqtCpVocation(ModelMap map,String vocationId,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
+	public String showhqtCpVocation(ModelMap map,String vocationId,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{		
 		try
-		{				
+		{		
+			Session session = SecurityUtils.getSubject().getSession();
 			List<Vocation> vocationlist=vocationServer.getVocationById(vocationId);
 			System.out.println(vocationId);
 			map.addAttribute("vocationlist",vocationlist);
@@ -260,7 +260,7 @@ public class XgkxkController {
 	 */
 	@RequestMapping(value = "/xgk_zsyqselect.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<List<Enrollment> > handlezsyq(String includeMajor,String eProvince,HttpSession session, HttpServletRequest request) {
+	public ResponseResult<List<Enrollment> > handlezsyq(String includeMajor,String eProvince, HttpServletRequest request) {
 		ResponseResult<List<Enrollment> > rr;
 		try{		
 			String includeMajors=new String(includeMajor.getBytes("ISO-8859-1"),"utf-8"); 

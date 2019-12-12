@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -58,11 +59,9 @@ public class XgkcpController {
 	 * @return String 
 	 */
 	@RequestMapping("/xgk_answer.do")
-	public String showhqtCpAnswer(ModelMap map, Integer cpid, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) throws MyRuntimeException {
+	public String showhqtCpAnswer(ModelMap map, Integer cpid, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException {
 		try {
-			// 获取session里的用户名
-			// UserAdmin username = (UserAdmin) session.getAttribute("user");
+			Session session = SecurityUtils.getSubject().getSession();
 			map.addAttribute("cpid", cpid);
 			logger.info("用户名：" + session.getAttribute("username") + " 模块名：答题页面     操作：进入模块  状态：OK!");
 			return "web/xgk/xgk_answer";
@@ -83,11 +82,9 @@ public class XgkcpController {
 	 * @return String 
 	 */
 	@RequestMapping("/xgk_answer_hld.do")
-	public String showhqtCpAnswerHld(ModelMap map, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) throws MyRuntimeException {
+	public String showhqtCpAnswerHld(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException {
 		try {
-			// 获取session里的用户名
-			// UserAdmin username = (UserAdmin) session.getAttribute("user");
+			Session session = SecurityUtils.getSubject().getSession();
 			logger.info("用户名：" + session.getAttribute("username") + " 模块名：霍兰德答题简介  操作：进入模块  状态：OK!");
 			return "web/xgk/xgk_answer_hld";
 		} catch (Exception e) {
@@ -107,11 +104,9 @@ public class XgkcpController {
 	 * @return String 
 	 */
 	@RequestMapping("/xgk_answer_mbti.do")
-	public String showhqtCpAnswerMbti(ModelMap map, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) throws MyRuntimeException {
+	public String showhqtCpAnswerMbti(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException {
 		try {
-			// 获取session里的用户名
-			// UserAdmin username = (UserAdmin) session.getAttribute("user");
+			Session session = SecurityUtils.getSubject().getSession();
 			logger.info("用户名：" + session.getAttribute("username") + " 模块名：MBTI答题简介  操作：进入模块  状态：OK!");
 			return "web/xgk/xgk_answer_mbti";
 		} catch (Exception e) {
@@ -131,11 +126,9 @@ public class XgkcpController {
 	 * @return String 
 	 */
 	@RequestMapping("/xgk_index.do")
-	public String showhqtCpIndex(ModelMap map, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) throws MyRuntimeException {
+	public String showhqtCpIndex(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException {
 		try {
-			// 获取session里的用户名
-			// UserAdmin username = (UserAdmin) session.getAttribute("user");
+			Session session = SecurityUtils.getSubject().getSession();
 			logger.info("用户名：" + session.getAttribute("username") + " 模块名：新高考首页  操作：进入模块  状态：OK!");
 			return "web/xgk/xgk_index";
 		} catch (Exception e) {
@@ -154,11 +147,10 @@ public class XgkcpController {
 	 * @return String 
 	 */	
 	@RequestMapping("/xgk_choice.do")
-	public String showhqtCpChoice(ModelMap map, HttpSession session, HttpServletRequest request,
+	public String showhqtCpChoice(ModelMap map, HttpServletRequest request,
 			HttpServletResponse response) throws MyRuntimeException {
 		try {
-			// 获取session里的用户名
-			// UserAdmin username = (UserAdmin) session.getAttribute("user");
+			Session session = SecurityUtils.getSubject().getSession();
 			logger.info("用户名：" + session.getAttribute("username") + " 模块名：认知测评页面  操作：进入模块  状态：OK!");
 			return "web/xgk/xgk_choice";
 		} catch (Exception e) {
@@ -178,7 +170,8 @@ public class XgkcpController {
 	 */	
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/xgk_report.do")
-	public String showIndexno(ModelMap map, HttpSession session, HttpServletRequest request) {
+	public String showIndexno(ModelMap map, HttpServletRequest request) {
+		Session session = SecurityUtils.getSubject().getSession();
 		// 重session里面提取分数与测评类型
 		String testName = (String) session.getAttribute("cpName");
 		Map<String, Integer> cpFengshu = (Map<String, Integer>) session.getAttribute("cpResult");
@@ -222,8 +215,8 @@ public class XgkcpController {
 	 */
 	@RequestMapping(value = "/xgk_result.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleCpResult(Integer id, @RequestParam(value = "cpda") String cpda,
-			HttpSession session, HttpServletRequest request) {
+	public ResponseResult<Void> handleCpResult(Integer id, @RequestParam(value = "cpda") String cpda, HttpServletRequest request) {
+		Session session = SecurityUtils.getSubject().getSession();
 		System.err.println("uid:" + session.getAttribute("uid"));
 		List<UserFeature> userFeatureList = userFeatureServer.getUserFeatureByUid(Integer.valueOf(session.getAttribute("uid").toString()));
 		ResponseResult<Void> rr;
@@ -292,7 +285,7 @@ public class XgkcpController {
 	}
 	
 	@RequestMapping("/xgk_guide_xuanke.do")	
-	public String xgk_guide_xuanke(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
+	public String xgk_guide_xuanke(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
 		return  "web/public/xgk_guide_xuanke";
 	}
 

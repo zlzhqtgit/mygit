@@ -10,11 +10,12 @@ import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.mapper.UserMapper;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class UserServerImpl implements IUserServer {
@@ -47,27 +48,20 @@ public class UserServerImpl implements IUserServer {
 	}
 
 	@Override
-	public ResponseResult<Void> bindAccount(HttpSession session, String phone, String verifyCode) {
+	public ResponseResult<Void> bindAccount(String phone, String verifyCode) {
+		Session session = SecurityUtils.getSubject().getSession();
 		String code = session.getAttribute("code").toString();
 		String mobile = session.getAttribute("phone").toString();
-//		if (!phone.equals(mobile)) {
-//			result.setState(Constants.RESULT_CODE_FAIL);
-//			result.setMessage("手机号不匹配");
-//			log.error(Constants.ERROR_HEAD_INFO + "手机号不匹配");
-//		}
-		ResponseResult<Void> result = new ResponseResult<>();
 		if (!verifyCode.equals(code) || !phone.equals(mobile)) {
-			result.setState(Constants.RESULT_CODE_FAIL);
-			result.setMessage("验证码错误");
-			logger.error(Constants.ERROR_HEAD_INFO + "验证码错误");
+			logger.error("手机号：" + mobile + " 模块名：第三方用户手机号绑定   操作：绑定  状态：FAIL! 验证码错误");
+			return new ResponseResult<>(ResponseResult.ERR,"验证码错误");
 		}
 		Map<String,Object> paramMap = new HashMap<>();
 		paramMap.put("phone",phone);
 		List<User> users = userMapper.selectUserListByMap(paramMap);
 		if (users.isEmpty()) {
-			result.setState(Constants.RESULT_CODE_FAIL);
-			result.setMessage("用户信息不存在");
-			logger.error(Constants.ERROR_HEAD_INFO + "用户信息不存在");
+			logger.error("手机号：" + mobile + " 模块名：第三方用户手机号绑定   操作：绑定  状态：FAIL! 用户信息不存在");
+			return new ResponseResult<>(ResponseResult.ERR,"验证码错误");
 		} else {
 			String wexinChat = session.getAttribute("wexinChat") == null ? null :session.getAttribute("wexinChat").toString();
 			String qqChat = session.getAttribute("qqChat") == null ? null :session.getAttribute("qqChat").toString();
@@ -86,10 +80,9 @@ public class UserServerImpl implements IUserServer {
 			JSONObject userJson = JSONObject.fromObject(users.get(0));
 			session.setAttribute("userJson", userJson);//提供给前端页面使用
 			session.setAttribute("user", users.get(0));//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
-			result.setState(Constants.RESULT_CODE_SUCCESS);
-			result.setMessage(Constants.RESULT_MESSAGE_SUCCESS);
+			logger.error("手机号：" + mobile + " 模块名：第三方用户手机号绑定   操作：绑定  状态：OK!");
+			return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 		}
-		return result;
 	}
 
 	@Override

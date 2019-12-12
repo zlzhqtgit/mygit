@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 /**
@@ -33,7 +32,7 @@ public class XgkSubjectController {
      * @return
      */
     @RequestMapping("/xgk_subject_score.do")
-    public String showXgkIndex(HttpSession session, HttpServletResponse response, HttpServletRequest request){
+    public String showXgkIndex(HttpServletResponse response, HttpServletRequest request){
         return "web/xgk/xgk_subject_score";
     }
 
@@ -46,8 +45,8 @@ public class XgkSubjectController {
      */
     @PostMapping("/xgk_potential_analysis.do")
     @ResponseBody
-    public ResponseResult<Void> addPotentialAnalysis(HttpSession session, @RequestParam(value="total_sc") String evaluationFraction) {
-        return iXgkSubjectService.addPotentialAnalysis(session,evaluationFraction);
+    public ResponseResult<Void> addPotentialAnalysis(@RequestParam(value="total_sc") String evaluationFraction) {
+        return iXgkSubjectService.addPotentialAnalysis(evaluationFraction);
     }
 
 
@@ -59,9 +58,9 @@ public class XgkSubjectController {
      * @return
      */
     @RequestMapping("/xgk_potential_report.do")
-    public String showPotentialReport(HttpSession session, HttpServletResponse response, HttpServletRequest request){
+    public String showPotentialReport(){
 
-        return iXgkSubjectService.showPotentialReport(session);
+        return iXgkSubjectService.showPotentialReport();
     }
 
 
@@ -73,7 +72,9 @@ public class XgkSubjectController {
      */
     @RequestMapping("/xgk_subject_exploration.do")
     @ResponseBody
-    public ResponseResult<Void> haveYouSubjectExploration(@RequestParam(value="uid") Integer uid){
-        return iXgkSubjectService.haveYouSubjectExploration(uid);
+    public ResponseResult<Void> haveYouSubjectExploration(){
+        return iXgkSubjectService.haveYouSubjectExploration();
     }
+    
+  
 }

@@ -38,7 +38,7 @@ import net.sf.json.JSONObject;
 /**
 * @Title: UserController.java
 * @Package cn.hqtzytb.controller
-* @Description:(前端用户控制层)1
+* @Description:(前端用户控制层)
 * @author: ZhouLingZhang
 * @date 2019年10月14日
 * @Copyright:好前途教育
@@ -59,6 +59,7 @@ public class UserController {
 	
 
 	private  static final  Logger logger = LogManager.getLogger(UserController.class.getName());
+
 	
 	/**
 	* @Title: hanldLogin
@@ -73,7 +74,8 @@ public class UserController {
 	* @throws
 	 */
 	@RequestMapping("xgk_login.do")
-	public String hanldLogin(ModelMap map,String nowUrl,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+	public String hanldLogin(ModelMap map,String nowUrl,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+		Session session = SecurityUtils.getSubject().getSession();
 		try
 		{
 			map.addAttribute("nowUrl", nowUrl);
@@ -97,7 +99,8 @@ public class UserController {
 	* @throws
 	 */
 	@RequestMapping("hqt_user_role.do")
-	public String hanldUserRole(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+	public String hanldUserRole(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+		Session session = SecurityUtils.getSubject().getSession();
 		try
 		{		
 			List<UserRole> roleList=userRoleServer.getUserRoleAll();
@@ -122,7 +125,8 @@ public class UserController {
 	* @throws
 	 */
 	@RequestMapping("hqt_user_roledetailsadd.do")
-	public String roleDetailsAdd(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+	public String roleDetailsAdd(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+		Session session = SecurityUtils.getSubject().getSession();
 		try
 		{	
 			List<UserRole> roleList=userRoleServer.getUserRoleAll();
@@ -149,8 +153,8 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/hqt_roledetailsadd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleRoleDetailsAdd(Integer rid,String detailsNumber,String detailsName,String detailsAdress, HttpSession session,HttpServletRequest request)
-	{	
+	public ResponseResult<Void> handleRoleDetailsAdd(Integer rid,String detailsNumber,String detailsName,String detailsAdress, HttpServletRequest request){	
+		Session session = SecurityUtils.getSubject().getSession();
 		ResponseResult<Void> rr;		
 		try {	
 			boolean flay=false;
@@ -201,8 +205,8 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/hqt_roledetailsedit.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleRoleDetailsEdit(Integer rid,String detailsNumber,String detailsName,String detailsAdress,Integer detailsId, HttpSession session,HttpServletRequest request)
-	{	
+	public ResponseResult<Void> handleRoleDetailsEdit(Integer rid,String detailsNumber,String detailsName,String detailsAdress,Integer detailsId, HttpServletRequest request){
+		Session session = SecurityUtils.getSubject().getSession();
 		ResponseResult<Void> rr=null;		
 		try {						
 			List<UserRoleDetails> detailsandlist=userRoleDetailsServer.getDetailsBynuband(rid,detailsNumber, detailsName);
@@ -231,8 +235,8 @@ public class UserController {
 	}
 	@RequestMapping(value = "/hqt_roledetailsdel.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleRoleDetailsDel(Integer detailsId, HttpSession session,HttpServletRequest request)
-	{	
+	public ResponseResult<Void> handleRoleDetailsDel(Integer detailsId, HttpServletRequest request){	
+		Session session = SecurityUtils.getSubject().getSession();
 		ResponseResult<Void> rr;		
 		try {						
 		
@@ -261,8 +265,8 @@ public class UserController {
 	* @throws
 	 */
 	@RequestMapping("hqt_user_roledetails.do")
-	public String hanldRoleDetails(ModelMap map,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException
-	{
+	public String hanldRoleDetails(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException{
+		Session session = SecurityUtils.getSubject().getSession();
 		try
 		{		
 			List<UserRoleDetails> userRoleDetailslist=userRoleDetailsServer.getUserRoleDetailsAll();
@@ -288,7 +292,8 @@ public class UserController {
 	* @throws
 	 */
 	@RequestMapping("hqt_user_roledetailsedit.do")
-	public String hanldRoleDetailsEdit(ModelMap map,Integer detailsId,HttpSession session,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
+	public String hanldRoleDetailsEdit(ModelMap map, Integer detailsId, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException{
+		Session session = SecurityUtils.getSubject().getSession();
 		try
 		{		
 			List<UserRoleDetails> userRoleDetailslist=userRoleDetailsServer.getDetailsBydetailsId(detailsId);
@@ -340,21 +345,6 @@ public class UserController {
 				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "登录成功");
 				logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：OK!");
-//				GetCommonUser get=new GetCommonUser();
-//				String md5Password = get.getEncrpytedPassword(Constants.MD5,password,user.getUuid(),1024);
-//				if(user.getPassword().equals(md5Password)){
-//					session.setAttribute("uid", user.getId());
-//					session.setAttribute("username", user.getUsername());
-//					session.setAttribute("headUrl", user.getHeadUrl());
-//					JSONObject userJson = JSONObject.fromObject(user);
-//					session.setAttribute("userJson", userJson);//提供给前端页面使用
-//					session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
-//					rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "登录成功");
-//					logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：OK!");
-//				}else{
-//					rr = new ResponseResult<Void>(ResponseResult.ERR, "用户密码不正确");
-//					logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：Failed!");
-//				}
 			}			
 		} catch (Exception e) {
 			logger.error("访问路径："+request.getRequestURI()+"操作：添加区库信息  错误信息: "+e);
@@ -369,8 +359,8 @@ public class UserController {
 	 * String @throws
 	 */
 	@RequestMapping("register.do")
-	public String hanldRegister(ModelMap map, HttpSession session, HttpServletRequest request,
-			HttpServletResponse response) throws MyRuntimeException {
+	public String hanldRegister(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException {
+		Session session = SecurityUtils.getSubject().getSession();
 		try {
 			logger.info("用户名：" + session.getAttribute("username") + " 模块名：用户注册模块  操作：进入模块  状态：OK!");
 			return "web/public/register";
@@ -390,60 +380,53 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/hqt_photoyzm.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handlephotoyzm(String phone, HttpSession session,HttpServletRequest request)
-	{
+	public ResponseResult<Void> handlephotoyzm(String phone, HttpServletRequest request){
+		Session session = SecurityUtils.getSubject().getSession();
 		ResponseResult<Void> rr;		
 		Photo.setNewcode();
 	    String code = Integer.toString(Photo.getNewcode());	  
 	    System.out.println(code);
-	        SendSmsResponse response;	       
-			try {
-				User user=userServer.queryUser(phone);
-				if(user!=null){
-					 rr =new ResponseResult<Void>(ResponseResult.ERR, "该手机号已经存在，请重新输入");
-					 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+	    SendSmsResponse response;	       
+		try {
+			User user=userServer.queryUser(phone);
+			if(user!=null){
+				 rr =new ResponseResult<Void>(ResponseResult.ERR, "该手机号已经存在，请重新输入");
+				 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+			}else{
+				response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
+				if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
+					session.setAttribute("code",code);
+					session.setAttribute("phone",phone);
+					rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
+					logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Success! ");
+					System.out.println(code);
 				}else{
-					response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
-					if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
-						session.setAttribute("code",code);
-						session.setAttribute("phone",phone);
-						rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
-						logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Success! ");
-						System.out.println(code);
-					}else{
-						 rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
-						 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
-					}					       
-				}				
-			} catch (Exception e) {
-				logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
-				rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");			
-			}			
+					 rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
+					 logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+				}					       
+			}				
+		} catch (Exception e) {
+			logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
+			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");			
+		}			
 		return rr;
 	}
+	
+	
 	/**
-	* @Title: handleRegisteradd
-	* @Description: (用户注册实现方法)
-	* @param @param username
-	* @param @param phone
-	* @param @param password
-	* @param @param school
-	* @param @param schoolAddress
-	* @param @param families
-	* @param @param fraction
-	* @param @param ceeYear
-	* @param @param session
-	* @param @param request
-	* @param @return    
-	* @return ResponseResult<Void>    
-	* @throws
+	 * (用户注册实现方法)
+	 * @param user
+	 * @param verifyCode
+	 * @param request
+	 * @return
 	 */
 	@RequestMapping(value = "/hqt_registeradd.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleRegisteradd(String verifyCode,String username,String phone,String password,String school,String schoolAddress,String families,String fraction,String ceeYear, HttpSession session,HttpServletRequest request) {
+	public ResponseResult<Void> handleRegisteradd(User user, String verifyCode, HttpServletRequest request) {
+		Session session = SecurityUtils.getSubject().getSession();
 		ResponseResult<Void> rr = null;
 		System.out.println(verifyCode);
-		if (!phone.equals(session.getAttribute("phone").toString())){
+		if (!user.getPhone().equals(session.getAttribute("phone").toString())){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码和手机号不匹配");
 		}
 		if (!verifyCode.equals(session.getAttribute("code").toString())){
@@ -451,48 +434,36 @@ public class UserController {
 		}
 		try {	
 			//查询用户名是否存在
-			User userlist=userServer.queryUser(phone);			
+			User userlist=userServer.queryUser(user.getPhone());			
 			//判断用户名是否存在
 			if (userlist!=null){
 				rr=new ResponseResult<Void>(ResponseResult.ERR,"手机号已经存在!请重新输入...");
-				logger.info("用户手机："+phone+" 模块名：注册模块 操作：登录  状态：Failed! ");
+				logger.info("用户手机：" + user.getPhone() + " 模块名：注册模块 操作：登录  状态：Failed! ");
 			}else{	
 				GetCommonUser get=new GetCommonUser();			
-				Date creatTime=new Date();		
+				Date creatTime = new Date();		
 				String uuid = UUID.randomUUID().toString().toUpperCase();
-				String md5Password = get.getEncrpytedPassword(Constants.MD5,password, uuid,1024);
-				User user=new User();
-				user.setUsername(username);
-				user.setPhone(phone);
-				System.err.println("注册手机号：" + phone);
-				System.err.println("密码：" + password);
-				System.err.println("密码：" + md5Password);
+				String md5Password = get.getEncrpytedPassword(Constants.MD5,user.getPassword(), uuid,1024);
+				user.setUuid(uuid);
+				user.setPassword(md5Password);
+				user.setRid(5);//默认角色 为个人
+				user.setBelongTo("2019100001");// TODO 隶属于 
 				user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
 				user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
-				user.setPassword(md5Password);
-				user.setUuid(uuid);
-				user.setBelongTo("2019100001");
-				user.setSchool(school);
-				user.setSchoolAddress(schoolAddress);
-				user.setFamilies(families);
-				user.setFraction(fraction);
-				user.setCeeYear(ceeYear);
-				user.setVocation("");
 				user.setHeadUrl(session.getAttribute("headUrl") == null ? "/img/public/head.jpg" : session.getAttribute("headUrl").toString());
-				user.setPower("");
 				user.setCreatTime(creatTime);				
-				userServer.insert(user);
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");				
-				logger.info("用户名："+user.getUsername()+" 模块名：注册模块 操作：登录  状态：OK!");
+				userServer.insert(user);	
 				JSONObject userJson = JSONObject.fromObject(user);
 				session.setAttribute("uid", user.getId());
 				session.setAttribute("username", user.getUsername());
 				session.setAttribute("headUrl", user.getHeadUrl());
 				session.setAttribute("userJson", userJson);//提供给前端页面使用
 				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+				logger.info("用户名："+user.getUsername()+" 模块名：注册模块 操作：登录  状态：OK!");
+				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");			
 			}			
 		} catch (Exception e) {
-			logger.error("访问路径："+request.getRequestURI()+"操作：注册信息  错误信息: "+e);
+			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
 			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
 		}
 		return rr;
@@ -507,9 +478,9 @@ public class UserController {
 	 */
 	@RequestMapping("/hqt_bind_account.do")
 	@ResponseBody
-	public ResponseResult<Void> bindAccount(HttpSession session,String phone,String verifyCode){
+	public ResponseResult<Void> bindAccount(String phone,String verifyCode){
 
-		return userServer.bindAccount(session,phone,verifyCode);
+		return userServer.bindAccount(phone,verifyCode);
 	}
 
 

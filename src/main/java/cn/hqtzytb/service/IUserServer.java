@@ -26,7 +26,7 @@ public interface IUserServer {
 	 * @param verifyCode
 	 * @return
 	 */
-	ResponseResult<Void> bindAccount(HttpSession session, String phone, String verifyCode);
+	ResponseResult<Void> bindAccount(String phone, String verifyCode);
 
 	/**
 	 * 查询用户信息
