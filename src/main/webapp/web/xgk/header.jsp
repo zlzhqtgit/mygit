@@ -15,8 +15,8 @@
 					<div class="logo">
 						<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.jpg" alt="贵州好前途教育科技有限公司"></a>
 					</div>
-					<nav id="navdh" class="">
-						<ul>
+					<nav class="clearfix" id="navdh">
+						<ul class="clearfix">
 							<li><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
 							<li><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
 							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>

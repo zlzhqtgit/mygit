@@ -24,7 +24,7 @@
 		<header class="padding-side login_head">
 			<nav class="">
 				<ul class="margin_top1">
-					<li><a href="${pageContext.request.contextPath}/cp/xgk_index.do">官方首页</a></li>
+					<li><a href="${pageContext.request.contextPath}/cp/xgk_index.do">官网首页</a></li>
 					<li><a href="">新手教程</a></li>
 					<li><a href="">志愿填报QQ群</a></li>
 					<li><a href="">官方微信</a></li>

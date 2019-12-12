@@ -10,9 +10,11 @@
 		<title>在线课程</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>
 		<script type="text/javascript"	src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
@@ -149,7 +151,7 @@
 
 		</script>
 		<main class="container p_relative margin_bot">
-			<div class="margin_bot" style="padding: 1em 100px 1em;">
+			<div class="margin_bot wow fadeInUp" style="padding: 1em 100px 1em;">
 			    <form class="bs-example bs-example-form" role="form">
 			        <div class="input-group input-group-lg">
 			            <span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search text-muted"></span></span>
@@ -233,7 +235,7 @@
 			</div>
 			<!--/弹框-->
 			
-			<div class="" id="con1">
+			<div class="wow fadeInUp" id="con1">
 				<div class="padding-side flex_jc_sb">
 					<span class="flex_jc_sb">
 						<h3>推荐课程</h3>
@@ -295,7 +297,7 @@
 					<span class="glyphicon glyphicon-refresh"></span> 换一组</a>
 				</p>
 			</div>
-			<div class="" id="con2">
+			<div class="wow fadeInUp" id="con2">
 				<div class="padding-side flex_jc_sb">
 					<span class="flex_jc_sb">
 						<h3>预习课程</h3>
@@ -357,7 +359,7 @@
 					<span class="glyphicon glyphicon-refresh"></span> 换一组</a>
 				</p>
 			</div>
-			<div class="" id="con3">
+			<div class="wow fadeInUp" id="con3">
 				<div class="padding-side flex_jc_sb">
 					<span class="flex_jc_sb">
 						<h3>预习课程</h3>
@@ -419,6 +421,16 @@
 					<span class="glyphicon glyphicon-refresh"></span> 换一组</a>
 				</p>
 			</div>
+			<script type="text/javascript">
+				new WOW().init();
+				var wow = new WOW({
+				    boxClass: 'wow', //需要执行动画的class
+				    animateClass: 'animated',  //animate.css的class
+				    offset: 0,  //距可视区域多少开始执行动画
+				    mobile: true,  //是否在移动设备上执行动画
+				    live: true  //一部加载的内容是否有效
+				});
+			</script>
 		</main>
 		
 	<!-- 页面右侧-->

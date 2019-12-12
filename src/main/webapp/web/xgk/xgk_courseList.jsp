@@ -8,9 +8,11 @@
 		<meta charset="utf-8">
 		<title>贵州好前途教育科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/common.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
@@ -21,7 +23,7 @@
 		<main class="sch_search">
 			<section class="sch_search container">
 				
-				<div style="padding: 1em 100px 1em;">
+				<div class="wow fadeInUp" style="padding: 1em 100px 1em;">
 				    <form class="bs-example bs-example-form" role="form">
 				        <div class="input-group input-group-lg">
 				            <span class="input-group-addon"><span class="glyphicon glyphicon-search text-muted"></span></span>
@@ -30,7 +32,7 @@
 				    </form>
 				</div>
 
-				<div class="panel panel-default">
+				<div class="panel panel-default wow fadeInUp">
 				    <ul class="list-group slice_list">
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
@@ -90,7 +92,7 @@
 				})
 		    	
 		    </script>
-			<div class="" id="">
+			<div class="wow fadeInUp" id="">
 				<ul class="clearfix course_list margin_top1">
 					<li class="pull-left padding-side">
 						<div class="thumbnail">
@@ -156,6 +158,16 @@
 			    <!--/分页-->
 			</div>
 			</section>
+			<script type="text/javascript">
+				new WOW().init();
+				var wow = new WOW({
+				    boxClass: 'wow', //需要执行动画的class
+				    animateClass: 'animated',  //animate.css的class
+				    offset: 0,  //距可视区域多少开始执行动画
+				    mobile: true,  //是否在移动设备上执行动画
+				    live: true  //一部加载的内容是否有效
+				});
+			</script>
 		</main>
 
 	<!-- 页面右侧-->

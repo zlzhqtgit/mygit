@@ -31,8 +31,8 @@
 					</th>
 				<th>星期一</th><th>星期二</th><th>星期三</th><th>星期四</th><th>星期五</th><th>星期六</th><th>星期七</th></tr>
 				<tr><td rowspan="5">
-					<div class="text-center"><span class="glyphicon glyphicon-plus-sign"></span></div>
-					<div>上午</div><span class="glyphicon glyphicon-minus-sign"></span></div>
+					<div class="text-center"><span class="glyphicon glyphicon-plus-sign text-primary margin_bot1"></span></div>
+					<div>上午</div><span class="glyphicon glyphicon-minus-sign text-danger margin_top1"></span></div>
 				</td><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td>
 				</tr>
 				<tr><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
@@ -41,16 +41,16 @@
 				<tr><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 				<tr><td>午休</td><td colspan="8"></td></tr>
 				<tr><td rowspan="4">
-					<div class="text-center"><span class="glyphicon glyphicon-plus-sign"></span></div>
-					<div>下午</div><span class="glyphicon glyphicon-minus-sign"></span>
+					<div class="text-center"><span class="glyphicon glyphicon-plus-sign text-primary margin_bot1"></span></div>
+					<div>下午</div><span class="glyphicon glyphicon-minus-sign text-danger margin_top1"></span>
 				</td><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td>
 				</tr>
 				<tr><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 				<tr><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 				<tr><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 				<tr><td rowspan="2">
-					<div class="text-center"><span class="glyphicon glyphicon-plus-sign"></span></div>
-					<div>晚上</div><span class="glyphicon glyphicon-minus-sign"></span>
+					<div class="text-center"><span class="glyphicon glyphicon-plus-sign text-primary margin_bot1"></span></div>
+					<div>晚上</div><span class="glyphicon glyphicon-minus-sign text-danger margin_top1"></span>
 				</td><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td>
 				</tr>
 				<tr><td>第一节</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>

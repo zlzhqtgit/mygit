@@ -23,7 +23,7 @@
 			<div class="test_instruction margin_top">
 				<section class="row">
 					<!-- thumbnail -->
-					<div class="col-md-6 " style="padding:0">
+					<div class="col-md-6 leftLoop" style="padding:0">
 						<img style="width: 100%;" src="${pageContext.request.contextPath}/img/xgk/car.jpg" >
 						<div class="caption">
 							<h3 class="text-center fontwei margin_top1">霍兰德职业兴趣测评</h3>
@@ -31,7 +31,7 @@
 							<p class="text-right margin_top margin_bot"><a href="javascript:;" onclick="login('hld')" class="btn btn-primary" role="button">开始测试 >></a></p>
 						</div>
 					</div>
-					<div class="col-md-6" style="padding:0">
+					<div class="col-md-6 rightLoop" style="padding:0">
 						<img style="width: 100%;" src="${pageContext.request.contextPath}/img/xgk/car.jpg" >
 						<div class="caption">
 							<h3 class="text-center fontwei margin_top1">MBTI职业性格测评</h3>

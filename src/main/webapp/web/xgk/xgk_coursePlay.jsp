@@ -10,9 +10,11 @@
 		<title>贵州好前途教育科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jsmodern.min.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/jsmodern.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
@@ -169,7 +171,7 @@
 				</div>
 			</div>
 			<div class="recom_course">
-				<div class="padding-side flex_jc_sb">
+				<div class="padding-side flex_jc_sb wow fadeInUp">
 					<div class="flex_jcstart">
 						<h3 class="fontwei">推荐课程</h3>
 						<span class="text-muted flex_Al_c">&ensp;共xxxx个视频</span>
@@ -178,7 +180,7 @@
 						<a class="text-primary border-primary btn" href=""><span class="glyphicon glyphicon-refresh"></span>换一组</a>
 					</div>
 				</div>
-				<ul class="clearfix course_list margin_top1">
+				<ul class="clearfix course_list margin_top1 wow fadeInUp">
 					<li class="pull-left padding-side" data-src="${pageContext.request.contextPath}/img/xgk/video/1.mp4" title="疯狂的max">
 						<div class="thumbnail">
 							<a href="javascript:void(0)" class="converse_info">
@@ -230,10 +232,20 @@
 				</ul>
 			</div>
 			
-			<div class="margin_bot1">
+			<div class="margin_bot1 wow fadeInUp">
 				<div class="border-primary padding-side"><h4 class="text-muted">课程评价</h4> </div>
 				<div class="flex_Al_c border-primary padding-side" style="height: 6em;">暂无相关评价 </div>
 			</div>
+			<script type="text/javascript">
+				new WOW().init();
+				var wow = new WOW({
+				    boxClass: 'wow', //需要执行动画的class
+				    animateClass: 'animated',  //animate.css的class
+				    offset: 0,  //距可视区域多少开始执行动画
+				    mobile: true,  //是否在移动设备上执行动画
+				    live: true  //一部加载的内容是否有效
+				});
+			</script>
 		</main>
 
 	<!-- 页面右侧-->
