@@ -1,0 +1,24 @@
+var videos=[
+	{
+		section:'第一章',
+		lists:[
+			{title:'如何填报高考志愿1',tag:'高考',vurl:'../../img/xgk/video/1.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考志愿2',tag:'高考1',vurl:'../../img/xgk/video/2.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考志愿3',tag:'高考2',vurl:'../../img/xgk/video/3.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考志愿4',tag:'高考3',vurl:'../../img/xgk/video/4.mp4',poster:'img/car.jpg'},
+		]
+	},
+	{
+		section:'第二章',
+		lists:[
+			{title:'如何填报高考22志愿',tag:'高考',vurl:'../../img/xgk/video/1.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考22志愿2',tag:'高考',vurl:'../../img/xgk/video/2.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考22志愿3',tag:'高考',vurl:'../../img/xgk/video/3.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考22志愿4',tag:'高考',vurl:'../../img/xgk/video/4.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考22志愿',tag:'高考',vurl:'../../img/xgk/video/5.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考22志愿2',tag:'高考',vurl:'../../img/xgk/video/1.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考22志愿3',tag:'高考',vurl:'../../img/xgk/video/2.mp4',poster:'img/car.jpg'},
+			{title:'如何填报高考22志愿4',tag:'高考',vurl:'../../img/xgk/video/3.mp4',poster:'img/car.jpg'},
+		]
+	}
+]
