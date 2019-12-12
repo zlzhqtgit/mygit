@@ -263,7 +263,6 @@ public class XgkxkController {
 	public ResponseResult<List<Enrollment> > handlezsyq(String includeMajor,String eProvince, HttpServletRequest request) {
 		ResponseResult<List<Enrollment> > rr;
 		try{		
-			Session session = SecurityUtils.getSubject().getSession();
 			String includeMajors=new String(includeMajor.getBytes("ISO-8859-1"),"utf-8"); 
 			List<Enrollment> enrollmentlist=enrollmentServer.getMajor(includeMajors, eProvince);
 			System.out.println(includeMajors);
