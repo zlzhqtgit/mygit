@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,19 +38,32 @@
 					</nav>
 				</div>
 				<div class="head-top col-md-4 margin_top margin_bot1">
-					<c:if test="${username==null}">
+					<shiro:guest>
 						<div class="user">
 							<img src="${pageContext.request.contextPath}/img/xgk/user.png" >
 							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
 						</div>
-					</c:if>
-					<c:if test="${username!=null}">
+					</shiro:guest>
+					<%-- <c:if test="${username==null}">
+						<div class="user">
+							<img src="${pageContext.request.contextPath}/img/xgk/user.png" >
+							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
+						</div>
+					</c:if> --%>
+					<shiro:user>  
+					   <div class="user">
+							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
+							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
+						</div>
+					</shiro:user> 
+					
+					<%-- <c:if test="${username!=null}">
 						<div class="user">
 							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
 							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 						</div>
 					</c:if>
-					
+					 --%>
 					<div class="search margin_top1">
 						<div class="pull-left input_box">
 							<span class="search_mark"><img src="${pageContext.request.contextPath}/img/xgk/search.png"></span>

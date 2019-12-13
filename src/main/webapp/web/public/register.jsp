@@ -19,6 +19,7 @@
 <script src="${pageContext.request.contextPath}/js/web/xgk/selectFilter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+<script src="${pageContext.request.contextPath}/js/web/xgk/register.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
 		<header class="padding-side login_head">
@@ -51,7 +52,7 @@
 					</ul>
 
 					<div class="page_step step2 margin_top hide padding-side2" style="width: 100%;">
-						<form class="user1" action="" method="post" onsubmit="return register()">
+						<form class="user1" action=""<!--  method="post" onsubmit="return " -->>
 							<fieldset id="">
 								<legend class="">
 									<h4 class="text-primary margin_bot1 fontwei">注册新用户
@@ -73,7 +74,7 @@
 									<div class="form-group">
 										<label for="captcha"><span class="text-danger">&lowast;</span> 验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
 										<input id="captcha" type="text" placeholder="请填写验证码"/>
-										<a  class="get_verify btn btn-default" id="get_verify" href="javascript:viod(0)">获取手机验证码</a>
+										<a  class="get_verify btn btn-default" id="get_verify" onclick="sendMobileMessage(0)" href="javascript:;" >获取手机验证码</a>
 									</div>
 									<div class="form-group">
 										<label for="password"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
@@ -137,11 +138,11 @@
 								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 							</div>
 							<div class="reg_submit padding-side2 margin_top1 margin_bot">
-								<input class="btn btn-default" type="submit" value="注册" id="submit" disabled="true"/>
+								<input class="btn btn-default" type="button" onclick="register(0)" value="注册" id="submit" disabled="true"/>
 							</div>
 						</form>
 
-						<form class="user2" action="" method="post" onsubmit="return register1()">
+						<form class="user2" action="" <!-- method="post" onsubmit="return " -->>
 							<fieldset id="">
 								<legend class="">
 									<h3 class="text-primary margin_bot1">注册新用户
@@ -163,7 +164,7 @@
 									<div class="form-group">
 										<label for="captcha1"><span class="text-danger">&lowast;</span> 验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
 										<input id="captcha1" type="text" placeholder="请填写验证码"/>
-										<a class="get_verify btn btn-default" id="get_verify1" href="javascript:void(0)">获取手机验证码</a>
+										<a class="get_verify btn btn-default" id="get_verify1" onclick="sendMobileMessage(1)" href="javascript:void(0)">获取手机验证码</a>
 									</div>
 									<div class="form-group">
 										<label for="password1"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
@@ -176,8 +177,8 @@
 										<span class="glyphicon text-danger padding-side"> </span>
 									</div>
 									<div class="form-group">
-										<label for="vocation">&nbsp;&nbsp;&nbsp;从事职业：</label>
-										<input id="vocation" type="text" placeholder="请输入您的职业名"/>
+										<label for="vocation1">&nbsp;&nbsp;&nbsp;从事职业：</label>
+										<input id="vocation1" type="text" placeholder="请输入您的职业名"/>
 									</div>
 
 									<div class="reg_tip hidden-xs" >
@@ -194,7 +195,7 @@
 								<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 							</div>
 							<div class="reg_submit padding-side2 margin_top1 margin_bot">
-								<input class="btn btn-default" type="submit" value="注册" id="submit1" disabled="true"/>
+								<input class="btn btn-default" onclick="register(1)" type="button" value="注册" id="submit1" disabled="true"/>
 							</div>
 						</form>
 					</div>
@@ -202,7 +203,7 @@
 					<div class="page_step step3 hide">
 						<div class="margin_top margin_bot">
 							<p class="">您的账号<label class="text-success">注册已完成 <span class="glyphicon glyphicon-ok-sign text-success"></span></label>，账号名称为您的手机号。</p>
-							<p class="text-center margin_top"><a class="btn btn-primary" href="">返回登录</a></p>
+							<p class="text-center margin_top"><a class="btn btn-primary" href="../user/xgk_login.do">返回登录</a></p>
 						</div>
 					</div>
 
@@ -227,8 +228,6 @@
 				}
 			});
 		</script>
-
-		<script src="${pageContext.request.contextPath}/js/web/xgk/register.js" type="text/javascript" charset="utf-8"></script>
 		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
 

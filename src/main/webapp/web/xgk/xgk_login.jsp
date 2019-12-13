@@ -44,7 +44,7 @@
 						<span class="glyphicon glyphicon-phone text-muted"></span>
 					</div>
 					<div class="margin_top1">
-						<input id="password" onblur="check_pwd ()" type="password" id="password" value="" placeholder="密码"/>
+						<input id="password" onblur="check_pwd ()" type="password" value="" placeholder="密码"/>
 						<span class="glyphicon glyphicon-tag text-muted"></span>
 					</div>
 				</fieldset>				
