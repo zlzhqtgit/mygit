@@ -81,8 +81,8 @@
 											<a  class="get_verify btn btn-default" href="javascript:;" onclick="sendMessages(2)">获取手机验证码</a>
 										</div>
 										<div class="form-group">
-											<label for="password22"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
-											<input id="password22" type="password" title="请填写6-16位数字、字母或符号作为密码" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+											<label for="password"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
+											<input id="password" type="password" title="请填写6-16位数字、字母或符号作为密码" placeholder="请填写6-16位数字、字母或符号作为密码"/>
 											<span class="glyphicon padding-side"> </span>
 										</div>
 										<div class="form-group">
@@ -142,7 +142,7 @@
 									<span class="">我已阅读并接受<a class="text-primary" href="">《用户协议》</a>及<a class="text-primary" href="">《隐私政策》</a></span>
 								</div>
 								<div class="reg_submit padding-side2 margin_top1 margin_bot">
-									<input class="btn btn-primary" type="button" onclick="register1()" value="提交注册" id="submit1" disabled="true"/>
+									<input class="btn btn-primary" type="button" onclick="completeRegister()" value="提交注册" id="submit1" disabled="true"/>
 								</div>
 							</form>
 						</div>
@@ -181,7 +181,8 @@
 				
 			</script>
 			
-			<script src="${pageContext.request.contextPath}/js/web/xgk/binding_acc.js" type="text/javascript" charset="utf-8"></script>
+			<%-- <script src="${pageContext.request.contextPath}/js/web/xgk/binding_acc.js" type="text/javascript" charset="utf-8"></script> --%>
+			<script src="${pageContext.request.contextPath}/js/web/xgk/register.js" type="text/javascript" charset="utf-8"></script>
 		</section>
 		
 		<!-- 页面右侧-->
@@ -190,102 +191,4 @@
 		<c:import url="footer.jsp"></c:import>	
 	
 	</body>
-
-	<script type="text/javascript">
-
-		var isSend = false;
-		//发送短信
-		function sendMessages(e) {
-			var url = "";
-			var phone = "";
-			if (e == 1){//绑定手机 短信
-				url = "/user/send_message.do";
-				phone = $("#phone").val();
-			} else {//完善信息 短信
-				url = "/user/hqt_photoyzm.do";
-				phone = $("#mobile").val();
-			}
-			var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-			if(!reg.test(phone)) {
-				layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
-			}else {
-				$.ajax({
-					url: "/user/user_is_exist.do",
-					data:"phone=" + phone,
-					type:"POST",
-					dataType:"json",
-					success:function(obj){
-						if(obj.state == 0){
-							if (e == 1){
-								//用户未注册过 弹出选项提示
-								layer.confirm('该手机号未注册账户，请完善账户信息！', {icon : 3, time : 2000});
-							} else {
-								$.ajax({
-									url: url,
-									type: "POST",
-									data: "phone=" + phone,
-									dataType: "JSON",
-									success: function(obj) {
-										if(obj.state == 0){
-											layer.msg(obj.message,{icon:3,time:2000});
-										} else {
-											isSend = true;
-											layer.msg(obj.message,{icon:6,time:2000});
-										}
-									}
-								});
-							}
-
-						} else {
-							if (e == 2){
-								layer.confirm('该手机号已注册账户，请更换手机号！', {icon : 3, time : 2000});
-							} else {
-								$.ajax({
-									url: url,
-									type: "POST",
-									data: "phone=" + phone,
-									dataType: "JSON",
-									success: function(obj) {
-										if(obj.state == 0){
-											layer.msg(obj.message,{icon:3,time:2000});
-										} else {
-											isSend = true;
-											layer.msg(obj.message,{icon:6,time:2000});
-										}
-									}
-								});
-							}
-						}
-						return;
-					}
-				});
-			}
-		}
-
-		//绑定账号
-		function bindAccount() {
-			if (isSend == false){
-				layer.msg("请先获取手机验证码",{icon:2,time:1000});
-			}
-			var phone = $("#phone").val();
-			var verifyCode = $("#verifyCode").val();
-			if (verifyCode == null || verifyCode == ""){
-				layer.msg("请输入手机验证码",{icon:2,time:1000});
-			}else {
-				$.ajax({
-					url: "/user/hqt_bind_account.do",
-					type: "POST",
-					data: "phone=" + phone + "&verifyCode=" + verifyCode,
-					dataType: "JSON",
-					success: function(obj) {
-						if(obj.state == 0){
-							layer.msg(obj.message,{icon:3,time:2000});
-						} else {
-							location.href = "../cp/xgk_index.do";
-						}
-					}
-				});
-			}
-		}
-	</script>
 </html>

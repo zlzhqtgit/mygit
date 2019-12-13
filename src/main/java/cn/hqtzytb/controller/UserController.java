@@ -86,227 +86,7 @@ public class UserController {
 			throw new MyRuntimeException(e);
 		}	
 	}
-	/**
-	* @Title: hanldUserRole
-	* @Description: (后台查看前端用户主角色页面)
-	* @param @param map
-	* @param @param session
-	* @param @param request
-	* @param @param response
-	* @param @return
-	* @param @throws MyRuntimeException    
-	* @return String    
-	* @throws
-	 */
-	@RequestMapping("hqt_user_role.do")
-	public String hanldUserRole(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
-		Session session = SecurityUtils.getSubject().getSession();
-		try
-		{		
-			List<UserRole> roleList=userRoleServer.getUserRoleAll();
-			map.addAttribute("roleList", roleList);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：新高考用户登录模块  操作：进入模块  状态：OK!");
-			return "main/user/hqt_user_role";	
-		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入新高考用户登录模块     错误信息: "+e);
-			throw new MyRuntimeException(e);
-		}	
-	}
-	/**
-	* @Title: hanldRoleDetailsAdd
-	* @Description: (后台增加前端角色明细)
-	* @param @param map
-	* @param @param session
-	* @param @param request
-	* @param @param response
-	* @param @return
-	* @param @throws MyRuntimeException    
-	* @return String    
-	* @throws
-	 */
-	@RequestMapping("hqt_user_roledetailsadd.do")
-	public String roleDetailsAdd(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{
-		Session session = SecurityUtils.getSubject().getSession();
-		try
-		{	
-			List<UserRole> roleList=userRoleServer.getUserRoleAll();
-			map.addAttribute("roleList", roleList);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：用户注册模块  操作：进入模块  状态：OK!");
-			return "main/user/hqt_user_roledetailsadd";	
-		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入用户注册模块     错误信息: "+e);
-			throw new MyRuntimeException(e);
-		}	
-	}
-	/**
-	* @Title: handleRoleDetailsAdd
-	* @Description: (后台添加角色明细实现方法)
-	* @param @param rid
-	* @param @param detailsNumber
-	* @param @param detailsName
-	* @param @param detailsAdress
-	* @param @param session
-	* @param @param request
-	* @param @return    
-	* @return ResponseResult<Void>    
-	* @throws
-	 */
-	@RequestMapping(value = "/hqt_roledetailsadd.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseResult<Void> handleRoleDetailsAdd(Integer rid,String detailsNumber,String detailsName,String detailsAdress, HttpServletRequest request){	
-		Session session = SecurityUtils.getSubject().getSession();
-		ResponseResult<Void> rr;		
-		try {	
-			boolean flay=false;
-			//查询用户名是否存在
-			List<UserRoleDetails> detailslist=userRoleDetailsServer.getDetailsBynub(detailsNumber, detailsName);
-			if(detailslist.size()!=0){
-				for(int i=0;i<detailslist.size();i++){
-					if(detailslist.get(i).getDetailsNumber().equals(detailsNumber) && detailslist.get(i).getDetailsName().equals(detailsName) && detailslist.get(i).getRid() !=rid){
-						flay=true;
-					}
-				}				
-			}else{
-				flay=true;
-			}
-			if(flay){
-				UserRoleDetails userRoleDetails=new UserRoleDetails();
-				userRoleDetails.setRid(rid);
-				userRoleDetails.setDetailsNumber(detailsNumber);
-				userRoleDetails.setDetailsName(detailsName);
-				userRoleDetails.setDetailsAdress(detailsAdress);
-				Date now=new Date(); 
-				userRoleDetails.setCreationTime(now);	
-				userRoleDetailsServer.insert(userRoleDetails);
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "角色添加成功");				
-				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：角色添加模块 操作：登录  状态：OK!");
-			}else{
-				rr = new ResponseResult<Void>(ResponseResult.ERR, "角色添加失败，相关信息重复");
-				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：角色添加模块   操作：添加角色 状态：Failed!");
-			}			
-		} catch (Exception e) {
-			logger.error("访问路径："+request.getRequestURI()+"操作：角色添加信息  错误信息: "+e);
-			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
-		}
-		return rr;
-	}
-	/**
-	* @Title: handleRoleDetailsAdd
-	* @Description: (后台更新角色明细实现方法)
-	* @param @param rid
-	* @param @param detailsNumber
-	* @param @param detailsName
-	* @param @param detailsAdress
-	* @param @param session
-	* @param @param request
-	* @param @return    
-	* @return ResponseResult<Void>    
-	* @throws
-	 */
-	@RequestMapping(value = "/hqt_roledetailsedit.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseResult<Void> handleRoleDetailsEdit(Integer rid,String detailsNumber,String detailsName,String detailsAdress,Integer detailsId, HttpServletRequest request){
-		Session session = SecurityUtils.getSubject().getSession();
-		ResponseResult<Void> rr=null;		
-		try {						
-			List<UserRoleDetails> detailsandlist=userRoleDetailsServer.getDetailsBynuband(rid,detailsNumber, detailsName);
-			List<UserRoleDetails> detailsIdlist=userRoleDetailsServer.getDetailsBydetailsId(detailsId);
-			if(detailsandlist.size()>0 && rid!=detailsIdlist.get(0).getRid() ){
-				rr = new ResponseResult<Void>(ResponseResult.ERR, "角色更新失败，相关信息重复");
-				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：角色信息修改模块   操作：修改角色 状态：Failed!");
-			}else{
-				UserRoleDetails userRoleDetails=new UserRoleDetails();
-				userRoleDetails.setDetailsId(detailsId);
-				userRoleDetails.setRid(rid);
-				userRoleDetails.setDetailsNumber(detailsNumber);
-				userRoleDetails.setDetailsName(detailsName);
-				userRoleDetails.setDetailsAdress(detailsAdress);
-				Date now=new Date(); 
-				userRoleDetails.setCreationTime(now);	
-				userRoleDetailsServer.update(userRoleDetails);
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "角色信息更新成功");				
-				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：角色信息修改模块 操作：登录  状态：OK!");
-			}			
-		} catch (Exception e) {
-			logger.error("访问路径："+request.getRequestURI()+"操作：角色信息修改模块  错误信息: "+e);
-			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
-		}
-		return rr;
-	}
-	@RequestMapping(value = "/hqt_roledetailsdel.do", method = RequestMethod.POST)
-	@ResponseBody
-	public ResponseResult<Void> handleRoleDetailsDel(Integer detailsId, HttpServletRequest request){	
-		Session session = SecurityUtils.getSubject().getSession();
-		ResponseResult<Void> rr;		
-		try {						
-		
-				UserRoleDetails userRoleDetails=new UserRoleDetails();
-				userRoleDetails.setDetailsId(detailsId);				
-				userRoleDetailsServer.delete(userRoleDetails);
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "角色信息更新成功");				
-				logger.info("用户名："+session.getAttribute("adminname")+" 模块名：角色信息修改模块 操作：登录  状态：OK!");
-					
-		} catch (Exception e) {
-			logger.error("访问路径："+request.getRequestURI()+"操作：角色信息修改模块  错误信息: "+e);
-			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
-		}
-		return rr;
-	}
-	/**
-	* @Title: hanldRoleDetails
-	* @Description: (后台查看角色明细)
-	* @param @param map
-	* @param @param session
-	* @param @param request
-	* @param @param response
-	* @param @return
-	* @param @throws MyRuntimeException    
-	* @return String    
-	* @throws
-	 */
-	@RequestMapping("hqt_user_roledetails.do")
-	public String hanldRoleDetails(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException{
-		Session session = SecurityUtils.getSubject().getSession();
-		try
-		{		
-			List<UserRoleDetails> userRoleDetailslist=userRoleDetailsServer.getUserRoleDetailsAll();
-			map.addAttribute("userRoleDetailslist", userRoleDetailslist);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：用户注册模块  操作：进入模块  状态：OK!");
-			return "main/user/hqt_user_roledetails";	
-		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入用户注册模块     错误信息: "+e);
-			throw new MyRuntimeException(e);
-		}	
-	}
-	/**
-	* @Title: hanldRoleDetailsEdit
-	* @Description: (后台角色明细页面)
-	* @param @param map
-	* @param @param detailsId
-	* @param @param session
-	* @param @param request
-	* @param @param response
-	* @param @return
-	* @param @throws MyRuntimeException    
-	* @return String    
-	* @throws
-	 */
-	@RequestMapping("hqt_user_roledetailsedit.do")
-	public String hanldRoleDetailsEdit(ModelMap map, Integer detailsId, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException{
-		Session session = SecurityUtils.getSubject().getSession();
-		try
-		{		
-			List<UserRoleDetails> userRoleDetailslist=userRoleDetailsServer.getDetailsBydetailsId(detailsId);
-			List<UserRole> roleList=userRoleServer.getUserRoleAll();
-			map.addAttribute("userRoleDetailslist", userRoleDetailslist);
-			map.addAttribute("roleList", roleList);
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：用户注册模块  操作：进入模块  状态：OK!");
-			return "main/user/hqt_user_roledetailsedit";	
-		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入用户注册模块     错误信息: "+e);
-			throw new MyRuntimeException(e);
-		}	
-	}
+
 	
 	/**
 	* @Title: handleUserlogin
@@ -323,17 +103,19 @@ public class UserController {
 	@ResponseBody
 	public ResponseResult<Void> handleUserlogin(String phone, String password, HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
-		ResponseResult<Void> rr;		
+		ResponseResult<Void> rr=null;		
 		try {			
 			//查询用户名是否存在
 			User user = userServer.queryUser(phone);
-			System.out.println(user);
+			System.out.println("手机号：" + phone);
+			System.out.println("密码：" + password);
 			//判断用户名是否存在
 			if (user == null){
 				rr = new ResponseResult<Void>(ResponseResult.ERR,"手机号不存在!请重新输入...");
 				logger.info("用户手机：" + phone + " 模块名：登录模块 操作：登录  状态：Failed! ");
 			}else{
-				UsernamePasswordToken token = new UsernamePasswordToken(phone, password);
+				UsernamePasswordToken token = new UsernamePasswordToken(phone, password);	
+				System.out.println(subject.isAuthenticated());
 				subject.login(token);
 				Session session= subject.getSession();
 				session.setAttribute(Constants.SYSTEM_USER,user);
@@ -347,11 +129,13 @@ public class UserController {
 				logger.info("用户名："+user.getUsername()+" 模块名：登录模块 操作：登录  状态：OK!");
 			}			
 		} catch (Exception e) {
-			logger.error("访问路径："+request.getRequestURI()+"操作：添加区库信息  错误信息: "+e);
-			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+			e.printStackTrace();
+//			logger.error("访问路径："+request.getRequestURI()+"操作：添加区库信息  错误信息: "+e);
+//			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
 		}
 		return rr;
 	}
+	
 	/**
 	 * @Title: hanldRegister @Description: (用户注册页面) @param @param
 	 * map @param @param session @param @param request @param @param
@@ -369,6 +153,7 @@ public class UserController {
 			throw new MyRuntimeException(e);
 		}
 	}
+	
 	/**
 	* @Title: handlephotoyzm
 	* @Description: (获取短信验证码)
@@ -426,6 +211,7 @@ public class UserController {
 		Session session = SecurityUtils.getSubject().getSession();
 		ResponseResult<Void> rr = null;
 		System.out.println(verifyCode);
+		System.err.println(user);
 		if (!user.getPhone().equals(session.getAttribute("phone").toString())){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码和手机号不匹配");
 		}
@@ -441,7 +227,8 @@ public class UserController {
 				logger.info("用户手机：" + user.getPhone() + " 模块名：注册模块 操作：登录  状态：Failed! ");
 			}else{	
 				GetCommonUser get=new GetCommonUser();			
-				Date creatTime = new Date();		
+				Date creatTime = new Date();
+				System.err.println("注册密码：" + user.getPassword());
 				String uuid = UUID.randomUUID().toString().toUpperCase();
 				String md5Password = get.getEncrpytedPassword(Constants.MD5,user.getPassword(), uuid,1024);
 				user.setUuid(uuid);
@@ -450,7 +237,7 @@ public class UserController {
 				user.setBelongTo("2019100001");// TODO 隶属于 
 				user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
 				user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
-				user.setHeadUrl(session.getAttribute("headUrl") == null ? "/img/public/head.jpg" : session.getAttribute("headUrl").toString());
+				user.setHeadUrl(session.getAttribute("headUrl") == null ? "../img/public/head.jpg" : session.getAttribute("headUrl").toString());
 				user.setCreatTime(creatTime);				
 				userServer.insert(user);	
 				JSONObject userJson = JSONObject.fromObject(user);
@@ -493,9 +280,9 @@ public class UserController {
 	@ResponseBody
 	public ResponseResult<Void> userIsExist(@RequestParam(value = "phone") String phone){
 		if (userServer.queryUser(phone) == null) {//未注册
-			return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
+			return new ResponseResult<Void>(ResponseResult.ERR,Constants.RESULT_MESSAGE_SUCCESS);
 		}
-		return new ResponseResult<Void>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS);
+		return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 	}
 
 	/**

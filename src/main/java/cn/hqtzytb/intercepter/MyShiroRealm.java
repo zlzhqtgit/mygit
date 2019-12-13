@@ -47,13 +47,12 @@ public class MyShiroRealm extends AuthorizingRealm{
 	//登录执行
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {		
-//		String username=(String)token.getPrincipal();
-//		User user = iUserServer.getUserByUsername(username);
 		String phone = (String)token.getPrincipal();
-		String password = (String)token.getCredentials();
-		System.err.println("手机号:" + phone);
-		System.err.println("密码:" + password);
+		
+		System.out.println("登录验证用户    手机号：" + token.getCredentials());
 		User user = iUserServer.queryUser(phone);
+		System.out.println("登录验证用户    手机号：" + phone);
+		System.out.println("登录验证用户    密码：" + user.getPassword());
 		if(user != null){
 			ByteSource byteSource = ByteSource.Util.bytes(user.getUuid());
 			SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(phone,user.getPassword(),getName());

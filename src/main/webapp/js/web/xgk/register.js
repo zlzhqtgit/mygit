@@ -1,117 +1,117 @@
-
-$('#get_verify1').click(function() {
-	var data="phone="+$("#mobile1").val();
+var countdown=60; //60秒发送一次
+function sendMobileMessage(e){
+	 var phone = $("#mobile").val();
+	 var obj = $("#get_verify");
+	 if(e == 1){
+		 obj = $("#get_verify1");
+		 phone = $("#mobile1").val();
+	}	
 	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-	if(!reg.test($("#mobile1").val())){	
-		layer.msg("请输入正确格式的手机号",{icon:2,time:1000});
-	}else{
-		$.ajax({
-			url: "../user/hqt_photoyzm.do",
-	        type: "POST", 
-	        data:data,
-	        dataType: "JSON", 
-	        success: function(obj) {
-	             if (obj.state == 0) {	            	 	            	
-	            	 layer.msg(obj.message,{icon:2,time:2000});	
-	            	 return;
-	             }
-	         }
-	    });
-		time(this);
-	}    
-})
+	if(!reg.test(phone)) {
+		layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
+		return;
+	}
+	settime(obj);
+	$.ajax({
+		url: "../user/hqt_photoyzm.do",
+		data:"phone=" + phone,
+		type:"POST",
+		dataType:"json",
+		success:function(obj){
+			if(obj.state == 0){
+				layer.msg(obj.message,{icon:2,time:1000});
+			}else{
+				layer.msg(obj.message,{icon:6,time:1000});
+			}
+		}	
+	});
+}
+////发送短信
+//$('#get_verify').click(function() { 
+//	    var phone = $("#mobile").val();
+//	    var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+//		if(!reg.test(phone)) {
+//			layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
+//			return;
+//		}
+//		var obj = $("#get_verify");
+//		settime(obj);
+//		$.ajax({
+//			url: "../user/hqt_photoyzm.do",
+//			data:"phone=" + phone,
+//			type:"POST",
+//			dataType:"json",
+//			success:function(obj){
+//				if(obj.state == 0){
+//					layer.msg(obj.message,{icon:2,time:1000});
+//				}else{
+//					layer.msg(obj.message,{icon:6,time:1000});
+//				}
+//			}	
+//		});
+//})
+////发送短信1
+//$('#get_verify1').click(function() { 
+//		console.log('11111111')
+//	    var phone = $("#mobile1").val();
+//	    var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+//		if(!reg.test(phone)) {
+//			layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
+//			return;
+//		}
+//		var obj = $("#get_verify1");
+//		settime(obj);
+//		$.ajax({
+//			url: "../user/hqt_photoyzm.do",
+//			data:"phone=" + phone,
+//			type:"POST",
+//			dataType:"json",
+//			success:function(obj){
+//				if(obj.state == 0){
+//					layer.msg(obj.message,{icon:2,time:1000});
+//				}else{
+//					layer.msg(obj.message,{icon:6,time:1000});
+//				}
+//			}	
+//		});
+//})
+
+function settime(obj) { //发送验证码倒计时
+    if (countdown == 0) { 
+    	obj.attr('disabled',false); 
+	    obj.html("获取手机验证码");
+	    countdown = 60; 
+	    return;
+	} else { 
+	    obj.attr('disabled',true);
+	    obj.html("重新获取验证码(" + countdown + ")");
+	    countdown--; 
+	} 
+	setTimeout(function() { 
+	    settime(obj) }
+	    ,1000) 
+	}
 
 function check_captcha(obj){
 	if(obj.val()==''){
 		layer.msg("验证码不能为空，请重新输入",{icon:2,time:1000});
 		obj.focus();
-		return false;
-	}else{
-		return true;
+		return;
 	}
 }
-
-var waitTime = 60;
-function time(ele) {
-    if (waitTime == 0) {
-        ele.disabled=false;
-        ele.value = "重新发送";
-        waitTime = 60;// 恢复计时
-    } else {
-        ele.disabled=true;
-        ele.value = waitTime + "秒后重新发送";
-        waitTime--;
-        setTimeout(function() {
-            time(ele)// 关键处-定时循环调用
-        }, 1000)
-    }
-}
-	/*function next_step(e){
-		var step=$('.reg_process ul li');
-		step.removeClass('current');//移除当前元素类 current类属性
-		var index=$(e).parents('.page_step').index();//返回指定元素相对于其他指定元素的 index 位置。
-		step.eq(index+1).addClass('current');//设置下一个同级元素 current类属性
-		$(e).parents('.page_step').addClass('hide');
-		var status=$(e).attr("id");//设置或返回被选元素的属性值。
-		if (status=='class1') {
-			$(e).parents('.page_step').next().find("form").eq(0).removeClass("hide");
-			$(e).parents('.page_step').next().find("form").eq(0).siblings().addClass("hide");
-		} else if(status=='class2'){
-			$(e).parents('.page_step').next().find("form").eq(1).removeClass("hide");
-			$(e).parents('.page_step').next().find("form").eq(1).siblings().addClass("hide");
-		}
-		$(e).parents('.page_step').next().removeClass('hide');
-	}*/
-	function register(){
-		var read = $("#read").is(':checked');
-		if(read){
-			var photeyzm="${code}";
-			var phone="${phone}";
-			alert(photeyzm + " " + phone + " === " + $("#verify_code").val() + " " + $("#phone").val());
-			if(photeyzm==$("#verify_code").val() && phone==$("#phone").val()){
-				var url = "../user/hqt_registeradd.do";
-				var data = $("#reg_form").serialize();
-				$.ajax({
-					"url" : url,
-					"data" : data,
-					"type" : "POST",
-					"dataType" : "json",
-					"success" : function(obj) {
-						if (obj.state == 0) {
-							layer.msg(obj.message,{icon:2,time:1000});
-							return;
-						}else{
-							layer.msg(obj.message,{icon:1,time:1000},function(){ next_step(e);});
-						}
-					}
-				});
-			}else if(photeyzm != $("#verify_code").val() && phone==$("#phone").val()){
-				layer.msg("验证码输入错误",{icon:2,time:1000});
-			}else{
-				layer.msg("验证码和手机号不匹配",{icon:2,time:1000});
-			}
-		} else {
-			layer.msg("请阅读《用户服务协议》和《隐私政策》",{icon:5,time:1000});
-		}
-	}
-
-	
-	
 
 function checkName(obj) {
 	reg = /^(([\u4e00-\u9fa5+\·?\u4e00-\u9fa5+]{2,4}$))/;
 	if(obj.val() == '') {
 		errorport(obj, ' 真实姓名不能为空');
-		//true_name.parent().children().last().text(' 真实姓名不能为空');
 		obj.focus();
-		return false;
+		return;
 	} else if(!reg.test(obj.val())) {
 		errorport(obj, ' 姓名输入有误，请重新输入');
 		obj.focus();
-		return false;
+		return;
 	} else {
 		success_input(obj, '');
-		return true;
 	}
 }
 
@@ -122,15 +122,14 @@ function check_mobile(obj) {
 	if(mobile.val() == '') {
 		errorport(mobile, ' 手机号不能为空，请重新输入');
 		mobile.focus();
-		return false;
+		return;
 	} else {
 		if(!reg_mobile.test(mobile.val())) {
 			errorport(mobile, ' 手机号输入有误，请重新输入');
 			mobile.focus();
-			return false;
+			return ;
 		} else {
 			success_input(mobile, '');
-			return true;
 		}
 	}
 }
@@ -141,7 +140,7 @@ function checkpwd(obj) {
 	if(obj.val() == '') {
 		errorport(obj, ' 密码不能为空，请重新输入');
 		obj.focus();
-		return false;
+		return;
 	} else {
 		var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
 		var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
@@ -149,20 +148,17 @@ function checkpwd(obj) {
 		if(false == enoughRegex.test(obj.val())) {
 			errorport(obj, ' 密码强度不符合安全要求，请重新输入');
 			obj.focus();
-			return false;
+			return;
 			//密码小于六位的时候，密码强度图片都为灰色 
 		} else if(strongRegex.test(obj.val())) {
 			success_input(obj, ' <span class="text-success">密码强度：强</span>');
-			return true;
 			//密码为八位及以上并且字母(大小写)、数字、特殊字符三项都包括,强度强 
 		} else if(mediumRegex.test(obj.val())) {
 			success_input(obj, ' <span class="text-primary">密码强度：中等</span>');
-			return true;
 			//密码为七位及以上并且字母、数字、特殊字符三项中有两项，强度是中等 
 		} else {
-			//							pwd.parent().children().last().html(' 真实姓名不能为空');
+			//pwd.parent().children().last().html(' 真实姓名不能为空');
 			success_input(obj, ' <span class="text-danger">密码强度：弱</span>');
-			return true;
 			//如果密码为6位及以下，就算字母、数字、特殊字符三项都包括，强度也是弱的 
 		}
 		//							success_input(pwd);
@@ -177,14 +173,13 @@ function confirm_pwd(obj, pre) {
 	if(confirm.val() == '') {
 		errorport(confirm, ' 请再次输入密码');
 		confirm.focus();
-		return false;
+		return;
 	} else if(confirm.val() == pwd.val()) {
 		success_input(confirm, '');
-		return true;
 	} else {
 		errorport(confirm, ' 两次密码输入不一致');
 		confirm.focus();
-		return false;
+		return;
 	}
 }
 
@@ -193,10 +188,7 @@ function check_year() {
 	var el = $('.filter-title');
 	if(el.val() == '请选择高考年度') {
 		errorport($('.filter-box'), ' 请选择高考年度');
-		return false;
-	} else {
-		//						console.log($('.filter-title').val());
-		return true;
+		return;
 	}
 }
 
@@ -207,37 +199,7 @@ function agree(check, sub) {
 	sub.disabled = !check.checked;
 }
 
-function register() {
-	var flag = checkName($('#username')) && check_mobile($('#mobile')) &&check_captcha($('#captcha')) && checkpwd($('#password')) && confirm_pwd($('#confirm'), $('#password')) && check_year() && agree('checkbox', 'submit');
-	if(flag == false) {
-		return false;
-	} else {
-		next_step($('.reg_submit input'));
-		return false;
-	}
 
-}
-
-function register1() {
-	var flag = checkName($('#username1')) && check_mobile($('#mobile1')) &&check_captcha($('#captcha1')) && checkpwd($('#password1')) && confirm_pwd($('#confirm1'), $('#password1')) && agree('checkbox1', 'submit1');
-	//return flag;
-	if(flag == false) {
-		return false;
-	} else {
-		$.ajax({
-			type:"get",
-			url:"",
-			async:true,
-			data:"",
-			datatype:'json',
-			success:function(res){
-				
-			}
-		});
-		next_step($('.reg_submit input'));
-		return false; //组织表单提交
-	}
-}
 //成功样式
 function success_input(obj, con) {
 	obj.parent().children().last().removeClass('glyphicon-remove-sign text-danger');
@@ -264,11 +226,197 @@ function next_step(obj) {
 	$(obj).parents('.page_step').addClass('hide');
 	var status = $(obj).attr("id");
 	if(status == 'class1') {
-		$(obj).parents('.page_step').next().find("form").eq(0).removeClass("hide");
+		$(obj).parents('.page_step').next().find("form").eq(0).removeClass("hide");  
 		$(obj).parents('.page_step').next().find("form").eq(0).siblings().addClass("hide");
 	} else if(status == 'class2') {
 		$(obj).parents('.page_step').next().find("form").eq(1).removeClass("hide");
 		$(obj).parents('.page_step').next().find("form").eq(1).siblings().addClass("hide");
-	}
+	} 
 	$(obj).parents('.page_step').next().removeClass('hide');
+}
+
+/**
+ * 注册
+ * @returns {Boolean}
+ */
+function register(e) {
+	if ($("#checkbox").is(':checked') || $("#checkbox1").is(':checked')){
+		var url = "../user/hqt_registeradd.do";
+		var data
+		if(e == 0){
+			checkName($('#username'));
+			check_mobile($('#mobile'));
+			check_captcha($('#captcha'));
+			checkpwd($('#password'));
+			confirm_pwd($('#confirm'), $('#password'));
+			check_year();
+			data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#captcha").val()
+			+ "&password=" + $("#password").val() + "&belongTo=" + $("#belong_to").val() + "&school=" + $("#school").val() 
+			+ "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val()
+			+ "&ceeYear=" + $("#year").val() + "&vocation=" + $("#vocation").val() + "&province=" + $("#province").val();
+		} else {
+			checkName($('#username1'));
+			check_mobile($('#mobile1'));
+			check_captcha($('#captcha1'));
+			checkpwd($('#password1'));
+			confirm_pwd($('#confirm1'), $('#password1'));
+			data = "username=" + $("#username1").val() + "&phone=" + $("#mobile1").val() + "&verifyCode=" + $("#captcha1").val()
+			+ "&password=" + $("#password1").val() + "&belongTo=" + $("#belong_to1").val() + "&school=" + $("#school1").val() 
+			+ "&schoolAddress=" + $("#school_address1").val() + "&families=" + $("#object1").val() + "&fraction=" + $("#score1").val()
+			+ "&ceeYear=" + $("#year1").val() + "&vocation=" + $("#vocation1").val() + "&province=" + $("#province1").val();
+		}
+		
+		$.ajax({
+			type:"POST",
+			url:url,
+			async:true,
+			data:data,
+			datatype:'json',
+			success:function(obj){
+				if (obj.state == 0) {
+					layer.msg(obj.message,{icon:2,time:1000});
+				}else{
+					layer.msg(obj.message,{icon:1,time:1000});
+//					location.href = "/cp/xgk_index.do";
+					next_step($(".reg_submit input"));
+				}
+			}
+		});
+		
+	} else {
+		layer.msg("请阅读《用户服务协议》和《隐私政策》",{icon:2,time:1000});
+	}
+
+}
+
+//完善注册信息
+function completeRegister() {
+	if ($("#checkbox").is(':checked')){
+		checkName($('#username'));
+		check_mobile($('#mobile'));
+		check_captcha($('#verify_code'));
+		checkpwd($('#password'));
+		confirm_pwd($('#confirm'), $('#password'));
+		check_year();
+		var url = "../user/hqt_registeradd.do";
+		var data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#verify_code").val()
+		+ "&password=" + $("#password").val() + "&belongTo=" + $("#belong_to").val() + "&school=" + $("#school").val() 
+		+ "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val()
+		+ "&ceeYear=" + $("#year").val() + "&vocation=" + $("#vocation").val() + "&province=" + $("#province").val();
+		$.ajax({
+			type:"POST",
+			url:url,
+			async:true,
+			data:data,
+			datatype:'json',
+			success:function(obj){
+				if (obj.state == 0) {
+					layer.msg(obj.message,{icon:2,time:1000});
+			
+				}else{
+					layer.msg(obj.message,{icon:1,time:1000});
+					location.href = "/cp/xgk_index.do";
+					
+				}
+			}
+		});
+	} else {
+		layer.msg("请阅读《用户服务协议》和《隐私政策》",{icon:2,time:1000});
+	}
+
+}
+
+//完善注册信息发送短信
+var isSend = false;
+function sendMessages(e) {
+	var url = "";
+	var phone = "";
+	if (e == 1){//绑定手机 短信
+		url = "/user/send_message.do";
+		phone = $("#phone").val();
+	} else {//完善信息 短信
+		url = "/user/hqt_photoyzm.do";
+		phone = $("#mobile").val();
+	}
+	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+	if(!reg.test(phone)) {
+		layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
+		return;
+	}
+	settime($(".get_verify"));
+	$.ajax({
+		url: "/user/user_is_exist.do",
+		data:"phone=" + phone,
+		type:"POST",
+		dataType:"json",
+		success:function(obj){
+			if(obj.state == 0){
+				if (e == 1){
+					//用户未注册过 弹出选项提示
+					layer.confirm('该手机号未注册账户，请完善账户信息！', {icon : 3, time : 2000});
+				} else {
+					$.ajax({
+						url: url,
+						type: "POST",
+						data: "phone=" + phone,
+						dataType: "JSON",
+						success: function(obj) {
+							if(obj.state == 0){
+								layer.msg(obj.message,{icon:3,time:2000});
+							} else {
+								isSend = true;
+								layer.msg(obj.message,{icon:6,time:2000});
+							}
+						}
+					});
+				}
+			} else {
+				if (e == 2){
+					layer.confirm('该手机号已注册账户，请更换手机号！', {icon : 3, time : 2000});
+				} else {
+					$.ajax({
+						url: url,
+						type: "POST",
+						data: "phone=" + phone,
+						dataType: "JSON",
+						success: function(obj) {
+							if(obj.state == 0){
+								layer.msg(obj.message,{icon:3,time:2000});
+							} else {
+								isSend = true;
+								layer.msg(obj.message,{icon:6,time:2000});
+							}
+						}
+					});
+				}
+			}
+		}
+	});
+	
+}
+
+//绑定账号
+function bindAccount() {
+	if (isSend == false){
+		layer.msg("请先获取手机验证码",{icon:2,time:1000});
+	}
+	var phone = $("#phone").val();
+	var verifyCode = $("#verifyCode").val();
+	if (verifyCode == null || verifyCode == ""){
+		layer.msg("请输入手机验证码",{icon:2,time:1000});
+	}else {
+		$.ajax({
+			url: "/user/hqt_bind_account.do",
+			type: "POST",
+			data: "phone=" + phone + "&verifyCode=" + verifyCode,
+			dataType: "JSON",
+			success: function(obj) {
+				if(obj.state == 0){
+					layer.msg(obj.message,{icon:3,time:2000});
+				} else {
+					location.href = "../cp/xgk_index.do";
+				}
+			}
+		});
+	}
 }
