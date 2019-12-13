@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.hamcrest.core.IsNot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,13 +82,11 @@ public class LoginController {
      * @return
      */
     @RequestMapping("/login_out.do")
-    public String logout(HttpSession session) {
-        if (!session.isNew()){
-        	//销毁 session
-        	session.invalidate();
+    public String logout() {
+        if(SecurityUtils.getSubject().isAuthenticated()){
+        	 //销毁 shiro 会话
+        	SecurityUtils.getSubject().logout();;
         }
-        //销毁 shiro 会话
-        SecurityUtils.getSubject().getSession().stop();
         return "web/xgk/xgk_login";
     }
 

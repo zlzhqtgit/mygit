@@ -109,7 +109,7 @@
     <bean id="myShiroRealm" class="cn.hqtzytb.intercepter.MyShiroRealm" >
         <!-- 凭证匹配器(密码加密) -->
         <property name="credentialsMatcher">
-            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+            <bean class="cn.hqtzytb.intercepter.MyHashedCredentialsMatcher">
                 <property name="hashAlgorithmName" value="MD5"/>
                 <property name="hashIterations" value="1024"/>
             </bean>

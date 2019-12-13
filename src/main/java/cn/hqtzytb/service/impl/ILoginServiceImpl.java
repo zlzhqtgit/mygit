@@ -2,6 +2,7 @@ package cn.hqtzytb.service.impl;
 
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.entity.User;
+import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
 import cn.hqtzytb.mapper.UserMapper;
 import cn.hqtzytb.service.ILoginService;
 import cn.hqtzytb.utils.HttpClientUtils;
@@ -13,6 +14,7 @@ import net.sf.json.JSONObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;;
 
 /**
  * @ClassName: ILoginServiceImpl
@@ -55,7 +58,8 @@ public class ILoginServiceImpl implements ILoginService {
     @Override
     public String qqLoginCallback(HttpServletRequest request, HttpServletResponse response) {
         try {
-            Session session = SecurityUtils.getSubject().getSession();
+        	Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
             String code = request.getParameter("code");
 
             //通过Authorization Code获取Access Token
@@ -87,6 +91,7 @@ public class ILoginServiceImpl implements ILoginService {
                         session.setAttribute("qqChat", openid);
                         return "web/xgk/xgk_bindingAcc";
                     } else {
+                    	subject.login(new MyUsernamePasswordToken(users.get(0).getPhone()));
                         session.setAttribute("uid", users.get(0).getId());
                         session.setAttribute("username", users.get(0).getUsername());
                         session.setAttribute("headUrl", users.get(0).getHeadUrl());
@@ -106,8 +111,9 @@ public class ILoginServiceImpl implements ILoginService {
     @Override
     public String wxLoginCallback(HttpServletRequest request, HttpServletResponse response) {
         try{
+        	Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
             String code = request.getParameter("code");
-            Session session = SecurityUtils.getSubject().getSession();
             if (code == null){
                 logger.error(Constants.ERROR_HEAD_INFO + "用户禁止授权");
             }
@@ -131,6 +137,7 @@ public class ILoginServiceImpl implements ILoginService {
                 // TODO 完善用户信息页面
                 return "web/xgk/xgk_bindingAcc";
             } else {
+            	subject.login(new MyUsernamePasswordToken(users.get(0).getPhone()));
             	session.setAttribute("uid", users.get(0).getId());
                 session.setAttribute("username", users.get(0).getUsername());
                 session.setAttribute("headUrl", users.get(0).getHeadUrl());

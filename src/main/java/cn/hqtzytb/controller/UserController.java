@@ -30,6 +30,7 @@ import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.UserRole;
 import cn.hqtzytb.entity.UserRoleDetails;
 import cn.hqtzytb.exception.MyRuntimeException;
+import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
 import cn.hqtzytb.service.IUserRoleDetailsServer;
 import cn.hqtzytb.service.IUserRoleServer;
 import cn.hqtzytb.service.IUserServer;
@@ -114,8 +115,7 @@ public class UserController {
 				rr = new ResponseResult<Void>(ResponseResult.ERR,"手机号不存在!请重新输入...");
 				logger.info("用户手机：" + phone + " 模块名：登录模块 操作：登录  状态：Failed! ");
 			}else{
-				UsernamePasswordToken token = new UsernamePasswordToken(phone, password);	
-				System.out.println(subject.isAuthenticated());
+				MyUsernamePasswordToken token = new MyUsernamePasswordToken(phone, password);	
 				subject.login(token);
 				Session session= subject.getSession();
 				session.setAttribute(Constants.SYSTEM_USER,user);
@@ -208,10 +208,14 @@ public class UserController {
 	@RequestMapping(value = "/hqt_registeradd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseResult<Void> handleRegisteradd(User user, String verifyCode, HttpServletRequest request) {
-		Session session = SecurityUtils.getSubject().getSession();
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		ResponseResult<Void> rr = null;
 		System.out.println(verifyCode);
 		System.err.println(user);
+		if	(session.getAttribute("phone") == null || session.getAttribute("code") == null ){
+			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"请先获取手机验证码");
+		}
 		if (!user.getPhone().equals(session.getAttribute("phone").toString())){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码和手机号不匹配");
 		}
@@ -237,8 +241,8 @@ public class UserController {
 				user.setBelongTo("2019100001");// TODO 隶属于 
 				user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
 				user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
-				user.setHeadUrl(session.getAttribute("headUrl") == null ? "../img/public/head.jpg" : session.getAttribute("headUrl").toString());
-				user.setCreatTime(creatTime);				
+				user.setHeadUrl(session.getAttribute("headUrl") == null ? "${pageContext.request.contextPath}/img/public/head.jpg" : session.getAttribute("headUrl").toString());
+				user.setCreatTime(creatTime);			
 				userServer.insert(user);	
 				JSONObject userJson = JSONObject.fromObject(user);
 				session.setAttribute("uid", user.getId());
@@ -247,7 +251,8 @@ public class UserController {
 				session.setAttribute("userJson", userJson);//提供给前端页面使用
 				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
 				logger.info("用户名："+user.getUsername()+" 模块名：注册模块 操作：登录  状态：OK!");
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");			
+				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");	
+				subject.login(new MyUsernamePasswordToken());
 			}			
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
