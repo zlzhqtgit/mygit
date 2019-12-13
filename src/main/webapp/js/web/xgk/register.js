@@ -96,8 +96,9 @@ function check_captcha(obj){
 	if(obj.val()==''){
 		layer.msg("验证码不能为空，请重新输入",{icon:2,time:1000});
 		obj.focus();
-		return;
+		return false;
 	}
+	return true;
 }
 
 function checkName(obj) {
@@ -105,13 +106,14 @@ function checkName(obj) {
 	if(obj.val() == '') {
 		errorport(obj, ' 真实姓名不能为空');
 		obj.focus();
-		return;
+		return false;
 	} else if(!reg.test(obj.val())) {
 		errorport(obj, ' 姓名输入有误，请重新输入');
 		obj.focus();
-		return;
+		return false;
 	} else {
 		success_input(obj, '');
+		return true;
 	}
 }
 
@@ -122,14 +124,15 @@ function check_mobile(obj) {
 	if(mobile.val() == '') {
 		errorport(mobile, ' 手机号不能为空，请重新输入');
 		mobile.focus();
-		return;
+		return false;
 	} else {
 		if(!reg_mobile.test(mobile.val())) {
 			errorport(mobile, ' 手机号输入有误，请重新输入');
 			mobile.focus();
-			return ;
+			return false;
 		} else {
 			success_input(mobile, '');
+			return true;
 		}
 	}
 }
@@ -140,7 +143,7 @@ function checkpwd(obj) {
 	if(obj.val() == '') {
 		errorport(obj, ' 密码不能为空，请重新输入');
 		obj.focus();
-		return;
+		return false;
 	} else {
 		var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
 		var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
@@ -148,17 +151,20 @@ function checkpwd(obj) {
 		if(false == enoughRegex.test(obj.val())) {
 			errorport(obj, ' 密码强度不符合安全要求，请重新输入');
 			obj.focus();
-			return;
+			return false;;
 			//密码小于六位的时候，密码强度图片都为灰色 
 		} else if(strongRegex.test(obj.val())) {
 			success_input(obj, ' <span class="text-success">密码强度：强</span>');
+			return true;
 			//密码为八位及以上并且字母(大小写)、数字、特殊字符三项都包括,强度强 
 		} else if(mediumRegex.test(obj.val())) {
 			success_input(obj, ' <span class="text-primary">密码强度：中等</span>');
+			return true;
 			//密码为七位及以上并且字母、数字、特殊字符三项中有两项，强度是中等 
 		} else {
 			//pwd.parent().children().last().html(' 真实姓名不能为空');
 			success_input(obj, ' <span class="text-danger">密码强度：弱</span>');
+			return true;
 			//如果密码为6位及以下，就算字母、数字、特殊字符三项都包括，强度也是弱的 
 		}
 		//							success_input(pwd);
@@ -173,13 +179,14 @@ function confirm_pwd(obj, pre) {
 	if(confirm.val() == '') {
 		errorport(confirm, ' 请再次输入密码');
 		confirm.focus();
-		return;
+		return false;
 	} else if(confirm.val() == pwd.val()) {
 		success_input(confirm, '');
+		return true;
 	} else {
 		errorport(confirm, ' 两次密码输入不一致');
 		confirm.focus();
-		return;
+		return false;
 	}
 }
 
@@ -188,8 +195,9 @@ function check_year() {
 	var el = $('.filter-title');
 	if(el.val() == '请选择高考年度') {
 		errorport($('.filter-box'), ' 请选择高考年度');
-		return;
+		return false;
 	}
+	return true;
 }
 
 //是否同意协议
@@ -244,22 +252,23 @@ function register(e) {
 		var url = "../user/hqt_registeradd.do";
 		var data
 		if(e == 0){
-			checkName($('#username'));
-			check_mobile($('#mobile'));
-			check_captcha($('#captcha'));
-			checkpwd($('#password'));
-			confirm_pwd($('#confirm'), $('#password'));
-			check_year();
+			if(!checkName($('#username')) || !check_mobile($('#mobile')) || !check_captcha($('#captcha')) || !confirm_pwd($('#confirm'), $('#password')) || !check_year()){
+				console.log(checkName($('#username')))
+				console.log(check_mobile($('#mobile')))
+				console.log(check_captcha($('#captcha')))
+				console.log(confirm_pwd($('#confirm'), $('#password')))
+				console.log(check_year())
+				return;
+			}
 			data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#captcha").val()
 			+ "&password=" + $("#password").val() + "&belongTo=" + $("#belong_to").val() + "&school=" + $("#school").val() 
 			+ "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val()
 			+ "&ceeYear=" + $("#year").val() + "&vocation=" + $("#vocation").val() + "&province=" + $("#province").val();
 		} else {
-			checkName($('#username1'));
-			check_mobile($('#mobile1'));
-			check_captcha($('#captcha1'));
-			checkpwd($('#password1'));
-			confirm_pwd($('#confirm1'), $('#password1'));
+			if(!checkName($('#username1')) || !check_mobile($('#mobile1')) || !check_captcha($('#captcha1')) || !confirm_pwd($('#confirm1'), $('#password1'))){
+				console.log('111')
+				return;
+			}
 			data = "username=" + $("#username1").val() + "&phone=" + $("#mobile1").val() + "&verifyCode=" + $("#captcha1").val()
 			+ "&password=" + $("#password1").val() + "&belongTo=" + $("#belong_to1").val() + "&school=" + $("#school1").val() 
 			+ "&schoolAddress=" + $("#school_address1").val() + "&families=" + $("#object1").val() + "&fraction=" + $("#score1").val()
@@ -292,12 +301,9 @@ function register(e) {
 //完善注册信息
 function completeRegister() {
 	if ($("#checkbox").is(':checked')){
-		checkName($('#username'));
-		check_mobile($('#mobile'));
-		check_captcha($('#verify_code'));
-		checkpwd($('#password'));
-		confirm_pwd($('#confirm'), $('#password'));
-		check_year();
+		if(!checkName($('#username')) || !check_mobile($('#mobile')) || !check_captcha($('#verify_code')) || !confirm_pwd($('#confirm'), $('#password')) || !check_year()){
+			return;
+		}
 		var url = "../user/hqt_registeradd.do";
 		var data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#verify_code").val()
 		+ "&password=" + $("#password").val() + "&belongTo=" + $("#belong_to").val() + "&school=" + $("#school").val() 

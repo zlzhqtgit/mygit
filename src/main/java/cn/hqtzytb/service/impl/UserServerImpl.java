@@ -12,9 +12,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cn.hqtzytb.entity.User;
+import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
 import cn.hqtzytb.mapper.UserMapper;
 
 @Service
@@ -49,7 +51,8 @@ public class UserServerImpl implements IUserServer {
 
 	@Override
 	public ResponseResult<Void> bindAccount(String phone, String verifyCode) {
-		Session session = SecurityUtils.getSubject().getSession();
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
 		String code = session.getAttribute("code").toString();
 		String mobile = session.getAttribute("phone").toString();
 		if (!verifyCode.equals(code) || !phone.equals(mobile)) {
@@ -80,6 +83,7 @@ public class UserServerImpl implements IUserServer {
 			JSONObject userJson = JSONObject.fromObject(users.get(0));
 			session.setAttribute("userJson", userJson);//提供给前端页面使用
 			session.setAttribute("user", users.get(0));//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+			subject.login(new MyUsernamePasswordToken(user.getPhone()));
 			logger.error("手机号：" + mobile + " 模块名：第三方用户手机号绑定   操作：绑定  状态：OK!");
 			return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 		}
