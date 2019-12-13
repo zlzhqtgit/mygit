@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<footer style="padding-bottom:2em">
+		<footer class="" style="padding-bottom:2em">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 list" style="padding-left: 4em;">
