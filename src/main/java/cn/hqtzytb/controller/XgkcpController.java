@@ -6,11 +6,14 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +26,7 @@ import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.Xgkcp;
 import cn.hqtzytb.entity.XgkcpResult;
 import cn.hqtzytb.exception.MyRuntimeException;
+import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.service.IUserFeatureServer;
 import cn.hqtzytb.service.IXgkcpResultServer;
 import cn.hqtzytb.service.IXgkcpServer;
@@ -47,7 +51,8 @@ public class XgkcpController {
 	private IXgkcpResultServer xgkcpResultServer;
 	@Autowired
 	private IUserFeatureServer userFeatureServer;
-
+	@Autowired
+	private UserFeatureMapper userFeatureMapper;
 	/**
 	 * @throws MyRuntimeException
 	 * @Title: showhqtCpAnswer 
@@ -195,7 +200,7 @@ public class XgkcpController {
 			map.addAttribute("hldreport", reportResult);
 			map.addAttribute("report", "report_hld");
 		} else {
-			cpresult=get.getMbti(cpFengshu);
+			cpresult = get.getMbti(cpFengshu);
 			// 组合以上结果渲染到页面
 			map.addAttribute("report", "report_" + cpresult);
 		}
@@ -220,14 +225,14 @@ public class XgkcpController {
 		System.err.println("uid:" + session.getAttribute("uid"));
 		List<UserFeature> userFeatureList = userFeatureServer.getUserFeatureByUid(Integer.valueOf(session.getAttribute("uid").toString()));
 		ResponseResult<Void> rr;
-		GetCommonUser get=new GetCommonUser();
+		GetCommonUser get = new GetCommonUser();
 		Map<String, Integer> cpResult = new HashMap<String, Integer>();
 		// 判断测评类型
 		String cpName = "霍兰德";
 		if (id == 2){
 			cpName = "MBTI";
 		}
-		UserFeature userFeature=new UserFeature();
+		UserFeature userFeature = new UserFeature();
 		boolean hasTest = false;//是否做过认知测评
 		for (UserFeature feature : userFeatureList) {
 			if (cpName.equals(feature.getEvaluationType())){

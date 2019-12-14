@@ -3,29 +3,29 @@
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="cn.hqtzytb.mapper.VocationMapper">
 	<resultMap id="BaseResultMap" type="cn.hqtzytb.entity.Vocation" >
-		<id column="v_id" property="vId" jdbcType="INTEGER" />
-		<result column="vocation_id" property="vocationId" jdbcType="VARCHAR" />
-		<result column="vocation_name" property="vocationName" jdbcType="VARCHAR" />
-		<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
-		<result column="industry_major_name" property="industryMajorName" jdbcType="VARCHAR" />
-		<result column="vocation_brief" property="vocationBrief" jdbcType="VARCHAR" />
-		<result column="prospect" property="prospect" jdbcType="VARCHAR" />
-		<result column="work_experience" property="workExperience" jdbcType="VARCHAR" />
-		<result column="work_content" property="workContent" jdbcType="VARCHAR" />
-		<result column="education_credential" property="educationCredential" jdbcType="VARCHAR" />
-		<result column="relation_specialty" property="relationSpecialty" jdbcType="VARCHAR" />
-		<result column="salary_trend" property="salaryTrend" jdbcType="VARCHAR" />
-		<result column="salary_distribution" property="salaryDistribution" jdbcType="VARCHAR" />
-		<result column="employment_situation_education" property="employmentSituationEducation" jdbcType="VARCHAR" />
-		<result column="employment_situation_experience" property="employmentSituationExperience" jdbcType="VARCHAR" />
-		<result column="requirement_qualification" property="requirementQualification" jdbcType="VARCHAR" />
-		<result column="education_qualification" property="educationQualification" jdbcType="INTEGER" />
-		<result column="specialty_know" property="specialtyKnow" jdbcType="INTEGER" />
-		<result column="specialty_skill" property="specialtySkill" jdbcType="INTEGER" />
-		<result column="work_year" property="workYear" jdbcType="INTEGER" />
-		<result column="work_achieved" property="workAchieved" jdbcType="INTEGER" />
-		<result column="organization_ability" property="organizationAbility" jdbcType="INTEGER" />
-		<result column="plan_ability" property="planAbility" jdbcType="INTEGER" />
+		<id column="v_id" property="vId" />
+		<result column="vocation_id" property="vocationId" />
+		<result column="vocation_name" property="vocationName" />
+		<result column="industry_name" property="industryName" />
+		<result column="industry_major_name" property="industryMajorName" />
+		<result column="vocation_brief" property="vocationBrief" />
+		<result column="prospect" property="prospect" />
+		<result column="work_experience" property="workExperience" />
+		<result column="work_content" property="workContent" />
+		<result column="education_credential" property="educationCredential" />
+		<result column="relation_specialty" property="relationSpecialty" />
+		<result column="salary_trend" property="salaryTrend" />
+		<result column="salary_distribution" property="salaryDistribution" />
+		<result column="employment_situation_education" property="employmentSituationEducation" />
+		<result column="employment_situation_experience" property="employmentSituationExperience" />
+		<result column="requirement_qualification" property="requirementQualification" />
+		<result column="education_qualification" property="educationQualification" />
+		<result column="specialty_know" property="specialtyKnow" />
+		<result column="specialty_skill" property="specialtySkill" />
+		<result column="work_year" property="workYear" />
+		<result column="work_achieved" property="workAchieved" />
+		<result column="organization_ability" property="organizationAbility" />
+		<result column="plan_ability" property="planAbility" />
 	</resultMap>
 
 	<sql id="Base_Column_List" >
@@ -38,28 +38,13 @@
 
 		<!--查询测评结果对应相关信息  -->
 		<select id="select" resultType="cn.hqtzytb.entity.Vocation">
-			select  
-					v_id as vId,vocation_id as vocationId,
-					vocation_name as vocationName,
-					industry_name as industryName,
-					vocation_brief as vocationBrief,
-					prospect,
-					work_experience as workExperience,
-					work_content as workContent,
-					education_credential as educationCredential,
-					relation_specialty as relationSpecialty,
-					education_qalification as educationQalification,
-					specialty_know as specialtyKnow,
-					specialty_skill as specialtySkill,
-					work_year as workYear,
-					work_achieved as workAchieved,
-					organization_ability as organizationAbility,
-					plan_ability as planAbility
-			from vocation b 
-					LEFT JOIN  personality_vocation e  on b.vocation_id=e.vocations_id  
-				<if test="where != null">where ${where}</if>
-		 		<if test="orderBy != null">order by  ${orderBy}</if> 
-		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+			SELECT  
+				<include refid="Base_Column_List" />
+			FROM vocation b 
+			LEFT JOIN  personality_vocation e  on b.vocation_id=e.vocations_id  
+			<if test="where != null">where ${where}</if>
+		 	<if test="orderBy != null">order by  ${orderBy}</if> 
+		 	<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>	
 				<!--查询测评结果对应相关信息  -->
 		<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Vocation">
@@ -72,24 +57,11 @@
 		</select>	
 		<select id="selectId" resultType="cn.hqtzytb.entity.Vocation">
 			select  				
-					vocation_brief as vocationBrief,
-					vocation_name as vocationName,
-					prospect,
-					work_experience as workExperience,
-					work_content as workContent,
-					education_credential as educationCredential,
-					relation_specialty as relationSpecialty,
-					education_qalification as educationQalification,
-					specialty_know as specialtyKnow,
-					specialty_skill as specialtySkill,
-					work_year as workYear,
-					work_achieved as workAchieved,
-					organization_ability as organizationAbility,
-					plan_ability as planAbility
+				<include refid="Base_Column_List" />
 			from vocation 					 
-				<if test="where != null">where ${where}</if>
-		 		<if test="orderBy != null">order by  ${orderBy}</if> 
-		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+			<if test="where != null">where ${where}</if>
+		 	<if test="orderBy != null">order by  ${orderBy}</if> 
+		 	<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>
 
 		<!--新增职业数据信息-->

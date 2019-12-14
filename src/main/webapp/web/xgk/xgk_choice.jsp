@@ -63,24 +63,28 @@ function login(e){
 			"type":"POST",
 			"dataType":"json",
 			"success":function(obj){
+				var url = "";
+				if(e=="hld"){
+					url ="../cp/xgk_answer_hld.do";
+				}else{
+					url ="../cp/xgk_answer_mbti.do";
+				}
 				if(obj.state == 0){
 					//未做过认知测评
-					if(e=="hld"){
-						location.href ="../cp/xgk_answer_hld.do";
-					}else{
-						location.href ="../cp/xgk_answer_mbti.do";
-					}
+					location.href = url;
 				} else {
+					var describe = "";
+					if(e=="hld"){
+						describe = "您已做过认知测评之霍兰德职业兴趣测评，是否继续？继续将覆盖霍兰德职业兴趣测评！";
+					}else{
+						describe = "您已做过认知测评之MBTI职业性格测评，是否继续？继续将覆盖MBTI职业性格测评！";
+					}
 					//已做过认知测评 弹出选项提示
-					layer.confirm('您已做过认知测评，是否继续？', {
+					layer.confirm(describe, {
 						icon : 3,
 						btn : [ '确定', '取消' ]
 					}, function(index) {
-						if(e=="hld"){
-							location.href ="../cp/xgk_answer_hld.do";
-						}else{
-							location.href ="../cp/xgk_answer_mbti.do";
-						}
+						location.href = url;
 						layer.close(index);
 					});
 				}

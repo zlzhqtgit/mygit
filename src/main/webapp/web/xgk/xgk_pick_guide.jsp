@@ -39,7 +39,7 @@
 											</div>
 											<div class="flex_Al_c">
 												<div class="circle bg-primary" style="display: flex;align-items: center;">
-													<div class="">
+													<div class="analyze1">
 														<p class="fontwei">成绩分析</p>
 														<span class="glyphicon glyphicon-ok"></span>
 													</div>
@@ -57,7 +57,7 @@
 											</div>
 											<div class="flex_Al_c">
 												<div class="circle bg-warning" style="display: flex;align-items: center;">
-													<div class="">
+													<div class="analyze2">
 														<p class="fontwei">学科潜能</p>
 														<span class="glyphicon glyphicon-ok"></span>
 													</div>
@@ -75,7 +75,7 @@
 											</div>
 											<div class="flex_Al_c">
 												<div class="circle bg-danger" style="display: flex;align-items: center;">
-													<div class="">
+													<div class="analyze3">
 														<p class="fontwei">认知测评</p>
 														<span class="glyphicon glyphicon-remove"></span>
 													</div>
@@ -110,6 +110,49 @@
 										}
 									}
 									
+									//初始化页面
+									var score = "${SCORE_ANALYZE}";//成绩分析
+									var potentail = "${POTENTIAL_ANALYZE}";//学科潜能
+									var cognize = "${COGNIZE_ANALYZE}";//认知测评
+									var largeClass = JSON.parse('${LARGE_CLASS}');//职业大类
+									console.log('${LARGE_CLASS}')
+									//for(var i=0; i<largeClass.length; i++){
+									//	console.log(largeClass[0])
+										//vactionLargeClass += "<option value=''>"+ largeClass[0] + "</option>";
+									//}
+									$(function(){
+										var type_start = "<p class='fontwei'>";
+										var type_end = "</p>";
+										var ok = "<span class='glyphicon glyphicon-ok'></span>";
+										var err = "<span class='glyphicon glyphicon-remove'></span>";
+										if(score == 1){
+											$(".analyze1").html(type_start + "成绩分析" + type_end + ok);
+											$(".analyze1").parents(".flex_Al_c").next().hide();
+										}else{
+											$(".analyze1").html(type_start + "成绩分析" + type_end + err);
+											$(".analyze1").parents(".flex_Al_c").next().show();
+											$(".analyze1").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/sub/xgk_subject_score.do');
+										}
+										if(potentail == 1){
+											$(".analyze2").html(type_start + "学科潜能" + type_end + ok);
+											$(".analyze2").parents(".flex_Al_c").next().hide();
+										}else{
+											$(".analyze2").html(type_start + "学科潜能" + type_end + err);
+											$(".analyze2").parents(".flex_Al_c").next().show();
+											$(".analyze1").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/sub/xgk_subject_score.do');
+										}
+										if(cognize == 1){
+											$(".analyze3").html(type_start + "认知测评" + type_end + ok);
+											$(".analyze3").parents(".flex_Al_c").next().hide();
+										}else{
+											$(".analyze3").html(type_start + "认知测评" + type_end + err);
+											$(".analyze3").parents(".flex_Al_c").next().show();
+											$(".analyze1").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/xk/xgk_guide_select.do');
+										}
+										
+										var vactionLargeClass = "<option value="">请选择一种心仪 的职业大类</option>";
+										
+									});
 								</script>
 							</div>
 						</div>
@@ -117,7 +160,7 @@
 							<h3 class="text-muted fontwei">理想职业</h3>
 							<div class="">请在下列表格中选择一种您心仪的职业</div>
 							<div class="margin_top1">
-								<select name="">
+								<select name="" class="large_class">
 									<option value="">请选择一种心仪 的职业大类</option>
 									<option value="">工程师</option>
 									<option value="">设计师</option>
