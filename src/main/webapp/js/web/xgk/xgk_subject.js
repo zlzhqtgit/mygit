@@ -1,5 +1,3 @@
-
-	
 	//存储题目
 	var ass_items = [
 				{num: '1',title: '相对于同龄人，我觉得自己在学习地上很有天赋。',	subject: '地', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
@@ -465,5 +463,3 @@
 		myChart1.setOption(option);
 		sectshow(3);
 	}
-
-
