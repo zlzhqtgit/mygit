@@ -1,45 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset=utf-8>
-<title>好前途后台登录页</title>
-<meta name="viewport" content="width=device-width, initial-scale=0.1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />	
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/certify.css" />	
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/web/xgk/swiper.min.js" type="text/javascript" charset="utf-8"></script>	
-<script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>
-<style type="text/css">
-	h1{font-size: 4em;}
-</style>
-
-</head>
-
-<body>
-<!-- 页面顶部-->
-<c:import url="header.jsp"></c:import>
-		<style type="text/css">
-			banner .swiper-container { width: 100%; height: 100%; margin-left: auto; margin-right: auto; }
-		    banner .swiper-slide { text-align: center; font-size: 18px; background: #fff; }
-		    banner .swiper-slide a{ display: block; width: 100%; }
-		    banner .swiper-slide img { width: 100%; }
-		    banner .swiper-button-prev, .swiper-container-rtl .swiper-button-next{ background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_left.png); background-color: gainsboro; opacity: .3;cursor: pointer;left: 10px;right: auto;padding: 4em 2em; }
-		    banner .swiper-button-next, .swiper-container-rtl .swiper-button-prev{ background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_righ.png); background-color: gainsboro; opacity: .3;cursor: pointer;right: 10px;left: auto;padding: 4em 2em; }
-		</style>
-		<banner class="">
-			 <!-- Swiper -->
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=0.1">
+		<title>贵州好前途教育科技有限公司</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />	
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/certify.css" />	
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+		<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+	</head>
+	<body>
+	<!-- 页面顶部-->
+	<c:import url="header.jsp"></c:import>
+		<banner class="p_relative">
+			<div class="login_form">
+			<shiro:guest>
+				<form action="" method="post" >
+					<fieldset id="" class="">
+						<legend class="text-primary margin0"><h3 class="fontwei">臻选高考云端系统</h3></legend>
+						<div class="form-group">
+							<input id="mobile" onblur="check_mobile()" type="text" value="" placeholder="手机号"/>
+							<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
+						</div>
+						<div class="form-group">
+							<input id="password" onblur="check_pwd()" type="password" value="" placeholder="密码"/>
+							<label for="password"><span class="glyphicon glyphicon-tag text-muted"></span></label>
+						</div>
+					</fieldset>
+					
+					
+					<div class="text-center">
+						<input class="login_btn" type="button" name="" onclick="login()"  id="subm" value="登录" />
+					</div>
+					<div class="tip text-center text-danger margin_top1" id="tip1" style="height: 1em;"></div>
+					<div class="forget clearfix ">
+						<a href="reset_pwd.html" class="text-primary pull-left">忘记密码？</a>
+						<a href="javascript:void(0)" onclick="xgkRegister()" class="text-primary pull-right">免费注册</a>
+					</div>
+					<div class="">
+						<div class="text-primary text-center thirds_login">
+							<div class="third_line"></div>
+							<span class="text-primary">第三方账号登录</span>
+							<div class="third_line"></div>
+						</div>
+						<ul class="others_acc margin0">
+							<li><a  href="${pageContext.request.contextPath}/qq_login.do"><img src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></a></li>
+							<li><a href="javascript:;"><img onclick="wechatQRCode()" src="${pageContext.request.contextPath}/img/xgk/wechat.jpg"/></a></li>
+							<!--<li><a href="">淘宝</a></li>
+							<li><a href="">支付宝</a></li>-->
+						</ul>
+					</div>
+				</form>
+			</shiro:guest>
+			</div>
 			<div class="swiper-container">
+				<!-- Swiper -->
 			    <div class="swiper-wrapper">
-			      <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
-			      <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/banner1.jpg"/></a></div>
-			      <div class="swiper-slide"><a href=""><img src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div>
+				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner_login1.jpg"/></a></div>
+				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
+				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner1.jpg"/></a></div>
+				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div>
 			    </div>
 			    <!-- Add Pagination -->
 			    <div class="swiper-pagination"></div>
@@ -49,17 +81,14 @@
 			</div>
 			<script>
 			    var swiperBanner = new Swiper('banner .swiper-container', {
+			      autoplay:false,
 			      slidesPerView: 1,
 			      spaceBetween: 30,
 			      loop: true,
-			      autoplay:{
-			      	delay: 2500,
-					disableOnInteraction: false,
-			      }, 
 			      effect : 'fade',
 			      fadeEffect: {
-			        crossFade: true,
-			      },
+				    crossFade: true,
+				  },
 			      pagination: {
 			        el: '.swiper-pagination',
 			        clickable: true,
@@ -70,547 +99,369 @@
 			      },
 			    });
 			    $('banner .swiper-slide').mouseenter(function () {
-			    	swiperBanner.autoplay.stop();
+		    	   swiperBanner.autoplay.stop();
 		    	})
 		    	$('banner .swiper-slide').mouseleave(function () {
-		    		swiperBanner.autoplay.start();
+		    	   swiperBanner.autoplay.start();
 		    	})
-			</script>
-		</banner>
-		
-		<section class="container margin_top">
-			<h1 class="text-center">视频课程</h1>
-			<div class="row video_box margin_top1">
-				<div class="thumbnail col-sm-6">
-					<video width="" height="" class="pull-left" poster="${pageContext.request.contextPath}/img/xgk/car.jpg" controls>
-						<source src="${pageContext.request.contextPath}/img/xgk/video/3.mp4" type="video/mp4" />						
-						<source src="myvideo.ogv" type="video/ogg" />
-						<source src="myvideo.webm" type="video/webm" />					
-						<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
-							<param name="movie" value="myvideo.swf" />
-							<param name="flashvars" value="autostart=true&amp;file=myvideo.swf" />
-						</object> 
-						当前浏览器不支持 video直接播放，点击这里下载视频：<a href="myvideo.webm" >下载视频</a>
-					</video>
-					<div class="caption"> 
-						<h3>视频简介</h3>
-						<p class="margin_top1">点击这里下载视频点击这里下载视频点击这里下载视频...</p>
-						<div class="font_mark">
-							<div class="pull-left text-left"><span class="glyphicon glyphicon-user text-muted"></span>超人</div>
-							<div class="pull-left text-right"><span class="glyphicon glyphicon-heart-empty text-danger"></span>9527</div>
-							<div class="clearfix"></div>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="section-content  col-sm-6">
-					<p>The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Lysefjorden, opposite the Kjerag plateau, in Forsand, Ryfylke, Norway. The top of the cliff is approximately 25 by 25 metres (82 by 82 feet) square and almost flat, and is a famous tourist attraction in Norway.The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Lysefjorden, opposite the Kjerag plateau, in Forsand, Ryfylke, Norway. </p>
-					<p class="text-center margin_top"><button type="button" class="btn btn-primary">更多视频 >></button></p>
-				</div>
-			</div>
-		</section>
-		
-		<section class="container">
-			<h1 class="text-center">公司业务</h1>
-			<style type="text/css">
-				.bussiness .swiper-container { width: 100%; height: 100%; }
-				.bussiness .swiper-slide {display:block; text-decoration:none; text-align: center; font-size: 18px; border: 1px solid #eee; transition: 300ms; transform: scale(.8); }
-				.bussiness .swiper-slide img { width: 100%; }
-				.bussiness .swiper-slide-active, .swiper-slide-duplicate-active { border: 1px solid #eee; transform: scale(1); z-index: 99999999; }
-			</style>
-			<div class="bussiness_bg" style="height: 568px;background-color: #fff;">
-				
-				<div class="bussiness container" style="padding: 0; width: 100%;">
-					<div class="" style="">
-						<div id="item_tit" class="item_tit text-center margin_bot" style="width: 8em;margin: 0 auto;">
-							<h3 class="text-white">志愿填报</h3>
-							<div class="margin_bot1" style="margin-top:10px ;position: relative;border-top: 3px solid #fff;"><span class="glyphicon glyphicon-play text-white" style="transform:rotate(90deg);"></span></div>
-						</div>
-					</div>
-					<div class="swiper-container" style="height: 384px;">
-						<div class="swiper-wrapper">
-							<a href="" class="swiper-slide">
-								<div class="">
-									<img src="${pageContext.request.contextPath}/img/xgk/certify01.png"/>
-								</div>
-								<div class="padding-side">
-									<input type="hidden" name="" id="" value="志愿填报" />
-									<h3 class="margin_top1">这是比较大的一句话1</h3>
-									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
-								</div>
-							</a>
-							<a href="" class="swiper-slide">
-								<div class="">
-									<img src="${pageContext.request.contextPath}/img/xgk/certify02.png"/>
-								</div>
-								<div class="padding-side">
-									<input type="hidden" name="" id="" value="新高考" />
-									<h3 class="margin_top1">这是比较大的一句话2</h3>
-									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
-								</div>
-							</a>
-							<a href="" class="swiper-slide">
-								<div class="">
-									<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
-								</div>
-								<div class="padding-side">
-									<input type="hidden" name="" id="" value="升学规划" />
-									<h3 class="margin_top1">这是比较大的一句话3</h3>
-									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
-								</div>
-							</a>
-							<a href="" class="swiper-slide">
-								<div class="">
-									<img src="${pageContext.request.contextPath}/img/xgk/certify03.png"/>
-								</div>
-								<div class="padding-side">
-									<input type="hidden" name="" id="" value="精准教学" />
-									<h3 class="margin_top1">这是比较大的一句话3</h3>
-									<div class="margin_top1 padding-side texts_hide text-center">这是比较大的一句话这这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话这是比较大的一句话</div>
-								</div>
-							</a>
-						</div>
-						<!-- Add Pagination -->
-						<div class="swiper-pagination"></div>
-					</div>
-				</div>
-				
-			</div>
-
-			<!-- Initialize Swiper -->
-			<script>
-				var swiper = new Swiper('.bussiness .swiper-container', {
-					slidesPerView: 3,
-					spaceBetween: 30,
-					centeredSlides: true,
-					loop: true,
-					on:{
-			    	    slideChange: function(){
-				    	    var index=this.realIndex;
-				    	    var input_val=$(this.slides).parent().find('.swiper-slide').eq(index).find('input').val();
-				    	    $('.item_tit h3').text(input_val);
-				    	},
-		    	  	},
-			        autoplay:{
-			      	  delay: 2500,
-					  disableOnInteraction: false,
-			        },
-					pagination: {
-						el: '.bussiness .swiper-pagination',
-						clickable: true,
-					},
-				});
-				$('.bussiness .swiper-slide').mouseenter(function () {
-					swiper.autoplay.stop();
-		    	})
-		    	$('.bussiness .swiper-slide').mouseleave(function () {
-		    		swiper.autoplay.start();
-		    	})
-				
-				var item_tit=$('.bussiness #item_tit');
-				var tit= $('.bussiness .swiper-wrapper .swiper-slide-active').find('input').val();
-				$('.bussiness #item_tit h3').text(tit);
-			</script>
-			<div class="clearfix"></div>
-		</section>
-
-		<section class="container">
-			<h1 class="text-center">咨询师</h1>
-			<style type="text/css">
-				.consultents .swiper-container {
-			      width: 100%;
-			      height: 100%;
-			    }
-			    .consultents .swiper-slide {
-			      text-align: center;
-			      font-size: 18px;
-			     /*  background: #fff; */
-			
-			      /* Center slide text vertically */
-			      display: -webkit-box;
-			      display: -ms-flexbox;
-			      display: -webkit-flex;
-			      display: flex;
-			      -webkit-box-pack: center;
-			      -ms-flex-pack: center;
-			      -webkit-justify-content: center;
-			      justify-content: center;
-			      -webkit-box-align: center;
-			      -ms-flex-align: center;
-			      -webkit-align-items: center;
-			      align-items: center;
-			    }
-			    .consultents .thumbnail{
-			    	padding:2em 4px;
-			    	/* padding-top:2em; */
-			    }
-			    .consultents .thumbnail .user_head{
-			    	padding-left:1em;
-			    	color:#d0d0d0;
-			    }
-			     .consultents .thumbnail .user_right .glyphicon{
-			     	margin-right:.5em;
-			     }
-			    .consultents .thumbnail h4{
-			    	font-weight:600;
-			    }
-			    .consultents .thumbnail p{
-			    	font-size:14px;
-			    }
-			    .consultents .thumbnail .btns{
-			    	padding-top:2em;
-			    }
-			    .consultents .thumbnail .caption p{
-			    	margin:20px 0;
-			    }
-			    .consultents .bussiness .swiper-container-horizontal,
-			    .consultents .swiper-container-horizontal > .swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{bottom: -5px;}
-			</style>
-			<div class="consultents">
-				<div class="swiper-container">
-				    <div class="swiper-wrapper">
-				      <div class="swiper-slide">
-				      	<div class="thumbnail">
-							<div class="converse_info">
-								<div class="pull-left user_head">
-									<span class="glyphicon glyphicon-user"></span>
-								</div>
-								<div class="pull-left user_right">
-									<h4>张XX&nbsp;生涯规划咨询师</h4>
-									<p class="text-left">这里是个人签名</p>
-									<p class="text-left"><span class="glyphicon glyphicon-map-marker"></span>中国&nbsp;北京</p>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="caption">
-								<p class="text-left">这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介...</p>
-								<div class="btns">
-									<div class="pull-left">
-										<div class="pull-left">
-											<h4>426</h4>
-											<div class="fontwei">
-												关注
-											</div>
-										</div>
-										<div class="pull-left">
-											<h4>1.6k</h4>
-											<div class="fontwei">
-												粉丝
-											</div>
-										</div>
-									</div>
-									<a href="#" class="btn btn-primary" role="button">+关注</a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-				      </div>
-				      <div class="swiper-slide">
-				      	<div class="thumbnail">
-							<div class="converse_info">
-								<div class="pull-left user_head">
-									<span class="glyphicon glyphicon-user"></span>
-								</div>
-								<div class="pull-left user_right">
-									<h4>张XX&nbsp;生涯规划咨询师</h4>
-									<p class="text-left">这里是个人签名</p>
-									<p class="text-left"><span class="glyphicon glyphicon-map-marker"></span>中国&nbsp;北京</p>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="caption">
-								<p class="text-left">这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介...</p>
-								<div class="btns">
-									<div class="pull-left">
-										<div class="pull-left">
-											<h4>426</h4>
-											<div class="fontwei">
-												关注
-											</div>
-										</div>
-										<div class="pull-left">
-											<h4>1.6k</h4>
-											<div class="fontwei">
-												粉丝
-											</div>
-										</div>
-									</div>
-									<a href="#" class="btn btn-primary" role="button">+关注</a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-				      </div>
-				      <div class="swiper-slide">
-				      	<div class="thumbnail">
-							<div class="converse_info">
-								<div class="pull-left user_head">
-									<span class="glyphicon glyphicon-user"></span>
-								</div>
-								<div class="pull-left user_right">
-									<h4>张XX&nbsp;生涯规划咨询师</h4>
-									<p class="text-left">这里是个人签名</p>
-									<p class="text-left"><span class="glyphicon glyphicon-map-marker"></span>中国&nbsp;北京</p>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="caption">
-								<p class="text-left">这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介...</p>
-								<div class="btns">
-									<div class="pull-left">
-										<div class="pull-left">
-											<h4>426</h4>
-											<div class="fontwei">
-												关注
-											</div>
-										</div>
-										<div class="pull-left">
-											<h4>1.6k</h4>
-											<div class="fontwei">
-												粉丝
-											</div>
-										</div>
-									</div>
-									<a href="#" class="btn btn-primary" role="button">+关注</a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-				      </div>
-				      <div class="swiper-slide">
-				      	<div class="thumbnail">
-							<div class="converse_info">
-								<div class="pull-left user_head">
-									<span class="glyphicon glyphicon-user"></span>
-								</div>
-								<div class="pull-left user_right">
-									<h4>张XX&nbsp;生涯规划咨询师</h4>
-									<p class="text-left">这里是个人签名</p>
-									<p class="text-left"><span class="glyphicon glyphicon-map-marker"></span>中国&nbsp;北京</p>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="caption">
-								<p class="text-left">这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介...</p>
-								<div class="btns">
-									<div class="pull-left">
-										<div class="pull-left">
-											<h4>426</h4>
-											<div class="fontwei">
-												关注
-											</div>
-										</div>
-										<div class="pull-left">
-											<h4>1.6k</h4>
-											<div class="fontwei">
-												粉丝
-											</div>
-										</div>
-									</div>
-									<a href="#" class="btn btn-primary" role="button">+关注</a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-				      </div>
-				      <div class="swiper-slide">
-				      	<div class="thumbnail">
-							<div class="converse_info">
-								<div class="pull-left user_head">
-									<span class="glyphicon glyphicon-user"></span>
-								</div>
-								<div class="pull-left user_right">
-									<h4>张XX&nbsp;生涯规划咨询师</h4>
-									<p class="text-left">这里是个人签名</p>
-									<p class="text-left"><span class="glyphicon glyphicon-map-marker"></span>中国&nbsp;北京</p>
-								</div>
-								<div class="clearfix"></div>
-							</div>
-							<div class="caption">
-								<p class="text-left">这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介这里是个人简介...</p>
-								<div class="btns">
-									<div class="pull-left">
-										<div class="pull-left">
-											<h4>426</h4>
-											<div class="fontwei">
-												关注
-											</div>
-										</div>
-										<div class="pull-left">
-											<h4>1.6k</h4>
-											<div class="fontwei">
-												粉丝
-											</div>
-										</div>
-									</div>
-									<a href="#" class="btn btn-primary" role="button">+关注</a>
-									<div class="clearfix"></div>
-								</div>
-							</div>
-						</div>
-				      </div>
-				    </div>
-				    <!-- Add Pagination -->
-				    <div class="swiper-pagination"></div>
-				    <!-- Add Arrows -->
-				    <div class="swiper-button-next" style="background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_righ.png); background-color: gainsboro; opacity: .3;cursor: pointer;"></div>
-				    <div class="swiper-button-prev" style="background-image: url(${pageContext.request.contextPath}/img/xgk/arrows_left.png); background-color: gainsboro; opacity: .3;cursor: pointer;"></div>
-				</div>
-			</div>
-			<script>
-			    var consult_swiper = new Swiper('.consultents .swiper-container', {
-			      autoplay:{
-			      	delay: 2500,
-					disableOnInteraction: false,
-			      },
-			      slidesPerView: 3,
-			      spaceBetween: 30,
-			      slidesPerGroup: 3,
-			      loop: true,
-			      loopFillGroupWithBlank: true,
-			      pagination: {
-			        el: '.consultents .swiper-pagination',
-			        clickable: true,
-			      },
-			      navigation: {
-			        nextEl: '.consultents .swiper-button-next',
-			        prevEl: '.consultents .swiper-button-prev',
-			      },
-			    });
-			    $('.consultents .swiper-slide').mouseenter(function () {
-			    	consult_swiper.autoplay.stop();
-		    	})
-		    	$('.consultents .swiper-slide').mouseleave(function () {
-		    		consult_swiper.autoplay.start();
-		    	})
-			</script>
-		</section>
-
-		<section class="container">
-			<h1 class="text-center">学员风采</h1>
-			<div id="certify">
-				<div class="swiper-container">
-				<div class="swiper-wrapper">
-				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify01.png" /><p>非常难得又值钱的认证证书</p></div>
-				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify02.png" /><p>贵阳市优秀互联网企业认定证书</p></div>
-				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify03.png" /><p>质量管理体系认证荣誉证书</p></div>
-				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify04.png" /><p>计算机软件著作权登记证书</p></div>
-				<div class="swiper-slide"><img src="${pageContext.request.contextPath}/img/xgk/certify05.png" /><p>增值电信业务经营许可证</p></div>
-				</div>
-				</div>
-				<div class="swiper-pagination"></div>				
-			</div>
-				
-				<script>
-				certifySwiper = new Swiper('#certify .swiper-container', {
-					watchSlidesProgress: true,
-					slidesPerView: 'auto',
-					centeredSlides: true,
-					loop: true,
-					loopedSlides: 5,
-					autoplay:{
-					    delay: 2500,
-					    disableOnInteraction: false,
-					},
-					/*
-					navigation: {
-						nextEl: '.swiper-button-next',
-						prevEl: '.swiper-button-prev',
-					},*/
-					pagination: {
-						el: '#certify .swiper-pagination',
-						clickable :true,
-					},
-					on: {
-						progress: function(progress) {
-							for (i = 0; i < this.slides.length; i++) {
-								var slide = this.slides.eq(i);
-								var slideProgress = this.slides[i].progress;
-								modify = 1;
-								if (Math.abs(slideProgress) > 1) {
-									modify = (Math.abs(slideProgress) - 1) * 0.3 + 1;
-								}
-								translate = slideProgress * modify * 260 + 'px';
-								scale = 1 - Math.abs(slideProgress) / 5;
-								zIndex = 999 - Math.abs(Math.round(10 * slideProgress));
-								slide.transform('translateX(' + translate + ') scale(' + scale + ')');
-								slide.css('zIndex', zIndex);
-								slide.css('opacity', 1);
-								if (Math.abs(slideProgress) > 3) {
-									slide.css('opacity', 0);
-								}
-							}
-						},
-						setTransition: function(transition) {
-							for (var i = 0; i < this.slides.length; i++) {
-								var slide = this.slides.eq(i)
-								slide.transition(transition);
-							}
-				
-						}
+		    	
+		    	
+		    	function login(){
+					var nowUrl="${nowUrl}";
+					if(nowUrl==null||nowUrl==""){
+						nowUrl="${pageContext.request.contextPath}/cp/xgk_index.do";
 					}
+					var tip1=$('#tip1').text();
+					var mobile=$("#mobile").val();
+					var pwd_tip=$('#tip2').text();
+					var pwd=$("#password").val();
+					if (mobile=='') {
+						$('#tip1').text('手机号不能为空')
+					} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+						$('#tip1').text('手机号码有误，请重新输入');
+				    } else if (pwd=='') {
+						$('#tip2').text('密码不能为空');
+					} else if(!(/^(\w){6,20}$/).test(pwd)){
+						//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+						$('#tip2').text('密码只能输入6-20个字母、数字、下划线_ ');		
+					}else{
+						var url = "${pageContext.request.contextPath}/user/xgk_userLogin.do";
+						var phone=$("#mobile").val();
+						var password=$("#password").val();		
+						var data = "phone="+phone+"&password="+password;		
+						$.ajax({
+							"url" : url,
+							"data" : data,
+							"type" : "POST",
+							"dataType" : "json",
+							"success" : function(obj) {
+								if (obj.state == 0) {
+									alert(obj.message);
+									$(".login_form").hide;
+									return;
+								}else{
+									location.href = nowUrl;
+								}
+							}
+						});  
+				    }
+				}
+		    	
+		    	function xgkRegister() {
+					var nowUrl=window.location.href;
+					location.href = "${pageContext.request.contextPath}/user/register.do?nowUrl="+nowUrl;
+				}
+			    
+			    function wechatQRCode() {
+					var weixin = '<div id="weixin" ></div>';
+					layer.open({
+						type: 1,
+						area: ['300px', '420px'],
+						// fix: false, //不固定
+						// maxmin: true,
+						shade:false,
+						title: false,
+						content: weixin,
+						scrollbar: false
+					});
+					drawingQRCode();
+				}
+				function drawingQRCode() {
+					//生成微信二维码,工具类
+					var obj = new WxLogin({
+						id:"weixin",
+						appid:"wx7287a60bb700fd21",
+						scope:"snsapi_login",
+						redirect_uri:"http://www.txjava.cn/loginServlet"
+					});
+				}
+
+				//登录规则部分，防止XSS注入
+				/**
+				 * 手机号规则
+				 */
+				function check_mobile () {
+					var tip1=$('#tip1').text();
+					var mobile=$("#mobile").val();
+					if (mobile=='') {
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号不能为空')
+					} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号码有误，请重新输入');
+				        return false; 
+				    } else{
+				    	$('#tip1').html('');
+				    }
+					
+				}
 				
-				})
-				$('#certify .swiper-slide').mouseenter(function () {
-					certifySwiper.autoplay.stop();
-		    	})
-		    	$('#certify .swiper-slide').mouseleave(function () {
-		    		certifySwiper.autoplay.start();
-		    	})
-				</script>
-		</section>	
-		
-		<section class="container">
-			<h1 class="text-center">升学规划服务中心</h1>
-			<div class="service-center">
-				<div class="pull-left prepare">
-					<div class="footer_nav">
-						<h3>高考备考</h3>
-						<div class="border-bt" style="background-color: #00AEFF !important; width: 20%;margin-top:10px ;"></div>
+				/**
+				 * 密码规则
+				 */
+				function check_pwd () {
+					var pwd_tip=$('#tip2').text();
+					var pwd=$("#password").val();
+					if (pwd=='') {
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码不能为空');
+					} else if(!(/^(\w){6,20}$/).test(pwd)){
+						//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码只能由6-20个字母、数字、和特殊字符组成');
+						return false; 
+					}else{
+						$('#tip1').html('');
+					}
+				}
+			</script>
+			
+		</banner>
+		<main class="">
+			<section class="container wow fadeInUp">
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<img src="${pageContext.request.contextPath}/img/xgk/index1.png" class="img-responsive"/>
 					</div>
-					<ul>
-						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Pulpit Rock is a massive cliff</a>
-						</li>
-						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Pulpit Rock is a massive cliff</a>
-						</li>
-						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Pulpit Rock is a massive cliff</a>
-						</li>
-						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Pulpit Rock is a massive cliff</a>
-						</li>
-					</ul>
+					<div class="col-md-6 col-sm-6">
+						<h2 class="text-primary"> 认知更清晰 </h2>
+						<div class="">
+							全方位了解认识自己，发掘隐藏潜能。针对发展自我能力，定位更准确，未来不迷茫！
+						</div>
+						<ul class="sectionList1 clearfix">
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 1 </div>
+									<div class=""> MBTI职业性格测评 </div>
+								</div>
+							</li>
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 2 </div>
+									<div class=""> MBTI职业性格测评 </div>
+								</div>
+							</li>
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 3 </div>
+									<div class=""> MBTI职业性格测评 </div>
+								</div>
+							</li>
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 4 </div>
+									<div class=""> MBTI职业性格测评 </div>
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
-				<div class="pull-left">
-					<div class="footer_nav">
-						<h3>专家文采</h3>
-						<div class="border-bt" style="background-color: #00AEFF !important; width: 20%;margin-top:10px ;"></div>
-					</div>
-					<ul>
+			</section>
+			<section class="wow fadeInUp" style="background-color: #ddd;padding-top: 1em;">
+				<div class="container">
+					<ul class="sectionList2 clearfix row">
 						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Pulpit Rock is a massive cliff</a>
+							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;">
+								<div class="">
+									<div class="text-center">
+										<img src="${pageContext.request.contextPath}/img/xgk/sect21.png" style="width: 3em;"/>
+									</div>
+									<p class="text-center text-white counter fontwei">2688</p>
+								</div>
+							</div>
+							<p class="text-center">高等院校</p>
 						</li>
 						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Pulpit Rock is a massive cliff</a>
+							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
+								<div class="">
+									<div class="text-center">
+										<img src="${pageContext.request.contextPath}/img/xgk/sect22.png" style="width: 3em;"/>
+									</div>
+									<p class="text-center text-white counter fontwei">6288</p>
+								</div>
+							</div>
+							<p class="text-center">高校专业</p>
 						</li>
 						<li>
-							<a href="">The Pulpit Rock is a massive cliff 604 metres (1982 feet) above Pulpit Rock is a massive cliff</a>
+							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;">
+								<div class="">
+									<div class="text-center">
+										<img src="${pageContext.request.contextPath}/img/xgk/sect23.png" style="width: 3em;"/>
+									</div>
+									<p class="text-center text-white counter fontwei">3288</p>
+								</div>
+							</div>
+							<p class="text-center">职业类型</p>
 						</li>
 						<li>
-							<a href="">s a massive cliff 604 metres (1982 feet)东方闪电 above Pulpit Rock is a massive cliff</a>
+							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
+								<div class="">
+									<div class="text-center">
+										<img src="${pageContext.request.contextPath}/img/xgk/sect24.png" style="width: 3em;"/>
+									</div>
+									<p class="text-center text-white fontwei"><span class="counter">30</span>W+</p>
+								</div>
+							</div>
+							<p class="text-center">考生信赖</p>
 						</li>
 					</ul>
+				</div>	
+			</section>
+			<section class="container wow fadeInUp">
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<h2 class="text-primary"> 数据更全面 </h2>
+						<div class="">
+							早一步查询，早一步知道，了解高校、专业、职业，更了解自己，让高考不留遗憾。
+						</div>
+						<ul class="sectionList1 clearfix">
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 1 </div>
+									<div class=""> 近三年高校录取数据 </div>
+								</div>
+							</li>
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 2 </div>
+									<div class=""> 职业薪酬发展 </div>
+								</div>
+							</li>
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 3 </div>
+									<div class=""> 高校专业详细信息 </div>
+								</div>
+							</li>
+							<li class="">
+								<div class="">
+									<div class="fontwei"> 4 </div>
+									<div class=""> 专业职业对照 </div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-6 col-sm-6">
+						<img src="${pageContext.request.contextPath}/img/xgk/index2.png" class="img-responsive"/>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script type="text/javascript">
+			new WOW().init(); 
+			var wow = new WOW({  
+			    boxClass: 'wow',
+			    animateClass: 'animated', 
+			    offset: 0,
+			    mobile: true, 
+			    live: true
+			}); 
+			$('.counter').countUp();
+		</script>
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-4 col-xs-4 list" style="padding-left: 4em;">
+						<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg">
+					</div>
+					<div class="col-md-2 col-sm-2 col-xs-2 list">
+						<div class="footer_nav">
+							<h4>好前途</h4>
+							<div class="border-bt"></div>
+						</div>
+						<ul>
+							<li>
+								<a href="">关于我们</a>
+							</li>
+							<li>
+								<a href="">团队介绍</a>
+							</li>
+							<li>
+								<a href="">人才招聘</a>
+							</li>
+							<li>
+								<a href="">公司动态</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-2 col-sm-2 col-xs-2 list">
+						<div class="footer_nav">
+							<h4>帮助与服务</h4>
+							<div class="border-bt"></div>
+						</div>
+						<ul>
+							<li>
+								<a href="">关于我们</a>
+							</li>
+							<li>
+								<a href="">团队介绍</a>
+							</li>
+							<li>
+								<a href="">人才招聘</a>
+							</li>
+							<li>
+								<a href="">公司动态</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-2 col-sm-2 col-xs-2 list">
+						<div class="footer_nav">
+							<h4>合作专区</h4>
+							<div class="border-bt"></div>
+						</div>
+						<ul>
+							<li>
+								<a href="">关于我们</a>
+							</li>
+							<li>
+								<a href="">团队介绍</a>
+							</li>
+							<li>
+								<a href="">人才招聘</a>
+							</li>
+							<li>
+								<a href="">公司动态</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-2 col-sm-2 col-xs-2 list">
+						<div class="footer_nav">
+							<h4>企业专区</h4>
+							<div class="border-bt"></div>
+						</div>
+						<ul>
+							<li>
+								<a href="">关于我们</a>
+							</li>
+							<li>
+								<a href="">团队介绍</a>
+							</li>
+							<li>
+								<a href="">人才招聘</a>
+							</li>
+							<li>
+								<a href="">公司动态</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="company-info container">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 4em;">
+						<p>微信：xdl6666</p>
+						<p>邮箱：401375488@qq.com</p>
+						<p>电话：0851-84721064</p>
+						<p>时间：9：00-18：00</p>
+						<p>公司地址：贵阳是观山湖区世纪金源国际财富中心B栋10楼</p>
+					</div>
+					<div class="copyright col-md-6 col-sm-6 col-xs-6" style="position: relative;">
+						<div id="" style="margin-top: 3em;">
+							<p><span class="glyphicon glyphicon-copyright-mark"></span>2019copyright All Rights Reserved 贵州好前途教育科技有限公司</p>
+							<p>电信与信息服务经营许可证：</p>
+						</div>
+					</div>
 				</div>
 			</div>
-		</section>
-
-			
-<!-- 页面底部-->
-<c:import url="../public/side_right.jsp"></c:import>
-<!-- 页面底部-->
-<c:import url="footer.jsp"></c:import>	
-</body>
+			<div class="clearfix"></div>
+		</footer>
+	</body>
 </html>

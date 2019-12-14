@@ -8,75 +8,55 @@
  <meta charset=utf-8>
 <title>Insert title here</title>
 </head>
-<body>
-		<header class="padding-side">
-			<div class="row">
-				
-				<div class="head-bottom col-md-8">
-					<div class="logo">
-						<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.jpg" alt="贵州好前途教育科技有限公司"></a>
-					</div>
-					<nav id="navdh" class="">
-						<ul>
-							<li><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
-							<li><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
-							<li><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
-							<li><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_pick_guide.jsp">选科指导</a></li>
-							<%-- <li><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li> --%>
-							<li><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_s.jsp">职业库</a></li>
-							<li>
-								<a id="xgk6" name="dh" href="${pageContext.request.contextPath}/school/xgk_school_search.do">高校专业</a>
-								<ul class="child">
-									<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>
-									<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>
-								</ul>
-							</li>
-							<li><a id="xgk7" name="dh" href="#">学科推荐</a></li>
-							<li><a id="xgk8" name="dh" href="#">升学规划</a></li>
-							<li><a id="xgk9" name="dh" href="#">志愿填报</a></li>
-						</ul>
-					</nav>
+<body>	
+		<header>
+			<div class="nav_wrap">
+				<div class="padding-side2">
+					<a href=""><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
 				</div>
-				<div class="head-top col-md-4 margin_top margin_bot1">
+				<nav id="navdh" class="clearfix">
+					<ul class="clearfix margin0">
+						<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
+						<li class=""><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
+						<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
+						<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_pick_guide.jsp">选科指导</a></li>
+						<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_s.jsp">职业库</a></li>
+						<li class="">
+							<a id="xgk6" name="dh" href="${pageContext.request.contextPath}/school/xgk_school_search.do">高校专业</a>
+							<ul class="list-unstyled">
+								<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>
+								<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>
+							</ul>
+						</li>
+						<li class=""><a id="xgk7" name="dh" href="#">学科推荐</a></li>
+						<li class="">
+							<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down text-muted"></span></a>
+							<ul class="list-unstyled">
+								<li><a id="xgk9" name="dh" href="#">新手教程</a></li>
+								<li><a id="xgk10" name="dh" href="#">商务合作</a></li>
+								<li><a id="xgk11" name="dh" href="#">官方微信</a></li>
+								<li><a id="xgk12" name="dh" href="#">志愿填报群</a></li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<div>
 					<shiro:guest>
 						<div class="user">
 							<img src="${pageContext.request.contextPath}/img/xgk/user.png" >
 							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
 						</div>
 					</shiro:guest>
-					<%-- <c:if test="${username==null}">
-						<div class="user">
-							<img src="${pageContext.request.contextPath}/img/xgk/user.png" >
-							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
-						</div>
-					</c:if> --%>
 					<shiro:user>  
 					   <div class="user">
 							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
 							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 						</div>
 					</shiro:user> 
-					
-					<%-- <c:if test="${username!=null}">
-						<div class="user">
-							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
-							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
-						</div>
-					</c:if>
-					 --%>
-					<div class="search margin_top1">
-						<div class="pull-left input_box">
-							<span class="search_mark"><img src="${pageContext.request.contextPath}/img/xgk/search.png"></span>
-							<input type="search" name="" id="" value="" placeholder="院校/专业/职业/学科" />
-						</div>
-						<div class="pull-left search_img">
-							<img src="${pageContext.request.contextPath}/img/xgk/resizeApi.png">
-						</div>
-						<div class="clearfix"></div>
-					</div>
-				</div>				
+				</div>	
 			</div>
 		</header>
+		
 </body>
 <script type="text/javascript">
 $("#navdh a").click(function(){	
