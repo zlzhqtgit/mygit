@@ -108,37 +108,37 @@ public class Vocation implements Serializable {
     /**
      * 学历要求
      */
-    private Integer educationQualification;
+    private String educationQualification;
 
     /**
      * 专业知识
      */
-    private Integer specialtyKnow;
+    private String specialtyKnow;
 
     /**
      * 专业技能
      */
-    private Integer specialtySkill;
+    private String specialtySkill;
 
     /**
      * 工作年限
      */
-    private Integer workYear;
+    private String workYear;
 
     /**
      * 工作成果
      */
-    private Integer workAchieved;
+    private String workAchieved;
 
     /**
      * 组织能力
      */
-    private Integer organizationAbility;
+    private String organizationAbility;
 
     /**
      * 统筹能力
      */
-    private Integer planAbility;
+    private String planAbility;
 
 
 

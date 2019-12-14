@@ -40,9 +40,7 @@
 				</div>
 			</section>
 			
-		</main>
-		
-		
+		</main>	
 <!-- 页面底部-->
 <c:import url="../public/side_right.jsp"></c:import>	
 <!-- 页面底部-->

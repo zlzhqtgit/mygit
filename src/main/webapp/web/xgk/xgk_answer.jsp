@@ -155,7 +155,7 @@
 						ti(strone-1);
 					} else {
 						//location.href="../cp/indexno.do?cpda="+JSON.stringify(cpda);
-						var url = "../cp/xgk_result.do";
+						var url = "${pageContext.request.contextPath}/cp/xgk_result.do";
 						var data = "id=" + id + "&cpda=" + JSON.stringify(cpda);
 						$.ajax({
 							"url": url,
@@ -168,7 +168,7 @@
 									return;
 								}
 								alert(obj.message);
-								location.href = "../cp/xgk_report.do";
+								location.href = "${pageContext.request.contextPath}/cp/xgk_report.do";
 							}
 						});
 					}

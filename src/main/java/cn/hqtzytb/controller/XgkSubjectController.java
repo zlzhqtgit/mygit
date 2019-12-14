@@ -54,12 +54,6 @@ public class XgkSubjectController {
         		if (Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(userFeature.getEvaluationType())) {
         			session.setAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS,1);
     			}
-        		if (Constants.EVALUATION_TYPE_MBTI_ANALYSIS.equals(userFeature.getEvaluationType())) {
-        			session.setAttribute(Constants.EVALUATION_TYPE_MBTI_ANALYSIS,1);
-    			}
-        		if (Constants.EVALUATION_TYPE_HOLLAND_ANALYSIS.equals(userFeature.getEvaluationType())) {
-        			session.setAttribute(Constants.EVALUATION_TYPE_HOLLAND_ANALYSIS,1);
-    			}
         	}
 		}
     	return "web/xgk/xgk_subject_score";

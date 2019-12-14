@@ -10,22 +10,30 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+
 import cn.hqtzytb.entity.Enrollment;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.Vocation;
 import cn.hqtzytb.exception.MyRuntimeException;
+import cn.hqtzytb.mapper.UserFeatureMapper;
+import cn.hqtzytb.mapper.VocationMapper;
 import cn.hqtzytb.service.IEnrollmentServer;
 import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.service.IUserFeatureServer;
 import cn.hqtzytb.service.IVocationServer;
+import cn.hqtzytb.utils.Constants;
 
 
 
@@ -51,7 +59,10 @@ public class XgkxkController {
 	private IEnrollmentServer enrollmentServer;
 	@Autowired
 	private IVocationServer vocationServer;
-	
+	@Autowired
+	private UserFeatureMapper userFeatureMapper;
+	@Autowired
+	private VocationMapper vocationMapper;
 	/**
 	 * @throws MyRuntimeException 
 	* @Title: showhqtCpAnswer
@@ -68,11 +79,35 @@ public class XgkxkController {
 	public String showhqtXgkGuideSelect(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
 		try
 		{
-			Session session = SecurityUtils.getSubject().getSession();		
-			logger.info("用户名："+session.getAttribute("username")+" 模块名：选科指导页面     操作：进入模块  状态：OK!");
-			return  "web/xgk/xgk_guide_select";
+			Subject subject = SecurityUtils.getSubject();
+			Session session = subject.getSession();		
+			if (subject.isAuthenticated()) {
+				List<UserFeature> userFeatures = userFeatureMapper.select("uid = '" + (Integer)session.getAttribute("uid") + "'", null, null, null);
+				Integer SCORE_ANALYZE = 0;//成绩分析
+				Integer POTENTIALSCORE_ANALYZE = 0;//潜能分析
+				Integer COGNIZESCORE_ANALYZE = 0;//认知分析
+				for(UserFeature userFeature : userFeatures){
+					if (Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(userFeature.getEvaluationType())) {
+						SCORE_ANALYZE = 1;
+					}
+					if (Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS.equals(userFeature.getEvaluationType())) {
+						POTENTIALSCORE_ANALYZE = 1;
+					}
+					if (Constants.EVALUATION_TYPE_MBTI_ANALYSIS.equals(userFeature.getEvaluationType()) 
+							|| Constants.EVALUATION_TYPE_HOLLAND_ANALYSIS.equals(userFeature.getEvaluationType())) {
+						COGNIZESCORE_ANALYZE = 1;
+					}
+				}
+				session.setAttribute("SCORE_ANALYZE", SCORE_ANALYZE);
+				session.setAttribute("POTENTIAL_ANALYZE", POTENTIALSCORE_ANALYZE);
+				session.setAttribute("COGNIZE_ANALYZE", COGNIZESCORE_ANALYZE);
+			}
+			session.setAttribute("LARGE_CLASS", JSON.toJSONString(vocationMapper.selectLargeClass(null, null, null, null)));//职业大类
+			System.err.println(JSON.toJSONString(vocationMapper.selectLargeClass(null, null, null, null)));
+			logger.info("用户名：" + session.getAttribute("username") + " 模块名：选科指导页面     操作：进入模块  状态：OK!");
+			return  "web/xgk/xgk_pick_guide";
 		} catch (Exception e){
-			logger.error("访问路径："+request.getRequestURI()+"操作：进入选科指导页面   错误信息: "+e);
+			logger.error("访问路径：" + request.getRequestURI() + "操作：进入选科指导页面   错误信息: "+e);
 			throw new MyRuntimeException(e);
 		}
 							
