@@ -27,10 +27,12 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
+import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.UserRole;
 import cn.hqtzytb.entity.UserRoleDetails;
 import cn.hqtzytb.exception.MyRuntimeException;
 import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
+import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.service.IUserRoleDetailsServer;
 import cn.hqtzytb.service.IUserRoleServer;
 import cn.hqtzytb.service.IUserServer;
@@ -57,7 +59,7 @@ public class UserController {
 	public IUserRoleDetailsServer userRoleDetailsServer;
 	@Autowired
 	private PhotoConfig photoConfig;
-	
+
 
 	private  static final  Logger logger = LogManager.getLogger(UserController.class.getName());
 
@@ -242,7 +244,7 @@ public class UserController {
 				user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
 				user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
 				user.setHeadUrl(session.getAttribute("headUrl") == null ? "${pageContext.request.contextPath}/img/public/head.jpg" : session.getAttribute("headUrl").toString());
-				user.setCreatTime(creatTime);			
+				user.setCreatTime(creatTime);	
 				userServer.insert(user);	
 				JSONObject userJson = JSONObject.fromObject(user);
 				session.setAttribute("uid", user.getId());

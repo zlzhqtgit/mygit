@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: HF
@@ -24,8 +25,6 @@
 <div id="test">
 
 </div>
-<img src="../img/photo/school/10001/image/logo.jpg">
-<img src="../img/photo/school/10001/life/2019_12_10_ca82eafb-7033-4046-bed1-8d0b3772e869.jpg">
 <br/>
 <br/>
 <br/>
@@ -43,12 +42,11 @@
             dataType: "json",
             success: function (obj) {
                 var a = obj.data;
-                var dd='[{"name":"编辑/记者","value":"15.1%","occupation":"主编，责任编辑，编辑部主任"},{"name":"金融分析/研究","value":"8.8%","occupation":"研究员，行业研究，研究部总监，高级研究员"},{"name":"行政/后勤/文秘","value":"8.8%","occupation":"行政专员/助理，办公室助理，行政助理、文秘，助理秘书"},{"name":"项目管理/协调","value":"7.2%","occupation":"项目经理，部门经理，项目经理（兼职），可持续发展专员"},{"name":"教师","value":"5.2%","occupation":"职业中专/技校教师，兼职教师"},{"name":"其他","value":"54.9%","occupation":"人事行政部，人力资源专员/助理，薪酬福利专员/助理，人力资源经理"}]';
-                // var b = JSON.stringify(a.employmentCareerDirection)
-                var cc = '[{"年份":2019,"省份":"贵州省","录取类型":"文科","平均分":80,"最低分":70,"省控线":700,"最低位次":1500,"录取人数":500,"录取批次":"第一批次"},{"年份":2019,"省份":"贵州省","录取类型":"理科","平均分":80,"最低分":70,"省控线":700,"最低位次":1500,"录取人数":500,"录取批次":"第一批次"},{"年份":2020,"省份":"贵州省","录取类型":"文科","平均分":80,"最低分":70,"省控线":700,"最低位次":1500,"录取人数":500,"录取批次":"第一批次"}]';
+                var cc = '[{"name":"行业收入","value":[{"vocation":"金融/投资/证券","money":"￥7680"},{"vocation":"金融/投资/证券","value":"￥7680"}]},{"name":"地区收入","value":[{"area":"北京","money":"￥5220"},{"area":"上海","money":"￥5170"}]}]';
                 // console.log(a)
-                var c = JSON.parse(cc)
-                console.log(c[0].省份);
+                var cc = '[{"行业收入":[{"name":"金融/投资/证券","money":"￥7680"},{"name":"金融/投资/证券","value":"￥7680"}]},{"地区收入":[{"name":"北京","money":"￥5220"},{"name":"上海","money":"￥5170"}]}]';
+                var c = JSON.parse(cc) 
+                console.log(c[0].行业收入);
                 $("#test").html("<a>" + a.employmentIndustryDistribution + "</a>")
             }
         })

@@ -69,10 +69,10 @@ public class UserServerImpl implements IUserServer {
 			String wexinChat = session.getAttribute("wexinChat") == null ? null :session.getAttribute("wexinChat").toString();
 			String qqChat = session.getAttribute("qqChat") == null ? null :session.getAttribute("qqChat").toString();
 			User user = users.get(0);
-			if (user.getWexinChat() == null && StringUtils.isNotEmpty(wexinChat)){
+			if (StringUtils.isEmpty(user.getWexinChat()) && StringUtils.isNotEmpty(wexinChat)){
 				user.setWexinChat(wexinChat);//绑定微信openid
 			}
-			if (user.getQqChat() == null && StringUtils.isNotEmpty(qqChat)){
+			if (StringUtils.isEmpty(user.getQqChat()) && StringUtils.isNotEmpty(qqChat)){
 				user.setQqChat(qqChat);//绑定腾讯openid
 			}
 			user.setHeadUrl(session.getAttribute("headUrl").toString());
