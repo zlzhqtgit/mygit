@@ -1,10 +1,5 @@
 package cn.hqtzytb.utils;
 
-import cn.hqtzytb.entity.UserFeature;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-
-import java.util.*;
 
 /**
  * @ClassName: DisciplineCombination

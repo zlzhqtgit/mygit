@@ -312,35 +312,57 @@
 							href="javascript:void(0)">下一步</a>
 					</p>
 					<script type="text/javascript">
+						var cjfx = "${CJFX}";
+						var qnfx = "${QNFX}";
 						// 判断用户是否已做过学科探索
 						function haveYouSubjectExploration() {
 							var uid = '${uid}';
 							if(uid == "" || uid == null){
 								onlogin();
 							}else{
-								var url = "/sub/xgk_subject_exploration.do";
-								var  data = "uid=" + uid;
-								$.ajax({
-									"url":url,
-									"data":data,
-									"type":"POST",
-									"dataType":"json",
-									"success":function(obj){
-										if(obj.state == 0){
-											//未做过学科探索
-											tip_input();
-										} else {
-											//已做过学科探索 弹出选项提示
-											layer.confirm('您已做过学科探索，是否继续？', {
-												icon : 3,
-												btn : [ '确定', '取消' ]
-											}, function(index) {
-												tip_input();
-												layer.close(index);
-											});
+								if(cjfx == 0){
+									//未做过成绩分析
+									tip_input();
+									//成绩分析纳入数据统计
+									$.ajax({
+										url: "${pageContext.request.contextPath}/sub/xgk_score_analysis.do",
+										data:"score=" + JSON.stringify(score),
+										type:"POST",
+										dataType:"json",
+										success:function(obj){
+											if(obj.state == 0){
+												layer.msg(obj.message,{icon:2,time:1000});
+											}
 										}
+									});	
+								} else {
+									//已做过学科探索 弹出选项提示
+									layer.confirm('您已做过学科探索之成绩分析，是否继续？继续将覆盖学科探索之成绩分析！', {
+									btn: ['确定', '取消', '进入潜能分析']
+									,btn3: function(index, layero){
+										//进入潜能分析
+										sectshow(1);
 									}
-								});
+									}, function(index, layero){
+										//确定
+										tip_input();										
+										$.ajax({
+											url: "${pageContext.request.contextPath}/sub/xgk_score_analysis.do",
+											data:"score=" + JSON.stringify(score),
+											type:"POST",
+											dataType:"json",
+											success:function(obj){
+												if(obj.state == 0){
+													layer.msg(obj.message,{icon:2,time:1000});
+												}
+											}
+										});	
+										layer.close(index, layero);
+									}, function(index){
+										//取消
+										layer.close(index);
+									});
+								}
 							}
 						}
 					</script>
@@ -367,8 +389,44 @@
 			</ul>
 			<p class="text-right padding-side2 margin_bot">
 				<a class="btn btn-primary" href="javascript:;"
-					onclick="sectshow(2);">开始答题</a>
+					onclick="answer();">开始答题</a>
 			</p>
+			<script type="text/javascript">
+				//答题
+				function answer(){
+					var QNFX = "${QNFX}";
+					if(QNFX == 1){
+						layer.confirm('您已做过学科探索之潜能分析，是否继续？继续将覆盖学科探索之潜能分析！', {
+							  btn: ['确定', '取消'] //可以无限个按钮
+							  ,
+							}, function(index, layero){//确认
+								layer.close(index);
+								getScore();
+							}, function(index){//取消
+								layer.close(index);
+							});
+					}else{
+						getScore();
+					}
+				}
+				//获得成绩分析
+				function getScore(){
+					$.ajax({
+						url: "${pageContext.request.contextPath}/sub/xgk_score_report.do",
+						data:"",
+						type:"POST",
+						dataType:"json",
+						success:function(obj){
+							if(obj.state == 0){
+								layer.msg(obj.message,{icon:2,time:1000});
+							}else{
+								score = JSON.parse(obj.data.evaluationFraction);
+								sectshow(2);
+							}
+						}	
+					});
+				}
+			</script>
 		</div>
 	</section>
 	<section class="row">

@@ -2,7 +2,8 @@ package cn.hqtzytb.service;
 
 
 import cn.hqtzytb.entity.ResponseResult;
-import javax.servlet.http.HttpSession;
+import cn.hqtzytb.entity.UserFeature;
+
 
 /**
  * @ClassName: IXgkSubjectService
@@ -20,4 +21,8 @@ public interface IXgkSubjectService {
     ResponseResult<Void> haveYouSubjectExploration();
 
     ResponseResult<Void> addPotentialAnalysis(String evaluationFraction);
+
+	ResponseResult<Void> addScoreAnalysis(String evaluationFraction);
+
+	ResponseResult<UserFeature> getScoreAnalysis();
 }

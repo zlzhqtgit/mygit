@@ -435,7 +435,7 @@
 		}
 		var myChart = echarts.init(document.getElementById('major'));
 		myChart.setOption(option);
-		// alert(total_sc);
+		// alert(total_sc); 
 		for(var i=0;i<score.length;i++){
 			for(var j=0;j<total_sc.length;j++){
 				if(score[i][0]==total_sc[j][0]){
@@ -465,6 +465,5 @@
 		myChart1.setOption(option);
 		sectshow(3);
 	}
-
 
 

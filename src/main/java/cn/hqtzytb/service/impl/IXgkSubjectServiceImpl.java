@@ -4,11 +4,15 @@ import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.UserFeature;
+import cn.hqtzytb.entity.UserResultReport;
 import cn.hqtzytb.mapper.UserFeatureMapper;
+import cn.hqtzytb.mapper.UserMapper;
+import cn.hqtzytb.mapper.UserResultReportMapper;
 import cn.hqtzytb.service.IXgkSubjectService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +32,11 @@ import java.util.*;
 public class IXgkSubjectServiceImpl implements IXgkSubjectService {
     @Autowired
     private UserFeatureMapper userFeatureMapper;
+    @Autowired
+    private UserResultReportMapper userResultReportMapper;
+    @Autowired
+    private UserMapper userMapper;
+    
 
     public ResponseResult<Void> addPotentialAnalysis(String evaluationFraction) {
     	Session session = SecurityUtils.getSubject().getSession();
@@ -101,4 +110,43 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
         
         return new ResponseResult<>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS);
     }
+
+
+	@Override
+	public ResponseResult<Void> addScoreAnalysis(String evaluationFraction) {
+		if ("[]".equals(evaluationFraction)) {
+			return new ResponseResult<Void>(ResponseResult.ERR, "请至少输入一组数据");
+		}
+		Session session = SecurityUtils.getSubject().getSession();
+        Integer uid = (Integer) session.getAttribute("uid");
+        List<UserFeature> oldFeatures = userFeatureMapper.select(" uid = '" + uid + "' AND evaluation_type = '" + Constants.EVALUATION_TYPE_SCORE_ANALYSIS + "'", null, null, null);
+        UserFeature feature = new UserFeature();
+        if (oldFeatures.isEmpty()){
+            feature.setUid(uid);
+            feature.setEvaluationType(Constants.EVALUATION_TYPE_SCORE_ANALYSIS);
+            feature.setEvaluationName(Constants.EVALUATION_NAME_SCORE_ANALYSIS);
+            feature.setEvaluationFraction(evaluationFraction);
+            feature.setEvaluationTime(new Date());
+            userFeatureMapper.insert(feature);
+        } else {
+        	feature = oldFeatures.get(0);
+        	feature.setEvaluationFraction(evaluationFraction);
+            userFeatureMapper.update(feature);
+        }
+        return new ResponseResult<Void>(Constants.RESULT_CODE_SUCCESS, Constants.RESULT_MESSAGE_SUCCESS);
+	}
+
+
+	@Override
+	public ResponseResult<UserFeature> getScoreAnalysis() {
+		Session session = SecurityUtils.getSubject().getSession();
+        Integer uid = (Integer) session.getAttribute("uid");
+        List<UserFeature> userFeatures = userFeatureMapper.select(" uid = '" + uid + "' AND evaluation_type = '" + Constants.EVALUATION_TYPE_SCORE_ANALYSIS + "'" ,null,null,null);
+		if (!userFeatures.isEmpty()) {
+			return new ResponseResult<UserFeature>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS).setData(userFeatures.get(0));
+		}
+        return new ResponseResult<UserFeature>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+	}
+	
+
 }

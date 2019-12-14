@@ -79,11 +79,13 @@ function sendMobileMessage(e){
 function settime(obj) { //发送验证码倒计时
     if (countdown == 0) { 
     	obj.attr('disabled',false); 
+    	obj.removeAttr("style","pointer-events");
 	    obj.html("获取手机验证码");
 	    countdown = 60; 
 	    return;
 	} else { 
 	    obj.attr('disabled',true);
+	    obj.css("pointer-events","none"); 
 	    obj.html("重新获取验证码(" + countdown + ")");
 	    countdown--; 
 	} 

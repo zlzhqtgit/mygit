@@ -23,7 +23,8 @@ public class Constants{
 	public static final String EVALUATION_NAME_POTENTIAL_ANALYSIS = "潜能分析";
 	public static final String EVALUATION_TYPE_SCORE_ANALYSIS = "CJFX";
 	public static final String EVALUATION_NAME_SCORE_ANALYSIS = "成绩分析";
-
+	public static final String EVALUATION_TYPE_MBTI_ANALYSIS = "MBTI";
+	public static final String EVALUATION_TYPE_HOLLAND_ANALYSIS = "霍兰德";
 	/**
 	 * 加密方式
 	 */
