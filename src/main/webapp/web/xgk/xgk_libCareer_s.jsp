@@ -119,7 +119,7 @@
 					<div class="padding-side">
 						<h4 class="fontwei">共找到xx条结果</h4>
 					</div>
-				    <ul class="list-group search_result">
+				    <ul class="list-group search_result list_career">
 				        <li class="list-group-item width100">
 				        	<a class="width100" href="xgk_libCareer_d.jsp">
 				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>

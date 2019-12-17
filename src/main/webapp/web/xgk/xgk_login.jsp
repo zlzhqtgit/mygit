@@ -33,42 +33,51 @@
 				</ul>
 			</nav>
 		</header>
-		<banner class="">
+		<banner class="p_relative">
+			<div class="login_form">
+				<shiro:guest>
+					<form action="" method="post" >
+						<fieldset id="" class="">
+							<legend class="text-primary margin0"><h3 class="fontwei">臻选高考云端系统</h3></legend>
+							<div class="form-group">
+								<input id="mobile" onblur="check_mobile()" type="text" value="" placeholder="手机号"/>
+								<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
+							</div>
+							<div class="form-group">
+								<input id="password" onblur="check_pwd()" type="password" value="" placeholder="密码"/>
+								<label for="password"><span class="glyphicon glyphicon-tag text-muted"></span></label>
+							</div>
+						</fieldset>
+						
+						
+						<div class="text-center">
+							<input class="login_btn" type="button" name="" onclick="login()"  id="subm" value="登录" />
+						</div>
+						<div class="tip text-center text-danger margin_top1" id="tip1" style="height: 1em;"></div>
+						<div class="forget clearfix ">
+							<a href="reset_pwd.html" class="text-primary pull-left">忘记密码？</a>
+							<a href="javascript:void(0)" onclick="xgkRegister()" class="text-primary pull-right">免费注册</a>
+						</div>
+						<div class="">
+							<div class="text-primary text-center thirds_login">
+								<div class="third_line"></div>
+								<span class="text-primary">第三方账号登录</span>
+								<div class="third_line"></div>
+							</div>
+							<ul class="others_acc margin0">
+								<li><a  href="${pageContext.request.contextPath}/qq_login.do"><img src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></a></li>
+								<li><a href="javascript:;"><img onclick="wechatQRCode()" src="${pageContext.request.contextPath}/img/xgk/wechat.jpg"/></a></li>
+								<!--<li><a href="">淘宝</a></li>
+								<li><a href="">支付宝</a></li>-->
+							</ul>
+						</div>
+					</form>
+				</shiro:guest>
+			</div>
+		
 			 <!-- Swiper -->
 			<div class="swiper-container">				
-				<form action="" method="post" style="background-color: #ffffff;" onsubmit="return false">
-				<fieldset id="">
-					<legend class="text-primary"><h3>臻选高考云端系统</h3></legend>
-					<div class="">
-						<input id="mobile" onblur="check_mobile ()" type="text"  value="" placeholder="手机号"/>
-						<span class="glyphicon glyphicon-phone text-muted"></span>
-					</div>
-					<div class="margin_top1">
-						<input id="password" onblur="check_pwd ()" type="password" value="" placeholder="密码"/>
-						<span class="glyphicon glyphicon-tag text-muted"></span>
-					</div>
-				</fieldset>				
-				<div class="text-center margin_bot margin_top1">
-					<input class="login_btn" type="button" name="" onclick="login()"  id="subm" value="登录" />
-				</div>
-				<div class="tip text-center text-danger" id="tip1" style="height: 1em;"></div>
-				<div class="forget margin_top1 clearfix">
-					<a href="" class="text-primary pull-left">忘记密码？</a>
-					<a href="${pageContext.request.contextPath}/user/register.do" class="text-primary pull-right">免费注册</a>
-				</div>
-				<div class=" margin_top1">
-					<div class="text-primary thirds_login text-center">
-						<span class="text-primary">第三方账号登录</span>
-					</div>
-					<ul class="others_acc margin_top">
-						<li><a  href="${pageContext.request.contextPath}/qq_login.do"><img id="qqLogin" src="${pageContext.request.contextPath}/img/xgk/qq.jpg"/></a></li>
-
-						<li><a href="javascript:;"><img onclick="wechatQRCode()" src="${pageContext.request.contextPath}/img/xgk/wechat.jpg"/></a></li>
-					</ul>
-
-				</div>
-
-			</form>
+				
 				<script type="text/javascript">
 					function wechatQRCode() {
 						var weixin = '<div id="weixin" ></div>';

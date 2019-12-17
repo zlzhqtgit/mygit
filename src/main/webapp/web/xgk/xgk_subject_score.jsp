@@ -45,20 +45,15 @@
 							<thead>
 								<tr>
 									<th class="first" style="padding: 0;" rowspan="2">
-										<canvas id="myCanvas" style="width: 100%; height: 100%;">您的浏览器不支持 HTML5 canvas 标签。</canvas>
+										<canvas id="myCanvas" style="width: 128px; height: 92px;">您的浏览器不支持 HTML5 canvas 标签。</canvas>
 										<script type="text/javascript">
 											//绘制表格斜线头
-											var c = document
-													.getElementById("myCanvas");
+											var c = document.getElementById("myCanvas");
 											var ctx = c.getContext("2d");
 											ctx.strokeStyle = "#fff";
 											ctx.moveTo(0, 0);
-											var th_height = $("[class=first]")
-													.height();
-											// console.log(th_height);
-											var w = $("#myCanvas").width(), h = $(
-													"#myCanvas").height();
-											ctx.lineTo(w, h);
+											var w = $("#myCanvas").width(), h = $("#myCanvas").height();
+											ctx.lineTo(330, 166);
 											ctx.stroke();
 										</script>
 										<div class="x_axis text-center">科类</div>
@@ -471,26 +466,26 @@
 						style="margin-left: auto; margin-right: auto;">
 						<thead>
 							<tr style="background-color: #3b8bec; color: white;">
-								<th class="first" style="padding: 0;">
-									<canvas id="myCanvas" style="width: 100%; height: 100%;">您的浏览器不支持 HTML5 canvas 标签。</canvas>
-									<script type="text/javascript">
-										//绘制表格斜线头
-										var c = document
-												.getElementById("myCanvas");
-										var ctx = c.getContext("2d");
-										ctx.moveTo(0, 0);
-										ctx.strokeStyle = "#fff";
-										var th_height = $("[class=first]")
-												.height();
-										// console.log(th_height);
-										var w = $("#myCanvas").width(), h = $(
-												"#myCanvas").height();
-										ctx.lineTo(w, h);
-										ctx.stroke();
-									</script>
-									<div class="x_axis">科目 / 次数</div>
-									<div class="y_axis">成绩 / 排名</div>
+								<th class="first1" style="padding: 0;height: 5em;">
+									<canvas id="myCanvas1" style="width: 100%;height: 100%;">您的浏览器不支持 HTML5 canvas 标签。</canvas>
+									<div class="x_axis">科目</div>
+									<div class="y_axis">类别</div>
 								</th>
+								<script type="text/javascript">
+									//绘制表格斜线头
+									var c1 = document.getElementById("myCanvas1");
+									var ctx1 = c1.getContext("2d");
+									ctx1.strokeStyle = "#fff";
+									ctx1.moveTo(0, 0);
+									var th_height1 = $("[class=first1]").height();
+									
+									var w1 = $("#myCanvas1").width();
+									var h1 = $("#myCanvas1").height();
+									console.log(w1);
+									console.log(h1);
+									ctx1.lineTo(w1, h1);
+									ctx1.stroke();
+								</script>
 								<th>物理</th>
 								<th>化学</th>
 								<th>生物</th>

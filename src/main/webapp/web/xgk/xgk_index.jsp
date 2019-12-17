@@ -16,10 +16,10 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 	</head>
 	<body>
 	<!-- 页面顶部-->
@@ -46,7 +46,7 @@
 					</div>
 					<div class="tip text-center text-danger margin_top1" id="tip1" style="height: 1em;"></div>
 					<div class="forget clearfix ">
-						<a href="reset_pwd.html" class="text-primary pull-left">忘记密码？</a>
+						<a href="${pageContext.request.contextPath}/web/public/reset_pwd.jsp" class="text-primary pull-left">忘记密码？</a>
 						<a href="javascript:void(0)" onclick="xgkRegister()" class="text-primary pull-right">免费注册</a>
 					</div>
 					<div class="">
@@ -262,10 +262,10 @@
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect21.png" style="width: 3em;"/>
 									</div>
-									<p class="text-center text-white counter fontwei">2688</p>
+									<p class="text-center text-white fontwei">2688</p>
 								</div>
 							</div>
-							<p class="text-center">高等院校</p>
+							<p class="text-center margin_top1 fontwei">高等院校</p>
 						</li>
 						<li>
 							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
@@ -273,10 +273,10 @@
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect22.png" style="width: 3em;"/>
 									</div>
-									<p class="text-center text-white counter fontwei">6288</p>
+									<p class="text-center text-white fontwei">6288</p>
 								</div>
 							</div>
-							<p class="text-center">高校专业</p>
+							<p class="text-center margin_top1 fontwei">高校专业</p>
 						</li>
 						<li>
 							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;">
@@ -284,10 +284,10 @@
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect23.png" style="width: 3em;"/>
 									</div>
-									<p class="text-center text-white counter fontwei">3288</p>
+									<p class="text-center text-white fontwei">3288</p>
 								</div>
 							</div>
-							<p class="text-center">职业类型</p>
+							<p class="text-center margin_top1 fontwei">职业类型</p>
 						</li>
 						<li>
 							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
@@ -295,10 +295,10 @@
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect24.png" style="width: 3em;"/>
 									</div>
-									<p class="text-center text-white fontwei"><span class="counter">30</span>W+</p>
+									<p class="text-center text-white fontwei"><span class="">30</span>W+</p>
 								</div>
 							</div>
-							<p class="text-center">考生信赖</p>
+							<p class="text-center margin_top1 fontwei">考生信赖</p>
 						</li>
 					</ul>
 				</div>	
@@ -352,116 +352,8 @@
 			    mobile: true, 
 			    live: true
 			}); 
-			$('.counter').countUp();
+			$(".counter").countUp();
 		</script>
-		<footer>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 col-sm-4 col-xs-4 list" style="padding-left: 4em;">
-						<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg">
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2 list">
-						<div class="footer_nav">
-							<h4>好前途</h4>
-							<div class="border-bt"></div>
-						</div>
-						<ul>
-							<li>
-								<a href="">关于我们</a>
-							</li>
-							<li>
-								<a href="">团队介绍</a>
-							</li>
-							<li>
-								<a href="">人才招聘</a>
-							</li>
-							<li>
-								<a href="">公司动态</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2 list">
-						<div class="footer_nav">
-							<h4>帮助与服务</h4>
-							<div class="border-bt"></div>
-						</div>
-						<ul>
-							<li>
-								<a href="">关于我们</a>
-							</li>
-							<li>
-								<a href="">团队介绍</a>
-							</li>
-							<li>
-								<a href="">人才招聘</a>
-							</li>
-							<li>
-								<a href="">公司动态</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2 list">
-						<div class="footer_nav">
-							<h4>合作专区</h4>
-							<div class="border-bt"></div>
-						</div>
-						<ul>
-							<li>
-								<a href="">关于我们</a>
-							</li>
-							<li>
-								<a href="">团队介绍</a>
-							</li>
-							<li>
-								<a href="">人才招聘</a>
-							</li>
-							<li>
-								<a href="">公司动态</a>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-2 col-sm-2 col-xs-2 list">
-						<div class="footer_nav">
-							<h4>企业专区</h4>
-							<div class="border-bt"></div>
-						</div>
-						<ul>
-							<li>
-								<a href="">关于我们</a>
-							</li>
-							<li>
-								<a href="">团队介绍</a>
-							</li>
-							<li>
-								<a href="">人才招聘</a>
-							</li>
-							<li>
-								<a href="">公司动态</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<div class="clearfix"></div>
-			<div class="company-info container">
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-6" style="padding-left: 4em;">
-						<p>微信：xdl6666</p>
-						<p>邮箱：401375488@qq.com</p>
-						<p>电话：0851-84721064</p>
-						<p>时间：9：00-18：00</p>
-						<p>公司地址：贵阳是观山湖区世纪金源国际财富中心B栋10楼</p>
-					</div>
-					<div class="copyright col-md-6 col-sm-6 col-xs-6" style="position: relative;">
-						<div id="" style="margin-top: 3em;">
-							<p><span class="glyphicon glyphicon-copyright-mark"></span>2019copyright All Rights Reserved 贵州好前途教育科技有限公司</p>
-							<p>电信与信息服务经营许可证：</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</footer>
+		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
 </html>

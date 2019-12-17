@@ -12,7 +12,7 @@
 		<header>
 			<div class="nav_wrap">
 				<div class="padding-side2">
-					<a href=""><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
+					<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
 				</div>
 				<nav id="navdh" class="clearfix">
 					<ul class="clearfix margin0">
@@ -22,7 +22,7 @@
 						<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
 						<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_s.jsp">职业库</a></li>
 						<li class="">
-							<a id="xgk6" name="dh" href="${pageContext.request.contextPath}/school/xgk_school_search.do">高校专业</a>
+							<a id="xgk6" name="dh" href="javascript:void(0)">高校专业&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="list-unstyled">
 								<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>
 								<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>
@@ -30,7 +30,7 @@
 						</li>
 						<li class=""><a id="xgk7" name="dh" href="#">学科推荐</a></li>
 						<li class="">
-							<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down text-muted"></span></a>
+							<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="list-unstyled">
 								<li><a id="xgk9" name="dh" href="#">新手教程</a></li>
 								<li><a id="xgk10" name="dh" href="#">商务合作</a></li>
@@ -40,20 +40,22 @@
 						</li>
 					</ul>
 				</nav>
-				<div>
-					<shiro:guest>
-						<div class="user">
-							<img src="${pageContext.request.contextPath}/img/xgk/user.png" >
-							<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
-						</div>
-					</shiro:guest>
-					<shiro:user>  
-					   <div class="user">
-							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
-							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
-						</div>
-					</shiro:user> 
-				</div>	
+			</div>
+			<div>
+				<shiro:guest>
+					<div class="user">
+						<a class="padding-side border_primary text-center" href=""><span class="glyphicon glyphicon-map-marker"></span><div>贵阳</div></a>
+						<img src="${pageContext.request.contextPath}/img/xgk/user.png" />
+						<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
+					</div>
+				</shiro:guest>
+				<shiro:user>  
+				   <div class="user">
+				   		<a class="padding-side border_primary" href=""><span class="glyphicon glyphicon-map-marker"></span></span><div>贵阳</div></a>
+						<a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp"><img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" /></a>
+						<span class="padding-side"><a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
+					</div>
+				</shiro:user> 
 			</div>
 		</header>
 		
