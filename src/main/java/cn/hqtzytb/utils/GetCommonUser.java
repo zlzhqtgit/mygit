@@ -2,6 +2,7 @@ package cn.hqtzytb.utils;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,6 +14,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.util.DigestUtils;
+
+import net.sf.json.JSONArray;
 
 /**
 * @Title: GetCommonUser.java
@@ -78,25 +81,31 @@ public class GetCommonUser {
 		return cpresult;
 	}
 
+
+	
 	/**
-	* @Title: getlogin
-	* @Description: (判断登录练)
-	* @param @param response
-	* @param @param request    
-	* @return void    
-	* @throws
+	 * 获取二位数组的值
+	 * @param jsonArray
+	 * @param request
+	 * @return
 	 */
-	public static void getlogin(HttpServletResponse response, HttpServletRequest request) {
-		try {
-			logger.info("用户名： 模块名：  操作：登录失效  状态：Failed!");
-			PrintWriter out = response.getWriter();
-			out.println("<html>");
-			out.println("<script>");
-			out.println("window.open ('" + request.getContextPath() + "/main/hqt_login.do','_top')");
-			out.println("</script>");
-			out.println("</html>");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	 public static List<List<String>>  getJson(JSONArray jsonArray,HttpServletRequest request){
+	  try {
+	   if(jsonArray.size()>0){
+	    List<List<String>> listTest = new ArrayList<List<String>>();
+	     for (int j = 0; j < jsonArray.size(); j++) {
+	               List<String> columnList = new ArrayList<String>();         
+	               columnList.add(0,(String) jsonArray.getJSONArray(j).getString(0));  
+	               columnList.add(1,(String) jsonArray.getJSONArray(j).getString(1));
+	               listTest.add(j, columnList);            
+	     }  
+	    return listTest;
+	   }else{
+	    return null;
+	   }    
+	  } catch (Exception e) {
+	   logger.error("访问路径："+request.getRequestURI()+"操作： 二维数组转List 错误信息: "+e);
+	   return null;
+	  }   
+	 }
 }

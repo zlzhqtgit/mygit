@@ -1,6 +1,8 @@
 package cn.hqtzytb.entity;
 
 import java.io.Serializable;
+
+import org.springframework.stereotype.Component;
 /**
  * 
 * @ClassName: PhotoConfig
@@ -8,6 +10,7 @@ import java.io.Serializable;
 * @author: ZhouLingZhang
 * @date 2019年9月3日
  */
+@Component
 public class PhotoConfig implements Serializable
 {	
 	private static final long serialVersionUID = 5930016584187491569L;

@@ -38,5 +38,5 @@ public enum Combination {
         this.one = one;
         this.two = two;
         this.three = three;
-    }
+    } 
 }

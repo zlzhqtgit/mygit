@@ -45,9 +45,9 @@
                 var cc = '[{"name":"行业收入","value":[{"vocation":"金融/投资/证券","money":"￥7680"},{"vocation":"金融/投资/证券","value":"￥7680"}]},{"name":"地区收入","value":[{"area":"北京","money":"￥5220"},{"area":"上海","money":"￥5170"}]}]';
                 // console.log(a)
                 // var cc = '[{"行业收入":[{"name":"金融/投资/证券","money":"￥7680"},{"name":"金融/投资/证券","value":"￥7680"}]},{"地区收入":[{"name":"北京","money":"￥5220"},{"name":"上海","money":"￥5170"}]}]';
-                var cc = '[{"industryName":"采矿业"},{"industryName":"电力、热力、燃气及水生产和供应业"},{"industryName":"房地产业"},{"industryName":"公共管理、社会保障和社会组织"},{"industryName":"建筑业"},{"industryName":"交通运输、仓储和邮政业"},{"industryName":"教育"},{"industryName":"金融业"},{"industryName":"居民服务、修理和其他服务业"},{"industryName":"科学研究和技术服务业"},{"industryName":"农、林、牧、渔业"},{"industryName":"批发和零售业"},{"industryName":"水利、环境和公共设施管理业"},{"industryName":"通用（或其他）"},{"industryName":"卫生和社会工作"},{"industryName":"文化、体育和娱乐业"},{"industryName":"信息传输、软件和信息技术服务业"},{"industryName":"制造业"},{"industryName":"住宿和餐饮业"},{"industryName":"租赁和商务服务业"}]'
+                var cc = '{"年份":2019,"省份":"贵州省","录取类型":"理科","平均分":80,"最低分":70,"最高分":150,"投档线":500,"提档位次":100,"线差":200,"省控线":700,"最低位次":1500,"录取人数":500,"去年录取人数":500,"录取批次":"第一批次"}'
                 var c = JSON.parse(cc) 
-                console.log(c);
+                console.log(c.年份);
                 $("#test").html("<a>" + a.employmentIndustryDistribution + "</a>")
             }
         })

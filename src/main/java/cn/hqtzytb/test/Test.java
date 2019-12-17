@@ -1,17 +1,23 @@
 package cn.hqtzytb.test;
 
 
+import cn.hqtzytb.utils.Combination;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringUtils;
+
 
 /**
  * @ClassName: Test
@@ -47,7 +53,15 @@ public class Test {
         System.out.println();
         System.out.println(new Test().getClass().getResource("/").getPath());
 //        432393A3840199E0957E15C9942769B6
-        System.out.println("111111:" + new GetCommonUser().getEncrpytedPassword(Constants.MD5,"111111","E5160889-0ADC-47B7-90F4-EB0080752C73",1024));
+     
+        
+        Pattern pattern = Pattern.compile("\\d{6}");
+        Matcher matcher = pattern.matcher("奥斯卡汇顶科技按时还款的骄傲和授课计划123045哈萨克电话卡精神可嘉023568");
+        while(matcher.find()){
+        	System.err.println(matcher.group());
+        }
+        
+        String year = new SimpleDateFormat("yyyy").format(new Date());
     }
 
 

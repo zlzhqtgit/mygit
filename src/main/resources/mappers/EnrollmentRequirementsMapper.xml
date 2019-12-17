@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hqtzytb.mapper.EnrollmentRequirementsMapper" >
+  <resultMap id="BaseResultMap" type="cn.hqtzytb.entity.EnrollmentRequirements" >
+    <id column="e_id" property="eId" />
+    <result column="e_year" property="eYear" />
+    <result column="e_province" property="eProvince" />
+    <result column="e_education" property="eEducation" />
+    <result column="universities_code" property="universitiesCode" />
+    <result column="universities_name" property="universitiesName" />
+    <result column="enrollment_major" property="enrollmentMajor" />
+    <result column="include_major" property="includeMajor" />
+    <result column="preferred_subject" property="preferredSubject" />
+    <result column="reelection_subjects" property="reelectionSubjects" />
+    <result column="subject_combination" property="subjectCombination" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    e_id, e_year, e_province, e_education, universities_code, universities_name, enrollment_major, 
+    include_major, preferred_subject, reelection_subjects, subject_combination
+  </sql>
+ 
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from enrollment_requirements where e_id = #{eId}
+  </delete>
+  
+  <insert id="insert" parameterType="cn.hqtzytb.entity.EnrollmentRequirements" >
+    insert into enrollment_requirements
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        e_id,
+      </if>
+      <if test="eYear != null" >
+        e_year,
+      </if>
+      <if test="eProvince != null" >
+        e_province,
+      </if>
+      <if test="eEducation != null" >
+        e_education,
+      </if>
+      <if test="universitiesCode != null" >
+        universities_code,
+      </if>
+      <if test="universitiesName != null" >
+        universities_name,
+      </if>
+      <if test="enrollmentMajor != null" >
+        enrollment_major,
+      </if>
+      <if test="includeMajor != null" >
+        include_major,
+      </if>
+      <if test="preferredSubject != null" >
+        preferred_subject,
+      </if>
+      <if test="reelectionSubjects != null" >
+        reelection_subjects,
+      </if>
+      <if test="subjectCombination != null" >
+        subject_combination,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        #{eId},
+      </if>
+      <if test="eYear != null" >
+        #{eYear},
+      </if>
+      <if test="eProvince != null" >
+        #{eProvince},
+      </if>
+      <if test="eEducation != null" >
+        #{eEducation},
+      </if>
+      <if test="universitiesCode != null" >
+        #{universitiesCode},
+      </if>
+      <if test="universitiesName != null" >
+        #{universitiesName},
+      </if>
+      <if test="enrollmentMajor != null" >
+        #{enrollmentMajor},
+      </if>
+      <if test="includeMajor != null" >
+        #{includeMajor},
+      </if>
+      <if test="preferredSubject != null" >
+        #{preferredSubject},
+      </if>
+      <if test="reelectionSubjects != null" >
+        #{reelectionSubjects},
+      </if>
+      <if test="subjectCombination != null" >
+        #{subjectCombination},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="cn.hqtzytb.entity.EnrollmentRequirements" >
+    update enrollment_requirements
+    <set >
+      <if test="eYear != null" >
+        e_year = #{eYear},
+      </if>
+      <if test="eProvince != null" >
+        e_province = #{eProvince},
+      </if>
+      <if test="eEducation != null" >
+        e_education = #{eEducation},
+      </if>
+      <if test="universitiesCode != null" >
+        universities_code = #{universitiesCode},
+      </if>
+      <if test="universitiesName != null" >
+        universities_name = #{universitiesName},
+      </if>
+      <if test="enrollmentMajor != null" >
+        enrollment_major = #{enrollmentMajor},
+      </if>
+      <if test="includeMajor != null" >
+        include_major = #{includeMajor},
+      </if>
+      <if test="preferredSubject != null" >
+        preferred_subject = #{preferredSubject},
+      </if>
+      <if test="reelectionSubjects != null" >
+        reelection_subjects = #{reelectionSubjects},
+      </if>
+      <if test="subjectCombination != null" >
+        subject_combination = #{subjectCombination},
+      </if>
+    </set>
+    where e_id = #{eId}
+  </update>
+  
+  <select id="select" resultType="cn.hqtzytb.entity.EnrollmentRequirements">
+	select
+		 <include refid="Base_Column_List" />
+	from 
+		enrollment_requirements
+	<if test="where != null">where ${where}</if>
+	<if test="orderBy != null">order by ${orderBy}</if>
+	<if test="offset != null">limit ${offset},${countPerPage}</if>
+  </select>
+</mapper>

@@ -73,10 +73,22 @@
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
 	</select>
 
-	<select id="selectvoction" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		FROM specialty b
+	<select id="selectvoction" resultType="cn.hqtzytb.entity.Specialty">
+		SELECT
+			b.id, b.specialty_id, b.specialty_name, b.specialty_intro,
+			b.specialty_major_name, b.specialty_class_name, b.specialty_divided,
+			b.specialty_disciplines, b.specialty_education, b.study_duration,
+			b.bachelor_degree, male_female_ratio, b.specialty_summary,
+			b.train_requirement, b.subject_requirement, b.knowledge_ability, 
+			b.postgraduate_direction, b.employment_career_direction,
+			b.employment_industry_distribution, b.employment_area_distribution,major_courses,
+			b.specialty_objective, b.specialty_employment, b.specialty_requirement,
+			b.physics_performance, b.chemistry_performance, b.biology_performance, 
+			b.politic_performance, b.history_performance, b.geography_performance,
+			b.chinese_performance, b.math_performance, b.foreign_performance, 
+			b.above_a, b.equal_a, b.below_a, b.above_b, b.open_college
+		FROM 
+			specialty b
 		LEFT JOIN vocation_specialty e ON b.specialty_id = e.specialty_id
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>

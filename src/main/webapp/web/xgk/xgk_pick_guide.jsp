@@ -15,6 +15,8 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/area_json.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 	</head>
 
 	<body>
@@ -88,7 +90,51 @@
 										<div class="doneStep bg-warning" style="border-top-right-radius: 1em; border-bottom-right-radius: 1em;"></div>
 									</div>
 								</div>
-								<script type="text/javascript">
+							</div>
+						</div>
+						<div class="margin_top">
+							<h3 class="text-muted fontwei" >理想职业</h3>
+							<div class="">请在下列表格中选择一种您心仪的职业</div>
+							<div class="margin_top1">
+								<select name="" class="large_class" onclick='selectVocation()'>
+									<option value="">请选择一种心仪 的职业大类</option>
+									<option value="">工程师</option>
+									<option value="">设计师</option>
+								</select>
+							</div>
+							<table class="table-bordered margin_top1 width100" style="text-align: center;" id="vocation_list">
+								<tr><td>报刊发行员</td><td>编辑</td><td>编曲家</td><td>导演</td><td>雕刻师</td></tr>
+								<tr><td>歌手</td><td>教练</td><td>记者</td><td>录音师</td><td>漫画家</td></tr>
+							</table>
+						</div>
+						<div class="margin_top">
+							<h3 class="text-muted fontwei">理想专业</h3>
+							<div class="">根据您选择的职业，我们为您推荐了以下专业，请从中选择一种您心仪的专业。</div>
+							<div class="text-center margin_top1">
+								<select class="province_list">
+									<option>成都</option>
+									<option selected="selected">贵州</option>
+									<option>上海</option>
+								</select>
+								<select name="" class="specialty_list">
+									<option value="0" selected="selected">请选择专业</option>
+								</select>
+								
+							</div>
+						</div>
+					</div>
+					<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a></p>
+				</div>
+			</section>
+		</main>
+
+		<!-- 右侧边栏-->
+		<c:import url="../public/side_right.jsp"></c:import>
+		<!-- 页面底部-->
+		<c:import url="footer.jsp"></c:import>	
+
+	</body>
+	<script type="text/javascript">		
 									new WOW().init(); 
 									var wow = new WOW({  
 									    boxClass: 'wow', //需要执行动画的class 
@@ -102,7 +148,6 @@
 									var step_wrap=$(".step_wrap .circle .glyphicon");
 									var btn=$(".step_wrap .done_item>p");
 									for (var i=0;i<step_wrap.length;i++){
-										console.log(step_wrap[i].getAttribute("class"))
 										if (step_wrap[i].getAttribute("class")=="glyphicon glyphicon-remove") {
 											btn[i].style.display="block";
 										} else{
@@ -115,11 +160,6 @@
 									var potentail = "${POTENTIAL_ANALYZE}";//学科潜能
 									var cognize = "${COGNIZE_ANALYZE}";//认知测评
 									var largeClass = JSON.parse('${LARGE_CLASS}');//职业大类
-									console.log('${LARGE_CLASS}')
-									//for(var i=0; i<largeClass.length; i++){
-									//	console.log(largeClass[0])
-										//vactionLargeClass += "<option value=''>"+ largeClass[0] + "</option>";
-									//}
 									$(function(){
 										var type_start = "<p class='fontwei'>";
 										var type_end = "</p>";
@@ -150,48 +190,124 @@
 											$(".analyze1").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/xk/xgk_guide_select.do');
 										}
 										
-										var vactionLargeClass = "<option value="">请选择一种心仪 的职业大类</option>";
-										
+										var vocationLargeClass = "<option value=''>请选择一种心仪 的职业大类</option>";
+										for(var i=0; i<largeClass.length; i++){
+											vocationLargeClass += "<option value=''>"+ largeClass[i].industryName + "</option>";
+										}
+										$(".large_class").html(vocationLargeClass);
 									});
+									
+									//查询职业列表清单
+									function selectVocation(){
+										var industryName = $('.large_class').find("option:selected").text();
+										$.ajax({
+											url:"${pageContext.request.contextPath}/xk/xgk_guide_vocation_list.do",
+											data:"industryName=" + industryName,
+											type:"POST",
+											dataType:"json",
+											success:function(obj){
+												//console.log(obj.data[0])
+												if(obj.state == 1){
+													var data = obj.data;
+													var vocationList = "<tr>";
+													var id = "";
+													var name = "";
+													for(var j=1; j<data.length; j++){
+														if (j%5 == 0 && j>0){
+															vocationList += "</tr><tr>";//
+														}
+														id = data[j].vocationId;
+														name = data[j].vocationName;
+														vocationList += '<td onclick="getSpecialtyList(this)" id="' + id + '">' + name + '</td>';
+													}
+													$("#vocation_list").html(vocationList + "</tr>");
+												}
+											}
+										});
+									}
+									
+									//获得专业列表清单
+									function getSpecialtyList(e){
+										var vocationId = $(e).attr("id");
+										$.ajax({
+											url:"${pageContext.request.contextPath}/xk/xgk_guide_specialt_list.do",
+											data:"vocationId=" + vocationId,
+											type:"POST",
+											dataType:"json",
+											success:function(obj){
+												if(obj.state == 1){
+													var data = obj.data;
+													var specialtyList = "";
+													for(var i=0; i<data.length; i++){
+														specialtyList += "<option value='" + data[i].specialtyId + "'>" + data[i].specialtyName + "</option>";
+													}
+													$(".specialty_list").html(specialtyList);
+												}
+											}
+										});	
+									}
+									
+									//加载省份信息
+									var myprovince = '${province}';
+									$(function(){
+										var provinceList = "";	
+										for(var i=0; i<area_json.length; i++){
+											if(area_json[i].name == myprovince){
+												provinceList += "<option selected='selected'>" + area_json[i].name + "</option>";
+											} else {
+												provinceList += "<option>" + area_json[i].name + "</option>";
+											}
+										}
+										$(".province_list").html(provinceList);
+									});
+									
+
+									//点击生成报告
+									function generateReport(){
+										if(score != 1){
+											layer.msg("请先完成成绩分析相关测评后继续该操作！",{icon:2,time:1000});
+											return;
+										}
+										if(potentail != 1){
+											layer.msg("请先完成学科潜能相关测评后继续该操作！",{icon:2,time:1000});
+											return;
+										}
+										if(cognize != 1){
+											layer.msg("请先完成认知相关测评后继续该操作！",{icon:2,time:1000});
+											return;
+										}
+										var specialtyId = $(".specialty_list option:selected").val();//专业ID
+										var province = $(".province_list option:selected").text();//省份信息
+										if(specialtyId == "" || specialtyId == "0"){
+											layer.msg("请选择专业",{icon:2,time:1000});
+											return;
+										}else{
+											$.ajax({
+												url:"${pageContext.request.contextPath}/xk/xgk_pick_verdict.do",
+												data:"",
+												type:"POST",
+												contentType: 'text/json,charset=utf-8',
+												dataType:"json",
+												success:function(obj){
+													if(obj.state == 1){
+														location.href = "${pageContext.request.contextPath}/xk/xgk_pick_report.do?province=" + decodeURI(province) + "&specialtyId=" + specialtyId;
+													} else if(obj.state == 2){
+														layer.confirm(obj.message, {
+															  btn: ['确认', '取消']
+															}, function(index, layero){
+																console.log(22222)
+																location.href = "${pageContext.request.contextPath}/xk/xgk_pick_report.do?province=" + decodeURI(province) + "&specialtyId=" + specialtyId;
+															}, function(index){
+																console.log(22222)
+																layer.close(index);
+															}); 
+														console.log(333)
+													} else {
+														layer.msg(obj.message,{icon:2,time:1000});
+													}
+												}
+											});	
+										}
+									}
 								</script>
-							</div>
-						</div>
-						<div class="margin_top">
-							<h3 class="text-muted fontwei">理想职业</h3>
-							<div class="">请在下列表格中选择一种您心仪的职业</div>
-							<div class="margin_top1">
-								<select name="" class="large_class">
-									<option value="">请选择一种心仪 的职业大类</option>
-									<option value="">工程师</option>
-									<option value="">设计师</option>
-								</select>
-							</div>
-							<table class="table-bordered margin_top1 width100" style="text-align: center;">
-								<tr><th>职业名称</th><th>职业名称</th><th>职业名称</th><th>职业名称</th><th>职业名称</th></tr>
-								<tr><td>职业名称</td><td>职业名称</td><td>职业名称</td><td>职业名称</td><td>职业名称</td></tr>
-							</table>
-						</div>
-						<div class="margin_top">
-							<h3 class="text-muted fontwei">理想专业</h3>
-							<div class="">根据您选择的职业，我们为您推荐了以下专业，请从中选择一种您心仪的专业。</div>
-							<div class="text-center margin_top1">
-								<select name="">
-									<option value="">国际经济与政治</option>
-									<option value="">汉语言文学</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="${pageContext.request.contextPath}/web/xgk/xgk_pick_report.jsp">生成报告</a></p>
-				</div>
-			</section>
-		</main>
-
-		<!-- 右侧边栏-->
-		<c:import url="../public/side_right.jsp"></c:import>
-		<!-- 页面底部-->
-		<c:import url="footer.jsp"></c:import>	
-
-	</body>
-
 </html>
