@@ -3,14 +3,14 @@
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="cn.hqtzytb.mapper.UserResultReportMapper" >
   <resultMap id="BaseResultMap" type="cn.hqtzytb.entity.UserResultReport" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
-    <result column="specialty_id" property="specialtyId" jdbcType="VARCHAR" />
-    <result column="province" property="province" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
-    <result column="result" property="result" jdbcType="VARCHAR" />
+    <id column="id" property="id" />
+    <result column="uid" property="uid" />
+    <result column="specialty_id" property="specialtyId" />
+    <result column="province" property="province" />
+    <result column="start_time" property="startTime" />
+    <result column="end_time" property="endTime" />
+    <result column="status" property="status" />
+    <result column="result" property="result" />
   </resultMap>
   
   <sql id="Base_Column_List" >

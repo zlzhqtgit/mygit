@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,7 @@
 		<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/html2canvas.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/jspdf.debug.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 	</head>
 
 	<body>
@@ -29,7 +31,11 @@
 					<div class="panel panel-default border-radius box-shadow">
 						<div class="panel-body padding-side2">
 							<div class="margin_top margin_bot">
-								<div class=""><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/><span class="padding-side">你好！</span></div>
+								<div class="">
+									<shiro:guest><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/></shiro:guest>
+									<shiro:user><img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 3em;"/></shiro:user>
+									<span class="padding-side">你好！</span>
+								</div>
 								<div class="padding-side2 margin_top1">
 									这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍
 									这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍
@@ -63,7 +69,7 @@
 							<div class="">
 								<h4 class="fontwei">通过测评结果对比分析，根据您的结果我们对20种组合方式的排序如下表：</h4>
 								<div class="padding-side2">
-									<table class="combile_xuank width100" border="" cellspacing="" cellpadding="">
+									<table class="combile_xuank width100" border="" cellspacing="" cellpadding="" id="recommend_combination">
 										<tr><td>1 物化生</td><td>1 物化生</td><td>1 物化生</td><td>1 物化生</td></tr>
 										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
@@ -82,7 +88,7 @@
 						<div class="">
 							<div class="">
 								<p class="padding-side2">根据你所在省份的高考政策以及高等院校在您所在的省份的招生考试及您所选择的理想专业，我们依照专业的招生考试要求，为您列举如下几种报考本专业的学科组合方式：</p>
-								<ul class="combile clearfix">
+								<ul class="combile clearfix" id="policy_combination">
 									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
 									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
 									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
@@ -99,23 +105,145 @@
 									<li class=""><div class="border-primary">物理+化学+生物</div></li>
 									<li class=""><div class="border-primary">物理+化学+生物</div></li>
 								</ul>
-							</div>
+								<div class="open-btn margin_top margin_bot" style="height: 50px;position: relative;background: inherit;">
+									<a class="downloadReport show_more btn btn-primary" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>
+		          				</div>
+		          			</div>
 						</div>
 					</div>
 				</div>	
 			</section>
-			<div class="open-btn margin_top margin_bot" style="height: 50px;position: relative;background: inherit;">
-				<a class="downloadReport show_more btn btn-primary" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>
-            </div>
-			<!--<p class="text-center margin_bot"><a class="downloadReport btn btn-primary" href="javascript:void(0)">下载报告</a></p>-->
-			<script type="text/javascript">
+		</main>
+		
+		<!--<p class="text-center margin_bot"><a class="downloadReport btn btn-primary" href="javascript:void(0)">下载报告</a></p>-->
+		<!-- 右侧边栏-->
+		<c:import url="../public/side_right.jsp"></c:import>
+		<!-- 页面底部-->
+		<c:import url="footer.jsp"></c:import>
+
+	</body>
+	<script type="text/javascript">
+								//最终推荐学科组合	
+								$(function(){
+									var combination = JSON.parse('${combination}');
+									var result = "";
+									for(var i=0; i<3; i++){//只展示3课
+										result += "<li class=''><div class='border-primary' onclick='saveReport(this)'>" + combination[i].key + "</div></li>";	
+									}
+									$(".combile1").html(result);
+								}); 
+								
+								//保存学科组合数据
+								function saveReport(e){
+									var result = $(e).text();
+									$.ajax({
+										url:"${pageContext.request.contextPath}/xk/xgk_add_report.do",
+										data:"result=" + result,
+										type:"POST",
+										dataType:"json",
+										success:function(obj){
+											if(obj.state == 1){
+												layer.msg(obj.message,{icon:1,time:1000});
+											}else{
+												layer.msg(obj.message,{icon:2,time:1000});
+											}
+											
+										}
+									});
+								}
+							
+								//当地本专业 政策允许 学科组合
+								$(function(){
+									var recommend_combination = JSON.parse('${policy_combination}');
+									var policy = "";
+									for(var i=0; i<recommend_combination.length; i++ ){
+										policy += "<li class='fontwei text-primary'><div class='border-primary'>" + recommend_combination[i] + "</div></li>"
+									}
+									$("#policy_combination").html(policy);
+								});
+								
+								//测评推荐组合
+								$(function(){
+									var recommend_combination = JSON.parse('${recommend_combination}');
+									var recommend = "<tr>";
+									for(var i=0; i<recommend_combination.length; i++){
+										if(i%5 == 0 && i > 0){
+											recommend += "</tr><tr>";
+										}
+										recommend += "<td>" + recommend_combination[i] + "</td>";
+									}
+									$("#recommend_combination").html(recommend + "</tr>");
+								});
 				$(function() {
+					
 					pie_ring("analyse_score","成绩分析")
-					pie_ring("analyse_score1","潜能分析")
+					pie_ring1("analyse_score1","潜能分析")
 					bar_Yaxis("analyse_score2","认知分析")
 					
+					/* var myChart_circle = echarts.init(document.getElementById('analyse_score'));
+					myChart_circle.setOption(option); */
+					
+					//成绩分析
+					function pie_ring(id,title) {
+						var score_analyse = JSON.parse('${score_analyse}');
+				    		var myChart_circle = echarts.init(document.getElementById(id));
+				    		var option = {
+								    title: [{
+								        text: title,
+								        left:'50%',
+								        bottom:'44%',
+								        textStyle:{
+								            fontSize:20,
+								            color:"black"
+								        },
+								        subtextStyle: {
+								            fontSize: 20,
+								            color: 'black'
+								        },
+								        textAlign:"center",
+								        x: '20%',
+								    }],
+								    tooltip: {
+								        trigger: 'item',
+								        formatter: "{a} <br/>{b}: {c} ({d}%)"
+								    },
+								    series: [
+								        {
+								            name:'成绩分析',
+								            type:'pie',
+								            radius: ['50%', '70%'],
+								            label: {
+								                normal: {
+								                    show: true
+								                },
+								                emphasis: {
+								                    show: false
+								                }
+								            },
+								            labelLine: {
+								                normal: {
+								                    show: true
+								                }
+								            },
+								            data:[
+								                {value:score_analyse[0][1], name:score_analyse[0][0]},
+								                {value:score_analyse[1][1], name:score_analyse[1][0]},
+								                {value:score_analyse[2][1], name:score_analyse[2][0]},
+								                {value:score_analyse[3][1], name:score_analyse[3][0]},
+								                {value:score_analyse[4][1], name:score_analyse[4][0]},
+								                {value:score_analyse[5][1], name:score_analyse[5][0]}
+								            ]
+								        }
+								    ]
+								};	
+						myChart_circle.setOption(option);
+				    } 
+					
+					
+					//认知分析
 					function bar_Yaxis(id,title) {
 						var myChart_circle = echarts.init(document.getElementById(id));
+						var cognize_analyze = JSON.parse('${cognize_analyze}');
 						option = {
 						    title: {
 						        text: title,
@@ -153,7 +281,7 @@
 						    },
 						    yAxis: {
 						        type: 'category',
-						        data: ['湖北省', '湖南省', '河南省', '安徽省', '浙江省', '山东省'],
+						        data: [cognize_analyze[0].key, cognize_analyze[1].key, cognize_analyze[2].key, cognize_analyze[3].key, cognize_analyze[4].key, cognize_analyze[5].key],
 						        axisTick:{
 						        	show:false,
 						        },
@@ -195,63 +323,93 @@
 						        markPoint:{
 						        	silent :true,
 						        },
-						        data: [22, 33, 44, 55, 66, 77]
+						        data: [cognize_analyze[0].value/10, cognize_analyze[1].value/10, cognize_analyze[2].value/10, cognize_analyze[3].value/10, cognize_analyze[4].value/10, cognize_analyze[5].value/10]
 						    }]
 						};
 						myChart_circle.setOption(option);
 					}
 					
-					function pie_ring(id,title) {
-				    	var myChart_circle = echarts.init(document.getElementById(id));
-					    var option = {
-						    title: [{
-						        text: title,
-						        left:'50%',
-						        bottom:'44%',
-						        textStyle:{
-						            fontSize:20,
-						            color:"black"
-						        },
-						        subtextStyle: {
-						            fontSize: 20,
-						            color: 'black'
-						        },
-						        textAlign:"center",
-						        x: '20%',
-						    }],
-						    tooltip: {
-						        trigger: 'item',
-						        formatter: "{a} <br/>{b}: {c} ({d}%)"
-						    },
-						    series: [
-						        {
-						            name:'访问来源',
-						            type:'pie',
-						            radius: ['50%', '70%'],
-						            label: {
-						                normal: {
-						                    show: true
-						                },
-						                emphasis: {
-						                    show: false
-						                }
-						            },
-						            labelLine: {
-						                normal: {
-						                    show: true
-						                }
-						            },
-						            data:[
-						                {value:335, name:'直接访问'},
-						                {value:310, name:'邮件营销'},
-						                {value:234, name:'联盟广告'},
-						                {value:135, name:'视频广告'},
-						                {value:1548, name:'搜索引擎'}
-						            ]
-						        }
-						    ]
-						};
-						myChart_circle.setOption(option);
+					//潜能分析
+					function pie_ring1(id,title) {	
+						var potential_analyse = JSON.parse('${potential_analyse}');	
+					    	var wul  = 0;
+					    	var huax  = 0;
+					    	var shengw  = 0;
+					    	var zhengz  = 0;
+					    	var lis  = 0;
+					    	var dil  = 0;
+					     for(var i=0; i<potential_analyse.length; i++){
+					    		if(potential_analyse[i][0] == '物'){
+						    		 wul += potential_analyse[i][2];
+						    	 }
+						    	 if(potential_analyse[i][0] == '化'){
+						    		 huax += potential_analyse[i][2];
+						    	 }
+						    	 if(potential_analyse[i][0] == '生'){
+						    		 shengw += potential_analyse[i][2];
+						    	 }
+						    	 if(potential_analyse[i][0] == '政'){
+						    		 zhengz += potential_analyse[i][2];
+						    	 }
+						    	 if(potential_analyse[i][0] == '历'){
+						    		 lis += potential_analyse[i][2];
+						    	 }
+						    	 if(potential_analyse[i][0] == '地'){
+						    		 dil += potential_analyse[i][2];
+						    	 }
+				     	}    
+					     
+					     var myChart_circle = echarts.init(document.getElementById(id));
+					    	var option = {
+							    title: [{
+							        text: title,
+							        left:'50%',
+							        bottom:'44%',
+							        textStyle:{
+							            fontSize:20,
+							            color:"black"
+							        },
+							        subtextStyle: {
+							            fontSize: 20,
+							            color: 'black'
+							        },
+							        textAlign:"center",
+							        x: '20%',
+							    }],
+							    tooltip: {
+							        trigger: 'item',
+							        formatter: "{a} <br/>{b}: {c} ({d}%)"
+							    },
+							    series: [
+							        {
+							            name:'访问来源',
+							            type:'pie',
+							            radius: ['50%', '70%'],
+							            label: {
+							                normal: {
+							                    show: true
+							                },
+							                emphasis: {
+							                    show: false
+							                }
+							            },
+							            labelLine: {
+							                normal: {
+							                    show: true
+							                }
+							            },
+							            data:[
+							                {value:wul, name:'物理'},
+							                {value:huax, name:'化学'},
+							                {value:shengw, name:'生物'},
+							                {value:zhengz, name:'政治'},
+							                {value:lis, name:'历史'},
+							                {value:dil, name:'地理'}
+							            ]
+							        }
+							    ]
+							};
+							myChart_circle.setOption(option);
 				    }
 					
 					function download(){
@@ -313,14 +471,4 @@
 					})
 				})
 			</script>
-			
-		</main>
-
-		<!-- 右侧边栏-->
-		<c:import url="../public/side_right.jsp"></c:import>
-		<!-- 页面底部-->
-		<c:import url="footer.jsp"></c:import>
-
-	</body>
-
 </html>

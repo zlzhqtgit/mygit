@@ -1,19 +1,13 @@
 package cn.hqtzytb.controller;
 
-
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import cn.hqtzytb.utils.Constants;
-import cn.hqtzytb.utils.GetCommonUser;
-import cn.hqtzytb.utils.Photo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +21,16 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
-import cn.hqtzytb.entity.UserFeature;
-import cn.hqtzytb.entity.UserRole;
-import cn.hqtzytb.entity.UserRoleDetails;
 import cn.hqtzytb.exception.MyRuntimeException;
 import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
-import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.service.IUserRoleDetailsServer;
 import cn.hqtzytb.service.IUserRoleServer;
 import cn.hqtzytb.service.IUserServer;
+import cn.hqtzytb.utils.Constants;
+import cn.hqtzytb.utils.GetCommonUser;
+import cn.hqtzytb.utils.Photo;
 import net.sf.json.JSONObject;
+
 
 /**
 * @Title: UserController.java
@@ -124,6 +118,7 @@ public class UserController {
 				session.setAttribute("uid", user.getId());
 				session.setAttribute("username", user.getUsername());
 				session.setAttribute("headUrl", user.getHeadUrl());
+				session.setAttribute("province", user.getProvince());
 				JSONObject userJson = JSONObject.fromObject(user);
 				session.setAttribute("userJson", userJson);//提供给前端页面使用
 				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
