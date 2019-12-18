@@ -107,15 +107,15 @@ public class VocationServerImpl implements IVocationServer {
 		}
 		Session session = SecurityUtils.getSubject().getSession();
 		//salary_trend 薪资趋势
-		session.setAttribute("salary_trend", GetCommonUser.getJson(JSONArray.fromObject(vocation.getSalaryTrend()), request));
+		session.setAttribute("salary_trend", GetCommonUser.getJson(vocation.getSalaryTrend(), request));
 		//salaryDistribution 薪资分布
-		session.setAttribute("salary_distribution", GetCommonUser.getJson(JSONArray.fromObject(vocation.getSalaryDistribution()), request));
+		session.setAttribute("salary_distribution", GetCommonUser.getJson(vocation.getSalaryDistribution(), request));
 				
 		//就业趋势(按学历) employmentSituationEducation
-		session.setAttribute("employment_situation_education", GetCommonUser.getJson(JSONArray.fromObject(vocation.getEmploymentSituationEducation()), request));	
+		session.setAttribute("employment_situation_education", GetCommonUser.getJson(vocation.getEmploymentSituationEducation(), request));	
 		
 		//就业趋势(按经验) employmentSituationExperience	
-		session.setAttribute("employment_situation_experience", GetCommonUser.getJson(JSONArray.fromObject(vocation.getEmploymentSituationExperience()), request));
+		session.setAttribute("employment_situation_experience", GetCommonUser.getJson(vocation.getEmploymentSituationExperience(), request));
 		
 		//从业资格 requirement_qualification
 		session.setAttribute("requirement_qualification", vocation.getRequirementQualification().split(";"));
@@ -126,9 +126,9 @@ public class VocationServerImpl implements IVocationServer {
 		
 		JSONArray jsonArray = JSONArray.fromObject(vocation.getProspect());
 		//行业收入 industry_income
-		session.setAttribute("industry_income", GetCommonUser.getJson(JSONArray.fromObject(jsonArray.get(0)), request));
+		session.setAttribute("industry_income", GetCommonUser.getJson(jsonArray.get(0), request));
 		//地区收入 regional_income
-		session.setAttribute("regional_income", GetCommonUser.getJson(JSONArray.fromObject(jsonArray.get(1)), request));
+		session.setAttribute("regional_income", GetCommonUser.getJson(jsonArray.get(1), request));
 		//职业列表
 		session.setAttribute("vocationList", vocationList);
 		return "web/xgk/xgk_libCareer_d";

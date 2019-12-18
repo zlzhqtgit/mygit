@@ -15,28 +15,7 @@ import java.util.*;
  * @Version V1.0
  */
 public class JSONUtil {
-//    JSONArray json = JSONArray.fromObject(queryrights);
 
-//    Map依据value的值倒序排序
-//    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValueDescending(Map<K, V> map)
-//    {
-//        List<Map.Entry<K, V>> list = new LinkedList<Map.Entry<K, V>>(map.entrySet());
-//        Collections.sort(list, new Comparator<Map.Entry<K, V>>()
-//        {
-//            @Override
-//            public int compare(Map.Entry<K, V> o1, Map.Entry<K, V> o2)
-//            {
-//                int compare = (o1.getValue()).compareTo(o2.getValue());
-//                return -compare;
-//            }
-//        });
-//        //另外一种写法：Collections.sort(list, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
-//        Map<K, V> result = new LinkedHashMap<K, V>();
-//        for (Map.Entry<K, V> entry : list) {
-//            result.put(entry.getKey(), entry.getValue());
-//        }
-//        return result;
-//    }
 
     /**
      * json字符串转数组
@@ -152,7 +131,7 @@ public class JSONUtil {
         }
     }
 
-
+    
 
     /**
      * 判断字符串是否可以转化为json对象
@@ -197,5 +176,11 @@ public class JSONUtil {
         }
         return set;
     }
+    
+    public static void main(String[] args) {
+    	boolean o = isJsonArray("[[1'71101','心理学'],['71102','应用心理学'],['10101','哲学'],['30301','社会学'],['12022','市场营销']]");
+    	System.err.println(o);
+    	net.sf.json.JSONArray.fromObject("[[],[]]");
+	}
 
 }

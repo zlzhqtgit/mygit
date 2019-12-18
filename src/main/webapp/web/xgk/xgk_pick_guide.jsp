@@ -47,7 +47,7 @@
 													</div>
 												</div>
 											</div>
-											<p class="text-center" style="display: none;"><a class="btn btn-primary" href="" style="margin: 0;">去测评</a></p>
+											<p class="text-center" style="display: none;"><a class="btn btn-primary" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do" style="margin: 0;">去测评</a></p>
 										</div>
 									</div>
 									<div class="p_relative step_wrap">
@@ -65,7 +65,7 @@
 													</div>
 												</div>
 											</div>
-											<p class="text-center" style="display: none;"><a class="btn btn-primary" href="" style="margin: 0;">去测评</a></p>
+											<p class="text-center" style="display: none;"><a class="btn btn-primary" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do" style="margin: 0;">去测评</a></p>
 										</div>
 									</div>
 									<div class="p_relative step_wrap">
@@ -83,7 +83,7 @@
 													</div>
 												</div>
 											</div>
-											<p class="text-center" style="display: none;"><a class="btn btn-primary" href="" style="margin: 0;">去测评</a></p>
+											<p class="text-center" style="display: none;"><a class="btn btn-primary" href="${pageContext.request.contextPath}/cp/xgk_choice.do" style="margin: 0;">去测评</a></p>
 										</div>
 									</div>
 									<div class="p_relative">
@@ -111,11 +111,6 @@
 							<h3 class="text-muted fontwei">理想专业</h3>
 							<div class="">根据您选择的职业，我们为您推荐了以下专业，请从中选择一种您心仪的专业。</div>
 							<div class="text-center margin_top1">
-								<select class="province_list">
-									<option>成都</option>
-									<option selected="selected">贵州</option>
-									<option>上海</option>
-								</select>
 								<select name="" class="specialty_list">
 									<option value="0" selected="selected">请选择专业</option>
 								</select>
@@ -179,7 +174,7 @@
 										}else{
 											$(".analyze2").html(type_start + "学科潜能" + type_end + err);
 											$(".analyze2").parents(".flex_Al_c").next().show();
-											$(".analyze1").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/sub/xgk_subject_score.do');
+											$(".analyze2").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/sub/xgk_subject_score.do');
 										}
 										if(cognize == 1){
 											$(".analyze3").html(type_start + "认知测评" + type_end + ok);
@@ -187,7 +182,7 @@
 										}else{
 											$(".analyze3").html(type_start + "认知测评" + type_end + err);
 											$(".analyze3").parents(".flex_Al_c").next().show();
-											$(".analyze1").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/xk/xgk_guide_select.do');
+											$(".analyze3").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/cp/xgk_choice.do');
 										}
 										
 										var vocationLargeClass = "<option value=''>请选择一种心仪 的职业大类</option>";
@@ -238,8 +233,12 @@
 												if(obj.state == 1){
 													var data = obj.data;
 													var specialtyList = "";
-													for(var i=0; i<data.length; i++){
-														specialtyList += "<option value='" + data[i].specialtyId + "'>" + data[i].specialtyName + "</option>";
+													if(data.length <= 0){
+														specialtyList += "<option value='0'>暂无专业数据</option>";
+													}else{
+														for(var i=0; i<data.length; i++){
+															specialtyList += "<option value='" + data[i].specialtyId + "'>" + data[i].specialtyName + "</option>";
+														}
 													}
 													$(".specialty_list").html(specialtyList);
 												}
@@ -247,19 +246,6 @@
 										});	
 									}
 									
-									//加载省份信息
-									var myprovince = '${province}';
-									$(function(){
-										var provinceList = "";	
-										for(var i=0; i<area_json.length; i++){
-											if(area_json[i].name == myprovince){
-												provinceList += "<option selected='selected'>" + area_json[i].name + "</option>";
-											} else {
-												provinceList += "<option>" + area_json[i].name + "</option>";
-											}
-										}
-										$(".province_list").html(provinceList);
-									});
 									
 
 									//点击生成报告
@@ -277,7 +263,7 @@
 											return;
 										}
 										var specialtyId = $(".specialty_list option:selected").val();//专业ID
-										var province = $(".province_list option:selected").text();//省份信息
+										var province = $(".pick_province").text();//省份信息
 										if(specialtyId == "" || specialtyId == "0"){
 											layer.msg("请选择专业",{icon:2,time:1000});
 											return;
@@ -295,13 +281,10 @@
 														layer.confirm(obj.message, {
 															  btn: ['确认', '取消']
 															}, function(index, layero){
-																console.log(22222)
 																location.href = "${pageContext.request.contextPath}/xk/xgk_pick_report.do?province=" + decodeURI(province) + "&specialtyId=" + specialtyId;
 															}, function(index){
-																console.log(22222)
 																layer.close(index);
 															}); 
-														console.log(333)
 													} else {
 														layer.msg(obj.message,{icon:2,time:1000});
 													}

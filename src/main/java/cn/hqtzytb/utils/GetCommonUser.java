@@ -1,20 +1,14 @@
 package cn.hqtzytb.utils;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.springframework.util.DigestUtils;
-
 import net.sf.json.JSONArray;
 
 /**
@@ -82,31 +76,40 @@ public class GetCommonUser {
 	}
 
 
-	 /**
-	  * JSONArray转二维数组
-	  * @param jsonArray
-	  * @param request
-	  * @return
-	  */
-	 public static List<List<String>>  getJson(JSONArray jsonArray,HttpServletRequest request){
-		 try {
-			 if(jsonArray.size()>0){
-				 List<List<String>> listTest = new ArrayList<List<String>>();
-				 for (int j = 0; j < jsonArray.size(); j++) {
-					 List<String> columnList = new ArrayList<String>();
-					 for(int i=0;i<jsonArray.getJSONArray(j).size();i++){
-						 columnList.add(i,(String) jsonArray.getJSONArray(j).getString(i));
-					 }            
-					 listTest.add(j, columnList);            
-				 }  
-				 return listTest;
-			 }else{
-				 return null;
-			 }    
-		 } catch (Exception e) {
-			 System.err.println("jsonArray = " + jsonArray);
-			 logger.error("访问路径："+request.getRequestURI()+"操作： 二维数组转List 错误信息: "+e);
-			 return null;
-		 }   
+
+	 
+	/**
+	 * 二位数组字符串 转 List<List<String>>数组
+	 * @param jsonstr
+	 * @param request
+	 * @return
+	 */
+	public static List<List<String>> getJson(Object jsonstr,HttpServletRequest request){  
+		try {
+			JSONArray jsonArray = null;
+			if (jsonstr instanceof JSONArray) {
+				jsonArray = (JSONArray)jsonstr;
+			} else {
+				jsonArray = JSONArray.fromObject(jsonstr);
+			}
+			System.err.println(jsonArray.size());
+			if(jsonArray.size()>0){
+				List<List<String>> listTest = new ArrayList<List<String>>();
+				for (int j = 0; j < jsonArray.size(); j++) {
+					List<String> columnList = new ArrayList<String>();
+					for(int i=0;i<jsonArray.getJSONArray(j).size();i++){
+						columnList.add(i,(String) jsonArray.getJSONArray(j).getString(i));
+					}	  
+					listTest.add(j, columnList); 
+				}  
+				return listTest;
+			}else{
+				return null;
+			}    
+		} catch (Exception e) {
+			logger.error("二位数组字符串：" + jsonstr);
+			logger.error("访问路径："+request.getRequestURI()+"操作： 二维数组转List 错误信息: "+e);
+			return null;
+		}   
 	}
 }

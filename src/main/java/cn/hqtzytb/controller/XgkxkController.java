@@ -196,16 +196,18 @@ public class XgkxkController {
 				return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 			} else {
 				if ("1".equals(userResultReports.get(0).getStatus())) {
-					return new ResponseResult<>(2, "您已存在选科指导记录，继续将覆盖您之前的选科报告" );
-				}else {
-					return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
-
+					session.setAttribute("whether_done", 1);//已做过选科指导
+				} else {
+					session.setAttribute("whether_done", 0);//已做过选科指导
 				}
+				return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 			}
+
 		}else {
 			return new ResponseResult<>(ResponseResult.ERR,"用户未登录,请登录后再进行学科！");
 		}
 	}
+	
 	
 	
 	
@@ -223,6 +225,8 @@ public class XgkxkController {
 		province = new String(province.toString().getBytes("ISO8859-1"), "UTF-8");
 		specialtyId = new String(specialtyId.toString().getBytes("ISO8859-1"), "UTF-8");
 		if (subject.isAuthenticated()) {
+			session.setAttribute("choose_province", province);
+			session.setAttribute("choose_specialtyId", specialtyId);
 			Integer uid = (Integer)session.getAttribute("uid");
 			List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid  + "'", null, null, null);
 			if (reportList.isEmpty()) {
@@ -269,7 +273,7 @@ public class XgkxkController {
 			score_map.put(Combination.政历地.one,0d);//政治
 			score_map.put(Combination.政历地.two,0d);//历史
 			score_map.put(Combination.政历地.three,0d);//地理
-			List<List<String>>  stringList = GetCommonUser.getJson(net.sf.json.JSONArray.fromObject(score_analyze), request);
+			List<List<String>>  stringList = GetCommonUser.getJson(score_analyze, request);
 			String sub = "";
 			Double score = 0d;
 			Double total_score = 0d;
@@ -330,6 +334,7 @@ public class XgkxkController {
 			UserFeature cognize_analyze = mbti_analyze == null ? hld_analyze : mbti_analyze;//认知分析 [优先选择mbti分析]
 			Map<String,Object> paramMap = new HashMap<>();
             paramMap.put("personalityCode",cognize_analyze.getEvaluationName());
+            List<Personality> personalityList = personalityMapper.selectPersonalityListByMap(paramMap);
             Map<String,Double> cognize_map = new HashMap<>();//分数map
             cognize_map.put(Combination.物化生.one,0d);//物理
             cognize_map.put(Combination.物化生.two,0d);//化学
@@ -337,9 +342,9 @@ public class XgkxkController {
             cognize_map.put(Combination.政历地.one,0d);//政治
             cognize_map.put(Combination.政历地.two,0d);//历史
             cognize_map.put(Combination.政历地.three,0d);//地理
-            List<Personality> personalityList = personalityMapper.selectPersonalityListByMap(paramMap);
-            Personality personality = personalityList.get(0);//认知测评结果数据信息
-            List<List<String>> specialtyIns = GetCommonUser.getJson(net.sf.json.JSONArray.fromObject(personality.getPersonalitySpecialty()), request);
+            Personality personality = personalityList.get(0);//认知测评结果数据信息     
+            List<List<String>> specialtyIns = GetCommonUser.getJson(personality.getPersonalitySpecialty(), request);
+            System.err.println(specialtyIns);
             String where = " specialty_id IN (";
             for(int i=0; i<specialtyIns.size(); i++){
             	if (i == specialtyIns.size()-1) {
@@ -348,7 +353,7 @@ public class XgkxkController {
 					where += specialtyIns.get(i).get(0) + ",";
 				}
             }
-            List<Specialty> specialtyList = specialtyMapper.select(where + ")", null, null, null);
+            List<Specialty> specialtyList = specialtyMapper.select( where + ")", null, null, null);
             Double cognize_total_score = 0d;//认知测评总分
             for (int i=0; i<specialtyList.size(); i++){
             	cognize_total_score += specialtyList.get(i).getPhysicsPerformance() 
@@ -382,7 +387,7 @@ public class XgkxkController {
             map.put(Combination.政历地.two, score_map.get(Combination.政历地.two) + potential_map.get(Combination.政历地.two) + cognize_map.get(Combination.政历地.two));//历史
             map.put(Combination.政历地.three, score_map.get(Combination.政历地.three) + potential_map.get(Combination.政历地.three) + cognize_map.get(Combination.政历地.three));//地理
             
-            Map<String,Double> combinationMap = new HashMap<>();//组合学科map
+            Map<String,Double> combinationMap = new HashMap<>();//学科组合map
             combinationMap.put(Combination.物化生.toString(),map.get(Combination.物化生.one) + map.get(Combination.物化生.two) + map.get(Combination.物化生.three));
             combinationMap.put(Combination.物化政.toString(),map.get(Combination.物化政.one) + map.get(Combination.物化政.two) + map.get(Combination.物化政.three));
             combinationMap.put(Combination.物化历.toString(),map.get(Combination.物化历.one) + map.get(Combination.物化历.two) + map.get(Combination.物化历.three));
@@ -491,6 +496,7 @@ public class XgkxkController {
 			session.setAttribute("combination", JSON.toJSONString(combination));//测评  + 政策 推荐学科组合	
             session.setAttribute("policy_combination", JSON.toJSONString(policy_combination));//政策允许组合  
 		}
+		
 		return "web/xgk/xgk_pick_report";
 	}
 	
@@ -503,17 +509,36 @@ public class XgkxkController {
 	 */
 	@RequestMapping("/xgk_add_report.do")	
 	@ResponseBody
-	public ResponseResult<Void> addReport(HttpServletRequest request,HttpServletResponse response,String result) {	
+	public ResponseResult<Void> addReport(HttpServletRequest request, String result) {	
 		System.err.println(result);
 		Subject subject = SecurityUtils.getSubject();
 		if (subject.isAuthenticated()) {
 			Session session = subject.getSession();
+			String province = (String)session.getAttribute("choose_province");
+			String specialtyId = (String)session.getAttribute("choose_specialtyId");
+			Date currentTime = new Date();
+			UserResultReport report = null;
 			Integer uid = (Integer)session.getAttribute("uid");
-			UserResultReport report = userResultReportMapper.select(" uid = '" + uid + "'", null, null, null).get(0);
-			report.setEndTime(new Date())
-			.setStatus("1")
-			.setResult(result);
-			userResultReportMapper.update(report);
+			List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid + "'", null, null, null);
+			if (reportList.isEmpty()) {
+				report = new UserResultReport();
+				report.setUid(uid);
+				report.setProvince(province);
+				report.setSpecialtyId(specialtyId);
+				report.setResult(result);
+				report.setStatus("1");
+				report.setStartTime(currentTime);
+				report.setEndTime(currentTime);
+			} else {
+				report = reportList.get(0);
+				report.setEndTime(currentTime);
+				report.setProvince(province);
+				report.setSpecialtyId(specialtyId);
+				report.setStatus("1");
+				report.setResult(result);
+				userResultReportMapper.update(report);
+			}
+			session.setAttribute("whether_done", 1);//已做过选科指导
 			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 		}
 		return new ResponseResult<>(ResponseResult.ERR,"请登录后,再进行提交学科组合报告！");

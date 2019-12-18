@@ -136,21 +136,48 @@
 								//保存学科组合数据
 								function saveReport(e){
 									var result = $(e).text();
-									$.ajax({
-										url:"${pageContext.request.contextPath}/xk/xgk_add_report.do",
-										data:"result=" + result,
-										type:"POST",
-										dataType:"json",
-										success:function(obj){
-											if(obj.state == 1){
-												layer.msg(obj.message,{icon:1,time:1000});
-											}else{
-												layer.msg(obj.message,{icon:2,time:1000});
+									var whether_done = '${whether_done}';//是否已完成学科指导
+									if(whether_done == 1){
+										layer.confirm('您的学科选科组合信息已存在，请问是否继续？继续将覆盖您之前的选择！', {
+											  btn: ['确认', '取消']
+											}, function(index, layero){
+												$.ajax({
+													url:"${pageContext.request.contextPath}/xk/xgk_add_report.do",
+													data:"result=" + result,
+													type:"POST",
+													dataType:"json",
+													success:function(obj){
+														if(obj.state == 1){
+															layer.msg(obj.message,{icon:1,time:1000});
+														}else{
+															layer.msg(obj.message,{icon:2,time:1000});
+														}
+														
+													}
+												});
+											}, function(index){
+												layer.close(index);
+											}); 
+									}else{
+										$.ajax({
+											url:"${pageContext.request.contextPath}/xk/xgk_add_report.do",
+											data:"result=" + result,
+											type:"POST",
+											dataType:"json",
+											success:function(obj){
+												if(obj.state == 1){
+													layer.msg(obj.message,{icon:1,time:1000});
+												}else{
+													layer.msg(obj.message,{icon:2,time:1000});
+												}
+												
 											}
-											
-										}
-									});
+										});
+									}
+									
+									
 								}
+								
 							
 								//当地本专业 政策允许 学科组合
 								$(function(){
@@ -463,7 +490,7 @@
 					            }
 					        }
 					    }
-					    pdf.save('我的简历.pdf');        
+					    pdf.save('我的选科报告.pdf');        
 					  })
 					}
 					$(".downloadReport").click(function(){

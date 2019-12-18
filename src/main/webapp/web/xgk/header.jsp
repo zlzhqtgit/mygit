@@ -63,6 +63,7 @@
 		
 </body>
 <script type="text/javascript">
+	
 	//pick_province
 	$(".pick_province").pickArea({
 		"format": "贵州省", //格式
@@ -76,9 +77,9 @@
 		"paddingLeft": "10px",
 		"arrowRight": "10px",
 		"maxHeight": "600",
-		//"preSet":"河南省/郑州市",
+		"preSet":'${province}',
 		"getVal": function() {
-			console.log($(".pick-area-hidden").val())
+			//console.log($(".pick-area-hidden").val())
 			//console.log($(".pick-area-dom").val())
 	//					var thisdom = $("." + $(".pick-area-dom").val());
 	//					thisdom.next().val($(".pick-area-hidden").val());
