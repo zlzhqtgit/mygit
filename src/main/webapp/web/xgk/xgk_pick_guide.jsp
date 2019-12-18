@@ -212,7 +212,7 @@
 													var vocationList = "<tr>";
 													var id = "";
 													var name = "";
-													for(var j=1; j<data.length; j++){
+													for(var j=0; j<data.length; j++){
 														if (j%5 == 0 && j>0){
 															vocationList += "</tr><tr>";//
 														}
