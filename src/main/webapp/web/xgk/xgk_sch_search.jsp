@@ -138,13 +138,14 @@
 				    
 				</div>
 				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="schoolSearch(2)" <%--onclick="schoolSearch()"--%>>开始查询</a></p>
-				<div class="panel panel-default" style="display: none" id="result_count"><div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
-
-			<div id="search_result"></div>
-				<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
-					<div class="holder" style="text-align: center;"></div>
+				<div class="panel panel-default" style="display: none" id="result_count">
+					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
+					<div id="search_result"></div>
+						<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+							<div class="holder" style="text-align: center;"></div>
+						</div>
+					</section>
 				</div>
-			</section>
 
 				<script type="text/javascript">
 					//条件数组
@@ -209,7 +210,7 @@
 							dataType: "json",
 							success: function (obj) {
 								if (obj.state == 1){
-									$("#result_count").css("display","inline");//显示搜索结果数量
+									$("#result_count").css("display","inline-block");//显示搜索结果数量
 									var list = obj.data;
 									$("#page h4 a").html(list.length);
 									var universities = "";
@@ -258,6 +259,7 @@
 												attrImg += "<img src='../../img/xgk/attr/yjsy.png'/>"
 											}
 										}
+                                        
                                         // var pagegrass='<div class="panel_head padding-side2" id="page"></div><div class="text-center"><div class="text-center"style="box-shadow: 0px 0px 0px #bdb8b8;"><div class="holder text-center" style="text-align: center;"></div></div></div>';
                                         // var box_head='<div class="panel panel-default" ><div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div><ul classs="search_result list-group" id="universities">';
 										var box_head='<ul classs="search_result list-group" id="universities">';

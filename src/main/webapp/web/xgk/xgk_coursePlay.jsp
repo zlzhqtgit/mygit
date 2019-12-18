@@ -139,15 +139,6 @@
 				                }
 				            };
 				            
-				            //定时隐藏
-				            $("#video").mouseover( show_control).mouseout( hide_control);
-				            function show_control () {
-				            	$(".jsmodern-video-panel").stop(true).fadeIn(500);
-				            }
-				            function hide_control () {
-				            	$(".jsmodern-video-panel").stop(true).fadeOut(1000);
-				            }
-				            
 				            //点击获取播放列表
 							play_list ($(".recom_course"));
 							function play_list (listUl) {

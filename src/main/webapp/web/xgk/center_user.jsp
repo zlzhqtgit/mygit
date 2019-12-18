@@ -78,9 +78,7 @@
 								<div class="border-primary">
 									<div class="text-center fontwei"><div class="bg-primary fontwei" style="font-size: 1.6em;padding: .6em 0;">待完成</div></div>
 									<div class="">
-										<div class="text-center margin_top margin_bot">
-											管理员发布了一次选科排课的任务，快去完成吧！
-										</div>
+										<div class="text-center margin_top margin_bot fontwei text-danger">管理员发布了一次选科排课的任务，快去完成吧！</div>
 										<p class="text-center"><a class="btn btn-primary" onclick="getPage('${pageContext.request.contextPath}/web/userCenter/el_result.jsp')" href="javascript:void(0)">参与选科排课</a></p>
 									</div>
 								</div>

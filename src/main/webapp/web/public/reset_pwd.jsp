@@ -36,15 +36,21 @@
 			</ul>
 			<div class="step_body">
 				<form class="verify">
-						<div class="">
-							<lable class="" for="">手机号码：</lable>
-							<input type="" name="" id="" value="" placeholder="请填写11位手机号码"/>
-							<span class="tip text-danger padding-side">手机号码错误</span>
-						</div>
-						<div class="margin_top1">
-							<lable class="" for="">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</lable>
-							<input type="" name="" id="" value="" placeholder="请填写验证码"/>
-							<a class="btn btn-primary" href="">获取手机验证码</a>
+						<div class="" style="display: flex;justify-content: center;">
+							<div class="input_group" style="width: 30em;">
+								<div class="" style="">
+									<div class="">
+										<lable class="" for="">手机号码：</lable>
+										<input type="" name="" id="" value="" placeholder="请填写11位手机号码"/>
+										<span class="tip text-danger padding-side">手机号码错误</span>
+									</div>
+								</div>	
+								<div class="margin_top1">
+									<lable class="" for="">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</lable>
+									<input type="" name="" id="" value="" placeholder="请填写验证码"/>
+									<a class="btn btn-primary" href="">获取手机验证码</a>
+								</div>
+							</div>
 						</div>
 						<div class="margin_top1 text-center">
 							<a class="btn btn-primary" href="javascript:history.go(-1)">返回</a>

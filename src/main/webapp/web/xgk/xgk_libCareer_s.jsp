@@ -123,8 +123,7 @@
 					<div class="padding-side">
 						<h4 class="fontwei">共找到<b id="search_count">2</b>条结果</h4>
 					</div>
-					
-				    <ul class="list-group search_result" id="search_result">
+				    <ul class="list-group search_result list_career" id="search_result">
 				        <li class="list-group-item width100">
 				        	<a class="width100" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_d.jsp">
 				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>

@@ -32,10 +32,14 @@ body{
 }
 header{
 	background-color: #f9f9f9;
-	padding: 0 2em;
 	border-bottom: 1px solid gainsboro;
 	box-shadow: 0px 0px 3px gainsboro;
 	width: 100%;
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 2em;
+	padding-bottom: .6em;
 }
 .container{
 	max-width: 1200px;
@@ -81,18 +85,21 @@ input{
 	display: flex;
 	justify-content: start;
 	align-items: center;
-	padding-top: 2em;
 }
 .user{
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 	margin-right: 3em;
 }
-.user>img{
+.user img{
 	max-width: 36px;
 }
-.user a{
-	line-height: 2em;
+.user>a:first-of-type{
+	display: flex;
+    align-items: center;
+    padding: .5em 1em;
+    margin-right: 1em;
 }
 .head-bottom{
 	background-color: #f9f9f9;
@@ -116,7 +123,7 @@ nav>ul>li:hover >a{
 	color: #555;
 	text-decoration: none;
 }
-nav>ul>li>a{ 
+/* nav>ul>li>a{ 
 	padding: 6px 8px; 
 	font-size:20px; 
 	display:inline-block; 
@@ -124,6 +131,16 @@ nav>ul>li>a{
 	width:6.2em; 
 	font-weight: 500;
 	text-decoration: none; 
+} */
+nav > ul > li > a {
+    padding: 6px 0;
+    font-size: 16px;
+    display: inline-block;
+    text-align: center;
+    width: 6.2em;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: "宋体";
 }
 nav>ul>li>ul{
 	width: 100%;
@@ -149,8 +166,8 @@ nav>ul>li>ul>li>a{
 	text-decoration: none;
 }
 nav>ul>li>ul>li:hover a{
-	background-color: #0066CC;
-	color: #fff;
+	background-color: #ddd;
+	color: #555;
 }
 .active{
 	background-color: #3b8bec;
@@ -312,6 +329,7 @@ banner .swiper-button-next, .swiper-container-rtl .swiper-button-prev{ backgroun
 }
 video{
 	width: 100%;
+	cursor: pointer;
 }
 .font_mark{
 	padding-top: 2em;
@@ -456,30 +474,12 @@ footer li:hover a{
 .company-info p{margin: 0;font-size: 14px;}
 /* .copyright{position: absolute;bottom: 0;right: 0;} */
 
-.side-right{
-	width: 60px;
-	position: fixed;
-	right: 1px;
-	top: 30%;
-	z-index: 999999999;
-}
-.side-right img{
-	width: 100%;
-}
-.mark-box{
-	display:block;
-	margin: 3px 0;
-	background-color: white;
-	padding: 7px 2px;
-	border-radius: 6px;
-	box-shadow: -1px 1px 3px #8C8C8C;
-	position: relative;
-}
+
 .submenu{
 	display: none;
 	position: absolute;
 	top: 0;
-	left: -154px;
+	left: -150px;
 	width: 150px;
 	overflow: inherit;
 	z-index: 100;
@@ -540,6 +540,7 @@ footer li:hover a{
 	padding: .2em;
 	background-color: #ff6600;
 	border-radius: 8px;
+	font-size: 12px;
 }
 .submenu_con ul li a:hover{
 	color: #fff;
@@ -572,6 +573,22 @@ footer li:hover a{
 .btn-mark img{
 	max-width: 20px;
 }
+.side-right{
+	width: 60px;
+	position: fixed;
+	right: 1px;
+	top: 30%;
+	z-index: 999999999;
+}
+.mark-box{
+	display:block;
+	margin: 3px 0;
+	background-color: white;
+	padding: 7px 2px;
+	border-radius: 6px;
+	box-shadow: -1px 1px 3px #8C8C8C;
+	position: relative;
+}
 .mark-box.backtop{
 	background-color:  #00AEFF;
 }
@@ -579,10 +596,13 @@ footer li:hover a{
 	color: white;
 }
 .mark-box a{
-	font-size: 12px;
+	display: block;
 	text-decoration: none;
 	cursor: pointer;
-	line-height: 0;
+}
+.mark-box a>div{
+	font-size: 12px;
+	margin-top: .4em;
 }
 
 main{
@@ -803,10 +823,12 @@ main{
 }
 th{
 	text-align: center;
-	padding: .5em 1em;
+	padding: .5em 0em;
+	position:relative;
 }
 td{
 	padding: .5em 1em;
+	text-align: center;
 }
 .notice>li{
 	list-style: decimal;

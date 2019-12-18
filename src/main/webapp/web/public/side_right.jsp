@@ -36,12 +36,10 @@ function chat2(id) {
 <body>
 		<div class="side-right">
 			<div class="text-center mark-box online_server" href="">
-				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
-				</span>
-				<div class="">
-				<a href="javascript:void(0);"  <!-- onclick="chat2() -->">在线客服</a>
-				</div>		
+				<a href="javascript:void(0);"">
+					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside3.png" > </span>
+					<div class=""> 在线客服 </div>
+				</a>	
 				<div class="submenu">
 					<div>
 						<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> 在线客服 </div>
@@ -67,30 +65,22 @@ function chat2(id) {
 				</div>
 			</div>
 			<div class="text-center mark-box course_server">
-				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/rside1.png" >
-				</span>				
-				<div class="">
-					<a href="${pageContext.request.contextPath}/web/xgk/xgk_course.jsp">线上课程</a>
-				</div>
-				
+				<a href="${pageContext.request.contextPath}/web/xgk/xgk_course.jsp">
+					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside1.png" > </span>
+					<div class=""> VIP</div>
+				</a>
 			</div>
 			<div class="text-center mark-box vip_server">
-				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/rside2.png" >
-				</span>
-				<div class="">
-					<a href="javascript:void(0);">VIP</a>
-				</div>
-				
+				<a href="javascript:void(0)">
+					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside2.png" > </span>
+					<div class=""> 在线课程</div>
+				</a>
 			</div>
 			<div class="text-center mark-box tel_server" href="">
-				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
-				</span>
-				<div class="">
-					<a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">电话咨询</a>
-				</div>
+				<a href="javascript:void(0)">
+					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside3.png" > </span>
+					<div class=""> 电话咨询</div>
+				</a>
 				<div class="submenu">
 					<div class="">
 						<div class="submenu_tit bg-primary" style="width: 100%;"><span class="glyphicon glyphicon-headphones"></span>&nbsp;电话咨询 </div>
@@ -115,12 +105,10 @@ function chat2(id) {
 			</div>
 			
 			<div class="text-center mark-box qq_server" href="">
-				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/rside3.png" >
-				</span>
-				<div class="">
-					<a href="javascript:void(0)">QQ客服</a>
-				</div>
+				<a href="javascript:void(0)">
+					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside3.png" > </span>
+					<div class=""> QQ客服</div>
+				</a>
 				<div class="submenu">
 					<div class="">
 						<div class="submenu_tit bg-primary" style="width: 100%;"><span class="glyphicon glyphicon-headphones"></span> QQ在线客服 </div>
@@ -144,12 +132,10 @@ function chat2(id) {
 				</div>
 			</div>
 			<div class="text-center mark-box backtop">
-				<span class="btn-mark">
-					<img src="${pageContext.request.contextPath}/img/xgk/rside4.png" >
-				</span>
-				<div class="">
-					<a href="javascript:void(0)">回到顶部</a>
-				</div>
+				<a href="javascript:void(0)">
+					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside4.png" > </span>
+					<div class=""> 回到顶部 </div>
+				</a>
 			</div>
 		</div>
 </body>

@@ -149,15 +149,15 @@ section{
 }
 .contrast{
 	display: none;
+	width: 1200px;
 	position: absolute;
 	bottom: -2em;
-	left: 18.4%;
-	width: 1200px;
+	left: 50%;
 	z-index: 4;
+	margin-left:-600px;
 }
 .contrast_tools{
 	width: 100%;
-	height: 161px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -648,4 +648,12 @@ select{
 .rank_salary ul li:nth-child(3){
 	color: green;
 	font-weight: bold;
+}
+.list_career li{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.sch_slice th{
+	border:1px solid blue;
 }
