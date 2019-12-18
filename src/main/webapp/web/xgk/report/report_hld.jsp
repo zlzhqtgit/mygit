@@ -113,7 +113,11 @@
 										    </script>
 									</div>
 									<p class="fontwei">
-										上面雷达图呈现了你的职业兴趣测试结果，职业兴趣得分越高，表示你越倾向于该兴趣类型。下面我们将为你具体介绍六种职业兴趣，你需要特别关注自己得分最高的前三种职业兴趣：${hldreport[0].personalityCode}
+										上面雷达图呈现了你的职业兴趣测试结果，职业兴趣得分越高，表示你越倾向于该兴趣类型。下面我们将为你具体介绍六种职业兴趣，你需要特别关注自己得分最高的前三种职业兴趣：
+												<c:forEach items="${vocation0}" var="item" begin="0" end="2">
+													<a href="javascript:;" id='${item[0]}'> ${item[1]}&nbsp;&nbsp;&nbsp;</a>
+												</c:forEach>
+												
 									</p>
 									<ol>
 										<li>
@@ -171,20 +175,115 @@
 								</li>
 								<div>
 									<h4 class="fontwei">由测评得分可知，您的职业兴趣代码是：${hldreport[0].personalityCode}</h4>
-									<div class="">
-										<p>${hldreport[0].personalitySpecialty}</p>
-										<p>${hldreport[0].personalityVocation}</p>
-									</div>
+									<%-- <div class="">
+										<c:forEach items="${specialty0}" var="item" >
+											<a href="javascript:;" id='${item[0]}'> ${item[1]}&nbsp;&nbsp;&nbsp;</a>
+										</c:forEach>
+									</div> --%>
 								</div>
+								
 								<table border="" >
 									<tr><th>代码</th><th>适合的典型专业</th><th>适合的典型职业</th></tr>
-									<c:forEach items="${hldreport}" var="c" step="1" begin="1">
-										<tr>
-											<td>${c.personalityCode}</td>
-											<td>${c.personalitySpecialty}</td>
-											<td>${c.personalityVocation}</td>
-										</tr>
-									</c:forEach>									
+									<tr>
+										<td>${hldreport[0].personalityCode}</td>
+										<!-- 专业 -->
+										<td>
+											<c:forEach items="${specialty0}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+										
+										<!-- 职业 -->
+										<td>
+											<c:forEach items="${vocation0}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+									</tr>
+									<tr>
+										<td>${hldreport[1].personalityCode}</td>
+										<!-- 专业 -->
+										<td>
+											<c:forEach items="${specialty1}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+										
+										<!-- 职业 -->
+										<td>
+											<c:forEach items="${vocation1}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+									</tr>
+									<tr>
+										<td>${hldreport[2].personalityCode}</td>
+										<!-- 专业 -->
+										<td>
+											<c:forEach items="${specialty2}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+										
+										<!-- 职业 -->
+										<td>
+											<c:forEach items="${vocation2}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+									</tr>
+									
+									<tr>
+										<td>${hldreport[3].personalityCode}</td>
+										<!-- 专业 -->
+										<td>
+											<c:forEach items="${specialty3}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+										
+										<!-- 职业 -->
+										<td>
+											<c:forEach items="${vocation3}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+									</tr>
+									
+									<tr>
+										<td>${hldreport[4].personalityCode}</td>
+										<!-- 专业 -->
+										<td>
+											<c:forEach items="${specialty4}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+										
+										<!-- 职业 -->
+										<td>
+											<c:forEach items="${vocation4}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+									</tr>
+									
+									<tr>
+										<td>${hldreport[5].personalityCode}</td>
+										<!-- 专业 -->
+										<td>
+											<c:forEach items="${specialty5}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+										
+										<!-- 职业 -->
+										<td>
+											<c:forEach items="${vocation5}" var="item">
+												<a href="javascript:;" id="${item[0]}">${item[1]}&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>
+										</td>
+									</tr>	
+																	
 								</table>
 							</ul>
 					</div>

@@ -6,14 +6,11 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +23,7 @@ import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.Xgkcp;
 import cn.hqtzytb.entity.XgkcpResult;
 import cn.hqtzytb.exception.MyRuntimeException;
+import cn.hqtzytb.mapper.PersonalityMapper;
 import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.service.IUserFeatureServer;
 import cn.hqtzytb.service.IXgkcpResultServer;
@@ -53,6 +51,9 @@ public class XgkcpController {
 	private IUserFeatureServer userFeatureServer;
 	@Autowired
 	private UserFeatureMapper userFeatureMapper;
+	@Autowired
+	private PersonalityMapper personalityMapper;
+	
 	/**
 	 * @throws MyRuntimeException
 	 * @Title: showhqtCpAnswer 
@@ -184,7 +185,7 @@ public class XgkcpController {
 		String cpresult = "";
 		// 判断测评类型
 		if (testName.equals("霍兰德")) {
-			List<String> mobileList=get.gethld(cpFengshu);
+			List<String> mobileList = get.gethld(cpFengshu);
 			// 查询数据库，查出相关的兴趣代码及相关信息
 			List<XgkcpResult> reportResult = xgkcpResultServer.resultReport(mobileList, testName);
 			// 渲染到页面
@@ -199,11 +200,29 @@ public class XgkcpController {
 			map.addAttribute("cpFengshu", fs);
 			map.addAttribute("hldreport", reportResult);
 			map.addAttribute("report", "report_hld");
+			
+
+			for(int i=0; i<reportResult.size(); i++){
+//				System.err.println(reportResult.get(i).getPersonalityCode());
+//				System.err.println(reportResult.get(i).getPersonalitySpecialty());
+//				System.err.println(reportResult.get(i).getPersonalityVocation());
+//				System.err.println(JSONArray.fromObject(reportResult.get(i).getPersonalitySpecialty()));
+//				System.err.println(JSONArray.fromObject(reportResult.get(i).getPersonalityVocation()));
+//				System.err.println(1111);
+//				System.err.println(111);
+//				System.err.println(11);
+//				System.err.println(1);
+				//专业列表
+				map.addAttribute("specialty" + i,GetCommonUser.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalitySpecialty()), request));
+				//职业列表
+				map.addAttribute("vocation" + i,GetCommonUser.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalityVocation()), request));
+			}
 		} else {
 			cpresult = get.getMbti(cpFengshu);
 			// 组合以上结果渲染到页面
 			map.addAttribute("report", "report_" + cpresult);
 		}
+		
 		return "web/xgk/xgk_report";
 	}
 

@@ -65,9 +65,8 @@
 	<!--查询测评结果对应相关信息 -->
 	<select id="select" resultType="cn.hqtzytb.entity.Specialty">
 		select
-		<include refid="Base_Column_List" />
+			<include refid="Base_Column_List" />
 		FROM specialty b
-		LEFT JOIN personality_specialty e ON b.specialty_id = e.specialtyt_id
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
@@ -98,9 +97,8 @@
 	<!--查询测评结果对应相关信息 -->
 	<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Specialty">
 		SELECT
-		DISTINCT(b.specialty_disciplines) specialtyDisciplines
+			DISTINCT(b.specialty_disciplines) specialtyDisciplines
 		FROM specialty b
-		LEFT JOIN personality_specialty e ON b.specialty_id = e.specialtyt_id
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
@@ -109,7 +107,7 @@
 	<!--查询测评结果对应相关信息 -->
 	<select id="selectLargeClassByvocation" resultType="cn.hqtzytb.entity.Specialty">
 		SELECT
-		DISTINCT(b.specialty_divided) specialtyDivided
+			DISTINCT(b.specialty_divided) specialtyDivided
 		FROM specialty b
 		LEFT JOIN vocation_specialty e ON b.specialty_id = e.specialty_id
 		<if test="where != null">where ${where}</if>
@@ -120,13 +118,7 @@
 	<!--查询测评结果对应相关信息 -->
 	<select id="selectId" resultType="cn.hqtzytb.entity.Specialty">
 		SELECT
-		<include refid="Base_Column_List" />
-		/*specialty_id as specialtyId,
-		specialty_name as specialtyName,
-		specialty_intro as specialtyIntro,
-		specialty_objective as specialtyObjective,
-		specialty_employment as specialtyEmployment,
-		specialty_requirement as specialtyRequirement*/
+			<include refid="Base_Column_List" />
 		FROM specialty
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>

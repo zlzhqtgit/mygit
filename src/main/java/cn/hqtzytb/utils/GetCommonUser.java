@@ -89,23 +89,24 @@ public class GetCommonUser {
 	  * @return
 	  */
 	 public static List<List<String>>  getJson(JSONArray jsonArray,HttpServletRequest request){
-		  try {
-		   if(jsonArray.size()>0){
-		    List<List<String>> listTest = new ArrayList<List<String>>();
-		     for (int j = 0; j < jsonArray.size(); j++) {
-		               List<String> columnList = new ArrayList<String>();
-		               for(int i=0;i<jsonArray.getJSONArray(j).size();i++){
-		                 columnList.add(i,(String) jsonArray.getJSONArray(j).getString(i));
-		               }            
-		               listTest.add(j, columnList);            
-		     }  
-		    return listTest;
-		   }else{
-		    return null;
-		   }    
-		  } catch (Exception e) {
-		   logger.error("访问路径："+request.getRequestURI()+"操作： 二维数组转List 错误信息: "+e);
-		   return null;
-		  }   
-		}
+		 try {
+			 if(jsonArray.size()>0){
+				 List<List<String>> listTest = new ArrayList<List<String>>();
+				 for (int j = 0; j < jsonArray.size(); j++) {
+					 List<String> columnList = new ArrayList<String>();
+					 for(int i=0;i<jsonArray.getJSONArray(j).size();i++){
+						 columnList.add(i,(String) jsonArray.getJSONArray(j).getString(i));
+					 }            
+					 listTest.add(j, columnList);            
+				 }  
+				 return listTest;
+			 }else{
+				 return null;
+			 }    
+		 } catch (Exception e) {
+			 System.err.println("jsonArray = " + jsonArray);
+			 logger.error("访问路径："+request.getRequestURI()+"操作： 二维数组转List 错误信息: "+e);
+			 return null;
+		 }   
+	}
 }

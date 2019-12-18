@@ -40,9 +40,9 @@ import com.alibaba.fastjson.JSONArray;
 import cn.hqtzytb.entity.Enrollment;
 import cn.hqtzytb.entity.EnrollmentRequirements;
 import cn.hqtzytb.entity.Personality;
+import cn.hqtzytb.entity.PersonalityOut;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
-import cn.hqtzytb.entity.SpecialtyIn;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.UserResultReport;
@@ -339,13 +339,13 @@ public class XgkxkController {
             cognize_map.put(Combination.政历地.three,0d);//地理
             List<Personality> personalityList = personalityMapper.selectPersonalityListByMap(paramMap);
             Personality personality = personalityList.get(0);//认知测评结果数据信息
-            List<SpecialtyIn> specialtyIns = JSON.parseArray(personality.getPersonalitySpecialty(), SpecialtyIn.class);
+            List<List<String>> specialtyIns = GetCommonUser.getJson(net.sf.json.JSONArray.fromObject(personality.getPersonalitySpecialty()), request);
             String where = " specialty_id IN (";
             for(int i=0; i<specialtyIns.size(); i++){
             	if (i == specialtyIns.size()-1) {
-            		where += specialtyIns.get(i).getNuber();
+            		where += specialtyIns.get(i).get(0);
 				} else {
-					where += specialtyIns.get(i).getNuber() + ",";
+					where += specialtyIns.get(i).get(0) + ",";
 				}
             }
             List<Specialty> specialtyList = specialtyMapper.select(where + ")", null, null, null);
