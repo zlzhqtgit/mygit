@@ -140,6 +140,8 @@ public class Vocation implements Serializable {
      */
     private String planAbility;
 
-
-
+    /**
+     * 收入信息
+     */
+    private String incomeInfo;
 }

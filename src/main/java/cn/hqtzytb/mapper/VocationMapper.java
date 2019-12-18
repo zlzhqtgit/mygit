@@ -53,4 +53,10 @@ public interface VocationMapper {
 	 * @return
 	 */
 	List<Vocation> selectVocationListByMap(Map<String, Object> paramMap);
+	
+	/**
+	 * 查询职业行业名称
+	 * @return
+	 */
+	List<String> selectIndustryName();
 }

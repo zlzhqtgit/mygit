@@ -39,7 +39,11 @@
 		<!--查询测评结果对应相关信息  -->
 		<select id="select" resultType="cn.hqtzytb.entity.Vocation">
 			SELECT  
-				<include refid="Base_Column_List" />
+				b.v_id, b.vocation_id, b.vocation_name, b.industry_name, b.industry_major_name, b.vocation_brief,
+				b.prospect, b.work_experience, b.work_content, b.education_credential, b.relation_specialty,
+				b.salary_trend, b.salary_distribution, b.employment_situation_education, b.employment_situation_experience,
+				b.requirement_qualification, b.education_qualification, b.specialty_know, b.specialty_skill,
+				b.work_year, b.work_achieved, b.organization_ability, b.plan_ability
 			FROM vocation b 
 			LEFT JOIN  personality_vocation e  on b.vocation_id=e.vocations_id  
 			<if test="where != null">where ${where}</if>
@@ -369,10 +373,14 @@
 				  AND plan_ability = #{planAbility}
 			  </if>
 		  </where>
-		  <if test="offset != null AND pageSize != null">
+		  <if test="offset != null and pageSize != null">
 			  LIMIT #{offset},#{pageSize}
 		  </if>
 	  </select>
+	  
+	 <select id="selectIndustryName" resultType="java.lang.String">
+	 	SELECT DISTINCT industry_name FROM vocation
+	 </select> 
 </mapper>
 	
 	

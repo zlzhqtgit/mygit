@@ -1,6 +1,7 @@
 package cn.hqtzytb.test;
 
 
+import cn.hqtzytb.entity.Vocation;
 import cn.hqtzytb.utils.Combination;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
@@ -62,6 +63,20 @@ public class Test {
         }
         
         String year = new SimpleDateFormat("yyyy").format(new Date());
+        
+        List<Integer> vocationList = new ArrayList<>();
+        vocationList.add(1);
+        vocationList.add(2);
+        vocationList.add(3);
+        vocationList.add(4);
+        vocationList.add(5);
+        vocationList.add(6);
+        System.err.println(vocationList);
+//		for(int i=vocationList.size(); i>0; i--){
+//			vocationList.add(i, vocationList.get(i-1));
+//		}
+		vocationList.add(0, 0);
+		System.err.println(vocationList);
     }
 
 
