@@ -146,7 +146,6 @@ public class VocationServerImpl implements IVocationServer {
 				
 		//就业趋势(按学历) employmentSituationEducation
 		map.put("employment_situation_education", GetCommonUser.getJson(JSONArray.fromObject(vocation.getEmploymentSituationEducation()), request));	
-		System.err.println(map.get("employment_situation_education"));
 		
 		//就业趋势(按经验) employmentSituationExperience	
 		map.put("employment_situation_experience", GetCommonUser.getJson(JSONArray.fromObject(vocation.getEmploymentSituationExperience()), request));
