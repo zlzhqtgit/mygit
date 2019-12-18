@@ -10,6 +10,8 @@
 </head>
 <body>	
 		<header>
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/pick-pcc.min.1.0.1.css"/>
+			<script src="${pageContext.request.contextPath}/js/pick-pcc.min.1.0.1.js" type="text/javascript" charset="utf-8"></script>
 			<div class="nav_wrap">
 				<div class="padding-side2">
 					<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
@@ -44,14 +46,14 @@
 			<div>
 				<shiro:guest>
 					<div class="user">
-						<a class="padding-side border_primary text-center" href=""><span class="glyphicon glyphicon-map-marker"></span><div>贵阳</div></a>
+						<a class="padding-side border_primary text-center" href="javascript:void(0)"><span class="glyphicon glyphicon-map-marker padding-side"></span><div class="pick-area pick_province"></div></a>
 						<img src="${pageContext.request.contextPath}/img/xgk/user.png" />
 						<span class="padding-side"><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
 					</div>
 				</shiro:guest>
 				<shiro:user>  
 				   <div class="user">
-				   		<a class="padding-side border_primary" href=""><span class="glyphicon glyphicon-map-marker"></span></span><div>贵阳</div></a>
+				   		<a class="padding-side border_primary" href="javascript:void(0)"><span class="glyphicon glyphicon-map-marker padding-side"></span><div class="pick-area pick_province"></div></a>
 						<a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp"><img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" /></a>
 						<span class="padding-side"><a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 					</div>
@@ -61,35 +63,57 @@
 		
 </body>
 <script type="text/javascript">
-$("#navdh a").click(function(){	
-	sessionStorage.setItem('xgkid',this.id); //设置数据	
-});
-var sessionData = sessionStorage.getItem('xgkid'); //取出数据
-if(sessionData==null){
-	$( "#xgk1").addClass( "active" );
-}else{
-	var sdf=document.getElementsByName("dh");
-	var dahref=window.location.href;
-	for(var i=0;i<sdf.length;i++){		
-		 if(sdf[i].href==dahref){			
-			sessionStorage.setItem('xgkid',sdf[i].id);	
-			sessionData = sessionStorage.getItem('xgkid');
-		}		
+	//pick_province
+	$(".pick_province").pickArea({
+		"format": "贵州省", //格式
+		"width": "170",
+		"borderColor": "#3b8bec", //文本边框的色值
+		"arrowColor": "#3b8bec", //箭头颜色
+		"listBdColor": "#51AFC9", //下拉框父元素ul的border色值
+		"color": "#555", //字体颜色
+		"fontSize": "16px", //字体大小
+		"hoverColor": "",
+		"paddingLeft": "10px",
+		"arrowRight": "10px",
+		"maxHeight": "600",
+		//"preSet":"河南省/郑州市",
+		"getVal": function() {
+			//console.log($(".pick-area-hidden").val())
+			//console.log($(".pick-area-dom").val())
+	//					var thisdom = $("." + $(".pick-area-dom").val());
+	//					thisdom.next().val($(".pick-area-hidden").val());
+		}
+	});
+	
+	$("#navdh a").click(function(){	
+		sessionStorage.setItem('xgkid',this.id); //设置数据	
+	});
+	var sessionData = sessionStorage.getItem('xgkid'); //取出数据
+	if(sessionData==null){
+		$( "#xgk1").addClass( "active" );
+	}else{
+		var sdf=document.getElementsByName("dh");
+		var dahref=window.location.href;
+		for(var i=0;i<sdf.length;i++){		
+			 if(sdf[i].href==dahref){			
+				sessionStorage.setItem('xgkid',sdf[i].id);	
+				sessionData = sessionStorage.getItem('xgkid');
+			}		
+		}
+		$( "#"+sessionData).addClass( "active" );
 	}
-	$( "#"+sessionData).addClass( "active" );
-}
-function xgkLogin(){
-	var nowUrl=window.location.href;	
-	location.href = "${pageContext.request.contextPath}/user/xgk_login.do?nowUrl="+nowUrl;
-}
-function xgkRegister() {
-	var nowUrl=window.location.href;
-	location.href = "${pageContext.request.contextPath}/user/register.do?nowUrl="+nowUrl;
-}
-function loginOut() {
-	var nowUrl=window.location.href;
-	location.href = "${pageContext.request.contextPath}/login_out.do?nowUrl="+nowUrl;
-}
+	function xgkLogin(){
+		var nowUrl=window.location.href;	
+		location.href = "${pageContext.request.contextPath}/user/xgk_login.do?nowUrl="+nowUrl;
+	}
+	function xgkRegister() {
+		var nowUrl=window.location.href;
+		location.href = "${pageContext.request.contextPath}/user/register.do?nowUrl="+nowUrl;
+	}
+	function loginOut() {
+		var nowUrl=window.location.href;
+		location.href = "${pageContext.request.contextPath}/login_out.do?nowUrl="+nowUrl;
+	}
 
 </script>
 </html>

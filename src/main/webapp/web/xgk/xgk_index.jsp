@@ -354,6 +354,8 @@
 			}); 
 			$(".counter").countUp();
 		</script>
+		<!-- 页面右侧-->
+		<c:import url="../public/side_right.jsp"></c:import>
 		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
 </html>

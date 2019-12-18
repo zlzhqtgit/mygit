@@ -98,7 +98,6 @@ input{
 .user>a:first-of-type{
 	display: flex;
     align-items: center;
-    border: 1px solid #3b8bec;
     padding: .5em 1em;
     margin-right: 1em;
 }
@@ -330,6 +329,7 @@ banner .swiper-button-next, .swiper-container-rtl .swiper-button-prev{ backgroun
 }
 video{
 	width: 100%;
+	cursor: pointer;
 }
 .font_mark{
 	padding-top: 2em;
@@ -474,30 +474,12 @@ footer li:hover a{
 .company-info p{margin: 0;font-size: 14px;}
 /* .copyright{position: absolute;bottom: 0;right: 0;} */
 
-.side-right{
-	width: 60px;
-	position: fixed;
-	right: 1px;
-	top: 30%;
-	z-index: 999999999;
-}
-.side-right img{
-	width: 100%;
-}
-.mark-box{
-	display:block;
-	margin: 3px 0;
-	background-color: white;
-	padding: 7px 2px;
-	border-radius: 6px;
-	box-shadow: -1px 1px 3px #8C8C8C;
-	position: relative;
-}
+
 .submenu{
 	display: none;
 	position: absolute;
 	top: 0;
-	left: -154px;
+	left: -150px;
 	width: 150px;
 	overflow: inherit;
 	z-index: 100;
@@ -558,6 +540,7 @@ footer li:hover a{
 	padding: .2em;
 	background-color: #ff6600;
 	border-radius: 8px;
+	font-size: 12px;
 }
 .submenu_con ul li a:hover{
 	color: #fff;
@@ -590,6 +573,22 @@ footer li:hover a{
 .btn-mark img{
 	max-width: 20px;
 }
+.side-right{
+	width: 60px;
+	position: fixed;
+	right: 1px;
+	top: 30%;
+	z-index: 999999999;
+}
+.mark-box{
+	display:block;
+	margin: 3px 0;
+	background-color: white;
+	padding: 7px 2px;
+	border-radius: 6px;
+	box-shadow: -1px 1px 3px #8C8C8C;
+	position: relative;
+}
 .mark-box.backtop{
 	background-color:  #00AEFF;
 }
@@ -597,10 +596,13 @@ footer li:hover a{
 	color: white;
 }
 .mark-box a{
-	font-size: 12px;
+	display: block;
 	text-decoration: none;
 	cursor: pointer;
-	line-height: 0;
+}
+.mark-box a>div{
+	font-size: 12px;
+	margin-top: .4em;
 }
 
 main{
