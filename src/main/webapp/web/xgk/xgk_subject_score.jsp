@@ -462,7 +462,7 @@
 				</div>
 				<div class="padding-side2">
 					<h3 class="fontwei margin_top margin_bot1">潜能分析</h3>
-					<table class="margin_bot" border="" cellspacing="" cellpadding=""
+					<table class="margin_bot qnAnalyse" border="" cellspacing="" cellpadding=""
 						style="margin-left: auto; margin-right: auto;">
 						<thead>
 							<tr style="background-color: #3b8bec; color: white;">
@@ -483,7 +483,7 @@
 									var h1 = $("#myCanvas1").height();
 									console.log(w1);
 									console.log(h1);
-									ctx1.lineTo(w1, h1);
+									ctx1.lineTo(330, 166);
 									ctx1.stroke();
 								</script>
 								<th>物理</th>
