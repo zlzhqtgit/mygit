@@ -151,6 +151,7 @@ public class IUniversityServiceImpl implements IUniversityService {
 	@Override
 	public String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request) {
 		// TODO Auto-generated method stub
+		System.err.println(universityCode);
 		return "web/xgk/xgk_sch_info";
 	}
 }
