@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
 
 	<head>
@@ -25,8 +25,8 @@
 
 		<main class="container">
 			<p class="text-right"><a class="btn btn-primary" href="javascript:history.go(-1)">返回</a></p>
-			<section class="row">
-				<div class="elsub" style="background-color: #fff;">
+			<div class="report_content container" id="report_content">
+				<section class="row">
 					<h2 class="text-primary fontwei">选科报告</h2>
 					<div class="panel panel-default border-radius box-shadow">
 						<div class="panel-body padding-side2">
@@ -43,6 +43,8 @@
 							</div>
 						</div>
 					</div>
+				</section>
+				<section class="row">
 					<div class="padding-side2">
 						<h3 class="title_wrap text-primary fontwei"> 
 							<span style="background-image: url(img/1.png);"></span>数据分析
@@ -111,8 +113,8 @@
 		          			</div>
 						</div>
 					</div>
-				</div>	
-			</section>
+				</section>
+			</div>
 		</main>
 		
 		<!--<p class="text-center margin_bot"><a class="downloadReport btn btn-primary" href="javascript:void(0)">下载报告</a></p>-->
@@ -440,7 +442,7 @@
 				    }
 					
 					function download(){
-					   var element = $(".elsub");    // 这个dom元素是要导出pdf的div容器
+					   var element = $("#report_content");    // 这个dom元素是要导出pdf的div容器
 					   var w = element.width();    // 获得该容器的宽
 					   var h = element.height();    // 获得该容器的高
 					   var offsetTop = element.offset().top;    // 获得该容器到文档顶部的距离
@@ -460,6 +462,7 @@
 					   context.translate(-offsetLeft-abs,-offsetTop);
 					   // 这里默认横向没有滚动条的情况，因为offset.left(),有无滚动条的时候存在差值，因此        
 					   // translate的时候，要把这个差值去掉
+					   element.css("background-color","#f9f9f9");
 					   html2canvas(element).then(function(canvas) {
 					    var contentWidth = canvas.width;
 					    var contentHeight = canvas.height;

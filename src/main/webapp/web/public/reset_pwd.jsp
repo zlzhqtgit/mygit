@@ -58,15 +58,19 @@
 						</div>
 				</form>
 				<form class="reset_pwd hide">
-						<div class="">
-							<lable class="" for="">密&ensp;&ensp;&ensp;&ensp;码：</lable>
-							<input type="" name="" id="" value="" placeholder="请填写6-16位数字、字母或符号作为密码"/>
-							<span class="glyphicon glyphicon-ok-sign text-success"> 密码强度：弱</span>
-						</div>
-						<div class="margin_top1">
-							<lable class="" for="">确认密码：</lable>
-							<input type="" name="" id="" value="" placeholder="请再次输入密码"/>
-							<span class="glyphicon glyphicon-remove-sign text-danger"> 两次输入的密码不一致</span>
+						<div class="" style="display: flex;justify-content: center;">
+							<div class="input_group" style="width: 30em;">
+								<div class="">
+									<lable class="" for="">密&ensp;&ensp;&ensp;&ensp;码：</lable>
+									<input type="" name="" id="" value="" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+									<span class="glyphicon glyphicon-ok-sign text-success"> 密码强度：弱</span>
+								</div>
+								<div class="margin_top1">
+									<lable class="" for="">确认密码：</lable>
+									<input type="" name="" id="" value="" placeholder="请再次输入密码"/>
+									<span class="glyphicon glyphicon-remove-sign text-danger"> 两次输入的密码不一致</span>
+								</div>
+							</div>
 						</div>
 						<div class="margin_top1 text-center">
 							<a class="btn btn-primary" href="javascript:void(0)" onclick="prev_step(this)">上一步</a>

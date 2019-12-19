@@ -41,7 +41,7 @@
 					        	<dl class="pull-left item_tit">
 					        		<dt>职业分类</dt>
 					        	</dl>
-					        	<dl class="pull-left item_body" id="industry_list">
+					        	<dl class="pull-left item_body careerList" id="industry_list">
 					        		<dd><a class="active" href="javascript:;">全部</a></dd>
 					        		<dd><a href="javascript:void(0)">互联网</a></dd>
 					        		<dd><a href="javascript:void(0)">师贸易</a></dd>

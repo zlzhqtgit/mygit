@@ -67,13 +67,13 @@ function chat2(id) {
 			<div class="text-center mark-box course_server">
 				<a href="${pageContext.request.contextPath}/web/xgk/xgk_course.jsp">
 					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside1.png" > </span>
-					<div class=""> VIP</div>
+					<div class=""> 在线课程</div>
 				</a>
 			</div>
 			<div class="text-center mark-box vip_server">
 				<a href="javascript:void(0)">
 					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside2.png" > </span>
-					<div class=""> 在线课程</div>
+					<div class=""> VIP</div>
 				</a>
 			</div>
 			<div class="text-center mark-box tel_server" href="">

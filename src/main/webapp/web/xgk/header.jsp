@@ -13,7 +13,7 @@
 			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/pick-pcc.min.1.0.1.css"/>
 			<script src="${pageContext.request.contextPath}/js/pick-pcc.min.1.0.1.js" type="text/javascript" charset="utf-8"></script>
 			<div class="nav_wrap">
-				<div class="padding-side2">
+				<div class="padding-side">
 					<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
 				</div>
 				<nav id="navdh" class="clearfix">

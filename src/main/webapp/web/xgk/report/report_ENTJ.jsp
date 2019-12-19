@@ -11,8 +11,8 @@
 	
 
 		<main class="container">
-			<section class="row">
-				<p class="text-right"><a href="" class="btn btn-primary">打印报告</a></p>
+			<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
+			<section class="row" id="report_cont">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="text-primary">MBTI职业性格测试报告</h3>
