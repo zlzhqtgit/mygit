@@ -775,8 +775,25 @@ public class University implements Serializable{
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
+		return "University [id=" + id + ", universitiesCode=" + universitiesCode + ", universitiesName="
+				+ universitiesName + ", province=" + province + ", city=" + city + ", establishedTime="
+				+ establishedTime + ", universitiesNature=" + universitiesNature + ", belongTo=" + belongTo
+				+ ", address=" + address + ", mapCoordinates=" + mapCoordinates + ", universitiesIntroduction="
+				+ universitiesIntroduction + ", universitiesAttributes=" + universitiesAttributes
+				+ ", universitiesType=" + universitiesType + ", universitiesLogo=" + universitiesLogo
+				+ ", universitiesImage=" + universitiesImage + ", universitiesLife=" + universitiesLife
+				+ ", roomAndBoard=" + roomAndBoard + ", scholarships=" + scholarships + ", teachingResearch="
+				+ teachingResearch + ", maleFemaleRatio=" + maleFemaleRatio + ", teachersResources=" + teachersResources
+				+ ", coreSpecialty=" + coreSpecialty + ", coreSubject=" + coreSubject
+				+ ", coreLaboratoriesAndResearchCenters=" + coreLaboratoriesAndResearchCenters + ", admissionLot="
+				+ admissionLot + ", admissionProbability=" + admissionProbability + ", universitiesWebsite="
+				+ universitiesWebsite + ", universitiesPhone=" + universitiesPhone + ", alumniAssociationRanking="
+				+ alumniAssociationRanking + ", martialBookAssociationRanking=" + martialBookAssociationRanking
+				+ ", softScienceRanking=" + softScienceRanking + ", quacquarelliSymondsRanking="
+				+ quacquarelliSymondsRanking + ", usNewsRanking=" + usNewsRanking + ", admissionAverageRanking="
+				+ admissionAverageRanking + ", totalRanking=" + totalRanking + ", createTime=" + createTime
+				+ ", createBy=" + createBy + ", updateTime=" + updateTime + ", updateBy=" + updateBy
+				+ ", universRelationList=" + universRelationList + "]";
 	}
 
 	

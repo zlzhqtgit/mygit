@@ -7,6 +7,8 @@ import cn.hqtzytb.mapper.SpecialtyMapper;
 import cn.hqtzytb.mapper.UniversityMapper;
 import cn.hqtzytb.service.IUniversityService;
 import cn.hqtzytb.utils.Constants;
+import cn.hqtzytb.utils.GetCommonUser;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,13 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.sun.prism.Image;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -153,9 +157,12 @@ public class IUniversityServiceImpl implements IUniversityService {
 		System.err.println(universityCode);
 		if (StringUtils.isNotEmpty(universityCode)) {
 			List<University> universityList = universityMapper.selectUniversityList(" u.universities_code = '" + universityCode +"' ", null, null, null);
-			if (universityList.isEmpty()) {
+			System.err.println(universityList.get(0));
+			if (!universityList.isEmpty()) {
 				University university = universityList.get(0);
 				map.addAttribute("school", university);
+				map.addAttribute("images", university.getUniversitiesLife().split(";"));
+				System.err.println(map.get("images"));
 			}
 		}
 		return "web/xgk/xgk_sch_info";

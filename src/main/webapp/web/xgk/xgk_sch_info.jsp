@@ -20,6 +20,7 @@
 		<script src="${pageContext.request.contextPath}/js/web/xgk/sch_chart.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<%-- 	<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script> --%>
 	</head>
 	<body>
 		<c:import url="header.jsp"></c:import>
@@ -29,20 +30,28 @@
 			<section class="" style="background: url(${pageContext.request.contextPath}/img/xgk/bannerBg.png) no-repeat;background-size: inherit;background-position: 0 -238px;padding-bottom: 2em;">
 				<div class="container">
 					<div class="row sch_info_head">
-						<div class="col-lg-2  col-sm-2 col-md-2 sch_logo">
-							<img src="${pageContext.request.contextPath}/img/xgk/report/ESFP_Jordan.jpg" style="width: 100%;border-radius: 10px;"/>
+						<div class="col-lg-2  col-sm-2 col-md-2 sch_logo">		
+								<img src="${pageContext.request.contextPath}/${school.universitiesLogo}" style="width: 100%;border-radius: 10px;"/>
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
-							<h3 class="text-white margin_top1">中山大学</h3>
+							<h3 class="text-white margin_top1">${school.universitiesName }</h3>10001
 							<script type="text/javascript">
-								var sch = ${school};
+								
 								$(function(){
-									alert(sch)
+									var a = '${school}';
+									console.log(a)
+									var attributes  = '${school.universitiesAttributes}';
+									if( attributes != ""){
+										var attributesList = JSON.parse(attributes);
+										var universities_attributes = "";
+										for(var i=0; i<attributesList.length; i++){
+											universities_attributes += '<span class="btn btn-default">' + attributesList[i] + '</span>';
+										}
+										$("#universities_attributes").html(universities_attributes);
+									}
+									
 								});
 								
-								/* if(){
-									
-								} */
 								
 							</script>
 							<p class="margin_top" id="universities_attributes">
@@ -51,8 +60,8 @@
 								<span class="btn btn-default">211</span>
 							</p>
 							<p class="clearfix text-white margin_top">
-								<span class="pull-left">学校官网：</span>
-								<span class="pull-right">招生电话：</span>
+								<span class="pull-left">学校官网：${school.universitiesWebsite}</span>
+								<span class="pull-right">招生电话：${school.universitiesPhone}</span>
 							</p>
 						</div>
 						<div class="col-lg-4  col-sm-4 col-md-4" style="display: flex;align-items: center;justify-content: center;">
@@ -82,21 +91,7 @@
 			    					<h2 class="text-primary fontwei"> <span style="background-image: url(../../img/xgk/1.png);"></span>学校介绍 </h2>
 		    						<div class="p_relative">
 		    							<div class="tindent " style="height: 100px; overflow: hidden;">
-			    							在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；
-				    						任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。 
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
-				    						总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。  
+		    								${school.universitiesIntroduction}
 			    						</div>
 			    						<div class="open-btn" style="height: 100px;">
 											<a class="show_more btn btn-primary" onclick="showMore(this)" style="text-align:center; bottom: 3em; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;"> 查看更多 <div class="light"></div> </a>
@@ -121,21 +116,11 @@
 										<div class="schlive">
 											<div class="swiper-container">
 												<div class="swiper-wrapper">
-													<a href="javascript:void(0)" class="swiper-slide">
-														<img src="${pageContext.request.contextPath}/img/xgk/certify04.png" style="width: 100%;"/>
+													<c:forEach items="${images}" var="img">
+														<a href="javascript:void(0)" class="swiper-slide" >
+														<img src="${pageContext.request.contextPath}/${img}" style="width: 100%;"/>
 													</a>
-													<a href="javascript:void(0)" class="swiper-slide">
-														<img src="${pageContext.request.contextPath}/img/xgk/certify04.png" style="width: 100%;"/>
-													</a>
-													<a href="javascript:void(0)" class="swiper-slide">
-														<img src="${pageContext.request.contextPath}/img/xgk/certify04.png" style="width: 100%;"/>
-													</a>
-													<a href="javascript:void(0)" class="swiper-slide">
-														<img src="${pageContext.request.contextPath}/img/xgk/certify04.png" style="width: 100%;"/>
-													</a>
-													<a href="javascript:void(0)" class="swiper-slide">
-														<img src="${pageContext.request.contextPath}/img/xgk/certify04.png" style="width: 100%;"/>
-													</a>
+													</c:forEach>
 												</div>
 												<!-- Add Pagination -->
 												<div class="swiper-pagination"></div>
@@ -524,12 +509,12 @@
 		    					<h3 class="">基础信息</h3>
 		    				</div>
 		    				<ul class="padding-side margin_top1">
-		    					<li>创建时间：<span>1942</span></li>
-		    					<li>办学性质：<span>公立</span></li>
-		    					<li>隶属于：<span>教育部</span></li>
-		    					<li>地址：<span>贵阳市观山湖区185号</span></li>
+		    					<li>创建时间：<span>${school.establishedTime }</span></li>
+		    					<li>办学性质：<span>${school.universitiesNature }</span></li>
+		    					<li>隶属于：<span>${school.belongTo}</span></li>
+		    					<li>地址：<span>${school.address}</span></li>
 		    				</ul>
-		    				<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址','position.jsp',2)">查看地图</a></p>
+		    				<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址','${pageContext.request.contextPath}/web/xgk/position.jsp',2)">查看地图</a></p>
 		    			</div>
 		    			
 		    			<div class="panel panel-primary margin_top">
