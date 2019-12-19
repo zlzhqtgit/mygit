@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName: IUniversityServiceImpl
@@ -144,4 +147,10 @@ public class IUniversityServiceImpl implements IUniversityService {
     public ResponseResult<List<String>> getProvince() {
         return new ResponseResult<List<String>>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS).setData(universityMapper.selectUniversityProvince());
     }
+
+	@Override
+	public String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return "web/xgk/xgk_sch_info";
+	}
 }

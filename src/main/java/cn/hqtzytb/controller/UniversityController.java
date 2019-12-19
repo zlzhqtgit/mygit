@@ -6,6 +6,7 @@ import cn.hqtzytb.entity.University;
 import cn.hqtzytb.service.IUniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -116,4 +117,15 @@ public class UniversityController {
     public ResponseResult<List<String>> getProvince(){
         return iUniversityService.getProvince();
     }
+    
+    /**
+     * 获得院校信息
+     * @return
+     */
+    @RequestMapping("/xgk_university_info.do")
+    public String getUniversityInfo(String universityCode ,ModelMap map,HttpServletRequest request){
+    	
+        return iUniversityService.getUniversityInfo(universityCode,map,request);
+    }
+
 }
