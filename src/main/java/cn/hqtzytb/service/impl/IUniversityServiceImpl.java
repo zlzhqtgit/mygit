@@ -150,8 +150,14 @@ public class IUniversityServiceImpl implements IUniversityService {
 
 	@Override
 	public String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		System.err.println(universityCode);
+		if (StringUtils.isNotEmpty(universityCode)) {
+			List<University> universityList = universityMapper.selectUniversityList(" u.universities_code = '" + universityCode +"' ", null, null, null);
+			if (universityList.isEmpty()) {
+				University university = universityList.get(0);
+				map.addAttribute("school", university);
+			}
+		}
 		return "web/xgk/xgk_sch_info";
 	}
 }

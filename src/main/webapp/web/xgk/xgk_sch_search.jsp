@@ -270,7 +270,7 @@
 										universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +
 												      //院校Logo
 													 "<div class='sh_logo'>" +
-													 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universityCode + "'><img alt='学校logo' src='${pageContext.request.contextPath}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
+													 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo' src='${pageContext.request.contextPath}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
 													 "</div>" +
 													 //院校名字   + 院校属性  + 录取批次  + 录取平均分排行
 													 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4><span class=''>" + list[i].universitiesName + "</span><span class=''>" + attrImg + "</span></h4>" +
@@ -304,13 +304,6 @@
 						}
 					});
 						where = "";
-					}
-
-					//点击查看院校信息
-					function queryUniversityInfo(e){
-						var universityCode = $(e).attr("class");
-						console.log(universityCode)
-						location.href = "${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + universityCode;
 					}
 					
 				</script>

@@ -34,7 +34,18 @@
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
 							<h3 class="text-white margin_top1">中山大学</h3>
-							<p class="margin_top">
+							<script type="text/javascript">
+								var sch = ${school};
+								$(function(){
+									alert(sch)
+								});
+								
+								/* if(){
+									
+								} */
+								
+							</script>
+							<p class="margin_top" id="universities_attributes">
 								<span class="btn btn-default">本科</span>
 								<span class="btn btn-default">双一流</span>
 								<span class="btn btn-default">211</span>
