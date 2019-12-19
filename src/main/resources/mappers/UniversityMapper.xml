@@ -2,10 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="cn.hqtzytb.mapper.UniversityMapper">
+	<resultMap id="BaseResultMap" type="cn.hqtzytb.entity.University">
+		<id column="id" property="id" />
+	    	<result column="universities_code" property="universitiesCode" />
+	    	<result column="universities_name" property="universitiesName" />
+	    	<result column="province" property="province" />
+	    	<result column="city" property="city" />
+	    	<result column="established_time" property="establishedTime" />
+	    	<result column="universities_nature" property="universitiesNature" />
+	    	<result column="belong_to" property="belongTo" />
+	   	<result column="address" property="address" />
+	    	<result column="map_coordinates" property="mapCoordinates" />
+	    	<result column="universities_attributes" property="universitiesAttributes" />
+	    	<result column="universities_type" property="universitiesType" />
+	    	<result column="universities_logo" property="universitiesLogo" />
+	   	<result column="universities_image" property="universitiesImage" />
+	    	<result column="admission_lot" property="admissionLot" />
+	    	<result column="admission_probability" property="admissionProbability" />
+	    	<result column="universities_website" property="universitiesWebsite" />
+	    	<result column="universities_phone" property="universitiesPhone" />
+	    	<result column="alumni_association_ranking" property="alumniAssociationRanking" />
+	   	<result column="martial_book_association_ranking" property="martialBookAssociationRanking" />
+	    	<result column="soft_science_ranking" property="softScienceRanking" />
+	    	<result column="quacquarelli_symonds_ranking" property="quacquarelliSymondsRanking" />
+	    	<result column="us_news_ranking" property="usNewsRanking" />
+	    	<result column="admission_average_ranking" property="admissionAverageRanking" />
+	    	<result column="total_ranking" property="totalRanking" />
+	    	<result column="universities_introduction" property="universitiesIntroduction" />
+	    	<result column="universities_life" property="universitiesLife" />
+	    	<result column="room_and_board" property="roomAndBoard" />
+	    	<result column="scholarships" property="scholarships" />
+	    	<result column="teaching_research" property="teachingResearch" />
+	    	<result column="male_female_ratio" property="maleFemaleRatio" />
+	    	<result column="teachers_resources" property="teachersResources" />
+	    	<result column="core_specialty" property="coreSpecialty" />
+	    	<result column="core_subject" property="coreSubject" />
+	    	<result column="core_laboratories_and_research_centers" property="coreLaboratoriesAndResearchCenters" />
+	    	<result column="create_time" property="createTime" />
+	    	<result column="create_by" property="createBy" />
+	    	<result column="update_time" property="updateTime" />
+	    	<result column="update_by" property="updateBy" />
+		<collection property="universRelationList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityRelation">
+		    	<result column="year" property="year" />
+		    	<result column="subject_type" property="subjectType" />
+		    	<result column="admission_batch" property="admissionBatch" />
+		    	<result column="college_score_line" property="collegeScoreLine" />
+		    	<result column="enrollment_plan" property="enrollmentPlan" />
+		    	<result column="professional_admission_score" property="professionalAdmissionScore" />
+		    	<result column="admissions_brochure" property="admissionsBrochure" />
+		    	<result column="admissions_regulations" property="admissionsRegulations" />
+		</collection>
+	</resultMap>
 
 	<insert id="insertUniversity" parameterType="cn.hqtzytb.entity.University"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into university
+		INSERT INTO university
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
@@ -42,6 +93,9 @@
 			</if>
 			<if test="universitiesType != null">
 				universities_type,
+			</if>
+			<if test="universitiesLogo != null">
+				universities_logo,
 			</if>
 			<if test="universitiesImage != null">
 				universities_image,
@@ -118,118 +172,121 @@
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
-				#{id,jdbcType=INTEGER},
+				#{id},
 			</if>
 			<if test="universitiesCode != null">
-				#{universitiesCode,jdbcType=VARCHAR},
+				#{universitiesCode},
 			</if>
 			<if test="universitiesName != null">
-				#{universitiesName,jdbcType=VARCHAR},
+				#{universitiesName},
 			</if>
 			<if test="province != null">
-				#{province,jdbcType=VARCHAR},
+				#{province},
 			</if>
 			<if test="city != null">
-				#{city,jdbcType=VARCHAR},
+				#{city},
 			</if>
 			<if test="establishedTime != null">
-				#{establishedTime,jdbcType=VARCHAR},
+				#{establishedTime},
 			</if>
 			<if test="universitiesNature != null">
-				#{universitiesNature,jdbcType=VARCHAR},
+				#{universitiesNature},
 			</if>
 			<if test="belongTo != null">
-				#{belongTo,jdbcType=VARCHAR},
+				#{belongTo},
 			</if>
 			<if test="address != null">
-				#{address,jdbcType=VARCHAR},
+				#{address},
 			</if>
 			<if test="mapCoordinates != null">
-				#{mapCoordinates,jdbcType=VARCHAR},
+				#{mapCoordinates},
 			</if>
 			<if test="universitiesAttributes != null">
-				#{universitiesAttributes,jdbcType=VARCHAR},
+				#{universitiesAttributes},
 			</if>
 			<if test="universitiesType != null">
-				#{universitiesType,jdbcType=VARCHAR},
+				#{universitiesType},
+			</if>
+			<if test="universitiesLogo != null">
+				#{universitiesLogo},
 			</if>
 			<if test="universitiesImage != null">
-				#{universitiesImage,jdbcType=VARCHAR},
+				#{universitiesImage},
 			</if>
 			<if test="admissionLot != null">
-				#{admissionLot,jdbcType=VARCHAR},
+				#{admissionLot},
 			</if>
 			<if test="admissionProbability != null">
-				#{admissionProbability,jdbcType=VARCHAR},
+				#{admissionProbability},
 			</if>
 			<if test="universitiesWebsite != null">
-				#{universitiesWebsite,jdbcType=VARCHAR},
+				#{universitiesWebsite},
 			</if>
 			<if test="alumniAssociationRanking != null">
-				#{alumniAssociationRanking,jdbcType=INTEGER},
+				#{alumniAssociationRanking},
 			</if>
 			<if test="martialBookAssociationRanking != null">
-				#{martialBookAssociationRanking,jdbcType=INTEGER},
+				#{martialBookAssociationRanking},
 			</if>
 			<if test="softScienceRanking != null">
-				#{softScienceRanking,jdbcType=INTEGER},
+				#{softScienceRanking},
 			</if>
 			<if test="quacquarelliSymondsRanking != null">
-				#{quacquarelliSymondsRanking,jdbcType=INTEGER},
+				#{quacquarelliSymondsRanking},
 			</if>
 			<if test="usNewsRanking != null">
-				#{usNewsRanking,jdbcType=INTEGER},
+				#{usNewsRanking},
 			</if>
 			<if test="admissionAverageRanking != null">
-				#{admissionAverageRanking,jdbcType=INTEGER},
+				#{admissionAverageRanking},
 			</if>
 			<if test="totalRanking != null">
-				#{totalRanking,jdbcType=INTEGER},
+				#{totalRanking},
 			</if>
 			<if test="createBy != null">
-				#{createBy,jdbcType=VARCHAR},
+				#{createBy},
 			</if>
 			<if test="updateTime != null">
-				#{updateTime,jdbcType=TIMESTAMP},
+				#{updateTime},
 			</if>
 			<if test="updateBy != null">
-				#{updateBy,jdbcType=VARCHAR},
+				#{updateBy},
 			</if>
 			<if test="universitiesIntroduction != null">
-				#{universitiesIntroduction,jdbcType=LONGVARCHAR},
+				#{universitiesIntroduction},
 			</if>
 			<if test="universitiesLife != null">
-				#{universitiesLife,jdbcType=LONGVARCHAR},
+				#{universitiesLife},
 			</if>
 			<if test="roomAndBoard != null">
-				#{roomAndBoard,jdbcType=LONGVARCHAR},
+				#{roomAndBoard},
 			</if>
 			<if test="scholarships != null">
-				#{scholarships,jdbcType=LONGVARCHAR},
+				#{scholarships},
 			</if>
 			<if test="teachingResearch != null">
-				#{teachingResearch,jdbcType=LONGVARCHAR},
+				#{teachingResearch},
 			</if>
 			<if test="maleFemaleRatio != null">
-				#{maleFemaleRatio,jdbcType=LONGVARCHAR},
+				#{maleFemaleRatio},
 			</if>
 			<if test="teachersResources != null">
-				#{teachersResources,jdbcType=LONGVARCHAR},
+				#{teachersResources},
 			</if>
 			<if test="coreSpecialty != null">
-				#{coreSpecialty,jdbcType=LONGVARCHAR},
+				#{coreSpecialty},
 			</if>
 			<if test="coreSubject != null">
-				#{coreSubject,jdbcType=LONGVARCHAR},
+				#{coreSubject},
 			</if>
 			<if test="coreLaboratoriesAndResearchCenters != null">
-				#{coreLaboratoriesAndResearchCenters,jdbcType=LONGVARCHAR},
+				#{coreLaboratoriesAndResearchCenters},
 			</if>
 		</trim>
 	</insert>
 
 	<update id="updateUniversity" parameterType="cn.hqtzytb.entity.University">
-		update university
+		UPDATE university
 		<set>
 			<if test="universitiesCode != null">
 				universities_code = #{universitiesCode},
@@ -263,6 +320,9 @@
 			</if>
 			<if test="universitiesType != null">
 				universities_type = #{universitiesType},
+			</if>
+			<if test="universitiesLogo != null">
+				universities_logo = #{universitiesLogo},
 			</if>
 			<if test="universitiesImage != null">
 				universities_image = #{universitiesImage},
@@ -337,34 +397,34 @@
 				core_laboratories_and_research_centers = #{coreLaboratoriesAndResearchCenters},
 			</if>
 		</set>
-		where id = #{id}
+		WHERE id = #{id}
 	</update>
 
 	<delete id="deleteUniversity" parameterType="cn.hqtzytb.entity.University">
-		delete from university where id = #{id}
+		DELETE FROM university WHERE id = #{id}
 	</delete>
 
-	<select id="selectUniversityList" resultType="cn.hqtzytb.entity.University">
-		select
-		u.id, u.universities_code, u.universities_name, u.province, u.city,
-		u.established_time, u.universities_nature,
-		u.belong_to, u.address, u.map_coordinates, u.universities_attributes,
-		u.universities_type, u.universities_image,
-		u.universities_life, u.room_and_board, u.scholarships, u.teaching_research,
-		u.male_female_ratio, u.teachers_resources,
-		u.core_specialty, u.core_subject, u.core_laboratories_and_research_centers,
-		u.admission_lot, u.admission_probability,
-		u.universities_website, u.universities_phone, u.alumni_association_ranking,
-		u.martial_book_association_ranking, u.soft_science_ranking,
-		u.quacquarelli_symonds_ranking,
-		u.us_news_ranking, u.admission_average_ranking, u.total_ranking,
-		u.create_by, u.create_time, u.update_time, u.update_by,
-		ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score,
-		ur.admissions_brochure,
-		ur.admissions_regulations
-		from university u
-		left join university_relation ur ON ur.universities_code =
-		u.universities_code
+	<select id="selectUniversityList" resultMap="BaseResultMap">
+		SELECT
+			u.id, u.universities_code, u.universities_name, u.province, u.city,
+			u.established_time, u.universities_nature,
+			u.belong_to, u.address, u.map_coordinates, u.universities_introduction, 
+			u.universities_attributes, u.universities_type, u.universities_logo,
+			u.universities_image, u.universities_life, u.room_and_board, u.scholarships,
+			u.teaching_research, u.male_female_ratio, u.teachers_resources,
+			u.core_specialty, u.core_subject, u.core_laboratories_and_research_centers,
+			u.admission_lot, u.admission_probability,
+			u.universities_website, u.universities_phone, u.alumni_association_ranking,
+			u.martial_book_association_ranking, u.soft_science_ranking,
+			u.quacquarelli_symonds_ranking,
+			u.us_news_ranking, u.admission_average_ranking, u.total_ranking,
+			u.create_by, u.create_time, u.update_time, u.update_by,
+			ur.year, ur.subject_type, ur.admission_batch,
+			ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score,
+			ur.admissions_brochure, ur.admissions_regulations
+		FROM 
+			university u
+		LEFT JOIN university_relation ur ON ur.universities_code =u.universities_code
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
@@ -373,13 +433,22 @@
 
 	<insert id="insertUniversityRelation" parameterType="cn.hqtzytb.entity.University"
 		useGeneratedKeys="true" keyProperty="id">
-		insert into university_relation
+		INSERT INTO university_relation
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
 				id,
 			</if>
 			<if test="universitiesCode != null">
 				universities_code,
+			</if>
+			<if test="year != null">
+				year,
+			</if>
+			<if test="subjectType != null">
+				subject_type,
+			</if>
+			<if test="admissionBatch != null">
+				admission_batch,
 			</if>
 			<if test="collegeScoreLine != null">
 				college_score_line,
@@ -404,6 +473,15 @@
 			<if test="universitiesCode != null">
 				#{universitiesCode},
 			</if>
+			<if test="year != null">
+				#{year},
+			</if>
+			<if test="subjectType != null">
+				#{subjectType},
+			</if>
+			<if test="admissionBatch != null">
+				#{admissionBatch},
+			</if>
 			<if test="collegeScoreLine != null">
 				#{collegeScoreLine},
 			</if>
@@ -423,10 +501,19 @@
 	</insert>
 
 	<update id="updateUniversityRelation" parameterType="cn.hqtzytb.entity.University">
-		update university_relation
+		UPDATE university_relation
 		<set>
 			<if test="universitiesCode != null">
 				universities_code = #{universitiesCode},
+			</if>
+			<if test="year != null">
+				year = #{year},
+			</if>
+			<if test="subjectType != null">
+				subjectType = #{subjectType},
+			</if>
+			<if test="admissionBatch != null">
+				admissionBatch = #{admissionBatch},
 			</if>
 			<if test="collegeScoreLine != null">
 				college_score_line = #{collegeScoreLine},
@@ -444,19 +531,19 @@
 				admissions_regulations = #{admissionsRegulations},
 			</if>
 		</set>
-		where id = #{id}
+		WHERE id = #{id}
 	</update>
 
 	<delete id="deleteUniversityRelation" parameterType="cn.hqtzytb.entity.University">
-		delete from university_relation where id = #{id}
+		DELETE from university_relation WHERE id = #{id}
 	</delete>
 
 	<select id="selectUniversityRelationList" resultType="cn.hqtzytb.entity.UniversityRelation">
-		select
-		id, universities_code, college_score_line, enrollment_plan,
-		professional_admission_score, admissions_brochure,
-		admissions_regulations
-		from university_relation
+		SELECT
+			id, year, subject_type, admission_batch,universities_code, college_score_line, enrollment_plan,
+			professional_admission_score, admissions_brochure, admissions_regulations
+		FROM 
+			university_relation
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>

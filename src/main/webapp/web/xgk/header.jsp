@@ -101,7 +101,7 @@
 				sessionData = sessionStorage.getItem('xgkid');
 			}		
 		}
-		$( "#"+sessionData).addClass( "active" );
+		/* $( "#"+sessionData).addClass( "active" ); */
 	}
 	function xgkLogin(){
 		var nowUrl=window.location.href;	

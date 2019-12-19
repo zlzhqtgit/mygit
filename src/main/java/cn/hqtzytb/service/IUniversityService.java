@@ -3,8 +3,12 @@ package cn.hqtzytb.service;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.University;
+
+import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName: IUniversityService
@@ -24,4 +28,6 @@ public interface IUniversityService {
     ResponseResult<Object> universityDeleteImage(String url);
 
     ResponseResult<List<String>> getProvince();
+
+	String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request);
 }

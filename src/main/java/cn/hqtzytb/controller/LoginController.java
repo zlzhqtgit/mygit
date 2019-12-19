@@ -90,17 +90,4 @@ public class LoginController {
         return "web/xgk/xgk_login";
     }
 
-
-    /**
-     * Test
-     */
-    @RequestMapping("/test.do")
-    @ResponseBody
-    public ResponseResult<Specialty> test(){
-        Specialty specialty = iSpecialtyServer.getSpecialtyById("20102").get(0);
-        System.out.println(specialty.getEmploymentCareerDirection());
-        System.err.println(JSONObject.toJSONString(specialty.getEmploymentCareerDirection()));
-        specialty.setEmploymentCareerDirection(JSONObject.toJSONString(specialty.getEmploymentCareerDirection()));
-        return new ResponseResult<Specialty>().setState(Constants.RESULT_CODE_SUCCESS).setMessage(Constants.RESULT_MESSAGE_SUCCESS).setData(specialty);
-    }
 }

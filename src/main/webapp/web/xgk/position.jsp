@@ -174,7 +174,7 @@
 			var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
 			var myGeo = new BMap.Geocoder(); 
 			// 将地址解析结果显示在地图上，并调整地图视野  
-			myGeo.getPoint("贵州师范学院", function(point){
+			myGeo.getPoint('${school.address}', function(point){
 		          if (point) {
 		              map.centerAndZoom(point, 14);
 		              map.addOverlay(new BMap.Marker(point));

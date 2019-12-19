@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
         <meta charset="utf-8">
@@ -21,10 +22,40 @@
 
 </head>
 <body>
-<c:import url="header.jsp"></c:import>
 <div id="test">
-
+	
+	<c:forEach items="${core_laboratories_and_research_centers}" var="item">
+		<c:forEach items="${item}" var="it">
+			${it}
+		</c:forEach>
+	</c:forEach>
 </div>
+	<script type="text/javascript">
+		var list = JSON.parse('{"年份":2019,"省份":"贵州省","录取类型":"文科","平均分":80,"最低分":70,"最高分":150,"投档线":500,"提档位次":100,"线差":200,"省控线":700,"最低位次":1500,"录取人数":500,"去年录取人数":500,"录取批次":"第一批次"}');
+		console.log(list.年份)
+	</script>
+<div>
+<%-- <c:forEach items="${core0}" var="item"> --%>
+		${ooo[0][0][1]}
+		<c:forEach items="${ooo}" var="r" varStatus="ff">
+			<c:forEach items="${ooo[ff.index]}" var="a" varStatus="o">		
+				<c:forEach items="${ooo[ff.index][o.index]}"  var="it" varStatus="tt">
+					<c:if test="${tt.index==0}">
+					<a>${it}</a>
+					</c:if>
+					<c:if test="${tt.index!=0}">
+						<a>${it}</a>
+					</c:if>					
+				</c:forEach>
+				<c:if test="${o.last}">
+					<br>
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+		
+		
+	<%-- </c:forEach> --%>
+	</div>
 <br/>
 <br/>
 <br/>
@@ -32,27 +63,7 @@
 <br/>
 <br/>
 <br/>
-<h4>                                                   <a href="javascript:;" onclick="test()">测试</a></h4>
-<script type="text/javascript">
-    function test() {
-        $.ajax({
-            url: "../test.do",
-            data: "",
-            type: "POST",
-            dataType: "json",
-            success: function (obj) {
-                var a = obj.data;
-                var cc = '[{"name":"行业收入","value":[{"vocation":"金融/投资/证券","money":"￥7680"},{"vocation":"金融/投资/证券","value":"￥7680"}]},{"name":"地区收入","value":[{"area":"北京","money":"￥5220"},{"area":"上海","money":"￥5170"}]}]';
-                // console.log(a)
-                // var cc = '[{"行业收入":[{"name":"金融/投资/证券","money":"￥7680"},{"name":"金融/投资/证券","value":"￥7680"}]},{"地区收入":[{"name":"北京","money":"￥5220"},{"name":"上海","money":"￥5170"}]}]';
-                var cc = '{"年份":2019,"省份":"贵州省","录取类型":"理科","平均分":80,"最低分":70,"最高分":150,"投档线":500,"提档位次":100,"线差":200,"省控线":700,"最低位次":1500,"录取人数":500,"去年录取人数":500,"录取批次":"第一批次"}'
-                var c = JSON.parse(cc) 
-                console.log(c.年份);
-                $("#test").html("<a>" + a.employmentIndustryDistribution + "</a>")
-            }
-        })
-    }
-</script>
+<h4> 
 <%--                测试--%>
 <%--<div id="gghhh">
     <div>就爱上的就拉开数据来看大家爱死了</div>
@@ -79,9 +90,6 @@
         });
     });
 </script>--%>
-<!-- 右侧边栏-->
-<c:import url="../public/side_right.jsp"></c:import>
 <!-- 页面底部-->
-<c:import url="footer.jsp"></c:import>
 </body>
 </html>

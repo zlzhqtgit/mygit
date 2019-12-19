@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.crypto.hash.SimpleHash;
+
+import com.sun.corba.se.spi.orb.StringPair;
+
 import net.sf.json.JSONArray;
 
 /**
@@ -92,7 +95,6 @@ public class GetCommonUser {
 			} else {
 				jsonArray = JSONArray.fromObject(jsonstr);
 			}
-			System.err.println(jsonArray.size());
 			if(jsonArray.size()>0){
 				List<List<String>> listTest = new ArrayList<List<String>>();
 				for (int j = 0; j < jsonArray.size(); j++) {
@@ -111,5 +113,48 @@ public class GetCommonUser {
 			logger.error("访问路径："+request.getRequestURI()+"操作： 二维数组转List 错误信息: "+e);
 			return null;
 		}   
+	}
+	
+	public static List<List<String>> getJson(Object jsonstr){  
+		try {
+			JSONArray jsonArray = null;
+			if (jsonstr instanceof JSONArray) {
+				jsonArray = (JSONArray)jsonstr;
+			} else {
+				jsonArray = JSONArray.fromObject(jsonstr);
+			}
+			if(jsonArray.size()>0){
+				List<List<String>> listTest = new ArrayList<List<String>>();
+				for (int j = 0; j < jsonArray.size(); j++) {
+					List<String> columnList = new ArrayList<String>();
+					for(int i=0;i<jsonArray.getJSONArray(j).size();i++){
+						columnList.add(i,(String) jsonArray.getJSONArray(j).getString(i));
+					}	  
+					listTest.add(j, columnList); 
+				}  
+				return listTest;
+			}else{
+				return null;
+			}    
+		} catch (Exception e) {
+			logger.error("二位数组字符串：" + jsonstr);
+			logger.error("访问路径：操作： 二维数组转List 错误信息: "+e);
+			return null;
+		}   
+	}
+	public static void main(String[] args) {
+		String string = "[[['国家重点实验室'],['华南肿瘤学国家重点实验室','眼科学国家重点实验室','光电材料与技术国家重点实验室']],[['教育部重点实验室'],['聚合物符合材料及功能材料','基因工程','眼科学','干细胞与组织工程']],[['国家工程研究中心'],['南海生物技术国家工程研究中心']],[['国家工程技术研究中心'],['国家数字家庭工程技术研究中心']],[['教育部人文社会科学重点研究基地'],['港澳珠三角洲研究中心','行政管理研究中心']]]";
+		JSONArray jsonArray = JSONArray.fromObject(string);
+		
+		for(int h=0; h<jsonArray.size(); h++){
+			List<List<String>> json = getJson(jsonArray.get(h));
+			for(int i=0; i<json.size(); i++){
+				for(int j=0; j<json.get(i).size(); j++){
+					System.err.println(json.get(i).get(j));
+				}
+			}
+			System.err.println("" + h + h + h + h);
+		}
+		
 	}
 }
