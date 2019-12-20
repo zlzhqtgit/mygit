@@ -217,6 +217,10 @@ public class University implements Serializable{
      */
     List<UniversityRelation> universRelationList;
 
+    /**
+     * 学校招生章程/简章
+     */
+    List<UniversityAdmission> universityAdmissionList;
     
 	public University() {
 		super();
@@ -276,6 +280,7 @@ public class University implements Serializable{
 	}
 
 
+	
 	public University(Integer id, String universitiesCode, String universitiesName, String province, String city,
 			String establishedTime, String universitiesNature, String belongTo, String address, String mapCoordinates,
 			String universitiesIntroduction, String universitiesAttributes, String universitiesType,
@@ -286,7 +291,7 @@ public class University implements Serializable{
 			String alumniAssociationRanking, String martialBookAssociationRanking, String softScienceRanking,
 			String quacquarelliSymondsRanking, String usNewsRanking, String admissionAverageRanking,
 			String totalRanking, Date createTime, String createBy, Date updateTime, String updateBy,
-			List<UniversityRelation> universRelationList) {
+			List<UniversityRelation> universRelationList, List<UniversityAdmission> universityAdmissionList) {
 		super();
 		this.id = id;
 		this.universitiesCode = universitiesCode;
@@ -328,6 +333,7 @@ public class University implements Serializable{
 		this.updateTime = updateTime;
 		this.updateBy = updateBy;
 		this.universRelationList = universRelationList;
+		this.universityAdmissionList = universityAdmissionList;
 	}
 
 
@@ -772,6 +778,18 @@ public class University implements Serializable{
 		return this;
 	}
 
+	
+
+	public List<UniversityAdmission> getUniversityAdmissionList() {
+		return universityAdmissionList;
+	}
+
+
+	public University setUniversityAdmissionList(List<UniversityAdmission> universityAdmissionList) {
+		this.universityAdmissionList = universityAdmissionList;
+		return this;
+	}
+
 
 	@Override
 	public String toString() {
@@ -793,8 +811,12 @@ public class University implements Serializable{
 				+ quacquarelliSymondsRanking + ", usNewsRanking=" + usNewsRanking + ", admissionAverageRanking="
 				+ admissionAverageRanking + ", totalRanking=" + totalRanking + ", createTime=" + createTime
 				+ ", createBy=" + createBy + ", updateTime=" + updateTime + ", updateBy=" + updateBy
-				+ ", universRelationList=" + universRelationList + "]";
+				+ ", universRelationList=" + universRelationList + ", universityAdmissionList="
+				+ universityAdmissionList + "]";
 	}
+
+
+
 
 	
     

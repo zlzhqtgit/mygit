@@ -19,7 +19,7 @@ public class TestController {
 	@RequestMapping("/one.do")
 	public String test(){
 		String str = "[[['国家重点实验室'],['华南肿瘤学国家重点实验室','眼科学国家重点实验室','光电材料与技术国家重点实验室']],[['教育部重点实验室'],['聚合物符合材料及功能材料','基因工程','眼科学','干细胞与组织工程']],[['国家工程研究中心'],['南海生物技术国家工程研究中心']],[['国家工程技术研究中心'],['国家数字家庭工程技术研究中心']],[['教育部人文社会科学重点研究基地'],['港澳珠三角洲研究中心','行政管理研究中心']]]";
-
+		str = "[[['一级学科国家重点'],['中国哲学','冰原生物学','人类学']],[['二级学科国家重点'],['中国哲学','冰原生物学','人类学']],[['国家重点(培育)学科'],['中国哲学','冰原生物学','人类学']]]";	
 		Session session = SecurityUtils.getSubject().getSession();
 		List<List<String>> json = GetCommonUser.getJson(str);
 		List<List<List<String>>> listTest = new ArrayList<List<List<String>>>();

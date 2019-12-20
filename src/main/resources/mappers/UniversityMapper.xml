@@ -43,14 +43,23 @@
 	    	<result column="update_time" property="updateTime" />
 	    	<result column="update_by" property="updateBy" />
 		<collection property="universRelationList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityRelation">
-		    	<result column="year" property="year" />
+		    	<result column="universities_code" property="universitiesCode" />
+		    	<result column="ur_year" property="urYear" />
+		    	<result column="ur_Province" property="urProvince" />
 		    	<result column="subject_type" property="subjectType" />
 		    	<result column="admission_batch" property="admissionBatch" />
 		    	<result column="college_score_line" property="collegeScoreLine" />
 		    	<result column="enrollment_plan" property="enrollmentPlan" />
 		    	<result column="professional_admission_score" property="professionalAdmissionScore" />
+		</collection>
+		<collection property="universityAdmissionList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityAdmission">
+		    	<result column="universities_code" property="universitiesCode" />
+		    	<result column="ua_year" property="uaYear" />
+		    	<result column="brochure_browse_count" property="brochureBrowseCount" />
+		    	<result column="regulations_browse_count" property="regulationsBrowseCount" />
+		    	<result column="pubdate" property="pubdate" />
 		    	<result column="admissions_brochure" property="admissionsBrochure" />
-		    	<result column="admissions_regulations" property="admissionsRegulations" />
+    			<result column="admissions_regulations" property="admissionsRegulations" />
 		</collection>
 	</resultMap>
 
@@ -403,7 +412,7 @@
 	<delete id="deleteUniversity" parameterType="cn.hqtzytb.entity.University">
 		DELETE FROM university WHERE id = #{id}
 	</delete>
-
+	
 	<select id="selectUniversityList" resultMap="BaseResultMap">
 		SELECT
 			u.id, u.universities_code, u.universities_name, u.province, u.city,
@@ -419,12 +428,14 @@
 			u.quacquarelli_symonds_ranking,
 			u.us_news_ranking, u.admission_average_ranking, u.total_ranking,
 			u.create_by, u.create_time, u.update_time, u.update_by,
-			ur.year, ur.subject_type, ur.admission_batch,
+			ur.ur_year, ur.ur_province, ur.subject_type, ur.admission_batch,
 			ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score,
-			ur.admissions_brochure, ur.admissions_regulations
+			ua.ua_year, ua.admissions_brochure, ua.admissions_regulations, ua.brochure_browse_count,
+			ua.regulations_browse_count, ua.pubdate
 		FROM 
 			university u
-		LEFT JOIN university_relation ur ON ur.universities_code =u.universities_code
+		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code
+		LEFT JOIN university_admission ua ON ua.universities_code = u.universities_code
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
@@ -441,8 +452,11 @@
 			<if test="universitiesCode != null">
 				universities_code,
 			</if>
-			<if test="year != null">
-				year,
+			<if test="urYear != null">
+				ur_year,
+			</if>
+			<if test="urProvince != null">
+				ur_province,
 			</if>
 			<if test="subjectType != null">
 				subject_type,
@@ -459,12 +473,6 @@
 			<if test="professionalAdmissionScore != null">
 				professional_admission_score,
 			</if>
-			<if test="admissionsBrochure != null">
-				admissions_brochure,
-			</if>
-			<if test="admissionsRegulations != null">
-				admissions_regulations,
-			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -473,8 +481,11 @@
 			<if test="universitiesCode != null">
 				#{universitiesCode},
 			</if>
-			<if test="year != null">
-				#{year},
+			<if test="urYear != null">
+				#{urYear},
+			</if>
+			<if test="urProvince != null">
+				#{urProvince},
 			</if>
 			<if test="subjectType != null">
 				#{subjectType},
@@ -491,12 +502,6 @@
 			<if test="professionalAdmissionScore != null">
 				#{professionalAdmissionScore},
 			</if>
-			<if test="admissionsBrochure != null">
-				#{admissionsBrochure},
-			</if>
-			<if test="admissionsRegulations != null">
-				#{admissionsRegulations},
-			</if>
 		</trim>
 	</insert>
 
@@ -506,8 +511,11 @@
 			<if test="universitiesCode != null">
 				universities_code = #{universitiesCode},
 			</if>
-			<if test="year != null">
-				year = #{year},
+			<if test="urYear != null">
+				ur_year = #{urYear},
+			</if>
+			<if test="urProvince != null">
+				ur_province = #{urProvince},
 			</if>
 			<if test="subjectType != null">
 				subjectType = #{subjectType},
@@ -524,12 +532,6 @@
 			<if test="professionalAdmissionScore != null">
 				professional_admission_score = #{professionalAdmissionScore},
 			</if>
-			<if test="admissionsBrochure != null">
-				admissions_brochure = #{admissionsBrochure},
-			</if>
-			<if test="admissionsRegulations != null">
-				admissions_regulations = #{admissionsRegulations},
-			</if>
 		</set>
 		WHERE id = #{id}
 	</update>
@@ -540,8 +542,8 @@
 
 	<select id="selectUniversityRelationList" resultType="cn.hqtzytb.entity.UniversityRelation">
 		SELECT
-			id, year, subject_type, admission_batch,universities_code, college_score_line, enrollment_plan,
-			professional_admission_score, admissions_brochure, admissions_regulations
+			id, ur_year, ur_province, subject_type, admission_batch,universities_code, 
+			college_score_line, enrollment_plan, professional_admission_score
 		FROM 
 			university_relation
 		<if test="where != null">where ${where}</if>
@@ -552,5 +554,107 @@
 
 	<select id="selectUniversityProvince" resultType="java.lang.String">
 		SELECT DISTINCT province FROM university
+	</select>
+	
+	
+	
+	<insert id="insertUniversityAdmission" parameterType="cn.hqtzytb.entity.UniversityAdmission">
+    		insert into university_admission
+	    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	      <if test="id != null">
+	        	id,
+	      </if>
+	      <if test="universitiesCode != null">
+	        	universities_code,
+	      </if>
+	      <if test="uaYear != null">
+	        	ua_year,
+	      </if>
+	      <if test="brochureBrowseCount != null">
+	        	brochure_browse_count,
+	      </if>
+	      <if test="regulationsBrowseCount != null">
+	        	regulations_browse_count,
+	      </if>
+	      <if test="pubdate != null">
+	        	pubdate,
+	      </if>
+	      <if test="admissionsBrochure != null">
+	        	admissions_brochure,
+	      </if>
+	      <if test="admissionsRegulations != null">
+	        	admissions_regulations,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="id != null">
+	        	#{id},
+	      </if>
+	      <if test="universitiesCode != null">
+	        	#{universitiesCode},
+	      </if>
+	      <if test="uaYear != null">
+	        	#{uaYear},
+	      </if>
+	      <if test="brochure_browse_count != null">
+	        	#{brochureBrowseCount},
+	      </if>
+	       <if test="regulations_browse_count != null">
+	        	#{regulationsBrowseCount},
+	      </if>
+	      <if test="pubdate != null">
+	        	#{pubdate},
+	      </if>
+	      <if test="admissionsBrochure != null">
+	        	#{admissionsBrochure},
+	      </if>
+	      <if test="admissionsRegulations != null">
+	        	#{admissionsRegulations},
+	      </if>
+	    </trim>
+  	</insert>
+  	
+  	
+	<update id="updateUniversityAdmission" parameterType="cn.hqtzytb.entity.UniversityAdmission">
+	    update university_admission
+	    <set>
+	    	  <if test="universitiesCode != null">
+	        universities_code = #{universitiesCode},
+	      </if>
+	      <if test="uaYear != null">
+	        ua_year = #{uaYear},
+	      </if>
+	      <if test="brochureBrowseCount != null">
+	        brochure_browse_count = #{brochureBrowseCount},
+	      </if>
+	      <if test="regulationsBrowseCount != null">
+	        regulations_browse_count = #{regulationsBrowseCount},
+	      </if>
+	      <if test="pubdate != null">
+	        pubdate = #{pubdate},
+	      </if>
+	      <if test="admissionsBrochure != null">
+	        admissions_brochure = #{admissionsBrochure},
+	      </if>
+	      <if test="admissionsRegulations != null">
+	        admissions_regulations = #{admissionsRegulations},
+	      </if>
+	    </set>
+	    where id = #{id}
+	  </update>
+	  
+	  <delete id="deleteUniversityAdmission" parameterType="cn.hqtzytb.entity.UniversityAdmission">
+	  	delete from university_admission where id = #{id,jdbcType=INTEGER}
+	  </delete>
+	  
+	  <select id="selectUniversityAdmissionList" resultType="cn.hqtzytb.entity.UniversityAdmission">
+		SELECT
+			id, universities_code, ua_year, brochure_browse_count, regulations_browse_count,
+			admissions_brochure, admissions_regulations, pubdate
+		FROM 
+			university_admission
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
 	</select>
 </mapper>

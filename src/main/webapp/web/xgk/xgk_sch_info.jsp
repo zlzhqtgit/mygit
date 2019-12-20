@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,7 +22,7 @@
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
 	<%-- 	<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script> --%>
-	</head>
+	</head>	
 	<body>
 		<c:import url="header.jsp"></c:import>
 
@@ -200,27 +201,7 @@
 			    					<h2 class="text-primary fontwei">
 			    						<span style="background-image: url(../../img/xgk/4.png);"></span>男女比例
 			    					</h2>
-			    					<script type="text/javascript">
-								
-								$(function(){
-									console.log('${school.address}');
-									var attributes  = '${school.universitiesAttributes}';
-									if( attributes != ""){
-										var attributesList = JSON.parse(attributes);
-										var universities_attributes = "";
-										for(var i=0; i<attributesList.length; i++){
-											universities_attributes += '<span class="btn btn-default">' + attributesList[i] + '</span>';
-										}
-										$("#universities_attributes").html(universities_attributes);
-									}
-									var maleFemaleRatio = '${school.maleFemaleRatio}';
-									var maleRatio = maleFemaleRatio.split(":")
-									$("#male").html(maleRatio[0] + "%");
-									$("#ratio").html(maleRatio[1] + "%");
-								});
-								
-								
-							</script>
+			    					
 			    					<div class="percentage margin_top">
 			    						<div class="text-primary">
 			    							<img src="${pageContext.request.contextPath}/img/xgk/male.png"/>
@@ -253,19 +234,62 @@
 			    					</h2>
 			    					<p class="">
 			    						<select name="">
-				    						<option value="">G贵州</option>
+			    							<c:forEach items="${proviceOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
 				    					</select>
 				    					<select name="">
-				    						<option value="">6选3</option>
+			    							<c:forEach items="${typeOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${yearOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${batchOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
 				    					</select>
 			    					</p>
 			    					<div class="">
 			    						<table class="table table-hover">
-			    							<tr><th>Header</th><th>Header</th><th>Header</th><th>Header</th><th>Header</th></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+			    					
+			    						<script type="text/javascript">
+								
+								$(function(){
+								
+									var attributes  = '${school.universitiesAttributes}';
+									if( attributes != ""){
+										var attributesList = JSON.parse(attributes);
+										var universities_attributes = "";
+										for(var i=0; i<attributesList.length; i++){
+											universities_attributes += '<span class="btn btn-default">' + attributesList[i] + '</span>';
+										}
+										$("#universities_attributes").html(universities_attributes);
+									}
+									var maleFemaleRatio = '${school.maleFemaleRatio}';
+									var maleRatio = maleFemaleRatio.split(":")
+									$("#male").html(maleRatio[0] + "%");
+									$("#ratio").html(maleRatio[1] + "%");
+									var universRelationList = '${school.universRelationList}';
+									for(var i=0; i<universRelationList.length; i++){
+										//var universRelation = JSON.parse(universRelationList[i]);
+										//var college = universRelation.collegeScoreLine;
+										//console.log(universRelationList[i].year);//年份
+										//console.log(college.平均分);
+									}
+									
+								});
+								
+								
+							</script>
+			    							<tr><th>省份</th><th>年份</th><th>类型</th><th>平均分</th><th>最低分</th><th>省控线</th><th>最低位次</th><th>录取人数</th><th>录取批次</th></tr>
+			    							<c:forEach items="${school.universRelationList}" var="item" >
+			    								<tr><td>${item.urProvince}</td><td>${item.urYear}</td><td>${item.subjectType}</td><td>${item.collegeScoreLineList[0]}</td><td>${item.collegeScoreLineList[1]}</td><td>${item.collegeScoreLineList[6]}</td><td>${item.collegeScoreLineList[7]}</td><td>${item.collegeScoreLineList[8]}</td><td>${item.admissionBatch}</td></tr>								
+			    							</c:forEach>			    			
 			    						</table>
 			    						<p class="text-muted margin_top1">"-"表示暂无该项数据或学校概念无招生</p>
 			    					</div>
@@ -274,13 +298,34 @@
 			    					<h2 class="text-primary fontwei">
 			    						<span style="background-image: url(../../img/xgk/2.png);"></span>招生计划
 			    					</h2>
+			    					<p class="">
+			    						<select name="">
+			    							<c:forEach items="${proviceOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${typeOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${yearOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${batchOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+			    					</p>
 			    					<div class="">
 			    						<table class="table table-hover">
-			    							<tr><th>Header</th><th>Header</th><th>Header</th><th>Header</th><th>Header</th></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+			    							<tr><th>省份</th><th>年份</th><th>类型</th><th>录取批次</th><th>专业名称</th><th>学科门类</th><th>二级门类</th><th>计划招生</th></tr>
+			    							<c:forEach items="${school.universRelationList}" var="item" >
+			    								<tr><td id="${item.enrollmentPlanList[0]}">${item.urProvince}</td><td>${item.urYear}</td><td>${item.subjectType}</td><td>${item.admissionBatch}</td><td>${item.enrollmentPlanList[1]}</td><td>${item.enrollmentPlanList[2]}</td><td>${item.enrollmentPlanList[3]}</td><td>${item.enrollmentPlanList[4]}</td><td>${item.enrollmentPlanList[8]}</td></tr>								
+			    							</c:forEach>
 			    						</table>
 			    					</div>
 			    				</div>
@@ -288,13 +333,37 @@
 			    					<h2 class="text-primary fontwei">
 			    						<span style="background-image: url(../../img/xgk/3.png);"></span>专业录取分数线
 			    					</h2>
+			    					<p class="">
+			    						<select name="">
+			    							<c:forEach items="${proviceOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${typeOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${yearOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+				    					<select name="">
+			    							<c:forEach items="${batchOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
+				    					</select>
+			    					</p>
 			    					<div class="">
 			    						<table class="table table-hover">
-			    							<tr><th>Header</th><th>Header</th><th>Header</th><th>Header</th><th>Header</th></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-			    							<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+			    						<tr><th>省份</th><th>年份</th><th>类型</th><th>录取批次</th><th>专业名称</th><th>学科门类</th><th>录取人数</th><th>录取平均分</th><th>录取最低分</th></tr>
+			    							<c:forEach items="${school.universRelationList}" var="item" >
+			    								<c:forEach items="${item.professionalAdmissionScoreList }" var="it">
+			    									<tr><td id="${it[0]}">${item.urProvince}</td><td>${item.urYear}</td><td>${item.subjectType}</td><td>${item.admissionBatch}</td><td>${it[1]}</td><td>${it[2]}</td><td>${it[3]}</td><td>${it[4]}</td><td>${it[5]}</td></tr>								
+			    								</c:forEach>
+			    							</c:forEach>
+			    							
 			    						</table>
 			    					</div>
 			    				</div>
@@ -307,7 +376,13 @@
 			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>教研教学
 			    					</h2>
 			    					<div class="border_major flex_jcstart w_ball" style="width: 100%;">
-			    						<div class="">
+			    						<c:forEach items="${teachingResearch }" var="item" varStatus="cc">
+			    							<div class="">
+			    							<div class="" id="water${cc.count}" style="width: 160px;height: 160px;"></div>
+			    							<p class="text-center">${item[0]}</p>
+			    						</div>
+			    						</c:forEach>
+			    						<!-- <div class="">
 			    							<div class="" id="water1" style="width: 160px;height: 160px;"></div>
 			    							<p class="text-center">硕士点</p>
 			    						</div>
@@ -322,7 +397,7 @@
 			    						<div class="">
 			    							<div class="" id="water4" style="width: 160px;height: 160px;"></div>
 			    							<p class="text-center">重点实验室</p>
-			    						</div>
+			    						</div> -->
 			    					</div>
 			    				</div>
 			    				<div class="items margin_top">
@@ -330,7 +405,7 @@
 			    						<span style="background-image: url(../../img/xgk/2.png);"></span>师资力量
 			    					</h2>
 			    					<div class="border_major">
-			    						现有院士（含双聘）18人，长江学者特聘教授43人，杰青73人，高层次人才数量居国内高校前列。
+			    						${school.teachersResources}
 			    					</div>
 			    				</div>
 			    				<div class="items margin_top">
@@ -341,10 +416,11 @@
 			    						<thead>
 			    							<tr>
 			    								<td>国家特色专业<div>双一流专业</div></td>
-				    							<td>
-				    								<a class="text-primary" href="">微电子学</a>
-				    								<a class="text-primary" href="">网络工程</a>
-				    								<a class="text-primary" href="">汉语言文学</a>
+				    							<td>	
+				    								<c:forEach items="${coreSpecialty}" var="item">
+				    									<a class="text-primary" href="" id="${item[0]}">${item[1]}&emsp;</a>
+				    								</c:forEach>
+				    								<!-- TODO跳转专业 -->
 				    							</td>
 				    						</tr>
 			    					</table>
@@ -354,9 +430,15 @@
 			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点学科
 			    					</h2>
 			    					<table class="table table-bordered">
-			    						<tr><td>一级学科国家重点学科</td><td>Data</td></tr>
-			    						<tr><td>二级学科国家重点学科</td><td>二级学科国家重点学科二级学科国家重点学科二级学科国家重点学科</td></tr>
-			    						<tr><td>国家重点（培育）学科</td><td>Data</td></tr>
+			    						<c:forEach items="${coreSubject}" var="item">
+			    							<tr><td>${item[0][0]}</td><td>
+										<c:forEach items="${item[1]}" var="it" >
+											<c:forEach items="${it}" var="i" >
+												<a>${i}&nbsp;&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>											
+										</c:forEach>
+										</td></tr>
+									</c:forEach>
 			    					</table>
 			    				</div>
 			    				<div class="items margin_top">
@@ -364,11 +446,15 @@
 			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点实验室及科研中心
 			    					</h2>
 			    					<table class="table table-bordered" border="" cellspacing="" cellpadding="">
-			    						<tr><td>国家重点实验室</td><td>Data</td></tr>
-			    						<tr><td>教育部重点实验室</td><td>Data</td></tr>
-			    						<tr><td>国家工程研究中心</td><td>Data</td></tr>
-			    						<tr><td>国家工程技术研究中心</td><td>国家工程技术研究中心国家工程技术研究中心</td></tr>
-			    						<tr><td>教育部人文社会科学重点研究基地</td><td>Data</td></tr>
+			    						<c:forEach items="${coreLaboratoriesList}" var="item">
+			    							<tr><td>${item[0][0]}</td><td>
+										<c:forEach items="${item[1]}" var="it" >
+											<c:forEach items="${it}" var="i" >
+												<a>${i}&nbsp;&nbsp;&nbsp;&nbsp;</a>
+											</c:forEach>											
+										</c:forEach>
+										</td></tr>
+									</c:forEach>
 			    					</table>
 			    				</div>
 				    		</div>
@@ -380,42 +466,29 @@
 			    						<span style="background-image: url(../../img/xgk/1.png);"></span>招生简章
 			    					</h2>
 			    					<p class="">
-			    						<select name="">
-				    						<option value="">G贵州</option>
-				    					</select>
 				    					<select name="">
-				    						<option value="">6选3</option>
+			    							<c:forEach items="${yearOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
 				    					</select>
-				    					<select name="">
-				    						<option value="">2019</option>
-				    					</select>
-				    					<select name="">
-				    						<option value="">本科一批</option>
-				    					</select>
+				    					
 			    					</p>
 			    					<div class="panel panel-default">
 			    						<ul class="list-group list_article">
-									        <li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list1').html())">中山大学2019年本科招生简章</a>
+			    							<c:forEach items="${school.universityAdmissionList}" var="item" varStatus="vs">
+			    								<li class="list-group-item">
+									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list${vs.count}').html())">${school.universitiesName}${item.uaYear}年招生简章</a>
 									        	<span class="text-right text-muted">
-									        		<span>发布时间325425</span>
-									        		<span>浏览15w</span>
+									        		<span>发布时间<fmt:formatDate value="${item.pubdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+									        		<c:if test="${item.brochureBrowseCount > 10000}">
+									        			<span>浏览${item.brochureBrowseCount/10000}w</span>
+									        		</c:if>
+									        		<c:if test="${item.brochureBrowseCount <= 10000}">
+									        			<span>浏览${item.brochureBrowseCount}</span>
+									        		</c:if>
 									        	</span>
 									        </li>
-									        <li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list2').html())">中山大学2018年本科招生简章</a>
-									        	<span class="text-right text-muted">
-									        		<span>发布时间325425</span>
-									        		<span>浏览15w</span>
-									        	</span>
-									        </li>
-									        <li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list3').html())">中山大学2017年本科招生简章</a>
-									        	<span class="text-right text-muted">
-									        		<span>发布时间325425</span>
-									        		<span>浏览15w</span>
-									        	</span>
-									        </li>
+			    							</c:forEach>
 										</ul>
 			    					</div>
 			    				</div>
@@ -424,80 +497,50 @@
 			    						<span style="background-image: url(../../img/xgk/2.png);"></span>招生章程
 			    					</h2>
 			    					<p class="">
-			    						<select name="">
-				    						<option value="">G贵州</option>
-				    					</select>
-				    					<select name="">
-				    						<option value="">6选3</option>
-				    					</select>
-				    					<select name="">
-				    						<option value="">2019</option>
-				    					</select>
-				    					<select name="">
-				    						<option value="">本科一批</option>
+			    			  			<select name="">
+			    							<c:forEach items="${yearOption}" var="item">
+			    								<option value="">${item }</option>
+			    							</c:forEach>
 				    					</select>
 			    					</p>
 			    					<div class="panel panel-default">
 			    						<ul class="list-group list_article">
-									        <li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list4').html())">中山大学2019年本科招生简章</a>
+			    							<c:forEach items="${school.universityAdmissionList}" var="item" varStatus="vs">
+			    								<li class="list-group-item">
+									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#set${vs.count}').html())">${school.universitiesName}${item.uaYear}年招生章程</a>
 									        	<span class="text-right text-muted">
-									        		<span>发布时间325425</span>
-									        		<span>浏览15w</span>
+									        		<span>发布时间<fmt:formatDate value="${item.pubdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+									        		<c:if test="${item.regulationsBrowseCount > 10000}">
+									        			<span>浏览${item.regulationsBrowseCount/10000}w</span>
+									        		</c:if>
+									        		<c:if test="${item.regulationsBrowseCount <= 10000}">
+									        			<span>浏览${item.regulationsBrowseCount}</span>
+									        		</c:if>
 									        	</span>
 									        </li>
-									        <li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list5').html())">中山大学2018年本科招生简章</a>
-									        	<span class="text-right text-muted">
-									        		<span>发布时间325425</span>
-									        		<span>浏览15w</span>
-									        	</span>
-									        </li>
-									        <li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list6').html())">中山大学2017年本科招生简章</a>
-									        	<span class="text-right text-muted">
-									        		<span>发布时间325425</span>
-									        		<span>浏览15w</span>
-									        	</span>
-									        </li>
+			    							</c:forEach>
 										</ul>
 			    					</div>
 			    				</div>
-		    					<div id="list1" class="" style="display: none;">
+			    				<c:forEach items="${school.universityAdmissionList }" var="item" varStatus="vs">
+			    					<div id="list${vs.count}" class="" style="display: none;">
 									<div class="padding-side2 margin_top1">
-										<h2 class="text-center fontwei">中山大学2019年本科招生简章</h2>
+										<h2 class="text-center fontwei">${school.universitiesName}${item.uaYear}年招生简章</h2>
 										<div class="margin_top2">
-											<p class="">第一章<span class="padding-side">总则</span></p>
-											<p class="">第一条<span class="padding-side">为了全面贯彻党的政策方针，依照《中华人民共和国教育法》和《中华人民共和国高等教育法》教育部有关文件规定，制定本章程。</span></p>
-											<p class="">第一章<span class="padding-side">总则</span></p>
-											<p class="">第一条<span class="padding-side">为了全面贯彻党的政策方针，依照《中华人民共和国教育法》和《中华人民共和国高等教育法》教育部有关文件规定，制定本章程。</span></p>
-											<p class="">第一章<span class="padding-side">总则</span></p>
-											<p class="">第一条<span class="padding-side">为了全面贯彻党的政策方针，依照《中华人民共和国教育法》和《中华人民共和国高等教育法》教育部有关文件规定，制定本章程。</span></p>
-											<p class="">第一章<span class="padding-side">总则</span></p>
-											<p class="">第一条<span class="padding-side">为了全面贯彻党的政策方针，依照《中华人民共和国教育法》和《中华人民共和国高等教育法》教育部有关文件规定，制定本章程。</span></p>
-											<p class="">第一章<span class="padding-side">总则</span></p>
-											<p class="">第一条<span class="padding-side">为了全面贯彻党的政策方针，依照《中华人民共和国教育法》和《中华人民共和国高等教育法》教育部有关文件规定，制定本章程。</span></p>
+											${item.admissionsBrochure}
 										</div>
 									</div>
 								</div>
-								<div id="list2" class="" style="display: none;">
-									<div class="text-danger padding-side2 margin_top1">你好我是model2</div>
+								<div id="set${vs.count}" class="" style="display: none;">
+									<div class="padding-side2 margin_top1">
+										<h2 class="text-center fontwei">${school.universitiesName}${item.uaYear}年招生章程</h2>
+										${item.admissionsRegulations}
+										<div class="margin_top2">
+											${item.admissionsRegulations}
+										</div>
+									</div>
 								</div>
-								<div id="list3" class="" style="display: none;">
-									<div class="text-danger padding-side2 margin_top1">你好我是model3</div>
-								</div>
-								<div id="list4" class="" style="display: none;">
-									<div class="text-danger padding-side2 margin_top1">你好我是model1</div>
-								</div>
-								<div id="list5" class="" style="display: none;">
-									<div class="text-danger padding-side2 margin_top1">你好我是model2</div>
-								</div>
-								<div id="list6" class="" style="display: none;">
-									<div class="text-danger padding-side2 margin_top1">你好我是model3</div>
-								</div>
-								<div id="list7" class="" style="display: none;">
-									<div class="text-danger padding-side2 margin_top1">你好我是model4</div>
-								</div>
+			    				</c:forEach>
 				    		</div>
 			    		</div>
 			    	</div>
@@ -827,6 +870,26 @@
 			
 					initMap(); //创建和初始化地图
 				</script>
+	<script type="text/javascript">
+		$(function() {
+			var teachingResearchList = JSON.parse('${teaching_research}');
+			//教研教学点水球
+			for(var i=1; i<teachingResearchList.length+1; i++){
+				if(i == 1){
+					waterball('water' + i,teachingResearchList[i-1][1],'#ffad05');
+				}
+				if(i == 2){
+					waterball('water' + i,teachingResearchList[i-1][1],'#47cf66');
+				}
+				if(i == 3){
+					waterball('water' + i,teachingResearchList[i-1][1],'#3b8bec');
+				}
+				if(i == 4){
+					waterball('water' + i,teachingResearchList[i-1][1],'#fe5656');
+				}
+			}
+		});
+	</script>
 			</div>
 		<!-- 右侧边栏-->
 		<c:import url="../public/side_right.jsp"></c:import>

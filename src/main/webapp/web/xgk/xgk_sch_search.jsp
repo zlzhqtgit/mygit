@@ -282,11 +282,14 @@
 													 "</table></div>" +
 													 //[录取分表格   start]
 													 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr>";
-	                                        	//[院校扩展表list 院校录取分数线] 
+	                                        	
+
+										//[院校扩展表list 院校录取分数线] 
 	                                        	for(var j=0; j<list[i].universRelationList.length; j++){
+	        									var lines = list[i].universRelationList[j].collegeScoreLineList;
 	                                        		var collegeScoreLines = JSON.parse(list[i].universRelationList[j].collegeScoreLine);
 	                                        		//年份 + 最低分  + 平均分  + 最高分  + 投档线  + 线差  + 提档位次  + 录取人数  + 去年录取人数
-	                                        		universities += "<tr><td>" + list[i].universRelationList[j].year + "</td><td>" + list[i].universRelationList[j].subjectType + "</td><td>" + collegeScoreLines.最低分 + "</td><td>" + collegeScoreLines.平均分 + "</td><td>" + collegeScoreLines.最高分 + "</td><td>" + collegeScoreLines.投档线 + "</td><td>" + collegeScoreLines.线差 + "</td><td>" + collegeScoreLines.提档位次 + "</td><td>" + collegeScoreLines.录取人数 + "</td><td>" + collegeScoreLines.去年录取人数 + "</td></tr>";
+	                                        		universities += "<tr><td>" + list[i].universRelationList[j].urYear + "</td><td>" + list[i].universRelationList[j].subjectType + "</td><td>" + lines[1] + "</td><td>" + lines[0] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[5] + "</td><td>" + lines[4] + "</td><td>" + lines[8] + "</td><td>" + lines[9] + "</td></tr>";
 	                                        	}
 	                                        	//[录取分表格   end]
 	                                        	universities += "</table>" + operate + "</li></ul>";

@@ -37,4 +37,12 @@ public interface UniversityMapper {
      * @return
      */
     List<String> selectUniversityProvince();
+    
+    Integer insertUniversityAdmission(UniversityRelation university);
+    Integer UniversityAdmission(UniversityRelation university);
+    Integer deleteUniversityAdmission(UniversityRelation university);
+    List<UniversityRelation> selectUniversityAdmissionList(@Param("where")String where,
+                                      @Param("orderBy")String orderBy,
+                                      @Param("offset")Integer offset,
+                                      @Param("countPerPage")Integer countPerPage);
 }
