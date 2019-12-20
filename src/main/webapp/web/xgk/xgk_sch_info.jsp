@@ -35,25 +35,7 @@
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
 							<h3 class="text-white margin_top1">${school.universitiesName }</h3>10001
-							<script type="text/javascript">
-								
-								$(function(){
-									var a = '${school}';
-									console.log(a)
-									var attributes  = '${school.universitiesAttributes}';
-									if( attributes != ""){
-										var attributesList = JSON.parse(attributes);
-										var universities_attributes = "";
-										for(var i=0; i<attributesList.length; i++){
-											universities_attributes += '<span class="btn btn-default">' + attributesList[i] + '</span>';
-										}
-										$("#universities_attributes").html(universities_attributes);
-									}
-									
-								});
-								
-								
-							</script>
+							
 							<p class="margin_top" id="universities_attributes">
 								<span class="btn btn-default">本科</span>
 								<span class="btn btn-default">双一流</span>
@@ -158,14 +140,14 @@
 										</script>
 			    					</div>
 			    					<div class="clearfix sch_info_twobox margin_top1">
-			    						<a class="two_box pull-left border-primary" href="javascript:void(0)" onclick="modelshow('',$('.sch_live_polocy').html())">
+			    						<a class="two_box pull-left border-primary" href="javascript:void(0)" onclick="modelshow('食宿条件',$('#room_and_board'),1)">
 			    							<div class="padding-side">
 			    								<h3 class="">食宿条件</h3>
 			    								<p class="">查看该校的食堂和宿舍情况</p>
 			    							</div>
 			    							<span class="glyphicon glyphicon-chevron-right"></span>
 			    						</a>
-			    						<a class="two_box pull-left" href="javascript:void(0)" onclick="modelshow('',$('.sch_live_polocy').html())">
+			    						<a class="two_box pull-left" href="javascript:void(0)" onclick="modelshow('奖助学金',$('#scholarships'),1)">
 			    							<div class="padding-side">
 			    								<h3 class="">奖助学金</h3>
 			    								<p class="">查看该校的奖学金和贫困生助学金情况</p>
@@ -174,10 +156,16 @@
 			    						</a>
 			    					</div>
 			    					
-			    					<div class="sch_live_polocy padding-side2" style="display: none;">
+			    					<div class="sch_live_polocy padding-side2" style="display: none;" id="room_and_board">
 			    						<div class="polocy_model padding-side2">
 			    							<h2 class="">食堂和宿舍情况</h2>
-			    							<p class="">查看该校的食堂和宿舍情况查看该校的食堂和宿舍情况查看该校的食堂和宿舍情况查看该校的食堂和宿舍情况查看该校的食堂和宿舍情况</p>
+			    							<p class="">${school.roomAndBoard}</p>
+			    						</div>
+			    					</div>
+			    					<div class="sch_live_polocy padding-side2" style="display: none;" id="scholarships">
+			    						<div class="polocy_model padding-side2">
+			    							<h2 class="">奖助学金</h2>
+			    							<p class="">${school.scholarships}</p>
 			    						</div>
 			    					</div>
 			    					<!--/模态框-->
@@ -195,23 +183,12 @@
 			    					</h2>
 			    					<div class="p_relative">
 			    						<div class="circle_list margin_top" style="height: 140px;">
-				    						<div class="">
-				    							<div class="circle">53</div>
-				    							<p class="text-center">硕士点</p>
+			    							<c:forEach items="${teachingResearch}" var="item">
+			    								<div class="">
+				    							<div class="circle">${item[1] }</div>
+				    							<p class="text-center">${item[0] }</p>
 				    						</div>
-				    						<div class="">
-				    							<div class="circle">53</div>
-				    							<p class="text-center">博士点</p>
-				    						</div>
-				    						<div class="">
-				    							<div class="circle">53</div>
-				    							<p class="text-center">重点专业</p>
-				    						</div>
-				    						<div class="">
-				    							<div class="circle">53</div>
-				    							<p class="text-center">重点实验室</p>
-				    						</div>
-				    						
+			    							</c:forEach>	
 				    					</div>
 				    					<div class="open-btn" style="height: 100px;">
 											<a class="show_more btn btn-primary" onclick="showMore(this)" style="text-align:center; bottom: 3em; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;"> 查看更多 <div class="light"></div> </a>
@@ -223,10 +200,31 @@
 			    					<h2 class="text-primary fontwei">
 			    						<span style="background-image: url(../../img/xgk/4.png);"></span>男女比例
 			    					</h2>
+			    					<script type="text/javascript">
+								
+								$(function(){
+									console.log('${school.address}');
+									var attributes  = '${school.universitiesAttributes}';
+									if( attributes != ""){
+										var attributesList = JSON.parse(attributes);
+										var universities_attributes = "";
+										for(var i=0; i<attributesList.length; i++){
+											universities_attributes += '<span class="btn btn-default">' + attributesList[i] + '</span>';
+										}
+										$("#universities_attributes").html(universities_attributes);
+									}
+									var maleFemaleRatio = '${school.maleFemaleRatio}';
+									var maleRatio = maleFemaleRatio.split(":")
+									$("#male").html(maleRatio[0] + "%");
+									$("#ratio").html(maleRatio[1] + "%");
+								});
+								
+								
+							</script>
 			    					<div class="percentage margin_top">
 			    						<div class="text-primary">
 			    							<img src="${pageContext.request.contextPath}/img/xgk/male.png"/>
-			    							<span class="male_percent">56%</span>
+			    							<span class="male_percent" id="male">56%</span>
 			    						</div>
 			    						<div class="percentage_con_box">
 			    							<div class="percentage_con">
@@ -234,7 +232,7 @@
 				    						</div>
 			    						</div>
 			    						<div class="text-danger">
-			    							<span class=""> 44% </span>
+			    							<span class="" id="ratio"> 44% </span>
 			    							<img src="${pageContext.request.contextPath}/img/xgk/female.png"/>
 			    						</div>
 			    					</div>
@@ -534,12 +532,12 @@
 								var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
 								var myGeo = new BMap.Geocoder(); 
 								// 将地址解析结果显示在地图上，并调整地图视野  
-								myGeo.getPoint("贵州师范学院", function(point){
+								myGeo.getPoint('${school.address}', function(point){
 							          if (point) {
 							              map.centerAndZoom(point, 14);
 							              map.addOverlay(new BMap.Marker(point));
 							          }      
-							      }, "贵阳市");
+							      }, '${school.province}');
 								//var point = new BMap.Point(106.649765, 26.617046); //定义一个中心点坐标
 								//map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
 								window.map = map; //将map变量存储在全局
@@ -659,27 +657,15 @@
 		    					<h3 class="">学校排名</h3>
 		    				</div>
 		    				<ul class="padding-side margin_top1">
-		    					<li>武书连：<span>11</span></li>
-		    					<li>校友会：<span>5</span></li>
-		    					<li>软科：<span>9</span></li>
-		    					<li>QS排名：<span>9</span></li>
-		    					<li>USNews：<span>8</span></li>
+		    					<li>武书连：<span>${school.martialBookAssociationRanking }</span></li>
+		    					<li>校友会：<span>${school.alumniAssociationRanking }</span></li>
+		    					<li>软科：<span>${school.softScienceRanking }</span></li>
+		    					<li>QS排名：<span>${school.quacquarelliSymondsRanking }</span></li>
+		    					<li>USNews：<span>${school.usNewsRanking }</span></li>
 		    				</ul>
 		    			</div>
 		    		</div>
 			    </div>
-		    			<div class="panel panel-primary margin_top">
-		    				<div class="panel-heading ">
-		    					<h3 class="">学校排名</h3>
-		    				</div>
-		    				<ul class="padding-side margin_top1">
-		    					<li>武书连：<span>11</span></li>
-		    					<li>校友会：<span>5</span></li>
-		    					<li>软科：<span>9</span></li>
-		    					<li>QS排名：<span>9</span></li>
-		    					<li>USNews：<span>8</span></li>
-		    				</ul>
-		    			</div>
 		    		</div>
 			    </div>
 			    <script type="text/javascript">

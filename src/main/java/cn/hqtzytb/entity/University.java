@@ -163,7 +163,7 @@ public class University implements Serializable{
     private String alumniAssociationRanking;
 
     /**
-     * 武书会排名
+     * 武书连排名
      */
     private String martialBookAssociationRanking;
 

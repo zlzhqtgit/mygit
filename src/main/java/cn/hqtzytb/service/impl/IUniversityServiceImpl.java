@@ -162,6 +162,7 @@ public class IUniversityServiceImpl implements IUniversityService {
 				University university = universityList.get(0);
 				map.addAttribute("school", university);
 				map.addAttribute("images", university.getUniversitiesLife().split(";"));
+				map.addAttribute("teachingResearch", GetCommonUser.getJson(university.getTeachingResearch(), request));
 				System.err.println(map.get("images"));
 			}
 		}
