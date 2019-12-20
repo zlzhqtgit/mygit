@@ -27,9 +27,9 @@
 				
 				<div style="padding: 1em 100px 1em;">
 				    <form class="bs-example bs-example-form" role="form">
-				        <div class="input-group input-group-lg">
+				        <div class="input-group input-group-lg" onclick="vocationSearch(1)">
 				            <span class="input-group-addon"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的职业">
+				            <input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">
 				        </div>
 				    </form>
 				</div>
@@ -94,7 +94,7 @@
 					        	<div class="clearfix"></div>
 					        </li>
 					    </ul>
-						<p class="text-center margin_bot1 margin_top1"><a class="btn btn-primary fontwei begin_btn" href="javascript:;" onclick="vocationSearch()">开始查询</a></p>
+						<p class="text-center margin_bot1 margin_top1"><a class="btn btn-primary fontwei begin_btn" href="javascript:;" onclick="vocationSearch(0)">开始查询</a></p>
 					</div>
 					
 				
@@ -160,29 +160,24 @@
 				    <div class="col-xs-12 bg-white p-10 m-t-10 t-a-c" style="box-shadow: 0px 0px 0px #bdb8b8;">
 						<div class="holder" style="text-align: center;"></div>
 						</div>
-				    <!-- <div class="text-center">
-				    	<ul class="pagination">
-							<li><a href="#">&laquo;</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li class="disabled"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-				    </div> -->
-				    <!--/分页-->
 				</div>
 				
 			</section>
 			
 	<script type="text/javascript">
 		//职业信息查询
-    		function vocationSearch(){
-    			var industry = $("#industry_list dd a[class=active]").html();
-    			var education = $("#education dd a[class=active]").html();
-    			industry = industry == "全部" ? "" : industry;
+    		function vocationSearch(e){
+    			var industry = "";
+    			var education = "";
+			if(e == 0){
+				industry = $("#industry_list dd a[class=active]").html();
+				education = $("#education dd a[class=active]").html();
+				industry = industry == "全部" ? "" : industry;
     			education = education == "全部" ? "" : education;
+			}else{
+				industry = $("#search_info").val();
+				console.log(industry)
+			}
     			var data = "industry=" + industry + "&education=" + education;
     			$.ajax({
 					url: "${pageContext.request.contextPath}/voc/xgk_voc_query.do",

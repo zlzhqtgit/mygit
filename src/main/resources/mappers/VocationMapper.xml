@@ -308,13 +308,13 @@
 				  AND vocation_id = #{vocationId}
 			  </if>
 			  <if test="vocationName != null" >
-				  AND vocation_name = #{vocationName}
+				  AND LOCATE(#{vocationName},vocation_name)
 			  </if>
 			  <if test="industryName != null" >
-				  AND industry_name = #{industryName}
+				  AND LOCATE(#{industryName},industry_name)
 			  </if>
 			  <if test="industryMajorName != null" >
-				  AND industry_major_name = #{industryMajorName}
+			   	  AND LOCATE(#{industryMajorName},industry_major_name)
 			  </if>
 			  <if test="vocationBrief != null" >
 				  AND vocation_brief = #{vocationBrief}
