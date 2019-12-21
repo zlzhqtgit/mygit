@@ -245,23 +245,25 @@
 										
 	                                        	var attrImg = "";//院校属性图片
 	                                        	var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
-										for (var f=0; f<universitiesAttributes.length; f++){
-											if (universitiesAttributes[f] == "985"){
-												attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png'/>"
-											}
-											if (universitiesAttributes[f] == "211"){
-												attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png'/>"
-											}
-											if (universitiesAttributes[f] == "双一流"){
-												attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png'/>"
-											}
-											if (universitiesAttributes[f] == "行业领军"){
-												attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png'/>"
-											}
-											if (universitiesAttributes[f] == "研究生院"){
-												attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png'/>"
-											}
-										}
+	                                        	if(universitiesAttributes != null){
+	        									for (var f=0; f<universitiesAttributes.length; f++){
+	        										if (universitiesAttributes[f] == "985"){
+	        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png'/>"
+	        										}
+	        										if (universitiesAttributes[f] == "211"){
+	        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png'/>"
+	        										}
+	        										if (universitiesAttributes[f] == "双一流"){
+	        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png'/>"
+	        										}
+	        										if (universitiesAttributes[f] == "行业领军"){
+	        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png'/>"
+	        										}
+	        										if (universitiesAttributes[f] == "研究生院"){
+	        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png'/>"
+	        										}
+	        									}
+	                                        	}
 										var box_head = '<ul classs="search_result list-group" id="universities">';
 										var id = "";
 										var operate = '<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
@@ -272,25 +274,33 @@
 													 "<div class='sh_logo'>" +
 													 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo' src='${pageContext.request.contextPath}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
 													 "</div>" +
-													 //院校名字   + 院校属性  + 录取批次  + 录取平均分排行
+													 //院校名字   + 院校属性  + 录取批次  + 综合评级
 													 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4><span class=''>" + list[i].universitiesName + "</span><span class=''>" + attrImg + "</span></h4>" +
-													 "<p class=''>录取平均分排行（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
+													 "<p class=''>综合评级（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
 													 "</div>" +
 													 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
 													 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span>" + list[i].universitiesCode + "</span></td><td>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></td></tr>" +
 													 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span>" + list[i].universitiesNature + "</span></td><td><span>" + doctor + "</span></td></tr>" +
 													 "</table></div>" +
 													 //[录取分表格   start]
-													 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>往年</th><th>今年</th></tr>";
+													 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
 	                                        	
 
 										//[院校扩展表list 院校录取分数线] 
-	                                        	for(var j=0; j<list[i].universRelationList.length; j++){
-	        									var lines = list[i].universRelationList[j].collegeScoreLineList;
-	                                        		var collegeScoreLines = JSON.parse(list[i].universRelationList[j].collegeScoreLine);
-	                                        		//年份 + 最低分  + 平均分  + 最高分  + 投档线  + 线差  + 提档位次  + 录取人数  + 去年录取人数
-	                                        		universities += "<tr><td>" + list[i].universRelationList[j].urYear + "</td><td>" + list[i].universRelationList[j].subjectType + "</td><td>" + lines[1] + "</td><td>" + lines[0] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[5] + "</td><td>" + lines[4] + "</td><td>" + lines[8] + "</td><td>" + lines[9] + "</td></tr>";
-	                                        	}
+										if(list[i].universRelationList == null){
+											universities += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+										}else{
+											for(var j=0; j<list[i].universRelationList.length; j++){
+	        										var lines = list[i].universRelationList[j].collegeScoreLineList;
+	        										if(lines.length <= 0){
+	        											universities += "<tr><td>" + (list[i].universRelationList[j].urYear == null ? "-" : list[i].universRelationList[j].urYear) + "</td><td>" + (list[i].universRelationList[j].subjectType == null ? "-" : list[i].universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+	        										} else {
+	        											universities += "<tr><td>" + list[i].universRelationList[j].urYear + "</td><td>" + list[i].universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
+		                                        		
+	        										}
+	        									}	
+										}
+	                                        	
 	                                        	//[录取分表格   end]
 	                                        	universities += "</table>" + operate + "</li></ul>";
 									}

@@ -79,8 +79,8 @@ public class UniversityController {
      */
     @RequestMapping("/xgk_school_query.do")
     @ResponseBody
-    public ResponseResult<List<University>> getUniversityList(String where){
-        return iUniversityService.getUniversityList(where);
+    public ResponseResult<List<University>> getUniversityList(String where, HttpServletRequest request){
+        return iUniversityService.getUniversityList(where, request);
     }
 
 
@@ -126,6 +126,17 @@ public class UniversityController {
     public String getUniversityInfo(String universityCode ,ModelMap map,HttpServletRequest request){
     	
         return iUniversityService.getUniversityInfo(universityCode,map,request);
+    }
+    
+    /**
+     * 点击游览招生简章/章程
+     * @return
+     */
+    @RequestMapping("/xgk_admission_browse.do")
+    @ResponseBody
+    public ResponseResult<Void> addAadmissionBrowse(String uaId ,String type,HttpServletRequest request){
+    	
+        return iUniversityService.addAadmissionBrowse(uaId,type,request);
     }
 
 }

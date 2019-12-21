@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface IUniversityService {
     ResponseResult<Void> universityUploadImage(String universitiesCode, MultipartFile[] files, Integer imageType);
 
-    ResponseResult<List<University>> getUniversityList(String where);
+    ResponseResult<List<University>> getUniversityList(String where, HttpServletRequest request);
 
     ResponseResult<List<Specialty>> getSpecialtyList(String where);
 
@@ -30,4 +30,6 @@ public interface IUniversityService {
     ResponseResult<List<String>> getProvince();
 
 	String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request);
+
+	ResponseResult<Void> addAadmissionBrowse(String uaId, String type, HttpServletRequest request);
 }

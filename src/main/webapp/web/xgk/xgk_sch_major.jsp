@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
-		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" charset="utf-8"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script>
 	</head>
@@ -163,7 +163,7 @@
 				    </div>
 				    <!--/tips-->
 				    
-				    <script src="js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+	
 				    <script type="text/javascript">
 				    	//弹框
 						function tips(content,el,director){
@@ -189,7 +189,7 @@
 				    			$(this).parents('.tab_list').find('.tab_body').children().eq(index).addClass('cur');
 				    		})
 				    	})
-				    	$(function () { $("[data-toggle='tooltip']").tooltip(); });
+				    	$(function(){ $("[data-toggle='tooltip']").tooltip(); });
 				    </script>
 				    
 				</div>

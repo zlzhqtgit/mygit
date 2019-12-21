@@ -43,6 +43,7 @@
 	    	<result column="update_time" property="updateTime" />
 	    	<result column="update_by" property="updateBy" />
 		<collection property="universRelationList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityRelation">
+			<result column="ur_id" property="urId"/>
 		    	<result column="universities_code" property="universitiesCode" />
 		    	<result column="ur_year" property="urYear" />
 		    	<result column="ur_Province" property="urProvince" />
@@ -53,6 +54,7 @@
 		    	<result column="professional_admission_score" property="professionalAdmissionScore" />
 		</collection>
 		<collection property="universityAdmissionList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityAdmission">
+			<result column="ua_id" property="uaId"/>
 		    	<result column="universities_code" property="universitiesCode" />
 		    	<result column="ua_year" property="uaYear" />
 		    	<result column="brochure_browse_count" property="brochureBrowseCount" />
@@ -428,10 +430,10 @@
 			u.quacquarelli_symonds_ranking,
 			u.us_news_ranking, u.admission_average_ranking, u.total_ranking,
 			u.create_by, u.create_time, u.update_time, u.update_by,
-			ur.ur_year, ur.ur_province, ur.subject_type, ur.admission_batch,
+			ur.id AS ur_id, ur.ur_year, ur.ur_province, ur.subject_type, ur.admission_batch,
 			ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score,
-			ua.ua_year, ua.admissions_brochure, ua.admissions_regulations, ua.brochure_browse_count,
-			ua.regulations_browse_count, ua.pubdate
+			ua.id AS ua_id, ua.ua_year, ua.admissions_brochure, ua.admissions_regulations,
+			ua.brochure_browse_count,ua.regulations_browse_count, ua.pubdate
 		FROM 
 			university u
 		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code
@@ -446,7 +448,7 @@
 		useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO university_relation
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
+			<if test="urId != null">
 				id,
 			</if>
 			<if test="universitiesCode != null">
@@ -475,8 +477,8 @@
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id},
+			<if test="urId != null">
+				#{urId},
 			</if>
 			<if test="universitiesCode != null">
 				#{universitiesCode},
@@ -533,16 +535,16 @@
 				professional_admission_score = #{professionalAdmissionScore},
 			</if>
 		</set>
-		WHERE id = #{id}
+		WHERE id = #{urId}
 	</update>
 
 	<delete id="deleteUniversityRelation" parameterType="cn.hqtzytb.entity.University">
-		DELETE from university_relation WHERE id = #{id}
+		DELETE from university_relation WHERE id = #{urId}
 	</delete>
 
 	<select id="selectUniversityRelationList" resultType="cn.hqtzytb.entity.UniversityRelation">
 		SELECT
-			id, ur_year, ur_province, subject_type, admission_batch,universities_code, 
+			id AS ur_ia, ur_year, ur_province, subject_type, admission_batch,universities_code, 
 			college_score_line, enrollment_plan, professional_admission_score
 		FROM 
 			university_relation
@@ -561,7 +563,7 @@
 	<insert id="insertUniversityAdmission" parameterType="cn.hqtzytb.entity.UniversityAdmission">
     		insert into university_admission
 	    	<trim prefix="(" suffix=")" suffixOverrides=",">
-	      <if test="id != null">
+	      <if test="uaId != null">
 	        	id,
 	      </if>
 	      <if test="universitiesCode != null">
@@ -587,8 +589,8 @@
 	      </if>
 	    </trim>
 	    <trim prefix="values (" suffix=")" suffixOverrides=",">
-	      <if test="id != null">
-	        	#{id},
+	      <if test="uaId != null">
+	        	#{uaId},
 	      </if>
 	      <if test="universitiesCode != null">
 	        	#{universitiesCode},
@@ -640,7 +642,7 @@
 	        admissions_regulations = #{admissionsRegulations},
 	      </if>
 	    </set>
-	    where id = #{id}
+	    where id = #{uaId}
 	  </update>
 	  
 	  <delete id="deleteUniversityAdmission" parameterType="cn.hqtzytb.entity.UniversityAdmission">
@@ -649,7 +651,7 @@
 	  
 	  <select id="selectUniversityAdmissionList" resultType="cn.hqtzytb.entity.UniversityAdmission">
 		SELECT
-			id, universities_code, ua_year, brochure_browse_count, regulations_browse_count,
+			id AS ua_id, universities_code, ua_year, brochure_browse_count, regulations_browse_count,
 			admissions_brochure, admissions_regulations, pubdate
 		FROM 
 			university_admission

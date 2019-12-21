@@ -10,22 +10,22 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" />
-		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" /> 
+		<%-- <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script> --%>
+		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script> 
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+		<script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>		
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/liquidFill.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/sch_chart.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
-	<%-- 	<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script> --%>
+		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script> 
+		<script src="${pageContext.request.contextPath}/js/jPages.js"></script>		
 	</head>	
 	<body>
-		<c:import url="header.jsp"></c:import>
-
+		<c:import url="header.jsp"></c:import>	
+ 
 		<main class="sch_info margin_bot">
 			<p class="text-right container"><a class="btn btn-primary" href="">< 返回</a></p>
 			<section class="" style="background: url(${pageContext.request.contextPath}/img/xgk/bannerBg.png) no-repeat;background-size: inherit;background-position: 0 -238px;padding-bottom: 2em;">
@@ -226,6 +226,9 @@
 			    				</div>
 			    			</div>
 			    		</div>
+			    		
+	
+			    			
 			    		<div class="tab_b2">
 			    			<div class="major_info margin_bot tab2">
 			    				<div class="items margin_top">
@@ -259,8 +262,7 @@
 			    					
 			    						<script type="text/javascript">
 								
-								$(function(){
-								
+								$(function(){								
 									var attributes  = '${school.universitiesAttributes}';
 									if( attributes != ""){
 										var attributesList = JSON.parse(attributes);
@@ -282,15 +284,50 @@
 										//console.log(college.平均分);
 									}
 									
+									
 								});
 								
 								
 							</script>
-			    							<tr><th>省份</th><th>年份</th><th>类型</th><th>平均分</th><th>最低分</th><th>省控线</th><th>最低位次</th><th>录取人数</th><th>录取批次</th></tr>
+								<thead>
+									<tr><th>省份</th><th>年份</th><th>类型</th><th>录取批次</th>
+			    							<th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>最低位次</th><th>计划人数</th><th>录取人数</th></tr>
+			    							
+								</thead>
+								<tbody id="sshy2">
 			    							<c:forEach items="${school.universRelationList}" var="item" >
-			    								<tr><td>${item.urProvince}</td><td>${item.urYear}</td><td>${item.subjectType}</td><td>${item.collegeScoreLineList[0]}</td><td>${item.collegeScoreLineList[1]}</td><td>${item.collegeScoreLineList[6]}</td><td>${item.collegeScoreLineList[7]}</td><td>${item.collegeScoreLineList[8]}</td><td>${item.admissionBatch}</td></tr>								
-			    							</c:forEach>			    			
+			    								<tr>
+				    								<td>${item.urProvince}</td>
+				    								<td>${item.urYear}</td>
+				    								<td>${item.subjectType}</td>
+				    								<td>${item.admissionBatch}</td>
+				    								<c:if test="${empty item.collegeScoreLineList}">
+				    									<td>-</td>
+				    									<td>-</td>
+				    									<td>-</td>
+				    									<td>-</td>
+				    									<td>-</td>
+				    									<td>-</td>
+				    									<td>-</td>
+				    									<td>-</td>
+				    								</c:if>
+				    								<c:if test="${not empty item.collegeScoreLineList}">
+				    									<td>${item.collegeScoreLineList[0]}</td>
+				    									<td>${item.collegeScoreLineList[1]}</td>
+				    									<td>${item.collegeScoreLineList[2]}</td>
+				    									<td>${item.collegeScoreLineList[3]}</td>
+				    									<td>${item.collegeScoreLineList[4]}</td>
+				    									<td>${item.collegeScoreLineList[5]}</td>
+				    									<td>${item.collegeScoreLineList[6]}</td>
+				    									<td>${item.collegeScoreLineList[7]}</td>
+				    								</c:if>
+			    								</tr>								
+			    							</c:forEach>
+			    							</tbody>			    			
 			    						</table>
+			    						<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+											<div class="holder2" style="text-align: center;"></div>
+										</div>	
 			    						<p class="text-muted margin_top1">"-"表示暂无该项数据或学校概念无招生</p>
 			    					</div>
 			    				</div>
@@ -321,16 +358,49 @@
 				    					</select>
 			    					</p>
 			    					<div class="">
-			    						<table class="table table-hover">
+			    						<table class="table table-hover" >
+			    							<thead>
 			    							<tr><th>省份</th><th>年份</th><th>类型</th><th>录取批次</th><th>专业名称</th><th>学科门类</th><th>二级门类</th><th>计划招生</th></tr>
+			    							</thead>
+			    							<tbody id="sshy">			    							
 			    							<c:forEach items="${school.universRelationList}" var="item" >
-			    								<tr><td id="${item.enrollmentPlanList[0]}">${item.urProvince}</td><td>${item.urYear}</td><td>${item.subjectType}</td><td>${item.admissionBatch}</td><td>${item.enrollmentPlanList[1]}</td><td>${item.enrollmentPlanList[2]}</td><td>${item.enrollmentPlanList[3]}</td><td>${item.enrollmentPlanList[4]}</td><td>${item.enrollmentPlanList[8]}</td></tr>								
-			    							</c:forEach>
-			    						</table>
-			    					</div>
+			    								<c:forEach items="${item.enrollmentPlanList }" var="it">
+			    									<tr>
+			    										<c:if test="${empty it}">
+			    											<td id="">${item.urProvince}</td>
+			    										</c:if>
+			    										<c:if test="${not empty it}">
+			    											<td id="${it[0] }">${item.urProvince}</td>
+			    										</c:if>
+				    									<td>${item.urYear}</td>
+				    									<td>${item.subjectType}</td>
+				    									<td>${item.admissionBatch}</td>
+				    									<c:if test="${empty it}">
+					    									<td>-</td>
+					    									<td>-</td>
+					    									<td>-</td>
+					    									<td>-</td>
+				    									</c:if>
+				    									<c:if test="${not empty it}">
+					    									<td>${it[1]}</td>
+					    									<td>${it[2]}</td>
+					    									<td>${it[3]}</td>
+					    									<td>${it[4]}</td>
+				    									</c:if>
+			    									</tr>								
+			    								</c:forEach>					
+			    							</c:forEach>			    											
+			    							</tbody>
+			    						</table>	
+			    						
+			    							<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+											<div class="holder" style="text-align: center;"></div>
+										</div>	    						
+			    					</div> 
+			    					<!-- 分页 -->	
 			    				</div>
 			    				<div class="items margin_top">
-			    					<h2 class="text-primary fontwei">
+			    					<h2 class="text-primary fontwei" style="display: block;">
 			    						<span style="background-image: url(../../img/xgk/3.png);"></span>专业录取分数线
 			    					</h2>
 			    					<p class="">
@@ -357,14 +427,21 @@
 			    					</p>
 			    					<div class="">
 			    						<table class="table table-hover">
-			    						<tr><th>省份</th><th>年份</th><th>类型</th><th>录取批次</th><th>专业名称</th><th>学科门类</th><th>录取人数</th><th>录取平均分</th><th>录取最低分</th></tr>
+			    						<thead>
+			    							<tr><th>省份</th><th>年份</th><th>类型</th><th>录取批次</th><th>专业名称</th><th>学科门类</th><th>录取人数</th><th>录取平均分</th><th>录取最低分</th></tr>
+			    						
+			    						</thead>
+			    						<tbody id="sshy1">
 			    							<c:forEach items="${school.universRelationList}" var="item" >
 			    								<c:forEach items="${item.professionalAdmissionScoreList }" var="it">
 			    									<tr><td id="${it[0]}">${item.urProvince}</td><td>${item.urYear}</td><td>${item.subjectType}</td><td>${item.admissionBatch}</td><td>${it[1]}</td><td>${it[2]}</td><td>${it[3]}</td><td>${it[4]}</td><td>${it[5]}</td></tr>								
 			    								</c:forEach>
 			    							</c:forEach>
-			    							
+			    						</tbody>
 			    						</table>
+			    						<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+											<div class="holder1" style="text-align: center;"></div>
+										</div>	
 			    					</div>
 			    				</div>
 			    			</div>
@@ -382,22 +459,6 @@
 			    							<p class="text-center">${item[0]}</p>
 			    						</div>
 			    						</c:forEach>
-			    						<!-- <div class="">
-			    							<div class="" id="water1" style="width: 160px;height: 160px;"></div>
-			    							<p class="text-center">硕士点</p>
-			    						</div>
-			    						<div class="">
-			    							<div class="" id="water2" style="width: 160px;height: 160px;"></div>
-			    							<p class="text-center">博士点</p>
-			    						</div>
-			    						<div class="">
-			    							<div class="" id="water3" style="width: 160px;height: 160px;"></div>
-			    							<p class="text-center">重点专业</p>
-			    						</div>
-			    						<div class="">
-			    							<div class="" id="water4" style="width: 160px;height: 160px;"></div>
-			    							<p class="text-center">重点实验室</p>
-			    						</div> -->
 			    					</div>
 			    				</div>
 			    				<div class="items margin_top">
@@ -477,7 +538,9 @@
 			    						<ul class="list-group list_article">
 			    							<c:forEach items="${school.universityAdmissionList}" var="item" varStatus="vs">
 			    								<li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#list${vs.count}').html())">${school.universitiesName}${item.uaYear}年招生简章</a>
+			    								<%-- ${item.id} --%>
+			    								
+									        	<a href="javascript:;" id="${item.id};1" onclick="modelshow($(this).html(),$('#list${vs.count}').html());browse(this)">${school.universitiesName}${item.uaYear}年招生简章</a>
 									        	<span class="text-right text-muted">
 									        		<span>发布时间<fmt:formatDate value="${item.pubdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 									        		<c:if test="${item.brochureBrowseCount > 10000}">
@@ -507,7 +570,7 @@
 			    						<ul class="list-group list_article">
 			    							<c:forEach items="${school.universityAdmissionList}" var="item" varStatus="vs">
 			    								<li class="list-group-item">
-									        	<a href="javascript:;" onclick="modelshow($(this).html(),$('#set${vs.count}').html())">${school.universitiesName}${item.uaYear}年招生章程</a>
+									        	<a href="javascript:;" id="${item.id};2" onclick="modelshow($(this).html(),$('#set${vs.count}').html());browse(this)">${school.universitiesName}${item.uaYear}年招生章程</a>
 									        	<span class="text-right text-muted">
 									        		<span>发布时间<fmt:formatDate value="${item.pubdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 									        		<c:if test="${item.regulationsBrowseCount > 10000}">
@@ -521,6 +584,20 @@
 			    							</c:forEach>
 										</ul>
 			    					</div>
+			    					<script type="text/javascript">
+			    						function browse(e){
+			    							var id_type = $(e).attr("id").split(";");
+			    							$.ajax({
+			    								url: "${pageContext.request.contextPath}/school/xgk_admission_browse.do",
+			    								data:"uaId=" + id_type[0] + "&type=" + id_type[1],
+			    								type:"POST",
+			    								dataType:"json",
+			    								success:function(obj){
+			    									console.log(obj.message);
+			    								}
+			    							});
+			    						}
+			    					</script>
 			    				</div>
 			    				<c:forEach items="${school.universityAdmissionList }" var="item" varStatus="vs">
 			    					<div id="list${vs.count}" class="" style="display: none;">
@@ -719,13 +796,37 @@
 				    	}
 				    	$(obj).find('img').attr('src', y);
 				    }
-			    	$(document).ready(function() {
+			    	$(document).ready(function() {			    		
 			    		$('.tab_head li').click(function(){
 			    			$(this).parent().children().removeClass('cur');
 			    			$(this).addClass('cur');
 			    			var index=$(this).index();
 			    			$(this).parents('.tab_list').find('.tab_body').children().removeClass('cur');
 			    			$(this).parents('.tab_list').find('.tab_body').children().eq(index).addClass('cur');
+			    			$("div.holder").jPages({
+			    			       containerID : "sshy",
+			    			       perPage     : 8,
+			    			       first       : "首页",
+			    			       previous    : "上一页",
+			    			       next        : "下一页",
+			    			       last        : "尾页"
+			    			 });
+			    			$("div.holder1").jPages({
+			    			       containerID : "sshy1",
+			    			       perPage     : 8,
+			    			       first       : "首页",
+			    			       previous    : "上一页",
+			    			       next        : "下一页",
+			    			       last        : "尾页"
+			    			 });
+			    			$("div.holder2").jPages({
+			    			       containerID : "sshy2",
+			    			       perPage     : 8,
+			    			       first       : "首页",
+			    			       previous    : "上一页",
+			    			       next        : "下一页",
+			    			       last        : "尾页"
+			    			 });
 			    		})
 			    	})
 			    </script>

@@ -24,7 +24,7 @@ public class UniversityRelation implements Serializable {
     /**
      * 主键ID
      */
-    private Integer id;
+    private Integer urId;
 
     /**
      * 大学编码
@@ -62,7 +62,7 @@ public class UniversityRelation implements Serializable {
      * 招生计划
      */
     private String enrollmentPlan;
-    private List<String> enrollmentPlanList;
+    private List<List<String>> enrollmentPlanList;
 
     /**
      * 专业录取分数线
@@ -78,7 +78,7 @@ public class UniversityRelation implements Serializable {
 	public UniversityRelation(Integer id, String universitiesCode, String urYear, String urProvince, String subjectType,
 			String admissionBatch, String collegeScoreLine, String enrollmentPlan, String professionalAdmissionScore) {
 		super();
-		this.id = id;
+		this.urId = id;
 		this.universitiesCode = universitiesCode;
 		this.urYear = urYear;
 		this.urProvince = urProvince;
@@ -90,11 +90,11 @@ public class UniversityRelation implements Serializable {
 	}
 
 	public Integer getId() {
-		return id;
+		return urId;
 	}
 
 	public UniversityRelation setId(Integer id) {
-		this.id = id;
+		this.urId = id;
 		return this;
 	}
 
@@ -171,11 +171,11 @@ public class UniversityRelation implements Serializable {
 	}
 	
 	
-	public List<String> getEnrollmentPlanList() {
+	public List<List<String>> getEnrollmentPlanList() {
 		return enrollmentPlanList;
 	}
 
-	public UniversityRelation setEnrollmentPlanList(List<String> enrollmentPlanList) {
+	public UniversityRelation setEnrollmentPlanList(List<List<String>> enrollmentPlanList) {
 		this.enrollmentPlanList = enrollmentPlanList;
 		return this;
 	}
@@ -202,7 +202,7 @@ public class UniversityRelation implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UniversityRelation [id=" + id + ", universitiesCode=" + universitiesCode + ", urYear=" + urYear
+		return "UniversityRelation [urId=" + urId + ", universitiesCode=" + universitiesCode + ", urYear=" + urYear
 				+ ", urProvince=" + urProvince + ", subjectType=" + subjectType + ", admissionBatch=" + admissionBatch
 				+ ", collegeScoreLine=" + collegeScoreLine + ", enrollmentPlan=" + enrollmentPlan
 				+ ", professionalAdmissionScore=" + professionalAdmissionScore + "]";

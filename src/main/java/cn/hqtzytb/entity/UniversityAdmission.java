@@ -22,7 +22,7 @@ public class UniversityAdmission implements Serializable{
 	/**
 	 * 主键ID
 	 */
-    private Integer id;
+    private Integer uaId;
 
     /**
      * 大学编码
@@ -48,7 +48,7 @@ public class UniversityAdmission implements Serializable{
     /**
      * 简章浏览数
      */
-    private String brochureBrowseCount;
+    private Integer brochureBrowseCount;
     
     /**
      * 章程浏览数
@@ -67,10 +67,10 @@ public class UniversityAdmission implements Serializable{
 
 	
 
-	public UniversityAdmission(Integer id, String universitiesCode, String uaYear, String admissionsBrochure,
-			String admissionsRegulations, String brochureBrowseCount, Integer regulationsBrowseCount, Date pubdate) {
+	public UniversityAdmission(Integer uaId, String universitiesCode, String uaYear, String admissionsBrochure,
+			String admissionsRegulations, Integer brochureBrowseCount, Integer regulationsBrowseCount, Date pubdate) {
 		super();
-		this.id = id;
+		this.uaId = uaId;
 		this.universitiesCode = universitiesCode;
 		this.uaYear = uaYear;
 		this.admissionsBrochure = admissionsBrochure;
@@ -83,11 +83,11 @@ public class UniversityAdmission implements Serializable{
 
 
 	public Integer getId() {
-		return id;
+		return uaId;
 	}
 
-	public UniversityAdmission setId(Integer id) {
-		this.id = id;
+	public UniversityAdmission setId(Integer uaId) {
+		this.uaId = uaId;
 		return this;
 	}
 
@@ -128,13 +128,13 @@ public class UniversityAdmission implements Serializable{
 	}
 
 
-	public String getBrochureBrowseCount() {
+	public Integer getBrochureBrowseCount() {
 		return brochureBrowseCount;
 	}
 
 
 
-	public UniversityAdmission setBrochureBrowseCount(String brochureBrowseCount) {
+	public UniversityAdmission setBrochureBrowseCount(Integer brochureBrowseCount) {
 		this.brochureBrowseCount = brochureBrowseCount;
 		return this;
 	}
@@ -165,7 +165,7 @@ public class UniversityAdmission implements Serializable{
 
 	@Override
 	public String toString() {
-		return "UniversityAdmission [id=" + id + ", universitiesCode=" + universitiesCode + ", uaYear=" + uaYear
+		return "UniversityAdmission [uaId=" + uaId + ", universitiesCode=" + universitiesCode + ", uaYear=" + uaYear
 				+ ", admissionsBrochure=" + admissionsBrochure + ", admissionsRegulations=" + admissionsRegulations
 				+ ", brochureBrowseCount=" + brochureBrowseCount + ", regulationsBrowseCount=" + regulationsBrowseCount
 				+ ", pubdate=" + pubdate + "]";
