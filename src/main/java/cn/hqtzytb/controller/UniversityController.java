@@ -1,8 +1,6 @@
 package cn.hqtzytb.controller;
 
 import cn.hqtzytb.entity.ResponseResult;
-import cn.hqtzytb.entity.Specialty;
-import cn.hqtzytb.entity.SpecialtyOut;
 import cn.hqtzytb.entity.University;
 import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.service.IUniversityService;
