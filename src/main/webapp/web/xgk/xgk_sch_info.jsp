@@ -479,7 +479,7 @@
 			    								<td>国家特色专业<div>双一流专业</div></td>
 				    							<td>	
 				    								<c:forEach items="${coreSpecialty}" var="item">
-				    									<a class="text-primary" href="" id="${item[0]}">${item[1]}&emsp;</a>
+				    									<a class="text-primary" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=${item[0]}" id="${item[0]}">${item[1]}&emsp;</a>
 				    								</c:forEach>
 				    								<!-- TODO跳转专业 -->
 				    							</td>

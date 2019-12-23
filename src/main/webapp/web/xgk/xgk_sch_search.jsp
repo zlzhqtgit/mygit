@@ -137,7 +137,9 @@
 				    </ul>
 				    
 				</div>
-				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="schoolSearch(2)" <%--onclick="schoolSearch()"--%>>开始查询</a></p>
+				<p class="text-center margin_bot margin_top">
+					<a class="btn btn-primary fontwei begin_btn" href ="javascript:void(0)" style="opacity: 0.2" id="sch_query_select">开始查询</a>
+				</p>
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
 					<div id="search_result"></div>
@@ -164,6 +166,8 @@
 							var school_name = $(".form-control").val();
 							if (school_name == ""){
 								where = "";
+								layer.msg('请输入您感兴趣的学校名字！', {icon: 5});
+								return ;
 							} else {
 								where = " LOCATE('" + school_name + "',u.universities_name) > 0";
 							}
@@ -588,5 +592,25 @@
 			$(e).parents("dl").children().find("a").removeClass("active");
 			$(e).addClass("active");
 		}
+
+		//给院校查询点击事件【查询按钮是否可以查询】
+		$(document).ready(function(){
+			$("#search-ui li dl dd a").click(function() {
+				var condition  = $("#search-ui li dl dd a.active");
+				var canQuery = false;
+				for(var i=0; i<condition.length; i++){
+					if(condition[i].text != "全部"){
+						canQuery = true;
+					}
+				}
+				if(canQuery){
+					$("#sch_query_select").click(schoolSearch(2));
+					$("#sch_query_select").css("opacity","");
+				} else {
+					$("#sch_query_select").unbind("click");
+					$("#sch_query_select").css("opacity","0.2");
+				}
+			})
+	     });
 	</script>
 </html>
