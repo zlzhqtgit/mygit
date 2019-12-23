@@ -430,9 +430,9 @@
 			u.quacquarelli_symonds_ranking,
 			u.us_news_ranking, u.admission_average_ranking, u.total_ranking,
 			u.create_by, u.create_time, u.update_time, u.update_by,
-			ur.id AS ur_id, ur.ur_year, ur.ur_province, ur.subject_type, ur.admission_batch,
+			ur_id, ur.ur_year, ur.ur_province, ur.subject_type, ur.admission_batch,
 			ur.college_score_line, ur.enrollment_plan, ur.professional_admission_score,
-			ua.id AS ua_id, ua.ua_year, ua.admissions_brochure, ua.admissions_regulations,
+			ua_id, ua.ua_year, ua.admissions_brochure, ua.admissions_regulations,
 			ua.brochure_browse_count,ua.regulations_browse_count, ua.pubdate
 		FROM 
 			university u
@@ -450,7 +450,7 @@
 		INSERT INTO university_relation
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="urId != null">
-				id,
+				ur_id,
 			</if>
 			<if test="universitiesCode != null">
 				universities_code,
@@ -536,16 +536,16 @@
 				professional_admission_score = #{professionalAdmissionScore},
 			</if>
 		</set>
-		WHERE id = #{urId}
+		WHERE ur_id = #{urId}
 	</update>
 
 	<delete id="deleteUniversityRelation" parameterType="cn.hqtzytb.entity.University">
-		DELETE from university_relation WHERE id = #{urId}
+		DELETE from university_relation WHERE ur_id = #{urId}
 	</delete>
 
 	<select id="selectUniversityRelationList" resultType="cn.hqtzytb.entity.UniversityRelation">
 		SELECT
-			id AS ur_ia, ur_year, ur_province, subject_type, admission_batch,universities_code, 
+			ur_ia, ur_year, ur_province, subject_type, admission_batch,universities_code, 
 			college_score_line, enrollment_plan, professional_admission_score
 		FROM 
 			university_relation
@@ -565,7 +565,7 @@
     		insert into university_admission
 	    	<trim prefix="(" suffix=")" suffixOverrides=",">
 	      <if test="uaId != null">
-	        	id,
+	        	ua_id,
 	      </if>
 	      <if test="universitiesCode != null">
 	        	universities_code,
@@ -643,16 +643,16 @@
 	        admissions_regulations = #{admissionsRegulations},
 	      </if>
 	    </set>
-	    where id = #{uaId}
+	    where ua_id = #{uaId}
 	  </update>
 	  
 	  <delete id="deleteUniversityAdmission" parameterType="cn.hqtzytb.entity.UniversityAdmission">
-	  	delete from university_admission where id = #{id,jdbcType=INTEGER}
+	  	delete from university_admission where ua_id = #{ua_id}
 	  </delete>
 	  
 	  <select id="selectUniversityAdmissionList" resultType="cn.hqtzytb.entity.UniversityAdmission">
 		SELECT
-			id AS ua_id, universities_code, ua_year, brochure_browse_count, regulations_browse_count,
+			ua_id, universities_code, ua_year, brochure_browse_count, regulations_browse_count,
 			admissions_brochure, admissions_regulations, pubdate
 		FROM 
 			university_admission
