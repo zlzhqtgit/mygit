@@ -318,8 +318,17 @@
 							}
 							if(jump == 1){
 								score = JSON.parse('${CJFX.evaluationFraction}');
-								layer.msg('您未做过学科潜能测评，未能查看成绩分析报告。请进行潜能分析测评后进行查看！', {icon: 5});
+								layer.msg('您未做过学科潜能测评，未能查看成绩分析报告。请进行潜能分析测评后进行查看！', {icon: 5,time:2000});
 								sectshow(1);
+							}
+							var test = '${test}';
+							if(test == 1){
+								score = JSON.parse('${CJFX.evaluationFraction}');
+								sectshow(1);
+							}
+							if(test == 0){
+								layer.msg('您未做过学科探索之成绩分析，请先进行成绩分析。在进入潜能测评！', {icon: 5,time:2000});
+								sectshow(0);
 							}
 						})
 						// 判断用户是否已做过学科探索
@@ -404,15 +413,6 @@
 				function answer(){
 					var QNFX = "${QNFX.featureId}";
 					if(QNFX != ""){
-						/* layer.confirm('您已做过学科探索之潜能分析，是否继续？继续将覆盖学科探索之潜能分析！', {
-							  btn: ['确定', '取消' ] //可以无限个按钮
-							  ,
-							}, function(index, layero){//确认
-								layer.close(index);
-								getScore();
-							}, function(index){//取消
-								layer.close(index);
-							}); */
 						layer.confirm('您已做过学科探索之潜能分析，是否继续？继续将覆盖学科探索之潜能分析！', {
 							  btn: ['确定', '取消', '进入分析结果页面'] //可以无限个按钮
 							  ,btn3: function(index, layero){

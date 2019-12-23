@@ -105,7 +105,7 @@
 							
 							<c:if test="${CJFX == null}">
 								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
-									<a class="text-mute" >潜能分析
+									<a class="text-mute" >成绩分析
 										<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									</a>
 									<a>您还未进行成绩分析测评,是否去测评？<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=CJFX">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>

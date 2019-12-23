@@ -57,8 +57,8 @@ public class XgkSubjectController {
         			session.setAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS,userFeature);
     			}
         	}
+    		//查看成绩分析报告
         	if(StringUtils.isNotEmpty(look) && Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(look)){
-        		//查看成绩分析报告
         		if (session.getAttribute(Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS) != null) {//已做过潜能分析
         			session.setAttribute("jump", 3);//【成绩分析   + 潜能分析】页面
 				} else {//未做过潜能分析
@@ -66,6 +66,16 @@ public class XgkSubjectController {
 				}
         	}else{
         		session.removeAttribute("jump");//去掉页面跳转【成绩分析   + 潜能分析】页面
+        	}
+        	//去做潜能测评
+        	if(StringUtils.isNotEmpty(test) && Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS.equals(test)){
+        		if (session.getAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS) != null) {//已做过成绩分析
+        			session.setAttribute("test", 1);//进入潜能测评分析页
+        		} else {
+        			session.setAttribute("test", 0);//进入成绩分析页
+        		}
+        	}else{
+        		session.removeAttribute("test");//去掉页面跳转【成绩分析   + 潜能分析】页面
         	}
 		}
     	return "web/xgk/xgk_subject_score";
