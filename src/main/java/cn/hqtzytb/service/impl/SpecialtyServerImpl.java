@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.coyote.Request;
 import org.apache.logging.log4j.LogManager;
@@ -16,9 +15,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
-
 import com.alibaba.fastjson.JSON;
-
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.SpecialtyOut;
