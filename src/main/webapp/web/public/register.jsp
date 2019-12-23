@@ -113,7 +113,7 @@
 												<input class="filter-title" type="text" readonly placeholder="pleace select"  style="background-color: transparent;border-radius: 0;box-shadow: 0 0 0;"/>
 												<i class="icon icon-filter-arrow"></i>
 											</div>
-											<select name="filter">
+											<select name="filter" id="cee_year">
 												<option value="请选择高考年度" selected>请选择高考年度</option>
 												<option value="2020" >2020年</option>
 												<option value="2019">2019年</option>

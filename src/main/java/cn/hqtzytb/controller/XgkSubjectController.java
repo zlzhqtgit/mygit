@@ -5,6 +5,8 @@ import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.service.IXgkSubjectService;
 import cn.hqtzytb.utils.Constants;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -41,19 +43,29 @@ public class XgkSubjectController {
      * @return
      */
     @RequestMapping("/xgk_subject_score.do")
-    public String showXgkIndex(HttpServletResponse response, HttpServletRequest request){
+    public String showXgkIndex(String look, String test,HttpServletResponse response, HttpServletRequest request){
     	Subject subject = SecurityUtils.getSubject();
-    	if (subject.isAuthenticated()) {
+    	if (subject.isAuthenticated()){
     		Session session= subject.getSession();
     		Integer uid = (Integer) session.getAttribute("uid");
     		List<UserFeature> userFeatures = userFeatureMapper.select(" uid ='" + uid + "'", null, null, null);
         	for(UserFeature userFeature : userFeatures){
         		if (Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS.equals(userFeature.getEvaluationType())) {
-        			session.setAttribute(Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS,1);
+        			session.setAttribute(Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS,userFeature);
     			}
         		if (Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(userFeature.getEvaluationType())) {
-        			session.setAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS,1);
+        			session.setAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS,userFeature);
     			}
+        	}
+        	if(StringUtils.isNotEmpty(look) && Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(look)){
+        		//查看成绩分析报告
+        		if (session.getAttribute(Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS) != null) {//已做过潜能分析
+        			session.setAttribute("jump", 3);//【成绩分析   + 潜能分析】页面
+				} else {//未做过潜能分析
+					session.setAttribute("jump", 1);//进入潜能分析页并提示
+				}
+        	}else{
+        		session.removeAttribute("jump");//去掉页面跳转【成绩分析   + 潜能分析】页面
         	}
 		}
     	return "web/xgk/xgk_subject_score";

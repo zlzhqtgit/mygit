@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html>
@@ -22,8 +23,19 @@
 			<div class=""><img src="${pageContext.request.contextPath}/img/xgk/bannerBg.png"/></div>
 			<div class="user_info">
 				<div class="text-center cenUser_head" style="width: 6em;">
-					<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 100%;"/>
-					<h3 class="fontwei">用户昵称</h3>
+					<shiro:guest> 
+						<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 100%;"/>
+						<h3 class="fontwei">用户昵称</h3>
+					</shiro:guest>
+					<shiro:user>  
+						<c:if test="${headUrl != null}">
+							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" />
+						</c:if>
+						<c:if test="${headUrl == null}">
+							<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 100%;"/>
+						</c:if>
+						<h3 class="fontwei">${username}</h3>
+					</shiro:user>
 				</div>
 				<div class="clearfix container">
 					<div class="col-lg-6 col-md-6 col-sm-6">
@@ -63,11 +75,105 @@
 				</ul>
 				
 				<div class="center_cont">
-					<ul>
-						<li>是的噶山豆根爱上公司的</li>
+					<ul id="user_info">
+						<li><span>用户ID: </span><span>${user.id}</span></li>
+						<li><span>用户名称: </span><span>${user.username}</span></li>
+						<li><span>手机号: </span><span>${user.phone}</span></li>
+						<li><span>手机号: </span><span>${user.phone}</span></li>
+						<li><span>归属: </span><span>${user.belongTo}</span></li>
+						<li><span>就读学校: </span><span>${user.school}</span></li>
+						<li><span>学校地址: </span><span>${user.schoolAddress}</span></li>
+						<li><span>科类: </span><span>${user.families}</span></li>
+						<li><span>分数: </span><span>${user.fraction}</span></li>
+						<li><span>高考年度: </span><span>${user.ceeYear}</span></li>
+						<li><span>职业: </span><span>${user.vocation}</span></li>
+						<li><span>影响力: </span><span>${user.power}</span></li>
+						<li><span>省份: </span><span>${user.province}</span></li>
+						<li><span>创建时间: </span><span><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span></li>
 					</ul>
-					<ul>
-						<li>萨嘎的撒和大家和环境</li>
+					<!-- 成绩分析  -->
+					<ul id="user_evaluation">
+						<li style="border-bottom: 1px solid #ddd;">
+							<c:if test="${CJFX != null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<a class="text-mute" >成绩分析
+										<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+									</a>
+									<a>测评时间：<fmt:formatDate value="${CJFX.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?look=CJFX">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+							
+							<c:if test="${CJFX == null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<a class="text-mute" >潜能分析
+										<span class="glyphicon glyphicon-remove"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									</a>
+									<a>您还未进行成绩分析测评,是否去测评？<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=CJFX">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+						</li>
+								
+						<!-- 潜能分析  -->
+						<li style="border-bottom: 1px solid #ddd;">
+							<c:if test="${QNFX != null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<!-- 跳转潜能分析测评页面  -->
+									<a class="text-mute" >潜能分析
+										<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+									</a>
+									<a>测评时间：<fmt:formatDate value="${QNFX.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/sub/xgk_potential_report.do">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+							<c:if test="${QNFX == null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<a class="text-mute" >潜能分析
+										<span class="glyphicon glyphicon-remove"></span>
+									</a>
+									<a>您还未进行潜能测评,是否去测评？<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=QNFX">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+						</li>
+						
+						<!-- MBTI -->
+						<li style="border-bottom: 1px solid #ddd;">
+							<c:if test="${MBTI != null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<a class="text-mute" >MBTI测评 
+										<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;
+									</a>
+									<a>测评时间：<fmt:formatDate value="${霍兰德.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${MBTI.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+							<c:if test="${MBTI == null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<a class="text-mute" >MBTI测评
+										<span class="glyphicon glyphicon-remove"></span>
+									</a>
+									<a>您还未进行MBTI测评,是否去测评？<a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+						</li>
+						
+						<!-- 霍兰德  -->
+						<li style="border-bottom: 1px solid #ddd;">
+							<c:if test="${霍兰德  != null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<!-- 跳转潜能分析测评页面  -->
+									<a class="text-mute" >霍兰德测评
+										<span class="glyphicon glyphicon-ok-sign"></span>
+									</a>
+									<a>测评时间：<fmt:formatDate value="${霍兰德.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${霍兰德.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+							<c:if test="${霍兰德  == null}">
+								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
+									<a class="text-mute" >霍兰德测评
+										<span class="glyphicon glyphicon-remove"></span>
+									</a>
+									<a>您还未进行霍兰德测评,是否去测评？<a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+								</div>	
+							</c:if>
+						</li>
 					</ul>
 					<ul>
 						<li>是的噶山豆根爱上公司的111</li>

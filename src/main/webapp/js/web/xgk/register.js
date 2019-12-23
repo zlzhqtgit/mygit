@@ -254,27 +254,40 @@ function register(e) {
 		var url = "../user/hqt_registeradd.do";
 		var data
 		if(e == 0){
-			if(!checkName($('#username')) || !check_mobile($('#mobile')) || !check_captcha($('#captcha')) || !confirm_pwd($('#confirm'), $('#password')) || !check_year()){
-				console.log(checkName($('#username')))
-				console.log(check_mobile($('#mobile')))
-				console.log(check_captcha($('#captcha')))
-				console.log(confirm_pwd($('#confirm'), $('#password')))
-				console.log(check_year())
+			if(!checkName($('#username')) || !check_mobile($('#mobile')) || !check_captcha($('#captcha')) 
+					                      || !confirm_pwd($('#confirm'), $('#password')) || !check_year()){
 				return;
 			}
-			data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#captcha").val()
-			+ "&password=" + $("#password").val() + "&belongTo=" + $("#belong_to").val() + "&school=" + $("#school").val() 
-			+ "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val()
-			+ "&ceeYear=" + $("#year").val() + "&vocation=" + $("#vocation").val() + "&province=" + $("#province").val();
+			data = "username=" + $("#username").val() + 
+				   "&phone=" + $("#mobile").val() + 
+				   "&verifyCode=" + $("#captcha").val() + 
+				   "&password=" + $("#password").val() + 
+				   "&belongTo=" + $("#belong_to").val() + 
+				   "&school=" + $("#school").val()  + 
+				   "&schoolAddress=" + $("#school_address").val() + 
+				   "&families=" + $("#object").val() + 
+				   "&fraction=" + $("#score").val() + 
+				   "&ceeYear=" + $("#cee_year option:selected").val() + 
+				   "&vocation=" + $("#vocation").val() + 
+				   "&province=" + $("#province").val();
+			console.log('data : ' + data);
 		} else {
 			if(!checkName($('#username1')) || !check_mobile($('#mobile1')) || !check_captcha($('#captcha1')) || !confirm_pwd($('#confirm1'), $('#password1'))){
 				console.log('111')
 				return;
 			}
-			data = "username=" + $("#username1").val() + "&phone=" + $("#mobile1").val() + "&verifyCode=" + $("#captcha1").val()
-			+ "&password=" + $("#password1").val() + "&belongTo=" + $("#belong_to1").val() + "&school=" + $("#school1").val() 
-			+ "&schoolAddress=" + $("#school_address1").val() + "&families=" + $("#object1").val() + "&fraction=" + $("#score1").val()
-			+ "&ceeYear=" + $("#year1").val() + "&vocation=" + $("#vocation1").val() + "&province=" + $("#province1").val();
+			data = "username=" + $("#username1").val() + 
+				   "&phone=" + $("#mobile1").val() + 
+				   "&verifyCode=" + $("#captcha1").val() + 
+				   "&password=" + $("#password1").val() + 
+				   "&belongTo=" + $("#belong_to1").val() + 
+				   "&school=" + $("#school1").val() + 
+				   "&schoolAddress=" + $("#school_address1").val() + 
+				   "&families=" + $("#object1").val() + 
+				   "&fraction=" + $("#score1").val() + 
+				   "&ceeYear=" + $("#cee_year1 option:selected").val() + 
+				   "&vocation=" + $("#vocation1").val() + 
+				   "&province=" + $("#province1").val();
 		}
 		
 		$.ajax({

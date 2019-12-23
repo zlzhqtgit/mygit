@@ -21,12 +21,7 @@
 
 <main class="container">
 	<section class="row">
-		<p class="text-right"><a class="btn btn-primary" href="javascript:;" onclick="print()">打印报告</a></p>
-		<script type="text/javascript">
-			function print() {
-				alert(111)
-			}
-		</script>
+		<p class="text-right"><a class="btn btn-primary" href="javascript:;"">打印报告</a></p>
 		<h1 class="text-primary fontwei">学科分析报告</h1>
 		<div class="panel panel-default">
 			<div class="padding-side2 margin_top margin_bot">

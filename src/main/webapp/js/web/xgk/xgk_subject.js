@@ -336,6 +336,8 @@
 				}
 			}
 		}
+		console.log(nextnum);
+		console.log(obj);
 		$(obj).parents('.choise').find('span').removeClass('active');
 		$(obj).addClass('active');
 		jztm (nextnum+1);
@@ -406,6 +408,7 @@
 			$('#total').text(total);
 		} else if(nextnum==total){
 			var url="xgk_potential_analysis.do";
+			//保存潜能测评信息
 			var  data = "total_sc=" + JSON.stringify(total_sc) + "&score=" + JSON.stringify(score);
 			$.ajax({
 				"url":url,
@@ -414,7 +417,7 @@
 				"dataType":"json",
 				"success":function(obj){
 					if(obj.state==0){
-						// alert(obj.message);
+						layer.msg(obj.message, {icon: 5});
 						return;
 					} else {
 						analysis();

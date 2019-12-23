@@ -307,15 +307,28 @@
 							href="javascript:void(0)">下一步</a>
 					</p>
 					<script type="text/javascript">
-						var cjfx = "${CJFX}";
-						var qnfx = "${QNFX}";
+						var cjfx = "${CJFX.featureId}";
+						var qnfx = "${QNFX.featureId}";
+						$(function(){
+							var jump = '${jump}';
+							if(jump == 3){
+								score = JSON.parse('${CJFX.evaluationFraction}');
+								total_sc = JSON.parse('${QNFX.evaluationFraction}');
+								analysis();//进入潜能分析报告
+							}
+							if(jump == 1){
+								score = JSON.parse('${CJFX.evaluationFraction}');
+								layer.msg('您未做过学科潜能测评，未能查看成绩分析报告。请进行潜能分析测评后进行查看！', {icon: 5});
+								sectshow(1);
+							}
+						})
 						// 判断用户是否已做过学科探索
 						function haveYouSubjectExploration() {
 							var uid = '${uid}';
 							if(uid == "" || uid == null){
 								onlogin();
 							}else{
-								if(cjfx == 0){
+								if(cjfx == ""){
 									//未做过成绩分析
 									tip_input();
 									//成绩分析纳入数据统计
@@ -333,7 +346,7 @@
 								} else {
 									//已做过学科探索 弹出选项提示
 									layer.confirm('您已做过学科探索之成绩分析，是否继续？继续将覆盖学科探索之成绩分析！', {
-									btn: ['确定', '取消', '进入潜能分析']
+									btn: ['确定', '取消', '进入潜能测评']
 									,btn3: function(index, layero){
 										//进入潜能分析
 										sectshow(1);
@@ -389,22 +402,48 @@
 			<script type="text/javascript">
 				//答题
 				function answer(){
-					var QNFX = "${QNFX}";
-					if(QNFX == 1){
-						layer.confirm('您已做过学科探索之潜能分析，是否继续？继续将覆盖学科探索之潜能分析！', {
-							  btn: ['确定', '取消'] //可以无限个按钮
+					var QNFX = "${QNFX.featureId}";
+					if(QNFX != ""){
+						/* layer.confirm('您已做过学科探索之潜能分析，是否继续？继续将覆盖学科探索之潜能分析！', {
+							  btn: ['确定', '取消' ] //可以无限个按钮
 							  ,
 							}, function(index, layero){//确认
 								layer.close(index);
 								getScore();
 							}, function(index){//取消
 								layer.close(index);
+							}); */
+						layer.confirm('您已做过学科探索之潜能分析，是否继续？继续将覆盖学科探索之潜能分析！', {
+							  btn: ['确定', '取消', '进入分析结果页面'] //可以无限个按钮
+							  ,btn3: function(index, layero){
+								  total_sc = JSON.parse('${QNFX.evaluationFraction}');
+								  $.ajax({
+										url: "${pageContext.request.contextPath}/sub/xgk_score_report.do",
+										data:"",
+										type:"POST",
+										dataType:"json",
+										success:function(obj){
+											if(obj.state == 0){
+												layer.msg(obj.message,{icon:2,time:1000});
+											}else{
+												score = JSON.parse(obj.data.evaluationFraction);
+												analysis();
+											}
+										}	
+									});
+							  }
+							}, function(index, layero){
+							  	//确定
+								layer.close(index)
+								getScore();
+							}, function(index){
+							 	//取消
 							});
 					}else{
 						getScore();
 					}
 				}
-				//获得成绩分析
+				//获得成绩分析成绩
 				function getScore(){
 					$.ajax({
 						url: "${pageContext.request.contextPath}/sub/xgk_score_report.do",
@@ -481,8 +520,6 @@
 									
 									var w1 = $("#myCanvas1").width();
 									var h1 = $("#myCanvas1").height();
-									console.log(w1);
-									console.log(h1);
 									ctx1.lineTo(330, 166);
 									ctx1.stroke();
 								</script>
@@ -525,9 +562,7 @@
 						</tbody>
 					</table>
 					<p class="text-right">
-<%--						<a class="btn btn-primary fontwei"--%>
-<%--							href="${pageContext.request.contextPath}/web/xgk/xgk_xk_analyse_rpt.jsp">查看潜能报告</a>--%>
-						<a class="btn btn-primary fontwei"  href="../sub/xgk_potential_report.do">查看潜能报告</a>
+						<a class="btn btn-primary fontwei"  href="${pageContext.request.contextPath}/sub/xgk_potential_report.do">查看潜能报告</a>
 					</p>
 				</div>
 

@@ -88,9 +88,6 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
         }
         List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(map.entrySet());
         Collections.sort(list, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
-        System.out.println(list);
-        System.out.println(net.sf.json.JSONArray.fromObject(list));
-        System.out.println(JSON.toJSONString(list));
         session.setAttribute("list", JSON.toJSONString(list));
         session.setAttribute("evaluationFraction",feature.getEvaluationFraction());
         return "web/xgk/xgk_xk_analyse_rpt";

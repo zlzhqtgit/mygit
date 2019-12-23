@@ -19,7 +19,8 @@
 		where
 		feature_id=#{featureId}
 	</update>
-	<!--查询收货地址 -->
+	
+	<!--查询测评信息地址 -->
 	<select id="select" resultType="cn.hqtzytb.entity.UserFeature">
 		select
 			feature_id as featureId,

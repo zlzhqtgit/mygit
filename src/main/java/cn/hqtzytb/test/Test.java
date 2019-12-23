@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,6 +78,13 @@ public class Test {
 //		}
 		vocationList.add(0, 0);
 		System.err.println(vocationList);
+		
+		String str = "ACE";
+		String charAt = str.charAt(0)+"";
+		System.err.println();
+		
+		Map<String, Integer> cpFengshu = JSONObject.fromObject("{A=9, R=7, C=8, S=4, E=8, I=6}");
+		System.err.println(cpFengshu);
     }
 
 

@@ -14,6 +14,7 @@ import cn.hqtzytb.service.IUserServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import cn.hqtzytb.utils.Photo;
+import jdk.nashorn.internal.objects.annotations.Where;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -26,9 +27,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import cn.hqtzytb.entity.User;
+import cn.hqtzytb.entity.UserFeature;
+import cn.hqtzytb.entity.UserResultReport;
 import cn.hqtzytb.exception.MyRuntimeException;
 import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
+import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.mapper.UserMapper;
+import cn.hqtzytb.mapper.UserResultReportMapper;
 
 @Service
 public class IUserServerImpl implements IUserServer {
@@ -37,7 +42,10 @@ public class IUserServerImpl implements IUserServer {
 	private UserMapper userMapper;
 	@Autowired
 	private PhotoConfig photoConfig;
-	
+	@Autowired
+	private UserResultReportMapper userResultReportMapper;
+	@Autowired
+	private UserFeatureMapper userFeatureMapper;
 	
 	@Override
 	public List<User> getuserAll() {
@@ -168,28 +176,29 @@ public class IUserServerImpl implements IUserServer {
 		Session session = SecurityUtils.getSubject().getSession();
 		ResponseResult<Void> rr;		
 	    String code = Integer.toString(Photo.getNewcode());	  
-	    System.out.println(code);
 	    SendSmsResponse response;	       
 		try {
-			User user= userMapper.queryUser(phone);
-			if(user!=null){
-				 rr =new ResponseResult<Void>(ResponseResult.ERR, "该手机号已经存在，请重新输入");
-				 logger.info("用户手机：" + phone + " 模块名：注册模块 操作：登录  状态：Failed! ");
+			User user = userMapper.queryUser(phone);
+			if(user != null){
+				 rr = new ResponseResult<Void>(ResponseResult.ERR, "该手机号已经存在，请重新输入");
+				 logger.info("用户手机：" + phone + " 模块名：注册模块 操作：注册发送短信验证码  状态：Failed! ");
 			}else{
+			    System.out.println(Constants.ERROR_HEAD_INFO +  "开始发送短信");
 				response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
+				System.out.println(Constants.ERROR_HEAD_INFO +  "短信发送完毕");
 				if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
 					session.setAttribute("code",code);
 					session.setAttribute("phone",phone);
 					rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
-					logger.info("用户手机：" + phone + " 模块名：注册模块 操作：登录  状态：Success! ");
+					logger.info("用户手机：" + phone + " 模块名：注册模块 操作：注册发送短信验证码  状态：Success! ");
 					System.out.println(code);
 				}else{
 					 rr =new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
-					 logger.info("用户手机：" + phone + " 模块名：注册模块 操作：登录  状态：Failed! ");
+					 logger.info("用户手机：" + phone + " 模块名：注册模块 操作：注册发送短信验证码  状态：Failed! ");
 				}					       
 			}				
 		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：注册发送短信信息  错误信息: "+e);
+			logger.error("访问路径：" + request.getRequestURI() + "操作：注册发送短信验证码  错误信息: "+e);
 			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");			
 		}			
 		return rr;
@@ -214,8 +223,6 @@ public class IUserServerImpl implements IUserServer {
 		Subject subject = SecurityUtils.getSubject();
 		Session session = subject.getSession();
 		ResponseResult<Void> rr = null;
-		System.out.println(verifyCode);
-		System.err.println(user);
 		if	(session.getAttribute("phone") == null || session.getAttribute("code") == null ){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"请先获取手机验证码");
 		}
@@ -225,7 +232,7 @@ public class IUserServerImpl implements IUserServer {
 		if (!verifyCode.equals(session.getAttribute("code").toString())){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码输入错误");
 		}
-		try {	
+//		try {	
 			//查询用户名是否存在
 			User userlist = userMapper.queryUser(user.getPhone());			
 			//判断用户名是否存在
@@ -255,12 +262,12 @@ public class IUserServerImpl implements IUserServer {
 				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
 				logger.info("用户名：" + user.getUsername() + " 模块名：注册模块 操作：登录  状态：OK!");
 				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");	
-				subject.login(new MyUsernamePasswordToken());
+				subject.login(new MyUsernamePasswordToken(user.getPhone()));
 			}			
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
-			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
-		}
+//		} catch (Exception e) {
+//			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
+//			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+//		}
 		return rr;
 	}
 
@@ -311,10 +318,34 @@ public class IUserServerImpl implements IUserServer {
 
 	@Override
 	public String showUserCenterInfo(HttpServletRequest request) {
+		
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			if (subject.isAuthenticated()) {
 				Session session = subject.getSession();
+				String where = " uid = '" + session.getAttribute("uid") + "' ";
+				List<UserResultReport> reportList = userResultReportMapper.select(where, null, null, null);
+				if(!reportList.isEmpty()){
+					session.setAttribute("result_report", reportList.get(0));//测评结果报告
+					session.setAttribute("assignment", reportList.get(0).getStatus());//是否存在测评任务
+				} else {
+					session.setAttribute("assignment", 3);//不存在测评任务
+				}
+				List<UserFeature> userFeatureList = userFeatureMapper.select(where, null, null, null);
+				for(UserFeature userFeature : userFeatureList){
+					if(Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(userFeature.getEvaluationType())){
+						session.setAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS, userFeature);//成绩分析
+					}
+					if(Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS.equals(userFeature.getEvaluationType())){
+						session.setAttribute(Constants.EVALUATION_TYPE_POTENTIAL_ANALYSIS, userFeature);//潜能测评
+					}
+					if(Constants.EVALUATION_TYPE_HOLLAND_ANALYSIS.equals(userFeature.getEvaluationType())){
+						session.setAttribute(Constants.EVALUATION_TYPE_HOLLAND_ANALYSIS, userFeature);//霍来德测评
+					}
+					if(Constants.EVALUATION_TYPE_MBTI_ANALYSIS.equals(userFeature.getEvaluationType())){
+						session.setAttribute(Constants.EVALUATION_TYPE_MBTI_ANALYSIS, userFeature);//MBTI测评
+					}
+				}
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：查看个人中心   错误信息: " + e);

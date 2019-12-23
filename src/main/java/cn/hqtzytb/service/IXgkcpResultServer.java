@@ -2,6 +2,8 @@ package cn.hqtzytb.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import cn.hqtzytb.entity.XgkcpResult;
 
 /**
@@ -17,4 +19,12 @@ public interface IXgkcpResultServer {
 	List<XgkcpResult> resultReport(List<String> tzName, String tzType);
 
 	List<XgkcpResult> getAll();
+
+	/**
+	 * 展示用户认知测评结果页面
+	 * @param cpResult
+	 * @param request
+	 * @return
+	 */
+	String showUserResultReport(String cpResult, HttpServletRequest request);
 }

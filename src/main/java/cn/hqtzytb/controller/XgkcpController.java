@@ -46,13 +46,9 @@ public class XgkcpController {
 	@Autowired
 	private IXgkcpServer xgkcpServer;
 	@Autowired
-	private IXgkcpResultServer xgkcpResultServer;
+	private IXgkcpResultServer iXgkcpResultServer;
 	@Autowired
 	private IUserFeatureServer userFeatureServer;
-	@Autowired
-	private UserFeatureMapper userFeatureMapper;
-	@Autowired
-	private PersonalityMapper personalityMapper;
 	
 	/**
 	 * @throws MyRuntimeException
@@ -181,13 +177,13 @@ public class XgkcpController {
 		// 重session里面提取分数与测评类型
 		String testName = (String) session.getAttribute("cpName");
 		Map<String, Integer> cpFengshu = (Map<String, Integer>) session.getAttribute("cpResult");
-		GetCommonUser get=new GetCommonUser();
+		GetCommonUser get = new GetCommonUser();
 		String cpresult = "";
 		// 判断测评类型
 		if (testName.equals("霍兰德")) {
 			List<String> mobileList = get.gethld(cpFengshu);
 			// 查询数据库，查出相关的兴趣代码及相关信息
-			List<XgkcpResult> reportResult = xgkcpResultServer.resultReport(mobileList, testName);
+			List<XgkcpResult> reportResult = iXgkcpResultServer.resultReport(mobileList, testName);
 			// 渲染到页面
 			String[][] str = { { "R", "0", "现实型" }, { "I", "0", "研究型" }, { "A", "0", "艺术型" }, { "S", "0", "社会型" },
 					{ "E", "0", "企业型" }, { "C", "0", "常规型" } };
@@ -197,21 +193,16 @@ public class XgkcpController {
 				str[i][1] = cpFengshu.get(str[i][0]).toString();
 				fs += str[i][0] + "," + str[i][1] + "," + str[i][2] + "-";
 			}
+			System.err.println("cpFengshu:" + cpFengshu);
+			System.err.println("mobileList:" + mobileList);
+			System.err.println("fs:" + fs);
+			System.err.println("reportResult:" + reportResult);
 			map.addAttribute("cpFengshu", fs);
 			map.addAttribute("hldreport", reportResult);
 			map.addAttribute("report", "report_hld");
 			
 
 			for(int i=0; i<reportResult.size(); i++){
-//				System.err.println(reportResult.get(i).getPersonalityCode());
-//				System.err.println(reportResult.get(i).getPersonalitySpecialty());
-//				System.err.println(reportResult.get(i).getPersonalityVocation());
-//				System.err.println(JSONArray.fromObject(reportResult.get(i).getPersonalitySpecialty()));
-//				System.err.println(JSONArray.fromObject(reportResult.get(i).getPersonalityVocation()));
-//				System.err.println(1111);
-//				System.err.println(111);
-//				System.err.println(11);
-//				System.err.println(1);
 				//专业列表
 				map.addAttribute("specialty" + i,GetCommonUser.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalitySpecialty()), request));
 				//职业列表
@@ -308,6 +299,7 @@ public class XgkcpController {
 		return rr;
 	}
 	
+	
 	@RequestMapping("/xgk_guide_xuanke.do")	
 	public String xgk_guide_xuanke(ModelMap map,HttpServletRequest request,HttpServletResponse response) throws MyRuntimeException{	
 		return  "web/public/xgk_guide_xuanke";
@@ -325,5 +317,12 @@ public class XgkcpController {
 		return userFeatureServer.haveYouCognitionEvaluation(uid,type);
 	}
 
-
+	/**
+	 * 展示用户认知测评结果页面
+	 */
+	@RequestMapping("/xgk_user_report.do")
+	public String showUserResultReport(String cpResult,HttpServletRequest request){
+		
+		return iXgkcpResultServer.showUserResultReport(cpResult,request);
+	}
 }
