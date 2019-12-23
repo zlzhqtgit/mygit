@@ -143,4 +143,22 @@
 	<if test="orderBy != null">order by ${orderBy}</if>
 	<if test="offset != null">limit ${offset},${countPerPage}</if>
   </select>
+  
+   <select id="geyProvince" resultType="java.lang.String" parameterType="java.lang.String">
+	SELECT
+		DISTINCT e_province
+	FROM
+		enrollment_requirements 
+	WHERE	
+		LOCATE(#{specialtyId},include_major)
+  </select>
+  
+   <select id="geyYear" resultType="java.lang.String" parameterType="java.lang.String">
+	SELECT
+		DISTINCT e_year
+	FROM
+		enrollment_requirements
+	WHERE	
+		LOCATE(#{specialtyId},include_major)
+  </select>
 </mapper>

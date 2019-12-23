@@ -1,19 +1,11 @@
 package cn.hqtzytb.controller;
 
-import cn.hqtzytb.entity.ResponseResult;
-import cn.hqtzytb.entity.Specialty;
-import cn.hqtzytb.service.ILoginService;
-import cn.hqtzytb.service.ISpecialtyServer;
-import cn.hqtzytb.utils.Constants;
-import com.alibaba.fastjson.JSONObject;
 
+import cn.hqtzytb.service.ILoginService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
-import org.hamcrest.core.IsNot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.*;
 
 
@@ -28,8 +20,6 @@ import javax.servlet.http.*;
  */
 @Controller
 public class LoginController {
-    @Autowired
-    private ISpecialtyServer iSpecialtyServer;
     @Autowired
     private ILoginService iLoginService;
 
@@ -83,11 +73,7 @@ public class LoginController {
      */
     @RequestMapping("/login_out.do")
     public String logout() {
-        if(SecurityUtils.getSubject().isAuthenticated()){
-        	 //销毁 shiro 会话
-        	SecurityUtils.getSubject().logout();;
-        }
-        return "web/xgk/xgk_login";
+    	return iLoginService.logout();
     }
 
 }

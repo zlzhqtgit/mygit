@@ -64,7 +64,7 @@
 
 	<!--查询测评结果对应相关信息 -->
 	<select id="select" resultType="cn.hqtzytb.entity.Specialty">
-		select
+		SELECT
 			<include refid="Base_Column_List" />
 		FROM specialty b
 		<if test="where != null">where ${where}</if>
@@ -651,6 +651,21 @@
 		</if>
 	</select>
 
+	<select id="selectSpecialtyClass" resultType="cn.hqtzytb.entity.Specialty">
+		SELECT
+			DISTINCT specialty_major_name,
+			specialty_education
+		FROM
+			specialty
+		WHERE specialty_education = '本科'
+		UNION ALL	
+		SELECT
+			DISTINCT specialty_major_name,
+			specialty_education
+		FROM
+			specialty
+		WHERE specialty_education = '专科'
+	</select>
 
 </mapper>
 	

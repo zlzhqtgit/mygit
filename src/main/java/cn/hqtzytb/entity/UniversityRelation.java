@@ -2,6 +2,9 @@ package cn.hqtzytb.entity;
 
 
 import java.io.Serializable;
+import java.util.List;
+
+import net.sf.json.JSONArray;
 
 /**
  * @ClassName: Vocation
@@ -13,12 +16,15 @@ import java.io.Serializable;
  */
 public class UniversityRelation implements Serializable {
 
+	/**
+	 * serialVersionUID
+	 */
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键ID
      */
-    private Integer id;
+    private Integer urId;
 
     /**
      * 大学编码
@@ -28,10 +34,15 @@ public class UniversityRelation implements Serializable {
     /**
      * 年份
      */
-    private String year;
+    private String urYear;
+    
+    /**
+     * 省份
+     */
+    private String urProvince;
 
     /**
-     * 选科类型
+     * 录取类型
      */
     private String subjectType;
 
@@ -44,54 +55,46 @@ public class UniversityRelation implements Serializable {
      * 院校分数线
      */
     private String collegeScoreLine;
+    private List<String> collegeScoreLineList;
+    
 
     /**
      * 招生计划
      */
     private String enrollmentPlan;
+    private List<List<String>> enrollmentPlanList;
 
     /**
      * 专业录取分数线
      */
     private String professionalAdmissionScore;
-
-    /**
-     * 招生简章
-     */
-    private String admissionsBrochure;
-
-    /**
-     * 招生章程
-     */
-    private String admissionsRegulations;
+    private List<List<String>> professionalAdmissionScoreList;
 
 	public UniversityRelation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UniversityRelation(Integer id, String universitiesCode, String year, String subjectType,
-			String admissionBatch, String collegeScoreLine, String enrollmentPlan, String professionalAdmissionScore,
-			String admissionsBrochure, String admissionsRegulations) {
+	public UniversityRelation(Integer id, String universitiesCode, String urYear, String urProvince, String subjectType,
+			String admissionBatch, String collegeScoreLine, String enrollmentPlan, String professionalAdmissionScore) {
 		super();
-		this.id = id;
+		this.urId = id;
 		this.universitiesCode = universitiesCode;
-		this.year = year;
+		this.urYear = urYear;
+		this.urProvince = urProvince;
 		this.subjectType = subjectType;
 		this.admissionBatch = admissionBatch;
 		this.collegeScoreLine = collegeScoreLine;
 		this.enrollmentPlan = enrollmentPlan;
 		this.professionalAdmissionScore = professionalAdmissionScore;
-		this.admissionsBrochure = admissionsBrochure;
-		this.admissionsRegulations = admissionsRegulations;
 	}
 
 	public Integer getId() {
-		return id;
+		return urId;
 	}
 
 	public UniversityRelation setId(Integer id) {
-		this.id = id;
+		this.urId = id;
 		return this;
 	}
 
@@ -104,12 +107,21 @@ public class UniversityRelation implements Serializable {
 		return this;
 	}
 
-	public String getYear() {
-		return year;
+	public String getUrYear() {
+		return urYear;
 	}
 
-	public UniversityRelation setYear(String year) {
-		this.year = year;
+	public UniversityRelation setUrYear(String urYear) {
+		this.urYear = urYear;
+		return this;
+	}
+
+	public String getUrProvince() {
+		return urProvince;
+	}
+
+	public UniversityRelation setUrProvince(String urProvince) {
+		this.urProvince = urProvince;
 		return this;
 	}
 
@@ -139,6 +151,15 @@ public class UniversityRelation implements Serializable {
 		this.collegeScoreLine = collegeScoreLine;
 		return this;
 	}
+	
+	public List<String> getCollegeScoreLineList() {
+		return collegeScoreLineList;
+	}
+
+	public UniversityRelation setCollegeScoreLineList(List<String> collegeScoreLineList) {
+		this.collegeScoreLineList = collegeScoreLineList;
+		return this;
+	}
 
 	public String getEnrollmentPlan() {
 		return enrollmentPlan;
@@ -146,6 +167,16 @@ public class UniversityRelation implements Serializable {
 
 	public UniversityRelation setEnrollmentPlan(String enrollmentPlan) {
 		this.enrollmentPlan = enrollmentPlan;
+		return this;
+	}
+	
+	
+	public List<List<String>> getEnrollmentPlanList() {
+		return enrollmentPlanList;
+	}
+
+	public UniversityRelation setEnrollmentPlanList(List<List<String>> enrollmentPlanList) {
+		this.enrollmentPlanList = enrollmentPlanList;
 		return this;
 	}
 
@@ -157,24 +188,24 @@ public class UniversityRelation implements Serializable {
 		this.professionalAdmissionScore = professionalAdmissionScore;
 		return this;
 	}
+	
+	
 
-	public String getAdmissionsBrochure() {
-		return admissionsBrochure;
+	public List<List<String>> getProfessionalAdmissionScoreList() {
+		return professionalAdmissionScoreList;
 	}
 
-	public UniversityRelation setAdmissionsBrochure(String admissionsBrochure) {
-		this.admissionsBrochure = admissionsBrochure;
+	public UniversityRelation setProfessionalAdmissionScoreList(List<List<String>> professionalAdmissionScoreList) {
+		this.professionalAdmissionScoreList = professionalAdmissionScoreList;
 		return this;
 	}
 
-	public String getAdmissionsRegulations() {
-		return admissionsRegulations;
-	}
-
-	public UniversityRelation setAdmissionsRegulations(String admissionsRegulations) {
-		this.admissionsRegulations = admissionsRegulations;
-		return this;
-		
+	@Override
+	public String toString() {
+		return "UniversityRelation [urId=" + urId + ", universitiesCode=" + universitiesCode + ", urYear=" + urYear
+				+ ", urProvince=" + urProvince + ", subjectType=" + subjectType + ", admissionBatch=" + admissionBatch
+				+ ", collegeScoreLine=" + collegeScoreLine + ", enrollmentPlan=" + enrollmentPlan
+				+ ", professionalAdmissionScore=" + professionalAdmissionScore + "]";
 	}
 
 	

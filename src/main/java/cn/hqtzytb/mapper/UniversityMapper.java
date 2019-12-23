@@ -2,6 +2,7 @@ package cn.hqtzytb.mapper;
 
 import cn.hqtzytb.entity.University;
 import cn.hqtzytb.entity.UniversityRelation;
+import cn.hqtzytb.entity.UniversityAdmission;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -37,4 +38,12 @@ public interface UniversityMapper {
      * @return
      */
     List<String> selectUniversityProvince();
+    
+    Integer insertUniversityAdmission(UniversityAdmission university);
+    Integer updateUniversityAdmission(UniversityAdmission university);
+    Integer deleteUniversityAdmission(UniversityAdmission university);
+    List<UniversityAdmission> selectUniversityAdmissionList(@Param("where")String where,
+                                      @Param("orderBy")String orderBy,
+                                      @Param("offset")Integer offset,
+                                      @Param("countPerPage")Integer countPerPage);
 }
