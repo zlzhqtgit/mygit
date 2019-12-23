@@ -189,7 +189,6 @@
 				    			$(this).parents('.tab_list').find('.tab_body').children().eq(index).addClass('cur');
 				    		})
 				    	})
-				    	$(function () { $("[data-toggle='tooltip']").tooltip(); });
 				    </script>
 				    
 				</div>
