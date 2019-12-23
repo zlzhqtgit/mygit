@@ -438,6 +438,7 @@
 			university u
 		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code
 		LEFT JOIN university_admission ua ON ua.universities_code = u.universities_code
+		LEFT JOIN enrollment_requirements er ON er.universities_code = u.universities_code
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>

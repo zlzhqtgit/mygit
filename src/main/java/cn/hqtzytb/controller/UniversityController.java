@@ -2,7 +2,9 @@ package cn.hqtzytb.controller;
 
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
+import cn.hqtzytb.entity.SpecialtyOut;
 import cn.hqtzytb.entity.University;
+import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.service.IUniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName: UniversityController
@@ -31,7 +34,8 @@ public class UniversityController {
 
     @Autowired
     private IUniversityService iUniversityService;
-
+    @Autowired
+    private ISpecialtyServer iSpecialtyServer;
 
     /**
      * 学校上传图片
@@ -84,29 +88,6 @@ public class UniversityController {
     }
 
 
-    /**
-     * 显示专业查询页
-     * @param session
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping("/xgk_specialty_search.do")
-    public String showSpecialtySearch(HttpSession session, HttpServletRequest request, HttpServletResponse response){
-        return "web/xgk/xgk_sch_major";
-    }
-
-    /**
-     * 专业查询
-     * @param where
-     * @return
-     */
-    @RequestMapping("/xgk_specialty_query.do")
-    @ResponseBody
-    public ResponseResult<List<Specialty>> getSpecialtyList(String where){
-        return iUniversityService.getSpecialtyList(where);
-    }
-
 
     /**
      * 获得院校省份信息
@@ -139,4 +120,49 @@ public class UniversityController {
         return iUniversityService.addAadmissionBrowse(uaId,type,request);
     }
 
+    
+    
+    /**
+     * 显示专业查询页
+     * @param session
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/xgk_specialty_search.do")
+    public String showSpecialtySearchIndex(ModelMap map, HttpServletRequest request, HttpServletResponse response){
+        return iSpecialtyServer.getSpecialtySearchIndex(map,request);
+    }
+
+    /**
+     * 专业查询
+     * @param where
+     * @return
+     */
+    @RequestMapping("/xgk_specialty_query.do")
+    @ResponseBody
+    public ResponseResult<Map<String,Object>> getSpecialtyList(String where, HttpServletRequest request){
+        return iSpecialtyServer.getSpecialtyList(where, request);
+    }
+    
+    /**
+     * 专业详情查询
+     * @param where
+     * @return
+     */
+    @RequestMapping("/xgk_specialty_detail.do")
+    public String getSpecialtyDetail(String specialtyId, HttpServletRequest request, ModelMap map){
+        return iSpecialtyServer.getSpecialtyDetail(specialtyId, request, map);
+    }
+    
+    /**
+     * 通过专业查询学校
+     * @param where
+     * @return
+     */
+    @RequestMapping("/xgk_specialty_school.do")
+    @ResponseBody
+    public ResponseResult<List<University>> getSpecialtySchool(String specialtyId, String er_year, String er_province, String sch_province, HttpServletRequest request){
+        return iSpecialtyServer.getSpecialtySchool(specialtyId, er_year, er_province, sch_province, request);
+    }
 }

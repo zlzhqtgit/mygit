@@ -10,7 +10,6 @@ import cn.hqtzytb.mapper.UniversityMapper;
 import cn.hqtzytb.service.IUniversityService;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
-import net.sf.json.JSONArray;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,7 +28,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
-import javax.sound.midi.Soundbank;
 
 /**
  * @ClassName: IUniversityServiceImpl
@@ -45,8 +42,6 @@ public class IUniversityServiceImpl implements IUniversityService {
     private  static final Logger logger = LogManager.getLogger(IUniversityServiceImpl.class.getName());
     @Autowired
     private UniversityMapper universityMapper;
-    @Autowired
-    private SpecialtyMapper specialtyMapper;
 
 
 
@@ -58,6 +53,7 @@ public class IUniversityServiceImpl implements IUniversityService {
             return new ResponseResult<Void>().setState(Constants.RESULT_CODE_FAIL).setMessage(Constants.RESULT_MESSAGE_FAIL);
         }
         String classpath = this.getClass().getResource("/").getPath();
+        System.err.println("classpath:" + classpath);
         //本地
         String path = classpath.replaceAll("/target/hqtzytb/WEB-INF/classes/","/src/main/webapp/img/photo/school/") + universitiesCode;
         //服务器
@@ -67,7 +63,8 @@ public class IUniversityServiceImpl implements IUniversityService {
         String extName = "";
         String url = "";
         try {
-            if (imageType.equals(1)){
+//            if (imageType.equals(1)){
+        		System.err.println("path:" + path);
                 path += "/life";
                 uploadFile = new File(path);
                 if (!uploadFile.exists()) {
@@ -81,6 +78,7 @@ public class IUniversityServiceImpl implements IUniversityService {
                 for (MultipartFile file : files){
                     // 获取图片后缀
                     extName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+                    System.err.println(file.getOriginalFilename());
                     url = path + "/"+ new SimpleDateFormat("yyyy_MM_dd_").format (new Date()) + UUID.randomUUID() + extName;
                     file.transferTo(new File(url));
                     logger.info("学校：" + university.getUniversitiesName() +" 模块名：上传校园生活图片信息  操作：上传  状态：OK!");
@@ -94,24 +92,24 @@ public class IUniversityServiceImpl implements IUniversityService {
                     }
                 }
                 universityMapper.updateUniversity(university.setUniversitiesLife(universitiesLife));
-            } else {
-                path += "/image";
-                uploadFile = new File(path);
-                System.err.println(path);
-                if (!uploadFile.exists()) {
-                    uploadFile.mkdirs();
-                }
-                if (uploadFile.listFiles().length > 0){
-                    logger.error("学校：" + university.getUniversitiesName() + " 模块名：上传校园生活图片信息  操作：失败  状态：FAIL! 校园logo图片已存在，如需更换请先删除原logo!");
-                    return new ResponseResult<Void>().setState(Constants.RESULT_CODE_FAIL).setMessage(Constants.RESULT_MESSAGE_FAIL);
-                }
-                // 获取图片后缀
-                extName = files[0].getOriginalFilename().substring(files[0].getOriginalFilename().lastIndexOf("."));
-                url = path + "/logo" + extName;
-                files[0].transferTo(new File(url));
-                logger.info("学校：" + university.getUniversitiesName() +" 模块名：上传校园logo图片信息  操作：上传  状态：OK!");
-                universityMapper.updateUniversity(university.setUniversitiesImage( url.substring(url.lastIndexOf("img"),url.length()) ));
-            }
+//            } else {
+//                path += "/image";
+//                uploadFile = new File(path);
+//                System.err.println(path);
+//                if (!uploadFile.exists()) {
+//                    uploadFile.mkdirs();
+//                }
+//                if (uploadFile.listFiles().length > 0){
+//                    logger.error("学校：" + university.getUniversitiesName() + " 模块名：上传校园生活图片信息  操作：失败  状态：FAIL! 校园logo图片已存在，如需更换请先删除原logo!");
+//                    return new ResponseResult<Void>().setState(Constants.RESULT_CODE_FAIL).setMessage(Constants.RESULT_MESSAGE_FAIL);
+//                }
+//                // 获取图片后缀
+//                extName = files[0].getOriginalFilename().substring(files[0].getOriginalFilename().lastIndexOf("."));
+//                url = path + "/logo" + extName;
+//                files[0].transferTo(new File(url));
+//                logger.info("学校：" + university.getUniversitiesName() +" 模块名：上传校园logo图片信息  操作：上传  状态：OK!");
+//                universityMapper.updateUniversity(university.setUniversitiesImage( url.substring(url.lastIndexOf("img"),url.length()) ));
+//            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -131,11 +129,7 @@ public class IUniversityServiceImpl implements IUniversityService {
     	return new ResponseResult<List<University>>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS,universityList);
     }
 
-    @Override
-    public ResponseResult<List<Specialty>> getSpecialtyList(String where) {
-        return new ResponseResult<List<Specialty>>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS).setData(specialtyMapper.select(StringUtils.isEmpty(where) ? null : where ,null,null,null));
-    }
-
+   
     @Override
     public ResponseResult<Object> universityDeleteImage(String url) {
         String classpath = this.getClass().getResource("/").getPath();
@@ -235,7 +229,7 @@ public class IUniversityServiceImpl implements IUniversityService {
 				} else {
 					ur.setRegulationsBrowseCount(ur.getRegulationsBrowseCount() + 1);
 				}
-				Integer ui = universityMapper.updateUniversityAdmission(ur);
+				universityMapper.updateUniversityAdmission(ur);
 				return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 			}	
 		} catch (Exception e) {
@@ -243,4 +237,5 @@ public class IUniversityServiceImpl implements IUniversityService {
 		}
 		return new ResponseResult<Void>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
 	}
+
 }

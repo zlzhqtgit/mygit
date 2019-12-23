@@ -23,8 +23,6 @@ public interface IUniversityService {
 
     ResponseResult<List<University>> getUniversityList(String where, HttpServletRequest request);
 
-    ResponseResult<List<Specialty>> getSpecialtyList(String where);
-
     ResponseResult<Object> universityDeleteImage(String url);
 
     ResponseResult<List<String>> getProvince();
@@ -32,4 +30,6 @@ public interface IUniversityService {
 	String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request);
 
 	ResponseResult<Void> addAadmissionBrowse(String uaId, String type, HttpServletRequest request);
+
+	
 }

@@ -22,4 +22,7 @@ public interface EnrollmentRequirementsMapper {
 			@Param("orderBy")String orderBy,
 			@Param("offset")Integer offset,
 			@Param("countPerPage")Integer countPerPage);
+	
+	List<String> geyYear(String specialtyId);
+	List<String> geyProvince(String specialtyId);
 }

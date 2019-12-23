@@ -55,5 +55,11 @@ public interface SpecialtyMapper {
 	 * @return
 	 */
 	List<Specialty> selectSpecialtyListByMap(Map<String,Object> paramMap);
+	
+	/**
+	 * 查询本科/专科专业类别
+	 * @return
+	 */
+	List<Specialty> selectSpecialtyClass();
 
 }
