@@ -79,15 +79,14 @@
 						<li><span>用户ID: </span><span>${user.id}</span></li>
 						<li><span>用户名称: </span><span>${user.username}</span></li>
 						<li><span>手机号: </span><span>${user.phone}</span></li>
-						<li><span>手机号: </span><span>${user.phone}</span></li>
 						<li><span>归属: </span><span>${user.belongTo}</span></li>
 						<li><span>就读学校: </span><span>${user.school}</span></li>
-						<li><span>学校地址: </span><span>${user.schoolAddress}</span></li>
+						<%-- <li><span>学校地址: </span><span>${user.schoolAddress}</span></li> --%>
 						<li><span>科类: </span><span>${user.families}</span></li>
 						<li><span>分数: </span><span>${user.fraction}</span></li>
 						<li><span>高考年度: </span><span>${user.ceeYear}</span></li>
-						<li><span>职业: </span><span>${user.vocation}</span></li>
-						<li><span>影响力: </span><span>${user.power}</span></li>
+						<%-- <li><span>职业: </span><span>${user.vocation}</span></li> --%>
+						<%-- <li><span>影响力: </span><span>${user.power}</span></li> --%>
 						<li><span>省份: </span><span>${user.province}</span></li>
 						<li><span>创建时间: </span><span><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span></li>
 					</ul>

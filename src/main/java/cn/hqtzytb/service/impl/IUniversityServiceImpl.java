@@ -221,7 +221,7 @@ public class IUniversityServiceImpl implements IUniversityService {
 	@Override
 	public ResponseResult<Void> addAadmissionBrowse(String uaId, String type, HttpServletRequest request) {
 		try {
-			List<UniversityAdmission> universityAdmissionList = universityMapper.selectUniversityAdmissionList(" id = '" + uaId + "'", null, null, null);
+			List<UniversityAdmission> universityAdmissionList = universityMapper.selectUniversityAdmissionList(" ua_id = '" + uaId + "'", null, null, null);
 			if (!universityAdmissionList.isEmpty()) {
 				UniversityAdmission ur = universityAdmissionList.get(0);
 				if ("1".equals(type)) {//招生简章 浏览数 +1

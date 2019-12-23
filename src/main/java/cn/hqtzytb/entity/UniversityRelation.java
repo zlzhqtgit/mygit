@@ -75,10 +75,10 @@ public class UniversityRelation implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UniversityRelation(Integer id, String universitiesCode, String urYear, String urProvince, String subjectType,
+	public UniversityRelation(Integer urId, String universitiesCode, String urYear, String urProvince, String subjectType,
 			String admissionBatch, String collegeScoreLine, String enrollmentPlan, String professionalAdmissionScore) {
 		super();
-		this.urId = id;
+		this.urId = urId;
 		this.universitiesCode = universitiesCode;
 		this.urYear = urYear;
 		this.urProvince = urProvince;
@@ -89,12 +89,12 @@ public class UniversityRelation implements Serializable {
 		this.professionalAdmissionScore = professionalAdmissionScore;
 	}
 
-	public Integer getId() {
+	public Integer getUrId() {
 		return urId;
 	}
 
-	public UniversityRelation setId(Integer id) {
-		this.urId = id;
+	public UniversityRelation setUrId(Integer urId) {
+		this.urId = urId;
 		return this;
 	}
 

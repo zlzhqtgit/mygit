@@ -538,9 +538,7 @@
 			    						<ul class="list-group list_article">
 			    							<c:forEach items="${school.universityAdmissionList}" var="item" varStatus="vs">
 			    								<li class="list-group-item">
-			    								<%-- ${item.id} --%>
-			    								
-									        	<a href="javascript:;" id="${item.id};1" onclick="modelshow($(this).html(),$('#list${vs.count}').html());browse(this)">${school.universitiesName}${item.uaYear}年招生简章</a>
+									        	<a href="javascript:;" id="${item.uaId};1" onclick="modelshow($(this).html(),$('#list${vs.count}').html());browse(this)">${school.universitiesName}${item.uaYear}年招生简章</a>
 									        	<span class="text-right text-muted">
 									        		<span>发布时间<fmt:formatDate value="${item.pubdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 									        		<c:if test="${item.brochureBrowseCount > 10000}">
@@ -570,7 +568,7 @@
 			    						<ul class="list-group list_article">
 			    							<c:forEach items="${school.universityAdmissionList}" var="item" varStatus="vs">
 			    								<li class="list-group-item">
-									        	<a href="javascript:;" id="${item.id};2" onclick="modelshow($(this).html(),$('#set${vs.count}').html());browse(this)">${school.universitiesName}${item.uaYear}年招生章程</a>
+									        	<a href="javascript:;" id="${item.uaId};2" onclick="modelshow($(this).html(),$('#set${vs.count}').html());browse(this)">${school.universitiesName}${item.uaYear}年招生章程</a>
 									        	<span class="text-right text-muted">
 									        		<span>发布时间<fmt:formatDate value="${item.pubdate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 									        		<c:if test="${item.regulationsBrowseCount > 10000}">

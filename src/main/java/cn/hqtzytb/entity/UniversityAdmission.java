@@ -82,11 +82,11 @@ public class UniversityAdmission implements Serializable{
 
 
 
-	public Integer getId() {
+	public Integer getUaId() {
 		return uaId;
 	}
 
-	public UniversityAdmission setId(Integer uaId) {
+	public UniversityAdmission setUaId(Integer uaId) {
 		this.uaId = uaId;
 		return this;
 	}
