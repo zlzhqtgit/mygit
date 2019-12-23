@@ -152,4 +152,13 @@ public class ILoginServiceImpl implements ILoginService {
         }
         return "web/xgk/xgk_error_404";
     }
+
+	@Override
+	public String logout() {
+		//销毁 shiro 会话
+        if(SecurityUtils.getSubject().isAuthenticated()){
+        	SecurityUtils.getSubject().logout();
+        }
+		return "web/xgk/xgk_index";
+	}
 }

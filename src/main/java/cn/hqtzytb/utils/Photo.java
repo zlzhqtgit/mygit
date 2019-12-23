@@ -24,8 +24,7 @@ public class Photo {
 	 * 阿里云短信服务：
 	 * 注意：需要 签名名称、模版CODE 以及 RAM访问控制中的 AccessKeyID 和 AccessKeySecret  
 	 */ 
-	    public  static SendSmsResponse sendSms(String telephone, String code, String accessKeyId, String accessKeySecret, String qm_name, String qm_sms) throws ClientException {
-	    	
+	    public  static SendSmsResponse sendSms(String telephone, String code, String accessKeyId, String accessKeySecret, String qm_name, String qm_sms) throws ClientException {    	
 	        //可自助调整超时时间
 	        System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
 	        System.setProperty("sun.net.client.defaultReadTimeout", "10000");
@@ -53,15 +52,12 @@ public class Photo {
 	        return sendSmsResponse;
 	    } 
 	 
-	    //以下为测试代码，随机生成验证码
-	    private static int newcode;
+	    //随机生成验证码
 	    public static int getNewcode() {
-	        return newcode;
+	        return (int)((Math.random()*9+1)*100000); //每次调用生成一个6位数的随机数;
 	    }
-	    public static void setNewcode(){
-	        newcode = (int)((Math.random()*9+1)*100000);  //每次调用生成一位四位数的随机数
-	    }
-	   
-
-
+	    
+	    public static void main(String[] args) {
+			System.err.println(getNewcode());
+		}
 }

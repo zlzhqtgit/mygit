@@ -20,4 +20,6 @@ public interface ILoginService {
     String qqLoginCallback(HttpServletRequest request, HttpServletResponse response);
 
     String wxLoginCallback(HttpServletRequest request, HttpServletResponse response);
+
+	String logout();
 }
