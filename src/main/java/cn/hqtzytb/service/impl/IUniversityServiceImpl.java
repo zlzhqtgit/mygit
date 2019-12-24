@@ -128,7 +128,7 @@ public class IUniversityServiceImpl implements IUniversityService {
     public ResponseResult<Map<String, Object>> getUniversityList(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
     	Map<String, Object> resultMap = new HashMap<>();
     	try {
-    		List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(where) ? null : where ," ur.ur_year DESC ",offset == null ? 0 : offset ,countPerPage == null ? 5 : countPerPage);
+    		List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(where) ? null : where ," ur.ur_year DESC ",offset == null ? 0 : offset ,countPerPage == null ? 3 : countPerPage);
         	Integer count = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(where) ? null : where);
     		resultMap.put("list", universityList);
     		resultMap.put("count", count);

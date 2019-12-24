@@ -144,10 +144,6 @@
 					<div id="search_page"></div>
 					</section>
 				</div>
-
-				<script type="text/javascript">
-
-				</script>
 			<div class="contrast panel" id="contrast" >
 				<div class="text-right text-primary padding-side2">
 					<label class="slide_down">
@@ -541,7 +537,7 @@
 								  laypage.render({
 								    elem: 'search_page',
 								    count: obj.data.count,
-								    limit: 5,
+								    limit: 3,
 								    limits: [1,2,3,4,5,6,7,8,9],
 								    layout: ['prev', 'page', 'next', 'limit', 'refresh', 'skip'],
 								    jump: function(obj,first){
