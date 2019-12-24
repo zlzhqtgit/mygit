@@ -79,10 +79,10 @@
 		"maxHeight": "600",
 		"preSet":'${province}',
 		"getVal": function() {
-			//console.log($(".pick-area-hidden").val())
-			//console.log($(".pick-area-dom").val())
-	//					var thisdom = $("." + $(".pick-area-dom").val());
-	//					thisdom.next().val($(".pick-area-hidden").val());
+			console.log($(".pick-area-hidden").val())
+			console.log($(".pick-area-dom").val())
+						var thisdom = $("." + $(".pick-area-dom").val());
+			console.log(thisdom.next().val($(".pick-area-hidden").val()));
 		}
 	});
 	

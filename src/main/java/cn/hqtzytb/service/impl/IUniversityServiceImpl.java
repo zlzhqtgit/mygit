@@ -11,8 +11,11 @@ import cn.hqtzytb.service.IUniversityService;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.ObjectUtils.Null;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -23,11 +26,14 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @ClassName: IUniversityServiceImpl
@@ -119,19 +125,18 @@ public class IUniversityServiceImpl implements IUniversityService {
     }
 
     @Override
-    public ResponseResult<List<University>> getUniversityList(String where, HttpServletRequest request) {
-    	
-    	List<University> universityList = universityMapper.selectUniversityList((StringUtils.isEmpty(where) ? " ur.ur_year = YEAR(CURDATE()) OR (ur.ur_year = YEAR(CURDATE())-1) " : where + " AND ( ur.ur_year = YEAR(CURDATE()) OR (ur.ur_year = YEAR(CURDATE())-1) )" )," ur.ur_year DESC ",null,null);
-//    	for(University university : universityList){
-//    		for(UniversityRelation relation : university.getUniversRelationList()){
-//    			relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(),request));
-//    		}
-//    	}
-    	for(UniversityRelation relation : universityList.get(0).getUniversRelationList()){
-    		System.err.println(relation.getCollegeScoreLine());
-    	}
-    	
-    	return new ResponseResult<List<University>>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS,universityList);
+    public ResponseResult<Map<String, Object>> getUniversityList(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
+    	Map<String, Object> resultMap = new HashMap<>();
+    	try {
+    		List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(where) ? null : where ," ur.ur_year DESC ",offset == null ? 0 : offset ,countPerPage == null ? 5 : countPerPage);
+        	Integer count = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(where) ? null : where);
+    		resultMap.put("list", universityList);
+    		resultMap.put("count", count);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作； 查询院校信息  错误信息：" + e);
+			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_FAIL);
+		}
+    	return new ResponseResult<>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
     }
 
    
@@ -241,6 +246,18 @@ public class IUniversityServiceImpl implements IUniversityService {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 添加招生简章/章程  错误信息：" + e);
 		}
 		return new ResponseResult<Void>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+	}
+
+	@Override
+	public String showUniversitySearch(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Session session = SecurityUtils.getSubject().getSession();
+			session.setAttribute("university_province_list", universityMapper.selectUniversityProvince());
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作； 展示学院搜索页面  错误信息：" + e);
+		}
+		
+		return "web/xgk/xgk_sch_search";
 	}
 
 }

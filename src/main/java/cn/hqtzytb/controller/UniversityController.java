@@ -69,8 +69,9 @@ public class UniversityController {
      * @return
      */
     @RequestMapping("/xgk_school_search.do")
-    public String showUniversitySearch(HttpSession session, HttpServletRequest request, HttpServletResponse response){
-        return "web/xgk/xgk_sch_search";
+    public String showUniversitySearch(HttpServletRequest request, HttpServletResponse response){
+        return iUniversityService.showUniversitySearch(request,response);
+
     }
 
 
@@ -81,8 +82,8 @@ public class UniversityController {
      */
     @RequestMapping("/xgk_school_query.do")
     @ResponseBody
-    public ResponseResult<List<University>> getUniversityList(String where, HttpServletRequest request){
-        return iUniversityService.getUniversityList(where, request);
+    public ResponseResult<Map<String, Object>> getUniversityList(String where, Integer offset, Integer countPerPage, HttpServletRequest request){
+        return iUniversityService.getUniversityList(where, offset,countPerPage, request);
     }
 
 

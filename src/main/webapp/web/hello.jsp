@@ -19,10 +19,12 @@
         <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
         <script src="${pageContext.request.contextPath}/js/jPages.js"></script>
+        <link rel="stylesheet" href="../../js/layui-v2.5.5/layui/css/layui.css"  media="all">
+        <script src="../../js/layui-v2.5.5/layui/layui.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
 <body>
-<div id="test">
+<%-- <div id="test">
 	
 	<c:forEach items="${core_laboratories_and_research_centers}" var="item">
 		<c:forEach items="${item}" var="it">
@@ -35,7 +37,7 @@
 		console.log(list)
 	</script>
 <div>
-<%-- <c:forEach items="${core0}" var="item"> --%>
+<c:forEach items="${core0}" var="item">
 		${ooo[0][0][1]}
 		<c:forEach items="${ooo}" var="r" varStatus="ff">
 			<c:forEach items="${ooo[ff.index]}" var="a" varStatus="o">		
@@ -54,8 +56,8 @@
 		</c:forEach>
 		
 		
-	<%-- </c:forEach> --%>
-	</div>
+	</c:forEach>
+	</div> --%>
 <br/>
 <br/>
 <br/>
@@ -63,33 +65,28 @@
 <br/>
 <br/>
 <br/>
-<h4> 
-<%--                测试--%>
-<%--<div id="gghhh">
-    <div>就爱上的就拉开数据来看大家爱死了</div>
-    <div>就爱上的就拉开数据来看大家爱死了</div>
-    <div>就爱上的就拉开数据来看大家爱死了</div>
-    <div>就爱上的就拉开数据来看大家爱死了</div>
-    <div>就爱上的就拉开数据来看大家爱死了</div>
-    <div>就爱上的就拉开数据来看大家爱死了</div>
-    <div>就爱上的就拉开数据来看大家爱死了</div>
-</div>
-<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
-    <div class="holder" style="text-align: center;"></div>
-</div>
-<script type="text/javascript">
-    $(function() {
-        /* initiate plugin assigning the desired button labels  */
-        $("div.holder").jPages({
-            containerID : "gghhh",
-            perPage     : 5,
-            first       : "首页",
-            previous    : "上一页",
-            next        : "下一页",
-            last        : "尾页"
-        });
-    });
-</script>--%>
+<div id="demo7"></div>
+<script>
+layui.use(['laypage', 'layer'], function(){
+  var laypage = layui.laypage
+  ,layer = layui.layer;
+  
+ 
+  //完整功能
+  laypage.render({
+    elem: 'demo7'
+    ,count: 100
+    ,layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+    ,jump: function(obj){
+      console.log(obj)
+    }
+  });
+  
+
+
+  
+});
+</script>
 <!-- 页面底部-->
 </body>
 </html>
