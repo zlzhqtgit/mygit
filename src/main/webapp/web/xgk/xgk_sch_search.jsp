@@ -265,8 +265,8 @@
 	                                        	}
 										var box_head = '<ul classs="search_result list-group" id="universities">';
 										var id = "";
-										var operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
-												    '<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
+										var operate = '<div class="operate_box"> <p class="text-center padding-side"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
+												    '<p class="text-center  padding-side"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
 												    '<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
 										universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +
 												      //院校Logo
