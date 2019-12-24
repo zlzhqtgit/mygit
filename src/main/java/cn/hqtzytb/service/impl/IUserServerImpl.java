@@ -15,6 +15,7 @@ import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import cn.hqtzytb.utils.Photo;
 import jdk.nashorn.internal.objects.annotations.Where;
+import lombok.experimental.var;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -345,6 +346,10 @@ public class IUserServerImpl implements IUserServer {
 					if(Constants.EVALUATION_TYPE_MBTI_ANALYSIS.equals(userFeature.getEvaluationType())){
 						session.setAttribute(Constants.EVALUATION_TYPE_MBTI_ANALYSIS, userFeature);//MBTI测评
 					}
+				}
+				List<UserResultReport> resultReportList = userResultReportMapper.select(where, null, null, null);
+				if(!resultReportList.isEmpty()){
+					session.setAttribute("resule_report", resultReportList.get(0));
 				}
 			}
 		} catch (Exception e) {

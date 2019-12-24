@@ -62,12 +62,12 @@
 					<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-th-large"></span> 我的学科</a></li>
 					<li class="p_relative">
 						<a href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> 
-							我的选科<span class="badge pull-right text-danger">3</span>
+							我的选科<!-- <span class="badge pull-right text-danger">3</span> -->
 						</a>
 						<ul class="sublist">
-							<li class="cur"><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/noDone.jsp')" href="javascript:void(0)">待完成</a></li>
-							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/done.jsp')" href="javascript:void(0)">已完成</a></li>
-							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li>
+							<%-- <li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/noDone.jsp')" href="javascript:void(0)">待完成</a></li> 
+							<li class="cur"><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/done.jsp')" href="javascript:void(0)">已完成</a></li> 
+							<%-- <li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li> --%>
 						</ul>
 					</li>
 					<li> <a href="javascript:void(0)"><span class="glyphicon glyphicon-record"></span> 我的关注 </a> </li>
@@ -180,6 +180,12 @@
 					<ul>
 						<li class="myXuanke">
 							<div class="" onload="showModel()">
+								<table class="table table-responsive">
+									<tr><th>起止时间</th><th>状态</th><th>选课结果</th><th>操作</th></tr>
+									<tr><td><fmt:formatDate value="${resule_report.startTime}" pattern="yyyy-MM-dd hh:mm:ss"/> - <fmt:formatDate value="${resule_report.endTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td><td>已结束</td><td>物理+化学+生物</td><td><a href="">已下载</a></td></tr>
+								</table>
+							</div>
+							<%-- <div class="" onload="showModel()">
 								<div class="border-primary">
 									<div class="text-center fontwei"><div class="bg-primary fontwei" style="font-size: 1.6em;padding: .6em 0;">待完成</div></div>
 									<div class="">
@@ -187,7 +193,7 @@
 										<p class="text-center"><a class="btn btn-primary" onclick="getPage('${pageContext.request.contextPath}/web/userCenter/el_result.jsp')" href="javascript:void(0)">参与选科排课</a></p>
 									</div>
 								</div>
-							</div>
+							</div> --%>
 						</li>
 					</ul>
 					<ul>
