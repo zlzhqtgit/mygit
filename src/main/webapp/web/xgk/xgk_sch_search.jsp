@@ -605,9 +605,12 @@
 				}
 				if(canQuery){
 					$("#sch_query_select").click(schoolSearch(2));
+					$("#sch_query_select").attr("onclick","schoolSearch(2)");
 					$("#sch_query_select").removeClass("disabled");
+					//.onclick(schoolSearch(2));
 				} else {
 					$("#sch_query_select").unbind("click");
+					$("#sch_query_select").removeAttr("onclick");
 					$("#sch_query_select").addClass("disabled")
 				}
 			})

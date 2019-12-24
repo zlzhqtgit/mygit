@@ -120,7 +120,8 @@ public class IUniversityServiceImpl implements IUniversityService {
 
     @Override
     public ResponseResult<List<University>> getUniversityList(String where, HttpServletRequest request) {
-    	List<University> universityList = universityMapper.selectUniversityList((StringUtils.isEmpty(where) ? null : where )," ur.ur_year DESC ",null,null);
+    	
+    	List<University> universityList = universityMapper.selectUniversityList((StringUtils.isEmpty(where) ? " ur.ur_year = YEAR(CURDATE()) OR (ur.ur_year = YEAR(CURDATE())-1) " : where + " AND ( ur.ur_year = YEAR(CURDATE()) OR (ur.ur_year = YEAR(CURDATE())-1) )" )," ur.ur_year DESC ",null,null);
     	for(University university : universityList){
     		for(UniversityRelation relation : university.getUniversRelationList()){
     			relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(),request));
