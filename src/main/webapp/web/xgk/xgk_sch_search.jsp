@@ -289,22 +289,26 @@
 													 //[录取分表格   start]
 													 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
 	                                        	
-
 										//[院校扩展表list 院校录取分数线] 
 										if(list[i].universRelationList == null){
 											universities += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 										}else{
+											var universRelationList = JSON.parse(list[i].universRelationList[0].collegeScoreLine);
 											for(var j=0; j<list[i].universRelationList.length; j++){
-	        										var lines = list[i].universRelationList[j].collegeScoreLineList;
-	        										if(lines.length <= 0){
-	        											universities += "<tr><td>" + (list[i].universRelationList[j].urYear == null ? "-" : list[i].universRelationList[j].urYear) + "</td><td>" + (list[i].universRelationList[j].subjectType == null ? "-" : list[i].universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
-	        										} else {
-	        											universities += "<tr><td>" + list[i].universRelationList[j].urYear + "</td><td>" + list[i].universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
-		                                        		
-	        										}
-	        									}	
-										}
-	                                        	
+												var collegeScoreLine = list[i].universRelationList[j].collegeScoreLine;
+												if($.isEmptyObject(collegeScoreLine) == false){
+													if(collegeScoreLine.startsWith("[")){
+														var lines = JSON.parse(collegeScoreLine);
+														console.log("lines:" + lines);
+														if(lines.length > 0){
+															universities += "<tr><td>" + list[i].universRelationList[j].urYear + "</td><td>" + list[i].universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
+														}	
+													}													
+												} else {
+													universities += "<tr><td>" + (list[i].universRelationList[j].urYear == null ? "-" : list[i].universRelationList[j].urYear) + "</td><td>" + (list[i].universRelationList[j].subjectType == null ? "-" : list[i].universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+												}												
+											}
+										}							
 	                                        	//[录取分表格   end]
 	                                        	universities += "</table>" + operate + "</li></ul>";
 									}
