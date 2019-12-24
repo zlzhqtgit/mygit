@@ -1,4 +1,3 @@
-
 .panel{
 	border-radius: 20px;
 	border: 1px solid #dfdcdc;
@@ -49,7 +48,7 @@ dl,dt,dd{
 	padding: 0;
 }
 dt{
-	font-weight: 200;
+	font-weight: 600;
 	color: #333;
 }
 .list-group-item dd{
@@ -67,9 +66,9 @@ dt{
 }
 .item_body a{
 	display: inline-block;
-	width: 5em;
+	/* width: 5em; */
 	text-align: center;
-	padding: 6px 8px;
+	padding: 2px 8px;
 	border-radius: 1em;
 	text-decoration: none;
 }
@@ -117,12 +116,32 @@ dt{
 	color: #fff;
 }
 .sch_info div img {
-    width: 3em;
+    width: 2.2em;
 }
 .flex_jcstart .sch_info{
 	width: auto;
 }
-
+.sh_logo{
+	width:16%
+}
+.sch_info {
+	/* width:30% */
+}
+.sch_info>table tr>td,
+.sch_info>table tr>td div,
+.sch_info>table tr>td span{
+	font-size:12px;
+	text-align:left;
+}
+.sch_slice{
+	width:42%
+}
+.sch_slice>tr>th{
+	boder:1px solid #fff;
+}
+.operate_box{
+	width:12%
+}
 .add_contrast,.store{
 	position: relative;
 }

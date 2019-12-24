@@ -899,7 +899,6 @@ background: #9f0303;
 .btn{
 	border-radius: 22px;
 	padding:6px 28px;
-	margin-left:1em;
 	border: 0;
 	box-shadow: 0 1px 3px #999;
 }
@@ -1881,15 +1880,18 @@ table.combile_xuank{
 	}
 }
 
+.pagegress{
+	box-sizing: border-box;
+	text-align:center;
+	/* display: flex;
+	justify-content: center; */
+}
 .holder{
-	border-bottom:1px solid #ddd;
-	padding-bottom:1em;
+	box-sizing: border-box;
 }
 .holder>a{
-	width: 3em;
 	padding:.4em;
 	background-color:#fff;
-	border: 1px solid #ddd;
 	display:inline-block;
 	margin:0 .4em;
 	color:#555;
@@ -1903,5 +1905,5 @@ table.combile_xuank{
 	width:4em;
 }
 .holder>a.jp-current{
-	border: 2px solid orangered;
+	/* border: 2px solid orangered; */
 }

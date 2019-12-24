@@ -9,25 +9,20 @@
 		<title>贵州好前途教育科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/jPages.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jPages.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/area_json.js"></script>
 		<style>
-			.sch_search_info table td{
-				width:50%;
-			}
 		</style>
 	</head>
 
 	<body>
 		<c:import url="header.jsp"></c:import>
 		<main class="sch_search">
-
 			<section class="sch_search container">
-				
 				<div style="padding: 1em 100px 1em;">
 				    <form class="bs-example bs-example-form" role="form" id="universities_name">
 				        <div class="input-group input-group-lg">
@@ -143,8 +138,8 @@
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
 					<div id="search_result"></div>
-						<div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
-							<div class="holder" style="text-align: center;"></div>
+						<div class="bg-white pagegress"style="box-shadow: 0px 0px 0px #bdb8b8;">
+							<div class="holder" style=""></div>
 						</div>
 					</section>
 				</div>
@@ -270,20 +265,20 @@
 	                                        	}
 										var box_head = '<ul classs="search_result list-group" id="universities">';
 										var id = "";
-										var operate = '<div class="operate_box"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
+										var operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
 												    '<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
 												    '<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
 										universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +
 												      //院校Logo
 													 "<div class='sh_logo'>" +
-													 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo' src='${pageContext.request.contextPath}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
+													 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校lgo(暂无图片)' src='${pageContext.request.contextPath}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
 													 "</div>" +
 													 //院校名字   + 院校属性  + 录取批次  + 综合评级
 													 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4><span class=''>" + list[i].universitiesName + "</span><span class=''>" + attrImg + "</span></h4>" +
 													 "<p class=''>综合评级（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
 													 "</div>" +
 													 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
-													 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span>" + list[i].universitiesCode + "</span></td><td>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></td></tr>" +
+													 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
 													 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span>" + list[i].universitiesNature + "</span></td><td><span>" + doctor + "</span></td></tr>" +
 													 "</table></div>" +
 													 //[录取分表格   start]
