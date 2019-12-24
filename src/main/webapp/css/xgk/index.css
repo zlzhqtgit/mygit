@@ -1881,3 +1881,27 @@ table.combile_xuank{
 	}
 }
 
+.holder{
+	border-bottom:1px solid #ddd;
+	padding-bottom:1em;
+}
+.holder>a{
+	width: 3em;
+	padding:.4em;
+	background-color:#fff;
+	border: 1px solid #ddd;
+	display:inline-block;
+	margin:0 .4em;
+	color:#555;
+	text-decoration: none;
+	border-radius: 4px;
+	box-shadow: 0px 0px 2px #c1aeae;
+	cursor: pointer;
+}
+.holder>a.jp-previous,
+.holder>a.jp-next{
+	width:4em;
+}
+.holder>a.jp-current{
+	border: 2px solid orangered;
+}

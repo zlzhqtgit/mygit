@@ -123,7 +123,7 @@
 					<div class="padding-side">
 						<h4 class="fontwei">共找到<b id="search_count">2</b>条结果</h4>
 					</div>
-				    <ul class="list-group search_result list_career" id="search_result">
+				    <ul class="list-group search_result list_career padding-side2" id="search_result">
 				        <li class="list-group-item width100">
 				        	<a class="width100" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_d.jsp">
 				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>
@@ -157,7 +157,7 @@
 								
 					        	</script>
 				    <!--分页-->
-				    <div class="col-xs-12 bg-white p-10 m-t-10 t-a-c" style="box-shadow: 0px 0px 0px #bdb8b8;">
+				    <div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
 						<div class="holder" style="text-align: center;"></div>
 						</div>
 				</div>
@@ -192,7 +192,7 @@
 							vocationList += '<li class="list-group-item width100">';
 							vocationList += '<a class="width100" href="javascript:;"  onclick="search_detail(this)" id="' + data[i].vocationId + '">';
 							vocationList += '<h4 class="fontwei">' + data[i].vocationName + '<span class="text-muted padding-side">' + data[i].industryName + '</span></h4>';
-							vocationList += '<div class="text-muted o_row_brif width100">' + data[i].vocationBrief + '</div></a>';
+							vocationList += '<div class="text-muted more_row_brif width100">' + data[i].vocationBrief + '</div></a>';
 							vocationList += '<div class="text-center like">';
 							vocationList += '<a class="" onclick="like(this)" href="javascript:">';
 							vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';

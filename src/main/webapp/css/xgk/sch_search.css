@@ -617,7 +617,11 @@ select{
 	width: 89%;
 }
 .major_relative .major_con a{
-	color: #3b8bec;
+	color:#fff;
+	font-weight: bold;
+}
+.major_relative .major_con a:hover{
+	color:yellow;
 }
 .rank_h span{
 	display: inline-block;

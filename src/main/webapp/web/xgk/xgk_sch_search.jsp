@@ -138,7 +138,7 @@
 				    
 				</div>
 				<p class="text-center margin_bot margin_top">
-					<a class="btn btn-primary fontwei begin_btn" href ="javascript:void(0)" style="opacity: 0.2" id="sch_query_select">开始查询</a>
+					<a class="btn btn-primary fontwei begin_btn disabled" href ="javascript:void(0)" id="sch_query_select">开始查询</a>
 				</p>
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
@@ -605,10 +605,10 @@
 				}
 				if(canQuery){
 					$("#sch_query_select").click(schoolSearch(2));
-					$("#sch_query_select").css("opacity","");
+					$("#sch_query_select").removeClass("disabled");
 				} else {
 					$("#sch_query_select").unbind("click");
-					$("#sch_query_select").css("opacity","0.2");
+					$("#sch_query_select").addClass("disabled")
 				}
 			})
 	     });
