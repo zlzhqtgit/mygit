@@ -298,10 +298,10 @@
 														if(lines.length > 0){
 															universities += "<tr><td>" + list[i].universRelationList[j].urYear + "</td><td>" + list[i].universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
 														}	
+													}else {
+														universities += "<tr><td>" + (list[i].universRelationList[j].urYear == null ? "-" : list[i].universRelationList[j].urYear) + "</td><td>" + (list[i].universRelationList[j].subjectType == null ? "-" : list[i].universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 													}													
-												} else {
-													universities += "<tr><td>" + (list[i].universRelationList[j].urYear == null ? "-" : list[i].universRelationList[j].urYear) + "</td><td>" + (list[i].universRelationList[j].subjectType == null ? "-" : list[i].universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
-												}												
+												} 												
 											}
 										}							
 	                                        	//[录取分表格   end]
