@@ -604,10 +604,12 @@
 					}
 				}
 				if(canQuery){
-					$("#sch_query_select").click(schoolSearch(2));
+					$("#sch_query_select").attr("onclick","schoolSearch(2)");
+					//.onclick(schoolSearch(2));
 					$("#sch_query_select").css("opacity","");
 				} else {
-					$("#sch_query_select").unbind("click");
+					$("#sch_query_select").removeAttr("onclick");
+					//.unbind("click");
 					$("#sch_query_select").css("opacity","0.2");
 				}
 			})
