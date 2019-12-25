@@ -1,6 +1,9 @@
 package cn.hqtzytb.service;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.UserFeature;
 
@@ -16,13 +19,15 @@ import cn.hqtzytb.entity.UserFeature;
 public interface IXgkSubjectService {
 
 
-    String showPotentialReport();
+    String showPotentialReport(HttpServletRequest request);
 
-    ResponseResult<Void> haveYouSubjectExploration();
+    ResponseResult<Void> haveYouSubjectExploration(HttpServletRequest request);
 
-    ResponseResult<Void> addPotentialAnalysis(String evaluationFraction);
+    ResponseResult<Void> addPotentialAnalysis(String evaluationFraction, HttpServletRequest request);
 
-	ResponseResult<Void> addScoreAnalysis(String evaluationFraction);
+	ResponseResult<Void> addScoreAnalysis(String evaluationFraction, HttpServletRequest request);
 
-	ResponseResult<UserFeature> getScoreAnalysis();
+	ResponseResult<UserFeature> getScoreAnalysis(HttpServletRequest request);
+
+	String showXgkIndex(String look, String test, HttpServletRequest request, HttpServletResponse response);
 }

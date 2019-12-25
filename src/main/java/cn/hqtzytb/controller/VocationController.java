@@ -63,7 +63,6 @@ public class VocationController {
 	@RequestMapping("/xgk_voc_other.do")
 	@ResponseBody
 	public ResponseResult<Map<String, Object>> getVocationOtherDetail(String vocationId, HttpServletRequest request) {
-		System.err.println("vocationId :" + vocationId);
 		return IVocationServer.getVocationOtherDetail(vocationId, request);
 	}
 }

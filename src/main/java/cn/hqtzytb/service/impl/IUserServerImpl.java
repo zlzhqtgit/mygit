@@ -14,8 +14,6 @@ import cn.hqtzytb.service.IUserServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import cn.hqtzytb.utils.Photo;
-import jdk.nashorn.internal.objects.annotations.Where;
-import lombok.experimental.var;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -175,17 +173,16 @@ public class IUserServerImpl implements IUserServer {
 	@Override
 	public ResponseResult<Void> handlephotoyzm(String phone, HttpServletRequest request) {
 		Session session = SecurityUtils.getSubject().getSession();
-		ResponseResult<Void> rr;		
-	    String code = Integer.toString(Photo.getNewcode());	  
-	    SendSmsResponse response;	       
+		ResponseResult<Void> rr;		     
 		try {
+			String code = Integer.toString(Photo.getNewcode());	  
 			User user = userMapper.queryUser(phone);
 			if(user != null){
 				 rr = new ResponseResult<Void>(ResponseResult.ERR, "该手机号已经存在，请重新输入");
 				 logger.info("用户手机：" + phone + " 模块名：注册模块 操作：注册发送短信验证码  状态：Failed! ");
 			}else{
 			    System.out.println(Constants.ERROR_HEAD_INFO +  "开始发送短信");
-				response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
+			    SendSmsResponse response = Photo.sendSms(phone,code, photoConfig.getAccessKeyId(), photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
 				System.out.println(Constants.ERROR_HEAD_INFO +  "短信发送完毕");
 				if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
 					session.setAttribute("code",code);

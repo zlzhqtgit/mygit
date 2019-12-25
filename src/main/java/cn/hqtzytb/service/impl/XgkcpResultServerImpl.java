@@ -1,7 +1,6 @@
 package cn.hqtzytb.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +9,6 @@ import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -97,13 +95,11 @@ public class XgkcpResultServerImpl implements IXgkcpResultServer {
 					session.setAttribute("hldreport", reportResult);
 					session.setAttribute("report", "report_hld");
 				}
-				
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：查看个人潜能报告   错误信息: " + e);
 			return "web/xgk/xgk_error_404";
 		}
-		
 		return "web/xgk/xgk_report";
 	}
 
