@@ -27,7 +27,7 @@
 		<c:import url="header.jsp"></c:import>	
  
 		<main class="sch_info margin_bot">
-			<p class="text-right container"><a class="btn btn-primary" href="">< 返回</a></p>
+			<p class="text-right container"><a class="btn btn-primary" href="javascript:history.go(-1)">< 返回</a></p>
 			<section class="" style="background: url(${pageContext.request.contextPath}/img/xgk/bannerBg.png) no-repeat;background-size: inherit;background-position: 0 -238px;padding-bottom: 2em;">
 				<div class="container">
 					<div class="row sch_info_head">
@@ -37,7 +37,7 @@
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
 							<h3 class="text-white margin_top1">${school.universitiesName }</h3>10001
 							
-							<p class="margin_top" id="universities_attributes">
+							<p class="margin_top sch_label" id="universities_attributes">
 								<span class="btn btn-default">本科</span>
 								<span class="btn btn-default">双一流</span>
 								<span class="btn btn-default">211</span>
@@ -632,148 +632,27 @@
 		    				</ul>
 		    				<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址',$('#positonBox'),1)">查看地图</a></p>
 		    			</div>
-		    			
-		    			<div class="" id="positonBox" style="display:none;">
-							<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
-							<!--百度地图容器-->
-							<div style="width:796px;height:456px;border:#ccc solid 1px;" id="dituContent"></div>
-							<script type="text/javascript">
-							//创建和初始化地图函数：
-							function initMap() {
-								createMap(); //创建地图
-								setMapEvent(); //设置地图事件
-								addMapControl(); //向地图添加控件
-								addMarker(); //向地图中添加marker
-							}
-					
-							//创建地图函数：
-							function createMap() {
-								var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
-								var myGeo = new BMap.Geocoder(); 
-								// 将地址解析结果显示在地图上，并调整地图视野  
-								myGeo.getPoint('${school.address}', function(point){
-							          if (point) {
-							              map.centerAndZoom(point, 14);
-							              map.addOverlay(new BMap.Marker(point));
-							          }      
-							      }, '${school.province}');
-								//var point = new BMap.Point(106.649765, 26.617046); //定义一个中心点坐标
-								//map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
-								window.map = map; //将map变量存储在全局
-							}
-					
-							//地图事件设置函数：
-							function setMapEvent() {
-								map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
-								map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
-								map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
-								map.enableKeyboard(); //启用键盘上下左右键移动地图
-							}
-					
-							//地图控件添加函数：
-							function addMapControl() {
-								//向地图中添加缩放控件
-								var ctrl_nav = new BMap.NavigationControl({
-									anchor: BMAP_ANCHOR_TOP_LEFT,
-									type: BMAP_NAVIGATION_CONTROL_LARGE
-								});
-								map.addControl(ctrl_nav);
-								//向地图中添加缩略图控件
-								var ctrl_ove = new BMap.OverviewMapControl({
-									anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-									isOpen: 1
-								});
-								map.addControl(ctrl_ove);
-								//向地图中添加比例尺控件
-								var ctrl_sca = new BMap.ScaleControl({
-									anchor: BMAP_ANCHOR_BOTTOM_LEFT
-								});
-								map.addControl(ctrl_sca);
-							}
-					
-							//标注点数组
-							var markerArr = [{
-								title: "贵州好前途教育科技有限公司",
-								content: "贵阳市观山湖区世纪金源国际财富中心B栋10楼",
-								point: "106.649734|26.617006",
-								isOpen: 0,
-								icon: {
-									w: 21,
-									h: 21,
-									l: 0,
-									t: 0,
-									x: 6,
-									lb: 5
-								}
-							}];
-							//创建marker
-							function addMarker() {
-								for(var i = 0; i < markerArr.length; i++) {
-									var json = markerArr[i];
-									var p0 = json.point.split("|")[0];
-									var p1 = json.point.split("|")[1];
-									var point = new BMap.Point(p0, p1);
-									var iconImg = createIcon(json.icon);
-									var marker = new BMap.Marker(point, {
-										icon: iconImg
-									});
-									var iw = createInfoWindow(i);
-									var label = new BMap.Label(json.title, {
-										"offset": new BMap.Size(json.icon.lb - json.icon.x + 10, -20)
-									});
-									marker.setLabel(label);
-									map.addOverlay(marker);
-									label.setStyle({
-										borderColor: "#808080",
-										color: "#333",
-										cursor: "pointer"
-									});
-					
-									(function() {
-										var index = i;
-										var _iw = createInfoWindow(i);
-										var _marker = marker;
-										_marker.addEventListener("click", function() {
-											this.openInfoWindow(_iw);
-										});
-										_iw.addEventListener("open", function() {
-											_marker.getLabel().hide();
-										})
-										_iw.addEventListener("close", function() {
-											_marker.getLabel().show();
-										})
-										label.addEventListener("click", function() {
-											_marker.openInfoWindow(_iw);
-										})
-										if(!!json.isOpen) {
-											label.hide();
-											_marker.openInfoWindow(_iw);
-										}
-									})()
-								}
-							}
-							//创建InfoWindow
-							function createInfoWindow(i) {
-								var json = markerArr[i];
-								var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>" + json.content + "</div>");
-								return iw;
-							}
-							//创建一个Icon
-							function createIcon(json) {
-								var icon = new BMap.Icon(" http://api.map.baidu.com/lbsapi/creatmap/images/us_mk_icon.png", new BMap.Size(json.w, json.h), {
-									imageOffset: new BMap.Size(-json.l, -json.t),
-									infoWindowOffset: new BMap.Size(json.lb + 5, 1),
-									offset: new BMap.Size(json.x, json.h)
-								})
-								return icon;
-							}
-					
-							initMap(); //创建和初始化地图
-						</script>
-					</div>
 		    		</div>
 			    </div>
 			    <script type="text/javascript">
+				    $(function() {
+						var teachingResearchList = JSON.parse('${teaching_research}');
+						//教研教学点水球
+						for(var i=1; i<teachingResearchList.length+1; i++){
+							if(i == 1){
+								waterball('water' + i,teachingResearchList[i-1][1],'#ffad05');
+							}
+							if(i == 2){
+								waterball('water' + i,teachingResearchList[i-1][1],'#47cf66');
+							}
+							if(i == 3){
+								waterball('water' + i,teachingResearchList[i-1][1],'#3b8bec');
+							}
+							if(i == 4){
+								waterball('water' + i,teachingResearchList[i-1][1],'#fe5656');
+							}
+						}
+					});
 					//点赞
 				    function like(obj) {
 				    	var y;
@@ -828,167 +707,148 @@
 			    		})
 			    	})
 			    </script>
-				
 			</section>
 		</main>
 		<div class="" id="positonBox" style="display:none;">
-   			<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+			<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 			<!--百度地图容器-->
 			<div style="width:796px;height:456px;border:#ccc solid 1px;" id="dituContent"></div>
-				<script type="text/javascript">
-					//创建和初始化地图函数：
-					function initMap() {
-						createMap(); //创建地图
-						setMapEvent(); //设置地图事件
-						addMapControl(); //向地图添加控件
-						addMarker(); //向地图中添加marker
-					}
-			
-					//创建地图函数：
-					function createMap() {
-						var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
-						// 创建地址解析器实例     
-						var myGeo = new BMap.Geocoder();      
-						// 将地址解析结果显示在地图上，并调整地图视野    
-						myGeo.getPoint("贵州师范大学", function(point){
-						          if (point) {      
-						              map.centerAndZoom(point, 14);      
-						              map.addOverlay(new BMap.Marker(point));      
-						          }      
-						      }, "贵州省");
-						//var point = new BMap.Point(106.649765, 26.617046); //定义一个中心点坐标
-						//map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
-						window.map = map; //将map变量存储在全局
-					}
-			
-					//地图事件设置函数：
-					function setMapEvent() {
-						map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
-						map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
-						map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
-						map.enableKeyboard(); //启用键盘上下左右键移动地图
-					}
-			
-					//地图控件添加函数：
-					function addMapControl() {
-						//向地图中添加缩放控件
-						var ctrl_nav = new BMap.NavigationControl({
-							anchor: BMAP_ANCHOR_TOP_LEFT,
-							type: BMAP_NAVIGATION_CONTROL_LARGE
+			<script type="text/javascript">
+			//创建和初始化地图函数：
+			function initMap() {
+				createMap(); //创建地图
+				setMapEvent(); //设置地图事件
+				addMapControl(); //向地图添加控件
+				addMarker(); //向地图中添加marker
+			}
+	
+			//创建地图函数：
+			function createMap() {
+				var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
+				// 创建地址解析器实例     
+				var myGeo = new BMap.Geocoder();      
+				// 将地址解析结果显示在地图上，并调整地图视野    
+				myGeo.getPoint("${school.address}", function(point){
+//							console.log(Position)
+				          if (point) {      
+				              map.centerAndZoom(point, 16);
+				              map.addOverlay(new BMap.Marker(point));      
+				          }      
+				      }, "${school.province}");
+				//var point = new BMap.Point(106.649765, 26.617046); //定义一个中心点坐标
+				//map.centerAndZoom(point, 18); //设定地图的中心点和坐标并将地图显示在地图容器中
+				window.map = map; //将map变量存储在全局
+			}
+	
+			//地图事件设置函数：
+			function setMapEvent() {
+				map.enableDragging(); //启用地图拖拽事件，默认启用(可不写)
+				map.enableScrollWheelZoom(); //启用地图滚轮放大缩小
+				map.enableDoubleClickZoom(); //启用鼠标双击放大，默认启用(可不写)
+				map.enableKeyboard(); //启用键盘上下左右键移动地图
+			}
+	
+			//地图控件添加函数：
+			function addMapControl() {
+				//向地图中添加缩放控件
+				var ctrl_nav = new BMap.NavigationControl({
+					anchor: BMAP_ANCHOR_TOP_LEFT,
+					type: BMAP_NAVIGATION_CONTROL_LARGE
+				});
+				map.addControl(ctrl_nav);
+				//向地图中添加缩略图控件
+				var ctrl_ove = new BMap.OverviewMapControl({
+					anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+					isOpen: 1
+				});
+				map.addControl(ctrl_ove);
+				//向地图中添加比例尺控件
+				var ctrl_sca = new BMap.ScaleControl({
+					anchor: BMAP_ANCHOR_BOTTOM_LEFT
+				});
+				map.addControl(ctrl_sca);
+			}
+	
+			//标注点数组
+			var markerArr = [{
+				title: "贵州好前途教育科技有限公司",
+				content: "我的备注",
+				point: "106.649734|26.617006",
+				isOpen: 0,
+				icon: {
+					w: 21,
+					h: 21,
+					l: 0,
+					t: 0,
+					x: 6,
+					lb: 5
+				}
+			}];
+			//创建marker
+			function addMarker() {
+				for(var i = 0; i < markerArr.length; i++) {
+					var json = markerArr[i];
+					var p0 = json.point.split("|")[0];
+					var p1 = json.point.split("|")[1];
+					var point = new BMap.Point(p0, p1);
+					var iconImg = createIcon(json.icon);
+					var marker = new BMap.Marker(point, {
+						icon: iconImg
+					});
+					var iw = createInfoWindow(i);
+					var label = new BMap.Label(json.title, {
+						"offset": new BMap.Size(json.icon.lb - json.icon.x + 10, -20)
+					});
+					marker.setLabel(label);
+					map.addOverlay(marker);
+					label.setStyle({
+						borderColor: "#808080",
+						color: "#333",
+						cursor: "pointer"
+					});
+	
+					(function() {
+						var index = i;
+						var _iw = createInfoWindow(i);
+						var _marker = marker;
+						_marker.addEventListener("click", function() {
+							this.openInfoWindow(_iw);
 						});
-						map.addControl(ctrl_nav);
-						//向地图中添加缩略图控件
-						var ctrl_ove = new BMap.OverviewMapControl({
-							anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
-							isOpen: 1
-						});
-						map.addControl(ctrl_ove);
-						//向地图中添加比例尺控件
-						var ctrl_sca = new BMap.ScaleControl({
-							anchor: BMAP_ANCHOR_BOTTOM_LEFT
-						});
-						map.addControl(ctrl_sca);
-					}
-			
-					//标注点数组
-					var markerArr = [{
-						title: "贵州好前途教育科技有限公司",
-						content: "我的备注",
-						point: "106.649734|26.617006",
-						isOpen: 0,
-						icon: {
-							w: 21,
-							h: 21,
-							l: 0,
-							t: 0,
-							x: 6,
-							lb: 5
-						}
-					}];
-					//创建marker
-					function addMarker() {
-						for(var i = 0; i < markerArr.length; i++) {
-							var json = markerArr[i];
-							var p0 = json.point.split("|")[0];
-							var p1 = json.point.split("|")[1];
-							var point = new BMap.Point(p0, p1);
-							var iconImg = createIcon(json.icon);
-							var marker = new BMap.Marker(point, {
-								icon: iconImg
-							});
-							var iw = createInfoWindow(i);
-							var label = new BMap.Label(json.title, {
-								"offset": new BMap.Size(json.icon.lb - json.icon.x + 10, -20)
-							});
-							marker.setLabel(label);
-							map.addOverlay(marker);
-							label.setStyle({
-								borderColor: "#808080",
-								color: "#333",
-								cursor: "pointer"
-							});
-			
-							(function() {
-								var index = i;
-								var _iw = createInfoWindow(i);
-								var _marker = marker;
-								_marker.addEventListener("click", function() {
-									this.openInfoWindow(_iw);
-								});
-								_iw.addEventListener("open", function() {
-									_marker.getLabel().hide();
-								})
-								_iw.addEventListener("close", function() {
-									_marker.getLabel().show();
-								})
-								label.addEventListener("click", function() {
-									_marker.openInfoWindow(_iw);
-								})
-								if(!!json.isOpen) {
-									label.hide();
-									_marker.openInfoWindow(_iw);
-								}
-							})()
-						}
-					}
-					//创建InfoWindow
-					function createInfoWindow(i) {
-						var json = markerArr[i];
-						var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>" + json.content + "</div>");
-						return iw;
-					}
-					//创建一个Icon
-					function createIcon(json) {
-						var icon = new BMap.Icon("http://api.map.baidu.com/lbsapi/creatmap/images/us_mk_icon.png", new BMap.Size(json.w, json.h), {
-							imageOffset: new BMap.Size(-json.l, -json.t),
-							infoWindowOffset: new BMap.Size(json.lb + 5, 1),
-							offset: new BMap.Size(json.x, json.h)
+						_iw.addEventListener("open", function() {
+							_marker.getLabel().hide();
 						})
-						return icon;
-					}
-			
-					initMap(); //创建和初始化地图
-				</script>
-	<script type="text/javascript">
-		$(function() {
-			var teachingResearchList = JSON.parse('${teaching_research}');
-			//教研教学点水球
-			for(var i=1; i<teachingResearchList.length+1; i++){
-				if(i == 1){
-					waterball('water' + i,teachingResearchList[i-1][1],'#ffad05');
-				}
-				if(i == 2){
-					waterball('water' + i,teachingResearchList[i-1][1],'#47cf66');
-				}
-				if(i == 3){
-					waterball('water' + i,teachingResearchList[i-1][1],'#3b8bec');
-				}
-				if(i == 4){
-					waterball('water' + i,teachingResearchList[i-1][1],'#fe5656');
+						_iw.addEventListener("close", function() {
+							_marker.getLabel().show();
+						})
+						label.addEventListener("click", function() {
+							_marker.openInfoWindow(_iw);
+						})
+						if(!!json.isOpen) {
+							label.hide();
+							_marker.openInfoWindow(_iw);
+						}
+					})()
 				}
 			}
-		});
-	</script>
+			//创建InfoWindow
+			function createInfoWindow(i) {
+				var json = markerArr[i];
+				var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>" + json.content + "</div>");
+				return iw;
+			}
+			//创建一个Icon
+			function createIcon(json) {
+				var icon = new BMap.Icon("http://api.map.baidu.com/lbsapi/creatmap/images/us_mk_icon.png", new BMap.Size(json.w, json.h), {
+					imageOffset: new BMap.Size(-json.l, -json.t),
+					infoWindowOffset: new BMap.Size(json.lb + 5, 1),
+					offset: new BMap.Size(json.x, json.h)
+				})
+				return icon;
+			}
+	
+			initMap(); //创建和初始化地图
+		</script>
+	</div>
 			</div>
 		<!-- 右侧边栏-->
 		<c:import url="../public/side_right.jsp"></c:import>

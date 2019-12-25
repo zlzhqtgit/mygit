@@ -136,8 +136,8 @@ dt{
 .sch_slice{
 	width:42%
 }
-.sch_slice>tr>th{
-	boder:1px solid #fff;
+.sch_slice tr>th{
+	position:static;
 }
 .operate_box{
 	width:12%
@@ -264,7 +264,11 @@ footer{
 	margin-left: .4em;
 }
 .sch_slice table,.sch_slice th,.sch_slice td{border: 1px solid #2480ed;font-size: 13px;text-align: center;}
-.sch_slice th{background-color: #75b5ff;color: white;}
+.sch_slice th{
+	background-color: #75b5ff;
+	color: white;
+	border:1px solid #3b8bec;
+}
 .tab_head{
 	border-bottom: 2px solid #2480ed;
 }
@@ -272,6 +276,9 @@ footer{
 	float: left;
 	cursor: pointer;
 	padding: .4em 1em;
+}
+.sch_label span{
+	margin-left:.6em;
 }
 .tab_head li.cur{
 	background-color: #3b8bec;
@@ -300,7 +307,6 @@ footer{
 .tab2 table tr td{
 	text-align: center;
 }
-
 .major_info_head{
 	background-color: #f5f5f5;
 	padding: .5em 1em;
@@ -483,9 +489,10 @@ footer{
 	/*width: 14%;*/
 	width: 10em;
 }
-.like a span{
+.like a{
 	display: inline-block;
-	width: 4em;
+	width: 3em;
+	border-radius:50%;
 	text-align: left;
 }
 .like a img{
@@ -685,7 +692,4 @@ select{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-}
-.sch_slice th{
-	border:1px solid blue;
 }
