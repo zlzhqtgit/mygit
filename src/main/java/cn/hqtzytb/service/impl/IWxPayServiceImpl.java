@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
 import com.github.wxpay.sdk.WXPayUtil;
 import com.google.zxing.BarcodeFormat;
@@ -36,6 +37,7 @@ import cn.hqtzytb.utils.HttpClientUtils;
  * @Copyright:好前途教育
  * @Version V1.0
  */
+@Service
 public class IWxPayServiceImpl implements IWxPayService{
 	private  static final Logger logger = LogManager.getLogger(IWxPayServiceImpl.class.getName());
 	@Autowired
