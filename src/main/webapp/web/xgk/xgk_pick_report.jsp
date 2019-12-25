@@ -89,7 +89,11 @@
 						</h3>
 						<div class="">
 							<div class="">
-								<p class="padding-side2">根据你所在省份的高考政策以及高等院校在您所在的省份的招生考试及您所选择的理想专业，我们依照专业的招生考试要求，为您列举如下几种报考本专业的学科组合方式：</p>
+								<p class="padding-side2">根据<span>【${choose_year}】年</span>的高考政策以及高等院校在<span>【${choose_province}】</span>的招生考试及您所选择的理想专业，我们依照<span>【${choose_enrollment_major.specialtyName}】</span>专业的招生考试要求，为您列举如下几种报考本专业的学科组合方式：
+									<c:if test="${intersection == 0}">
+										[${choose_province}部分院校可选以下学科组合方式]
+									</c:if>
+								</p>
 								<ul class="combile clearfix" id="policy_combination">
 									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
 									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
@@ -273,6 +277,7 @@
 					function bar_Yaxis(id,title) {
 						var myChart_circle = echarts.init(document.getElementById(id));
 						var cognize_analyze = JSON.parse('${cognize_analyze}');
+						console.log(cognize_analyze);
 						option = {
 						    title: {
 						        text: title,
@@ -352,7 +357,7 @@
 						        markPoint:{
 						        	silent :true,
 						        },
-						        data: [cognize_analyze[0].value/10, cognize_analyze[1].value/10, cognize_analyze[2].value/10, cognize_analyze[3].value/10, cognize_analyze[4].value/10, cognize_analyze[5].value/10]
+						        data: [(cognize_analyze[0].value*100).toFixed(2), (cognize_analyze[1].value*100).toFixed(2), (cognize_analyze[2].value*100).toFixed(2), (cognize_analyze[3].value*100).toFixed(2), (cognize_analyze[4].value*100).toFixed(2), (cognize_analyze[5].value*100).toFixed(2)]
 						    }]
 						};
 						myChart_circle.setOption(option);

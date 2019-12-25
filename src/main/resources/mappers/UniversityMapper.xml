@@ -435,14 +435,49 @@
 			ua_id, ua.ua_year, ua.admissions_brochure, ua.admissions_regulations,
 			ua.brochure_browse_count,ua.regulations_browse_count, ua.pubdate
 		FROM 
-			university u
-		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code
+			university u 	
+		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code 
 		LEFT JOIN university_admission ua ON ua.universities_code = u.universities_code
 		LEFT JOIN enrollment_requirements er ON er.universities_code = u.universities_code
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
 	</select>
+	
+	<select id="selectUniversityList2" resultMap="BaseResultMap">
+		SELECT
+			u.*,
+			ur.*
+		FROM
+			(SELECT
+				u.id, u.universities_code, u.universities_name, u.province, u.city,
+				u.established_time, u.universities_nature,
+				u.belong_to, u.address, u.map_coordinates, u.universities_introduction, 
+				u.universities_attributes, u.universities_type, u.universities_logo,
+				u.universities_image, u.universities_life, u.room_and_board, u.scholarships,
+				u.teaching_research, u.male_female_ratio, u.teachers_resources,
+				u.core_specialty, u.core_subject, u.core_laboratories_and_research_centers,
+				u.admission_lot, u.admission_probability,
+				u.universities_website, u.universities_phone, u.alumni_association_ranking,
+				u.martial_book_association_ranking, u.soft_science_ranking,
+				u.quacquarelli_symonds_ranking,
+				u.us_news_ranking, u.admission_average_ranking, u.total_ranking
+			 FROM	
+			 	university u
+			<if test="where != null">where ${where}</if>
+			<if test="offset != null">limit ${offset},${countPerPage}</if>
+			 ) AS  u
+		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code AND (ur.ur_year = YEAR(CURDATE()) OR (ur.ur_year = YEAR(CURDATE())-1))
+		<if test="orderBy != null">order by ${orderBy}</if>	
+	</select>
+	<select id="selectUniversityListCount2" resultType="java.lang.Integer">
+		SELECT
+			count(u.id)
+		FROM 
+			university u
+		<if test="where != null">where ${where}</if>	
+	</select>
+
 
 
 	<insert id="insertUniversityRelation" parameterType="cn.hqtzytb.entity.University"

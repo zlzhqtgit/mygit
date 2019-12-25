@@ -2,9 +2,7 @@ package cn.hqtzytb.service;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Vocation;
 

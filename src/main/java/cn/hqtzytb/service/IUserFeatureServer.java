@@ -1,12 +1,10 @@
 package cn.hqtzytb.service;
 
 import java.util.List;
-
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.UserFeature;
 
-public interface IUserFeatureServer
-{
+public interface IUserFeatureServer{
 	UserFeature insert(UserFeature userFeature);
 	Integer update(UserFeature userFeature);
 	List<UserFeature> getUserFeatureAll();

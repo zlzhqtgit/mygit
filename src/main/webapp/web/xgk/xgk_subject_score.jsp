@@ -322,13 +322,15 @@
 								sectshow(1);
 							}
 							var test = '${test}';
-							if(test == 1){
-								score = JSON.parse('${CJFX.evaluationFraction}');
-								sectshow(1);
-							}
-							if(test == 0){
-								layer.msg('您未做过学科探索之成绩分析，请先进行成绩分析。在进入潜能测评！', {icon: 5,time:2000});
-								sectshow(0);
+							if (test != null && test != ""){
+								if(test == 1){
+									score = JSON.parse('${CJFX.evaluationFraction}');
+									sectshow(1);
+								}
+								if(test == 0){
+									layer.msg('您未做过学科探索之成绩分析，请先进行成绩分析。在进入潜能测评！', {icon: 5,time:2000});
+									sectshow(0);
+								}
 							}
 						})
 						// 判断用户是否已做过学科探索

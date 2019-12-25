@@ -23,6 +23,12 @@ public interface UniversityMapper {
                                       @Param("orderBy")String orderBy,
                                       @Param("offset")Integer offset,
                                       @Param("countPerPage")Integer countPerPage);
+    
+    List<University> selectUniversityList2(@Param("where")String where,
+            @Param("orderBy")String orderBy,
+            @Param("offset")Integer offset,
+            @Param("countPerPage")Integer countPerPage);
+	Integer selectUniversityListCount2(@Param("where") String where);
 
 
     Integer insertUniversityRelation(UniversityRelation university);
@@ -46,4 +52,5 @@ public interface UniversityMapper {
                                       @Param("orderBy")String orderBy,
                                       @Param("offset")Integer offset,
                                       @Param("countPerPage")Integer countPerPage);
+
 }

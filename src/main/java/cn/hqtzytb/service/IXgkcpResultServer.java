@@ -1,9 +1,7 @@
 package cn.hqtzytb.service;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
-
 import cn.hqtzytb.entity.XgkcpResult;
 
 /**

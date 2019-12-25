@@ -2,7 +2,6 @@ package cn.hqtzytb.intercepter;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 

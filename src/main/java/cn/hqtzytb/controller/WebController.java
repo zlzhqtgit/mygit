@@ -48,8 +48,7 @@ public class WebController {
 	 */
 	@RequestMapping(value = "/hqt_img.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handlexyghReg(HttpSession session,HttpServletRequest request,@RequestParam(value="inputImage",required=false)MultipartFile file)
-	{
+	public ResponseResult<Void> handlexyghReg(HttpSession session,HttpServletRequest request,@RequestParam(value="inputImage",required=false)MultipartFile file){
 		ResponseResult<Void> rr;		
         try{        	
         	String classpath = this.getClass().getResource("/").getPath(); 				
@@ -70,6 +69,7 @@ public class WebController {
 		}
 		return rr;
 	}
+	
 	/**
 	* @Title: showXgkIndex
 	* @Description: (微信支付测试页面)
@@ -82,8 +82,9 @@ public class WebController {
 	 */
 	@RequestMapping("/weixzf.do")	
 	public String showXgkIndex(HttpSession session,HttpServletResponse response,HttpServletRequest request){			
-			return "web/public/weixzf";						
+		return "web/public/weixzf";						
 	}
+	
 	/**
 	* @Title: getUUID
 	* @Description: ( 随机生成序列号 )

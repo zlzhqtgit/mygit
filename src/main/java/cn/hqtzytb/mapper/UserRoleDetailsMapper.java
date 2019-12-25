@@ -6,8 +6,7 @@ import cn.hqtzytb.entity.UserRoleDetails;
 
 
 
-public interface UserRoleDetailsMapper
-{
+public interface UserRoleDetailsMapper{
 	Integer insert(UserRoleDetails userRoleDetails);
 	Integer update(UserRoleDetails userRoleDetails);
 	Integer delete(UserRoleDetails userRoleDetails);

@@ -2,14 +2,11 @@ package cn.hqtzytb.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Vocation;
 import cn.hqtzytb.service.IVocationServer;
@@ -63,7 +60,6 @@ public class VocationController {
 	@RequestMapping("/xgk_voc_other.do")
 	@ResponseBody
 	public ResponseResult<Map<String, Object>> getVocationOtherDetail(String vocationId, HttpServletRequest request) {
-		System.err.println("vocationId :" + vocationId);
 		return IVocationServer.getVocationOtherDetail(vocationId, request);
 	}
 }

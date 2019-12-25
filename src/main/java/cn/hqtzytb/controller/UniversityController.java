@@ -7,14 +7,10 @@ import cn.hqtzytb.service.IUniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -36,32 +32,6 @@ public class UniversityController {
     private ISpecialtyServer iSpecialtyServer;
 
     /**
-     * 学校上传图片
-     * @param universitiesCode
-     * @param files
-     * @param imageType 1-校园生活 2-学校主图
-     * @return
-     */
-    @PostMapping("/xgk_upload_image.do")
-    @ResponseBody
-    public ResponseResult<Void> universityUploadImage(@RequestParam(value="universitiesCode") String universitiesCode,
-                                                        @RequestParam(value="files") MultipartFile[] files,
-                                                        @RequestParam(value="imageType") Integer imageType){
-        return  iUniversityService.universityUploadImage(universitiesCode,files,imageType);
-    }
-
-    /**
-     * 学校删除图片
-     * @param url
-     * @return
-     */
-    @RequestMapping("/xgk_delete_image.do")
-    @ResponseBody
-    public ResponseResult<Object> universityDeleteImage(@RequestParam(value="url") String url){
-        return  iUniversityService.universityDeleteImage(url);
-    }
-
-    /**
      * 显示院校查询页
      * @param session
      * @param request
@@ -69,8 +39,9 @@ public class UniversityController {
      * @return
      */
     @RequestMapping("/xgk_school_search.do")
-    public String showUniversitySearch(HttpSession session, HttpServletRequest request, HttpServletResponse response){
-        return "web/xgk/xgk_sch_search";
+    public String showUniversitySearch(HttpServletRequest request, HttpServletResponse response){
+        return iUniversityService.showUniversitySearch(request,response);
+
     }
 
 
@@ -81,8 +52,8 @@ public class UniversityController {
      */
     @RequestMapping("/xgk_school_query.do")
     @ResponseBody
-    public ResponseResult<List<University>> getUniversityList(String where, HttpServletRequest request){
-        return iUniversityService.getUniversityList(where, request);
+    public ResponseResult<Map<String, Object>> getUniversityList(String where, Integer offset, Integer countPerPage, HttpServletRequest request){
+        return iUniversityService.getUniversityList(where, offset,countPerPage, request);
     }
 
 

@@ -1,7 +1,6 @@
 package cn.hqtzytb.service.impl;
 
 import java.util.List;
-
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.service.IUserFeatureServer;
 import cn.hqtzytb.utils.Constants;

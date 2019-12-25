@@ -2,10 +2,14 @@ package cn.hqtzytb.utils;
 
 
 
+
 /**
- * 设置一个成功静态常量
- * @author zhoulingzhang
- *
+ * @ClassName: Constants
+ * @Description: 静态常量工具类
+ * @Author: WuPeiLong
+ * @Date: 2019年12月04日
+ * @Copyright:好前途教育
+ * @Version V1.0
  */
 public class Constants{
 
