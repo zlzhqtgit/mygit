@@ -3,14 +3,11 @@ package cn.hqtzytb.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import cn.hqtzytb.service.IVocationServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import net.sf.json.JSONArray;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,9 +15,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSON;
-
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Vocation;
 import cn.hqtzytb.mapper.VocationMapper;

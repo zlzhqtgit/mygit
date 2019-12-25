@@ -5,8 +5,7 @@ import java.util.List;
 import cn.hqtzytb.entity.UserRoleDetails;
 
 
-public interface IUserRoleDetailsServer
-{
+public interface IUserRoleDetailsServer{
 	UserRoleDetails insert(UserRoleDetails userRoleDetails);
 	Integer update(UserRoleDetails userRoleDetails);
 	Integer delete(UserRoleDetails userRoleDetails);

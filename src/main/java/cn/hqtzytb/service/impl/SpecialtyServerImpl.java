@@ -9,7 +9,6 @@ import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.commons.lang.StringUtils;
-import org.apache.coyote.Request;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

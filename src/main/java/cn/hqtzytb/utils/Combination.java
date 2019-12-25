@@ -1,8 +1,9 @@
 package cn.hqtzytb.utils;
 
 
+
 /**
- * @ClassName: DisciplineCombination
+ * @ClassName: Combination
  * @Description: 学科组合
  * @Author: WuPeiLong
  * @Date: 2019年12月04日

@@ -1,4 +1,4 @@
-package cn.hqtzytb.test.mysqltest;
+package cn.hqtzytb.test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @ClassName: Demo
+ * @Description: 数据库连接Test
+ * @Author: WuPeiLong
+ * @Date: 2019年12月12日
+ * @Copyright:好前途教育
+ * @Version V1.0
+ */
 public class Demo {
 	static String sql = null;  
     static DBHelper db1 = null;  

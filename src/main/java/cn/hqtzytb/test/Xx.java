@@ -1,7 +1,15 @@
-package cn.hqtzytb.test.mysqltest;
+package cn.hqtzytb.test;
 
 import java.io.Serializable;
 
+/**
+ * @ClassName: Xx
+ * @Description: 数据库连接Test
+ * @Author: WuPeiLong
+ * @Date: 2019年12月12日
+ * @Copyright:好前途教育
+ * @Version V1.0
+ */
 public class Xx implements Serializable{
 	/**
 	 * serialVersionUID
