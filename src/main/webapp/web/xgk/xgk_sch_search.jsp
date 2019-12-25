@@ -281,6 +281,8 @@
 					var rowId=$(obj).parents('li').attr('id');
 					//var rowName=$(obj).parents('li').attr('pname');
 					var imgUrl=$(obj).parents('li').find(".sh_logo img").attr("src");
+					console.log($(obj).parents('li').find(".sch_slice").html());
+					console.log(imgUrl);
 					if(flag==false){
 						$('.contrast').show();
 					}
@@ -374,7 +376,6 @@
 
  				//判断查询按钮是否可以点击查询
  				$(document).ready(function(){
- 					console.log("111");
  					$("#search-ui li dl dd a").attr("onclick","trem()");
  			     });
  				function trem(){
@@ -424,7 +425,6 @@
 							}
 						}
 					}
-					console.log(where);
 					$.ajax({
 						url: "${pageContext.request.contextPath}/school/xgk_school_query.do",
 						data: where,
@@ -559,7 +559,6 @@
 			}
 				//layui分页查询数据
 				function schoolSearch2(where2){
-					console.log(where2);
 					$.ajax({
 						url: "${pageContext.request.contextPath}/school/xgk_school_query.do",
 						data: where2,
