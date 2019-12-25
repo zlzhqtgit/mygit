@@ -1,5 +1,7 @@
 package cn.hqtzytb.service.impl;
 
+
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +19,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -54,6 +57,7 @@ import cn.hqtzytb.utils.GetCommonUser;
  * @Copyright:好前途教育
  * @Version V1.0
  */
+@Service
 public class IXgkxkServiceImpl implements IXgkxkService {
 	private  static final  Logger logger = LogManager.getLogger(XgkxkController.class.getName());
 	@Autowired
@@ -165,33 +169,17 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	}
 
 	@Override
-	public String getGenerateReport(String province, String specialtyId, HttpServletRequest request) {
+	public String getGenerateReport(String province, String specialtyId, HttpServletRequest request) throws UnsupportedEncodingException {
 		try {
 			Subject subject = SecurityUtils.getSubject();
-			Session session = subject.getSession();
 			province = new String(province.toString().getBytes("ISO8859-1"), "UTF-8");
 			specialtyId = new String(specialtyId.toString().getBytes("ISO8859-1"), "UTF-8");
 			if (subject.isAuthenticated()) {
-				session.setAttribute("choose_province", province);
-				session.setAttribute("choose_specialtyId", specialtyId);
+				Session session = subject.getSession();
+				session.setAttribute("choose_province", province);//选择省份
+				session.setAttribute("choose_specialtyId", specialtyId);//选择专业
+				session.setAttribute("choose_enrollment_major", specialtyMapper.select(" b.specialty_id = '" + specialtyId + "'", null, null, null).get(0));//选择专业名字
 				Integer uid = (Integer)session.getAttribute("uid");
-				List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid  + "'", null, null, null);
-				if (reportList.isEmpty()) {
-					userResultReportMapper.insert(new UserResultReport()
-							.setUid((Integer)session.getAttribute("uid"))
-							.setStartTime(new Date())
-							.setProvince(province)
-							.setSpecialtyId(specialtyId)
-							.setStatus("0"));//待完成
-				} else {
-					userResultReportMapper.update(reportList.get(0)
-							.setSpecialtyId(specialtyId)
-							.setProvince(province)
-							.setEndTime(null)
-							.setStatus("0")
-							.setStartTime(new Date())
-							.setResult(""));
-				}
 				List<UserFeature> userFeatures = userFeatureMapper.select(" uid = '" + (Integer)session.getAttribute("uid") + "' ", null, null, null);
 				String score_analyze = null;//成绩分析
 				String potential_analyze = null;//潜能分析
@@ -214,68 +202,101 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 				
 				//成绩分析
 				Map<String,Double> score_map = new HashMap<>();//分数map
-				score_map.put(Combination.物化生.one,0d);//物理
-				score_map.put(Combination.物化生.two,0d);//化学
-				score_map.put(Combination.物化生.three,0d);//生物
-				score_map.put(Combination.政历地.one,0d);//政治
-				score_map.put(Combination.政历地.two,0d);//历史
-				score_map.put(Combination.政历地.three,0d);//地理
-				List<List<String>>  stringList = GetCommonUser.getJson(score_analyze, request);
-				String sub = "";
-				Double score = 0d;
-				Double total_score = 0d;
+				List<List<String>> stringList = GetCommonUser.getJson(score_analyze, request);
+				Double wu = 0d;//物
+				Double hua = 0d;//化
+				Double sheng = 0d;//生
+				Double zheng = 0d;//政
+				Double li = 0d;//历
+				Double di = 0d;//地
+				Double total_score = 0d;//成绩分析总分
 				for (int i = 0; i < stringList.size(); i++) {
-					sub = stringList.get(i).get(0);
-					score = Double.valueOf(stringList.get(i).get(1));
-					if (Combination.物化生.one.equals(sub)) {//物理
-						score_map.put(Combination.物化生.one, score);//物理
+					if (Combination.物化生.one.equals(stringList.get(i).get(0))) {
+						wu = Double.valueOf(stringList.get(i).get(1));//物理
 					}
-					if (Combination.物化生.two.equals(sub)) {//化学
-						score_map.put(Combination.物化生.two, score);//化学
+					if (Combination.物化生.two.equals(stringList.get(i).get(0))) {
+						hua = Double.valueOf(stringList.get(i).get(1));//化学
 									}
-					if (Combination.物化生.three.equals(sub)) {//生物
-						score_map.put(Combination.物化生.three, score);//生物
+					if (Combination.物化生.three.equals(stringList.get(i).get(0))) {
+						sheng = Double.valueOf(stringList.get(i).get(1));//生物
 					}
-					if (Combination.政历地.one.equals(sub)) {//政治
-						score_map.put(Combination.政历地.one, score);//政治
+					if (Combination.政历地.one.equals(stringList.get(i).get(0))) {
+						zheng = Double.valueOf(stringList.get(i).get(1));//政治
 					}
-					if (Combination.政历地.two.equals(sub)) {//历史
-						score_map.put(Combination.政历地.two, score);//历史
+					if (Combination.政历地.two.equals(stringList.get(i).get(0))) {
+						li = Double.valueOf(stringList.get(i).get(1));//历史
 					}
-					if (Combination.政历地.three.equals(sub)) {//地理
-						score_map.put(Combination.政历地.three,score);//地理
+					if (Combination.政历地.three.equals(stringList.get(i).get(0))) {
+						di = Double.valueOf(stringList.get(i).get(1));//地理
 					}
-					total_score += score;
+					total_score += Double.valueOf(stringList.get(i).get(1));
 				}
-				score_map.put(Combination.物化生.one,score_map.get(Combination.物化生.one)/total_score);//物理占比
-		        score_map.put(Combination.物化生.two,score_map.get(Combination.物化生.two)/total_score);//化学占比
-		        score_map.put(Combination.物化生.three,score_map.get(Combination.物化生.three)/total_score);//生物占比
-		        score_map.put(Combination.政历地.one,score_map.get(Combination.政历地.one)/total_score);//政治占比
-		        score_map.put(Combination.政历地.two,score_map.get(Combination.政历地.two)/total_score);//历史占比
-		        score_map.put(Combination.政历地.three,score_map.get(Combination.政历地.three)/total_score);//地理占比
-		        session.setAttribute("score_analyse", score_analyze);
+				if(!total_score.equals(new Double(0))){
+					score_map.put(Combination.物化生.one,wu/total_score);//物理占比
+			        score_map.put(Combination.物化生.two,hua/total_score);//化学占比
+			        score_map.put(Combination.物化生.three,sheng/total_score);//生物占比
+			        score_map.put(Combination.政历地.one,zheng/total_score);//政治占比
+			        score_map.put(Combination.政历地.two,li/total_score);//历史占比
+			        score_map.put(Combination.政历地.three,di/total_score);//地理占比
+				} else {
+					score_map.put(Combination.物化生.one,0d);//物理占比
+			        score_map.put(Combination.物化生.two,0d);//化学占比
+			        score_map.put(Combination.物化生.three,0d);//生物占比
+			        score_map.put(Combination.政历地.one,0d);//政治占比
+			        score_map.put(Combination.政历地.two,0d);//历史占比
+			        score_map.put(Combination.政历地.three,0d);//地理占比
+				}
+				session.setAttribute("score_analyse", score_analyze);
+		        
 		        
 				//潜能分析
 				Map<String,Double> potential_map = new HashMap<>();//分数map
-				potential_map.put(Combination.物化生.one,0d);//物理
-				potential_map.put(Combination.物化生.two,0d);//化学
-				potential_map.put(Combination.物化生.three,0d);//生物
-				potential_map.put(Combination.政历地.one,0d);//政治
-				potential_map.put(Combination.政历地.two,0d);//历史
-				potential_map.put(Combination.政历地.three,0d);//地理
+				wu = 0d;//物
+				hua = 0d;//化
+				sheng = 0d;//生
+				zheng = 0d;//政
+				li = 0d;//历
+				di = 0d;//地
 				JSONArray jsonArray2 = JSON.parseArray(potential_analyze);
-				Double potential_total_score = 0d;
+				total_score = 0d;//潜能分析总分
 	            for (int i=0; i<jsonArray2.size(); i++){
-	            	potential_total_score += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());
-	            	potential_map.put(jsonArray2.getJSONArray(i).get(0).toString(),potential_map.get(jsonArray2.getJSONArray(i).get(0).toString()) + Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString()));
+	            	if (Combination.物化生.one.equals(jsonArray2.getJSONArray(i).get(0).toString())) {
+						wu += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());//物
+					}
+					if (Combination.物化生.two.equals(jsonArray2.getJSONArray(i).get(0).toString())) {
+						hua += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());//化
+									}
+					if (Combination.物化生.three.equals(jsonArray2.getJSONArray(i).get(0).toString())) {
+						sheng += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());//生
+					}
+					if (Combination.政历地.one.equals(jsonArray2.getJSONArray(i).get(0).toString())) {
+						zheng += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());//政
+					}
+					if (Combination.政历地.two.equals(jsonArray2.getJSONArray(i).get(0).toString())) {
+						li += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());//历
+					}
+					if (Combination.政历地.three.equals(jsonArray2.getJSONArray(i).get(0).toString())) {
+						di += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());//地
+					}
+					total_score += Double.valueOf(jsonArray2.getJSONArray(i).get(2).toString());
 	            }
-	            potential_map.put(Combination.物化生.one,score_map.get(Combination.物化生.one)/potential_total_score);//物理占比
-	            potential_map.put(Combination.物化生.two,score_map.get(Combination.物化生.two)/potential_total_score);//化学占比
-	            potential_map.put(Combination.物化生.three,score_map.get(Combination.物化生.three)/potential_total_score);//生物占比
-	            potential_map.put(Combination.政历地.one,score_map.get(Combination.政历地.one)/potential_total_score);//政治占比
-	            potential_map.put(Combination.政历地.two,score_map.get(Combination.政历地.two)/potential_total_score);//历史占比
-	            potential_map.put(Combination.政历地.three,score_map.get(Combination.政历地.three)/potential_total_score);//地理占比
+	            if(!total_score.equals(new Double(0))){
+	            	potential_map.put(Combination.物化生.one,wu/total_score);//物理占比
+		            potential_map.put(Combination.物化生.two,hua/total_score);//化学占比
+		            potential_map.put(Combination.物化生.three,sheng/total_score);//生物占比
+		            potential_map.put(Combination.政历地.one,zheng/total_score);//政治占比
+		            potential_map.put(Combination.政历地.two,li/total_score);//历史占比
+		            potential_map.put(Combination.政历地.three,di/total_score);//地理占比
+	            } else {
+	            	potential_map.put(Combination.物化生.one,0d);//物理占比
+	            	potential_map.put(Combination.物化生.two,0d);//化学占比
+	            	potential_map.put(Combination.物化生.three,0d);//生物占比
+	            	potential_map.put(Combination.政历地.one,0d);//政治占比
+	            	potential_map.put(Combination.政历地.two,0d);//历史占比
+	            	potential_map.put(Combination.政历地.three,0d);//地理占比
+	            }
 	            session.setAttribute("potential_analyse", potential_analyze);
+	            
 	            
 	            //认知分析
 				UserFeature cognize_analyze = mbti_analyze == null ? hld_analyze : mbti_analyze;//认知分析 [优先选择mbti分析]
@@ -283,48 +304,57 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	            paramMap.put("personalityCode",cognize_analyze.getEvaluationName());
 	            List<Personality> personalityList = personalityMapper.selectPersonalityListByMap(paramMap);
 	            Map<String,Double> cognize_map = new HashMap<>();//分数map
-	            cognize_map.put(Combination.物化生.one,0d);//物理
-	            cognize_map.put(Combination.物化生.two,0d);//化学
-	            cognize_map.put(Combination.物化生.three,0d);//生物
-	            cognize_map.put(Combination.政历地.one,0d);//政治
-	            cognize_map.put(Combination.政历地.two,0d);//历史
-	            cognize_map.put(Combination.政历地.three,0d);//地理
-	            Personality personality = personalityList.get(0);//认知测评结果数据信息     
-	            List<List<String>> specialtyIns = GetCommonUser.getJson(personality.getPersonalitySpecialty(), request);
-	            System.err.println(specialtyIns);
-	            String where = " specialty_id IN (";
-	            for(int i=0; i<specialtyIns.size(); i++){
-	            	if (i == specialtyIns.size()-1) {
-	            		where += specialtyIns.get(i).get(0);
-					} else {
-						where += specialtyIns.get(i).get(0) + ",";
-					}
-	            }
-	            List<Specialty> specialtyList = specialtyMapper.select( where + ")", null, null, null);
-	            Double cognize_total_score = 0d;//认知测评总分
-	            for (int i=0; i<specialtyList.size(); i++){
-	            	cognize_total_score += specialtyList.get(i).getPhysicsPerformance() 
-				            			+ specialtyList.get(i).getChemistryPerformance()
-				            			+ specialtyList.get(i).getBiologyPerformance()
-				            			+ specialtyList.get(i).getPoliticPerformance()
-				            			+ specialtyList.get(i).getHistoryPerformance()
-				            			+ specialtyList.get(i).getGeographyPerformance();	
-	            	cognize_map.put(Combination.物化生.one,cognize_map.get(Combination.物化生.one) + specialtyList.get(i).getPhysicsPerformance());
-	            	cognize_map.put(Combination.物化生.two,cognize_map.get(Combination.物化生.two) + specialtyList.get(i).getChemistryPerformance());
-	            	cognize_map.put(Combination.物化生.three,cognize_map.get(Combination.物化生.three) + specialtyList.get(i).getBiologyPerformance());
-	            	cognize_map.put(Combination.政历地.one,cognize_map.get(Combination.政历地.one) + specialtyList.get(i).getPoliticPerformance());
-	            	cognize_map.put(Combination.政历地.two,cognize_map.get(Combination.政历地.two) + specialtyList.get(i).getHistoryPerformance());
-	            	cognize_map.put(Combination.政历地.three,cognize_map.get(Combination.政历地.three) + specialtyList.get(i).getGeographyPerformance());
-	            }
+	            wu = 0d;//物
+				hua = 0d;//化
+				sheng = 0d;//生
+				zheng = 0d;//政
+				li = 0d;//历
+				di = 0d;//地
+				total_score = 0d;//认知分析总分
+	            if(personalityList.isEmpty()){
+	            	cognize_map.put(Combination.物化生.one,0d);//物理占比
+		            cognize_map.put(Combination.物化生.two,0d);//化学
+		            cognize_map.put(Combination.物化生.three,0d);//生物
+		            cognize_map.put(Combination.政历地.one,0d);//政治
+		            cognize_map.put(Combination.政历地.two,0d);//历史
+		            cognize_map.put(Combination.政历地.three,0d);//地理
+	            } else {
+	            	Personality personality = personalityList.get(0);//认知测评结果数据信息     
+		            List<List<String>> specialtyIns = GetCommonUser.getJson(personality.getPersonalitySpecialty(), request);
+		            String where = " specialty_id IN (";
+		            for(int i=0; i<specialtyIns.size(); i++){
+		            	if (i == specialtyIns.size()-1) {
+		            		where += specialtyIns.get(i).get(0);
+						} else {
+							where += specialtyIns.get(i).get(0) + ",";
+						}
+		            }
+		            //查询专业科目分数占比
+		            List<Specialty> specialtyList = specialtyMapper.select( where + ")", null, null, null);
+		            for (int i=0; i<specialtyList.size(); i++){
+		            	total_score += specialtyList.get(i).getPhysicsPerformance() 
+					            	+  specialtyList.get(i).getChemistryPerformance()
+					            	+  specialtyList.get(i).getBiologyPerformance()
+					            	+  specialtyList.get(i).getPoliticPerformance()
+					            	+  specialtyList.get(i).getHistoryPerformance()
+					            	+  specialtyList.get(i).getGeographyPerformance();	
+		            	wu += specialtyList.get(i).getPhysicsPerformance();//物
+		            	hua += specialtyList.get(i).getChemistryPerformance();//化
+		            	sheng += specialtyList.get(i).getBiologyPerformance();//生
+		            	zheng += specialtyList.get(i).getPoliticPerformance();//政
+		            	li += specialtyList.get(i).getHistoryPerformance();//历
+		            	di += specialtyList.get(i).getGeographyPerformance();//地
+		            }
+	            } 
+	            cognize_map.put(Combination.物化生.one,wu/total_score);//物理占比
+	            cognize_map.put(Combination.物化生.two,hua/total_score);//化学占比
+	            cognize_map.put(Combination.物化生.three,sheng/total_score);//生物占比
+	            cognize_map.put(Combination.政历地.one,zheng/total_score);//政治占比
+	            cognize_map.put(Combination.政历地.two,li/total_score);//历史占比
+	            cognize_map.put(Combination.政历地.three,di/total_score);//地理占比
 	            List<Map.Entry<String, Double>> cognize_list = new LinkedList<Map.Entry<String, Double>>(cognize_map.entrySet());
 	            Collections.sort(cognize_list, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
-	            session.setAttribute("cognize_analyze", JSON.toJSONString(cognize_list));
-	            cognize_map.put(Combination.物化生.one,cognize_map.get(Combination.物化生.one)/cognize_total_score);//物理占比
-	            cognize_map.put(Combination.物化生.two,cognize_map.get(Combination.物化生.two)/cognize_total_score);//化学占比
-	            cognize_map.put(Combination.物化生.three,cognize_map.get(Combination.物化生.three)/cognize_total_score);//生物占比
-	            cognize_map.put(Combination.政历地.one,cognize_map.get(Combination.政历地.one)/cognize_total_score);//政治占比
-	            cognize_map.put(Combination.政历地.two,cognize_map.get(Combination.政历地.two)/cognize_total_score);//历史占比
-	            cognize_map.put(Combination.政历地.three,cognize_map.get(Combination.政历地.three)/cognize_total_score);//地理占比
+	            session.setAttribute("cognize_analyze", JSON.toJSONString(cognize_list));//认知测评
 	            
 	            Map<String,Double> map = new HashMap<>();//总占比map
 	            map.put(Combination.物化生.one, score_map.get(Combination.物化生.one) + potential_map.get(Combination.物化生.one) + cognize_map.get(Combination.物化生.one));//物理
@@ -362,53 +392,61 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	            for (int i=0; i<list.size(); i++) {
 	            	combination_list.add(i, list.get(i).getKey());
 				}
-	            session.setAttribute("recommend_combination",JSON.toJSONString(combination_list));//测评推荐学科组合
+	            session.setAttribute("recommend_combination",JSON.toJSONString(combination_list));//测评推荐学科组合排序
+	            
 	            //测评+分析 学科组合总分
 				Double combination_total_score = 0d;
 				for(Double value : combinationMap.values()){
 					combination_total_score += value;
 				}
-				
-	            
 	            //获取当前年份政策[已学生填写的高考年度为准]
 	            User user = userMapper.select(" id = '" + uid + "'", null, null, null).get(0);
 	            String year = StringUtils.isEmpty(user.getCeeYear())? new SimpleDateFormat("yyyy").format(new Date()) : user.getCeeYear();
+	            session.setAttribute("choose_year", year);//当地政策年份
 	            //政策查询条件
-	            where = " e_year = '" + year + "' AND LOCATE('" + specialtyId + "', include_major) > 0 AND LOCATE('" + province + "', e_province) > 0";
+	            String where = " e_year = '" + year + "' AND LOCATE('" + specialtyId + "', include_major) > 0 AND LOCATE('" + province + "', e_province) > 0";
 	            List<EnrollmentRequirements> enrollmentRequirementsList = enrollmentRequirementsMapper.select(where, null, null, null);
 	            
-	            System.err.println(enrollmentRequirementsList);
 	            //当地政策map
 	            if (enrollmentRequirementsList.isEmpty()) {
+	            	session.setAttribute("intersection", 0);//无交集
+	            	session.setAttribute("combination", JSON.toJSONString(combination_list));//测评推荐学科组合
 					return "web/xgk/xgk_pick_report";
-				}
-	            String[] enrollment_list = enrollmentRequirementsList.get(0).getSubjectCombination().split(";");
-	            List<String> policy_combination = new ArrayList<>();//政策学科组合
-	            for(int i=0; i<enrollment_list.length; i++){
+				} 
+	            String[] enrollment_list = null;
+	            if(StringUtils.isNotEmpty(enrollmentRequirementsList.get(0).getSubjectCombination())){
+	            	enrollment_list = enrollmentRequirementsList.get(0).getSubjectCombination().split(";");;//某一所院校政策允许学科组合数组
+	            }else{
+	            	enrollment_list = new String[0];
+	            }	
+	            List<String> policy_combination = new ArrayList<>();//交集政策学科组合  
+	            for(int i=0; i<enrollment_list.length; i++){//当前院校某一学科组合
 	            	Integer count = 1;
-	            	for(int j=1; j<enrollmentRequirementsList.size(); j++){
-	            		String subCom = enrollmentRequirementsList.get(j).getSubjectCombination();
-	            		if (subCom.contains(enrollment_list[i])) {
-	            			count ++;
+	            	for(EnrollmentRequirements enrollmentRequirements : enrollmentRequirementsList){//院校政策
+	            		String subCom = enrollmentRequirements.getSubjectCombination();//院校政策允许学科组合字符串
+		            	if (StringUtils.isNotEmpty(subCom) && subCom.contains(enrollment_list[i])) {
+		            		count ++;
 						} else{
 							break;
-						}
+						}	
 	            	}
 	            	if (count.equals(enrollmentRequirementsList.size())) {
 	            		policy_combination.add(enrollment_list[i]);
 					}
 	            }
-	            
 				Map<String, Double> policy_map = new HashMap<>();//政策允许出现的学科组合Map<学科,总占比>
 	            if (policy_combination.isEmpty()) {//无交集
 	            	int count = 0;//政策允许学科组合总数
 					for(int i=0; i<enrollmentRequirementsList.size(); i++){
+						if(StringUtils.isEmpty(enrollmentRequirementsList.get(i).getSubjectCombination())){
+							break;
+						}
 						enrollment_list = enrollmentRequirementsList.get(i).getSubjectCombination().split(";");
 						for(int j=0; j<enrollment_list.length; j++){
+							count ++ ;
 							if (policy_map.containsKey(enrollment_list[j])) {
 								policy_map.put(enrollment_list[j], policy_map.get(enrollment_list[j]) + 1);//出现次数+1
 							} else {
-								count ++ ;
 								policy_map.put(enrollment_list[j], 1d);
 								policy_combination.add(enrollment_list[j]);
 							}
@@ -428,6 +466,7 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 								policy_map.put(enrollment_list[j], policy_map.get(enrollment_list[j]) + 1);
 							} else {
 								policy_map.put(enrollment_list[j], 1d);
+								policy_combination.add(enrollment_list[j]);
 							}
 						}
 					}
@@ -439,7 +478,6 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 				}
 	            List<Map.Entry<String, Double>> combination = new LinkedList<Map.Entry<String, Double>>(policy_map.entrySet());
 				Collections.sort(combination, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
-				System.err.println(combination);
 				session.setAttribute("combination", JSON.toJSONString(combination));//测评  + 政策 推荐学科组合	
 	            session.setAttribute("policy_combination", JSON.toJSONString(policy_combination));//政策允许组合  
 			}

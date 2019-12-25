@@ -1,5 +1,6 @@
 package cn.hqtzytb.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,7 +59,7 @@ public interface IXgkxkService {
 	 * @param request
 	 * @return
 	 */
-	String getGenerateReport(String province, String specialtyId, HttpServletRequest request);
+	String getGenerateReport(String province, String specialtyId, HttpServletRequest request) throws UnsupportedEncodingException ;
 
 	/**
 	 * 新增选科组合报告

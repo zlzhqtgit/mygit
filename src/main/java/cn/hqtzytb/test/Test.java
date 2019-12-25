@@ -9,6 +9,7 @@ import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import java.io.*;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.context.annotation.EnableLoadTimeWeaving;
 
 
 /**
@@ -84,6 +86,20 @@ public class Test {
 		
 		Map<String, Integer> cpFengshu = JSONObject.fromObject("{A=9, R=7, C=8, S=4, E=8, I=6}");
 		System.err.println(cpFengshu);
+		System.err.println( "10  0   " +  0/0.1);
+		Double accc = new Double(0);
+		if(accc == new Double(0)){
+					System.err.println("saasdkhaskjhdakjhdkj");
+		}
+		
+		System.err.println(0/1);
+		
+		
+		String[] aStrings  = new String[0];
+		System.err.println(aStrings.length);
+		for(int i=0; i<aStrings.length; i++){
+			System.err.println("空数组:"+i);
+		}
     }
 
 
