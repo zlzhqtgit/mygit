@@ -50,6 +50,10 @@
 							<h4 class="fontwei">178</h4>
 							<div class="text-muted">关注的课程</div>
 						</div>
+						<div class="text-center pull-left padding-side margin_bot1 margin_top">
+							<h4 class="fontwei"><span class="glyphicon glyphicon-comment"></span></h4>
+							<div class="text-muted">我的任务</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -70,8 +74,8 @@
 							<%-- <li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li> --%>
 						</ul>
 					</li>
-					<li> <a href="javascript:void(0)"><span class="glyphicon glyphicon-record"></span> 我的关注 </a> </li>
-					<li class="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
+					<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-record"></span> 我的关注 </a> </li>
+					<liclass="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
 				</ul>
 				
 				<div class="center_cont">
@@ -140,7 +144,7 @@
 									<a class="text-mute" >MBTI测评 
 										<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;
 									</a>
-									<a>测评时间：<fmt:formatDate value="${霍兰德.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${MBTI.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+									<a>测评时间：<fmt:formatDate value="${MBTI.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${MBTI.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 								</div>	
 							</c:if>
 							<c:if test="${MBTI == null}">
@@ -182,7 +186,27 @@
 							<div class="" onload="showModel()">
 								<table class="table table-responsive">
 									<tr><th>起止时间</th><th>状态</th><th>选课结果</th><th>操作</th></tr>
-									<tr><td><fmt:formatDate value="${resule_report.startTime}" pattern="yyyy-MM-dd hh:mm:ss"/> - <fmt:formatDate value="${resule_report.endTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td><td>已结束</td><td>物理+化学+生物</td><td><a href="">已下载</a></td></tr>
+									<tr>
+										<td><fmt:formatDate value="${resule_report.startTime}" pattern="yyyy-MM-dd hh:mm:ss"/> - <fmt:formatDate value="${resule_report.endTime}" pattern="yyyy-MM-dd hh:mm:ss"/></td>
+										<c:if test="${resule_report.status != 1}">
+											<td>待完成</td>
+										</c:if>
+										<c:if test="${resule_report.status == 1}">
+											<td>已完成</td>
+										</c:if>
+										<c:if test="${resule_report.status == 1}">
+											<td>${resule_report.result}</td>
+										</c:if>
+										<c:if test="${resule_report.status != 1}">
+											<td>您未完成选科测评</td>
+										</c:if>
+										<c:if test="${resule_report.status == 1}">
+											<td><a href="javascript:;">下载</a></td>
+										</c:if>
+										<c:if test="${resule_report.status != 1}">
+											<td><a href="${pageContext.request.contextPath}/xk/xgk_guide_select.do" >进行选科</a></td>
+										</c:if>
+									</tr>
 								</table>
 							</div>
 							<%-- <div class="" onload="showModel()">
@@ -204,12 +228,12 @@
 							<div class="">
 								<h4 class="fontwei text-primary">找数据</h4>
 								<ul class="row_list clearfix">
-									<li><a href=""><span class="glyphicon glyphicon-search"></span> 找大学</a></li>
-									<li><a href=""><span class="glyphicon glyphicon-list"></span> 查专业</a></li>
-									<li><a href=""><span class="glyphicon glyphicon-briefcase"></span> 看职业</a></li>
-									<li><a href=""><span class="glyphicon glyphicon-log-in"></span> 提前批</a></li>
-									<li><a href=""><span class="glyphicon glyphicon-indent-left"></span> 分数线</a></li>
-									<li><a href=""><span class="glyphicon glyphicon-eye-open"></span> 历年报考</a></li>
+									<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do"><span class="glyphicon glyphicon-search"></span> 找大学</a></li>
+									<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do"><span class="glyphicon glyphicon-list"></span> 查专业</a></li>
+									<li><a href="${pageContext.request.contextPath}/voc/xgk_job_blank.do"><span class="glyphicon glyphicon-briefcase"></span> 看职业</a></li>
+									<li><a href="javascript:;"><span class="glyphicon glyphicon-log-in"></span> 提前批</a></li>
+									<li><a href="javascript:;"><span class="glyphicon glyphicon-indent-left"></span> 分数线</a></li>
+									<li><a href="javascript:;"><span class="glyphicon glyphicon-eye-open"></span> 历年报考</a></li>
 								</ul>
 							</div>
 						</li>
@@ -217,7 +241,10 @@
 							<div class="">
 								<h4 class="fontwei text-primary">测评</h4>
 								<ul class="row_list clearfix">
-									<li><a href=""><span class="glyphicon glyphicon-align-right"></span> 测评</a></li>
+									<li><a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=CJFX"><span class="glyphicon glyphicon-align-right"></span> 成绩分析</a></li>
+									<li><a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=QNFX"><span class="glyphicon glyphicon-road"></span> 潜能测评</a></li>
+									<li><a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do"><span class="glyphicon glyphicon-tasks"></span> 霍兰德测评</a></li>
+									<li><a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do"><span class="glyphicon glyphicon-cloud"></span> MBTI测评</a></li>
 								</ul>
 							</div>
 						</li>
