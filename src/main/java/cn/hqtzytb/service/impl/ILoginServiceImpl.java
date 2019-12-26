@@ -86,14 +86,14 @@ public class ILoginServiceImpl implements ILoginService {
                     paramMap.put("qqChat",openid);
                     List<User> users = userMapper.selectUserListByMap(paramMap);
                     if (users.isEmpty()){ //不存在该QQ用户
-                        session.setAttribute("headUrl", jsonObject.get("figureurl_qq_2"));
+                        session.setAttribute("headImg", jsonObject.get("figureurl_qq_2"));
                         session.setAttribute("qqChat", openid);
                         return "web/xgk/xgk_bindingAcc";
                     } else {
                     	subject.login(new MyUsernamePasswordToken(users.get(0).getPhone()));
                         session.setAttribute("uid", users.get(0).getId());
                         session.setAttribute("username", users.get(0).getUsername());
-                        session.setAttribute("headUrl", users.get(0).getHeadUrl());
+                        session.setAttribute("headImg", users.get(0).getHeadImg());
                         JSONObject userJson = JSONObject.fromObject(users.get(0));
                         session.setAttribute("userJson", userJson);//提供给前端页面使用
                         session.setAttribute("user", users.get(0));//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
@@ -131,7 +131,7 @@ public class ILoginServiceImpl implements ILoginService {
             paramMap.put("wexinChat",openid);
             List<User> users = userMapper.selectUserListByMap(paramMap);
             if (users.isEmpty()){ //不存在该微信用户
-            	session.setAttribute("headUrl", user_json.get("headimgurl"));
+            	session.setAttribute("headImg", user_json.get("headimgurl"));
             	session.setAttribute("wexinChat", openid);
                 // TODO 完善用户信息页面
                 return "web/xgk/xgk_bindingAcc";
@@ -139,7 +139,7 @@ public class ILoginServiceImpl implements ILoginService {
             	subject.login(new MyUsernamePasswordToken(users.get(0).getPhone()));
             	session.setAttribute("uid", users.get(0).getId());
                 session.setAttribute("username", users.get(0).getUsername());
-                session.setAttribute("headUrl", users.get(0).getHeadUrl());
+                session.setAttribute("headImg", users.get(0).getHeadImg());
                 JSONObject userJson = JSONObject.fromObject(users.get(0));
                 session.setAttribute("userJson", userJson);//提供给前端页面使用
                 session.setAttribute("user", users.get(0));//提供给后台服务websocket类使用(存放对象，避免过多的json转换)

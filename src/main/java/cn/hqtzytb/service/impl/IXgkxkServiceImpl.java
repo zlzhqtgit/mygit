@@ -401,7 +401,7 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 				}
 	            //获取当前年份政策[已学生填写的高考年度为准]
 	            User user = userMapper.select(" id = '" + uid + "'", null, null, null).get(0);
-	            String year = StringUtils.isEmpty(user.getCeeYear())? new SimpleDateFormat("yyyy").format(new Date()) : user.getCeeYear();
+	            String year = StringUtils.isEmpty(user.getEducationalCircles())? new SimpleDateFormat("yyyy").format(new Date()) : user.getEducationalCircles();
 	            session.setAttribute("choose_year", year);//当地政策年份
 	            //政策查询条件
 	            String where = " e_year = '" + year + "' AND LOCATE('" + specialtyId + "', include_major) > 0 AND LOCATE('" + province + "', e_province) > 0";

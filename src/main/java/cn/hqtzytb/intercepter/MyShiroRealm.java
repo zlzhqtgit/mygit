@@ -33,7 +33,7 @@ public class MyShiroRealm extends AuthorizingRealm{
 	//每次验证权限执行
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {		
-		String[] ids = LoginSession.getSession().getUserAuthority().split(";");
+		String[] ids = LoginSession.getSession().getAuthority().split(";");
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		if(ids.length > 0){
 			for(int i=0; i<ids.length; i++){
@@ -47,11 +47,11 @@ public class MyShiroRealm extends AuthorizingRealm{
 	//登录执行
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {		
-		String phone = (String)token.getPrincipal();
-		User user = iUserServer.queryUser(phone);
+		String account = (String)token.getPrincipal();
+		User user = iUserServer.queryUser(account);
 		if(user != null){
 			ByteSource byteSource = ByteSource.Util.bytes(user.getUuid());
-			SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(phone,user.getPassword(),getName());
+			SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(account,user.getPassword(),getName());
 			info.setCredentialsSalt(byteSource);
 			return info;
 		}

@@ -21,7 +21,7 @@ public interface IUserServer {
 	 * @param password 密码
 	 * @return User
 	 */
-	User queryUser(String phone);
+	User queryUser(String account);
 
 	/**
 	 * 绑定账号
@@ -32,12 +32,6 @@ public interface IUserServer {
 	 */
 	ResponseResult<Void> bindAccount(String phone, String verifyCode);
 
-	/**
-	 * 查询用户信息
-	 * @param username
-	 * @return
-	 */
-	User getUserByUsername(String username);
 	
 	/**
 	 * 进入新高考登录模块
@@ -56,7 +50,7 @@ public interface IUserServer {
 	 * @param request
 	 * @return
 	 */
-	ResponseResult<Void> handleUserlogin(String phone, String password, HttpServletRequest request);
+	ResponseResult<Void> handleUserlogin(String account, String password, HttpServletRequest request);
 	
 	/**
 	 * 用户注册获取短信验证码
@@ -85,11 +79,11 @@ public interface IUserServer {
 	ResponseResult<Void> handleRegisteradd(User user, String verifyCode, HttpServletRequest request);
 	
 	/**
-	 * 查用手机号是否已注册
+	 * 查用手机号/身份证号是否已注册
 	 * @param phone
 	 * @return
 	 */
-	ResponseResult<Void> userIsExist(String phone, HttpServletRequest request);
+	ResponseResult<Void> userIsExist(String account, HttpServletRequest request);
 	
 	/**
 	 * 给已注册用户发送短信

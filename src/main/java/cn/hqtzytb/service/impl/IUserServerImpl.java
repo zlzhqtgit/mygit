@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
+import cn.hqtzytb.entity.Role;
 import cn.hqtzytb.service.IUserServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
@@ -21,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -59,13 +61,21 @@ public class IUserServerImpl implements IUserServer {
 	}
 
 	
-	// 查询单个用户信息 登陆
+	/**
+	 *  查询单个用户信息 登陆
+	 * @param phone
+	 * @return
+	 */
 	@Override
-	public User queryUser(String phone) {
-		return userMapper.queryUser(phone);
+	public User queryUser(String account) {
+		return  userMapper.queryUser(account);
 	}
 
-
+	/**
+	 * 插入用户信息
+	 * @param user
+	 * @return
+	 */
 	@Override
 	public User insert(User user) {
 		userMapper.insert(user);
@@ -99,11 +109,11 @@ public class IUserServerImpl implements IUserServer {
 			if (StringUtils.isEmpty(user.getQqChat()) && StringUtils.isNotEmpty(qqChat)){
 				user.setQqChat(qqChat);//绑定腾讯openid
 			}
-			user.setHeadUrl(session.getAttribute("headUrl").toString());
+			user.setHeadImg(session.getAttribute("headImg").toString());
 			userMapper.updateById(user);//修改用户信息
 			session.setAttribute("uid", users.get(0).getId());
 			session.setAttribute("username", users.get(0).getUsername());
-			session.setAttribute("headUrl", users.get(0).getHeadUrl());
+			session.setAttribute("headImg", users.get(0).getHeadImg());
 			JSONObject userJson = JSONObject.fromObject(users.get(0));
 			session.setAttribute("userJson", userJson);//提供给前端页面使用
 			session.setAttribute("user", users.get(0));//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
@@ -114,10 +124,6 @@ public class IUserServerImpl implements IUserServer {
 	}
 
 	
-	@Override
-	public User getUserByUsername(String username) {
-		return userMapper.getUserByUsername(username);
-	}
 
 	
 	@Override
@@ -154,8 +160,8 @@ public class IUserServerImpl implements IUserServer {
 				session.setAttribute(Constants.SYSTEM_USER,user);
 				session.setAttribute("uid", user.getId());
 				session.setAttribute("username", user.getUsername());
-				session.setAttribute("headUrl", user.getHeadUrl());
-				session.setAttribute("province", user.getProvince());
+				session.setAttribute("headImg", user.getHeadImg());
+				session.setAttribute("province", user.getStudyProvinces());
 				JSONObject userJson = JSONObject.fromObject(user);
 				session.setAttribute("userJson", userJson);//提供给前端页面使用
 				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
@@ -230,55 +236,76 @@ public class IUserServerImpl implements IUserServer {
 		if (!verifyCode.equals(session.getAttribute("code").toString())){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码输入错误");
 		}
-//		try {	
-			//查询用户名是否存在
-			User userlist = userMapper.queryUser(user.getPhone());			
+		try {	
+			//查询手机号用户是否存在
+			User account = userMapper.queryUser(user.getPhone());			
 			//判断用户名是否存在
-			if (userlist!=null){
-				rr=new ResponseResult<Void>(ResponseResult.ERR,"手机号已经存在!请重新输入...");
+			if (account != null){
 				logger.info("用户手机：" + user.getPhone() + " 模块名：注册模块 操作：登录  状态：Failed! ");
-			}else{	
-				GetCommonUser get=new GetCommonUser();			
-				Date creatTime = new Date();
-				System.err.println("注册密码：" + user.getPassword());
-				String uuid = UUID.randomUUID().toString().toUpperCase();
-				String md5Password = get.getEncrpytedPassword(Constants.MD5,user.getPassword(), uuid,1024);
-				user.setUuid(uuid);
-				user.setPassword(md5Password);
-				user.setRid(5);//默认角色 为个人
-				user.setBelongTo("2019100001");// TODO 隶属于 
-				user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
-				user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
-				user.setHeadUrl(session.getAttribute("headUrl") == null ? "${pageContext.request.contextPath}/img/public/head.jpg" : session.getAttribute("headUrl").toString());
-				user.setCreatTime(creatTime);	
-				userMapper.insert(user);	
-				JSONObject userJson = JSONObject.fromObject(user);
-				session.setAttribute("uid", user.getId());
-				session.setAttribute("username", user.getUsername());
-				session.setAttribute("headUrl", user.getHeadUrl());
-				session.setAttribute("userJson", userJson);//提供给前端页面使用
-				session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
-				logger.info("用户名：" + user.getUsername() + " 模块名：注册模块 操作：登录  状态：OK!");
-				rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");	
-				subject.login(new MyUsernamePasswordToken(user.getPhone()));
-			}			
-//		} catch (Exception e) {
-//			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
-//			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
-//		}
+				return new ResponseResult<Void>(ResponseResult.ERR,"手机号已经存在!请重新输入...");
+			}	
+			//查询身份证号是否存在
+			if(StringUtils.isNotEmpty(user.getPcNumber())){
+				account = userMapper.queryUser(user.getPcNumber());	
+			}	
+			//判断身份证号是否存在
+			if (account != null){
+				logger.info("用户手机：" + user.getPhone() + " 模块名：注册模块 操作：登录  状态：Failed! ");
+				return new ResponseResult<Void>(ResponseResult.ERR,"身份证号已经存在!请重新输入...");
+			}
+			if(StringUtils.isNotEmpty(user.getStudentId())){
+				List<User> student_user = userMapper.select(" student_id = '" + user.getStudentId() + "' ", null, null, null);
+				if(!student_user.isEmpty()){
+					logger.info("用户手机：" + user.getPhone() + " 模块名：注册模块 操作：登录  状态：Failed! ");
+					return new ResponseResult<Void>(ResponseResult.ERR,"学号已经存在!请重新输入...");
+				}
+			}
+			Role role = userMapper.selectRoleById(5);
+			if(StringUtils.isEmpty(role.getRoleAuthority())){
+				logger.info("用户手机：" + user.getPhone() + " 模块名：注册模块 操作：登录  状态：Failed! ");
+				return new ResponseResult<Void>(ResponseResult.ERR,"系统正处于维护状态!请稍后重试...");
+			}
+			GetCommonUser get=new GetCommonUser();			
+			Date currentTime = new Date();
+			System.err.println("注册密码：" + user.getPassword());
+			String uuid = UUID.randomUUID().toString().toUpperCase();
+			String md5Password = get.getEncrpytedPassword(Constants.MD5,user.getPassword(), uuid, 1024);
+			user.setUuid(uuid);
+			user.setPassword(md5Password);
+			user.setRid(5);//默认角色 为平台个人
+			user.setAuthority(role.getRoleAuthority());//用户授权
+			user.setWexinChat(session.getAttribute("wexinChat") == null ? null : session.getAttribute("wexinChat").toString());
+			user.setQqChat(session.getAttribute("qqChat") == null ? null : session.getAttribute("qqChat").toString());
+			user.setHeadImg((String)session.getAttribute("headImg"));
+			user.setCreatTime(currentTime);	
+			userMapper.insert(user);	
+			JSONObject userJson = JSONObject.fromObject(user);
+			session.setAttribute("uid", user.getId());
+			session.setAttribute("username", user.getUsername());
+			session.setAttribute("headImg", user.getHeadImg());
+			session.setAttribute("userJson", userJson);//提供给前端页面使用
+			session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)
+			logger.info("用户名：" + user.getUsername() + " 模块名：注册模块 操作：登录  状态：OK!");
+			rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");	
+			subject.login(new MyUsernamePasswordToken(user.getPhone()));
+						
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
+			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+		}
 		return rr;
 	}
 
 	
 	@Override
-	public ResponseResult<Void> userIsExist(String phone, HttpServletRequest request) {
+	public ResponseResult<Void> userIsExist(String account, HttpServletRequest request) {
 		try {
-			User user = userMapper.queryUser(phone);
+			User user = userMapper.queryUser(account);
 			if (user != null) {
 				return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 			}
 		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：查询手机号注册信息  错误信息: "+e);
+			logger.error("访问路径：" + request.getRequestURI() + "操作：查询手机号/身份证号注册信息  错误信息: "+e);
 		}
 		return new ResponseResult<Void>(ResponseResult.ERR,Constants.RESULT_MESSAGE_SUCCESS);
 	}

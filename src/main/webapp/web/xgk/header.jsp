@@ -55,10 +55,10 @@
 				   <div class="user">
 				   		<a class="padding-side border_primary" href="javascript:void(0)"><span class="glyphicon glyphicon-map-marker padding-side"></span><div class="pick-area pick_province"></div></a>
 						<a href="${pageContext.request.contextPath}/user/hqt_user_info.do">
-							<c:if test="${headUrl != null && headUrl != ''}">
-								<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" />
+							<c:if test="${headImg != null && headImg != ''}">
+								<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" />
 							</c:if>
-							<c:if test="${headUrl == null || headUrl == ''}">
+							<c:if test="${headImg == null || headImg == ''}">
 								<img src="${pageContext.request.contextPath}/img/xgk/user.png" />
 							</c:if>
 						</a>
