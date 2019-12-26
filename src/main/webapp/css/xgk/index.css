@@ -132,25 +132,27 @@ nav>ul>li:hover >a{
 	text-decoration: none; 
 } */
 nav > ul > li > a {
-    padding: 6px 0;
+	width: 6.2em;
+	height:3em;
+	line-height: 3em;
     font-size: 16px;
     display: inline-block;
     text-align: center;
-    width: 6.2em;
     font-weight: 600;
     text-decoration: none;
     font-family: "宋体";
+    transition: all 0.3s ease-out 0s;
 }
 nav>ul>li>ul{
 	width: 100%;
 	display: none;
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, .8);
 	position: absolute;
 	left: 0;
 	z-index: 999;
 	border: 1px solid #ddd;
 	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.16);
-	transition: all 0.3s ease-out 0s;
+	transition: all 3s ease-out 0s;
 }
 nav>ul>li:hover ul{
 	display: block;
@@ -194,6 +196,7 @@ nav>ul>li>ul>li:hover a{
 	border-bottom-left-radius: 4em;
 	border: 2px solid #3b8bec;
 	cursor: context-menu;
+	transition: all 0.3s ease-out 0s;
 }
 .sectionList1 li>div>div:first-child{
 	display: flex;
@@ -212,9 +215,11 @@ nav>ul>li>ul>li:hover a{
 	padding-left: 5em;
 	border-radius: 1em;
 }
-.sectionList1 li:hover div{
+.sectionList1 li:hover>div{
 	background-color: #3b8bec;
 	color: #fff;
+	transform: translateY(-5px);
+	box-shadow: 0 0 4px #2b2b2b;
 }
 .sectionList1 li:hover div>div:first-child{
 	border: 2px solid #fff;
@@ -625,7 +630,7 @@ main{
 }
 .test_instruction>section>div{
 	width: 300px;
-	box-shadow: -2px 4px 5px #d2d0d0;
+	box-shadow: 0px 4px 6px #d2d0d0;
 }
 .test_instruction>section>div .btn{
 	border-radius: 20px;
@@ -1673,6 +1678,10 @@ li.current>a{
 	overflow: hidden;
 	white-space: nowrap;
 }
+.select>a{
+	color:#19ae68;
+	font-weight:600;
+}
 .zytb_tit h3{
 	margin-top: .6em;
 	margin-bottom: .4em;
@@ -1900,6 +1909,328 @@ table.combile_xuank{
 	box-shadow: 0px 0px 2px #c1aeae;
 	cursor: pointer;
 }
-.holder>a.jp-current{
-	/* border: 2px solid orangered; */
+
+/*新手教程*/
+.course_navlist{
+	font-size: 0;
+	width: 1073px;
+	margin: 0 auto;
+	background: url(../../img/xgk/navs.png) no-repeat;
 }
+.course_navlist >li{
+	display: inline-block;
+	width: 175px;
+	position: relative;
+}
+.course_navlist >li>div{
+	width: 5.8em;
+	height: 5.4em;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.course_navlist >li>div>a{
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	line-height: 86.4px;
+	color: #fff;
+	transition: all 0.3s ease-out 0s;
+	font-weight: bold;
+}
+.course_navlist >li>div>a:hover{
+	color: #1E90FF;
+}
+.sub_nav{
+	width: 8em;
+	height: 6em;
+	position: absolute;
+	bottom: -6em;
+}
+.sub_nav p{
+	font-size: 12px;
+	font-weight: bold;
+}
+.third_apart{
+	position: relative;
+}
+.lc,.rc{
+	width: 4em;
+	position: absolute;
+}
+.lc>a,.rc>a{
+	display: inline-block;
+	width: 4.6em;
+	height: 4.2em;
+	color: #fff;
+	font-weight: bold;
+	background: url(../../img/xgk/children.png) no-repeat;
+	transition: all 0.3s ease-out 0s;
+}
+.lc>a:hover,.rc>a:hover{
+	color: #00AEFF;
+}
+.lc>a>div,.rc>a>div{
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+}
+.lc>a>div>span,.rc>a>div>span{
+	width: 5em;
+	font-size: 14px;
+	line-height: 1em;
+}
+.lc{
+	left: -2em;
+}
+.rc{
+	right: -1.6em;
+}
+.lc>a{
+	background-position: -.6em -8.8em;
+}
+.course_navlist >li:nth-of-type(6) .lc>a{
+	background-position: -.6em -26em;
+}
+.course_navlist >li:nth-of-type(6) .rc>a{
+	background-position: -.6em -30.4em;
+}
+.rc>a{
+	background-position: -.48em -13em;
+}
+.single_line,.apart_line{
+	height: 127.33px;
+}
+.single_line>label{
+	margin: 0;
+	padding: 0;
+	width: .3em;
+	height: 100%;
+	background-color: #f08519;
+}
+.single_item>a{
+	display: inline-block;
+	width: 4.6em;
+	height: 4.2em;
+	color: #fff;
+	background: url(../../img/xgk/children.png) no-repeat;
+	background-position: -.5em -4.4em;
+	transition: all 0.3s ease-out 0s;
+}
+.single_item>a:hover{
+	font-weight: bold;
+	color: #00AEFF;
+}
+.single_item>a>div{
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+}
+.single_item>a>div>span{
+	width: 4em;
+	font-size: 14px;
+}
+.course_navlist >li:nth-of-type(4) .single_item>a{
+	background-position: -.5em -17.4em;
+}
+.course_navlist >li:nth-of-type(4) .single_line > label{
+	background-color: #acce22;
+}
+.course_navlist >li:nth-of-type(5) .single_item>a{
+	background-position: -.5em -21.6em;
+}
+.course_navlist >li:nth-of-type(5) .single_line > label{
+	background-color: #62c3d0;
+}
+
+/*vip*/
+.bg_tit{
+	position: relative;
+}
+.bg_tit>div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.series{
+	margin-top: 1em;
+	display: flex;
+	justify-content: space-around;
+}
+.series_item{
+	width: 16em;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 8px #2b2b2b;
+	background-color: #fff;
+}
+.series_item:hover{
+	transform: translateY(-5px);
+	box-shadow: 0 0 14px #2b2b2b;
+}
+.series_item_tit{
+	position: relative;
+	background-color: #3b8bec;
+}
+.series_item_titcon{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	text-align: center;
+	color: #fff;
+}
+.series .price{
+	font-size: 1.6em;
+}
+.fsize12{
+	font-size: 12px;
+}
+.series_item_tit1{
+	height: 7em;
+	background-color: #3b8bec;
+}
+.triangle_box{
+	height: 7.8em;
+	position: relative;
+}
+.triangle{
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 7.9em 7.94em 0;
+	border-top-color: transparent;
+	border-left-color: #fff;
+	border-right-color: #fff;
+}
+.series_item:nth-of-type(2) .series_item_titcon{
+	background: url(../../img/xgk/vip_bg1.jpg);
+	background-position: -92em -2em;
+}
+.series_item:nth-of-type(3) .series_item_titcon{
+	background: url(../../img/xgk/vip_bg2.jpg) no-repeat;
+	background-position: 0 -5em;
+	background-size: 182%;
+}
+.vip_icon_tit{
+	display: inline-block;
+	width: 2.4em;
+	height: 2.4em;
+	background: url(../../img/xgk/vip_icon1.png) no-repeat;
+	background-size: cover;
+	margin-right: 1em;
+}
+.vip_icon_tit.type2{
+	background-size: cover;
+	background: url(../../img/xgk/vip_icon2.png) no-repeat;
+}
+.alignCenter{
+	display: flex;
+	align-items: center;
+}
+.series_summary{
+	min-height: 6em;
+}
+.advert>div{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+}
+.advert>div>div{
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+.advert>div>div:first-child{
+	justify-content: flex-end;
+	align-items: flex-start;
+}
+.advert>div>div>p{
+	font-size: 2em;
+}
+
+/*搜索结果页*/
+.tab_head{
+	border-bottom: 2px solid #3b8bec;
+}
+.tab_head >li{
+	width: 5em;
+	padding: .4em .8em;
+	text-align: center;
+	float: left;
+	font-size: 1.4em;
+	cursor: pointer;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+}
+.tab_head >li.cur{
+	background-color: #3b8bec;
+	color: #fff;
+}
+.tab_body>div{
+	display: none;
+}
+.tab_body>div.cur{
+	display: block;
+}
+.tab_body ul>li{
+	margin: 0 1em;
+	padding: .6em 0;
+	border-top: 1px solid #ddd;
+}
+.tab_body ul>li>div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+.like{
+	width: 9em;
+}
+.like img{
+	width: 3em;
+}
+.like>a>span{
+	display: inline-block;
+	width: 4em;
+	text-align: left;
+}
+.tab_body .sch_info{
+	display: flex;
+	justify-content: flex-start;
+}
+.tab_body .sch_tit{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.job_sum{
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	display: -webkit-box;
+}
+.job_infos{
+	width: 50em;
+}
+.panel{
+	border-radius: 20px;
+}
+

@@ -92,7 +92,7 @@
 				                        $(".tag").text(lis[j].getAttribute("tag"))
 				                        curr = j+1;//定位下一播放位置
 				                    }else{
-				                        lis[j].innerHTML = lis[j].getAttribute("title");//没有点击的列表显示
+				                        lis[j].children.innerHTML = lis[j].getAttribute("title");//没有点击的列表显示
 				                        lis[j].className = "";
 				                    }
 				                }

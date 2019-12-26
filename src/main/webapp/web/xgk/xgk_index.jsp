@@ -29,7 +29,7 @@
 			<shiro:guest>
 				<form action="" method="post" >
 					<fieldset id="" class="">
-						<legend class="text-primary margin0"><h3 class="fontwei">臻选高考云端系统</h3></legend>
+						<legend class="text-primary margin0"><h3 class="fontwei">立学道综合改革云平台</h3></legend>
 						<div class="form-group">
 							<input id="mobile" onblur="check_mobile()" type="text" value="" placeholder="手机号"/>
 							<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
@@ -68,7 +68,7 @@
 			<div class="swiper-container">
 				<!-- Swiper -->
 			    <div class="swiper-wrapper">
-				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner_login1.jpg"/></a></div>
+				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner_login1.png"/></a></div>
 				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
 				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner1.jpg"/></a></div>
 				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div>
@@ -216,13 +216,15 @@
 			
 		</banner>
 		<main class="">
-			<section class="container wow fadeInUp">
+			<section class="container">
 				<div class="row">
-					<div class="col-md-6 col-sm-6">
+					<div class="col-md-6 col-sm-6 wow bounceInLeft">
 						<img src="${pageContext.request.contextPath}/img/xgk/index1.png" class="img-responsive"/>
 					</div>
-					<div class="col-md-6 col-sm-6">
-						<h2 class="text-primary"> 认知更清晰 </h2>
+					<div class="col-md-6 col-sm-6 wow bounceInRight">
+						<h2 class="text-primary alignCenter fontwei">
+							<span class="vip_icon_tit" style="background-size: cover;background-img: url(../../img/xgk/index_icon.png) no-repeat;"></span>认知更清晰 
+						</h2>
 						<div class="">
 							全方位了解认识自己，发掘隐藏潜能。针对发展自我能力，定位更准确，未来不迷茫！
 						</div>
@@ -255,10 +257,10 @@
 					</div>
 				</div>
 			</section>
-			<section class="wow fadeInUp" style="background-color: #ddd;padding-top: 1em;">
+			<section class=""style="background-color:#ddd; padding-top: 1em;">
 				<div class="container">
 					<ul class="sectionList2 clearfix row">
-						<li>
+						<li class="wow zoomIn">
 							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;">
 								<div class="">
 									<div class="text-center">
@@ -269,7 +271,7 @@
 							</div>
 							<p class="text-center margin_top1 fontwei">高等院校</p>
 						</li>
-						<li>
+						<li class="wow zoomIn">
 							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
 								<div class="">
 									<div class="text-center">
@@ -280,7 +282,7 @@
 							</div>
 							<p class="text-center margin_top1 fontwei">高校专业</p>
 						</li>
-						<li>
+						<li class="wow zoomIn">
 							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;">
 								<div class="">
 									<div class="text-center">
@@ -291,7 +293,7 @@
 							</div>
 							<p class="text-center margin_top1 fontwei">职业类型</p>
 						</li>
-						<li>
+						<li class="wow zoomIn">
 							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
 								<div class="">
 									<div class="text-center">
@@ -305,10 +307,12 @@
 					</ul>
 				</div>	
 			</section>
-			<section class="container wow fadeInUp">
+			<section class="container">
 				<div class="row">
-					<div class="col-md-6 col-sm-6">
-						<h2 class="text-primary"> 数据更全面 </h2>
+					<div class="col-md-6 col-sm-6 wow bounceInLeft">
+						<h2 class="text-primary alignCenter fontwei">
+							<span class="vip_icon_tit" style="background-size: cover;background-img: url(../../img/xgk/index_icon1.png) no-repeat;"></span>数据更全面 
+						</h2>
 						<div class="">
 							早一步查询，早一步知道，了解高校、专业、职业，更了解自己，让高考不留遗憾。
 						</div>
@@ -339,7 +343,7 @@
 							</li>
 						</ul>
 					</div>
-					<div class="col-md-6 col-sm-6">
+					<div class="col-md-6 col-sm-6 wow bounceInRight">
 						<img src="${pageContext.request.contextPath}/img/xgk/index2.png" class="img-responsive"/>
 					</div>
 				</div>
