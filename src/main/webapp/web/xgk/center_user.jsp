@@ -75,23 +75,23 @@
 						</ul>
 					</li>
 					<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-record"></span> 我的关注 </a> </li>
-					<liclass="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
+					<li><liclass="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
 				</ul>
 				
 				<div class="center_cont">
 					<ul id="user_info">
 						<li><span>用户ID: </span><span>${user.id}</span></li>
+						<%-- <li><span>头像: </span><span>${user.headImg}</span></li> --%>
 						<li><span>用户名称: </span><span>${user.username}</span></li>
 						<li><span>手机号: </span><span>${user.phone}</span></li>
-						<li><span>归属: </span><span>${user.belongTo}</span></li>
-						<li><span>就读学校: </span><span>${user.school}</span></li>
-						<%-- <li><span>学校地址: </span><span>${user.schoolAddress}</span></li> --%>
-						<li><span>科类: </span><span>${user.families}</span></li>
-						<li><span>分数: </span><span>${user.fraction}</span></li>
-						<li><span>高考年度: </span><span>${user.ceeYear}</span></li>
-						<%-- <li><span>职业: </span><span>${user.vocation}</span></li> --%>
-						<%-- <li><span>影响力: </span><span>${user.power}</span></li> --%>
-						<li><span>省份: </span><span>${user.province}</span></li>
+						<li><span>身份证号: </span><span>${user.pcNumber}</span></li>
+						<li><span>学号: </span><span>${user.studentId}</span></li>
+					  	<li><span>就读学校: </span><span>${user.school}</span></li>
+					  	<li><span>就读学校地址: </span><span>${user.schoolAddress}</span></li>
+					  	<li><span>就读省份: </span><span>${user.studyProvinces}</span></li>
+					 	<li><span>学届: </span><span>${user.educationalCircles}</span></li>
+					 	<li><span>年级: </span><span>${user.grade}</span></li>
+						<li><span>班级: </span><span>${user.className}</span></li>
 						<li><span>创建时间: </span><span><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span></li>
 					</ul>
 					<!-- 成绩分析  -->

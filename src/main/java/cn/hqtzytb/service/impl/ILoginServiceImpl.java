@@ -109,6 +109,7 @@ public class ILoginServiceImpl implements ILoginService {
 
     @Override
     public String wxLoginCallback(HttpServletRequest request, HttpServletResponse response) {
+    	System.err.println("1111111" );
         try{
         	Subject subject = SecurityUtils.getSubject();
             Session session = subject.getSession();
@@ -130,6 +131,7 @@ public class ILoginServiceImpl implements ILoginService {
             Map<String,Object> paramMap = new HashMap<>();
             paramMap.put("wexinChat",openid);
             List<User> users = userMapper.selectUserListByMap(paramMap);
+            System.err.println("users:" + users);
             if (users.isEmpty()){ //不存在该微信用户
             	session.setAttribute("headImg", user_json.get("headimgurl"));
             	session.setAttribute("wexinChat", openid);

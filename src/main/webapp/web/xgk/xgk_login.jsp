@@ -44,7 +44,7 @@
 								<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
 							</div>
 							<div class="form-group">
-								<input id="password" onblur="check_pwd()" type="password" value="" placeholder="密码"/>
+								<input id="password" <!-- onblur="check_pwd()"  -->type="password" value="" placeholder="密码"/>
 								<label for="password"><span class="glyphicon glyphicon-tag text-muted"></span></label>
 							</div>
 						</fieldset>
@@ -108,13 +108,13 @@
 					 * 手机号规则
 					 */
 					function check_mobile () {
+						console.log("22222")
 						var tip1=$('#tip1').text();
 						var mobile=$("#mobile").val();
 						if (mobile=='') {
-							$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号不能为空')
-						} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+							$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 账号不能为空')
+						} else if(mobile.length == 11 && !(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
 							$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号码有误，请重新输入');
-					        return false; 
 					    } else{
 					    	$('#tip1').html('');
 					    }
@@ -246,10 +246,10 @@ function login(){
 	var pwd_tip=$('#tip2').text();
 	var pwd=$("#password").val();
 	if (mobile=='') {
-		$('#tip1').text('手机号不能为空')
-	} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+		$('#tip1').text('账号不能为空')
+	} /* else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
 		$('#tip1').text('手机号码有误，请重新输入');      
-    } else if (pwd=='') {
+    } */ else if (pwd=='') {
 		$('#tip2').text('密码不能为空');
 	} else if(!(/^(\w){6,20}$/).test(pwd)){
 		//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符

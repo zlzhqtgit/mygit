@@ -273,14 +273,32 @@ function register(e) {
 //完善注册信息
 function completeRegister() {
 	if ($("#checkbox").is(':checked')){
-		if(!checkName($('#username')) || !check_mobile($('#mobile')) || !check_captcha($('#verify_code')) || !confirm_pwd($('#confirm'), $('#password')) || !check_year()){
+		if( !checkName($('#username')) 
+			|| !check_mobile($('#mobile')) 
+			|| !check_captcha($('#captcha')) 
+			|| !confirm_pwd($('#confirm'), $('#password')) 
+			|| !check_year()){
 			return;
 		}
 		var url = "../user/hqt_registeradd.do";
-		var data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#verify_code").val()
-		+ "&password=" + $("#password").val() + "&belongTo=" + $("#belong_to").val() + "&school=" + $("#school").val() 
-		+ "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val()
-		+ "&ceeYear=" + $("#year").val() + "&vocation=" + $("#vocation").val() + "&province=" + $("#province").val();
+		if($("#pc_number").val() != ""){
+			if(!idCodeValid($("#pc_number"))){
+				return;//身份证号验证失败
+			}
+		}
+		
+		data = "username=" + $("#username").val() + //用户名
+			   "&phone=" + $("#mobile").val() + //手机号
+			   "&verifyCode=" + $("#captcha").val() + //验证码
+			   "&password=" + $("#password").val() + //密码
+			   "&pcNumber=" + $("#pc_number").val() + //身份证号
+			   "&studyProvinces=" + $("#study_provinces").val() + //就读省份 
+			   "&school=" + $("#school").val()  + //学校
+			   "&schoolAddress=" + $("#school_address").val() + //学校地址
+			   "&educationalCircles=" + $("#educational_circles option:selected").val() + //学届 
+			   "&grade=" + $("#grade").val() + //年级
+			   "&className=" + $("#class_name").val() + //班级
+			   "&studentId=" + $("#student_id").val(); //学号
 		$.ajax({
 			type:"POST",
 			url:url,
@@ -316,6 +334,7 @@ function sendMessages(e) {
 		url = "/user/hqt_photoyzm.do";
 		phone = $("#mobile").val();
 	}
+	console.log(phone);
 	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
 	if(!reg.test(phone)) {
 		layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});

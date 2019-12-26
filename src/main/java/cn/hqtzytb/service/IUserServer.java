@@ -83,7 +83,7 @@ public interface IUserServer {
 	 * @param phone
 	 * @return
 	 */
-	ResponseResult<Void> userIsExist(String account, HttpServletRequest request);
+	ResponseResult<Void> userIsExist(String phone, HttpServletRequest request);
 	
 	/**
 	 * 给已注册用户发送短信

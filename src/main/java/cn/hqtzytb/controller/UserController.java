@@ -129,15 +129,15 @@ public class UserController {
 
 
 	/**
-	 * 查用手机号/身份证号是否已注册
+	 * 查用手机号是否已注册
 	 * @param phone
 	 * @return
 	 */
 	@RequestMapping("/user_is_exist.do")
 	@ResponseBody
-	public ResponseResult<Void> userIsExist(@RequestParam(value = "account") String account, HttpServletRequest request){
+	public ResponseResult<Void> userIsExist(@RequestParam(value = "phone") String phone, HttpServletRequest request){
 		
-		return iUserServer.userIsExist(account,request);
+		return iUserServer.userIsExist(phone,request);
 	}
 
 

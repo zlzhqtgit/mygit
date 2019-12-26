@@ -141,20 +141,20 @@ public class IUserServerImpl implements IUserServer {
 
 	
 	@Override
-	public ResponseResult<Void> handleUserlogin(String phone, String password, HttpServletRequest request) {
+	public ResponseResult<Void> handleUserlogin(String account, String password, HttpServletRequest request) {
 		ResponseResult<Void> rr=null;		
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			//查询用户名是否存在
-			User user = userMapper.queryUser(phone);
-			System.out.println("手机号：" + phone);
+			User user = userMapper.queryUser(account);
+			System.out.println("账号号：" + account);
 			System.out.println("密码：" + password);
 			//判断用户名是否存在
 			if (user == null){
 				rr = new ResponseResult<Void>(ResponseResult.ERR,"手机号不存在!请重新输入...");
-				logger.info("用户手机：" + phone + " 模块名：登录模块 操作：登录  状态：Failed! ");
+				logger.info("用户手机：" + account + " 模块名：登录模块 操作：登录  状态：Failed! ");
 			}else{
-				MyUsernamePasswordToken token = new MyUsernamePasswordToken(phone, password);	
+				MyUsernamePasswordToken token = new MyUsernamePasswordToken(account, password);	
 				subject.login(token);
 				Session session= subject.getSession();
 				session.setAttribute(Constants.SYSTEM_USER,user);
@@ -239,7 +239,7 @@ public class IUserServerImpl implements IUserServer {
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码输入错误");
 		}
 		
-//		try {	
+		try {	
 			//查询手机号用户是否存在
 			User account = userMapper.queryUser(user.getPhone());			
 			//判断用户名是否存在
@@ -292,18 +292,18 @@ public class IUserServerImpl implements IUserServer {
 			rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");	
 			subject.login(new MyUsernamePasswordToken(user.getPhone()));
 						
-//		} catch (Exception e) {
-//			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
-//			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
-//		}
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
+			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+		}
 		return rr;
 	}
 
 	
 	@Override
-	public ResponseResult<Void> userIsExist(String account, HttpServletRequest request) {
+	public ResponseResult<Void> userIsExist(String phone, HttpServletRequest request) {
 		try {
-			User user = userMapper.queryUser(account);
+			User user = userMapper.queryUser(phone);
 			if (user != null) {
 				return new ResponseResult<Void>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 			}
