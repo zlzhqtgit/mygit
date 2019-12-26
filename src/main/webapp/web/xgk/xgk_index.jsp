@@ -116,8 +116,8 @@
 					var pwd_tip=$('#tip2').text();
 					var pwd=$("#password").val();
 					if (mobile=='') {
-						$('#tip1').text('手机号不能为空')
-					} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+						$('#tip1').text('账号号不能为空')
+					} else if(mobile.length == 11 && !(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
 						$('#tip1').text('手机号码有误，请重新输入');
 				    } else if (pwd=='') {
 						$('#tip2').text('密码不能为空');
@@ -128,7 +128,7 @@
 						var url = "${pageContext.request.contextPath}/user/xgk_userLogin.do";
 						var phone=$("#mobile").val();
 						var password=$("#password").val();		
-						var data = "phone="+phone+"&password="+password;		
+						var data = "account="+phone+"&password="+password;		
 						$.ajax({
 							"url" : url,
 							"data" : data,
@@ -181,11 +181,13 @@
 				 * 手机号规则
 				 */
 				function check_mobile () {
-					var tip1=$('#tip1').text();
-					var mobile=$("#mobile").val();
-					if (mobile=='') {
+					var tip1 = $('#tip1').text();
+					var mobile = $("#mobile").val();
+					console.log(mobile);
+					console.log(mobile.length);
+					if (mobile == '') {
 						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号不能为空')
-					} else if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+					} else if(mobile.length == 11 && !(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
 						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号码有误，请重新输入');
 				        return false; 
 				    } else{

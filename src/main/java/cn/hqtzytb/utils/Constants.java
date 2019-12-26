@@ -42,6 +42,11 @@ public class Constants{
 	public static final String INITIAL_PASSWORD = "666666";
 
 	/**
+	 * 院校图片前缀
+	 */
+	public static final String COLLEGE_PHOTO_PREFIX = "${pageContext.request.contextPath}";
+	
+	/**
 	 * 错误信息字符串头
 	 */
 	public static final String ERROR_HEAD_INFO = "错误信息>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";

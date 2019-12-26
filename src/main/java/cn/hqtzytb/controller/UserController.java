@@ -64,9 +64,9 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/xgk_userLogin.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseResult<Void> handleUserlogin(String phone, String password, HttpServletRequest request) {
+	public ResponseResult<Void> handleUserlogin(String account, String password, HttpServletRequest request) {
 
-		return iUserServer.handleUserlogin(phone, password, request);
+		return iUserServer.handleUserlogin(account, password, request);
 	}
 	
 

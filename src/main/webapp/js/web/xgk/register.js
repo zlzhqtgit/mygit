@@ -1,10 +1,10 @@
 var countdown=60; //60秒发送一次
 function sendMobileMessage(e){
-	 var phone = $("#mobile").val();
+	 var phone = $("#phone").val();
 	 var obj = $("#get_verify");
 	 if(e == 1){
 		 obj = $("#get_verify1");
-		 phone = $("#mobile1").val();
+		 phone = $("#phone1").val();
 	}	
 	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
 	if(!reg.test(phone)) {
@@ -26,55 +26,6 @@ function sendMobileMessage(e){
 		}	
 	});
 }
-////发送短信
-//$('#get_verify').click(function() { 
-//	    var phone = $("#mobile").val();
-//	    var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-//		if(!reg.test(phone)) {
-//			layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
-//			return;
-//		}
-//		var obj = $("#get_verify");
-//		settime(obj);
-//		$.ajax({
-//			url: "../user/hqt_photoyzm.do",
-//			data:"phone=" + phone,
-//			type:"POST",
-//			dataType:"json",
-//			success:function(obj){
-//				if(obj.state == 0){
-//					layer.msg(obj.message,{icon:2,time:1000});
-//				}else{
-//					layer.msg(obj.message,{icon:6,time:1000});
-//				}
-//			}	
-//		});
-//})
-////发送短信1
-//$('#get_verify1').click(function() { 
-//		console.log('11111111')
-//	    var phone = $("#mobile1").val();
-//	    var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
-//		if(!reg.test(phone)) {
-//			layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
-//			return;
-//		}
-//		var obj = $("#get_verify1");
-//		settime(obj);
-//		$.ajax({
-//			url: "../user/hqt_photoyzm.do",
-//			data:"phone=" + phone,
-//			type:"POST",
-//			dataType:"json",
-//			success:function(obj){
-//				if(obj.state == 0){
-//					layer.msg(obj.message,{icon:2,time:1000});
-//				}else{
-//					layer.msg(obj.message,{icon:6,time:1000});
-//				}
-//			}	
-//		});
-//})
 
 function settime(obj) { //发送验证码倒计时
     if (countdown == 0) { 
@@ -93,6 +44,7 @@ function settime(obj) { //发送验证码倒计时
 	    settime(obj) }
 	    ,1000) 
 	}
+
 
 function check_captcha(obj){
 	if(obj.val()==''){
@@ -120,7 +72,6 @@ function checkName(obj) {
 }
 
 function check_mobile(obj) {
-	//mobile=$('#mobile');
 	mobile = obj;
 	reg_mobile = /^1(3|4|5|6|7|8|9)\d{9}$/;
 	if(mobile.val() == '') {
@@ -192,11 +143,11 @@ function confirm_pwd(obj, pre) {
 	}
 }
 
-//选择高考年度
+//选择学届验证
 function check_year() {
 	var el = $('.filter-title');
-	if(el.val() == '请选择高考年度') {
-		errorport($('.filter-box'), ' 请选择高考年度');
+	if(el.val() == '请选择学届') {
+		errorport($('.filter-box'), '请选择学届');
 		return false;
 	}
 	return true;
@@ -250,46 +201,52 @@ function next_step(obj) {
  * @returns {Boolean}
  */
 function register(e) {
+	
+	//阅读已同意
 	if ($("#checkbox").is(':checked') || $("#checkbox1").is(':checked')){
 		var url = "../user/hqt_registeradd.do";
-		var data
+		var data = "";
 		if(e == 0){
-			if(!checkName($('#username')) || !check_mobile($('#mobile')) || !check_captcha($('#captcha')) 
-					                      || !confirm_pwd($('#confirm'), $('#password')) || !check_year()){
+			//学生
+			if(!checkName($('#username'))  //用户名验证
+			   || !check_mobile($('#phone')) //手机号验证 
+			   || !check_captcha($('#captcha')) //验证码输入验证              
+			   || !confirm_pwd($('#confirm'), $('#password')) //密码\确认码输入确认 
+			   || !check_year()){ //选择学届验证
 				return;
 			}
-			data = "username=" + $("#username").val() + 
-				   "&phone=" + $("#mobile").val() + 
-				   "&verifyCode=" + $("#captcha").val() + 
-				   "&password=" + $("#password").val() + 
-				   "&belongTo=" + $("#belong_to").val() + 
-				   "&school=" + $("#school").val()  + 
-				   "&schoolAddress=" + $("#school_address").val() + 
-				   "&families=" + $("#object").val() + 
-				   "&fraction=" + $("#score").val() + 
-				   "&ceeYear=" + $("#cee_year option:selected").val() + 
-				   "&vocation=" + $("#vocation").val() + 
-				   "&province=" + $("#province").val();
-			console.log('data : ' + data);
+			if($("#pc_number").val() != ""){
+				if(!idCodeValid($("#pc_number"))){
+					return;//身份证号验证失败
+				}
+			}
+			
+			data = "username=" + $("#username").val() + //用户名
+				   "&phone=" + $("#phone").val() + //手机号
+				   "&verifyCode=" + $("#captcha").val() + //验证码
+				   "&password=" + $("#password").val() + //密码
+				   "&pcNumber=" + $("#pc_number").val() + //身份证号
+				   "&studyProvinces=" + $("#study_provinces").val() + //就读省份 
+				   "&school=" + $("#school").val()  + //学校
+				   "&schoolAddress=" + $("#school_address").val() + //学校地址
+				   "&educationalCircles=" + $("#educational_circles option:selected").val() + //学届 
+				   "&grade=" + $("#grade").val() + //年级
+				   "&className=" + $("#class_name").val() + //班级
+				   "&studentId=" + $("#student_id").val(); //学号
 		} else {
-			if(!checkName($('#username1')) || !check_mobile($('#mobile1')) || !check_captcha($('#captcha1')) || !confirm_pwd($('#confirm1'), $('#password1'))){
-				console.log('111')
-				return;
-			}
-			data = "username=" + $("#username1").val() + 
-				   "&phone=" + $("#mobile1").val() + 
-				   "&verifyCode=" + $("#captcha1").val() + 
-				   "&password=" + $("#password1").val() + 
-				   "&belongTo=" + $("#belong_to1").val() + 
-				   "&school=" + $("#school1").val() + 
-				   "&schoolAddress=" + $("#school_address1").val() + 
-				   "&families=" + $("#object1").val() + 
-				   "&fraction=" + $("#score1").val() + 
-				   "&ceeYear=" + $("#cee_year1 option:selected").val() + 
-				   "&vocation=" + $("#vocation1").val() + 
-				   "&province=" + $("#province1").val();
+			//咨询师
+			if(!checkName($('#username1'))  //用户名验证
+					   || !check_mobile($('#phone1')) //手机号验证 
+					   || !check_captcha($('#captcha1')) //验证码输入验证              
+					   || !confirm_pwd($('#confirm1'), $('#password1'))){ //密码\确认码输入确认 
+
+						return;
+					}
+					data = "username=" + $("#username1").val() + //用户名
+						   "&phone=" + $("#phone1").val() + //手机号
+						   "&verifyCode=" + $("#captcha1").val() + //验证码
+						   "&password=" + $("#password1").val(); //密码
 		}
-		
 		$.ajax({
 			type:"POST",
 			url:url,
@@ -316,14 +273,32 @@ function register(e) {
 //完善注册信息
 function completeRegister() {
 	if ($("#checkbox").is(':checked')){
-		if(!checkName($('#username')) || !check_mobile($('#mobile')) || !check_captcha($('#verify_code')) || !confirm_pwd($('#confirm'), $('#password')) || !check_year()){
+		if( !checkName($('#username')) 
+			|| !check_mobile($('#mobile')) 
+			|| !check_captcha($('#captcha')) 
+			|| !confirm_pwd($('#confirm'), $('#password')) 
+			|| !check_year()){
 			return;
 		}
 		var url = "../user/hqt_registeradd.do";
-		var data = "username=" + $("#username").val() + "&phone=" + $("#mobile").val() + "&verifyCode=" + $("#verify_code").val()
-		+ "&password=" + $("#password").val() + "&belongTo=" + $("#belong_to").val() + "&school=" + $("#school").val() 
-		+ "&schoolAddress=" + $("#school_address").val() + "&families=" + $("#object").val() + "&fraction=" + $("#score").val()
-		+ "&ceeYear=" + $("#year").val() + "&vocation=" + $("#vocation").val() + "&province=" + $("#province").val();
+		if($("#pc_number").val() != ""){
+			if(!idCodeValid($("#pc_number"))){
+				return;//身份证号验证失败
+			}
+		}
+		
+		data = "username=" + $("#username").val() + //用户名
+			   "&phone=" + $("#mobile").val() + //手机号
+			   "&verifyCode=" + $("#captcha").val() + //验证码
+			   "&password=" + $("#password").val() + //密码
+			   "&pcNumber=" + $("#pc_number").val() + //身份证号
+			   "&studyProvinces=" + $("#study_provinces").val() + //就读省份 
+			   "&school=" + $("#school").val()  + //学校
+			   "&schoolAddress=" + $("#school_address").val() + //学校地址
+			   "&educationalCircles=" + $("#educational_circles option:selected").val() + //学届 
+			   "&grade=" + $("#grade").val() + //年级
+			   "&className=" + $("#class_name").val() + //班级
+			   "&studentId=" + $("#student_id").val(); //学号
 		$.ajax({
 			type:"POST",
 			url:url,
@@ -359,6 +334,7 @@ function sendMessages(e) {
 		url = "/user/hqt_photoyzm.do";
 		phone = $("#mobile").val();
 	}
+	console.log(phone);
 	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
 	if(!reg.test(phone)) {
 		layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
@@ -440,4 +416,45 @@ function bindAccount() {
 			}
 		});
 	}
+}
+
+//身份证号合法性验证
+//支持15位和18位身份证号
+//支持地址编码、出生日期、校验位验证
+function idCodeValid(obj){
+var code = obj.val(); 
+var city={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江 ",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北 ",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏 ",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外 "};
+if(!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|[xX])$/.test(code)){
+	errorport(obj, ' 身份证号格式错误');
+	obj.focus();
+	return false;    
+}else if(!city[code.substr(0,2)]){
+	errorport(obj, ' 身份证号地址编码错误');
+	obj.focus();
+	return false;
+}else{
+    //18位身份证需要验证最后一位校验位
+    if(code.length == 18){
+        code = code.split('');
+        //∑(ai×Wi)(mod 11)
+        //加权因子
+        var factor = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ];
+        //校验位
+        var parity = [ 1, 0, 'X', 9, 8, 7, 6, 5, 4, 3, 2 ];
+        var sum = 0;
+        var ai = 0;
+        var wi = 0;
+        for (var i=0; i<17; i++){
+            ai = code[i];
+            wi = factor[i];
+            sum += ai * wi;
+        }
+        if(parity[sum % 11] != code[17].toUpperCase()){
+        	errorport(obj, ' 身份证号校验位错误');
+        	obj.focus();
+        	return false;
+        }
+    }
+}
+return true;
 }

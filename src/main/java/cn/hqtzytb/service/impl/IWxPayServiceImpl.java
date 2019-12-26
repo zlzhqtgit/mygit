@@ -6,6 +6,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
@@ -24,7 +28,9 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import cn.hqtzytb.entity.Order;
 import cn.hqtzytb.entity.WxpayConfig;
+import cn.hqtzytb.mapper.OrderMapper;
 import cn.hqtzytb.service.IWxPayService;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.HttpClientUtils;
@@ -42,6 +48,8 @@ public class IWxPayServiceImpl implements IWxPayService{
 	private  static final Logger logger = LogManager.getLogger(IWxPayServiceImpl.class.getName());
 	@Autowired
 	private WxpayConfig wxpayConfig;
+	@Autowired 
+	private OrderMapper orderMapper;
 	
 	@Override
 	public Object wxpay(HttpServletRequest request, String out_trade_no, String total_fee, String body) {
@@ -76,16 +84,23 @@ public class IWxPayServiceImpl implements IWxPayService{
 
 	
 	@Override
-	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String out_trade_no, Double rechargeMoney) {
+	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, Double rechargeMoney) throws Exception {
 		try {
-			int i = (new Double(rechargeMoney * 100)).intValue();
+			body = new String(body.toString().getBytes("ISO8859-1"), "UTF-8");
+			System.err.println(body);
+			Session session = SecurityUtils.getSubject().getSession();
+			String out_trade_no = generateOrderTradeNo();
+			session.setAttribute("out_trade_no", out_trade_no);
+			session.setAttribute("recharge_money", rechargeMoney);
+			session.setAttribute("body", body);
+			int total_fee = (new Double(rechargeMoney * 100)).intValue();
 			System.out.println(out_trade_no);
 			// Integer total_fee=Integer.parseInt(rechargeMoney);
 			// 调用pay工程的微信支付接口
 			Map<String, Object> paramMap = new ConcurrentHashMap<String, Object>();
+			String url = "http://localhost/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee + "&body=" + body;
 			// pay工程微信支付接口返回的json字符串
-			String result = HttpClientUtils.doPost("http://localhost:8080/hqtzytb/api/wxpay.do?out_trade_no=" + out_trade_no
-					+ "&total_fee=" + i + "&body=停车费充值", paramMap);
+			String result = HttpClientUtils.doPost(url, paramMap);
 			// 获取到code_url，将其生成二维码显示到页面 ;
 			// 解析result	
 			JSONObject jsonObject = JSONObject.parseObject(result);
@@ -107,8 +122,7 @@ public class IWxPayServiceImpl implements IWxPayService{
 					Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
 					hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 					// 创建一个矩阵对象
-					BitMatrix bitMatrix = new MultiFormatWriter().encode(code_url, BarcodeFormat.QR_CODE, width, height,
-							hints);
+					BitMatrix bitMatrix = new MultiFormatWriter().encode(code_url, BarcodeFormat.QR_CODE, width, height, hints);
 					// 创建字节数组输出流
 					ByteArrayOutputStream imageOut = new ByteArrayOutputStream();
 					// 将矩阵对象转换为响应到页面
@@ -135,6 +149,7 @@ public class IWxPayServiceImpl implements IWxPayService{
 	@Override
 	public void weixinNotify(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			Session session = SecurityUtils.getSubject().getSession();
 			String inputLine;
 			String notityXml = "";
 			ServletContext application = request.getSession().getServletContext();
@@ -155,6 +170,9 @@ public class IWxPayServiceImpl implements IWxPayService{
 				map = WXPayUtil.xmlToMap(notityXml);
 			}
 			System.out.println(notityXml);
+			for(Map.Entry<String, String> entry : map.entrySet()){
+				System.err.println("key: " + entry.getKey() + " && value: " + entry.getValue());
+			}
 			//定义一个返回给微信的变量
 			String resXml ="";
 			//判断返回的通知是否是交易成功
@@ -168,7 +186,13 @@ public class IWxPayServiceImpl implements IWxPayService{
 				out.flush();
 				out.close();			
 				application.setAttribute(map.get("out_trade_no")+"SUCCESS","SUCCESS");			
-				System.out.println("通知微信.异步确认成功");			
+				System.out.println("通知微信.异步确认成功");
+				Order order = new Order();
+				order.setUid((Integer)session.getAttribute("uid"));
+				order.setOutTradeNo((String)session.getAttribute("out_trade_no"));
+				order.setRechargeMoney((Double)session.getAttribute("recharge_money"));
+				order.setBody((String)session.getAttribute("body"));
+				orderMapper.insert(order);
 			} else {			
 				resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
 						+ "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
@@ -177,12 +201,20 @@ public class IWxPayServiceImpl implements IWxPayService{
 				out.flush();
 				out.close();
 				application.setAttribute(map.get("out_trade_no")+"SUCCESS","FAIL");
-				System.out.println("通知微信.异步确认交易失败");			
+				System.out.println("通知微信.异步确认交易失败");		
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付回掉异常     错误信息: " + e);
 		}
-	
 	}
-
+	
+	/**
+	 * 生成时间戳订单id
+	 * @return
+	 */
+	private String generateOrderTradeNo(){
+		String current_time = Long.toString(System.currentTimeMillis());
+		String date =  new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		return date + current_time.substring(current_time.length() - 4);
+	}
 }

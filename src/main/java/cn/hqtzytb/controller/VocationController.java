@@ -62,4 +62,15 @@ public class VocationController {
 	public ResponseResult<Map<String, Object>> getVocationOtherDetail(String vocationId, HttpServletRequest request) {
 		return IVocationServer.getVocationOtherDetail(vocationId, request);
 	}
+	
+	
+	/**
+	 * 分页查询职业信息列表
+	 * @return
+	 */
+	@RequestMapping("/xgk_voc_list.do")
+	@ResponseBody
+	public ResponseResult<Map<String, Object>> getVocationList(String where,Integer offset, Integer countPerPage ,HttpServletRequest request) {
+		return IVocationServer.getVocationList(where, offset, countPerPage, request);
+	}
 }

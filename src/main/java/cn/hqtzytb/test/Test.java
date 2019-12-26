@@ -46,60 +46,65 @@ public class Test {
 ////        JSONArray array = JSONArray.fromObject("['3','4','5','6','7']");
 ////        Object[] array1 = array.toArray();
 ////        System.out.println(array1[0]);
-        for (int i=0;i<10;i++){
-            System.out.println(new SimpleDateFormat("yyyy_MM_dd_").format (new Date()) + UUID.randomUUID());
-        }
-
-        String image = "asdasda/img/photo/school/10001/2.png";
-
-        System.out.println( image.substring(image.lastIndexOf("img"),image.length())) ;
-        System.out.println();
-        System.out.println(new Test().getClass().getResource("/").getPath());
+//        for (int i=0;i<10;i++){
+//            System.out.println(new SimpleDateFormat("yyyy_MM_dd_").format (new Date()) + UUID.randomUUID());
+//        }
+//
+//        String image = "asdasda/img/photo/school/10001/2.png";
+//
+//        System.out.println( image.substring(image.lastIndexOf("img"),image.length())) ;
+//        System.out.println();
+//        System.out.println(new Test().getClass().getResource("/").getPath());
 //        432393A3840199E0957E15C9942769B6
      
         
-        Pattern pattern = Pattern.compile("\\d{6}");
-        Matcher matcher = pattern.matcher("奥斯卡汇顶科技按时还款的骄傲和授课计划123045哈萨克电话卡精神可嘉023568");
-        while(matcher.find()){
-        	System.err.println(matcher.group());
-        }
-        
-        String year = new SimpleDateFormat("yyyy").format(new Date());
-        
-        List<Integer> vocationList = new ArrayList<>();
-        vocationList.add(1);
-        vocationList.add(2);
-        vocationList.add(3);
-        vocationList.add(4);
-        vocationList.add(5);
-        vocationList.add(6);
-        System.err.println(vocationList);
+//        Pattern pattern = Pattern.compile("\\d{6}");
+//        Matcher matcher = pattern.matcher("奥斯卡汇顶科技按时还款的骄傲和授课计划123045哈萨克电话卡精神可嘉023568");
+//        while(matcher.find()){
+//        	System.err.println(matcher.group());
+//        }
+//        
+//        String year = new SimpleDateFormat("yyyy").format(new Date());
+//        
+//        List<Integer> vocationList = new ArrayList<>();
+//        vocationList.add(1);
+//        vocationList.add(2);
+//        vocationList.add(3);
+//        vocationList.add(4);
+//        vocationList.add(5);
+//        vocationList.add(6);
+//        System.err.println(vocationList);
 //		for(int i=vocationList.size(); i>0; i--){
 //			vocationList.add(i, vocationList.get(i-1));
 //		}
-		vocationList.add(0, 0);
-		System.err.println(vocationList);
+//		vocationList.add(0, 0);
+//		System.err.println(vocationList);
+//		
+//		String str = "ACE";
+//		String charAt = str.charAt(0)+"";
+//		System.err.println();
+//		
+//		Map<String, Integer> cpFengshu = JSONObject.fromObject("{A=9, R=7, C=8, S=4, E=8, I=6}");
+//		System.err.println(cpFengshu);
+//		System.err.println( "10  0   " +  0/0.1);
+//		Double accc = new Double(0);
+//		if(accc == new Double(0)){
+//					System.err.println("saasdkhaskjhdakjhdkj");
+//		}
+//		
+//		System.err.println(0/1);
+//		
+//		
+//		String[] aStrings  = new String[0];
+//		System.err.println(aStrings.length);
+//		for(int i=0; i<aStrings.length; i++){
+//			System.err.println("空数组:"+i);
+//		}
 		
-		String str = "ACE";
-		String charAt = str.charAt(0)+"";
-		System.err.println();
-		
-		Map<String, Integer> cpFengshu = JSONObject.fromObject("{A=9, R=7, C=8, S=4, E=8, I=6}");
-		System.err.println(cpFengshu);
-		System.err.println( "10  0   " +  0/0.1);
-		Double accc = new Double(0);
-		if(accc == new Double(0)){
-					System.err.println("saasdkhaskjhdakjhdkj");
-		}
-		
-		System.err.println(0/1);
-		
-		
-		String[] aStrings  = new String[0];
-		System.err.println(aStrings.length);
-		for(int i=0; i<aStrings.length; i++){
-			System.err.println("空数组:"+i);
-		}
+    	String current_time = Long.toString(System.currentTimeMillis());
+		String date =  new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		String order_id = date + current_time.substring(current_time.length() - 4);
+		System.err.println(order_id);
     }
 
 

@@ -2,169 +2,340 @@
 	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="cn.hqtzytb.mapper.UserMapper">
-	<insert id="insert" parameterType="cn.hqtzytb.entity.User"
-		useGeneratedKeys="true" keyProperty="id">
-		insert into user(
-		username,phone,wexin_chat,qq_chat,password,uuid,
-		belong_to,school,school_address,families,fraction,
-		cee_year,vocation,head_url,power,creat_time
-		)values(
-		#{username},#{phone},
-		#{wexinChat},#{qqChat},
-		#{password},#{uuid},#{belongTo},
-		#{school},#{schoolAddress},
-		#{families},#{fraction},
-		#{ceeYear},#{vocation},#{headUrl},
-		#{power},#{creatTime}
-		)
+	<resultMap id="BaseResultMap" type="cn.hqtzytb.entity.User">
+	    	<id column="id" property="id" />
+	    	<result column="head_img" property="headImg" />
+	    	<result column="username" property="username" />
+	    	<result column="phone" property="phone" />
+	    	<result column="pc_number" property="pcNumber" />
+	    	<result column="student_id" property="studentId" />
+	    	<result column="wexin_chat" property="wexinChat" />
+	    	<result column="qq_chat" property="qqChat" />
+	    	<result column="password" property="password" />
+	    	<result column="uuid" property="uuid" />
+	    	<result column="school" property="school" />
+	    	<result column="school_address" property="schoolAddress" />
+	    	<result column="study_provinces" property="studyProvinces" />
+	    	<result column="educational_circles" property="educationalCircles" />
+	    	<result column="grade" property="grade" />
+	    	<result column="class_name" property="className" />
+	    	<result column="rid" property="rid" />
+	    	<result column="authority" property="authority" />
+	    	<result column="creat_time" property="creatTime" />
+	     <!-- 角色 -->
+	     <result column="role_id" property="roleId" />
+	     <result column="cid" property="cid" />
+	     <result column="role_name" property="roleName" />
+	     <result column="role_authority" property="roleAuthority" />
+	     <result column="role_description" property="roleDescription" />
+	     <!-- 单位 -->
+	    	<result column="company_id" property="companyId" />
+		<result column="company_number" property="companyNumber" />
+		<result column="company_name" property="companyName" />
+		<result column="company_adress" property="companyAdress" />
+		<result column="creation_time" property="creationTime" />
+  	</resultMap>
+
+	<insert id="insert" parameterType="cn.hqtzytb.entity.User" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO  user
+	    <trim prefix="(" suffix=")" suffixOverrides=",">
+	      <if test="id != null">
+	        id,
+	      </if>
+	      <if test="headImg != null">
+	        head_img,
+	      </if>
+	      <if test="username != null">
+	        username,
+	      </if>
+	      <if test="phone != null">
+	        phone,
+	      </if>
+	      <if test="pcNumber != null">
+	        pc_number,
+	      </if>
+	      <if test="studentId != null">
+	        student_id,
+	      </if>
+	      <if test="wexinChat != null">
+	        wexin_chat,
+	      </if>
+	      <if test="qqChat != null">
+	        qq_chat,
+	      </if>
+	      <if test="password != null">
+	        password,
+	      </if>
+	      <if test="uuid != null">
+	        uuid,
+	      </if>
+	      <if test="school != null">
+	        school,
+	      </if>
+	      <if test="schoolAddress != null">
+	        school_address,
+	      </if>
+	      <if test="studyProvinces != null">
+	        study_provinces,
+	      </if>
+	      <if test="educationalCircles != null">
+	        educational_circles,
+	      </if>
+	      <if test="grade != null">
+	        grade,
+	      </if>
+	      <if test="className != null">
+	        class_name,
+	      </if>
+	      <if test="rid != null">
+	        rid,
+	      </if>
+	      <if test="authority != null">
+	        authority,
+	      </if>
+	      <if test="creatTime != null">
+	        creat_time,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	      <if test="id != null">
+	        #{id},
+	      </if>
+	      <if test="headImg != null">
+	        #{headImg},
+	      </if>
+	      <if test="username != null">
+	        #{username},
+	      </if>
+	      <if test="phone != null">
+	        #{phone},
+	      </if>
+	      <if test="pcNumber != null">
+	        #{pcNumber},
+	      </if>
+	      <if test="studentId != null">
+	        #{studentId},
+	      </if>
+	      <if test="wexinChat != null">
+	        #{wexinChat},
+	      </if>
+	      <if test="qqChat != null">
+	        #{qqChat},
+	      </if>
+	      <if test="password != null">
+	        #{password},
+	      </if>
+	      <if test="uuid != null">
+	        #{uuid},
+	      </if>
+	      <if test="school != null">
+	        #{school},
+	      </if>
+	      <if test="schoolAddress != null">
+	        #{schoolAddress},
+	      </if>
+	      <if test="studyProvinces != null">
+	        #{studyProvinces},
+	      </if>
+	      <if test="educationalCircles != null">
+	        #{educationalCircles},
+	      </if>
+	      <if test="grade != null">
+	        #{grade},
+	      </if>
+	      <if test="className != null">
+	        #{className},
+	      </if>
+	      <if test="rid != null">
+	        #{rid},
+	      </if>
+	      <if test="authority != null">
+	        #{authority},
+	      </if>
+	      <if test="creatTime != null">
+	        #{creatTime},
+	      </if>
+	    </trim>
 	</insert>
+	
 	<!--查询用户 -->
 	<select id="select" resultType="cn.hqtzytb.entity.User">
-		select
-		id,username,phone,wexin_chat as wexinChat,qq_chat as qqChat,password,uuid,
-		belong_to as belongTo,school,school_address as schoolAddress,families,fraction,
-		cee_year as ceeYear,vocation,head_url as headUrl,power,creat_time as
-		creatTime
-		from user
+		SELECT
+			id, head_img, username, phone, pc_number, student_id, wexin_chat, qq_chat, password, 
+		    	uuid, school, school_address, study_provinces, educational_circles, grade, class_name, 
+		    	rid, authority, creat_time,
+		    	role_id, cid, role_name, role_authority, role_description,
+			company_id, company_number, company_name, company_adress, creation_time
+		FROM user
+		LEFT JOIN role on role.role_id = user.rid
+		LEFT JOIN company on company.company_id = role.cid
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
 	</select>
+	
 	<!-- 查询单个用户信息 -->
 	<!-- 如果参数类型parameterType是普通数据类型，那么SQL中的#{}参数名可以任意； 如果参数是对象，那么参#{}数名称必须和对象属性名一致 -->
-	<select id="queryUser" resultType="User" parameterType="String">
-		SELECT *
-		FROM user WHERE phone = #{phone}
+	<select id="queryUser" resultType="cn.hqtzytb.entity.User" parameterType="java.lang.String">
+		SELECT 
+			id, head_img, username, phone, pc_number, student_id, wexin_chat, qq_chat, password, 
+		    	uuid, school, school_address, study_provinces, educational_circles, grade, class_name, 
+		    	rid, authority, creat_time,
+		    	role_id, cid, role_name, role_authority, role_description,
+			company_id, company_number, company_name, company_adress, creation_time
+		FROM 
+			user	
+		LEFT JOIN role on role.role_id = user.rid
+		LEFT JOIN company on company.company_id = role.cid	
+		WHERE phone = #{account} OR pc_number = #{account}
 	</select>
+	 
 
-	<select id="selectUserListByMap" resultType="cn.hqtzytb.entity.User"
-		parameterType="java.util.Map">
+	<select id="selectUserListByMap" resultType="cn.hqtzytb.entity.User" parameterType="java.util.Map">
 		SELECT
-		*
+			id, head_img, username, phone, pc_number, student_id, wexin_chat, qq_chat, password, 
+		    	uuid, school, school_address, study_provinces, educational_circles, grade, class_name, 
+		    	rid, authority, creat_time,
+		    	role_id, cid, role_name, role_authority, role_description,
+			company_id, company_number, company_name, company_adress, creation_time
 		FROM
-		user
+			user
+		LEFT JOIN role on role.role_id = user.rid
+		LEFT JOIN company on company.company_id = role.cid	
 		<where>
 			<if test="id != null">
-				AND id = #{id}
-			</if>
-			<if test="username != null">
-				AND username = #{username}
-			</if>
-			<if test="phone != null">
-				AND phone = #{phone}
-			</if>
-			<if test="wexinChat != null">
-				AND wexin_chat = #{wexinChat}
-			</if>
-			<if test="qqChat != null">
-				AND qq_chat = #{qqChat}
-			</if>
-			<if test="password != null">
-				AND password = #{password}
-			</if>
-			<if test="uuid != null">
-				AND uuid = #{uuid}
-			</if>
-			<if test="belongTo != null">
-				AND belong_to = #{belongTo}
-			</if>
-			<if test="school != null">
-				AND school = #{school}
-			</if>
-			<if test="schoolAddress != null">
-				AND school_address = #{schoolAddress}
-			</if>
-			<if test="families != null">
-				AND families = #{families}
-			</if>
-			<if test="fraction != null">
-				AND fraction = #{fraction}
-			</if>
-			<if test="ceeYear != null">
-				AND cee_year = #{ceeYear}
-			</if>
-			<if test="vocation != null">
-				AND vocation = #{vocation}
-			</if>
-			<if test="headUrl != null">
-				AND head_url = #{headUrl}
-			</if>
-			<if test="power != null">
-				AND power = #{power}
-			</if>
-			<if test="creatTime != null">
-				AND creat_time = #{creatTime}
-			</if>
+		        AND id = #{id}
+		      </if>
+		      <if test="headImg != null">
+		        AND head_img = #{headImg}
+		      </if>
+		      <if test="username != null">
+		        AND username = #{username}
+		      </if>
+		      <if test="phone != null">
+		        AND phone = #{phone}
+		      </if>
+		      <if test="pcNumber != null">
+		        AND pc_number = #{pcNumber}
+		      </if>
+		      <if test="studentId != null">
+		        AND student_id = #{studentId}
+		      </if>
+		      <if test="wexinChat != null">
+		        AND wexin_chat = #{wexinChat}
+		      </if>
+		      <if test="qqChat != null">
+		        AND qq_chat = #{qqChat}
+		      </if>
+		      <if test="password != null">
+		        AND password = #{password}
+		      </if>
+		      <if test="uuid != null">
+		        AND uuid = #{uuid}
+		      </if>
+		      <if test="school != null">
+		        AND school = #{school}
+		      </if>  
+		      <if test="schoolAddress != null">
+		        AND school_address = #{schoolAddress}
+		      </if>
+		      <if test="studyProvinces != null">
+		        AND study_provinces = #{studyProvinces}
+		      </if>
+		      <if test="educationalCircles != null">
+		        AND educational_circles = #{educationalCircles}
+		      </if>
+		      <if test="grade != null">
+		        AND grade = #{grade}
+		      </if>
+		      <if test="className != null">
+		        AND class_name = #{className}
+		      </if>
+		      <if test="rid != null">
+		        AND rid = #{rid}
+		      </if>
+		      <if test="authority != null">
+		        AND authority = #{authority}
+		      </if>
+		      <if test="creatTime != null">
+		        AND creat_time = #{creatTime}
+		      </if>
 		</where>
 	</select>
 
+
 	<update id="updateById" parameterType="cn.hqtzytb.entity.User">
 		update user
-		<set>
-			<if test="username != null">
-				username = #{username},
-			</if>
-			<if test="phone != null">
-				phone = #{phone},
-			</if>
-			<if test="wexinChat != null">
-				wexin_chat = #{wexinChat},
-			</if>
-			<if test="qqChat != null">
-				qq_chat = #{qqChat},
-			</if>
-			<if test="password != null">
-				password = #{password},
-			</if>
-			<if test="uuid != null">
-				uuid = #{uuid},
-			</if>
-			<if test="belongTo != null">
-				belong_to = #{belongTo},
-			</if>
-			<if test="school != null">
-				school = #{school},
-			</if>
-			<if test="schoolAddress != null">
-				school_address = #{schoolAddress},
-			</if>
-			<if test="families != null">
-				families = #{families},
-			</if>
-			<if test="fraction != null">
-				fraction = #{fraction},
-			</if>
-			<if test="ceeYear != null">
-				cee_year = #{ceeYear},
-			</if>
-			<if test="vocation != null">
-				vocation = #{vocation},
-			</if>
-			<if test="headUrl != null">
-				head_url = #{headUrl},
-			</if>
-			<if test="power != null">
-				power = #{power},
-			</if>
-			<if test="creatTime != null">
-				creat_time = #{creatTime},
-			</if>
-		</set>
-		where id = #{id}
+	    <set>
+	      <if test="headImg != null">
+	        head_img = #{headImg},
+	      </if>
+	      <if test="username != null">
+	        username = #{username},
+	      </if>
+	      <if test="phone != null">
+	        phone = #{phone},
+	      </if>
+	      <if test="pcNumber != null">
+	        pc_number = #{pcNumber},
+	      </if>
+	      <if test="studentId != null">
+	        student_id = #{studentId},
+	      </if>
+	      <if test="wexinChat != null">
+	        wexin_chat = #{wexinChat},
+	      </if>
+	      <if test="qqChat != null">
+	        qq_chat = #{qqChat},
+	      </if>
+	      <if test="password != null">
+	        password = #{password},
+	      </if>
+	      <if test="uuid != null">
+	        uuid = #{uuid},
+	      </if>
+	      <if test="school != null">
+	        school = #{school},
+	      </if>
+	      <if test="schoolAddress != null">
+	        school_address = #{schoolAddress},
+	      </if>
+	      <if test="studyProvinces != null">
+	        study_provinces = #{studyProvinces},
+	      </if>
+	      <if test="educationalCircles != null">
+	        educational_circles = #{educationalCircles},
+	      </if>
+	      <if test="grade != null">
+	        grade = #{grade},
+	      </if>
+	      <if test="className != null">
+	        class_name = #{className},
+	      </if>
+	      <if test="rid != null">
+	        rid = #{rid},
+	      </if>
+	      <if test="authority != null">
+	        authority = #{authority},
+	      </if>
+	      <if test="creatTime != null">
+	        creat_time = #{creatTime},
+	      </if>
+	    </set>
+	    where id = #{id}
 	</update>
 
-	<select id="getUserByUsername" resultType="cn.hqtzytb.entity.User">
+
+	<select id="selectRoleById" parameterType="java.lang.Integer" resultType="cn.hqtzytb.entity.Role">
 		SELECT
-			a.id,a.username,a.phone,a.wexin_chat,a.qq_chat,a.password,a.uuid,a.belong_to,a.school,a.school_address,
-			a.families,a.families,a.cee_year,a.vocation,a.head_url,a.power,a.province,a.rid,a.user_authority,
-			a.creat_time,b.role_id,b.cid,b.role_name,b.role_authority,b.role_description,
-			c.company_id,c.company_number,c.company_name,c.company_adress,c.creation_time
-		FROM 
-			user a
-		LEFT JOIN role b on b.role_id = a.rid
-		LEFT JOIN company c on
-		c.company_id = b.cid
-		WHERE a.username = #{username}
+			role_id,
+			cid,
+			role_name,
+			role_authority,
+			role_description
+		FROM
+			role
+		WHERE role_id = #{roleId}
 	</select>
 </mapper>
 	

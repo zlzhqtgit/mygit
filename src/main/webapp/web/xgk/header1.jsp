@@ -51,14 +51,14 @@
 					</c:if> --%>
 					<shiro:user>  
 					   <div class="user">
-							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
+							<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
 							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 						</div>
 					</shiro:user> 
 					
 					<%-- <c:if test="${username!=null}">
 						<div class="user">
-							<img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
+							<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%">
 							<span class="padding-side"><a href="javascript:;">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 						</div>
 					</c:if>

@@ -17,11 +17,6 @@ import lombok.experimental.Accessors;
  * @Copyright:好前途教育
  * @version V1.0
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@NoArgsConstructor()
-@AllArgsConstructor()
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,5 +46,71 @@ public class Company implements Serializable {
      */
     private Date creationTime;
 
+	public Company() {
+		super();
+	}
+
+	public Company(Integer companyId, String companyNumber, String companyName, String companyAdress,
+			Date creationTime) {
+		super();
+		this.companyId = companyId;
+		this.companyNumber = companyNumber;
+		this.companyName = companyName;
+		this.companyAdress = companyAdress;
+		this.creationTime = creationTime;
+	}
+
+	public Integer getCompanyId() {
+		return companyId;
+	}
+
+	public Company setCompanyId(Integer companyId) {
+		this.companyId = companyId;
+		return this;
+	}
+
+	public String getCompanyNumber() {
+		return companyNumber;
+	}
+
+	public Company setCompanyNumber(String companyNumber) {
+		this.companyNumber = companyNumber;
+		return this;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public Company setCompanyName(String companyName) {
+		this.companyName = companyName;
+		return this;
+	}
+
+	public String getCompanyAdress() {
+		return companyAdress;
+	}
+
+	public Company setCompanyAdress(String companyAdress) {
+		this.companyAdress = companyAdress;
+		return this;
+	}
+
+	public Date getCreationTime() {
+		return creationTime;
+	}
+
+	public Company setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", companyNumber=" + companyNumber + ", companyName=" + companyName
+				+ ", companyAdress=" + companyAdress + ", creationTime=" + creationTime + "]";
+	}
+
+    
 
 }

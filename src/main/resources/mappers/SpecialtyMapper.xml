@@ -66,10 +66,20 @@
 	<select id="select" resultType="cn.hqtzytb.entity.Specialty">
 		SELECT
 			<include refid="Base_Column_List" />
-		FROM specialty b
+		FROM 
+			specialty b
 		<if test="where != null">where ${where}</if>
 		<if test="orderBy != null">order by ${orderBy}</if>
 		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
+	
+	<!--查询测评结果对应相关信息 -->
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT
+			count(b.specialty_id)
+		FROM 
+			specialty b
+		<if test="where != null">where ${where}</if>
 	</select>
 
 	<select id="selectvoction" resultType="cn.hqtzytb.entity.Specialty">

@@ -33,7 +33,7 @@
 							<div class="margin_top margin_bot">
 								<div class="">
 									<shiro:guest><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/></shiro:guest>
-									<shiro:user><img src="${headUrl}" style="border-radius: 50%; overflow: hidden; width: 3em;"/></shiro:user>
+									<shiro:user><img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 3em;"/></shiro:user>
 									<span class="padding-side">你好！</span>
 								</div>
 								<div class="padding-side2 margin_top1">

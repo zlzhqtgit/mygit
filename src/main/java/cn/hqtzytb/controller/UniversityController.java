@@ -134,4 +134,15 @@ public class UniversityController {
     public ResponseResult<List<University>> getSpecialtySchool(String specialtyId, String er_year, String er_province, String sch_province, HttpServletRequest request){
         return iSpecialtyServer.getSpecialtySchool(specialtyId, er_year, er_province, sch_province, request);
     }
+    
+    /**
+     * 分页专业查询
+     * @param where
+     * @return
+     */
+    @RequestMapping("/xgk_specialty_list.do")
+    @ResponseBody
+    public ResponseResult<Map<String,Object>> getSpecialtyList2(String where,Integer offset, Integer countPerPage ,HttpServletRequest request){
+        return iSpecialtyServer.getSpecialtyList2(where, offset, countPerPage, request);
+    }
 }
