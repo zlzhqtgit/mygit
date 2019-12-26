@@ -233,10 +233,13 @@ public class IUserServerImpl implements IUserServer {
 		if (!user.getPhone().equals(session.getAttribute("phone").toString())){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码和手机号不匹配");
 		}
+		System.err.println("verifyCode:" + verifyCode);
+		System.err.println("code:" + session.getAttribute("code").toString());
 		if (!verifyCode.equals(session.getAttribute("code").toString())){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"验证码输入错误");
 		}
-		try {	
+		
+//		try {	
 			//查询手机号用户是否存在
 			User account = userMapper.queryUser(user.getPhone());			
 			//判断用户名是否存在
@@ -289,10 +292,10 @@ public class IUserServerImpl implements IUserServer {
 			rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "注册成功");	
 			subject.login(new MyUsernamePasswordToken(user.getPhone()));
 						
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
-			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
-		}
+//		} catch (Exception e) {
+//			logger.error("访问路径：" + request.getRequestURI() + "操作：注册信息  错误信息: "+e);
+//			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
+//		}
 		return rr;
 	}
 

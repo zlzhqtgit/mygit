@@ -53,7 +53,7 @@
 					</ul>
 
 					<div class="page_step step2 margin_top hide padding-side2" style="width: 100%;">
-						<form class="user1" action=""<!--  method="post" onsubmit="return " -->>
+						<form class="user1" action=""<!--  method="post" onsubmit="return " -->
 							<fieldset id="">
 								<legend class="">
 									<h4 class="text-primary margin_bot1 fontwei">注册新用户
@@ -68,8 +68,8 @@
 										<span class="padding-side glyphicon text-muted"> 你的真实姓名，保存后不可修改</span>
 									</div>
 									<div class="form-group">
-										<label for="mobile"><span class="text-danger">&lowast;</span> 手机号码：</label>
-										<input id="mobile" type="text" placeholder="请填写11位手机号码"/>
+										<label for="phone"><span class="text-danger">&lowast;</span> 手机号码：</label>
+										<input id="phone" type="text" placeholder="请填写11位手机号码"/>
 										<span class="padding-side glyphicon"></span>
 									</div>
 									<div class="form-group">
@@ -87,35 +87,41 @@
 										<input id="confirm" type="password" placeholder="请再次输入密码"/>
 										<span class="glyphicon padding-side"> </span>
 									</div>
+									
 								</div>
 
 								<h4 class="text-primary fontwei">完善学生信息
 									<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
 								</h4>
-								<div class="padding-side2 margin_top1 margin_bot" style="position: relative;">
+								<div class="padding-side2 margin_top1 margin_bot" style="position: relative;">								
+									<div class="form-group">
+										<label for="pc_number">&emsp;身份证号：</label>
+										<input id="pc_number" type="text" placeholder="请填写你的身份证号码"/>
+										<span class="padding-side glyphicon"></span>
+									</div>
+									<div class="form-group">
+										<label for="study_provinces">&emsp;就读省份：</label>
+										<input id="study_provinces" type="text" placeholder="请填写你的就读省份信息"/>
+										<span class="padding-side glyphicon"></span>								
+									</div>
 									<div class="form-group">
 										<label for="school">&emsp;就读学校：</label>
 										<input id="school" type="text" placeholder="请填写你的学校名称"/>
 									</div>
 									<div class="form-group">
-										<label for="object">&emsp;科&emsp;&emsp;类：</label>
-										<input id="object" type="text" placeholder=""/>
+										<label for="school_address">&emsp;学校地址：</label>
+										<input id="school_address" type="text" placeholder="请填写你的学校地址"/>
 									</div>
 									<div class="form-group">
-										<label for="score">&emsp;分&emsp;&emsp;数：</label>
-										<input id="score" type="text" placeholder=""/>
-									</div>
-									<div class="form-group">
-										<label for="year"><span class="text-danger">&lowast;</span> 高考年度：</label>
-										<!--<input id="year" type="text" placeholder=""/>-->
+										<label for=educational_circles><span class="text-danger"></span>&emsp;学&emsp;&emsp;届：</label>
 										<div class="filter-box inline_block" style="width: 200px;display: inline-block;">
 											<div class="filter-text" style="overflow: hidden;overflow: inherit;background-color: transparent;">
 												<input class="filter-title" type="text" readonly placeholder="pleace select"  style="background-color: transparent;border-radius: 0;box-shadow: 0 0 0;"/>
 												<i class="icon icon-filter-arrow"></i>
 											</div>
-											<select name="filter" id="cee_year">
-												<option value="请选择高考年度" selected>请选择高考年度</option>
-												<option value="2020" >2020年</option>
+											<select name="filter" id="educational_circles">
+												<option value="请选择学届" selected>请选择学届</option>
+												<option value="2020">2020年</option>
 												<option value="2019">2019年</option>
 												<option value="2018">2018年</option>
 												<option value="2017">2017年</option>
@@ -125,7 +131,19 @@
 										</div>
 										<span class="glyphicon padding-side"> </span>
 									</div>
-
+									<div class="form-group">
+										<label for="grade">&emsp;年&emsp;&emsp;级：</label>
+										<input id="grade" type="text" placeholder="请填写你的年级"/>
+										<span class="padding-side glyphicon"></span>
+									</div>
+									<div class="form-group">
+										<label for="class_name">&emsp;班&emsp;&emsp;级：</label>
+										<input id="class_name" type="text" placeholder="请填写你的班级"/>
+									</div>
+									<div class="form-group">
+										<label for="student_id">&emsp;学&emsp;&emsp;号：</label>
+										<input id="student_id" type="text" placeholder="请填写你的学号"/>
+									</div>
 									<div class="reg_tip">
 										<h4 class="text-danger fontwei">温馨提示：</h4>
 										<div class="padding-side2">
@@ -158,8 +176,8 @@
 										<span class="glyphicon text-muted padding-side">请填写考生真实姓名，保存后不可修改</span>
 									</div>
 									<div class="form-group">
-										<label for="mobile1"><span class="text-danger">&lowast;</span> 手机号码：</label>
-										<input id="mobile1" type="text" placeholder="请填写11位手机号码"/>
+										<label for="phone1"><span class="text-danger">&lowast;</span> 手机号码：</label>
+										<input id="phone1" type="text" placeholder="请填写11位手机号码"/>
 										<span class="glyphicon text-danger padding-side"> </span>
 									</div>
 									<div class="form-group">
@@ -176,12 +194,7 @@
 										<label for="confirm1"><span class="text-danger">&lowast;</span> 确认密码：</label>
 										<input id="confirm1" type="password" placeholder="请再次输入密码"/>
 										<span class="glyphicon text-danger padding-side"> </span>
-									</div>
-									<div class="form-group">
-										<label for="vocation1">&nbsp;&nbsp;&nbsp;从事职业：</label>
-										<input id="vocation1" type="text" placeholder="请输入您的职业名"/>
-									</div>
-
+									</div>								
 									<div class="reg_tip hidden-xs" >
 										<h4 class="text-danger fontwei">温馨提示：</h4>
 										<div class="padding-side2">
