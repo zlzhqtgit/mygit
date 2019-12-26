@@ -198,6 +198,21 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 		}
 		return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
 	}
+	@Override
+	public ResponseResult<Map<String, Object>> getSpecialtyList2(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
+		try {
+			Map<String,Object> resultMap = new HashMap<>();
+			//专业
+			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where, null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Integer specialtyCount = specialtyMapper.selectCount(StringUtils.isEmpty(where) ? null : where);
+			resultMap.put("specialtyList", specialtyList);
+			resultMap.put("specialtyCount", specialtyCount);
+			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：搜索框搜索专业信息异常   错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+		}
+	}
 
 
 }

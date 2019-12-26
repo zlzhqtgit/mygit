@@ -167,6 +167,22 @@ public class VocationServerImpl implements IVocationServer {
 		return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,map);
 	}
 
+	@Override
+	public ResponseResult<Map<String, Object>> getVocationList(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
+		try {
+			Map<String,Object> resultMap = new HashMap<>();
+			//职业
+			List<Vocation> vocationList = vocationMapper.select(StringUtils.isEmpty(where) ? null : where, null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Integer vocationCount = vocationMapper.selectCount(StringUtils.isEmpty(where) ? null : where);
+			resultMap.put("vocationList", vocationList);
+			resultMap.put("vocationCount", vocationCount);
+			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：搜索框搜索职业信息异常   错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+		}
+	}
+
 	
 
 }

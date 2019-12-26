@@ -18,6 +18,8 @@ import cn.hqtzytb.entity.Vocation;
 public interface VocationMapper {
 	List<Vocation> select(@Param("where") String where, @Param("orderBy") String orderBy,
 			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
+	Integer selectCount(@Param("where") String where);
+	
 	List<Vocation> selectLargeClass(@Param("where") String where, @Param("orderBy") String orderBy,
 		@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);	
 	List<Vocation> selectId(@Param("where") String where, @Param("orderBy") String orderBy,

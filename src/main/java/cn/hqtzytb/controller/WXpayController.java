@@ -7,6 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.zxing.WriterException;
+
+import cn.hqtzytb.entity.Order;
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.service.IWxPayService;
 
 /**
@@ -43,19 +48,19 @@ public class WXpayController{
 		return iWxPayService.wxpay(request, out_trade_no, total_fee, body);
 	}
 	
+
 	/**
 	 * 微信生成二维码
 	 * @param request
 	 * @param response
-	 * @param out_trade_no
+	 * @param body
 	 * @param rechargeMoney
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/weixinQRCode.do")
-	public void generateQRCode( HttpServletRequest request, HttpServletResponse response,
-								@RequestParam(value = "out_trade_no", required = true) String out_trade_no,
-								@RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney){	
+	public void generateQRCode( HttpServletRequest request, HttpServletResponse response, String body, @RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney) throws Exception {	
 		
-		iWxPayService.generateQRCode(request, response, out_trade_no, rechargeMoney);
+		iWxPayService.generateQRCode(request, response, body, rechargeMoney);
 	}
 
 	/**
