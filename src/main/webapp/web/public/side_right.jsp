@@ -71,7 +71,7 @@ function chat2(id) {
 				</a>
 			</div>
 			<div class="text-center mark-box vip_server">
-				<a href="javascript:void(0)">
+				<a href="${pageContext.request.contextPath}/web/xgk/xgk_userVip.jsp">
 					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside2.png" > </span>
 					<div class=""> VIP</div>
 				</a>

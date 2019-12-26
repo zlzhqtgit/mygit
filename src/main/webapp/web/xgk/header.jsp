@@ -30,11 +30,10 @@
 								<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>
 							</ul>
 						</li>
-						<li class=""><a id="xgk7" name="dh" href="#">学科推荐</a></li>
 						<li class="">
 							<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="list-unstyled">
-								<li><a id="xgk9" name="dh" href="#">新手教程</a></li>
+								<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_noviceMaterial.jsp">新手教程</a></li>
 								<li><a id="xgk10" name="dh" href="#">商务合作</a></li>
 								<li><a id="xgk11" name="dh" href="#">官方微信</a></li>
 								<li><a id="xgk12" name="dh" href="#">志愿填报群</a></li>

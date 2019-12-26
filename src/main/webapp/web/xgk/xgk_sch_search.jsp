@@ -433,7 +433,7 @@
 						dataType: "json",							
 						success: function (obj) {
 							if (obj.state == 1){
-								$("#result_count").css("display","inline-block");//显示搜索结果数量
+								$("#result_count").css("display","block");//显示搜索结果数量
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
 								var universities = "";
