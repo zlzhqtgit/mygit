@@ -44,11 +44,20 @@
 				b.salary_trend, b.salary_distribution, b.employment_situation_education, b.employment_situation_experience,
 				b.requirement_qualification, b.education_qualification, b.specialty_know, b.specialty_skill,
 				b.work_year, b.work_achieved, b.organization_ability, b.plan_ability
-			FROM vocation b 
+			FROM 
+				vocation b 
 			<if test="where != null">where ${where}</if>
 		 	<if test="orderBy != null">order by  ${orderBy}</if> 
 		 	<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>	
+		<select id="selectCount" resultType="java.lang.Integer">
+			SELECT  
+				count(b.vocation_id)
+			FROM 
+				vocation b 
+			<if test="where != null">where ${where}</if>
+		</select>
+		
 				<!--查询测评结果对应相关信息  -->
 		<select id="selectLargeClass" resultType="cn.hqtzytb.entity.Vocation">
 			select DISTINCT(b.industry_name) industryName

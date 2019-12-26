@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hqtzytb.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="cn.hqtzytb.entity.Order" >
+    <id column="id" property="id"  />
+    <result column="out_trade_no" property="outTradeNo"/>
+    <result column="uid" property="uid"  />
+    <result column="recharge_money" property="rechargeMoney"/>
+    <result column="body" property="body"/>
+    <result column="create_time" property="createTime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, out_trade_no, uid, recharge_money, body, create_time
+  </sql>
+  
+  <select id="select" resultMap="BaseResultMap" >
+    	SELECT 
+    		<include refid="Base_Column_List" />
+    	FROM 
+    		order
+    	<if test="where != null">where ${where}</if>
+	<if test="orderBy != null">order by ${orderBy}</if>
+	<if test="offset != null">limit ${offset},${countPerPage}</if>
+  </select>
+  
+  <delete id="delete" parameterType="cn.hqtzytb.entity.Order" >
+    DELETE FROM order WHERE id = #{id}
+  </delete>
+  
+ 
+  <insert id="insert" parameterType="cn.hqtzytb.entity.Order" >
+    INSERT INTO order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="outTradeNo != null" >
+        out_trade_no,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="rechargeMoney != null" >
+        recharge_money,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id},
+      </if>
+      <if test="outTradeNo != null" >
+        #{outTradeNo},
+      </if>
+      <if test="uid != null" >
+        #{uid},
+      </if>
+      <if test="rechargeMoney != null" >
+        #{rechargeMoney},
+      </if>
+      <if test="body != null" >
+        #{body},
+      </if>
+      <if test="createTime != null" >
+        #{createTime},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <update id="update" parameterType="cn.hqtzytb.entity.Order" >
+    update order
+    <set >
+      <if test="outTradeNo != null" >
+        out_trade_no = #{outTradeNo},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid},
+      </if>
+      <if test="rechargeMoney != null" >
+        recharge_money = #{rechargeMoney},
+      </if>
+      <if test="body != null" >
+        body = #{body},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+</mapper>

@@ -19,5 +19,15 @@ public interface IVocationServer{
 	String getVocationDetail(String vocationId, HttpServletRequest request);
 	ResponseResult<Map<String, Object>> getVocationOtherDetail(String vocationId, HttpServletRequest request);
 	
+	/**
+	 * 分页查询职业信息列表
+	 * @param where
+	 * @param offset
+	 * @param countPerPage
+	 * @param request
+	 * @return
+	 */
+	ResponseResult<Map<String, Object>> getVocationList(String where, Integer offset, Integer countPerPage, HttpServletRequest request);
+	
 	
 }

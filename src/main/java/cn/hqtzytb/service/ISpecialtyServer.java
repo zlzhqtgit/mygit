@@ -21,4 +21,14 @@ public interface ISpecialtyServer{
 	String getSpecialtySearchIndex(ModelMap map, HttpServletRequest request);
 	String getSpecialtyDetail(String specialtyId, HttpServletRequest request, ModelMap map);
 	ResponseResult<List<University>> getSpecialtySchool(String specialtyId, String er_year, String er_province, String sch_province, HttpServletRequest request);
+	
+	/**
+	 * 分页专业查询
+	 * @param where
+	 * @param offset
+	 * @param countPerPage
+	 * @param request
+	 * @return
+	 */
+	ResponseResult<Map<String, Object>> getSpecialtyList2(String where, Integer offset, Integer countPerPage, HttpServletRequest request);
 }
