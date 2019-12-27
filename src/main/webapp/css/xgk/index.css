@@ -1573,7 +1573,6 @@ textarea{
 }
 .course_nav{
 	position: fixed;
-	left: 18em;
 	top: 4em;
 	z-index: 9;
 	display: none;
@@ -1828,26 +1827,28 @@ select {
 .done_item .circle{
 	cursor: pointer;
 	border: 0;
+	box-shadow: 0 0 8px #555;
 }
-.done_item{
-	animation: shaking 1s linear infinite forwards;
+ .done_item{
+ 	animation-duration: 2s;
+	/*animation: shaking 1s linear infinite forwards;
 	animation-iteration-count:2;
 	-webkit-animation-iteration-count:2; Safari and Chrome*/
 }
-@keyframes shaking {
+/*@keyframes shaking {
 	20% {
-		transform: rotate3d(0, 0, 1, -20deg);
+		transform: rotate3d(0, 0, 1, 15deg);
 	}
 	40% {
-		transform: rotate3d(0, 0, 1, 0deg);
+		transform: rotate3d(0, 0, 1, -10deg);
 	}
 	60% {
-		transform: rotate3d(0, 0, 1, 20deg);
+		transform: rotate3d(0, 0, 1, -5deg);
 	}
 	100% {
 		transform: rotate3d(0, 0, 1, 0deg);
 	}
-}
+} */
 .bg-warning{
 	background-color: #f4e074;
 	color: #555;
@@ -2145,6 +2146,10 @@ table.combile_xuank{
 }
 .series_item:hover{
 	transform: translateY(-5px);
+	-ms-transform:translateY(-5px);
+	-webkit-transform:translateY(-5px);
+	-moz-transform: translateY(-5px);
+	-o-transform: translateY(-5px);
 	box-shadow: 0 0 14px #2b2b2b;
 }
 .series_item_tit{
@@ -2234,13 +2239,28 @@ table.combile_xuank{
 .advert>div>div>p{
 	font-size: 2em;
 }
+.pay{
+	padding:2em;
+	border: 1px solid #F08519;
+	border-radius: 20px;
+}
+form.pay .tab_head > li{
+	width:7em;
+	font-weight: 1.2em;
+}
+.pay .tab_body >div>div{
+	width: 10em;
+	margin: 0 auto;
+	text-align: center;
+}
+
 
 /*搜索结果页*/
 .tab_head{
 	border-bottom: 2px solid #3b8bec;
 }
 .tab_head >li{
-	width: 5em;
+	width: 6em;
 	padding: .4em .8em;
 	text-align: center;
 	float: left;

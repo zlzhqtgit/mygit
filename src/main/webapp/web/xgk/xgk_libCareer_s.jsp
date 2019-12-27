@@ -125,21 +125,21 @@
 					</div>
 				    <ul class="list-group search_result list_career padding-side2" id="search_result">
 				        <li class="list-group-item width100">
-				        	<a class="width100" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_d.jsp">
+				        	<a class="width100" href="javascript:void(0)">
 				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>
 				        		<div class="text-muted o_row_brif width100">
 				        			利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务
 				        		</div>
 				        	</a>
 				        	<div class="text-center like">
-				        		<a class="" onclick="like(this)" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_d.jsp">
+				        		<a class="" onclick="like(this)" href="javascript:void(0)">
 				        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
 				        			<span class="">喜欢</span>
 				        		</a>
 				        	</div>
 				        </li>
 				        <li class="list-group-item width100">
-				        	<a class="width100" href="${pageContext.request.contextPath}/web/xgk/xgk_libCareer_d.jsp">
+				        	<a class="width100" href="javascript:void(0)">
 				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>
 				        		<div class="text-muted o_row_brif width100">
 				        			利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务

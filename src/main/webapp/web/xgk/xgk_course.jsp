@@ -432,7 +432,11 @@
 				});
 			</script>
 		</main>
-		
+		<script type="text/javascript">
+			var distance=$("main").offset().left
+			var w=$(".course_nav").width()
+			$(".course_nav").css("left",distance-w)
+		</script>
 	<!-- 页面右侧-->
 	<c:import url="../public/side_right.jsp"></c:import>	
 	<!-- 页面底部-->
