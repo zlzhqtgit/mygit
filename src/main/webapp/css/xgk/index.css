@@ -12,7 +12,8 @@ html, body {
 	font-size: 16px;
 }
 img{ border:0;  }
-a{ text-decoration:none; color:#333;  }
+a{ text-decoration:none; color:#333;}
+a:hover{ text-decoration:none; }
 a:link{
 	text-decoration: none;
 }
@@ -1959,26 +1960,6 @@ table.combile_xuank{
 	}
 }
 
-.pagegress{
-	box-sizing: border-box;
-	text-align:center;
-	/* display: flex;
-	justify-content: center; */
-}
-.holder{
-	box-sizing: border-box;
-}
-.holder>a{
-	padding:.4em .8em;
-	background-color:#fff;
-	display:inline-block;
-	margin:0 .4em;
-	color:#555;
-	text-decoration: none;
-	border-radius: 4px;
-	box-shadow: 0px 0px 2px #c1aeae;
-	cursor: pointer;
-}
 
 /*新手教程*/
 .course_navlist{
@@ -2279,12 +2260,12 @@ form.pay .tab_head > li{
 .tab_body>div.cur{
 	display: block;
 }
-.tab_body ul>li{
+.index_searchDetal .tab_body ul>li{
 	margin: 0 1em;
 	padding: .6em 0;
 	border-top: 1px solid #ddd;
 }
-.tab_body ul>li>div{
+.index_searchDetal .tab_body ul>li>div{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -2323,3 +2304,38 @@ form.pay .tab_head > li{
 	border-radius: 20px;
 }
 
+/*分页*/
+.holder1,.holder2{
+	margin-top:2em;
+}
+.holder>a,
+.holder1>a,
+.holder2>a{
+	display:inline-block;
+	padding:.4em .8em;
+	border:1px solid #ddd;
+	cursor:pointer;
+}
+a.jp-disabled{
+	color:#999;
+	cursor: no-drop;
+}
+.holder > a:hover,
+.holder1 > a:hover,
+.holder2 > a:hover{
+	text-decoration:none;
+	border:1px solid #fb660c;
+}
+.holder>a.jp-disabled:hover,
+.holder1>a.jp-disabled:hover,
+.holder2>a.jp-disabled:hover{
+	border:1px solid #ddd;
+}
+.holder>a.jp-current,
+.holder1>a.jp-current,
+.holder2>a.jp-current{
+	border:1px solid #3b8bec;
+	background-color:#3b8bec;
+	color:#fff;
+	cursor: default;
+}

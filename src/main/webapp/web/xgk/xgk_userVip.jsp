@@ -150,7 +150,7 @@
 						</div>
 					</form>
 				</div>
-				<script src="${pageContext.request.contextPath}/js/xgk/common.js" type="text/javascript" charset="utf-8"></script>
+				<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
 				<div class="row" style="display: flex;align-items: center;">
 					<div class="col-md-6 col-sm-6 wow bounceInLeft">
 						<img src="${pageContext.request.contextPath}/img/xgk/vip_pic1.png" class="img-responsive"/>

@@ -315,11 +315,23 @@ footer{
 }
 .major_info_sub{
 	padding: .5em 1em;
+	padding-bottom:0;
 	border-bottom: 1px solid #dbd8d8;
 }
 .major_list li{
 	float: left;
 	padding: 0 1em;
+	
+}
+.major_list li>a{
+	color:#04441a;
+	padding: 0.1em .4em;
+	border-radius: .4em;
+	font-size:12px;
+}
+.major_list li>a:hover{
+	color:#3b8bec;
+	text-decoration:none;
 }
 .sch_info_head{
 	height: 14em;
@@ -623,10 +635,28 @@ select{
 .station .tab_head{
 	border: none;
 }
+
 .station .tab_head li{
-	margin: 0 .5em;
+	width:16.666667%;
+	padding:.4em;
 	border-radius: 8px;
+}
+.station .tab_head li.cur{
+	background-color:rgba(0,0,0,0);
+}
+.station .tab_head li>div{
+	min-height: 7em;
+	padding:.4em;
 	border: 1px solid #999;
+	border-radius:10px;
+	color:#555;
+}
+.station .tab_head li>div>h5{
+	font-size:15px;
+}
+.station .tab_head li.cur>div{
+	background-color:#3b8bec;
+	color:#fff;
 }
 .major_relative a{
 	padding: .2em .6em;

@@ -30,7 +30,8 @@
 			            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" id="search_info" value="${search_content}">
 			        </div>
 				</div>
-				<div class="tab_list">
+
+				<div class="tab_list index_searchDetal">
 					<ul class="tab_head list-unstyled clearfix">
 						<li class="cur">高校</li>
 						<li>专业</li>
