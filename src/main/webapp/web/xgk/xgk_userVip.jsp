@@ -59,8 +59,9 @@
 									<h3 class="text-center" style="margin: 0; padding: .4em 0;">套餐内容</h3>
 									<div class="series_summary"> 一个划算又有用的套餐一个划算又有用的套餐一个划算又有用的套餐一个划算又有用的套餐 </div>
 								</div>
-								<p class="text-center margin_top1"><a class="btn btn-primary" href="">立即购买</a></p>
+								<p class="text-center margin_top1"><a class="btn btn-primary" href="javascript:;" onclick="choice_combo(this)">立即购买</a></p>
 							</div>
+							<script type="text/javascript"></script>
 						</div>
 						<div class="series_item wow zoomIn">
 							<div class="series_item_tit">
@@ -71,7 +72,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">59</span> 元/年
+											<span class="price">229</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -84,7 +85,7 @@
 									<h3 class="text-center" style="margin: 0; padding: .4em 0;">套餐内容</h3>
 									<div class="series_summary"> 一个划算又有用的套餐一个划算又有用的套餐一个划算又有用的套餐一个划算又有用的套餐 </div>
 								</div>
-								<p class="text-center margin_top1"><a class="btn btn-primary" href="">立即购买</a></p>
+								<p class="text-center margin_top1"><a class="btn btn-primary" href="javascript:;" onclick="choice_combo(this)">立即购买</a></p>
 							</div>
 						</div>
 						<div class="series_item wow zoomIn">
@@ -96,7 +97,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">999999</span> 元/年
+											<span class="price">599</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -109,7 +110,7 @@
 									<h3 class="text-center" style="margin: 0; padding: .4em 0;">套餐内容</h3>
 									<div class="series_summary">一个套餐，买它上可九天揽月，下可五洋捉鳖。一个套餐，买它上可九天揽月，下可五洋捉鳖。</div>
 								</div>
-								<p class="text-center margin_top1"><a class="btn btn-primary" href="">立即购买</a></p>
+								<p class="text-center margin_top1"><a class="btn btn-primary" href="javascript:;" onclick="choice_combo(this)">立即购买</a></p>
 							</div>
 						</div>
 					</div>
@@ -136,10 +137,25 @@
 							<div class="tab_body">
 								<div class="cur">
 									<div class="">
-										<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+										<img id="qr_code"  src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
 										<div class="text-center"> 微信扫码 </div>
 									</div>
 								</div>
+								<script type="text/javascript">
+									
+									//选择套餐生成微信支付二维码
+									function choice_combo(e){
+										 var recharge_money = $(e).parents(".series_item").find(".series_item_tit .price").text();
+										 var body = $(e).parents(".series_item_con").find(".series_summary").html();
+										 var body = "立学道" + recharge_money + "元臻选套餐";
+										 if('${uid}' != ""){
+											 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?rechargeMoney=" + recharge_money + "&body=" + body);	 
+										 }else{
+											 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
+										 }
+										 
+									}
+								</script>
 								<div class="">
 									<div class="">
 										<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
@@ -187,7 +203,7 @@
 							</li>
 						</ul>
 					</div>
-				</div>
+				</div>				
 			</section>
 			<section class="wow flipInX">
 				<div class="advert">
@@ -231,6 +247,7 @@
 					<div class="col-md-6 col-sm-6 wow bounceInRight">
 						<img src="${pageContext.request.contextPath}/img/xgk/vip_pic2.png" class="img-responsive"/>
 					</div>
+					
 				</div>
 			</section>
 		</main>

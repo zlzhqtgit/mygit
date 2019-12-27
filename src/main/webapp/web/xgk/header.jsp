@@ -31,7 +31,7 @@
 						<li class="">
 							<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="list-unstyled">
-								<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_noviceMaterial.jsp">新手教程</a></li>
+								<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>
 								<li><a id="xgk10" name="dh" href="#">商务合作</a></li>
 								<li class="">
 									<a href="">立学道社群</a>

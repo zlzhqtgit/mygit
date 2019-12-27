@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -85,9 +86,8 @@ public class IWxPayServiceImpl implements IWxPayService{
 	
 	@Override
 	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, Double rechargeMoney) throws Exception {
-		try {
-			body = new String(body.toString().getBytes("ISO8859-1"), "UTF-8");
-			System.err.println(body);
+//		try {
+			body = URLEncoder.encode(body, "ISO8859-1");
 			Session session = SecurityUtils.getSubject().getSession();
 			String out_trade_no = generateOrderTradeNo();
 			session.setAttribute("out_trade_no", out_trade_no);
@@ -95,10 +95,10 @@ public class IWxPayServiceImpl implements IWxPayService{
 			session.setAttribute("body", body);
 			int total_fee = (new Double(rechargeMoney * 100)).intValue();
 			System.out.println(out_trade_no);
-			// Integer total_fee=Integer.parseInt(rechargeMoney);
 			// 调用pay工程的微信支付接口
 			Map<String, Object> paramMap = new ConcurrentHashMap<String, Object>();
 			String url = "http://localhost/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee + "&body=" + body;
+			System.err.println(url);
 			// pay工程微信支付接口返回的json字符串
 			String result = HttpClientUtils.doPost(url, paramMap);
 			// 获取到code_url，将其生成二维码显示到页面 ;
@@ -139,9 +139,9 @@ public class IWxPayServiceImpl implements IWxPayService{
 					outputStream.close();				
 				}
 			} 
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付生成二维码异常     错误信息: " + e);
-		}
+//		} catch (Exception e) {
+//			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付生成二维码异常     错误信息: " + e);
+//		}
 		
 	}
 

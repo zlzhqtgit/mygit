@@ -49,11 +49,18 @@ public interface IWebService {
 	ResponseResult<Map<String,Object>> browserSearch2(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request);
 
 	/**
-	 * 
+	 * 进入VIP页面
 	 * @param request
 	 * @return
 	 */
 	String showVipIndex(HttpServletRequest request);
+
+	/**
+	 * 进入新手教程页面
+	 * @param request
+	 * @return
+	 */
+	String showNewbieIndex(HttpServletRequest request);
 
 	
 }
