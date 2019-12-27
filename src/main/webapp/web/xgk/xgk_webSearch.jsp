@@ -24,12 +24,11 @@
 		<main class="sch_search">
 			<section class="sch_search container">
 				<div style="padding: 1em 100px 1em;">
-				    <form class="bs-example bs-example-form" role="form" id="universities_name">
-				        <div class="input-group input-group-lg">
-				            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
-				        </div>
-				    </form>
+				    <!-- <form class="bs-example bs-example-form" role="form" id="universities_name" onsubmit="return function(){return false;}"></form> -->
+				    <div class="input-group input-group-lg">
+			            <span class="input-group-addon" style="cursor: pointer;" onclick="web_search()"><span class="glyphicon glyphicon-search text-muted"></span></span>
+			            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" id="search_info" value="${search_content}">
+			        </div>
 				</div>
 
 				<div class="tab_list index_searchDetal">
@@ -41,92 +40,330 @@
 					<div class="tab_body">
 						<div class="panel panel-default cur">
 							<div class="panel_head">
-								<h4 class="fontwei padding-side">共找到xx条结果1</h4>
+								<h4 class="fontwei padding-side">共找到${universityCount}条结果</h4>
 							</div>
-							<ul>
-								<li>
-									<div class="padding-side2">
-										<div class="sch_info">
-											<a href="" class=""> <img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" style="width: 7em;"/> </a>
-											<div class="padding-side">
-												<div class="">
-													<div class="sch_tit">
-														<a href=""><h4 class="fontwei">上海外国语大学</h4></a>
+							<ul id="search_university_list">
+								<c:forEach items="${universityList}" var="item"  varStatus="vs">
+										<li>
+											<div class="padding-side2">
+												<div class="sch_info">
+													<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.universitiesCode}" class=""> <img src="${COLLEGE_PHOTO_PREFIX}/img/xgk/sch_logo.png" style="width: 7em;"/> </a>
+													<div class="padding-side">
 														<div class="">
-															<img src="${pageContext.request.contextPath}/img/xgk/label.png"/>
-															<span class="glyphicon glyphicon-map-marker"></span>
-															<span class="text-muted">上海</span>
+															<div class="sch_tit">
+																<a href=""><h4 class="fontwei">${item.universitiesName}</h4></a>
+																<div class="">
+																	<c:if test="${item.universitiesAttributes.contains('985')}">
+																		<img src="${pageContext.request.contextPath}/img/xgk/attr/985.png" width="6%"/>
+																	</c:if>
+																	<c:if test="${item.universitiesAttributes.contains('211')}">
+																		<img src="${pageContext.request.contextPath}/img/xgk/attr/211.png" width="6%"/>
+																	</c:if>
+																	<c:if test="${item.universitiesAttributes.contains('双一流')}">
+																		<img src="${pageContext.request.contextPath}/img/xgk/attr/syl.png" width="6%"/>
+																	</c:if>
+																	<c:if test="${item.universitiesAttributes.contains('研究生院')}">
+																		<img src="${pageContext.request.contextPath}/img/xgk/attr/yjsy.png" width="6%"/>
+																	</c:if>
+																	<span class="glyphicon glyphicon-map-marker"></span>
+																	<span class="text-muted">${item.province}</span>
+																</div>
+															</div>
+															<div class="text-muted">综合排行（
+															<c:if test="${item.admissionLot.contains('本科一批')}">
+																本科一批&nbsp;
+															</c:if>
+															<c:if test="${item.admissionLot.contains('本科二批')}">
+																本科二批&nbsp;
+															</c:if>
+															<c:if test="${item.admissionLot.contains('高职高专')}">
+																高职高专
+															</c:if>）
+															<span class="text-danger">${item.totalRanking}</span></div>
+															<div class="text-muted">
+																<span class="">隶属：${item.belongTo}</span>
+																<span class="padding-side">院校类型：${item.universitiesNature}</span>
+																<c:forEach items="${item.teachingResearchList}" var="it">
+																	<c:if test="${it[0] == '硕士点'}">
+																		<span class="padding-side">硕士点数：${it[1]}个</span>
+																	</c:if>
+																	<c:if test="${it[0] == '博士点'}">
+																		<span class="padding-side">博士点数：${it[1]}个</span>
+																	</c:if>															
+																</c:forEach>
+															</div>
 														</div>
 													</div>
-													<div class="text-muted">录取平均分排行（本科一批）<span class="text-danger">34</span></div>
-													<div class="text-muted">
-														<span class="">隶属：教育部</span>
-														<span class="padding-side">院校类型：语言类</span>
-														<span class="padding-side">硕士点数：43个</span>
-														<span class="padding-side">博士点数：17个</span>
-													</div>
 												</div>
-											</div>
+												<div class="text-center like">
+									        		<a class="" onclick="like(this)" href="javascript:">
+									        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
+									        			<span class="">喜欢</span>
+									        		</a>
+									        		<div class="text-center text-muted">喜欢人数：22W</div>
+									        	</div>
 										</div>
-										<div class="text-center like">
-							        		<a class="" onclick="like(this)" href="javascript:">
-							        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
-							        			<span class="">喜欢</span>
-							        		</a>
-							        		<div class="text-center text-muted">喜欢人数：22W</div>
-							        	</div>
-									</div>
-								</li>
-								<li>
-									<div class="padding-side2">
-										<div class="sch_info">
-											<a href="" class=""> <img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" style="width: 7em;"/> </a>
-											<div class="padding-side">
-												<div class="">
-													<div class="sch_tit">
-														<a href=""><h4 class="fontwei">上海外国语大学</h4></a>
-														<div class="">
-															<img src="${pageContext.request.contextPath}/img/xgk/label.png"/>
-															<span class="glyphicon glyphicon-map-marker"></span>
-															<span class="text-muted">上海</span>
-														</div>
-													</div>
-													<div class="text-muted">录取平均分排行（本科一批）<span class="text-danger">34</span></div>
-													<div class="text-muted">
-														<span class="">隶属：教育部</span>
-														<span class="padding-side">院校类型：语言类</span>
-														<span class="padding-side">硕士点数：43个</span>
-														<span class="padding-side">博士点数：17个</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="text-center like">
-							        		<a class="" onclick="like(this)" href="javascript:">
-							        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
-							        			<span class="">喜欢</span>
-							        		</a>
-							        		<div class="text-center text-muted">喜欢人数：22W</div>
-							        	</div>
-									</div>
-								</li>
-							</ul>
+									</li>
+							</c:forEach>
+							<!-- 查询结果 -->
+							
+						</ul>
+						<ul id="search_university_page"></ul>
+							<script type="text/javascript">
+								$('#search_info').bind('keypress',function(event){
+									if(event.keyCode == "13"){
+										web_search();								
+									}
+								});
+							
+								//搜索
+								function web_search(){
+									location.href = "${pageContext.request.contextPath}/web/hqt_search.do?content=" + $("#search_info").val();
+								}
+								
+								//分页
+								layui.use(['laypage', 'layer'], function(){
+									  var laypage = layui.laypage
+									  ,layer = layui.layer;
+								
+									  //院校分页
+									  laypage.render({
+									    elem: 'search_university_page',
+									    count: '${universityCount}', //数据总数
+									    limit: 5,
+									    limits: [5,10,15,20,25,30,35,40,45],
+									    layout: ['prev', 'page', 'next', 'limit',],
+									    jump: function(obj,first){
+									    		var offset = parseInt(obj.limit)*(parseInt(obj.curr)-1);
+										    	var countPerPage = parseInt(obj.limit);
+										    	var where = "where=" + ('${search_content}') + "&offset=" + offset + "&countPerPage=" + countPerPage;									    	 	
+									      	if(!first){									    	  	
+										    	   	$.ajax({
+													url: "${pageContext.request.contextPath}/school/xgk_school_query.do",
+													data: where,
+													async:true,
+													type: "POST",
+													dataType: "json",							
+													success: function (obj) {
+														if(obj.state == 1){
+															var list = obj.data.list;
+															var sch_search = "";
+															console.log(list)
+															for(var i=0; i<list.length; i++){
+																var attrImg = "";//院校属性图片
+							                                        	var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
+							                                        	if(universitiesAttributes != null){
+							        									for (var f=0; f<universitiesAttributes.length; f++){
+							        										if (universitiesAttributes[f] == "985"){
+							        											attrImg += '<img src="${pageContext.request.contextPath}/img/xgk/attr/985.png" width="6%"/>'
+							        										}
+							        										if (universitiesAttributes[f] == "211"){
+							        											attrImg += '<img src="${pageContext.request.contextPath}/img/xgk/attr/211.png" width="6%"/>'
+							        										}
+							        										if (universitiesAttributes[f] == "双一流"){
+							        											attrImg += '<img src="${pageContext.request.contextPath}/img/xgk/attr/syl.png"  width="6%"/>'
+							        										}
+							        										if (universitiesAttributes[f] == "行业领军"){
+							        											attrImg += '<img src="${pageContext.request.contextPath}/img/xgk/attr/hylj.png"  width="6%"/>'
+							        										}
+							        										if (universitiesAttributes[f] == "研究生院"){
+							        											attrImg += '<img src="${pageContext.request.contextPath}/img/xgk/attr/yjsy.png"  width="6%"/>'
+							        										}
+							        									}
+						                                        		}
+							                                        	var admissionLots = "";// 录取批次
+								                                        var admissionLotList = JSON.parse(list[i].admissionLot);
+								                                        for (var j=0; j<admissionLotList.length; j++){
+								                                            if (j == admissionLotList.length-1) {
+								                                                admissionLots += admissionLotList[j];
+								                                            }else {
+								                                                admissionLots += admissionLotList[j] + " ";
+								                                            }
+								                                        }
+								                                        
+								                                        var master = 0;//硕士点数
+								    								var doctor = 0;//博士点数
+								    								var teaching_research = JSON.parse(list[i].teachingResearch);
+								    								for(var j=0; j<teaching_research.length; j++){
+								    									if(teaching_research[j][0] == "硕士点"){
+								    										master = teaching_research[j][0] + "数: " + teaching_research[j][1];
+								    									}
+								    									if(teaching_research[j][0] == "博士点"){
+								    										doctor = teaching_research[j][0] + "数 :" + teaching_research[j][1];
+								    									}
+								    								}
+																sch_search += '<li>';
+																sch_search += '<div class="padding-side2">';
+																sch_search += '<div class="sch_info">';
+																//院校logo
+																sch_search += '<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode="' + list[i].universitiesCode + '" class=""> <img src="${COLLEGE_PHOTO_PREFIX}/img/xgk/sch_logo.png" style="width: 7em;"/></a>';
+																sch_search += '<div class="padding-side">';
+																sch_search += '<div class="">';
+																sch_search += '<div class="sch_tit">';
+																//院校名字
+																sch_search += '<a href=""><h4 class="fontwei">' + list[i].universitiesName + '</h4></a>';
+																sch_search += '<div class="">';
+																//院校属性图片
+																sch_search += attrImg;
+																sch_search += '</div>';
+																sch_search += '<span class="glyphicon glyphicon-map-marker"></span>';
+																//院校省份
+																sch_search += '<span class="text-muted">' + list[i].province + '</span>';
+																sch_search += '</div>';
+																sch_search += '<div class="text-muted">综合排行（';
+																//录取批次
+																sch_search += admissionLots;
+																//综合排名
+																sch_search += '）<span class="text-danger">' + list[i].totalRanking + '</span></div>';
+																sch_search += '<div class="text-muted">';
+																//隶属
+																sch_search += '<span class="">隶属：' + list[i].belongTo + '</span>';
+																//院校类型
+																sch_search += '<span class="padding-side">院校类型：' + list[i].universitiesNature + '</span>';														
+																sch_search += '<span class="padding-side">硕士点数：' + master + '个</span><span class="padding-side">博士点数：' + doctor + '个</span>';
+																sch_search += '</div>';
+																sch_search += '</div>';
+																sch_search += '</div>';
+																sch_search += '</div>';
+																sch_search += '<div class="text-center like">';
+																sch_search += '<a class="" onclick="like(this)" href="javascript:">';
+																sch_search += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+																sch_search += '<span class="">喜欢</span>';
+																sch_search += '</a>';
+																sch_search += '<div class="text-center text-muted">喜欢人数：22W</div>';
+																sch_search += '</div>';
+																sch_search += '</div>';
+																
+															}															
+														}
+														console.log(sch_search);
+														$("#search_university_list").html(sch_search);
+										      		}
+										    		});
+									      	} 	
+									    } 
+									  });
+									  
+									  //专业分页
+									  laypage.render({
+										    elem: 'search_specialty_page',
+										    count: '${specialtyCount}', //数据总数
+										    limit: 5,
+										    limits: [5,10,15,20,25,30,35,40,45],
+										    layout: ['prev', 'page', 'next', 'limit',],
+										    jump: function(obj,first){
+										    		var offset = parseInt(obj.limit)*(parseInt(obj.curr)-1);
+									    			var countPerPage = parseInt(obj.limit);
+									    			var where = "where=" + ('${search_content}') + "&offset=" + offset + "&countPerPage=" + countPerPage;									    	 	
+										    		if(!first){
+										    			$.ajax({
+														url: "${pageContext.request.contextPath}/school/xgk_specialty_list.do",
+														data: where,
+														async:true,
+														type: "POST",
+														dataType: "json",							
+														success: function (obj) {
+															if(obj.state == 1){
+												      			var list = obj.data.specialtyList;
+												      			var spec_search = "";
+												      			for(var i=0; i<list.length; i++){
+												      				spec_search += '<li>';
+												      				spec_search += '<div class="padding-side2">';
+												      				spec_search += '<div class="">';
+												      				spec_search += '<div class="sch_tit">';
+												      				spec_search += '<a href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + list[i].specialtyId + '"><h4 class="fontwei">' + list[i].specialtyName + '</h4></a><span class="padding-side text-muted">国际代码：' + list[i].specialtyId + '</span>';
+												      				spec_search += '</div>';
+												      				spec_search += '<p class="text-muted margin0">';
+												      				spec_search += '<span class="">学历层次：' + list[i].specialtyEducation + '</span>';
+												      				spec_search += '<span class="padding-side">修业年限：' + list[i].studyDuration + '</span>';
+												      				spec_search += '<span class="padding-side">授予学位：' + list[i].bachelorDegree + '</span>';
+												      				spec_search += '<span class="padding-side">男女比例：' + list[i].maleFemaleRatio + '</span>';
+												      				spec_search += '</p>';
+												      				spec_search += '</div>';
+												      				spec_search += '<div class="text-center like">';
+												      				spec_search += '<a class="" onclick="like(this)" href="javascript:">';
+												      				spec_search += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+												      				spec_search += '<span class="">喜欢</span>';
+												      				spec_search += '</a>';
+												      				spec_search += '</div>';
+												      				spec_search += '</div>';
+												      				spec_search += '</li>';
+												      			}
+												      			$("#search_specialty_list").html(spec_search);
+												      		}
+														}
+										    			});	
+										    		}										    		
+										    }
+									  });	
+									  
+
+									  //职业分页
+									  laypage.render({
+										    elem: 'search_vocation_page',
+										    count: '${vocationCount}', //数据总数
+										    limit: 5,
+										    limits: [5,10,15,20,25,30,35,40,45],
+										    layout: ['prev', 'page', 'next', 'limit',],
+										    jump: function(obj,first){
+										    		var offset = parseInt(obj.limit)*(parseInt(obj.curr)-1);
+									    			var countPerPage = parseInt(obj.limit);
+									    			var where = "where=" + ('${search_content}') + "&offset=" + offset + "&countPerPage=" + countPerPage;									    	 	
+										    		if(!first){
+										    			$.ajax({
+														url: "${pageContext.request.contextPath}/voc/xgk_voc_list.do",
+														data: where,
+														async:true,
+														type: "POST",
+														dataType: "json",							
+														success: function (obj) {
+															if(obj.state == 1){
+												      			var list = obj.data.vocationList;
+												      			var voc_search = '';
+												      			for(var i=0; i<list.length; i++){
+												      				voc_search += '<li>';
+												      				voc_search += '<div class="padding-side2">';
+												      				voc_search += '<div class="job_infos">';
+												      				voc_search += '<div class="sch_tit">';
+												      				voc_search += '<a href="${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=' + list[i].vocationId + '"><h4 class="fontwei">' + list[i].vocationName + '</h4></a><span class="padding-side text-muted">' + list[i].industryMajorName + ' > ' + list[i].industryName + '</span>';
+												      				voc_search += '</div>';
+												      				voc_search += '<p class="text-muted margin0 job_sum"> ' + list[i].vocationBrief + ' </p>';
+												      				voc_search += '</div>';
+												      				voc_search += '<div class="text-center like">';
+												      				voc_search += '<a class="" onclick="like(this)" href="javascript:">';
+												      				voc_search += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+												      				voc_search += '<span class="">喜欢</span>';
+												      				voc_search += '</a>';
+												      				voc_search += '</div>';
+												      				voc_search += '</div>';
+												      				voc_search += '</li>';
+												      			}
+												      			$("#search_vocation_list").html(voc_search);
+												      		}
+														}
+										    			});	
+										    		}										    		
+										    }
+									  });	
+								});								
+							  </script>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel_head">
-								<h4 class="fontwei padding-side">共找到xx条结果2</h4>
-								<ul>
-									<li>
+								<h4 class="fontwei padding-side">共找到${specialtyCount}条结果</h4>
+								<ul id="search_specialty_list">
+									<c:forEach items="${specialtyList}" var="item">
+										<li>
 										<div class="padding-side2">
 											<div class="">
 												<div class="sch_tit">
-													<a href=""><h4 class="fontwei">经济学</h4></a><span class="padding-side text-muted">国际代码：010101</span>
+													<a href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=${item.specialtyId}"><h4 class="fontwei">${item.specialtyName}</h4></a><span class="padding-side text-muted">国际代码：${item.specialtyId}</span>
 												</div>
 												<p class="text-muted margin0">
-													<span class="">学历层次：本科</span>
-													<span class="padding-side">修业年限：四年</span>
-													<span class="padding-side">授予学位：哲学学士</span>
-													<span class="padding-side">男女比例：40：60</span>
+													<span class="">学历层次：${item.specialtyEducation}</span>
+													<span class="padding-side">修业年限：${item.studyDuration}</span>
+													<span class="padding-side">授予学位：${item.bachelorDegree}</span>
+													<span class="padding-side">男女比例：${item.maleFemaleRatio}</span>
 												</p>
 											</div>
 											<div class="text-center like">
@@ -137,14 +374,35 @@
 								        	</div>
 										</div>
 									</li>
+									</c:forEach>
 								</ul>
+								<ul id="search_specialty_page"></ul>
 							</div>
 						</div>
 						<div class="panel panel-default">
 							<div class="panel_head">
-								<h4 class="fontwei padding-side">共找到xx条结果3</h4>
-								<ul>
-								<li>
+								<h4 class="fontwei padding-side">共找到${vocationCount}条结果</h4>
+								<ul id="search_vocation_list">
+									<c:forEach items="${vocationList}" var="item">
+										<li>
+											<div class="padding-side2">
+												<div class="job_infos">
+													<div class="sch_tit">
+														<a href="${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=${item.vocationId}"><h4 class="fontwei">${item.vocationName}</h4></a><span class="padding-side text-muted">${item.industryMajorName} > ${item.industryName}</span>
+													</div>
+													<p class="text-muted margin0 job_sum"> ${item.vocationBrief} </p>
+												</div>
+												<div class="text-center like">
+										        		<a class="" onclick="like(this)" href="javascript:">
+										        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
+										        			<span class="">喜欢</span>
+										        		</a>
+									        		</div>
+											</div>
+										</li>
+									</c:forEach>
+								
+								<%-- <li>
 									<div class="padding-side2">
 										<div class="job_infos">
 											<div class="sch_tit">
@@ -159,24 +417,9 @@
 							        		</a>
 							        	</div>
 									</div>
-								</li>
-								<li>
-									<div class="padding-side2">
-										<div class="job_infos">
-											<div class="sch_tit">
-												<a href=""><h4 class="fontwei">银行清算员</h4></a><span class="padding-side text-muted">金融/银行>金融业务</span>
-											</div>
-											<p class="text-muted margin0 job_sum"> 利用资金清算网路系统，从事银行业务资金的和结计电子汇划会差工作的人员利用资金清算网路系统，从事银行业务资金的和结计电子汇划会差工作的人员利用资金清算网路系统，从事银行业务资金的和结计电子汇划会差工作的人员 </p>
-										</div>
-										<div class="text-center like">
-							        		<a class="" onclick="like(this)" href="javascript:">
-							        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
-							        			<span class="">喜欢</span>
-							        		</a>
-							        	</div>
-									</div>
-								</li>
+								</li> --%>
 							</ul>
+							<ul id="search_vocation_page"></ul>
 							</div>
 						</div>
 					</div>

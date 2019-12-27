@@ -14,7 +14,6 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
-		<%-- <script src="${pageContext.request.contextPath}/js/jPages.js"></script> --%>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/area_json.js"></script> 
 		<script src="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/layui.js" charset="utf-8"></script>
 		
@@ -541,10 +540,13 @@
 								    limits: [1,2,3,4,5,6,7,8,9],
 								    layout: ['prev', 'page', 'next', 'limit', 'refresh', 'skip'],
 								    jump: function(obj,first){
+								    		console.log(first);
+								    		console.log(obj);
 								      	var offset = parseInt(obj.limit)*(parseInt(obj.curr)-1);
 								      	var countPerPage = parseInt(obj.limit);
 								      	var end_where =  "&offset=" + offset + "&countPerPage=" + countPerPage;
 								      	if(!first && where != ""){
+								      		console.log(end_where);
 								      		current = obj.curr;
 								      		schoolSearch2(where + end_where);
 								      	}

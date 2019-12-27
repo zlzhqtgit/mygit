@@ -92,7 +92,7 @@ public class VocationServerImpl implements IVocationServer {
 
 	@Override
 	public String getVocationDetail(String vocationId, HttpServletRequest request) {
-//		try {
+		try {
 			Vocation vocation = vocationMapper.selectId("vocation_id = '" + vocationId + "' ", null, null, null).get(0);
 			List<Vocation> vocationList = vocationMapper.selectId(" industry_name = '" + vocation.getIndustryName() + "' AND vocation_id <> '" + vocationId + "' " ,null,0,5);
 			vocationList.add(0, vocation);
@@ -101,10 +101,11 @@ public class VocationServerImpl implements IVocationServer {
 			List<List<String>> salaryList = null;
 			for(Vocation voc :vocationList){
 				salaryList = GetCommonUser.getJson(JSONArray.fromObject(voc.getSalaryTrend()), request);
-				max = Integer.valueOf(salaryList.get(0).get(1).equals("-")? "0" : salaryList.get(0).get(1)) ;
-				min = max ;
+				max = Integer.valueOf("-".equals(salaryList.get(0).get(1)) ? "0" : salaryList.get(0).get(1)) ;
+				min = max;
+
 				for(List<String> salary : salaryList){
-					int current = Integer.valueOf(salary.get(1).equals("-")? "0" : salary.get(1));
+					int current = Integer.valueOf("-".equals(salary.get(1)) ? "0" : salary.get(1));
 					if (current > max) {
 						max = current;
 					}
@@ -124,9 +125,8 @@ public class VocationServerImpl implements IVocationServer {
 			//就业趋势(按经验) employmentSituationExperience	
 			session.setAttribute("employment_situation_experience", GetCommonUser.getJson(vocation.getEmploymentSituationExperience(), request));
 			//从业资格 requirement_qualification
-			session.setAttribute("requirement_qualification", StringUtils.isEmpty(vocation.getRequirementQualification())? new ArrayList<String>() : vocation.getRequirementQualification().split(";"));			
-			//相关专业 relation_specialty
-			session.setAttribute("relation_specialty", vocation.getRelationSpecialty().split("、"));			
+			session.setAttribute("requirement_qualification", StringUtils.isEmpty(vocation.getRequirementQualification()) ? new ArrayList<String>() : vocation.getRequirementQualification().split(";"));			
+			session.setAttribute("relation_specialty", StringUtils.isEmpty(vocation.getRelationSpecialty()) ? new ArrayList<String>() : vocation.getRelationSpecialty().split("、"));			
 			JSONArray jsonArray = JSONArray.fromObject(vocation.getProspect());
 			//行业收入
 			session.setAttribute("industry_income", GetCommonUser.getJson(jsonArray.get(0), request));
@@ -134,10 +134,10 @@ public class VocationServerImpl implements IVocationServer {
 			session.setAttribute("regional_income", GetCommonUser.getJson(jsonArray.get(1), request));
 			//职业列表
 			session.setAttribute("vocationList", vocationList);
-//		} catch (Exception e) {
-//			logger.error("模块： 职业库  操作：查看职业信息详情异常    状态：FAIL!" + e);
-//			return "web/xgk/xgk_error_404";
-//		}
+		} catch (Exception e) {
+			logger.error("模块： 职业库  操作：查看职业信息详情异常    状态：FAIL!" + e);
+			return "web/xgk/xgk_error_404";
+		}
 		return "web/xgk/xgk_libCareer_d";
 	}
 

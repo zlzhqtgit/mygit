@@ -46,7 +46,7 @@ public class IUniversityServiceImpl implements IUniversityService {
     	Map<String, Object> resultMap = new HashMap<>();
     	try {
     		List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(where) ? null : where ," ur.ur_year DESC ",offset == null ? 0 : offset ,countPerPage == null ? 3 : countPerPage);
-        	Integer count = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(where) ? null : where);
+    		Integer count = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(where) ? null : where);
     		resultMap.put("list", universityList);
     		resultMap.put("count", count);
 		} catch (Exception e) {
