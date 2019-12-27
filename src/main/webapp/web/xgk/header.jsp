@@ -66,16 +66,16 @@
 				
 			<div class="user padding-side">
 				<span class="nav_search">
-					<a href=""><img src="${pageContext.request.contextPath}/img/xgk/search.png"/></a>
+					<a href="${pageContext.request.contextPath}/web/hqt_search.do"><img src="${pageContext.request.contextPath}/img/xgk/search.png"/></a>
 					<div class="search_slideDown">
 						<div style="padding: 1em 18em 1em;">
 							<p class="padding-side2"> <a class="padding-side" href="">高校</a> <a class="padding-side" href="">职业</a> <a class="padding-side" href="">专业</a> <a class="padding-side" href="">测评</a> </p>
-						    <form class="bs-example bs-example-form" role="form">
+						   <!--  <form class="bs-example bs-example-form" role="form">
+						    </form> -->
 						        <div class="input-group input-group-lg">
-						            <span class="input-group-addon" style="cursor: pointer;"><span class="glyphicon glyphicon-search text-muted"></span></span>
-						            <input type="text" class="form-control" placeholder="请输入您要查找的内容">
-						        </div>
-						    </form>
+						            <span class="input-group-addon" style="cursor: pointer;" onclick="search_content()"><span class="glyphicon glyphicon-search text-muted"></span></span>
+						            <input type="text" class="form-control" placeholder="请输入您要查找的内容" id="search_content">						        </div>
+						    	   
 						    <p class="margin_top1"> 
 						    	<span class="">热门搜索：</span> 
 						    	<a class="label label-info" href="">北京大学</a>
@@ -155,6 +155,16 @@
 	function loginOut() {
 		var nowUrl=window.location.href;
 		location.href = "${pageContext.request.contextPath}/login_out.do?nowUrl="+nowUrl;
+	}
+
+	//搜索
+	$('#search_content').bind('keypress',function(event){
+		if(event.keyCode == "13"){
+			search_content();
+		}
+	});
+	function search_content(){
+		location.href = "${pageContext.request.contextPath}/web/hqt_search.do?content=" + $("#search_content").val();
 	}
 
 </script>

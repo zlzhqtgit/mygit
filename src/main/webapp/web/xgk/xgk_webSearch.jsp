@@ -24,13 +24,12 @@
 		<main class="sch_search">
 			<section class="sch_search container">
 				<div style="padding: 1em 100px 1em;">
-				    <form class="bs-example bs-example-form" role="form" id="universities_name">
-				        <div class="input-group input-group-lg">
-				            <span class="input-group-addon" style="cursor: pointer;" onclick="web_search()"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" id="search_info" value="${search_content}">
-				        </div>
-				    </form>
-				</div>				
+				    <!-- <form class="bs-example bs-example-form" role="form" id="universities_name" onsubmit="return function(){return false;}"></form> -->
+				    <div class="input-group input-group-lg">
+			            <span class="input-group-addon" style="cursor: pointer;" onclick="web_search()"><span class="glyphicon glyphicon-search text-muted"></span></span>
+			            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" id="search_info" value="${search_content}">
+			        </div>
+				</div>
 				<div class="tab_list">
 					<ul class="tab_head list-unstyled clearfix">
 						<li class="cur">高校</li>
@@ -110,6 +109,12 @@
 						</ul>
 						<ul id="search_university_page"></ul>
 							<script type="text/javascript">
+								$('#search_info').bind('keypress',function(event){
+									if(event.keyCode == "13"){
+										web_search();								
+									}
+								});
+							
 								//搜索
 								function web_search(){
 									location.href = "${pageContext.request.contextPath}/web/hqt_search.do?content=" + $("#search_info").val();

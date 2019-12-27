@@ -1,6 +1,7 @@
 package cn.hqtzytb.service.impl;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -52,7 +53,10 @@ public class IWebServiceImpl implements IWebService{
 	@Override
 	public String browserSearch(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request) {
 		try {
-			content = new String(content.toString().getBytes("ISO8859-1"), "UTF-8");
+			if(StringUtils.isNotEmpty(content)){
+				System.err.println(content);
+				content = new String(content.toString().getBytes("ISO8859-1"), "UTF-8");
+			}
 			//高校
 			List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ", " ur.ur_year DESC ", offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
 			for(University university : universityList){
