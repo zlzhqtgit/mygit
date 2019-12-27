@@ -44,7 +44,7 @@ public class Constants{
 	/**
 	 * 院校图片前缀
 	 */
-	public static final String COLLEGE_PHOTO_PREFIX = "${pageContext.request.contextPath}";
+	public static final String COLLEGE_PHOTO_PREFIX = "..";
 	
 	/**
 	 * 错误信息字符串头

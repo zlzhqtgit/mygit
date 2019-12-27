@@ -15,6 +15,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.hqtzytb.controller.WebController;
@@ -28,6 +29,7 @@ import cn.hqtzytb.mapper.VocationMapper;
 import cn.hqtzytb.service.IUniversityService;
 import cn.hqtzytb.service.IWebService;
 import cn.hqtzytb.utils.Constants;
+import cn.hqtzytb.utils.GetCommonUser;
 
 /**
  * @ClassName: IWebServiceImpl
@@ -48,31 +50,37 @@ public class IWebServiceImpl implements IWebService{
 	private SpecialtyMapper specialtyMapper;
 	
 	@Override
-	public ResponseResult<Map<String, Object>> browserSearch(String content, Integer offset, Integer countPerPage, HttpServletRequest request) {
+	public String browserSearch(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request) {
 		try {
-			Map<String,Object> resultMap = new HashMap<>();
+			content = new String(content.toString().getBytes("ISO8859-1"), "UTF-8");
 			//高校
 			List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ", " ur.ur_year DESC ", offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			for(University university : universityList){
+        		university.setTeachingResearchList(GetCommonUser.getJson(university.getTeachingResearch(), request));
+        	}
 			Integer universityCount = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(content) ? null : " LOCATE('" + content +"',u.universities_name) ");
+			
 			//职业
-			List<Vocation> vocationList = vocationMapper.select(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + ",b.vocation_name) ", null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
-			Integer vocationCount = vocationMapper.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + ",b.vocation_name) ");
+			List<Vocation> vocationList = vocationMapper.select(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ", null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Integer vocationCount = vocationMapper.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ");
 			//专业
 			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ", null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
 			Integer specialtyCount = specialtyMapper.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ");
-			resultMap.put("universityList", universityList);
-			resultMap.put("universityCount", universityCount);
-			resultMap.put("vocationList", vocationList);
-			resultMap.put("vocationCount", vocationCount);
-			resultMap.put("specialtyList", specialtyList);
-			resultMap.put("specialtyCount", specialtyCount);
-			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
+			map.put("COLLEGE_PHOTO_PREFIX",Constants.COLLEGE_PHOTO_PREFIX);
+			map.put("universityList", universityList);
+			map.put("universityCount", universityCount);
+			map.put("vocationList", vocationList);
+			map.put("vocationCount", vocationCount);
+			map.put("specialtyList", specialtyList);
+			map.put("specialtyCount", specialtyCount);
+			map.put("search_content", content);
+			return "web/xgk/xgk_webSearch";
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：搜索框搜索院校/专业/职业信息异常   错误信息: " + e);
-			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+			return "web/xgk/xgk_error_404";
 		}
-	}
-
+		
+	} 
 	@Override
 	public ResponseResult<Void> handlexyghReg(HttpServletRequest request, MultipartFile file) {
 		ResponseResult<Void> rr;		
@@ -95,6 +103,38 @@ public class IWebServiceImpl implements IWebService{
 			rr=new ResponseResult<Void>(ResponseResult.ERR,"数据存在异常，请联系工作人员处理！");
 		}
 		return rr;
+	}
+	
+	
+	@Override
+	public ResponseResult<Map<String,Object>> browserSearch2(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request) {
+		try {
+			Map<String,Object> resultMap = new HashMap<>();
+			//高校
+			List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ", " ur.ur_year DESC ", offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			for(University university : universityList){
+        		university.setTeachingResearchList(GetCommonUser.getJson(university.getTeachingResearch(), request));
+        	}
+			Integer universityCount = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(content) ? null : " LOCATE('" + content +"',u.universities_name) ");
+			//职业
+			List<Vocation> vocationList = vocationMapper.select(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ", null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Integer vocationCount = vocationMapper.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ");
+			//专业
+			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ", null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Integer specialtyCount = specialtyMapper.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ");
+			resultMap.put("COLLEGE_PHOTO_PREFIX",Constants.COLLEGE_PHOTO_PREFIX);
+			resultMap.put("universityList", universityList);
+			resultMap.put("universityCount", universityCount);
+			resultMap.put("vocationList", vocationList);
+			resultMap.put("vocationCount", vocationCount);
+			resultMap.put("specialtyList", specialtyList);
+			resultMap.put("specialtyCount", specialtyCount);
+			resultMap.put("search_content", content);
+			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：搜索框搜索院校/专业/职业信息异常   错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+		}
 	}
 
 	

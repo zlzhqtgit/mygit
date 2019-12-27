@@ -111,6 +111,11 @@ public class University implements Serializable{
      * 教研教学
      */
     private String teachingResearch;
+    
+    /**
+     * 教研教学
+     */
+    private List<List<String>> teachingResearchList;
 
     /**
      * 男女比例
@@ -211,12 +216,13 @@ public class University implements Serializable{
      * 修改人
      */
     private String updateBy;
-
+    
+    
     /**
      * 学校拓展信息清单
      */
     List<UniversityRelation> universRelationList;
-
+    
     /**
      * 学校招生章程/简章
      */
@@ -566,6 +572,18 @@ public class University implements Serializable{
 
 	public University setTeachersResources(String teachersResources) {
 		this.teachersResources = teachersResources;
+		return this;
+	}
+
+	
+
+	public List<List<String>> getTeachingResearchList() {
+		return teachingResearchList;
+	}
+
+
+	public University setTeachingResearchList(List<List<String>> teachingResearchList) {
+		this.teachingResearchList = teachingResearchList;
 		return this;
 	}
 

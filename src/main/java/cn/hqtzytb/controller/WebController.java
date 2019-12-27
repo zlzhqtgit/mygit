@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,14 +42,23 @@ public class WebController {
 	 * @return
 	 */
 	@RequestMapping("/hqt_search.do")
-	@ResponseBody
-	public ResponseResult<Map<String, Object>> browserSearch(String content, Integer offset, Integer countPerPage, HttpServletRequest request) {
+	public String browserSearch(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request) {
 		
-		return iWebService.browserSearch(content, offset, countPerPage, request );
+		return iWebService.browserSearch(content, offset, countPerPage, map, request );
 	}
 		
-	
 
+	/**
+	 * 搜索框搜索【职业、专业、院校】内容2
+	 * @return
+	 */
+	@RequestMapping("/hqt_search_2.do")
+	@ResponseBody
+	public ResponseResult<Map<String,Object>> browserSearch2(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request) {
+		
+		return iWebService.browserSearch2(content, offset, countPerPage, map, request );
+	}
+	
 	/**
 	 * 在线聊天图片传输
 	 * @param request
