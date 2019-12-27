@@ -26,12 +26,12 @@
 		<header class="padding-side login_head">
 			<nav class="">
 				<ul class="margin_top1">
-					<li><a href="${pageContext.request.contextPath}/cp/xgk_index.do">官方首页</a></li>
-					<li><a href="">新手教程</a></li>
-					<li><a href="">志愿填报QQ群</a></li>
-					<li><a href="">官方微信</a></li>
-					<li><a href="">开通/激活VIP</a></li>
-					<li><a href="">商务合作</a></li>
+					<li><a class="padding-side" href="${pageContext.request.contextPath}/cp/xgk_index.do">官方首页</a></li>
+					<li><a class="padding-side" href="${pageContext.request.contextPath}/web/xgk/xgk_noviceMaterial.jsp">新手教程</a></li>
+					<li><a class="padding-side" href="">志愿填报QQ群</a></li>
+					<li><a class="padding-side" href="">官方微信</a></li>
+					<li><a class="padding-side" href="">开通/激活VIP</a></li>
+					<li><a class="padding-side" href="">商务合作</a></li>
 				</ul>
 			</nav>
 		</header>

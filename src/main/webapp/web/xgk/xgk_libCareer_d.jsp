@@ -61,13 +61,23 @@
 							<h3 class="text-primary fontwei margin_bot1 icon_tit">
 								<span style="background-image: url(../../img/xgk/2.png);"></span>就业岗位
 							</h3>
-							<div class="tab_list">
+							<div class="tab_list job_position">
 								<ul class="tab_head clearfix">
-								<c:forEach items="${vocationList}" var="item">
-								<li class="cur" onclick="other_vocation(this)">
-						    			<h4 id="${item.vocationId}">${item.vocationName}</h4>${item.incomeInfo}
-						    		</li>	
-						    		</c:forEach>	
+									<c:forEach items="${vocationList}" var="item" varStatus="vs">									
+										<c:if test="${vs.first}">
+											<li onclick="other_vocation(this)" class="cur">
+								    			<div><h5 class="fontwei" id="${item.vocationId}">${item.vocationName}</h5>${item.incomeInfo}</div>
+								    		</li>
+								    	</c:if>
+							    		<c:if test="${vs.first == false}">
+											<li class="" onclick="other_vocation(this)">
+								    			<div><h5 class="fontwei" id="${item.vocationId}">${item.vocationName}</h5>${item.incomeInfo}</div>
+								    		</li>
+										</c:if>
+										<%-- <li class="" onclick="other_vocation(this)">
+							    			<div><h5 class="fontwei" id="${item.vocationId}">${item.vocationName}</h5>${item.incomeInfo}</div>
+							    		</li> --%>	
+						    		</c:forEach>
 						    	</ul>
 						    	<div class="tab_body">
 						    		<div class="tab1 cur">
@@ -365,15 +375,16 @@
 												    
 												  //获取其他职业相关数据		
 												    function other_vocation(e){
+													  console.log(e)
 										    			var url = "${pageContext.request.contextPath}/voc/xgk_voc_other.do";
-										    			var data = "vocationId=" + $(e).find('h4').attr("id");
+										    			var data = "vocationId=" + $(e).find('h5').attr("id");
 										    			$.ajax({
 														url: url,
 														data: data,
 														type: "POST",
 														dataType: "json",
 														success: function(obj) {
-															if(obj.state == 1) {														
+															if(obj.state == 1) {
 																//薪资趋势														
 																for(var i=0; i<obj.data.salary_trend.length; i++){
 																	option.xAxis[0].data[i] = obj.data.salary_trend[i][0];
@@ -383,6 +394,7 @@
 																
 																//薪酬分布
 																for(var i=0; i<obj.data.salary_distribution.length; i++){
+																	console.log(obj.data.salary_distribution[i][1]);
 																	option1.series[0].data[i].name = obj.data.salary_distribution[i][0];
 																	option1.series[0].data[i].value = obj.data.salary_distribution[i][1];
 																}

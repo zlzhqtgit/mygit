@@ -145,7 +145,7 @@
 				    					<div class="padding-side">
 				    						<c:if test="${not empty majorCourses}">
 				    							<c:forEach items="${majorCourses}" var="item">
-				    								<a>${item }</a>
+				    								<a class="padding-side">${item }</a>
 				    							</c:forEach>
 				    						</c:if>
 				    						<c:if test="${empty majorCourses}">
@@ -158,7 +158,7 @@
 				    					<h2 class="text-primary fontwei">
 				    						<span style="background-image: url(img/4.png);"></span>考研方向
 				    					</h2>
-				    					<div class="padding-side">${specialty.postgraduateDirection}</div>
+				    					<div class="padding-side2">${specialty.postgraduateDirection}</div>
 				    				</div>
 				    			</div>
 				    		</div>
@@ -334,7 +334,7 @@
 				    				
 				    				
 				    				<div class="panel panel-default">
-										<div class="panel_head">
+										<div class="panel_head padding-side">
 											<h4 class="fontwei">共找到<a id="shc_count">8</a>条结果</h4>
 										</div>
 									    <ul class="list-group search_result" id="sch_data">
@@ -403,7 +403,7 @@
 									        
 									    </ul>
 									    <!--  分页      -->
-									     <div class="col-xs-12 bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+									     <div class="bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
 				    							<div class="holder" style="text-align: center;"></div>
 				    						</div>
 									    <script type="text/javascript">
