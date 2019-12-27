@@ -114,6 +114,43 @@
 						</div>
 					</div>
 				</div>
+				<div class="row">
+					<form class="pay">
+						<div class="margin_bot">
+							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side">599元</span>
+						</div>
+						<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
+							<thead>
+								<tr><th> </th><th>下载次数</th><th>xx个数</th><th>使用期限</th></tr>
+							</thead>
+							<tboody>
+								<tr><td>套餐权益</td><td>Data</td><td>Data</td><td>Data</td></tr>
+							</tboody>
+						</table>
+						<div class="tab_list">
+							<ul class="tab_head clearfix">
+								<!--<div class="pull-left" style="height: 3.1em;line-height: 3em;">支付方式：</div>-->
+								<li class="cur">微信支付</li>
+								<li>支付宝支付</li>
+							</ul>
+							<div class="tab_body">
+								<div class="cur">
+									<div class="">
+										<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+										<div class="text-center"> 微信扫码 </div>
+									</div>
+								</div>
+								<div class="">
+									<div class="">
+										<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+										<div class="text-center"> 支付宝扫码 </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<script src="${pageContext.request.contextPath}/js/xgk/common.js" type="text/javascript" charset="utf-8"></script>
 				<div class="row" style="display: flex;align-items: center;">
 					<div class="col-md-6 col-sm-6 wow bounceInLeft">
 						<img src="${pageContext.request.contextPath}/img/xgk/vip_pic1.png" class="img-responsive"/>

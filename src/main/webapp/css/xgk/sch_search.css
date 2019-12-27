@@ -491,7 +491,7 @@ footer{
 }
 .like a{
 	display: inline-block;
-	width: 3em;
+	width: 100%;
 	border-radius:50%;
 	text-align: left;
 }
