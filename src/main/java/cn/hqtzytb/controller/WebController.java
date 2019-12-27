@@ -118,4 +118,14 @@ public class WebController {
 		
 		return iWebService.showVipIndex(request);
 	}
+	
+	/**
+	 * 进入新手教程页面
+	 * @return
+	 */
+	@RequestMapping("/hqt_newbie_index.do")	
+	public String showNewbieIndex(HttpServletRequest request) {
+		
+		return iWebService.showNewbieIndex(request);
+	}
 }

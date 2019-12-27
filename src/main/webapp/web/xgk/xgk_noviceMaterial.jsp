@@ -24,18 +24,18 @@
 			<ul class="course_navlist list-unstyled clearfix">
 				<li>
 					<div class="">
-						<a href="">首页</a>
+						<a href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a>
 					</div>
 				</li>
 				<li>
 					<div class="">
-						<a href="">学科探索</a>
+						<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a>
 						<div class="sub_nav">
 							<div class="single_line">
 								<label></label>
 							</div>
 							<div class="single_item">
-								<a href=""><div class=""><span class="">学科潜能分析</span></div></a>
+								<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do"><div class=""><span class="">学科潜能分析</span></div></a>
 								<p class="text-primary wow heartBeat">帮助你更好的了解及发掘自身潜能</p>
 							</div>
 						</div>
@@ -43,16 +43,16 @@
 				</li>
 				<li>
 					<div class="">
-						<a href="">认知测评</a>
+						<a href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a>
 						<div class="sub_nav">
 							<div class="apart_line"><img src="${pageContext.request.contextPath}/img/xgk/apart.png" class="img-responsive"/></div>
 							<div class="third_apart">
 								<div class="lc">
-									<a href=""><div class=""><span class="">MBTI职业性格测评</span></div></a>
+									<a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do"><div class=""><span class="">MBTI职业性格测评</span></div></a>
 									<p class="text-primary wow heartBeat">帮助你更好的了解及发掘自身潜能</p>
 								</div>
 								<div class="rc">
-									<a href="">
+									<a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do">
 										<div class="">
 											<span class="" style="font-size: 11.8px;line-height: 1.2em;">霍兰德职业兴趣测评</span>
 										</div>
@@ -65,13 +65,13 @@
 				</li>
 				<li>
 					<div class="">
-						<a href="">选科指导</a>
+						<a href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a>
 						<div class="sub_nav">
 							<div class="single_line">
 								<label></label>
 							</div>
 							<div class="single_item">
-								<a href=""><div class=""><span class="">选科指导</span></div></a>
+								<a href="${pageContext.request.contextPath}/xk/xgk_guide_select.do"><div class=""><span class="">选科指导</span></div></a>
 								<p class="text-primary wow heartBeat">帮助你更好的了解及发掘自身潜能</p>
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 								<label></label>
 							</div>
 							<div class="single_item">
-								<a href=""><div class=""><span class="">职业查询</span></div></a>
+								<a href="${pageContext.request.contextPath}/voc/xgk_job_blank.do"><div class=""><span class="">职业查询</span></div></a>
 								<p class="text-primary wow heartBeat">帮助你更好的了解及发掘自身潜能</p>
 							</div>
 						</div>
@@ -93,16 +93,16 @@
 				</li>
 				<li>
 					<div class="">
-						<a href="">高校专业</a>
+						<a href="${pageContext.request.contextPath}/school/xgk_school_search.do">高校专业</a>
 						<div class="sub_nav">
 							<div class="apart_line"><img src="${pageContext.request.contextPath}/img/xgk/apart1.png" class="img-responsive"/></div>
 							<div class="third_apart">
 								<div class="lc">
-									<a href=""><div class=""><span class="">高校查询</span></div></a>
+									<a href="${pageContext.request.contextPath}/school/xgk_school_search.do"><div class=""><span class="">高校查询</span></div></a>
 									<p class="text-primary wow heartBeat">帮助你更好的了解及发掘自身潜能</p>
 								</div>
 								<div class="rc">
-									<a href=""><div class=""><span class="">专业查询</span></div></a>
+									<a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do"><div class=""><span class="">专业查询</span></div></a>
 									<p class="text-primary wow heartBeat">帮助你更好的了解及发掘自身潜能</p>
 								</div>
 							</div>

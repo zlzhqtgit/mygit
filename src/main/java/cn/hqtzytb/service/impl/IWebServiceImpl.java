@@ -1,14 +1,11 @@
 package cn.hqtzytb.service.impl;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,8 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
-
-import cn.hqtzytb.controller.WebController;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.University;
@@ -27,7 +22,6 @@ import cn.hqtzytb.entity.Vocation;
 import cn.hqtzytb.mapper.SpecialtyMapper;
 import cn.hqtzytb.mapper.UniversityMapper;
 import cn.hqtzytb.mapper.VocationMapper;
-import cn.hqtzytb.service.IUniversityService;
 import cn.hqtzytb.service.IWebService;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
@@ -140,6 +134,8 @@ public class IWebServiceImpl implements IWebService{
 			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
 		}
 	}
+	
+	
 	@Override
 	public String showVipIndex(HttpServletRequest request) {
 		try {
@@ -149,6 +145,17 @@ public class IWebServiceImpl implements IWebService{
 			return "web/xgk/xgk_error_404";
 		}
 		
+	}
+	
+	
+	@Override
+	public String showNewbieIndex(HttpServletRequest request) {
+		try {
+			return "web/xgk/xgk_noviceMaterial";
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：进入VIP充值页异常   错误信息: " + e);
+			return "web/xgk/xgk_error_404";
+		}
 	}
 
 	
