@@ -48,5 +48,12 @@ public interface IWebService {
 	 */
 	ResponseResult<Map<String,Object>> browserSearch2(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request);
 
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
+	String showVipIndex(HttpServletRequest request);
+
 	
 }

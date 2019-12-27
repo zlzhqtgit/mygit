@@ -108,4 +108,14 @@ public class WebController {
 		String tempName = "游客" + (int) ((Math.random() * 9 + 1) * 100000);
 		return tempName;
 	}
+	
+	/**
+	 * 进入VIP页面
+	 * @return
+	 */
+	@RequestMapping("/hqt_vip_index.do")	
+	public String showVipIndex(HttpServletRequest request) {
+		
+		return iWebService.showVipIndex(request);
+	}
 }
