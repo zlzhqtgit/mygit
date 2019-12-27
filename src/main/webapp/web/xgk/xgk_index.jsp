@@ -259,7 +259,7 @@
 				<div class="container">
 					<ul class="sectionList2 clearfix row">
 						<li class="wow zoomIn">
-							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;">
+							<div class="" style="background: url(./../img/xgk/multi.png) no-repeat 45% center / 54%;">
 								<div class="">
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect21.png" style="width: 3em;"/>
@@ -270,7 +270,7 @@
 							<p class="text-center margin_top1 fontwei">高等院校</p>
 						</li>
 						<li class="wow zoomIn">
-							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
+							<div class="" style="background: url(./../img/xgk/multi.png) no-repeat 45% center / 54%;;">
 								<div class="">
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect22.png" style="width: 3em;"/>
@@ -281,7 +281,7 @@
 							<p class="text-center margin_top1 fontwei">高校专业</p>
 						</li>
 						<li class="wow zoomIn">
-							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;">
+							<div class="" style="background: url(./../img/xgk/multi.png) no-repeat 45% center / 54%;">
 								<div class="">
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect23.png" style="width: 3em;"/>
@@ -292,7 +292,7 @@
 							<p class="text-center margin_top1 fontwei">职业类型</p>
 						</li>
 						<li class="wow zoomIn">
-							<div class="" style="background: url(../../img/xgk/multi.png) no-repeat 45% center / 54%;;">
+							<div class="" style="background: url(./../img/xgk/multi.png) no-repeat 45% center / 54%;;">
 								<div class="">
 									<div class="text-center">
 										<img src="${pageContext.request.contextPath}/img/xgk/sect24.png" style="width: 3em;"/>

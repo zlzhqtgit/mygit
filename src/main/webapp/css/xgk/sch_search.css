@@ -50,6 +50,7 @@ dl,dt,dd{
 dt{
 	font-weight: 600;
 	color: #333;
+	text-align: right;
 }
 .list-group-item dd{
 	float: left;

@@ -174,7 +174,7 @@ nav>ul>li:hover >a{
 }
 nav>ul>li>a{ 
 	padding: 6px 2px; 
-	font-size:20px; 
+	font-size:19px; 
 	display:inline-block; 
 	text-align:center; 
 	width:5.6em; 
@@ -219,6 +219,7 @@ nav>ul>li>ul>li>div{
 	top: 0;
 	background-color: #fff;
 	box-shadow: 0 0 12px #555;
+	z-index:99999;
 }
 nav>ul>li>ul>li:hover>div{
 	display: block;
@@ -652,7 +653,7 @@ footer li:hover a{
 	position: fixed;
 	right: 1px;
 	top: 30%;
-	z-index: 999999999;
+	z-index: 99;
 }
 .mark-box{
 	display:block;
@@ -2271,8 +2272,13 @@ form.pay .tab_head > li{
 	align-items: center;
 	
 }
+#search_university_list .sch_tit>div>span{
+	display:inline-block;
+	width:2.4em;
+}
+
 .like{
-	width: 9em;
+	width: 12em;
 }
 .like img{
 	width: 3em;

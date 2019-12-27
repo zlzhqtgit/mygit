@@ -256,7 +256,7 @@
 				    					<span class="pull-right text-muted">1个专业类>4个本科专业</span>
 				    				</div>
 					    			<div class="clearfix major_info_sub">
-				    					<span class="pull-left"><h4>哲学类（0101）</h4></span>
+				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
 				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
 					    			</div>
 					    			<ul class="major_list clearfix margin_top1">

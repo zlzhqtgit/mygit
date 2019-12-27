@@ -40,7 +40,7 @@
 					<div class="tab_body">
 						<div class="panel panel-default cur">
 							<div class="panel_head">
-								<h4 class="fontwei padding-side">共找到${universityCount}条结果</h4>
+								<h4 class="fontwei padding-side margin_top1">共找到${universityCount}条结果</h4>
 							</div>
 							<ul id="search_university_list">
 								<c:forEach items="${universityList}" var="item"  varStatus="vs">
@@ -54,16 +54,16 @@
 																<a href=""><h4 class="fontwei">${item.universitiesName}</h4></a>
 																<div class="">
 																	<c:if test="${item.universitiesAttributes.contains('985')}">
-																		<img src="${pageContext.request.contextPath}/img/xgk/attr/985.png" width="6%"/>
+																		<span style><img src="${pageContext.request.contextPath}/img/xgk/attr/985.png" class="img-responsive"/></span>
 																	</c:if>
 																	<c:if test="${item.universitiesAttributes.contains('211')}">
-																		<img src="${pageContext.request.contextPath}/img/xgk/attr/211.png" width="6%"/>
+																		<span><img src="${pageContext.request.contextPath}/img/xgk/attr/211.png" class="img-responsive"/></span>
 																	</c:if>
 																	<c:if test="${item.universitiesAttributes.contains('双一流')}">
-																		<img src="${pageContext.request.contextPath}/img/xgk/attr/syl.png" width="6%"/>
+																		<span><img src="${pageContext.request.contextPath}/img/xgk/attr/syl.png" class="img-responsive"/></span>
 																	</c:if>
 																	<c:if test="${item.universitiesAttributes.contains('研究生院')}">
-																		<img src="${pageContext.request.contextPath}/img/xgk/attr/yjsy.png" width="6%"/>
+																		<span><img src="${pageContext.request.contextPath}/img/xgk/attr/yjsy.png" class="img-responsive"/></span>
 																	</c:if>
 																	<span class="glyphicon glyphicon-map-marker"></span>
 																	<span class="text-muted">${item.province}</span>
@@ -350,7 +350,7 @@
 						</div>
 						<div class="panel panel-default">
 							<div class="panel_head">
-								<h4 class="fontwei padding-side">共找到${specialtyCount}条结果</h4>
+								<h4 class="fontwei padding-side margin_top1">共找到${specialtyCount}条结果</h4>
 								<ul id="search_specialty_list">
 									<c:forEach items="${specialtyList}" var="item">
 										<li>
@@ -381,7 +381,7 @@
 						</div>
 						<div class="panel panel-default">
 							<div class="panel_head">
-								<h4 class="fontwei padding-side">共找到${vocationCount}条结果</h4>
+								<h4 class="fontwei padding-side margin_top1">共找到${vocationCount}条结果</h4>
 								<ul id="search_vocation_list">
 									<c:forEach items="${vocationList}" var="item">
 										<li>
