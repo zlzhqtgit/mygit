@@ -155,10 +155,10 @@ public class VocationServerImpl implements IVocationServer {
 			//就业趋势(按经验)	
 			map.put("employment_situation_experience", GetCommonUser.getJson(JSONArray.fromObject(vocation.getEmploymentSituationExperience()), request));	
 			//从业资格
-			map.put("requirement_qualification", vocation.getRequirementQualification().split(";"));		
+			map.put("requirement_qualification", StringUtils.isEmpty(vocation.getRequirementQualification())? new ArrayList<String>() : vocation.getRequirementQualification().split(";"));		
 			//相关专业 
-			map.put("relation_specialty", vocation.getRelationSpecialty().split("、"));
-			JSONArray jsonArray = JSONArray.fromObject(vocation.getProspect());
+			map.put("relation_specialty", StringUtils.isEmpty(vocation.getRelationSpecialty()) ? new ArrayList<String>() : vocation.getRelationSpecialty().split("、"));
+			JSONArray jsonArray = JSONArray.fromObject( vocation.getProspect());
 			//行业收入
 			map.put("industry_income", GetCommonUser.getJson(JSONArray.fromObject(jsonArray.get(0)), request));
 			//地区收入

@@ -565,10 +565,10 @@
 						    							<div class="" style="width: 88%;">
 						    								<p class="">${item[0]}</p>
 						    								<div class="per_all">
-						    									<div class="per_inner"></div>
+						    									<div class="per_inner" style="width:${item[1]}%"></div>
 						    								</div>
 						    							</div>
-						    							<div class="text-center" style="width:${item[1]}%">${item[1]}</div>
+						    							<div class="text-center">${item[1]}%</div>
 					    							</li>
 					    						</c:forEach>
 					    					</c:if>
@@ -606,10 +606,10 @@
 						    							<div class="" style="width: 88%;">
 						    								<p class="">${item[0]}</p>
 						    								<div class="per_all">
-						    									<div class="per_inner"></div>
+						    									<div class="per_inner" style="width:${item[1]}%"></div>
 						    								</div>
 						    							</div>
-						    							<div class="text-center" style="width:${item[1]}%">${item[1]}</div>
+						    							<div class="text-center">${item[1]}%</div>
 					    							</li>
 					    						</c:forEach>
 					    					</c:if>

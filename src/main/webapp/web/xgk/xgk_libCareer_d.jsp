@@ -375,7 +375,6 @@
 												    
 												  //获取其他职业相关数据		
 												    function other_vocation(e){
-													  console.log(e)
 										    			var url = "${pageContext.request.contextPath}/voc/xgk_voc_other.do";
 										    			var data = "vocationId=" + $(e).find('h5').attr("id");
 										    			$.ajax({
@@ -392,9 +391,9 @@
 																}														
 																pic1.setOption(option);
 																
+																
 																//薪酬分布
-																for(var i=0; i<obj.data.salary_distribution.length; i++){
-																	console.log(obj.data.salary_distribution[i][1]);
+																for(var i=0; i<obj.data.salary_distribution.length-1; i++){
 																	option1.series[0].data[i].name = obj.data.salary_distribution[i][0];
 																	option1.series[0].data[i].value = obj.data.salary_distribution[i][1];
 																}
@@ -414,9 +413,10 @@
 																}
 																pic4.setOption(option3);
 																
+																
 																//从业资格要求
 																var requirement = "";
-																for(var i=0; i<obj.data.requirement_qualification.length; i++){
+																for(var i=0; i<obj.data.requirement_qualification.length-1; i++){
 																	requirement += '<span class="btn btn_border_p">' + obj.data.requirement_qualification[i] + '</span>';
 																}
 																$("#requirement_qualification").html(requirement);
