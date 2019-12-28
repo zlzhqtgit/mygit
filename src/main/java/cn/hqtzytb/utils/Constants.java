@@ -36,6 +36,10 @@ public class Constants{
 	public static final String MD5 = "MD5";
 	public static final String SHA1 = "SHA1";
 
+    // 二维码颜色
+	public static final int BLACK = 0xFF000000;
+    // 二维码颜色
+	public static final int WHITE = 0xFFFFFFFF;
 	/**
 	 * 初始密码
 	 */

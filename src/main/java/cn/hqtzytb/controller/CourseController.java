@@ -15,4 +15,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/online")
 public class CourseController {
 	
+	
 }

@@ -1,9 +1,15 @@
 package cn.hqtzytb.service.impl;
 
+import java.awt.BasicStroke;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Shape;
+import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.URLEncoder;
@@ -94,11 +100,9 @@ public class IWxPayServiceImpl implements IWxPayService{
 			session.setAttribute("recharge_money", rechargeMoney);
 			session.setAttribute("body", body);
 			int total_fee = (new Double(rechargeMoney * 100)).intValue();
-			System.out.println(out_trade_no);
 			// 调用pay工程的微信支付接口
 			Map<String, Object> paramMap = new ConcurrentHashMap<String, Object>();
 			String url = "http://localhost/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee + "&body=" + body;
-			System.err.println(url);
 			// pay工程微信支付接口返回的json字符串
 			String result = HttpClientUtils.doPost(url, paramMap);
 			// 获取到code_url，将其生成二维码显示到页面 ;
@@ -116,25 +120,55 @@ public class IWxPayServiceImpl implements IWxPayService{
 					String code_url = jsonObject.getString("code_url");
 					// 将code_url生成二维码
 					// 二维码宽高
-					int width = 200;
-					int height = 200;
+					int width = 250;
+					int height = 250;
 					// 创建一个map集合
 					Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
 					hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 					// 创建一个矩阵对象
 					BitMatrix bitMatrix = new MultiFormatWriter().encode(code_url, BarcodeFormat.QR_CODE, width, height, hints);
-					// 创建字节数组输出流
-					ByteArrayOutputStream imageOut = new ByteArrayOutputStream();
-					// 将矩阵对象转换为响应到页面
-					MatrixToImageWriter.writeToStream(bitMatrix, "jpg", imageOut);
-					// 创建一个字节输入流
-					ByteArrayInputStream imageIn = new ByteArrayInputStream(imageOut.toByteArray());
-					// 创建一个图片缓存对象
-					BufferedImage bImage = ImageIO.read(imageIn);
-					// 输出流对象
+					width = bitMatrix.getWidth();
+			        height = bitMatrix.getHeight();
+			        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+			        for (int x = 0; x < width; x++) {
+			            for (int y = 0; y < height; y++) {
+			                image.setRGB(x, y, bitMatrix.get(x, y) ? Constants.BLACK : Constants.WHITE);
+			            }
+			        }
+			        url = "E:/workspace/hqtzytb/src/main/webapp/img/public/logo.png";
+			        //url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/", "webapp/img/public/logo.png");
+			        System.err.println(url);
+			        File file = new File(url);
+			        Image logo = ImageIO.read(file);
+			        width = logo.getWidth(null) > (250 * 2/10) ?  (250 * 2/10) : logo.getWidth(null);
+			        height = logo.getHeight(null) > (250 * 2/10) ? (250 * 2/10) : logo.getHeight(null);
+			        // 插入LOGO
+			        Graphics2D graph = image.createGraphics();
+			        int x = (250 - width) / 2;
+			        int y = (250 - height) / 2;
+			        graph.drawImage(logo, x, y, width, height, null);
+			        Shape shape = new RoundRectangle2D.Float(x, y, width, width, 6, 6);
+			        graph.setStroke(new BasicStroke(3f));
+			        graph.draw(shape);
+			        graph.dispose();
+					
+			        
+//					 //创建字节数组输出流
+//					ByteArrayOutputStream imageOut = new ByteArrayOutputStream();
+//					// 将矩阵对象转换为响应到页面
+//					MatrixToImageWriter.writeToStream(bitMatrix, "jpg", imageOut);
+//					// 创建一个字节输入流
+//					ByteArrayInputStream imageIn = new ByteArrayInputStream(imageOut.toByteArray());
+//					// 创建一个图片缓存对象
+//					BufferedImage bImage = ImageIO.read(imageIn);
+//					// 输出流对象
+//					OutputStream outputStream = response.getOutputStream();
+//					ImageIO.write(bImage, "jpg", outputStream);
+//					bImage.flush();
 					OutputStream outputStream = response.getOutputStream();
-					ImageIO.write(bImage, "jpg", outputStream);
-					bImage.flush();
+					// 输出流对象
+			        ImageIO.write(image, "jpg", outputStream);
+					image.flush();
 					outputStream.flush();
 					outputStream.close();				
 				}
