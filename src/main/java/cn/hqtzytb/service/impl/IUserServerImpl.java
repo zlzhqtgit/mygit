@@ -403,7 +403,7 @@ public class IUserServerImpl implements IUserServer {
 					resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
 					return new ResponseResult<>(ResponseResult.ERR,"您的下载测评报告次数已用完，请充值后再进行尝试！",resultMap);
 				}
-				if(currentTime.before(user.getExpirationTime())){//使用次数已用完
+				if(currentTime.after(user.getExpirationTime())){//使用次数已用完
 					resultMap.put("count", user.getDownloadCount());
 					resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
 					return new ResponseResult<>(ResponseResult.ERR,"您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
