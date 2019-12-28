@@ -93,6 +93,9 @@
 									<c:if test="${intersection == 0}">
 										[${choose_province}部分院校可选以下学科组合方式]
 									</c:if>
+									<c:if test="${intersection == 2}">
+										[${choose_province}暂无高考招生政策]
+									</c:if>
 								</p>
 								<ul class="combile clearfix" id="policy_combination">
 									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
@@ -132,10 +135,19 @@
 								//最终推荐学科组合	
 								$(function(){
 									var combination = JSON.parse('${combination}');
+									var status = '${intersection}';
 									var result = "";
-									for(var i=0; i<3; i++){//只展示3课
-										result += "<li class=''><div class='border-primary' onclick='saveReport(this)'>" + combination[i].key + "</div></li>";	
+									if(status == 2){//无政策
+										for(var i=0; i<3; i++){//只展示3课
+											result += "<li class=''><div class='border-primary' onclick='saveReport(this)'>" + combination[i] + "</div></li>";	
+										}
+									}else{
+										for(var i=0; i<3; i++){//只展示3课
+											result += "<li class=''><div class='border-primary' onclick='saveReport(this)'>" + combination[i].key + "</div></li>";	
+										}
 									}
+									
+									
 									$(".combile1").html(result);
 								}); 
 								
@@ -187,7 +199,6 @@
 							
 								//当地本专业 政策允许 学科组合
 								$(function(){
-									console.log('${policy_combination}');
 									var recommend_combination = JSON.parse('${policy_combination}');
 									var policy = "";
 									for(var i=0; i<recommend_combination.length; i++ ){
@@ -198,7 +209,7 @@
 								
 								//测评推荐组合
 								$(function(){
-									var recommend_combination = JSON.parse('${recommend_combination}');
+									var recommend_combination = JSON.parse('${recommend_combination}');									
 									var recommend = "<tr>";
 									for(var i=0; i<recommend_combination.length; i++){
 										if(i%5 == 0 && i > 0){
