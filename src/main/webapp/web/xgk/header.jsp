@@ -120,8 +120,12 @@
 		
 	})
 	var options='';
-	for (var i=0;i<chinaDatas.length;i++) {
-		options+='<option value="'+chinaDatas[i][0].name+'">'+chinaDatas[i][0].name+'</option>'
+	for (var i=0;i<chinaDatas.length;i++) {		
+		if(chinaDatas[i][0].name.search('${province}') != -1){
+			options+='<option value="'+chinaDatas[i][0].name+'" selected="selected">'+chinaDatas[i][0].name+'</option>'
+		}else{
+			options+='<option value="'+chinaDatas[i][0].name+'">'+chinaDatas[i][0].name+'</option>'
+		}		
 	}
 	$("#province").html(options);
 	$("#province").change(function() {
