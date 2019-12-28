@@ -34,8 +34,8 @@
 								<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>
 								<li><a id="xgk10" name="dh" href="#">商务合作</a></li>
 								<li class="">
-									<a href="">立学道社群</a>
-									<div class="community">
+									<a href="javascript:void(0)">立学道社群</a>
+									<div class="community wow bounceInRight">
 										<div class="text-right text-white padding-side fontwei ctit" style="padding:.4em 1em">立学道社群</div>
 										<div class="cont_wrap">
 											<div class="clearfix">

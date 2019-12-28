@@ -18,9 +18,7 @@
 //	}
 //	$(obj).find('img').attr('src', y);
 //}
-
-$(function(){
-	//弹框
+//弹框
 	function modelshow(title, content, type) {
 		layer.open({
 			type: type,
@@ -36,16 +34,7 @@ $(function(){
 			scrollbar: true
 		});
 	}
-
-	//选项卡				
-	$('.tab_head li').click(function() {
-		$(this).parent().children().removeClass('cur');
-		$(this).addClass('cur');
-		var index = $(this).index();
-		$(this).parents('.tab_list').find('.tab_body').children().removeClass('cur');
-		$(this).parents('.tab_list').find('.tab_body').children().eq(index).addClass('cur');
-	})
-
+	
 	// 点击显示更多按钮
 	function showMore(obj) {
 		$(obj).parent('.open-btn').prev().height("auto"); //取消文字容器高度限制
@@ -63,4 +52,14 @@ $(function(){
 			}
 		});
 	}
+$(function(){
+	//选项卡				
+	$('.tab_head li').click(function() {
+		$(this).parent().children().removeClass('cur');
+		$(this).addClass('cur');
+		var index = $(this).index();
+		$(this).parents('.tab_list').find('.tab_body').children().removeClass('cur');
+		$(this).parents('.tab_list').find('.tab_body').children().eq(index).addClass('cur');
+	})
+	
 })

@@ -233,7 +233,7 @@
 				    	<div class="tab_body">
 				    		<div class="tab_b1 cur">
 				    			<div class="major_info" id="bklist">
-				    				<div class="clearfix major_info_head">
+				    				<!-- <div class="clearfix major_info_head">
 				    					<span class="pull-left"><h3>哲学(01)</h3></span>
 				    					<span class="pull-right  text-muted">1个专业类>4个本科专业</span>
 				    				</div>
@@ -246,17 +246,17 @@
 					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
 					    				<li class=""><a >伦理学</a></li>
 					    				<li class=""><a >宗教学</a></li>
-					    			</ul>
+					    			</ul> -->
 				    			</div>
 				    		</div>	
 				    		<div class="tab_b2">
 				    			<div class="major_info" id="zklist">
-				    				<div class="clearfix major_info_head" >
+				    				<!-- <div class="clearfix major_info_head" >
 				    					<span class="pull-left"><h3>哲学(02)</h3></span>
 				    					<span class="pull-right text-muted">1个专业类>4个本科专业</span>
 				    				</div>
 					    			<div class="clearfix major_info_sub">
-				    					<span class="pull-left"><h4>哲学类（0101）</h4></span>
+				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
 				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
 					    			</div>
 					    			<ul class="major_list clearfix margin_top1">
@@ -264,7 +264,7 @@
 					    				<li class=""><a href="sch_major_info.html">逻辑学</a></li>
 					    				<li class=""><a href="sch_major_info.html">伦理学</a></li>
 					    				<li class=""><a href="sch_major_info.html">宗教学</a></li>
-					    			</ul>
+					    			</ul> -->
 				    			</div>
 				    		</div>
 				    	</div>
