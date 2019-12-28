@@ -3,11 +3,6 @@ package cn.hqtzytb.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.zxing.WriterException;
-
-import cn.hqtzytb.entity.Order;
-import cn.hqtzytb.entity.ResponseResult;
-
 /**
  * @ClassName: IWxPayService
  * @Description: TODO

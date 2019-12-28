@@ -109,7 +109,6 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 				session.setAttribute("COGNIZE_ANALYZE", COGNIZESCORE_ANALYZE);
 			}
 			session.setAttribute("LARGE_CLASS", JSON.toJSONString(vocationMapper.selectLargeClass(null, null, null, null)));//职业大类
-			System.err.println(JSON.toJSONString(vocationMapper.selectLargeClass(null, null, null, null)));
 			logger.info("用户名：" + session.getAttribute("username") + " 模块名：选科指导页面     操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_pick_guide";
 		} catch (Exception e){
@@ -170,7 +169,7 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 
 	@Override
 	public String getGenerateReport(String province, String specialtyId, HttpServletRequest request) throws UnsupportedEncodingException {
-		try {
+//		try {
 			Subject subject = SecurityUtils.getSubject();
 			province = new String(province.toString().getBytes("ISO8859-1"), "UTF-8");
 			specialtyId = new String(specialtyId.toString().getBytes("ISO8859-1"), "UTF-8");
@@ -409,8 +408,10 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	            
 	            //当地政策map
 	            if (enrollmentRequirementsList.isEmpty()) {
-	            	session.setAttribute("intersection", 0);//无交集
+	            	session.setAttribute("intersection", 2);//无当地政策
 	            	session.setAttribute("combination", JSON.toJSONString(combination_list));//测评推荐学科组合
+	            	System.err.println(JSON.toJSONString(combination_list));
+	            	session.setAttribute("policy_combination", JSON.toJSONString(new ArrayList<String>()));//政策允许选科组合
 					return "web/xgk/xgk_pick_report";
 				} 
 	            String[] enrollment_list = null;
@@ -434,6 +435,7 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	            		policy_combination.add(enrollment_list[i]);
 					}
 	            }
+
 				Map<String, Double> policy_map = new HashMap<>();//政策允许出现的学科组合Map<学科,总占比>
 	            if (policy_combination.isEmpty()) {//无交集
 	            	int count = 0;//政策允许学科组合总数
@@ -479,14 +481,14 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	            List<Map.Entry<String, Double>> combination = new LinkedList<Map.Entry<String, Double>>(policy_map.entrySet());
 				Collections.sort(combination, (o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 				session.setAttribute("combination", JSON.toJSONString(combination));//测评  + 政策 推荐学科组合	
-	            session.setAttribute("policy_combination", JSON.toJSONString(policy_combination));//政策允许组合  
+	            session.setAttribute("policy_combination", JSON.toJSONString(policy_combination));//政策允许组合  	            
 			}
-			
+            
 			return "web/xgk/xgk_pick_report";
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：进入选科报告数据分析异常   错误信息: " + e);
-			return  "web/xgk/xgk_error_404"; 
-		}
+//		} catch (Exception e) {
+//			logger.error("访问路径：" + request.getRequestURI() + "操作：进入选科报告数据分析异常   错误信息: " + e);
+//			return  "web/xgk/xgk_error_404"; 
+//		}
 	}
 
 	@Override
@@ -548,7 +550,6 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 			HttpServletResponse response) {
 		try{
 			Session session = SecurityUtils.getSubject().getSession();
-			System.out.println(str);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：自定义选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_customisereport";
 		} catch (Exception e){
@@ -630,7 +631,6 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 		try{		
 			Session session = SecurityUtils.getSubject().getSession();
 			List<Vocation> vocationlist=vocationServer.getVocationById(vocationId);
-			System.out.println(vocationId);
 			map.addAttribute("vocationlist",vocationlist);
 			logger.info("用户名："+session.getAttribute("username")+" 模块名：测评选科报告页面简介  操作：进入模块  状态：OK!");
 			return  "web/xgk/xgk_vocation";
@@ -646,9 +646,6 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 		try{		
 			String includeMajors=new String(includeMajor.getBytes("ISO-8859-1"),"utf-8"); 
 			List<Enrollment> enrollmentlist=enrollmentServer.getMajor(includeMajors, eProvince);
-			System.out.println(includeMajors);
-			System.out.println(eProvince);
-			System.out.println(enrollmentlist);
 			if(enrollmentlist.size()>0){				
 				rr = new ResponseResult<List<Enrollment> >(ResponseResult.STATE_OK,enrollmentlist);
 			}else{

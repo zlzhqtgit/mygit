@@ -187,6 +187,7 @@
 							
 								//当地本专业 政策允许 学科组合
 								$(function(){
+									console.log('${policy_combination}');
 									var recommend_combination = JSON.parse('${policy_combination}');
 									var policy = "";
 									for(var i=0; i<recommend_combination.length; i++ ){
@@ -277,7 +278,6 @@
 					function bar_Yaxis(id,title) {
 						var myChart_circle = echarts.init(document.getElementById(id));
 						var cognize_analyze = JSON.parse('${cognize_analyze}');
-						console.log(cognize_analyze);
 						option = {
 						    title: {
 						        text: title,

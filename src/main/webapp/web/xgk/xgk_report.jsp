@@ -14,11 +14,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/html2canvas.js" type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/jspdf.debug.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-
-</script>
 </head>
-
 <body>
 <!-- 页面顶部-->
 <c:import url="header.jsp"></c:import>
