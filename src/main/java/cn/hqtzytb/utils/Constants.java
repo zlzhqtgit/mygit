@@ -29,6 +29,31 @@ public class Constants{
 	public static final String EVALUATION_NAME_SCORE_ANALYSIS = "成绩分析";
 	public static final String EVALUATION_TYPE_MBTI_ANALYSIS = "MBTI";
 	public static final String EVALUATION_TYPE_HOLLAND_ANALYSIS = "霍兰德";
+	
+	/**
+	 * 成为VIP套餐
+	 */
+	public static final String TYPE_BECOME_VIP = "立学道0.01元臻选套餐";
+	
+	/**
+	 * 成为咨询师套餐
+	 */
+	public static final String TYPE_COUNSELOR_VIP = "立学道0.02元臻选套餐";
+	
+	
+	/**
+	 * 普通用户
+	 */
+	public static final Integer ROLE_TYPE_USER = 5;
+	/**
+	 * 个人VIP
+	 */
+	public static final Integer ROLE_TYPE_USER_VIP = 4;
+	/**
+	 * 个人咨询师VIP
+	 */
+	public static final Integer ROLE_TYPE_COUNSELOR_VIP = 6;
+	
 	/**
 	 * 加密方式
 	 */

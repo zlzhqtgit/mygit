@@ -46,7 +46,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">59</span> 元/年
+											<span class="price">0.01</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -72,7 +72,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">229</span> 元/年
+											<span class="price">0.02</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -97,7 +97,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">599</span> 元/年
+											<span class="price">0.03</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -146,7 +146,7 @@
 									//选择套餐生成微信支付二维码
 									function choice_combo(e){
 										 var recharge_money = $(e).parents(".series_item").find(".series_item_tit .price").text();
-										 var body = $(e).parents(".series_item_con").find(".series_summary").html();
+										 //var body = $(e).parents(".series_item_con").find(".series_summary").html();
 										 var body = "立学道" + recharge_money + "元臻选套餐";
 										 $("#show_money").html(recharge_money);
 										 if('${uid}' != ""){

@@ -22,6 +22,8 @@
 	    	<result column="rid" property="rid" />
 	    	<result column="authority" property="authority" />
 	    	<result column="creat_time" property="creatTime" />
+	    	<result column="download_count" property="downloadCount" />
+	    	<result column="expiration_time" property="expirationTime" />
 	     <!-- 角色 -->
 	     <result column="role_id" property="roleId" />
 	     <result column="cid" property="cid" />
@@ -96,6 +98,12 @@
 	      <if test="creatTime != null">
 	        creat_time,
 	      </if>
+	      <if test="downloadCount != null">
+	        download_count,
+	      </if>
+	      <if test="expirationTime != null">
+	        expiration_time,
+	      </if>	     
 	    </trim>
 	    <trim prefix="values (" suffix=")" suffixOverrides=",">
 	      <if test="id != null">
@@ -155,15 +163,21 @@
 	      <if test="creatTime != null">
 	        #{creatTime},
 	      </if>
+	       <if test="downloadCount != null">
+	        #{downloadCount},
+	      </if>
+	       <if test="expirationTime != null">
+	        #{expirationTime},
+	      </if>	      
 	    </trim>
 	</insert>
 	
 	<!--查询用户 -->
-	<select id="select" resultType="cn.hqtzytb.entity.User">
+	<select id="select" resultMap="BaseResultMap"> 
 		SELECT
 			id, head_img, username, phone, pc_number, student_id, wexin_chat, qq_chat, password, 
 		    	uuid, school, school_address, study_provinces, educational_circles, grade, class_name, 
-		    	rid, authority, creat_time,
+		    	rid, authority, creat_time, download_count, expiration_time,
 		    	role_id, cid, role_name, role_authority, role_description,
 			company_id, company_number, company_name, company_adress, creation_time
 		FROM user
@@ -175,12 +189,12 @@
 	</select>
 	
 	<!-- 查询单个用户信息 -->
-	<!-- 如果参数类型parameterType是普通数据类型，那么SQL中的#{}参数名可以任意； 如果参数是对象，那么参#{}数名称必须和对象属性名一致 -->
-	<select id="queryUser" resultType="cn.hqtzytb.entity.User" parameterType="java.lang.String">
+	<!-- 如果参数类型parameterType是普通数据类型，那么SQL中的#{}参数名可以任意； 如果参数是对象，那么参#{}数名称必须和对象属性名一致 -->		
+	<select id="queryUser" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT 
 			id, head_img, username, phone, pc_number, student_id, wexin_chat, qq_chat, password, 
 		    	uuid, school, school_address, study_provinces, educational_circles, grade, class_name, 
-		    	rid, authority, creat_time,
+		    	rid, authority, creat_time, download_count, expiration_time,
 		    	role_id, cid, role_name, role_authority, role_description,
 			company_id, company_number, company_name, company_adress, creation_time
 		FROM 
@@ -190,12 +204,11 @@
 		WHERE phone = #{account} OR pc_number = #{account}
 	</select>
 	 
-
 	<select id="selectUserListByMap" resultType="cn.hqtzytb.entity.User" parameterType="java.util.Map">
 		SELECT
 			id, head_img, username, phone, pc_number, student_id, wexin_chat, qq_chat, password, 
 		    	uuid, school, school_address, study_provinces, educational_circles, grade, class_name, 
-		    	rid, authority, creat_time,
+		    	rid, authority, creat_time, download_count, expiration_time,
 		    	role_id, cid, role_name, role_authority, role_description,
 			company_id, company_number, company_name, company_adress, creation_time
 		FROM
@@ -260,6 +273,12 @@
 		      <if test="creatTime != null">
 		        AND creat_time = #{creatTime}
 		      </if>
+		       <if test="downloadCount != null">
+		        AND download_count = #{downloadCount}
+		      </if>
+		       <if test="expirationTime != null">
+		        AND expiration_time = #{expirationTime}
+		      </if>		     
 		</where>
 	</select>
 
@@ -321,6 +340,12 @@
 	      <if test="creatTime != null">
 	        creat_time = #{creatTime},
 	      </if>
+	      <if test="downloadCount != null">
+	        download_count = #{downloadCount},
+	      </if>
+	      <if test="expirationTime != null">
+	        expiration_time = #{expirationTime},
+	      </if>	       
 	    </set>
 	    where id = #{id}
 	</update>

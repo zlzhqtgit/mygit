@@ -25,12 +25,12 @@
   </select>
   
   <delete id="delete" parameterType="cn.hqtzytb.entity.Order" >
-    DELETE FROM order WHERE id = #{id}
+    DELETE FROM `order` WHERE id = #{id}
   </delete>
   
  
   <insert id="insert" parameterType="cn.hqtzytb.entity.Order" >
-    INSERT INTO order
+    INSERT INTO `order`
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -75,7 +75,7 @@
   
   
   <update id="update" parameterType="cn.hqtzytb.entity.Order" >
-    update order
+    update `order`
     <set >
       <if test="outTradeNo != null" >
         out_trade_no = #{outTradeNo},
