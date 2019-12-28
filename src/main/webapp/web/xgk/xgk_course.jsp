@@ -239,9 +239,9 @@
 				<div class="padding-side flex_jc_sb">
 					<span class="flex_jc_sb">
 						<h3>推荐课程</h3>
-						<span class="text-muted flex_Al_c">&ensp;共xxxx个视频</span>
+						<span class="text-muted flex_Al_c">&ensp;共300个视频</span>
 					</span> 
-					<a href="${pageContext.request.contextPath}/web/xgk/xgk_courseList.jsp">查看更多课程&raquo;</a>
+					<a href="${pageContext.request.contextPath}/online/xgk_online_more.do">查看更多课程&raquo;</a>
 				</div>
 				<ul class="clearfix course_list margin_top1">
 					<li class="pull-left padding-side">
@@ -301,9 +301,9 @@
 				<div class="padding-side flex_jc_sb">
 					<span class="flex_jc_sb">
 						<h3>预习课程</h3>
-						<span class="text-muted flex_Al_c">&ensp;共xxxx个视频</span>
+						<span class="text-muted flex_Al_c">&ensp;共128个视频</span>
 					</span> 
-					<a href="course_list.html">查看更多课程&raquo;</a>
+					<a href="${pageContext.request.contextPath}/online/xgk_online_more.do">查看更多课程&raquo;</a>
 				</div>
 				<ul class="clearfix course_list margin_top1">
 					<li class="pull-left padding-side">
@@ -363,9 +363,9 @@
 				<div class="padding-side flex_jc_sb">
 					<span class="flex_jc_sb">
 						<h3>预习课程</h3>
-						<span class="text-muted flex_Al_c">&ensp;共xxxx个视频</span>
+						<span class="text-muted flex_Al_c">&ensp;共128个视频</span>
 					</span> 
-					<a href="">查看更多课程&raquo;</a>
+					<a href="${pageContext.request.contextPath}/online/xgk_online_more.do">查看更多课程&raquo;</a>
 				</div>
 				<ul class="clearfix course_list margin_top1">
 					<li class="pull-left padding-side">

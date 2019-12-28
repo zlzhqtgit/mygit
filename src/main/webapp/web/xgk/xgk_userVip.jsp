@@ -118,7 +118,7 @@
 				<div class="row">
 					<form class="pay">
 						<div class="margin_bot">
-							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side">599元</span>
+							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
 						</div>
 						<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
 							<thead>
@@ -148,6 +148,7 @@
 										 var recharge_money = $(e).parents(".series_item").find(".series_item_tit .price").text();
 										 var body = $(e).parents(".series_item_con").find(".series_summary").html();
 										 var body = "立学道" + recharge_money + "元臻选套餐";
+										 $("#show_money").html(recharge_money);
 										 if('${uid}' != ""){
 											 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?rechargeMoney=" + recharge_money + "&body=" + body);	 
 										 }else{

@@ -97,10 +97,10 @@
 				<ul class="clearfix course_list margin_top1">
 					<li class="pull-left padding-side">
 						<div class="thumbnail">
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="converse_info">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="converse_info">
 								<img src="${pageContext.request.contextPath}/img/xgk/car.jpg"/>
 							</a>
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="caption flex_jc_sb">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="caption flex_jc_sb">
 								<span>语文预习</span>
 								<span>高一上学期第一单元</span>
 							</a>
@@ -109,10 +109,10 @@
 					</li>
 					<li class="pull-left padding-side">
 						<div class="thumbnail">
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="converse_info">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="converse_info">
 								<img src="${pageContext.request.contextPath}/img/xgk/car.jpg"/>
 							</a>
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="caption flex_jc_sb">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="caption flex_jc_sb">
 								<span>语文预习</span>
 								<span>高一上学期第一单元</span>
 							</a>
@@ -121,10 +121,10 @@
 					</li>
 					<li class="pull-left padding-side">
 						<div class="thumbnail">
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="converse_info">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="converse_info">
 								<img src="${pageContext.request.contextPath}/img/xgk/car.jpg"/>
 							</a>
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="caption flex_jc_sb">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="caption flex_jc_sb">
 								<span>语文预习</span>
 								<span>高一上学期第一单元</span>
 							</a>
@@ -133,10 +133,10 @@
 					</li>
 					<li class="pull-left padding-side">
 						<div class="thumbnail">
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="converse_info">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="converse_info">
 								<img src="${pageContext.request.contextPath}/img/xgk/car.jpg"/>
 							</a>
-							<a href="${pageContext.request.contextPath}/web/xgk/xgk_coursePlay.jsp" class="caption flex_jc_sb">
+							<a href="${pageContext.request.contextPath}/online/xgk_video_page.do" class="caption flex_jc_sb">
 								<span>语文预习</span>
 								<span>高一上学期第一单元</span>
 							</a>

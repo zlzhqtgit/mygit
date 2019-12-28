@@ -135,8 +135,8 @@ public class IWxPayServiceImpl implements IWxPayService{
 			                image.setRGB(x, y, bitMatrix.get(x, y) ? Constants.BLACK : Constants.WHITE);
 			            }
 			        }
-			        url = "E:/workspace/hqtzytb/src/main/webapp/img/public/logo.png";
-			        //url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/", "webapp/img/public/logo.png");
+			        url = "E:/workspace/hqtzytb/src/main/webapp/img/public/logo.jpg";
+			        //url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/", "webapp/img/public/logo.jpg");
 			        System.err.println(url);
 			        File file = new File(url);
 			        Image logo = ImageIO.read(file);

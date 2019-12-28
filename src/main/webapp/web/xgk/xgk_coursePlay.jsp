@@ -31,7 +31,7 @@
 						<span class="inline_block text-white tag" style="padding: .4em 1em;background-color: #45d7e6;margin-left: 1em;margin-top: 1em;">高考</span>
 					</div>
 					<div class="flex_Al_c">
-						<span class=""><i class="text-danger">xx人</i>已学习</span>&ensp;
+						<span class=""><i class="text-danger">20508人</i>已学习</span>&ensp;
 						<input type="text" name="" id="" value="" placeholder="输入课程名称自动搜索"/>
 					</div>
 				</div>
@@ -164,8 +164,10 @@
 			<div class="recom_course">
 				<div class="padding-side flex_jc_sb wow fadeInUp">
 					<div class="flex_jcstart">
-						<h3 class="fontwei">推荐课程</h3>
-						<span class="text-muted flex_Al_c">&ensp;共xxxx个视频</span>
+						<h3 class="fontwei">推荐课程</h3> 
+						
+						
+						<span class="text-muted flex_Al_c">&ensp;共2008个视频</span>
 					</div> 
 					<div class="" style="display: flex;align-items: flex-end;">
 						<a class="text-primary border-primary btn" href=""><span class="glyphicon glyphicon-refresh"></span>换一组</a>
