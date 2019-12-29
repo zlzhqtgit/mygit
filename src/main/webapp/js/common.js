@@ -22,7 +22,7 @@
 	function modelshow(title, content, type) {
 		layer.open({
 			type: type,
-			area: ['800px', '500px'],
+			area: ['800px', '480px'],
 			fix: true, //是否随跟页面滚动
 			maxmin: true,
 			shadeClose: true, //点击阴影开关
