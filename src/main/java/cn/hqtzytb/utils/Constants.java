@@ -31,6 +31,15 @@ public class Constants{
 	public static final String EVALUATION_TYPE_HOLLAND_ANALYSIS = "霍兰德";
 	
 	/**
+	 * 好前途平台用户
+	 */
+	public static final String HQT_USER = "hqt_user";
+	/**
+	 * 好前途科技有限公司编码
+	 */
+	public static final String HQT_COMPANY_NUMBER = "201910001";
+	
+	/**
 	 * 成为VIP套餐
 	 */
 	public static final String TYPE_BECOME_VIP = "立学道0.01元臻选套餐";

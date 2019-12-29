@@ -103,9 +103,16 @@ public interface IUserServer {
 	String showUserCenterInfo(HttpServletRequest request);
 	
 	/**
-	 * 
+	 * 判断用户是否能够下载报告
 	 * @param request
 	 * @return
 	 */
 	ResponseResult<Map<String, Object>> reduceDownloadCount(HttpServletRequest request);
+	
+	/**
+	 * 上传任务报告
+	 * @param request
+	 * @return
+	 */
+	ResponseResult<Map<String, Object>> addTaskResult(Integer taskId, HttpServletRequest request);
 }

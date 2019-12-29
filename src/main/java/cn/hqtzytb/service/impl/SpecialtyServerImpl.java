@@ -11,6 +11,7 @@ import cn.hqtzytb.utils.GetCommonUser;
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -192,6 +193,7 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 	    			relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(),request));
 	    		}
 	    	}
+			SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
 			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,universityList);
 		}catch(Exception e){
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 查询专业详情信息   错误信息：" + e);

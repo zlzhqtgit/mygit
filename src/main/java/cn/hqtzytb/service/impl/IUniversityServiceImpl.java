@@ -45,6 +45,7 @@ public class IUniversityServiceImpl implements IUniversityService {
     public ResponseResult<Map<String, Object>> getUniversityList(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
     	Map<String, Object> resultMap = new HashMap<>();
     	try {
+    		SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
     		List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(where) ? null : where ," ur.ur_year DESC ",offset == null ? 0 : offset ,countPerPage == null ? 3 : countPerPage);
     		Integer count = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(where) ? null : where);
     		resultMap.put("list", universityList);
@@ -81,7 +82,8 @@ public class IUniversityServiceImpl implements IUniversityService {
 						relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(), request));//院校分数线
 						relation.setEnrollmentPlanList(GetCommonUser.getJson(relation.getEnrollmentPlan(),request));//招生计划
 						relation.setProfessionalAdmissionScoreList(GetCommonUser.getJson(relation.getProfessionalAdmissionScore(), request));//专业录取分数线			
-					}					
+					}			
+					map.addAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
 					map.addAttribute("proviceOption", proviceOption);//省份集合
 					map.addAttribute("typeOption", typeOption);//录取类型集合
 					map.addAttribute("yearOption", yearOption);//年份集合
@@ -139,6 +141,7 @@ public class IUniversityServiceImpl implements IUniversityService {
 	public String showUniversitySearch(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Session session = SecurityUtils.getSubject().getSession();
+			session.setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
 			session.setAttribute("university_province_list", universityMapper.selectUniversityProvince());
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 展示学院搜索页面  错误信息：" + e);

@@ -178,4 +178,16 @@ public class UserController {
 		
 		return iUserServer.reduceDownloadCount(request);
 	}
+	
+	/**
+	 * 上传任务报告
+	 */
+	@RequestMapping("/hqt_task_add.do")
+	@ResponseBody
+	public ResponseResult<Map<String, Object>> addTaskResult(Integer taskId, HttpServletRequest request){
+		
+		return iUserServer.addTaskResult(taskId, request);
+	}
+	
+
 }

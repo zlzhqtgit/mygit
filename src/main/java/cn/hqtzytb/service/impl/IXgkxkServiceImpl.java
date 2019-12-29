@@ -29,6 +29,7 @@ import cn.hqtzytb.entity.EnrollmentRequirements;
 import cn.hqtzytb.entity.Personality;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
+import cn.hqtzytb.entity.TaskDetails;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.UserResultReport;
@@ -36,6 +37,7 @@ import cn.hqtzytb.entity.Vocation;
 import cn.hqtzytb.mapper.EnrollmentRequirementsMapper;
 import cn.hqtzytb.mapper.PersonalityMapper;
 import cn.hqtzytb.mapper.SpecialtyMapper;
+import cn.hqtzytb.mapper.TaskMapper;
 import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.mapper.UserMapper;
 import cn.hqtzytb.mapper.UserResultReportMapper;
@@ -82,12 +84,18 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	private PersonalityMapper personalityMapper;
 	@Autowired
 	private EnrollmentRequirementsMapper enrollmentRequirementsMapper;
+	@Autowired
+	private TaskMapper taskMapper;
+	
 	@Override
-	public String showhqtXgkGuideSelect(ModelMap map, HttpServletRequest request, HttpServletResponse response) {
+	public String showhqtXgkGuideSelect(Integer taskId,ModelMap map, HttpServletRequest request, HttpServletResponse response) {
 		try{
 			Subject subject = SecurityUtils.getSubject();
 			Session session = subject.getSession();		
 			if (subject.isAuthenticated()) {
+				if(taskId != null){
+					session.setAttribute("taskId", taskId);
+				}
 				List<UserFeature> userFeatures = userFeatureMapper.select("uid = '" + (Integer)session.getAttribute("uid") + "'", null, null, null);
 				Integer SCORE_ANALYZE = 0;//成绩分析
 				Integer POTENTIALSCORE_ANALYZE = 0;//潜能分析
@@ -495,6 +503,7 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	public ResponseResult<Void> addReport(String result, HttpServletRequest request) {
 		try {
 			Subject subject = SecurityUtils.getSubject();
+			System.err.println(result);
 			if (subject.isAuthenticated()) {
 				Session session = subject.getSession();
 				String province = (String)session.getAttribute("choose_province");
@@ -503,6 +512,11 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 				UserResultReport report = null;
 				Integer uid = (Integer)session.getAttribute("uid");
 				List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid + "'", null, null, null);
+				String taskId = (String)session.getAttribute("taskId");
+				TaskDetails task = null;
+				if(StringUtils.isNotEmpty(taskId)){
+					task = taskMapper.selectTaskDetails(" a.tid = '" + taskId + "' ", null, null, null).get(0);
+				}				
 				if (reportList.isEmpty()) {
 					report = new UserResultReport();
 					report.setUid(uid);
@@ -518,9 +532,19 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 					report.setProvince(province);
 					report.setSpecialtyId(specialtyId);
 					report.setStatus("1");
-					report.setResult(result);
-					userResultReportMapper.update(report);
+					report.setResult(result);					
 				}
+				if(task != null){
+					task.setdStatus(2);
+					task.setdResult(result);
+					taskMapper.updateTaskDetails(task);
+					report.setStartTime(task.getCreationTime());
+				}
+				if(reportList.isEmpty()){
+					userResultReportMapper.insert(report);
+				}else{
+					userResultReportMapper.update(report);
+				}				
 				session.setAttribute("whether_done", 1);//已做过选科指导
 				return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
 			}

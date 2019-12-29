@@ -48,9 +48,9 @@ public class XgkxkController {
 	 * @throws MyRuntimeException
 	 */
 	@RequestMapping("/xgk_guide_select.do")	
-	public String showhqtXgkGuideSelect(ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException{	
+	public String showhqtXgkGuideSelect(Integer taskId, ModelMap map, HttpServletRequest request, HttpServletResponse response) throws MyRuntimeException{	
 		
-		return iXgkxkService.showhqtXgkGuideSelect(map, request, response);					
+		return iXgkxkService.showhqtXgkGuideSelect(taskId, map, request, response);					
 	}
 	
 	
