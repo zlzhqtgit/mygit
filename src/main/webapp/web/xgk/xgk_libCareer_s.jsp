@@ -194,8 +194,25 @@
 							vocationList += '<h4 class="fontwei">' + data[i].vocationName + '<span class="text-muted padding-side">' + data[i].industryName + '</span></h4>';
 							vocationList += '<div class="text-muted more_row_brif width100">' + data[i].vocationBrief + '</div></a>';
 							vocationList += '<div class="text-center like">';
-							vocationList += '<a class="" onclick="like(this)" href="javascript:">';
-							vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+							var like = false;
+							var eId = "";
+							console.log(i +''+like);
+							for(var j=0; j<data[0].enshrineList.length; j++){
+								console.log(data[0].enshrineList[j].eCode);
+								console.log(data[i].vocationId);
+								if(data[0].enshrineList[j].eCode == data[i].vocationId){
+									like = true;
+									eId = data[0].enshrineList[j].eId;
+								}
+							}
+							console.log(like);
+							if(like == true){
+								vocationList += '<a id="' + eId + '" class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
+								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
+							}else{
+								vocationList += '<a id=""  class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
+								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+							}							
 							vocationList += '<span class="">喜欢</span></a></div></li>';		
 						}
 						$("#search_count").html(data.length);
@@ -235,11 +252,13 @@
 			switch(o) {
 			    	case '${pageContext.request.contextPath}/img/xgk/like.png':
 			    		y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
-			    		$(obj).find('span').text('喜欢');
+			    		$(obj).find('span').text('取消喜欢');
+			    		unlove(obj);
 			    		break;
 			    	case '${pageContext.request.contextPath}/img/xgk/unlike.png':
 			    		y = '${pageContext.request.contextPath}/img/xgk/like.png';
-			    		$(obj).find('span').text('取消喜欢');
+			    		$(obj).find('span').text('喜欢');
+			    		love(obj)
 			    		break;
 			    	default:
 			    		y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
@@ -248,7 +267,49 @@
 			}
 			$(obj).find('img').attr('src', y);
 		}
-				
+		  function love(obj){
+		    	if('${uid}' != ''){				    				
+	    			var data = "eCode=" + $(obj).attr("class") + "&eName=" + $(obj).attr("name") + "&eType=2";
+	    			$.ajax({
+	    				url: "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
+	    				data:data,
+	    				type:"POST",
+	    				dataType:"json",
+	    				success:function(obj){
+	    					if(obj.state == 0){
+	    						console.log(obj.message);
+	    						layer.msg(obj.message,{icon:2,time:1000});
+	    					}else{
+	    						console.log(obj.message);
+	    						$(obj).attr("id",obj.data.eId);
+	    						layer.msg(obj.message,{icon:6,time:1000});
+	    						
+	    					}
+	    				}	
+  				});
+					}		
+	    		}
+		     function unlove(obj){
+		    	 	console.log("取消喜欢")
+	    			if($(obj).attr("id") != ''){					    			
+		    			$.ajax({
+		    				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
+		    				data: "eId=" + $(obj).attr("id"),
+		    				type: "POST",
+		    				dataType:"json",
+		    				success:function(obj){
+		    					if(obj.state == 0){
+		    						console.log(obj.message);
+		    						layer.msg(obj.message,{icon:2,time:1000});
+		    					}else{
+		    						console.log(obj.message);
+		    						layer.msg(obj.message,{icon:6,time:1000});
+		    					}
+		    				}	
+		    			});
+	    			}	
+  			} 	
+		
 		//点击筛选样式
 		$(".item_body dd a").click(function() {
 			$(this).parents("dl").children().find("a").removeClass("active");

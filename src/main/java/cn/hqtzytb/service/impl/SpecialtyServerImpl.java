@@ -12,16 +12,20 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import com.alibaba.fastjson.JSON;
+
+import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.SpecialtyOut;
 import cn.hqtzytb.entity.University;
 import cn.hqtzytb.entity.UniversityRelation;
 import cn.hqtzytb.mapper.EnrollmentRequirementsMapper;
+import cn.hqtzytb.mapper.EnshrineMapper;
 import cn.hqtzytb.mapper.SpecialtyMapper;
 import cn.hqtzytb.mapper.UniversityMapper;
 
@@ -45,6 +49,9 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 	private EnrollmentRequirementsMapper enrollmentRequirementsMapper;
 	@Autowired
 	private UniversityMapper universityMapper;
+    @Autowired
+    private EnshrineMapper enshrineMapper;
+	
 	
 	@Override
 	public List<Specialty> getSpecialtyByPCode(String personalityCode) {
@@ -136,6 +143,16 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 	@Override
 	public String getSpecialtyDetail(String specialtyId, HttpServletRequest request, ModelMap map) {
 		try {
+			Subject subject = SecurityUtils.getSubject();
+			if(subject.isAuthenticated()){
+				Object uid = SecurityUtils.getSubject().getSession().getAttribute("uid");
+				if(uid != null){
+					List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer)uid + "' AND e_code = '" + specialtyId + "'", null, null, null);
+					if(!enshrineList.isEmpty()){
+						map.addAttribute("school_like", enshrineList.get(0));
+					}
+				}
+			}
 			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "' ", null, null, null);
 			map.addAttribute("specialty", specialtyList.get(0));
 			map.addAttribute("majorCourses", specialtyList.get(0).getMajorCourses().split(";"));

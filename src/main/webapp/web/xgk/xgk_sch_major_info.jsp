@@ -51,7 +51,16 @@
 									}
 								</script>
 								<div class="like">
-									<a href="javascript:" onclick="like(this)"><img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/><span class="">喜欢</span></a>
+									<c:if test="${school_like != null}">
+										<a id="${school_like.eId}" href="javascript:;" onclick="like(this)" >测评专业喜欢
+											<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>
+										</a>
+									</c:if>
+									<c:if test="${school_like == null}">
+										<a id="" href="javascript:;" onclick="like(this)">测评专业喜欢
+											<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
+										</a>											
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -414,11 +423,13 @@
 									    		switch (o){
 									    			case '${pageContext.request.contextPath}/img/xgk/like.png':
 									    				y='${pageContext.request.contextPath}/img/xgk/unlike.png';
-									    				$(obj).find('span').text('喜欢');
+									    				$(obj).find('span').text('取消喜欢');
+									    				unlove(obj);
 									    				break;
 								    				case '${pageContext.request.contextPath}/img/xgk/unlike.png':
 								    					y='${pageContext.request.contextPath}/img/xgk/like.png';
-									    				$(obj).find('span').text('取消喜欢');
+									    				$(obj).find('span').text('喜欢');
+									    				love(obj);
 								    					break;
 									    			default:
 									    				y='${pageContext.request.contextPath}/img/xgk/unlike.png';
@@ -427,6 +438,49 @@
 									    		}
 									    		$(obj).find('img').attr('src',y);
 									    	}
+									        function love(obj){
+										    	if('${uid}' != ''){				    				
+									    			var data = "eCode=${specialty.specialtyId}&eName=${specialty.specialtyName}&eType=1";
+									    			$.ajax({
+									    				url: "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
+									    				data:data,
+									    				type:"POST",
+									    				dataType:"json",
+									    				success:function(obj){
+									    					if(obj.state == 0){
+									    						console.log(obj.message);
+									    						layer.msg(obj.message,{icon:2,time:1000});
+									    					}else{
+									    						console.log(obj.message);
+									    						$(obj).attr("id",obj.data.eId);
+									    						layer.msg(obj.message,{icon:6,time:1000});
+									    						
+									    					}
+									    				}	
+								    				});
+							    					}		
+									    		}
+										     function unlove(obj){
+										    	 	console.log("取消喜欢")
+									    			if($(obj).attr("id") != ''){					    			
+										    			$.ajax({
+										    				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
+										    				data: "eId=" + $(obj).attr("id"),
+										    				type: "POST",
+										    				dataType:"json",
+										    				success:function(obj){
+										    					if(obj.state == 0){
+										    						console.log(obj.message);
+										    						layer.msg(obj.message,{icon:2,time:1000});
+										    					}else{
+										    						console.log(obj.message);
+										    						layer.msg(obj.message,{icon:6,time:1000});
+										    					}
+										    				}	
+										    			});
+									    			}	
+								    			} 	
+									    	
 									    </script>
 									</div>
 				    			</div>

@@ -14,11 +14,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
+
+import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Vocation;
+import cn.hqtzytb.mapper.EnshrineMapper;
 import cn.hqtzytb.mapper.VocationMapper;
 
 
@@ -37,7 +41,8 @@ public class VocationServerImpl implements IVocationServer {
     private  static final Logger logger = LogManager.getLogger(VocationServerImpl.class.getName());
 	@Autowired
 	public VocationMapper vocationMapper;
-	
+    @Autowired
+    private EnshrineMapper enshrineMapper;
 	
 	@Override
 	public List<Vocation> getVocationByCode(String personalityCode) {
@@ -82,6 +87,12 @@ public class VocationServerImpl implements IVocationServer {
 			paramMap.put("industryName", StringUtils.isEmpty(industry) ? null : industry);
 			paramMap.put("educationQualification", StringUtils.isEmpty(education) ? null : education);
 			vocationList = vocationMapper.selectVocationListByMap(paramMap);
+			Subject subject = SecurityUtils.getSubject();
+			if (subject.isAuthenticated()) {
+				Integer uid = (Integer)subject.getSession().getAttribute("uid");
+				List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer)uid + "' AND e_type = '2'", null, null, null);
+				vocationList.get(0).setEnshrineList(enshrineList);
+			}
 		} catch (Exception e) {
 			logger.error("模块： 职业库  操作：搜索职业库信息异常    状态：FAIL!" + e);
 			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);

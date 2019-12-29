@@ -2,6 +2,8 @@ package cn.hqtzytb.entity;
 
 
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -144,4 +146,9 @@ public class Vocation implements Serializable {
      * 收入信息
      */
     private String incomeInfo;
+    
+    /**
+     * 喜欢
+     */
+    private List<Enshrine> enshrineList;
 }

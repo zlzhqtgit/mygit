@@ -32,7 +32,7 @@
 					
 			</div>
 		</section>
-			<div class="" >
+			<%-- <div class="" >
 				<div class="padding-side">
 					<h5 class="fontwei">官方微信</h5>
 				</div>
@@ -63,7 +63,7 @@
 							</div>
 						</div>
 					</div>
-				</div>	
+			</div>	 --%>
 		</div>	
 						
 				<script type="text/javascript">

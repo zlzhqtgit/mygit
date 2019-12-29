@@ -1,9 +1,11 @@
 package cn.hqtzytb.service.impl;
 
+import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.University;
 import cn.hqtzytb.entity.UniversityAdmission;
 import cn.hqtzytb.entity.UniversityRelation;
+import cn.hqtzytb.mapper.EnshrineMapper;
 import cn.hqtzytb.mapper.UniversityMapper;
 import cn.hqtzytb.service.IUniversityService;
 import cn.hqtzytb.utils.Constants;
@@ -39,8 +41,10 @@ public class IUniversityServiceImpl implements IUniversityService {
     private  static final Logger logger = LogManager.getLogger(IUniversityServiceImpl.class.getName());
     @Autowired
     private UniversityMapper universityMapper;
-
-
+    @Autowired
+    private EnshrineMapper enshrineMapper;
+    
+    
     @Override
     public ResponseResult<Map<String, Object>> getUniversityList(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
     	Map<String, Object> resultMap = new HashMap<>();
@@ -65,11 +69,18 @@ public class IUniversityServiceImpl implements IUniversityService {
 
 	@Override
 	public String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request) {
-		try {
+//		try {
 			if (StringUtils.isNotEmpty(universityCode)) {
 				List<University> universityList = universityMapper.selectUniversityList(" u.universities_code = '" + universityCode +"' ", " ur.ur_year DESC ", null, null);
 				if (!universityList.isEmpty()) {
 					University university = universityList.get(0);
+					Object uid = SecurityUtils.getSubject().getSession().getAttribute("uid");
+					if(uid != null){
+						List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer)uid + "' AND e_code = '" + university.getUniversitiesCode() + "'", null, null, null);
+						if(!enshrineList.isEmpty()){
+							map.addAttribute("school_like", enshrineList.get(0));
+						}
+					}					
 					Set<String> proviceOption = new HashSet<>();
 					Set<String> typeOption = new HashSet<>();
 					Set<String> yearOption = new HashSet<>();
@@ -110,10 +121,10 @@ public class IUniversityServiceImpl implements IUniversityService {
 					map.addAttribute("universityAdmissionList", JSON.toJSONString(university.getUniversityAdmissionList()));
 				}
 			}
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作； 查看院校详情信息   错误信息：" + e);
-			return "web/xgk/xgk_error_404";
-		}		
+//		} catch (Exception e) {
+//			logger.error("访问路径：" + request.getRequestURI() + "操作； 查看院校详情信息   错误信息：" + e);
+//			return "web/xgk/xgk_error_404";
+//		}		
 		return "web/xgk/xgk_sch_info";
 	}
 
