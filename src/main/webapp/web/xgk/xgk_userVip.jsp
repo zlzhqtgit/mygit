@@ -19,12 +19,12 @@
 		<script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		<!-- 页面顶部-->
 		<c:import url="header.jsp"></c:import>
-		<main class="">
+		<div class="">
 			<div class="bg_tit">
 				<img src="${pageContext.request.contextPath}/img/xgk/vip_tit1.png" class="img-responsive"/>
 				<div class="">
@@ -115,8 +115,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<form class="pay">
+				<div class="" id="pay_info" style="display: none;">
+					<div class="pay">
 						<div class="margin_bot">
 							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
 						</div>
@@ -141,22 +141,6 @@
 										<div class="text-center"> 微信扫码 </div>
 									</div>
 								</div>
-								<script type="text/javascript">
-									
-									//选择套餐生成微信支付二维码
-									function choice_combo(e){
-										 var recharge_money = $(e).parents(".series_item").find(".series_item_tit .price").text();
-										 //var body = $(e).parents(".series_item_con").find(".series_summary").html();
-										 var body = "立学道" + recharge_money + "元臻选套餐";
-										 $("#show_money").html(recharge_money);
-										 if('${uid}' != ""){
-											 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?rechargeMoney=" + recharge_money + "&body=" + body);	 
-										 }else{
-											 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
-										 }
-										 
-									}
-								</script>
 								<div class="">
 									<div class="">
 										<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
@@ -165,9 +149,35 @@
 								</div>
 							</div>
 						</div>
-					</form>
+					</div>
 				</div>
-				<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
+				<script type="text/javascript">
+					//选择套餐生成微信支付二维码
+					function choice_combo(e){
+						 var recharge_money = $(e).parents(".series_item").find(".series_item_tit .price").text();
+						 var body = $(e).parents(".series_item_con").find(".series_summary").html();
+						 var body = "立学道" + recharge_money + "元臻选套餐";
+						 if('${uid}' != ""){
+							 modelshow(false,$('#pay_info'),1);
+							 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?rechargeMoney=" + recharge_money + "&body=" + body);	 
+						 }else{
+							 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
+						 }
+					}
+				</script>
+				<div class="row">
+					<div class="illustration">
+						<h4 class="fontwei">权益说明：</h4>
+						<div class="padding-side2">
+							<table class="table table-bordered table-hover" cellspacing="" cellpadding="">
+								<thead><tr><th>账户类型</th><th>Data</th><th>Data</th><th>报告下载次数</th><th>权益期限</th></tr></thead>
+								<tr><td>普通用户</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+								<tr><td>VIP用户</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+								<tr><td>咨询师用户</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+							</table>
+						</div>
+					</div>
+				</div>
 				<div class="row" style="display: flex;align-items: center;">
 					<div class="col-md-6 col-sm-6 wow bounceInLeft">
 						<img src="${pageContext.request.contextPath}/img/xgk/vip_pic1.png" class="img-responsive"/>
@@ -251,18 +261,7 @@
 					
 				</div>
 			</section>
-		</main>
-		<script type="text/javascript">
-			new WOW().init(); 
-			var wow = new WOW({  
-			    boxClass: 'wow', //需要执行动画的class 
-			    animateClass: 'animated',  //animate.css的class
-			    offset: 0,  //距可视区域多少开始执行动画
-			    mobile: true,  //是否在移动设备上执行动画
-			    live: true  //一部加载的内容是否有效
-			}); 
-			$('.counter').countUp();
-		</script>
+		</div>
 		<!-- 页面右侧-->
 		<c:import url="../public/side_right.jsp"></c:import>
 		<c:import url="../xgk/footer.jsp"></c:import>

@@ -347,17 +347,6 @@
 				</div>
 			</section>
 		</main>
-		<script type="text/javascript">
-			new WOW().init(); 
-			var wow = new WOW({  
-			    boxClass: 'wow',
-			    animateClass: 'animated', 
-			    offset: 0,
-			    mobile: true, 
-			    live: true
-			}); 
-			$(".counter").countUp();
-		</script>
 		<!-- 页面右侧-->
 		<c:import url="../public/side_right.jsp"></c:import>
 		<c:import url="../xgk/footer.jsp"></c:import>

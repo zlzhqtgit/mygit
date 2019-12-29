@@ -10,6 +10,8 @@
 </head>
 <body>	
 		<header>
+			<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>
+			<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 			<div class="nav_wrap">
 				<div class="padding-side">
 					<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
@@ -32,7 +34,7 @@
 							<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 							<ul class="list-unstyled">
 								<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>
-								<li><a id="xgk10" name="dh" href="#">商务合作</a></li>
+								<li><a id="xgk10" name="dh" href="${pageContext.request.contextPath}/web/xgk/xgk_cooperation.jsp">商务合作</a></li>
 								<li class="">
 									<a href="javascript:void(0)">立学道社群</a>
 									<div class="community wow bounceInRight">
@@ -129,6 +131,17 @@
 	}
 	$("#province").html(options);
 	$("#province").change(function() {
+	})
+	
+	$(function(){
+		new WOW().init(); 
+		var wow = new WOW({  
+		    boxClass: 'wow',
+		    animateClass: 'animated', 
+		    offset: 0,
+		    mobile: true, 
+		    live: true
+		}); 
 	})
 	
 	$("#navdh a").click(function(){	
