@@ -263,7 +263,8 @@
 											return;
 										}
 										var specialtyId = $(".specialty_list option:selected").val();//专业ID
-										var province = $(".pick_province").text();//省份信息
+										var province = $("#province option:selected").val();//省份信息
+										console.log(province);
 										if(specialtyId == "" || specialtyId == "0"){
 											layer.msg("请选择专业",{icon:2,time:1000});
 											return;

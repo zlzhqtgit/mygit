@@ -2,6 +2,8 @@ package cn.hqtzytb.service;
 
 
 import java.util.List;
+import java.util.Map;
+
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.exception.MyRuntimeException;
@@ -99,4 +101,11 @@ public interface IUserServer {
 	 * @return
 	 */
 	String showUserCenterInfo(HttpServletRequest request);
+	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
+	ResponseResult<Map<String, Object>> reduceDownloadCount(HttpServletRequest request);
 }

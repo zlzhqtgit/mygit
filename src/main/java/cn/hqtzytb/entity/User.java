@@ -96,6 +96,16 @@ public class User extends Role implements Serializable {
 	 */
 	private Date creatTime;
 	
+	/**
+	 * 下载次数
+	 */
+	private Integer downloadCount;
+	
+	/**
+	 * vip到期时间
+	 */
+	private Date expirationTime;
+	
 	public User() {
 		super();
 	}
@@ -104,14 +114,16 @@ public class User extends Role implements Serializable {
 		super(companyId, companyNumber, companyName, companyAdress, creationTime);
 	}
 	
+	
 	public User(Integer roleId, Integer cid, String roleName, String roleAuthority, String roleDescription) {
 		super(roleId, cid, roleName, roleAuthority, roleDescription);
 	}
 
+	
 	public User(Integer id, String headImg, String username, String phone, String pcNumber, String studentId,
 			String wexinChat, String qqChat, String password, String uuid, String school, String schoolAddress,
 			String studyProvinces, String educationalCircles, String grade, String className, Integer rid,
-			String authority, Date creatTime) {
+			String authority, Date creatTime, Integer downloadCount, Date expirationTime) {
 		super();
 		this.id = id;
 		this.headImg = headImg;
@@ -132,6 +144,8 @@ public class User extends Role implements Serializable {
 		this.rid = rid;
 		this.authority = authority;
 		this.creatTime = creatTime;
+		this.downloadCount = downloadCount;
+		this.expirationTime = expirationTime;
 	}
 
 	public Integer getId() {
@@ -305,6 +319,25 @@ public class User extends Role implements Serializable {
 		return this;
 	}
 
+	
+	public Integer getDownloadCount() {
+		return downloadCount;
+	}
+
+	public User setDownloadCount(Integer downloadCount) {
+		this.downloadCount = downloadCount;
+		return this;
+	}
+
+	public Date getExpirationTime() {
+		return expirationTime;
+	}
+
+	public User setExpirationTime(Date expirationTime) {
+		this.expirationTime = expirationTime;
+		return this;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", headImg=" + headImg + ", username=" + username + ", phone=" + phone + ", pcNumber="
@@ -312,10 +345,9 @@ public class User extends Role implements Serializable {
 				+ ", password=" + password + ", uuid=" + uuid + ", school=" + school + ", schoolAddress="
 				+ schoolAddress + ", studyProvinces=" + studyProvinces + ", educationalCircles=" + educationalCircles
 				+ ", grade=" + grade + ", className=" + className + ", rid=" + rid + ", authority=" + authority
-				+ ", creatTime=" + creatTime + "]";
+				+ ", creatTime=" + creatTime + ", downloadCount=" + downloadCount + ", expirationTime=" + expirationTime
+				+ "]";
 	}
-	
-	
 	
 	
 }

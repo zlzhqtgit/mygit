@@ -46,7 +46,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">59</span> 元/年
+											<span class="price">0.01</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -72,7 +72,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">229</span> 元/年
+											<span class="price">0.02</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -97,7 +97,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">599</span> 元/年
+											<span class="price">0.03</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -118,7 +118,7 @@
 				<div class="" id="pay_info" style="display: none;">
 					<div class="pay">
 						<div class="margin_bot">
-							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side">599元</span>
+							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
 						</div>
 						<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
 							<thead>

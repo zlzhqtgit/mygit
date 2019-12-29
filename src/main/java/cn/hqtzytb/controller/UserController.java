@@ -1,5 +1,7 @@
 package cn.hqtzytb.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -166,4 +168,14 @@ public class UserController {
 		return iUserServer.showUserCenterInfo(request);
 	}
 	
+	
+	/**
+	 * 判断用户是否能够下载报告
+	 */
+	@RequestMapping("/hqt_download_count.do")
+	@ResponseBody
+	public ResponseResult<Map<String, Object>> reduceDownloadCount(HttpServletRequest request){
+		
+		return iUserServer.reduceDownloadCount(request);
+	}
 }

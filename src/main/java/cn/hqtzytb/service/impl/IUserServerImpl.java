@@ -1,5 +1,6 @@
 package cn.hqtzytb.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,6 @@ import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import org.omg.PortableInterceptor.USER_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -383,5 +383,44 @@ public class IUserServerImpl implements IUserServer {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：查看个人中心   错误信息: " + e);
 		}
 		return "web/xgk/center_user";
+	}
+
+
+	@Override
+	public ResponseResult<Map<String, Object>> reduceDownloadCount(HttpServletRequest request) {
+		try {
+			Subject subject = SecurityUtils.getSubject();
+			Map<String,Object> resultMap = new HashMap<>();
+			if(subject.isAuthenticated()){			
+				Date currentTime = new Date();
+				Integer uid = (Integer)subject.getSession().getAttribute("uid");
+				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
+				if(Constants.ROLE_TYPE_USER.equals(user.getRid())){
+					return new ResponseResult<>(ResponseResult.ERR,"您不是VIP用户，不能下载测评报告",resultMap);
+				}
+				if(user.getDownloadCount() <= 0){//使用次数已用完
+					resultMap.put("count", user.getDownloadCount());
+					resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+					return new ResponseResult<>(ResponseResult.ERR,"您的下载测评报告次数已用完，请充值后再进行尝试！",resultMap);
+				}
+				if(currentTime.after(user.getExpirationTime())){//使用次数已用完
+					resultMap.put("count", user.getDownloadCount());
+					resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+					return new ResponseResult<>(ResponseResult.ERR,"您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
+				}
+				//正常下载测评报告
+				resultMap.put("count", user.getDownloadCount());
+				resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+				user.setDownloadCount(user.getDownloadCount()-1);
+				userMapper.updateById(user);				
+				return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
+			} else {
+				return new ResponseResult<>(ResponseResult.ERR,"请登录后,再行打印报告",resultMap);
+			}
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：查看用户是否能够下载测评报告异常   错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+		}
+		
 	}
 }

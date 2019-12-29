@@ -77,7 +77,7 @@
 				</li>
 				<li>
 					<div class="">
-						<a href="">职业库</a>
+						<a href="${pageContext.request.contextPath}/voc/xgk_job_blank.do">职业库</a>
 						<div class="sub_nav">
 							<div class="single_line">
 								<label></label>

@@ -65,7 +65,7 @@ function chat2(id) {
 				</div>
 			</div>
 			<div class="text-center mark-box course_server">
-				<a href="${pageContext.request.contextPath}/web/xgk/xgk_course.jsp">
+				<a href="${pageContext.request.contextPath}/online/xgk_online_index.do">
 					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside1.png" > </span>
 					<div class=""> 在线课程</div>
 				</a>
