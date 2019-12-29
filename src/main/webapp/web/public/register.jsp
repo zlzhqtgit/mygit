@@ -26,7 +26,7 @@
 <body>
 		<header class="padding-side login_head">
 			<nav class="">
-				<ul class="margin_top1">
+				<ul class="margin_top1 clearfix">
 					<li><a class="padding-side" href="${pageContext.request.contextPath}/cp/xgk_index.do">官方首页</a></li>
 					<li><a class="padding-side" href="${pageContext.request.contextPath}/web/xgk/xgk_noviceMaterial.jsp">新手教程</a></li>
 					<li><a class="padding-side" href="">志愿填报QQ群</a></li>
@@ -74,49 +74,14 @@
 										<span class="padding-side glyphicon"></span>
 									</div>
 									<div class="form-group">
-										<label for="captcha"><span class="text-danger">&lowast;</span> 验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
-										<input id="captcha" type="text" placeholder="请填写验证码"/>
-										<a  class="get_verify btn btn-default" id="get_verify" onclick="sendMobileMessage(0)" href="javascript:;" >获取手机验证码</a>
-									</div>
-									<div class="form-group">
-										<label for="password"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
-										<input id="password" type="password" title="请填写6-16位数字、字母或符号作为密码" placeholder="请填写6-16位数字、字母或符号作为密码"/>
-										<span class="glyphicon padding-side"> </span>
-									</div>
-									<div class="form-group">
-										<label for="confirm"><span class="text-danger">&lowast;</span> 确认密码：</label>
-										<input id="confirm" type="password" placeholder="请再次输入密码"/>
-										<span class="glyphicon padding-side"> </span>
-									</div>
-									
-								</div>
-
-								<h4 class="text-primary fontwei">完善学生信息
-									<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
-								</h4>
-								<div class="padding-side2 margin_top1 margin_bot" style="position: relative;">								
-									<div class="form-group">
-										<label for="pc_number">&emsp;身份证号：</label>
-										<input id="pc_number" type="text" placeholder="请填写你的身份证号码"/>
-										<span class="padding-side glyphicon"></span>
-									</div>
-									<div class="form-group">
-										<label for="study_provinces">&emsp;就读省份：</label>
+										<label for="study_provinces"><span class="text-danger">&lowast;</span> 就读省份：</label>
 										<select name="" id="study_provinces">
 											<option value="">贵州</option>
 										</select>
 										<span class="padding-side glyphicon"></span>
 									</div>
 									<div class="form-group">
-										<label for="school">&emsp;就读学校：</label>
-										<input id="school" type="text" placeholder="请填写你的学校名称"/>
-									</div>
-									<div class="form-group">
-										<label for="school_address">&emsp;学校地址：</label>
-										<input id="school_address" type="text" placeholder="请填写你的学校地址"/>
-									</div>
-									<div class="form-group">
-										<label for=educational_circles><span class="text-danger"></span>&emsp;学&emsp;&emsp;届：</label>
+										<label for=educational_circles><span class="text-danger">&lowast;</span> <span class="text-danger"></span>学&emsp;&emsp;届：</label>
 										<div class="filter-box inline_block" style="width: 200px;display: inline-block;">
 											<div class="filter-text" style="overflow: hidden;overflow: inherit;background-color: transparent;">
 												<input class="filter-title" type="text" readonly placeholder="pleace select"  style="background-color: transparent;border-radius: 0;box-shadow: 0 0 0;"/>
@@ -137,6 +102,41 @@
 										<span class="glyphicon padding-side"> </span>
 									</div>
 									<div class="form-group">
+										<label for="captcha"><span class="text-danger">&lowast;</span> 验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
+										<input id="captcha" type="text" placeholder="请填写验证码"/>
+										<span class="padding-side"><a  class="get_verify btn btn-default" id="get_verify" onclick="sendMobileMessage(0)" href="javascript:;" >获取手机验证码</a></span>
+									</div>
+									<div class="form-group">
+										<label for="password"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
+										<input id="password" type="password" title="请填写6-16位数字、字母或符号作为密码" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+										<span class="glyphicon padding-side"> </span>
+									</div>
+									<div class="form-group">
+										<label for="confirm"><span class="text-danger">&lowast;</span> 确认密码：</label>
+										<input id="confirm" type="password" placeholder="请再次输入密码"/>
+										<span class="glyphicon padding-side"> </span>
+									</div>
+									
+								</div>
+
+								<!-- <h4 class="text-primary fontwei">完善学生信息
+									<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
+								</h4>
+								<div class="padding-side2 margin_top1 margin_bot" style="position: relative;">								
+									<div class="form-group">
+										<label for="pc_number">&emsp;身份证号：</label>
+										<input id="pc_number" type="text" placeholder="请填写你的身份证号码"/>
+										<span class="padding-side glyphicon"></span>
+									</div>
+									<div class="form-group">
+										<label for="school">&emsp;就读学校：</label>
+										<input id="school" type="text" placeholder="请填写你的学校名称"/>
+									</div>
+									<div class="form-group">
+										<label for="school_address">&emsp;学校地址：</label>
+										<input id="school_address" type="text" placeholder="请填写你的学校地址"/>
+									</div>
+									<div class="form-group">
 										<label for="grade">&emsp;年&emsp;&emsp;级：</label>
 										<input id="grade" type="text" placeholder="请填写你的年级"/>
 										<span class="padding-side glyphicon"></span>
@@ -155,7 +155,7 @@
 											本栏中的和官方的说法的呵呵和人合伙二号合法的和任何人还不如新色版额
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</fieldset>
 							<div class="padding-side2">
 								<input type="checkbox" name="" id="checkbox" onclick="agree('checkbox','submit')"/>

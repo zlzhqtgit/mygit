@@ -49,7 +49,7 @@ header{
 	align-items: center;
 }
 .user>div{
-	width: 19em;
+	width: 20em;
 }
 .user>div>span{
 	display: inline-block;
@@ -132,7 +132,7 @@ input{
 	background-color: #f9f9f9;
 }
 .nav_wrap{
-	width: 930px;
+	width: 892px;
 	display: flex;
 	justify-content: start;
 	align-items: center;

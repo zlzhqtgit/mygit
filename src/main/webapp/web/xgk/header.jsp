@@ -17,7 +17,7 @@
 					<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
 				</div>
 				<nav id="navdh" class="clearfix">
-					<ul class="clearfix margin0" style="width: 49em;">
+					<ul class="clearfix margin0" style="width: 47em;">
 						<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
 						<li class=""><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
 						<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
