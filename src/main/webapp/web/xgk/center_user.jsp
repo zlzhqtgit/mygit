@@ -75,7 +75,36 @@
 									}	
 									
 									//点击操作任务
-									fulfil_task(){
+									function fulfil_task(e){	
+										var taskId = $(e).attr("name");
+										var report = '${whether_done}';
+										if(report == 1 ){
+											layer.confirm('您已做完选科指导，是否上传测评报告结果？', {
+												  btn: ['是', '否'] //可以无限个按钮												  
+												}, function(index, layero){													
+													console.log(taskId);
+													 $.ajax({
+														url:"${pageContext.request.contextPath}/user/hqt_task_add.do",
+														data:"taskId=" + taskId,
+														type:"POST",
+														dataType:"json",
+														success:function(obj){
+															if(obj.state == 1){
+																layer.msg(obj.message,{icon:1,time:1000});
+															}else{
+																layer.msg(obj.message,{icon:2,time:1000});
+															}
+															
+														}
+													});
+													layer.close(index);												  
+												}, function(index){
+												  //按钮【按钮二】的回调
+												  location.href = "${pageContext.request.contextPath}/xk/xgk_guide_select.do?taskId=" + taskId;
+												});
+										}else{
+											
+										}
 										
 									}
 								</script>
@@ -93,34 +122,32 @@
 										<c:if test="${hqt_user == 0}">
 											<c:forEach items="${task_list}" var="item" varStatus="vs">
 												<tr>
-												<td>${vs.count}</td> 
-												<td><fmt:formatDate value="${item.creationTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td> 
-												<td>${item.taskName}</td> 
-												<td>${item.taskContent}</td> 
-												<c:if test="${item.status == 0}">
-													<c:if test="${item.dStatus == 0}">
-														<td>${item.dResult}</td>
-														<td>未开始</td>
-														<td><a>去完成</a></td>
+													<td>${vs.count}</td> 
+													<td><fmt:formatDate value="${item.creationTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td> 
+													<td>${item.taskName}</td> 
+													<td>${item.taskContent}</td> 
+													<c:if test="${item.status == 0}">
+														<c:if test="${item.dStatus == 0}">
+															<td>${item.dResult}</td>
+															<td>未开始</td>
+															<td><a name="${item.taskId}" onclick="fulfil_task(this)">去完成</a></td>
+														</c:if>
+														<c:if test="${item.dStatus == 1}">
+															<td>${item.dResult}</td>
+															<td>进行中</td>
+															<td><a name="${item.taskId}" onclick="fulfil_task(this)">去完成</a></td>
+														</c:if>
+														<c:if test="${item.dStatus == 2}">
+															<td>${item.dResult}</td>
+															<td>已结束</td>
+															<td><a name="${item.taskId}"></a></td>
+														</c:if>													
 													</c:if>
-													<c:if test="${item.dStatus == 1}">
-														<td>${item.dResult}</td>
-														<td>进行中</td>
-														<td><a>去完成</a></td>
-													</c:if>
-													<c:if test="${item.dStatus == 2}">
+													<c:if test="${item.status == 1}">
 														<td>${item.dResult}</td>
 														<td>已结束</td>
-														<td><a>查看</a></td>
-													</c:if>													
-												</c:if>
-												<c:if test="${item.status == 1}">
-													<td>${item.dResult}</td>
-													<td>已结束</td>
-													<td><a>查看</a></td>
-												</c:if>
-												
-												
+														<td><a name="${item.taskId}"></a></td>
+													</c:if>
 												</tr>
 											</c:forEach>
 										</c:if>										
@@ -129,7 +156,7 @@
 							</h4>
 							<div class="text-muted" >
 								<c:if test="${hqt_user == 0}">
-									<a href="javascript:;" onclick="open_task()">我的任务<span class="layui-badge">${task_cout}</span><!-- <span class="layui-badge-dot"></span> --></a>
+									<a href="javascript:;" onclick="open_task()">我的任务<span class="layui-badge">${task_count}</span></a>
 								</c:if>
 								<c:if test="${hqt_user == 1}">
 									<a href="javascript:;">我的任务<span class="layui-badge-dot"></span></a>

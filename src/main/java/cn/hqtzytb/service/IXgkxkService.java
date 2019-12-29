@@ -27,7 +27,7 @@ public interface IXgkxkService {
 	 * @param response
 	 * @return
 	 */
-	String showhqtXgkGuideSelect(ModelMap map, HttpServletRequest request, HttpServletResponse response);
+	String showhqtXgkGuideSelect(Integer taskId,ModelMap map, HttpServletRequest request, HttpServletResponse response);
 
 	/**
 	 * 依据职业大类查询职业详情清单

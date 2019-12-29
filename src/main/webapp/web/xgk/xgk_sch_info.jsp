@@ -32,7 +32,7 @@
 				<div class="container">
 					<div class="row sch_info_head">
 						<div class="col-lg-2  col-sm-2 col-md-2 sch_logo">		
-								<img src="${pageContext.request.contextPath}/${school.universitiesLogo}" style="width: 100%;border-radius: 10px;"/>
+								<img src="${COLLEGE_PHOTO_PREFIX}/${school.universitiesLogo}" style="width: 100%;border-radius: 10px;"/>
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
 							<h3 class="text-white margin_top1">${school.universitiesName }</h3>10001
@@ -101,7 +101,7 @@
 												<div class="swiper-wrapper">
 													<c:forEach items="${images}" var="img">
 														<a href="javascript:void(0)" class="swiper-slide" >
-														<img src="${pageContext.request.contextPath}/${img}" style="width: 100%;"/>
+														<img src="${COLLEGE_PHOTO_PREFIX}/${img}" style="width: 100%;"/>
 													</a>
 													</c:forEach>
 												</div>

@@ -382,24 +382,28 @@ public class IUserServerImpl implements IUserServer {
 				}
 				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "' ", null, null, null);
 				if(!resultReportList.isEmpty()){
+					if ("1".equals(resultReportList.get(0).getStatus())) {
+						session.setAttribute("whether_done", 1);//已做过选科指导
+					} else {
+						session.setAttribute("whether_done", 0);//已做过选科指导
+					}
 					session.setAttribute("resule_report", resultReportList.get(0));//测评结果报告
 				}
+				
 				if(Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())){//好前途平台用户
 					session.setAttribute(Constants.HQT_USER, 1);
 				} else {//非好前途平台用户  TODO 查询用户任务
 					session.setAttribute(Constants.HQT_USER, 0);
 					List<TaskDetails> taskDetailsList = taskMapper.selectTaskDetails(" e.id = '" + uid + "' ", " b.status DESC,b.creation_time DESC ", null, null);
-					Integer taskCout = 0;
+					Integer taskCount = 0;
 					for(TaskDetails task : taskDetailsList){
-						System.err.println("getdStatus:" + taskCout);
-						System.err.println("getStatus:" + taskCout);
 						if(!task.getdStatus().equals(2) && task.getStatus().equals(0)){
-							taskCout ++ ;
+							taskCount ++ ;
 						}
 					}
-					session.setAttribute("task_cout", taskCout);//未完成任务数
+					session.setAttribute("task_count", taskCount);//未完成任务数
 					session.setAttribute("task_list", taskDetailsList);//任务列表
-					System.err.println("task_cout:" + taskCout);
+					System.err.println("task_cout:" + taskCount);
 					System.err.println("task_list:" + taskDetailsList);
 				}
 			}
@@ -415,28 +419,30 @@ public class IUserServerImpl implements IUserServer {
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			Map<String,Object> resultMap = new HashMap<>();
-			if(subject.isAuthenticated()){			
+			if(subject.isAuthenticated()){//好前途平台用户下载报告有限制			
 				Date currentTime = new Date();
 				Integer uid = (Integer)subject.getSession().getAttribute("uid");
 				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
-				if(Constants.ROLE_TYPE_USER.equals(user.getRid())){
-					return new ResponseResult<>(ResponseResult.ERR,"您不是VIP用户，不能下载测评报告",resultMap);
-				}
-				if(user.getDownloadCount() <= 0){//使用次数已用完
+				if(Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())){ //
+					if(Constants.ROLE_TYPE_USER.equals(user.getRid())){
+						return new ResponseResult<>(ResponseResult.ERR,"您不是VIP用户，不能下载测评报告",resultMap);
+					}
+					if(user.getDownloadCount() <= 0){//使用次数已用完
+						resultMap.put("count", user.getDownloadCount());
+						resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+						return new ResponseResult<>(ResponseResult.ERR,"您的下载测评报告次数已用完，请充值后再进行尝试！",resultMap);
+					}
+					if(currentTime.after(user.getExpirationTime())){//使用次数已用完
+						resultMap.put("count", user.getDownloadCount());
+						resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+						return new ResponseResult<>(ResponseResult.ERR,"您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
+					}
+					//正常下载测评报告
 					resultMap.put("count", user.getDownloadCount());
 					resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-					return new ResponseResult<>(ResponseResult.ERR,"您的下载测评报告次数已用完，请充值后再进行尝试！",resultMap);
+					user.setDownloadCount(user.getDownloadCount()-1);
+					userMapper.updateById(user);				
 				}
-				if(currentTime.after(user.getExpirationTime())){//使用次数已用完
-					resultMap.put("count", user.getDownloadCount());
-					resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-					return new ResponseResult<>(ResponseResult.ERR,"您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
-				}
-				//正常下载测评报告
-				resultMap.put("count", user.getDownloadCount());
-				resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-				user.setDownloadCount(user.getDownloadCount()-1);
-				userMapper.updateById(user);				
 				return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
 			} else {
 				return new ResponseResult<>(ResponseResult.ERR,"请登录后,再行打印报告",resultMap);
@@ -446,5 +452,28 @@ public class IUserServerImpl implements IUserServer {
 			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
 		}
 		
+	}
+
+
+	@Override
+	public ResponseResult<Map<String, Object>> addTaskResult(Integer taskId, HttpServletRequest request) {
+		Subject subject = SecurityUtils.getSubject();
+		try {
+			if(subject.isAuthenticated()){
+				Integer uid = (Integer)subject.getSession().getAttribute("uid");
+				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "'", null, null, null);
+				if(!resultReportList.isEmpty()){
+					TaskDetails task = new TaskDetails();
+					task.setTaskId(taskId);
+					task.setdStatus(2);
+					task.setdResult(resultReportList.get(0).getResult());
+					taskMapper.updateTaskDetails(task);					
+					return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
+				}				
+			}
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：添加测评报告到任务异常   错误信息: " + e);
+		}
+		return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_FAIL);		
 	}
 }

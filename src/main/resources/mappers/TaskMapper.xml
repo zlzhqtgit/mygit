@@ -31,7 +31,7 @@
 				</if>
 			</set>				
 			WHERE
-				details_id = #{detailsId}		
+				tid = #{taskId}		
 		</update>
 				
 		<!--查询用户任务详情  -->
