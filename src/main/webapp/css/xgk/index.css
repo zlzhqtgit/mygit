@@ -1707,6 +1707,8 @@ textarea{
 .result_cp > div > a.active:focus{
 	color: #fff;
 }
+
+/*个人中心  */
 .center_cont{
 	width: 80%;
 }
@@ -1732,6 +1734,31 @@ li.current{
 li.current>a{
 	color: #fff;
 }
+
+.user_material>fieldset>div>label{
+	width: 8em;
+	text-align: right;
+}
+.user_material>fieldset>div input{
+	width: 16em;
+	padding: .4em;
+	border-radius: 4px;
+}
+.user_material select{
+	width: 16em;
+}
+.focusStore table td a{
+	display: inline-block;
+	width: 4em;
+}
+.focusStore table>tbody>tr:nth-of-type(odd){
+	background-color: #EEF7EF;
+} 
+.focusStore table>tbody>tr:nth-of-type(even){
+	background-color: #FDF5EC;
+} 
+
+
 .o_row_brif{
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -1743,7 +1770,6 @@ li.current>a{
 	-webkit-box-orient: vertical;
 	display: -webkit-box;
 }
-
 .zytb_tit>div{
 	padding: 0;
 }
@@ -2424,6 +2450,7 @@ table.combile_xuank{
 .tab_head >li{
 	width: 6em;
 	padding: .4em .8em;
+	margin:0;
 	text-align: center;
 	float: left;
 	font-size: 1.4em;
@@ -2524,4 +2551,7 @@ a.jp-disabled{
 	background-color:#3b8bec;
 	color:#fff;
 	cursor: default;
+}
+.icon.Hui-iconfont{
+	font-size: 1.6em;
 }

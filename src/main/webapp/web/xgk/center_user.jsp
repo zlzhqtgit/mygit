@@ -11,12 +11,14 @@
 		<title>贵州好前途教育科技有限公司</title>
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/css/layui.css"  media="all">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Hui-iconfont/1.0.8/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/layui.js" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
+		<script src="${pageContext.request.contextPath}/js/province.js"></script>
 	</head>
 
 	<body>
@@ -168,7 +170,7 @@
 			</div>
 		</div>
 		<main class="container">
-			<div class="flex_jc_sb border_major margin_bot1 tab_box">
+			<div class="flex_jc_sb border_major margin_bot1 tab_box" style="height:722px">
 				<ul class="center_nav padding-side">
 					<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-align-left"></span> 我的资料</a></li>
 					<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-list-alt"></span> 我的测评</a></li>
@@ -189,8 +191,8 @@
 				
 				<div class="center_cont">
 					<ul id="user_info">
-						<li><span>用户ID: </span><span>${user.id}</span></li>
-						<%-- <li><span>头像: </span><span>${user.headImg}</span></li> --%>
+						<%-- <li><span>用户ID: </span><span>${user.id}</span></li>
+						<li><span>头像: </span><span>${user.headImg}</span></li>
 						<li><span>用户名称: </span><span>${user.username}</span></li>
 						<li><span>手机号: </span><span>${user.phone}</span></li>
 						<li><span>身份证号: </span><span>${user.pcNumber}</span></li>
@@ -201,7 +203,73 @@
 					 	<li><span>学届: </span><span>${user.educationalCircles}</span></li>
 					 	<li><span>年级: </span><span>${user.grade}</span></li>
 						<li><span>班级: </span><span>${user.className}</span></li>
-						<li><span>创建时间: </span><span><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span></li>
+						<li><span>创建时间: </span><span><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span></li> --%>
+						<li>
+							<form class="user_material" id="user_info" action="" method="post">
+								<fieldset id="">
+									<legend class="text-primary">用户信息</legend>
+									<div class="form-group">
+										<label for="username">用户名称：</label>
+										<input id="username" name="username" type="text" placeholder="请输入用户名" value="${user.username}"/>
+									</div>
+									<div class="form-group">
+										<label for="phone">手机号：</label>
+										<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}"/>
+									</div>
+									<div class="form-group">
+										<label for="pcNumber">身份证号：</label>
+										<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}"/>
+									</div>
+									<div class="form-group">
+										<label for="studentId">学号：</label>
+										<input id="studentId" name="studentId" type="text" placeholder="请输入学号" value="${user.studentId}"/>
+									</div>
+									<div class="form-group">
+										<label for="school">就读学校：</label>
+										<input id="school" name="school" type="text" placeholder="请输入就读学校" value="${user.school}"/>
+									</div>
+									<div class="form-group">
+										<label for="schoolAddress">就读学校地址：</label>
+										<input id="schoolAddress" name="schoolAddress" type="text" placeholder="请输入就读学校地址" value="${user.schoolAddress}"/>
+									</div>
+									<div class="form-group">
+										<label for="studyProvinces">就读省份：</label>
+										<select name="studyProvinces" id="studyProvinces"></select>
+										<span class="padding-side glyphicon"></span>
+									</div>
+									<div class="form-group">
+										<label for="educationalCircles">学届：</label>
+										<select name="educationalCircles" id="educationalCircles">
+											<option value="2021">2021届</option>
+											<option value="2020">2020届</option>
+											<option value="2019">2019届</option>
+											<option value="2018">2018届</option>
+											<option value="2017">2017届</option>
+											<option value="2016">2016届</option>
+											<option value="2015">2015届</option>
+										</select>
+										<span class="padding-side glyphicon"></span>
+									</div>
+									<div class="form-group">
+										<label for="grade">年级：</label>
+										<select name="grade" id="grade">
+											<option value="高一">高一</option>
+											<option value="高二">高二</option>
+											<option value="高三">高三</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="className">班级：</label>
+										<input id="className" name="className" type="text" placeholder="请输入班级" value="${user.className}"/>
+									</div>
+									<div class="form-group">
+										<label>账号创建时间：</label>
+										<span class=""><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span>
+									</div>
+								</fieldset>
+								<p class="text-center margin_top"><input class="btn btn-primary" type="submit" value="保存"/></p>
+							</form>
+						</li>
 					</ul>
 					<!-- 成绩分析  -->
 					<ul id="user_evaluation">
@@ -330,7 +398,76 @@
 						</li>
 					</ul>
 					<ul>
-						<li>萨嘎的撒和大家和环境33333</li>
+						<li>
+							<div class="focusStore">
+								<div class="tab_list">
+									<ul class="tab_head clearfix">
+										<li class="cur">院校收藏</li>
+										<li>专业收藏</li>
+										<li>职业收藏</li>
+									</ul>
+									<div class="tab_body">
+										<div class="cur">
+											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
+												<thead>
+													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
+														<td>23123</td><td>立学道大学</td>
+														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+													</tr>
+													<tr>
+														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
+														<td>101001</td><td>立学道大学</td>
+														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="">
+											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
+												<thead>
+													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
+														<td>34543534</td><td>立学道大学</td>
+														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<div class="">
+											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
+												<thead>
+													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
+														<td>344123</td><td>立学道大学</td>
+														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+													</tr>
+													<tr>
+														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
+														<td>101001</td><td>立学道大学</td>
+														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
 					</ul>
 					<ul class="padding-side current">
 						<li>
@@ -382,6 +519,18 @@
 		</main>
 		
 		<script type="text/javascript">
+			var options='';
+			for (var i=0;i<province.length;i++) {		
+				if(province[i].name.search('${province}') != -1){
+					options+='<option value="'+province[i].name+'" selected="selected">'+province[i].name+'</option>'
+				}else{
+					options+='<option value="'+province[i].name+'">'+province[i].name+'</option>'
+				}		
+			}
+			$("#studyProvinces").html(options);
+			$("#studyProvinces").change(function() {
+				console.log($(this).val())
+			})
 			$(function(){
 				tab_list($('.center_nav'),'click','.tab_box');
 				
