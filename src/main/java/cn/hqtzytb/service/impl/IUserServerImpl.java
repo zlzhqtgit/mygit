@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Role;
+import cn.hqtzytb.entity.TaskDetails;
 import cn.hqtzytb.service.IUserServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
@@ -32,6 +33,7 @@ import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.UserResultReport;
 import cn.hqtzytb.exception.MyRuntimeException;
 import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
+import cn.hqtzytb.mapper.TaskMapper;
 import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.mapper.UserMapper;
 import cn.hqtzytb.mapper.UserResultReportMapper;
@@ -47,6 +49,9 @@ public class IUserServerImpl implements IUserServer {
 	private UserResultReportMapper userResultReportMapper;
 	@Autowired
 	private UserFeatureMapper userFeatureMapper;
+	@Autowired
+	private TaskMapper taskMapper;
+	
 	
 	@Override
 	public List<User> getuserAll() {
@@ -351,15 +356,16 @@ public class IUserServerImpl implements IUserServer {
 			Subject subject = SecurityUtils.getSubject();
 			if (subject.isAuthenticated()) {
 				Session session = subject.getSession();
-				String where = " uid = '" + session.getAttribute("uid") + "' ";
-				List<UserResultReport> reportList = userResultReportMapper.select(where, null, null, null);
+				Integer uid = (Integer)session.getAttribute("uid");
+				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
+				List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid + "' ", null, null, null);
 				if(!reportList.isEmpty()){
 					session.setAttribute("result_report", reportList.get(0));//测评结果报告
 					session.setAttribute("assignment", reportList.get(0).getStatus());//是否存在测评任务
 				} else {
 					session.setAttribute("assignment", 3);//不存在测评任务
 				}
-				List<UserFeature> userFeatureList = userFeatureMapper.select(where, null, null, null);
+				List<UserFeature> userFeatureList = userFeatureMapper.select(" uid = '" + uid + "' ", null, null, null);
 				for(UserFeature userFeature : userFeatureList){
 					if(Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(userFeature.getEvaluationType())){
 						session.setAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS, userFeature);//成绩分析
@@ -374,9 +380,27 @@ public class IUserServerImpl implements IUserServer {
 						session.setAttribute(Constants.EVALUATION_TYPE_MBTI_ANALYSIS, userFeature);//MBTI测评
 					}
 				}
-				List<UserResultReport> resultReportList = userResultReportMapper.select(where, null, null, null);
+				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "' ", null, null, null);
 				if(!resultReportList.isEmpty()){
-					session.setAttribute("resule_report", resultReportList.get(0));
+					session.setAttribute("resule_report", resultReportList.get(0));//测评结果报告
+				}
+				if(Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())){//好前途平台用户
+					session.setAttribute(Constants.HQT_USER, 1);
+				} else {//非好前途平台用户  TODO 查询用户任务
+					session.setAttribute(Constants.HQT_USER, 0);
+					List<TaskDetails> taskDetailsList = taskMapper.selectTaskDetails(" e.id = '" + uid + "' ", " b.status DESC,b.creation_time DESC ", null, null);
+					Integer taskCout = 0;
+					for(TaskDetails task : taskDetailsList){
+						System.err.println("getdStatus:" + taskCout);
+						System.err.println("getStatus:" + taskCout);
+						if(!task.getdStatus().equals(2) && task.getStatus().equals(0)){
+							taskCout ++ ;
+						}
+					}
+					session.setAttribute("task_cout", taskCout);//未完成任务数
+					session.setAttribute("task_list", taskDetailsList);//任务列表
+					System.err.println("task_cout:" + taskCout);
+					System.err.println("task_list:" + taskDetailsList);
 				}
 			}
 		} catch (Exception e) {

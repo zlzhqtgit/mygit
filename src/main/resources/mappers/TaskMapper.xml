@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<mapper namespace="cn.hqtzytb.mapper.TaskMapper">
+	
+	<resultMap type="cn.hqtzytb.entity.TaskDetails" id="detailsMap">
+		<result column="task_id" property="taskId" />	
+		<result column="details_id" property="detailsId" />
+		<result column="task_name" property="taskName" />
+		<result column="task_content" property="taskContent" />	
+		<result column="status" property="status" />	
+		<result column="d_status" property="dStatus" />			
+		<result column="d_result" property="dResult" />
+		<result column="uid" property="uid" />
+		<result column="username" property="username" />
+		<result column="educational_circles" property="educationalCircles" />
+		<result column="grade" property="grade" />
+		<result column="class_name" property="className" />	
+		<result column="creation_time" property="creationTime" />	
+	</resultMap> 	
+				
+		<update id="updateTaskDetails" parameterType="cn.hqtzytb.entity.TaskDetails" >
+			UPDATE  
+				admin_taskdetails
+			<set>
+				<if test="dStatus != null">
+					d_status = #{dStatus},
+				</if>
+				<if test="dResult != null">
+					d_result = #{dResult},
+				</if>
+			</set>				
+			WHERE
+				details_id = #{detailsId}		
+		</update>
+				
+		<!--查询用户任务详情  -->
+		<select id="selectTaskDetails" resultMap="detailsMap">			
+			SELECT 
+				b.task_id, a.details_id, b.task_name, b.task_content,
+				b.status, a.d_status, a.d_result, e.id AS uid, e.username,
+				e.educational_circles, e.grade, e.class_name , b.creation_time
+			FROM 
+				admin_taskdetails a			  	
+			LEFT JOIN user e ON e.id = a.uid
+			LEFT JOIN admin_task  b  ON b.task_id = a.tid
+			<if test="where != null">where ${where}</if>
+		 	<if test="orderBy != null">order by  ${orderBy}</if> 
+		 	<if test="offset != null">limit   ${offset},${countPerPage}</if>		
+		</select>		  			
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	

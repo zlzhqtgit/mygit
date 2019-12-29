@@ -5,15 +5,18 @@
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>贵州好前途教育科技有限公司</title>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/css/layui.css"  media="all">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+		<script src="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/layui.js" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</head>
 
 	<body>
@@ -51,8 +54,87 @@
 							<div class="text-muted">关注的课程</div>
 						</div>
 						<div class="text-center pull-left padding-side margin_bot1 margin_top">
-							<h4 class="fontwei"><span class="glyphicon glyphicon-comment"></span></h4>
-							<div class="text-muted">我的任务</div>
+							<h4 class="fontwei">								
+								<span class="glyphicon glyphicon-comment"></span>								
+								<script type="text/javascript">
+									//打开任务列表
+									function open_task(){
+										layer.open({
+											type: 1,
+											area: ['800px', '500px'],
+											fix: true, //是否随跟页面滚动
+											maxmin: false,
+											shadeClose: true, //点击阴影开关
+											shade: 0.4, //阴影透明度
+											move: 'false', //默认：.layui-layer-title
+											moveOut: false, //是否允许拖拽到窗口外
+											title: false,
+											content: $('#task'),
+											scrollbar: true
+										});
+									}	
+									
+									//点击操作任务
+									fulfil_task(){
+										
+									}
+								</script>
+								<div class="margin_top" id="task" style="display: none;">
+									<table class="table table-hover table-border margin_top" cellspacing="0" cellpadding="0"> 
+										<tr> 
+											<th width="105">序号</th> 
+											<th width="105">时间</th> 
+											<th width="181">任务名字</th> 
+											<th width="112">任务内容</th>
+											<th width="112">详情状态</th>
+											<th width="112">结果</th>
+											<th width="112">操作</th>
+										</tr>
+										<c:if test="${hqt_user == 0}">
+											<c:forEach items="${task_list}" var="item" varStatus="vs">
+												<tr>
+												<td>${vs.count}</td> 
+												<td><fmt:formatDate value="${item.creationTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td> 
+												<td>${item.taskName}</td> 
+												<td>${item.taskContent}</td> 
+												<c:if test="${item.status == 0}">
+													<c:if test="${item.dStatus == 0}">
+														<td>${item.dResult}</td>
+														<td>未开始</td>
+														<td><a>去完成</a></td>
+													</c:if>
+													<c:if test="${item.dStatus == 1}">
+														<td>${item.dResult}</td>
+														<td>进行中</td>
+														<td><a>去完成</a></td>
+													</c:if>
+													<c:if test="${item.dStatus == 2}">
+														<td>${item.dResult}</td>
+														<td>已结束</td>
+														<td><a>查看</a></td>
+													</c:if>													
+												</c:if>
+												<c:if test="${item.status == 1}">
+													<td>${item.dResult}</td>
+													<td>已结束</td>
+													<td><a>查看</a></td>
+												</c:if>
+												
+												
+												</tr>
+											</c:forEach>
+										</c:if>										
+									</table> 
+								</div>
+							</h4>
+							<div class="text-muted" >
+								<c:if test="${hqt_user == 0}">
+									<a href="javascript:;" onclick="open_task()">我的任务<span class="layui-badge">${task_cout}</span><!-- <span class="layui-badge-dot"></span> --></a>
+								</c:if>
+								<c:if test="${hqt_user == 1}">
+									<a href="javascript:;">我的任务<span class="layui-badge-dot"></span></a>
+								</c:if>
+							</div>
 						</div>
 					</div>
 				</div>
