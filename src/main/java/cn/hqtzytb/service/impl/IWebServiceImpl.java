@@ -157,6 +157,16 @@ public class IWebServiceImpl implements IWebService{
 			return "web/xgk/xgk_error_404";
 		}
 	}
+	
+	@Override
+	public String showBusinessCooperationIndex(HttpServletRequest request) {
+		try {
+			return "web/xgk/xgk_cooperation";
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：进入VIP充值页异常   错误信息: " + e);
+			return "web/xgk/xgk_error_404";
+		}
+	}
 
 	
 }

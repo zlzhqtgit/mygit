@@ -23,15 +23,52 @@
 			<div class="banner">
 				<img src="${pageContext.request.contextPath}/img/xgk/banner48.jpg" class="img-responsive"/>
 				<div class="banner_con text-center">
-					<div class="">
+					<div class="wow">
 						<h1 class="fontwei wow bounceInLeft">立学道高考综合改革云平台</h1>
 						<h3 class="fontwei wow bounceInRight">帮您搭建 <span class="text-danger fontwei">属于自己</span> 的服务平台</h3>
 						<p class="margin_top fontwei wow fadeInDownBig">最低5千起，即可拥有专属平台</p>
-						<p class="margin_top wow bounceInUp"><a class="btn" href="">立刻体验</a></p>
+						<p class="margin_top bounceInUp"><a class="btn" href="">立刻体验</a></p>						
 					</div>
-				</div>
+					
 			</div>
 		</section>
+			<div class="" >
+				<div class="padding-side">
+					<h5 class="fontwei">官方微信</h5>
+				</div>
+				<div class="">
+					<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+				</div>	
+				<div class="text-center mark-box qq_server" href="">
+					<a href="javascript:void(0)">
+						<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside3.png" > </span>
+						<div class=""> QQ客服</div>
+					</a>
+					<div class="">
+						<div class="submenu_tit bg-primary" ><span class="glyphicon glyphicon-headphones"></span> QQ在线客服 </div>
+						<div class="submenu_con">
+							<div class="">
+								<div class="serve_class">精准教学</div>
+								<ul class="">
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+								</ul>
+							</div>
+							<div class="">
+								<div class="serve_class">升学规划</div>
+								<ul class="">
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>	
+		</div>	
+						
+				<script type="text/javascript">
+						
+				</script>
 		<div class="container">
 			<section class="row strengths">
 				<div class="strengths_tit margin_bot wow rubberBand">

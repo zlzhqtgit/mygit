@@ -62,5 +62,12 @@ public interface IWebService {
 	 */
 	String showNewbieIndex(HttpServletRequest request);
 
+	/**
+	 * 进入商务合作页
+	 * @param request
+	 * @return
+	 */
+	String showBusinessCooperationIndex(HttpServletRequest request);
+
 	
 }
