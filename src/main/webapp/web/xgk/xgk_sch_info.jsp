@@ -168,13 +168,11 @@
 			    					
 			    					<div class="sch_live_polocy padding-side2" style="display: none;" id="room_and_board">
 			    						<div class="polocy_model padding-side2">
-			    							<h2 class="">食堂和宿舍情况</h2>
 			    							<p class="">${school.roomAndBoard}</p>
 			    						</div>
 			    					</div>
 			    					<div class="sch_live_polocy padding-side2" style="display: none;" id="scholarships">
 			    						<div class="polocy_model padding-side2">
-			    							<h2 class="">奖助学金</h2>
 			    							<p class="">${school.scholarships}</p>
 			    						</div>
 			    					</div>
@@ -301,7 +299,6 @@
 								<thead>
 									<tr><th>省份</th><th>年份</th><th>类型</th><th>录取批次</th>
 			    							<th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>最低位次</th><th>计划人数</th><th>录取人数</th></tr>
-			    							
 								</thead>
 								<tbody id="sshy2">
 			    							<c:forEach items="${school.universRelationList}" var="item" >
