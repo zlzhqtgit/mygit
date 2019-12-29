@@ -29,7 +29,7 @@
 			<shiro:guest>
 				<form action="" method="post" >
 					<fieldset id="" class="">
-						<legend class="text-primary margin0"><h3 class="fontwei">立学道综合改革云平台</h3></legend>
+						<legend class="text-primary margin0"><h3 class="">立学道综合改革云平台</h3></legend>
 						<div class="form-group">
 							<input id="mobile" onblur="check_mobile()" type="text" value="" placeholder="手机号"/>
 							<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
@@ -255,7 +255,7 @@
 					</div>
 				</div>
 			</section>
-			<section class=""style="background-color:#ddd; padding-top: 1em;">
+			<section class=""style="background-color:#e4f5ff; padding-top: 1em;">
 				<div class="container">
 					<ul class="sectionList2 clearfix row">
 						<li class="wow zoomIn">

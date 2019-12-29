@@ -17,7 +17,7 @@
 					<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
 				</div>
 				<nav id="navdh" class="clearfix">
-					<ul class="clearfix margin0" style="width: 49em;">
+					<ul class="clearfix margin0" style="width: 47em;">
 						<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
 						<li class=""><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
 						<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
@@ -122,15 +122,16 @@
 		
 	})
 	var options='';
-	for (var i=0;i<chinaDatas.length;i++) {		
-		if(chinaDatas[i][0].name.search('${province}') != -1){
-			options+='<option value="'+chinaDatas[i][0].name+'" selected="selected">'+chinaDatas[i][0].name+'</option>'
+	for (var i=0;i<province.length;i++) {		
+		if(province[i].name.search('${province}') != -1){
+			options+='<option value="'+province[i].name+'" selected="selected">'+province[i].name+'</option>'
 		}else{
-			options+='<option value="'+chinaDatas[i][0].name+'">'+chinaDatas[i][0].name+'</option>'
+			options+='<option value="'+province[i].name+'">'+province[i].name+'</option>'
 		}		
 	}
 	$("#province").html(options);
 	$("#province").change(function() {
+		console.log($(this).val())
 	})
 	
 	$(function(){

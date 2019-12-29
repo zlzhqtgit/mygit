@@ -16,7 +16,7 @@
 					</div>
 					<div class="col-md-2 list">
 						<div class="footer_nav">
-							<h4>好前途</h4>
+							<h4 class="fontwei">好前途</h4>
 							<div class="border-bt"></div>
 						</div>
 						<ul>
@@ -36,7 +36,7 @@
 					</div>
 					<div class="col-md-2 list">
 						<div class="footer_nav">
-							<h4>帮助与服务</h4>
+							<h4 class="fontwei">帮助与服务</h4>
 							<div class="border-bt"></div>
 						</div>
 						<ul>
@@ -56,7 +56,7 @@
 					</div>
 					<div class="col-md-2 list">
 						<div class="footer_nav">
-							<h4>合作专区</h4>
+							<h4 class="fontwei">合作专区</h4>
 							<div class="border-bt"></div>
 						</div>
 						<ul>
@@ -76,7 +76,7 @@
 					</div>
 					<div class="col-md-2 list">
 						<div class="footer_nav">
-							<h4>企业专区</h4>
+							<h4 class="fontwei">企业专区</h4>
 							<div class="border-bt"></div>
 						</div>
 						<ul>
