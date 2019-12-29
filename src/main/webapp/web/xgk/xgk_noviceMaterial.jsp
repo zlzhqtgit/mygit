@@ -17,7 +17,7 @@
 	<body>
 		<!-- 页面顶部-->
 		<c:import url="header.jsp"></c:import>
-		<div class="padding-side2 course_navlist_wrap" style="height: 26em;">
+		<div class="padding-side2 course_navlist_wrap" style="height: 32em;">
 			<h3 class="text-primary container">新手教程</h3>
 			<ul class="course_navlist list-unstyled clearfix">
 				<li>

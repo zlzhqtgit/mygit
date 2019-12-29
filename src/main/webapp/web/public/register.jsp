@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/selectFilter.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/province.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/web/xgk/jquery.countup.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/jquery.waypoints.min.js"></script>
@@ -40,19 +41,19 @@
 				
 				<div class="reg_process">
 					<ul class="clearfix">
-						<li class="pull-left current fontwei">选择身份</li>
-						<li class="pull-left fontwei">注册信息</li>
+						<!-- <li class="pull-left current fontwei">选择身份</li> -->
+						<li class="pull-left current fontwei">注册信息</li>
 						<li class="pull-left fontwei">注册账号</li>
 					</ul>
 				</div>
 
 				<div class="status margin_bot">
-					<ul class="page_step step1 margin_bot margin_top">
+					<!-- <ul class="page_step step1 margin_bot margin_top">
 						<li><a class="active wow bounceInLeft" id="class1" href="javascript:void(0)" onclick="next_step(this)">个人用户</a></li>
 						<li class="margin_top"><a class="wow bounceInRight" id="class2" href="javascript:void(0)" onclick="next_step(this)">我是咨询师</a></li>
-					</ul>
+					</ul> -->
 
-					<div class="page_step step2 margin_top hide padding-side2" style="width: 100%;">
+					<div class="page_step step2 margin_top padding-side2" style="width: 100%;">
 						<form class="user1" action=""<!--  method="post" onsubmit="return " -->
 							<fieldset id="">
 								<legend class="">
@@ -101,8 +102,10 @@
 									</div>
 									<div class="form-group">
 										<label for="study_provinces">&emsp;就读省份：</label>
-										<input id="study_provinces" type="text" placeholder="请填写你的就读省份信息"/>
-										<span class="padding-side glyphicon"></span>								
+										<select name="" id="study_provinces">
+											<option value="">贵州</option>
+										</select>
+										<span class="padding-side glyphicon"></span>
 									</div>
 									<div class="form-group">
 										<label for="school">&emsp;就读学校：</label>
@@ -121,6 +124,8 @@
 											</div>
 											<select name="filter" id="educational_circles">
 												<option value="请选择学届" selected>请选择学届</option>
+												<option value="2020">2022年</option>
+												<option value="2019">2021年</option>
 												<option value="2020">2020年</option>
 												<option value="2019">2019年</option>
 												<option value="2018">2018年</option>
@@ -161,7 +166,7 @@
 							</div>
 						</form>
 
-						<form class="user2" action="" <!-- method="post" onsubmit="return " -->>
+						<!-- <form class="user2" action="" method="post" onsubmit="return ">
 							<fieldset id="">
 								<legend class="">
 									<h3 class="text-primary margin_bot1">注册新用户
@@ -183,7 +188,7 @@
 									<div class="form-group">
 										<label for="captcha1"><span class="text-danger">&lowast;</span> 验&nbsp;&nbsp;证&nbsp;&nbsp;码：</label>
 										<input id="captcha1" type="text" placeholder="请填写验证码"/>
-										<a class="get_verify btn btn-default" id="get_verify1" onclick="sendMobileMessage(1)" href="javascript:void(0)">获取手机验证码</a>
+										<a class="get_verify btn btn-default" id="get_verify1" onclick="sendMobileMessage(1)" href="javascript:;)">获取手机验证码</a>
 									</div>
 									<div class="form-group">
 										<label for="password1"><span class="text-danger">&lowast;</span> 密&emsp;&emsp;码：</label>
@@ -211,7 +216,7 @@
 							<div class="reg_submit padding-side2 margin_top1 margin_bot">
 								<input class="btn btn-default" onclick="register(1)" type="button" value="注册" id="submit1" disabled="true"/>
 							</div>
-						</form>
+						</form> -->
 					</div>
 
 					<div class="page_step step3 hide">
@@ -225,14 +230,26 @@
 			</div>
 		</section>
 		<script type="text/javascript">
+		console.log("11111")
 			new WOW().init();
 			var wow = new WOW({
-			    boxClass: 'wow', //需要执行动画的class
-			    animateClass: 'animated',  //animate.css的class
-			    offset: 0,  //距可视区域多少开始执行动画
-			    mobile: true,  //是否在移动设备上执行动画
-			    live: true  //一部加载的内容是否有效
+			    boxClass: 'wow',
+			    animateClass: 'animated',
+			    offset: 0,  
+			    mobile: true,
+			    live: true 
 			});
+			
+			//就读省份
+			var sProvince=$("#study_provinces");
+			var options=''
+			for (var i=0;i<province.length;i++) {
+				options+='<option value="'+province[i].name+'">'+province[i].name+'</option>'
+			}
+			sProvince.html(options)
+			sProvince.on("change",function() {
+				console.log($(this).val())
+			})
 			
 			//这里是选择框初始化
 			$('.filter-box').selectFilter({
