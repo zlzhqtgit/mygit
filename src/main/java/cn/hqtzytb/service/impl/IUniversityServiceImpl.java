@@ -69,7 +69,7 @@ public class IUniversityServiceImpl implements IUniversityService {
 
 	@Override
 	public String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request) {
-//		try {
+		try {
 			if (StringUtils.isNotEmpty(universityCode)) {
 				List<University> universityList = universityMapper.selectUniversityList(" u.universities_code = '" + universityCode +"' ", " ur.ur_year DESC ", null, null);
 				if (!universityList.isEmpty()) {
@@ -121,10 +121,10 @@ public class IUniversityServiceImpl implements IUniversityService {
 					map.addAttribute("universityAdmissionList", JSON.toJSONString(university.getUniversityAdmissionList()));
 				}
 			}
-//		} catch (Exception e) {
-//			logger.error("访问路径：" + request.getRequestURI() + "操作； 查看院校详情信息   错误信息：" + e);
-//			return "web/xgk/xgk_error_404";
-//		}		
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作； 查看院校详情信息   错误信息：" + e);
+			return "web/xgk/xgk_error_404";
+		}		
 		return "web/xgk/xgk_sch_info";
 	}
 
