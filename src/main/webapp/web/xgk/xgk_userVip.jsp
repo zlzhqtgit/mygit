@@ -141,13 +141,14 @@
 				</script>
 				<div class="row">
 					<div class="illustration">
-						<h4 class="fontwei">权益说明：</h4>
+						<h4 class="fontwei">套餐权益说明：</h4>
 						<div class="padding-side2">
 							<table class="table table-bordered table-hover" cellspacing="" cellpadding="">
-								<thead><tr><th>账户类型</th><th>Data</th><th>Data</th><th>报告下载次数</th><th>权益期限</th></tr></thead>
-								<tr><td>普通用户</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>VIP用户</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>咨询师用户</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+								<thead><tr><th>账户类型</th><th>包含账户数（个）</th><th>报告下载次数（次）</th><th>使用期限（年）</th></tr></thead>
+								<tr><td>学生套餐</td><td>1</td><td>9</td><td>1</td></tr>
+								<tr><td>咨询师套餐</td><td>1</td><td>100</td><td>1</td></tr>
+								<tr><td>工作室套餐</td><td>3</td><td>100</td><td>1</td></tr>
+								<tr><td>公司套餐</td><td>50</td><td>100</td><td>1</td></tr>
 							</table>
 						</div>
 					</div>

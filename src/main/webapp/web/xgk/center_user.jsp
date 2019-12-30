@@ -200,11 +200,11 @@
 						<a href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> 
 							我的选科<!-- <span class="badge pull-right text-danger">3</span> -->
 						</a>
-						<ul class="sublist">
-							<%-- <li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/noDone.jsp')" href="javascript:void(0)">待完成</a></li> 
+						<%-- <ul class="sublist">
+							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/noDone.jsp')" href="javascript:void(0)">待完成</a></li> 
 							<li class="cur"><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/done.jsp')" href="javascript:void(0)">已完成</a></li> 
-							<%-- <li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li> --%>
-						</ul>
+							<%-- <li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li> 
+						</ul>--%>
 					</li>
 					<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-record"></span> 我的关注 </a> </li>
 					<li><liclass="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
