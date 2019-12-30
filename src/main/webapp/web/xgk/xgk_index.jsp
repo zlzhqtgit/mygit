@@ -213,7 +213,7 @@
 			</script>
 			
 		</banner>
-		<main class="">
+		<main class="index">
 			<section class="container">
 				<div class="row">
 					<div class="col-md-6 col-sm-6 wow bounceInLeft">
@@ -309,7 +309,7 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 wow bounceInLeft">
 						<h2 class="text-primary alignCenter fontwei">
-							<span class="vip_icon_tit" style="background-size: cover;background-img: url(../../img/xgk/index_icon1.png) no-repeat;"></span>数据更全面 
+							<span class="vip_icon_tit type2" style="background-size: cover;background-img: url(../../img/xgk/index_icon1.png) no-repeat;"></span>数据更全面 
 						</h2>
 						<div class="">
 							早一步查询，早一步知道，了解高校、专业、职业，更了解自己，让高考不留遗憾。

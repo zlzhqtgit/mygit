@@ -24,7 +24,7 @@
 			type: type,
 			area: ['800px', '480px'],
 			fix: true, //是否随跟页面滚动
-			maxmin: true,
+			maxmin: false,
 			shadeClose: true, //点击阴影开关
 			shade: 0.4, //阴影透明度
 			move: 'false', //默认：.layui-layer-title

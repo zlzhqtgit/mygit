@@ -85,11 +85,21 @@
 				        	</dl>
 				        	<dl class="pull-left item_body">
 				        		<dd class=""><a class="active a" href="javascript:void(0)"  name="city">全部</a></dd>
-				        		<dd><a href="javascript:void(0)"  name="city">绵阳</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="city">北京</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="city">上海</a></dd>
-				        		<dd><a href="javascript:void(0)"  name="city">贵阳</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">武汉</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">杭州</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">广州</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">深圳</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="city">成都</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">重庆</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">西安</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">南京</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">长沙</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">苏州</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">天津</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">沈阳</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="city">青岛</a></dd>
 				        	</dl>
 				        </li>
 				        <li class="list-group-item"  id="universities_nature">
