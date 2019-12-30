@@ -46,32 +46,6 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">0.01</span> 元/年
-										</div>
-										<p class="fsize12">这是一句话</p>
-									</div>
-								</div>
-								<div class="series_item_tit1"></div>
-								<div class="triangle_box"> <div class="triangle"></div> </div>
-							</div>
-							<div class="series_item_con padding-side2" style="padding: .4em 1em;">
-								<div class="">
-									<h3 class="text-center" style="margin: 0; padding: .4em 0;">套餐内容</h3>
-									<div class="series_summary"> 一个划算又有用的套餐一个划算又有用的套餐一个划算又有用的套餐一个划算又有用的套餐 </div>
-								</div>
-								<p class="text-center margin_top1"><a class="btn btn-primary" href="javascript:;" onclick="choice_combo(this)">立即购买</a></p>
-							</div>
-							<script type="text/javascript"></script>
-						</div>
-						<div class="series_item wow zoomIn">
-							<div class="series_item_tit">
-								<div class="series_item_titcon">
-									<div class="">
-										<div class="" style="margin-top: .6em;">
-											<img src="${pageContext.request.contextPath}/img/xgk/icon_vip.png" style="width: 3em;"/>
-										</div>
-										<h3 class="fontwei">套餐名称</h3>
-										<div class="">
 											<span class="price">0.02</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>

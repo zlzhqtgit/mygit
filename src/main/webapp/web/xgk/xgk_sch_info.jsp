@@ -18,7 +18,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/H-ui.admin.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/liquidFill.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${pageContext.request.contextPath}/js/web/xgk/sch_chart.js" type="text/javascript" charset="utf-8"></script>
+		<%-- <script src="${pageContext.request.contextPath}/js/web/xgk/sch_chart.js" type="text/javascript" charset="utf-8"></script> --%>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script> 
 		<script src="${pageContext.request.contextPath}/js/jPages.js"></script>		
@@ -449,14 +449,23 @@
 			    					<h2 class="text-primary fontwei">
 			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>教研教学
 			    					</h2>
-			    					<div class="border_major flex_jcstart w_ball" style="width: 100%;">
+			    					<div class="circle_list margin_top" style="height: 140px;">
+			    						<c:forEach items="${teachingResearch }" var="item" varStatus="cc">
+				    						<div class="">
+				    							<div class="circle">53</div>
+				    							<p class="text-center">${item[0]}</p>
+				    						</div>
+				    					</c:forEach>
+			    					</div>
+			    					<%-- <div class="border_major flex_jcstart w_ball" style="width: 100%;">
 			    						<c:forEach items="${teachingResearch }" var="item" varStatus="cc">
 			    							<div class="">
-			    							<div class="" id="water${cc.count}" style="width: 160px;height: 160px;"></div>
-			    							<p class="text-center">${item[0]}</p>
-			    						</div>
+				    							<div class="" id="water${cc.count}" style="width: 160px;height: 160px;"></div>
+				    							<p class="text-center">${item[0]}</p>
+				    						</div>
 			    						</c:forEach>
-			    					</div>
+			    					</div> --%>
+			    					<div></div>
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">

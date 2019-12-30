@@ -14,11 +14,12 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 	</head>
 </head>
 <body>
 	<c:import url="header.jsp"></c:import>
-	<div class="">
+	<div class="cooperation">
 		<section class="">
 			<div class="banner">
 				<img src="${pageContext.request.contextPath}/img/xgk/banner48.jpg" class="img-responsive"/>
@@ -27,7 +28,7 @@
 						<h1 class="fontwei wow bounceInLeft">立学道高考综合改革云平台</h1>
 						<h3 class="fontwei wow bounceInRight">帮您搭建 <span class="text-danger fontwei">属于自己</span> 的服务平台</h3>
 						<p class="margin_top fontwei wow fadeInDownBig">最低5千起，即可拥有专属平台</p>
-						<p class="margin_top wow bounceInUp"><a class="btn" href="">立刻体验</a></p>
+						<p class="margin_top wow bounceInUp"><a class="btn" onclick="modelshow(false, $('#contactUs'), 1)" href="javascript:;">立刻体验</a></p>
 					</div>
 				</div>
 			</div>
@@ -287,6 +288,72 @@
 					</div>
 			</div>
 		</section>
+		<div class="clearfix" id="contactUs" style="display: none;width: 100%;">
+			<div class="community pull-left" style="width: 100%;">
+				<div class="cont_wrap">
+					<div class="clearfix">
+						<legend><h3 class="padding-side fontwei">联系客服</h3></legend>
+						<div class="pull-left padding-side2 border-right">
+							<div class="padding-side2"><h5 class="fontwei">精准教学</h5></div>
+							<div class="padding-side2">
+								<div class="">
+									<a class="padding-side" href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>
+										<span class="padding-side05">在线客服</span>
+									</a>
+									<a class="padding-side" href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>
+										<span class="padding-side05">在线客服</span>
+									</a>
+								</div>
+								<div class="">
+									<a class="padding-side" href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>
+										<span class="padding-side05">在线客服</span>
+									</a>
+									<a class="padding-side" href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>
+										<span class="padding-side05">在线客服</span>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="pull-left padding-side2">
+							<div class="padding-side2"><h5 class="fontwei">升学规划</h5></div>
+							<div class="padding-side2">
+								<div class="">
+									<a class="padding-side" href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>
+										<span class="padding-side05">在线客服</span>
+									</a>
+									<a class="padding-side" href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>
+										<span class="padding-side05">在线客服</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix">
+						<div class="pull-left padding-side2 border-right">
+							<div class="padding-side2"><h5 class="fontwei">官方微信</h5></div>
+							<div class="flex_Al_c padding-side2">
+								<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+							</div>
+						</div>
+						<div class="pull-left">
+							<div class="padding-side2"><h5 class="fontwei">志愿填报群</h5></div>
+							<div class="text-left padding-side2">
+								<p class="">QQ群1：6424323</p>
+								<p class="">QQ群2：5453433</p>
+								<p class="">QQ群3：2456354(已满)</p>
+								<p class="">QQ群4：3321354(已满)</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- 页面底部-->
 	<c:import url="../public/side_right.jsp"></c:import>	
