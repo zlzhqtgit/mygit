@@ -271,12 +271,13 @@
 				 * @param {Object} obj
 				 */
 				function store(obj) {
-					var rowName=$(obj).parents('li').attr('pname');
+					var schName=$(obj).parents('li').attr('pname');
+					var schLogo=$(obj).parents('li').find(".sh_logo img").attr("src");
+					var schCode=$(obj).parents('li').find(".sch_info .schCode").text();
 					if ($(obj).find('input').is(":checked")) {
 						$(obj).removeClass("btn-primary");
 						$(obj).addClass("cancel");
 						$(obj).find('span').text("取消收藏");
-						return;
 					}else{
 						$(obj).removeClass("cancel");
 						$(obj).addClass("btn-primary");
@@ -496,20 +497,20 @@
                                         	}
 									var box_head = '<ul classs="search_result list-group" id="universities">';
 									var id = "";
-									var operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
+									var operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>收藏学校</span><input type="checkbox" name="" id="" value=""/></a></p>'+
 											    '<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
 											    '<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
-									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +
+									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
 												 "<div class='sh_logo'>" +
 												 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
 												 "</div>" +
 												 //院校名字   + 院校属性  + 录取批次  + 综合评级
-												 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4><span class=''>" + list[i].universitiesName + "</span><span class=''>" + attrImg + "</span></h4>" +
+												 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4><span class=''>" + list[i].universitiesName + "</span><span class='schoolTag'>" + attrImg + "</span></h4>" +
 												 "<p class=''>综合评级（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
 												 "</div>" +
 												 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
-												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
+												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
 												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span>" + list[i].universitiesNature + "</span></td><td><span>" + doctor + "</span></td></tr>" +
 												 "</table></div>" +
 												 //[录取分表格   start]
