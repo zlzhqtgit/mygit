@@ -9,6 +9,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Role;
@@ -33,6 +35,7 @@ import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.UserResultReport;
 import cn.hqtzytb.exception.MyRuntimeException;
 import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
+import cn.hqtzytb.mapper.EnshrineMapper;
 import cn.hqtzytb.mapper.TaskMapper;
 import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.mapper.UserMapper;
@@ -51,6 +54,8 @@ public class IUserServerImpl implements IUserServer {
 	private UserFeatureMapper userFeatureMapper;
 	@Autowired
 	private TaskMapper taskMapper;
+	@Autowired
+	private EnshrineMapper enshrineMapper;
 	
 	
 	@Override
@@ -198,6 +203,7 @@ public class IUserServerImpl implements IUserServer {
 				if(response.getCode().equals("OK") && response.getMessage().equals("OK")){
 					session.setAttribute("code",code);
 					session.setAttribute("phone",phone);
+					System.err.println("短信验证码：" + code);
 					rr =new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
 					logger.info("用户手机：" + phone + " 模块名：注册模块 操作：注册发送短信验证码  状态：Success! ");
 					System.out.println(code);
@@ -272,12 +278,11 @@ public class IUserServerImpl implements IUserServer {
 			if(StringUtils.isEmpty(role.getRoleAuthority())){
 				logger.info("用户手机：" + user.getPhone() + " 模块名：注册模块 操作：登录  状态：Failed! ");
 				return new ResponseResult<Void>(ResponseResult.ERR,"系统正处于维护状态!请稍后重试...");
-			}
-			GetCommonUser get=new GetCommonUser();			
+			}		
 			Date currentTime = new Date();
 			System.err.println("注册密码：" + user.getPassword());
 			String uuid = UUID.randomUUID().toString().toUpperCase();
-			String md5Password = get.getEncrpytedPassword(Constants.MD5,user.getPassword(), uuid, 1024);
+			String md5Password = GetCommonUser.getEncrpytedPassword(Constants.MD5,user.getPassword(), uuid, 1024);
 			user.setUuid(uuid);
 			user.setPassword(md5Password);
 			user.setRid(5);//默认角色 为平台个人
@@ -379,7 +384,7 @@ public class IUserServerImpl implements IUserServer {
 					if(Constants.EVALUATION_TYPE_MBTI_ANALYSIS.equals(userFeature.getEvaluationType())){
 						session.setAttribute(Constants.EVALUATION_TYPE_MBTI_ANALYSIS, userFeature);//MBTI测评
 					}
-				}
+				}				
 				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "' ", null, null, null);
 				if(!resultReportList.isEmpty()){
 					if ("1".equals(resultReportList.get(0).getStatus())) {
@@ -392,7 +397,7 @@ public class IUserServerImpl implements IUserServer {
 				
 				if(Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())){//好前途平台用户
 					session.setAttribute(Constants.HQT_USER, 1);
-				} else {//非好前途平台用户  TODO 查询用户任务
+				} else {//非好前途平台用户  
 					session.setAttribute(Constants.HQT_USER, 0);
 					List<TaskDetails> taskDetailsList = taskMapper.selectTaskDetails(" e.id = '" + uid + "' ", " b.status DESC,b.creation_time DESC ", null, null);
 					Integer taskCount = 0;
@@ -406,6 +411,13 @@ public class IUserServerImpl implements IUserServer {
 					System.err.println("task_cout:" + taskCount);
 					System.err.println("task_list:" + taskDetailsList);
 				}
+				List<Enshrine> universityList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '0' ", null, null, null);
+				List<Enshrine> specialtyList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '1' ", null, null, null);
+				List<Enshrine> voactionList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '2' ", null, null, null);
+				session.setAttribute("like_university_list", universityList);//未完成任务数
+				session.setAttribute("like_specialty_list", specialtyList);//未完成任务数
+				session.setAttribute("like_voaction_list", voactionList);//未完成任务数
+				session.setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：查看个人中心   错误信息: " + e);
@@ -475,5 +487,74 @@ public class IUserServerImpl implements IUserServer {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：添加测评报告到任务异常   错误信息: " + e);
 		}
 		return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_FAIL);		
+	}
+
+
+	@Override
+	public ResponseResult<Void> updateUserInfo(User user, HttpServletRequest request) {
+		Subject subject = SecurityUtils.getSubject();
+		try {
+			if(subject.isAuthenticated()){
+				Session session = subject.getSession();
+				Integer uid = (Integer)session.getAttribute("uid");
+				List<User> users = userMapper.select(" pc_number = '" + user.getPcNumber() + "' AND id != '" + uid + "' ", null, null, null);
+				if(!users.isEmpty()){
+					return new ResponseResult<>(ResponseResult.ERR,"身份证号已存在,请重新输入!");
+				}
+				users = userMapper.select(" student_id = '" + user.getStudentId() + "' AND id != '" + uid + "' ", null, null, null);
+				if(!users.isEmpty()){
+					return new ResponseResult<>(ResponseResult.ERR,"学号已存在,请重新输入!");
+				}				
+				user.setId(uid);
+				String uuid = UUID.randomUUID().toString().toUpperCase();
+				user.setUuid(uuid);
+				String md5Password = GetCommonUser.getEncrpytedPassword(Constants.MD5,user.getPassword(), uuid, 1024);
+				user.setPassword(md5Password);
+				Integer row = userMapper.updateById(user);
+				if(row > 0){				
+					session.setAttribute(Constants.SYSTEM_USER,user);
+					session.setAttribute("username", user.getUsername());
+					session.setAttribute("province", user.getStudyProvinces());
+					JSONObject userJson = JSONObject.fromObject(user);
+					session.setAttribute("userJson", userJson);//提供给前端页面使用
+					session.setAttribute("user", user);//提供给后台服务websocket类使用(存放对象，避免过多的json转换)					
+					return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);	
+				}										
+			}
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：用户修改信息异常   错误信息: " + e);
+		}
+		return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+	}
+
+
+	@Override
+	public ResponseResult<Void> updateUserPhone(String phone, String verifyCode, HttpServletRequest request) {
+		ResponseResult<Void> rr = null;
+		try {
+			Subject subject = SecurityUtils.getSubject();
+			if(subject.isAuthenticated()){
+				Session session = subject.getSession();
+				String code = (String)session.getAttribute("code");
+				String mobile = (String)session.getAttribute("phone");
+				Integer uid = (Integer)session.getAttribute("uid");
+				if(!verifyCode.equals(code)){
+					rr = new ResponseResult<>(ResponseResult.ERR,"验证码输入错误,请重新输入!");
+				}
+				if(!phone.equals(mobile)){
+					rr = new ResponseResult<>(ResponseResult.ERR,"手机号输入错误,请重新输入!");
+				}
+				User user = new User();
+				user.setId(uid);
+				user.setPhone(phone);
+				Integer row = userMapper.updateById(user);
+				rr = new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);	
+			}
+			
+		} catch (Exception e) {
+			rr = new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+			logger.error("访问路径：" + request.getRequestURI() + "操作：用户修改手机号异常   错误信息: " + e);
+		}
+		return rr;
 	}
 }

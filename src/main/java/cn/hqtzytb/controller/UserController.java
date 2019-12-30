@@ -189,5 +189,24 @@ public class UserController {
 		return iUserServer.addTaskResult(taskId, request);
 	}
 	
+	
+	/**
+	 * 修改用户信息
+	 */
+	@RequestMapping("/hqt_update_user.do")
+	@ResponseBody
+	public ResponseResult<Void> updateUserInfo(User user, HttpServletRequest request){
+		System.err.println(user);
+		return iUserServer.updateUserInfo(user, request);
+	}
 
+	/**
+	 * 用户修改手机号
+	 */
+	@RequestMapping("/hqt_update_phone.do")
+	@ResponseBody
+	public ResponseResult<Void> updateUserPhone(String phone,String verifyCode , HttpServletRequest request){
+		
+		return iUserServer.updateUserPhone(phone, verifyCode, request);
+	}
 }

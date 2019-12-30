@@ -283,7 +283,7 @@
 	</select>
 
 
-	<update id="updateById" parameterType="cn.hqtzytb.entity.User">
+	<update id="updateById"  parameterType="cn.hqtzytb.entity.User">
 		update user
 	    <set>
 	      <if test="headImg != null">
