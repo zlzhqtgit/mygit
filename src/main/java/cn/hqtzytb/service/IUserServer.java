@@ -115,4 +115,21 @@ public interface IUserServer {
 	 * @return
 	 */
 	ResponseResult<Map<String, Object>> addTaskResult(Integer taskId, HttpServletRequest request);
+	
+	/**
+	 * 修改用户信息
+	 * @param user
+	 * @param request
+	 * @return
+	 */
+	ResponseResult<Void> updateUserInfo(User user, HttpServletRequest request);
+	
+	/**
+	 * 用户修改手机号
+	 * @param phone
+	 * @param verifyCode
+	 * @param request
+	 * @return
+	 */
+	ResponseResult<Void> updateUserPhone(String phone, String verifyCode, HttpServletRequest request);
 }

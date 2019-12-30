@@ -128,4 +128,14 @@ public class WebController {
 		
 		return iWebService.showNewbieIndex(request);
 	}
+	
+	/**
+	 * 进入商务合作页
+	 * @return
+	 */
+	@RequestMapping("/hqt_business_cooperation.do")	
+	public String showBusinessCooperationIndex(HttpServletRequest request) {
+		
+		return iWebService.showBusinessCooperationIndex(request);
+	}
 }

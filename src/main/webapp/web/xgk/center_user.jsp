@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -19,6 +19,7 @@
 		<script src="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/layui.js" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 		<script src="${pageContext.request.contextPath}/js/province.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jPages.js"></script>
 	</head>
 
 	<body>
@@ -48,12 +49,31 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 focus_info">
 						<div class="text-center pull-left padding-side margin_bot1 margin_top">
-							<h4 class="fontwei">88</h4>
+							<shiro:guest>
+								<h4 class="fontwei">188</h4>
+							</shiro:guest>
+							<shiro:user>  
+								<h4 class="fontwei">${like_university_list.size()}</h4>
+							</shiro:user>
 							<div class="text-muted">关注院校 </div>
 						</div>
 						<div class="text-center pull-left padding-side margin_bot1 margin_top">
-							<h4 class="fontwei">178</h4>
-							<div class="text-muted">关注的课程</div>
+							<shiro:guest>
+								<h4 class="fontwei">188</h4>
+							</shiro:guest>
+							<shiro:user>  
+								<h4 class="fontwei">${like_specialty_list.size()}</h4>
+							</shiro:user>							
+							<div class="text-muted">关注专业</div>
+						</div>
+						<div class="text-center pull-left padding-side margin_bot1 margin_top">
+							<shiro:guest>
+								<h4 class="fontwei">188</h4>
+							</shiro:guest>
+							<shiro:user>  
+								<h4 class="fontwei">${like_voaction_list.size()}</h4>
+							</shiro:user>							
+							<div class="text-muted">关注职业</div>
 						</div>
 						<div class="text-center pull-left padding-side margin_bot1 margin_top">
 							<h4 class="fontwei">								
@@ -110,6 +130,7 @@
 										
 									}
 								</script>
+								
 								<div class="margin_top" id="task" style="display: none;">
 									<table class="table table-hover table-border margin_top" cellspacing="0" cellpadding="0"> 
 										<tr> 
@@ -191,55 +212,121 @@
 				
 				<div class="center_cont">
 					<ul id="user_info">
-						<%-- <li><span>用户ID: </span><span>${user.id}</span></li>
-						<li><span>头像: </span><span>${user.headImg}</span></li>
-						<li><span>用户名称: </span><span>${user.username}</span></li>
-						<li><span>手机号: </span><span>${user.phone}</span></li>
-						<li><span>身份证号: </span><span>${user.pcNumber}</span></li>
-						<li><span>学号: </span><span>${user.studentId}</span></li>
-					  	<li><span>就读学校: </span><span>${user.school}</span></li>
-					  	<li><span>就读学校地址: </span><span>${user.schoolAddress}</span></li>
-					  	<li><span>就读省份: </span><span>${user.studyProvinces}</span></li>
-					 	<li><span>学届: </span><span>${user.educationalCircles}</span></li>
-					 	<li><span>年级: </span><span>${user.grade}</span></li>
-						<li><span>班级: </span><span>${user.className}</span></li>
-						<li><span>创建时间: </span><span><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span></li> --%>
 						<li>
-							<form class="user_material" id="user_info" action="" method="post">
+							<div class="user_material" id="user_info" >
 								<fieldset id="">
-									<legend class="text-primary">用户信息</legend>
+									<c:if test="${hqt_user == 1}">
+										<legend class="text-primary">用户信息</legend>
+										<div class="form-group">
+											<label for="username">用户名称：</label>
+											<input id="username" name="username" type="text" placeholder="请输入用户名" value="${user.username}"/>
+										</div>
+										<div class="form-group">
+											<label for="phone">手机号：</label>
+											<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true"/>
+											<label for="phone"><a onclick="open_pws_div()">修改手机号</a></label>											
+										</div>
+										<div class="form-group">
+											<label for="pcNumber">身份证号：</label>
+											<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}"/>
+										</div>
+										<div class="form-group">
+											<label for="studentId">学号：</label>
+											<input id="studentId" name="studentId" type="text" placeholder="请输入学号" value="${user.studentId}"/>
+										</div>
+										<div class="form-group">
+											<label for="school">就读学校：</label>
+											<input id="school" name="school" type="text" placeholder="请输入就读学校" value="${user.school}"/>
+										</div>
+										<div class="form-group">
+											<label for="schoolAddress">就读学校地址：</label>
+											<input id="schoolAddress" name="schoolAddress" type="text" placeholder="请输入就读学校地址" value="${user.schoolAddress}"/>
+										</div>
+										<div class="form-group">
+											<label for="studyProvinces">就读省份：</label>
+											<select name="studyProvinces" id="studyProvinces"></select>
+											<span class="padding-side glyphicon"></span>
+										</div>
+										<div class="form-group">
+											<label for="educationalCircles">学届：</label>
+											<select name="educationalCircles" id="educationalCircles">
+												<option value="2021">2021届</option>
+												<option value="2020">2020届</option>
+												<option value="2019">2019届</option>
+												<option value="2018">2018届</option>
+												<option value="2017">2017届</option>
+												<option value="2016">2016届</option>
+												<option value="2015">2015届</option>
+											</select>
+											<span class="padding-side glyphicon"></span>
+										</div>
+										<div class="form-group">
+											<label for="grade">年级：</label>
+											<select name="grade" id="grade">
+												<option value="高一">高一</option>
+												<option value="高二">高二</option>
+												<option value="高三">高三</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="className">班级：</label>
+											<input id="className" name="className" type="text" placeholder="请输入班级" value="${user.className}"/>
+										</div>
+										<div class="form-group">
+											<label>账号创建时间：</label>
+											<span class=""><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span>
+										</div>
+									</c:if>
+									<c:if test="${hqt_user == 0}">
+										<legend class="text-primary">用户信息</legend>
 									<div class="form-group">
 										<label for="username">用户名称：</label>
 										<input id="username" name="username" type="text" placeholder="请输入用户名" value="${user.username}"/>
 									</div>
+									<div class="form-group">										
+										<label for="password">用户密码：</label>
+										<input id="password" name="password" onclick="updatepassword()" type="password" placeholder="" value="${user.password}"/>
+									</div>
+									<script type="text/javascript">
+										function updatepassword(){
+											var demoInput = document.getElementById("password");
+											demoInput.type = "text";
+										}
+										$("#password").blur(function(){
+											var demoInput = document.getElementById("password");
+											demoInput.type = "password";
+										});
+									</script>
 									<div class="form-group">
 										<label for="phone">手机号：</label>
-										<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}"/>
+										<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true" />
+										<label class="padding-side"><a class="btn btn-default" onclick="open_pws_div()">修改手机号</a></label>
+										<%-- <input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}"/> --%>
 									</div>
 									<div class="form-group">
 										<label for="pcNumber">身份证号：</label>
-										<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}"/>
+										<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}" />
 									</div>
 									<div class="form-group">
 										<label for="studentId">学号：</label>
-										<input id="studentId" name="studentId" type="text" placeholder="请输入学号" value="${user.studentId}"/>
+										<input id="studentId" name="studentId" type="text" placeholder="请输入学号" value="${user.studentId}" readonly="true"/>
 									</div>
 									<div class="form-group">
 										<label for="school">就读学校：</label>
-										<input id="school" name="school" type="text" placeholder="请输入就读学校" value="${user.school}"/>
+										<input id="school" name="school" type="text" placeholder="请输入就读学校" value="${user.school}" readonly="true"/>
 									</div>
 									<div class="form-group">
 										<label for="schoolAddress">就读学校地址：</label>
-										<input id="schoolAddress" name="schoolAddress" type="text" placeholder="请输入就读学校地址" value="${user.schoolAddress}"/>
+										<input id="schoolAddress" name="schoolAddress" type="text" placeholder="请输入就读学校地址" value="${user.schoolAddress}" readonly="true"/>
 									</div>
 									<div class="form-group">
 										<label for="studyProvinces">就读省份：</label>
-										<select name="studyProvinces" id="studyProvinces"></select>
+										<select name="studyProvinces" id="studyProvinces" readonly="true" disabled="disabled"></select>
 										<span class="padding-side glyphicon"></span>
 									</div>
 									<div class="form-group">
 										<label for="educationalCircles">学届：</label>
-										<select name="educationalCircles" id="educationalCircles">
+										<select name="educationalCircles" id="educationalCircles" disabled="disabled">
 											<option value="2021">2021届</option>
 											<option value="2020">2020届</option>
 											<option value="2019">2019届</option>
@@ -252,7 +339,7 @@
 									</div>
 									<div class="form-group">
 										<label for="grade">年级：</label>
-										<select name="grade" id="grade">
+										<select name="grade" id="grade" disabled="disabled">
 											<option value="高一">高一</option>
 											<option value="高二">高二</option>
 											<option value="高三">高三</option>
@@ -260,17 +347,34 @@
 									</div>
 									<div class="form-group">
 										<label for="className">班级：</label>
-										<input id="className" name="className" type="text" placeholder="请输入班级" value="${user.className}"/>
+										<input id="className" name="className" type="text" placeholder="请输入班级" value="${user.className}" readonly="true"/>
 									</div>
 									<div class="form-group">
 										<label>账号创建时间：</label>
 										<span class=""><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span>
 									</div>
+									</c:if>
 								</fieldset>
-								<p class="text-center margin_top"><input class="btn btn-primary" type="submit" value="保存"/></p>
-							</form>
+								<p class="text-center margin_top"><input class="btn btn-primary" type="button" value="保存" onclick="update()"/></p>
+							</div>
+							<div id="update_pwsd" style="display: none;">
+								<fieldset id="">
+										<legend class="text-primary">修改手机号</legend>									
+										<div class="form-group">
+											<label for="new_phone">新手机号：</label>
+											<input id="new_phone" name="new_phone" type="text" placeholder="请输入手机号"/>
+											<label><a id="verify_phone" class="get_verify btn btn-default" onclick="sendMobileMessage()">获取手机验证码</a></label>											
+										</div>
+										<div class="form-group">
+											<label for="verify_code">验证码：</label>
+											<input id="verify_code" name="verify_code" type="text" placeholder="请输入验证码"/>
+										</div>
+										<p class="text-center margin_top"><input class="btn btn-primary" type="button" value="修改" onclick="updatephone()"/></p>
+								</fieldset>
+							</div>
 						</li>
 					</ul>
+					
 					<!-- 成绩分析  -->
 					<ul id="user_evaluation">
 						<li style="border-bottom: 1px solid #ddd;">
@@ -291,10 +395,9 @@
 									<a>您还未进行成绩分析测评,是否去测评？<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=CJFX">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 								</div>	
 							</c:if>
-						</li>
-								
+						</li>								
 						<!-- 潜能分析  -->
-						<li style="border-bottom: 1px solid #ddd;">
+						<li style=" border-bottom: 1px solid #ddd;" >
 							<c:if test="${QNFX != null}">
 								<div class="" style="display: flex;justify-content: space-between;align-items:center;">
 									<!-- 跳转潜能分析测评页面  -->
@@ -378,7 +481,7 @@
 											<td>您未完成选科测评</td>
 										</c:if>
 										<c:if test="${resule_report.status == 1}">
-											<td><a href="javascript:;">下载</a></td>
+											<td><a href="${pageContext.request.contextPath}/xk//xgk_pick_report.do?province=${resule_report.province}&specialtyId=${resule_report.specialtyId}">下载</a></td>
 										</c:if>
 										<c:if test="${resule_report.status != 1}">
 											<td><a href="${pageContext.request.contextPath}/xk/xgk_guide_select.do" >进行选科</a></td>
@@ -406,50 +509,72 @@
 										<li>专业收藏</li>
 										<li>职业收藏</li>
 									</ul>
+									
 									<div class="tab_body">
 										<div class="cur">
 											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
 												<thead>
 													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
 												</thead>
-												<tbody>
-													<tr>
-														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
-														<td>23123</td><td>立学道大学</td>
-														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
-														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+												
+												<tbody id="search_result1">
+													<c:forEach items="${like_university_list}" var="item">
+														<tr>
+														<td><a href="javascript:;"><img src="${COLLEGE_PHOTO_PREFIX}${item.eLogo}" class="img-responsive"/></a></td>
+														<td>${item.eCode}</td><td>${item.eName}</td>
+														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a id="${item.eId}" href="javascript:;" onclick="unlove(this)">取消关注<!-- <span class="icon Hui-iconfont text-info">&#xe725;</span> --></a></td>
 													</tr>
-													<tr>
+													</c:forEach>
+													
+													<%-- <tr>
 														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
 														<td>101001</td><td>立学道大学</td>
 														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
-													</tr>
-												</tbody>
+													</tr> --%>
+												</tbody>												
 											</table>
+											<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
+												<div class="holder1" style="text-align: center;"></div>
+											</div>
 										</div>
 										<div class="">
 											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
 												<thead>
-													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
+													<tr><th>序号</th><th>专业代码</th><th>专业名称</th><th colspan="2">操作</th></tr>
 												</thead>
-												<tbody>
-													<tr>
-														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
-														<td>34543534</td><td>立学道大学</td>
-														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
-														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+												<tbody id="search_result2">
+													<c:forEach items="${like_specialty_list}" var="item" varStatus="vs">
+														<tr>
+														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
+														<td>${item.eCode}</td><td>${item.eName}</td>
+														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a id="${item.eId}"  href="javascript:;" onclick="unlove(this)">取消关注<!-- <span class="icon Hui-iconfont text-info">&#xe725;</span> --></a></td>
 													</tr>
+													</c:forEach>
+													
 												</tbody>
 											</table>
+											<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
+												<div class="holder2" style="text-align: center;"></div>
+											</div>
 										</div>
 										<div class="">
 											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
 												<thead>
-													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
+													<tr><th>序号</th><th>职业代码</th><th>职业名称</th><th colspan="2">操作</th></tr>
 												</thead>
-												<tbody>
-													<tr>
+												<tbody id=search_result3>
+													<c:forEach items="${like_voaction_list}" var="item" varStatus="vs">
+														<tr>
+														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
+														<td>${item.eCode}</td><td>${item.eName}</td>
+														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a id="${item.eId}"  href="javascript:;" onclick="unlove(this)">取消关注<!-- <span class="icon Hui-iconfont text-info">&#xe725;</span> --></a></td>
+														</tr>
+													</c:forEach>	
+													<%-- <tr>
 														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
 														<td>344123</td><td>立学道大学</td>
 														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
@@ -460,15 +585,20 @@
 														<td>101001</td><td>立学道大学</td>
 														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
-													</tr>
+													</tr> --%>
 												</tbody>
 											</table>
+											<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
+												<div class="holder3" style="text-align: center;"></div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</li>
 					</ul>
+					
+									
 					<ul class="padding-side current">
 						<li>
 							<div class="">
@@ -517,7 +647,166 @@
 				</div>
 			</div>
 		</main>
-		
+		<script type="text/javascript">
+		 function unlove(obj){
+	    	 	console.log("取消喜欢")
+   			if($(obj).attr("id") != ''){					    			
+	    			$.ajax({
+	    				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
+	    				data: "eId=" + $(obj).attr("id"),
+	    				type: "POST",
+	    				dataType:"json",
+	    				success:function(obj){
+	    					if(obj.state == 0){
+	    						console.log(obj.message);
+	    						layer.msg(obj.message,{icon:2,time:1000});
+	    					}else{
+	    						console.log(obj.message);
+	    						layer.msg(obj.message,{icon:6,time:1000});
+	    					}
+	    				}	
+	    			});
+   			}	
+			} 	
+		 
+		 //院校分页
+		 $("div.holder1").jPages({
+				containerID : "search_result1",
+				perPage     : 5,
+				first       : "首页",
+				previous    : "上一页",
+				next        : "下一页",
+				last        : "尾页"
+			});
+		 
+		//专业分页
+		 $("div.holder2").jPages({
+				containerID : "search_result2",
+				perPage     : 5,
+				first       : "首页",
+				previous    : "上一页",
+				next        : "下一页",
+				last        : "尾页"
+			});
+		//职业分页
+		 $("div.holder3").jPages({
+				containerID : "search_result3",
+				perPage     : 5,
+				first       : "首页",
+				previous    : "上一页",
+				next        : "下一页",
+				last        : "尾页"
+			});
+
+			
+					//修改手机号
+					function updatephone(){
+						var phone = $("#new_phone").val();	
+						var verifyCode = $("#verify_code").val();
+						$.ajax({
+							url: "${pageContext.request.contextPath}/user/hqt_update_phone.do",
+							data:"phone=" + phone + "&verifyCode=" + verifyCode,
+							type:"POST",
+							dataType:"json",
+							success:function(obj){
+								if(obj.state == 0){
+									layer.msg(obj.message,{icon:2,time:1000});
+								}else{
+									layer.msg(obj.message,{icon:6,time:1000});
+									window.setTimeout(function() {window.location.reload(); },1000)	
+								}
+							}	
+						});
+					}
+					
+					var countdown=60; //60秒发送一次
+					function settime(obj) { //发送验证码倒计时
+					    if (countdown == 0) { 
+					    	obj.attr('disabled',false); 
+					    	obj.removeAttr("style","pointer-events");
+						    obj.html("获取手机验证码");
+						    countdown = 60; 
+						    return;
+						} else { 
+						    obj.attr('disabled',true);
+						    obj.css("pointer-events","none"); 
+						    obj.html("重新获取验证码(" + countdown + ")");
+						    countdown--; 
+						} 
+						setTimeout(function() { 
+						    settime(obj) }
+						    ,1000) 
+						}
+					function sendMobileMessage(){
+						var phone = $("#new_phone").val();	
+						console.log(phone);
+						var obj = $("#verify_phone");
+						var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
+						if(!reg.test(phone)) {
+							layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});
+							return;
+						}
+						settime(obj);
+						$.ajax({
+							url: "${pageContext.request.contextPath}/user/hqt_photoyzm.do",
+							data:"phone=" + phone,
+							type:"POST",
+							dataType:"json",
+							success:function(obj){
+								if(obj.state == 0){
+									layer.msg(obj.message,{icon:2,time:1000});
+								}else{
+									layer.msg(obj.message,{icon:6,time:1000});
+								}
+							}	
+						});
+					}
+					
+					function open_pws_div(){
+						layer.open({
+							type: 1,
+							area: ['800px', '500px'],
+							fix: true, //是否随跟页面滚动
+							maxmin: false,
+							shadeClose: true, //点击阴影开关
+							shade: 0.4, //阴影透明度
+							move: 'false', //默认：.layui-layer-title
+							moveOut: false, //是否允许拖拽到窗口外
+							title: false,
+							content: $('#update_pwsd'),
+							scrollbar: true
+						});
+					}	
+					
+						function update(){
+							var data = "username=" + $("#username").val() + //用户名
+							           "&password=" + $("#password").val() + //用户密码
+							   		 "&pcNumber=" + $("#pcNumber").val() + //身份证号
+							   		 "&studyProvinces=" + $("#studyProvinces").val() + //就读省份 
+							   		 "&school=" + $("#school").val()  + //学校
+							  		 "&schoolAddress=" + $("#schoolAddress").val() + //学校地址
+							   		 "&educationalCircles=" + $("#educationalCircles option:selected").val() + //学届 
+							   		 "&grade=" + $("#grade").val() + //年级
+							   	 	 "&className=" + $("#className").val() + //班级
+							   		 "&studentId=" + $("#studentId").val(); //学号
+							   $.ajax({
+									type: "POST",
+									url : "${pageContext.request.contextPath}/user/hqt_update_user.do",
+									data: data,
+									datatype:'json',
+									success:function(obj){
+										if (obj.state == 0) {
+											layer.msg(obj.message,{icon:2,time:1000});
+									
+										}else{											
+											layer.alert(obj.message,{icon:1,time:1000});
+											window.setTimeout(function() {window.location.reload(); },1000)																						
+										}
+									}
+								});
+						}
+					
+					</script>
 		<script type="text/javascript">
 			var options='';
 			for (var i=0;i<province.length;i++) {		
@@ -580,7 +869,6 @@
 		<c:import url="../public/side_right.jsp"></c:import>	
 		<!-- 页面底部-->
 		<c:import url="footer.jsp"></c:import>
-
 	</body>
 
 </html>

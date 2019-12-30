@@ -228,21 +228,27 @@ public class University implements Serializable{
      */
     List<UniversityAdmission> universityAdmissionList;
     
+    /**
+     * 院校收藏数
+     */
+    private Integer enshrineCount;
+    
 	public University() {
 		super();
 	}
 
-
 	public University(Integer id, String universitiesCode, String universitiesName, String province, String city,
 			String establishedTime, String universitiesNature, String belongTo, String address, String mapCoordinates,
 			String universitiesIntroduction, String universitiesAttributes, String universitiesType,
 			String universitiesLogo, String universitiesImage, String universitiesLife, String roomAndBoard,
-			String scholarships, String teachingResearch, String maleFemaleRatio, String teachersResources,
-			String coreSpecialty, String coreSubject, String coreLaboratoriesAndResearchCenters, String admissionLot,
-			String admissionProbability, String universitiesWebsite, String universitiesPhone,
-			String alumniAssociationRanking, String martialBookAssociationRanking, String softScienceRanking,
-			String quacquarelliSymondsRanking, String usNewsRanking, String admissionAverageRanking,
-			String totalRanking, Date createTime, String createBy, Date updateTime, String updateBy) {
+			String scholarships, String teachingResearch, List<List<String>> teachingResearchList,
+			String maleFemaleRatio, String teachersResources, String coreSpecialty, String coreSubject,
+			String coreLaboratoriesAndResearchCenters, String admissionLot, String admissionProbability,
+			String universitiesWebsite, String universitiesPhone, String alumniAssociationRanking,
+			String martialBookAssociationRanking, String softScienceRanking, String quacquarelliSymondsRanking,
+			String usNewsRanking, String admissionAverageRanking, String totalRanking, Date createTime, String createBy,
+			Date updateTime, String updateBy, List<UniversityRelation> universRelationList,
+			List<UniversityAdmission> universityAdmissionList, Integer enshrineCount) {
 		super();
 		this.id = id;
 		this.universitiesCode = universitiesCode;
@@ -263,61 +269,7 @@ public class University implements Serializable{
 		this.roomAndBoard = roomAndBoard;
 		this.scholarships = scholarships;
 		this.teachingResearch = teachingResearch;
-		this.maleFemaleRatio = maleFemaleRatio;
-		this.teachersResources = teachersResources;
-		this.coreSpecialty = coreSpecialty;
-		this.coreSubject = coreSubject;
-		this.coreLaboratoriesAndResearchCenters = coreLaboratoriesAndResearchCenters;
-		this.admissionLot = admissionLot;
-		this.admissionProbability = admissionProbability;
-		this.universitiesWebsite = universitiesWebsite;
-		this.universitiesPhone = universitiesPhone;
-		this.alumniAssociationRanking = alumniAssociationRanking;
-		this.martialBookAssociationRanking = martialBookAssociationRanking;
-		this.softScienceRanking = softScienceRanking;
-		this.quacquarelliSymondsRanking = quacquarelliSymondsRanking;
-		this.usNewsRanking = usNewsRanking;
-		this.admissionAverageRanking = admissionAverageRanking;
-		this.totalRanking = totalRanking;
-		this.createTime = createTime;
-		this.createBy = createBy;
-		this.updateTime = updateTime;
-		this.updateBy = updateBy;
-	}
-
-
-	
-	public University(Integer id, String universitiesCode, String universitiesName, String province, String city,
-			String establishedTime, String universitiesNature, String belongTo, String address, String mapCoordinates,
-			String universitiesIntroduction, String universitiesAttributes, String universitiesType,
-			String universitiesLogo, String universitiesImage, String universitiesLife, String roomAndBoard,
-			String scholarships, String teachingResearch, String maleFemaleRatio, String teachersResources,
-			String coreSpecialty, String coreSubject, String coreLaboratoriesAndResearchCenters, String admissionLot,
-			String admissionProbability, String universitiesWebsite, String universitiesPhone,
-			String alumniAssociationRanking, String martialBookAssociationRanking, String softScienceRanking,
-			String quacquarelliSymondsRanking, String usNewsRanking, String admissionAverageRanking,
-			String totalRanking, Date createTime, String createBy, Date updateTime, String updateBy,
-			List<UniversityRelation> universRelationList, List<UniversityAdmission> universityAdmissionList) {
-		super();
-		this.id = id;
-		this.universitiesCode = universitiesCode;
-		this.universitiesName = universitiesName;
-		this.province = province;
-		this.city = city;
-		this.establishedTime = establishedTime;
-		this.universitiesNature = universitiesNature;
-		this.belongTo = belongTo;
-		this.address = address;
-		this.mapCoordinates = mapCoordinates;
-		this.universitiesIntroduction = universitiesIntroduction;
-		this.universitiesAttributes = universitiesAttributes;
-		this.universitiesType = universitiesType;
-		this.universitiesLogo = universitiesLogo;
-		this.universitiesImage = universitiesImage;
-		this.universitiesLife = universitiesLife;
-		this.roomAndBoard = roomAndBoard;
-		this.scholarships = scholarships;
-		this.teachingResearch = teachingResearch;
+		this.teachingResearchList = teachingResearchList;
 		this.maleFemaleRatio = maleFemaleRatio;
 		this.teachersResources = teachersResources;
 		this.coreSpecialty = coreSpecialty;
@@ -340,6 +292,7 @@ public class University implements Serializable{
 		this.updateBy = updateBy;
 		this.universRelationList = universRelationList;
 		this.universityAdmissionList = universityAdmissionList;
+		this.enshrineCount = enshrineCount;
 	}
 
 
@@ -808,6 +761,17 @@ public class University implements Serializable{
 		return this;
 	}
 
+	
+	
+
+	public Integer getEnshrineCount() {
+		return enshrineCount;
+	}
+
+	public University setEnshrineCount(Integer enshrineCount) {
+		this.enshrineCount = enshrineCount;
+		return this;
+	}
 
 	@Override
 	public String toString() {
@@ -819,18 +783,18 @@ public class University implements Serializable{
 				+ ", universitiesType=" + universitiesType + ", universitiesLogo=" + universitiesLogo
 				+ ", universitiesImage=" + universitiesImage + ", universitiesLife=" + universitiesLife
 				+ ", roomAndBoard=" + roomAndBoard + ", scholarships=" + scholarships + ", teachingResearch="
-				+ teachingResearch + ", maleFemaleRatio=" + maleFemaleRatio + ", teachersResources=" + teachersResources
-				+ ", coreSpecialty=" + coreSpecialty + ", coreSubject=" + coreSubject
-				+ ", coreLaboratoriesAndResearchCenters=" + coreLaboratoriesAndResearchCenters + ", admissionLot="
-				+ admissionLot + ", admissionProbability=" + admissionProbability + ", universitiesWebsite="
-				+ universitiesWebsite + ", universitiesPhone=" + universitiesPhone + ", alumniAssociationRanking="
-				+ alumniAssociationRanking + ", martialBookAssociationRanking=" + martialBookAssociationRanking
-				+ ", softScienceRanking=" + softScienceRanking + ", quacquarelliSymondsRanking="
-				+ quacquarelliSymondsRanking + ", usNewsRanking=" + usNewsRanking + ", admissionAverageRanking="
-				+ admissionAverageRanking + ", totalRanking=" + totalRanking + ", createTime=" + createTime
-				+ ", createBy=" + createBy + ", updateTime=" + updateTime + ", updateBy=" + updateBy
-				+ ", universRelationList=" + universRelationList + ", universityAdmissionList="
-				+ universityAdmissionList + "]";
+				+ teachingResearch + ", teachingResearchList=" + teachingResearchList + ", maleFemaleRatio="
+				+ maleFemaleRatio + ", teachersResources=" + teachersResources + ", coreSpecialty=" + coreSpecialty
+				+ ", coreSubject=" + coreSubject + ", coreLaboratoriesAndResearchCenters="
+				+ coreLaboratoriesAndResearchCenters + ", admissionLot=" + admissionLot + ", admissionProbability="
+				+ admissionProbability + ", universitiesWebsite=" + universitiesWebsite + ", universitiesPhone="
+				+ universitiesPhone + ", alumniAssociationRanking=" + alumniAssociationRanking
+				+ ", martialBookAssociationRanking=" + martialBookAssociationRanking + ", softScienceRanking="
+				+ softScienceRanking + ", quacquarelliSymondsRanking=" + quacquarelliSymondsRanking + ", usNewsRanking="
+				+ usNewsRanking + ", admissionAverageRanking=" + admissionAverageRanking + ", totalRanking="
+				+ totalRanking + ", createTime=" + createTime + ", createBy=" + createBy + ", updateTime=" + updateTime
+				+ ", updateBy=" + updateBy + ", universRelationList=" + universRelationList
+				+ ", universityAdmissionList=" + universityAdmissionList + ", enshrineCount=" + enshrineCount + "]";
 	}
 
 

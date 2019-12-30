@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hqtzytb.mapper.EnshrineMapper" >
+  <resultMap id="BaseResultMap" type="cn.hqtzytb.entity.Enshrine">
+    <id column="e_id" property="eId" />
+    <result column="uid" property="uid" />
+    <result column="e_logo" property="eLogo" />
+    <result column="e_code" property="eCode" />
+    <result column="e_name" property="eName" />
+    <result column="e_type" property="eType" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    e_id, uid, e_logo, e_code, e_name, e_type
+  </sql>
+  
+  <select id="select" resultMap="BaseResultMap">
+    select 
+    		<include refid="Base_Column_List" />
+    from 
+    		enshrine
+    <if test="where != null">where ${where}</if>
+    <if test="orderBy != null">order by ${orderBy}</if>
+    <if test="offset != null">limit ${offset},${countPerPage}</if>
+  </select>
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+    select 
+    		count(enshrine.e_id)
+    from 
+    		enshrine
+    <if test="where != null">where ${where}</if>
+  </select>
+  
+  
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from enshrine  where e_id = #{eId}
+  </delete>
+  
+ 
+  
+  <insert id="insert" parameterType="cn.hqtzytb.entity.Enshrine" useGeneratedKeys="true" keyProperty="id">
+    insert into enshrine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        e_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="eLogo != null" >
+        e_logo,
+      </if>
+      <if test="eCode != null" >
+        e_code,
+      </if>
+      <if test="eName != null" >
+        e_name,
+      </if>
+      <if test="eType != null" >
+        e_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eId != null" >
+        #{eId},
+      </if>
+      <if test="uid != null" >
+        #{uid},
+      </if>
+      <if test="eLogo != null" >
+        #{eLogo},
+      </if>
+      <if test="eCode != null" >
+        #{eCode},
+      </if>
+      <if test="eName != null" >
+        #{eName},
+      </if>
+      <if test="eType != null" >
+        #{eType},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="cn.hqtzytb.entity.Enshrine" >
+    update enshrine
+    <set >
+      <if test="uid != null" >
+        uid = #{uid},
+      </if>
+      <if test="eLogo != null" >
+        e_logo = #{eLogo},
+      </if>
+      <if test="eCode != null" >
+        e_code = #{eCode},
+      </if>
+      <if test="eName != null" >
+        e_name = #{eName},
+      </if>
+      <if test="eType != null" >
+        e_type = #{eType},
+      </if>
+    </set>
+    where e_id = #{eId}
+  </update>
+ 
+</mapper>

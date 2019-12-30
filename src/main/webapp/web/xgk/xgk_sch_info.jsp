@@ -49,7 +49,16 @@
 						</div>
 						<div class="col-lg-4  col-sm-4 col-md-4" style="display: flex;align-items: center;justify-content: center;">
 							<div class="like">
-								<a href="javascript:" onclick="like(this)"><img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/></a>
+									<c:if test="${school_like != null}">
+										<a id="${school_like.eId}" href="javascript:;" onclick="like(this)" >喜欢
+											<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>
+										</a>
+									</c:if>
+									<c:if test="${school_like == null}">	
+										<a id="" href="javascript:;" onclick="like(this)">喜欢
+											<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
+										</a>											
+									</c:if>								
 							</div>
 							<!--<div class="collection">
 								<a href="" class="glyphicon glyphicon-heart-empty text-danger"></a>
@@ -641,6 +650,71 @@
 		    		</div>
 			    </div>
 			    <script type="text/javascript">
+			    function like(obj){
+				    	var y;
+				    	var o = $(obj).find('img').attr('src');
+				    	switch(o) {
+				    		case '${pageContext.request.contextPath}/img/xgk/like.png':
+				    			y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
+				    			$(obj).find('span').text('取消喜欢');
+				    			console.log("取消喜欢");
+				    			unlove(obj);		    			
+				    			break;
+				    		case '${pageContext.request.contextPath}/img/xgk/unlike.png':
+				    			y = '${pageContext.request.contextPath}/img/xgk/like.png';
+				    			$(obj).find('span').text('喜欢');	
+				    			console.log("喜欢");
+				    			love(obj);				    			
+				    			break;
+				    		default:
+				    			y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
+				    			$(obj).find('span').text('喜欢');
+				    			break;
+				    	}
+				    	$(obj).find('img').attr('src', y);
+			    } 
+			    
+			     function love(obj){
+			    	if('${uid}' != ''){				    				
+		    			var data = "eCode=${school.universitiesCode}&eName=${school.universitiesName}&eLogo=${school.universitiesLogo}&eType=0";
+		    			$.ajax({
+		    				url: "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
+		    				data:data,
+		    				type:"POST",
+		    				dataType:"json",
+		    				success:function(obj){
+		    					if(obj.state == 0){
+		    						console.log(obj.message);
+		    						layer.msg(obj.message,{icon:2,time:1000});
+		    					}else{
+		    						console.log(obj.message);
+		    						$(obj).attr("id",obj.data.eId);
+		    						layer.msg(obj.message,{icon:6,time:1000});
+		    						
+		    					}
+		    				}	
+	    				});
+    					}		
+		    		}
+			     function unlove(obj){
+		    			if($(obj).attr("id") != ''){					    			
+			    			$.ajax({
+			    				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
+			    				data: "eId=" + $(obj).attr("id"),
+			    				type: "POST",
+			    				dataType:"json",
+			    				success:function(obj){
+			    					if(obj.state == 0){
+			    						console.log(obj.message);
+			    						layer.msg(obj.message,{icon:2,time:1000});
+			    					}else{
+			    						console.log(obj.message);
+			    						layer.msg(obj.message,{icon:6,time:1000});
+			    					}
+			    				}	
+			    			});
+		    			}	
+	    			} 	
 				    $(function() {
 						var teachingResearchList = JSON.parse('${teaching_research}');
 						//教研教学点水球
@@ -659,26 +733,11 @@
 							}
 						}
 					});
-					//点赞
-				    function like(obj) {
-				    	var y;
-				    	var o = $(obj).find('img').attr('src');
-				    	switch(o) {
-				    		case '${pageContext.request.contextPath}/img/xgk/like.png':
-				    			y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
-				    			$(obj).find('span').text('喜欢');
-				    			break;
-				    		case '${pageContext.request.contextPath}/img/xgk/unlike.png':
-				    			y = '${pageContext.request.contextPath}/img/xgk/like.png';
-				    			$(obj).find('span').text('取消喜欢');
-				    			break;
-				    		default:
-				    			y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
-				    			$(obj).find('span').text('喜欢');
-				    			break;
-				    	}
-				    	$(obj).find('img').attr('src', y);
-				    }
+				    
+				    
+					
+					
+				   /*  */
 			    	$(document).ready(function() {			    		
 			    		$('.tab_head li').click(function(){
 			    			$(this).parent().children().removeClass('cur');

@@ -37,7 +37,7 @@ public class GetCommonUser {
 	 * @param hashIterations 加密次数
 	 * @return
 	 */
-	public String getEncrpytedPassword(String hashAlgorithmName,String password, String uuid,int  hashIterations) {
+	public static String getEncrpytedPassword(String hashAlgorithmName,String password, String uuid,int  hashIterations) {
 		Object result = new SimpleHash(hashAlgorithmName,password,uuid,hashIterations);
 		return (result.toString()).toUpperCase();
 	}
