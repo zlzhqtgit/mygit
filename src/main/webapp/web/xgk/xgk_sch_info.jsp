@@ -188,13 +188,14 @@
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
 			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>教研教学
-			    					</h2>
+			    					</h2>			    					
 			    					<div class="p_relative">
 			    						<div class="circle_list margin_top" style="height: 140px;">
+			    							
 			    							<c:forEach items="${teachingResearch}" var="item">
 			    								<div class="">
-				    							<div class="circle">${item[1] }</div>
-				    							<p class="text-center">${item[0] }</p>
+				    							<div class="circle">${item[1]}</div>
+				    							<p class="text-center">${item[0]}</p>
 				    						</div>
 			    							</c:forEach>	
 				    					</div>
@@ -461,7 +462,7 @@
 			    					<div class="circle_list margin_top" style="height: 140px;">
 			    						<c:forEach items="${teachingResearch }" var="item" varStatus="cc">
 				    						<div class="">
-				    							<div class="circle">53</div>
+				    							<div class="circle">${item[1]}</div>
 				    							<p class="text-center">${item[0]}</p>
 				    						</div>
 				    					</c:forEach>
@@ -715,7 +716,7 @@
 			    			});
 		    			}	
 	    			} 	
-				    $(function() {
+				   /*  $(function() {
 						var teachingResearchList = JSON.parse('${teaching_research}');
 						//教研教学点水球
 						for(var i=1; i<teachingResearchList.length+1; i++){
@@ -732,7 +733,7 @@
 								waterball('water' + i,teachingResearchList[i-1][1],'#fe5656');
 							}
 						}
-					});
+					}); */
 				    
 				    
 					
