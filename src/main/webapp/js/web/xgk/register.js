@@ -201,12 +201,11 @@ function next_step(obj) {
  * @returns {Boolean}
  */
 function register(e) {
-	
 	//阅读已同意
 	if ($("#checkbox").is(':checked') || $("#checkbox1").is(':checked')){
 		var url = "../user/hqt_registeradd.do";
 		var data = "";
-		if(e == 0){
+		if(e == 0){			
 			//学生
 			if(!checkName($('#username'))  //用户名验证
 			   || !check_mobile($('#phone')) //手机号验证 
@@ -215,24 +214,23 @@ function register(e) {
 			   || !check_year()){ //选择学届验证
 				return;
 			}
-			if($("#pc_number").val() != ""){
+			/*if($("#pc_number").val() != ""){
 				if(!idCodeValid($("#pc_number"))){
 					return;//身份证号验证失败
 				}
-			}
-			
+			}	*/		
 			data = "username=" + $("#username").val() + //用户名
 				   "&phone=" + $("#phone").val() + //手机号
 				   "&verifyCode=" + $("#captcha").val() + //验证码
 				   "&password=" + $("#password").val() + //密码
-				   "&pcNumber=" + $("#pc_number").val() + //身份证号
+				   //"&pcNumber=" + $("#pc_number").val() + //身份证号
 				   "&studyProvinces=" + $("#study_provinces").val() + //就读省份 
-				   "&school=" + $("#school").val()  + //学校
-				   "&schoolAddress=" + $("#school_address").val() + //学校地址
-				   "&educationalCircles=" + $("#educational_circles option:selected").val() + //学届 
-				   "&grade=" + $("#grade").val() + //年级
-				   "&className=" + $("#class_name").val() + //班级
-				   "&studentId=" + $("#student_id").val(); //学号
+				   //"&school=" + $("#school").val()  + //学校
+				   //"&schoolAddress=" + $("#school_address").val() + //学校地址
+				   "&educationalCircles=" + $("#educational_circles option:selected").val();//学届 
+				   //"&grade=" + $("#grade").val() + //年级
+				   //"&className=" + $("#class_name").val() + //班级
+				   //"&studentId=" + $("#student_id").val(); //学号				   
 		} else {
 			//咨询师
 			if(!checkName($('#username1'))  //用户名验证
@@ -247,6 +245,7 @@ function register(e) {
 						   "&verifyCode=" + $("#captcha1").val() + //验证码
 						   "&password=" + $("#password1").val(); //密码
 		}
+		console.log(data);
 		$.ajax({
 			type:"POST",
 			url:url,
@@ -325,6 +324,7 @@ function completeRegister() {
 //完善注册信息发送短信
 var isSend = false;
 function sendMessages(e) {
+	console.log("aa")
 	var url = "";
 	var phone = "";
 	if (e == 1){//绑定手机 短信
@@ -334,7 +334,6 @@ function sendMessages(e) {
 		url = "/user/hqt_photoyzm.do";
 		phone = $("#mobile").val();
 	}
-	console.log(phone);
 	var reg = /^[1][3,4,5,7,8][0-9]{9}$/;
 	if(!reg.test(phone)) {
 		layer.msg("请输入正确格式的手机号", {icon: 3, time: 1000});

@@ -500,7 +500,7 @@
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
 								var universities = "";
-								for (var i=0; i<list.length; i++){
+								for (var i=0; i<list.length; i++){									
 									var admission_lot = "";//录取批次
 									var admissionLotList = JSON.parse(list[i].admissionLot);
 									for (var j=0; j<admissionLotList.length; j++){
@@ -532,7 +532,7 @@
                                         	if(universitiesAttributes != null){
         									for (var f=0; f<universitiesAttributes.length; f++){
         										if (universitiesAttributes[f] == "985"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png'/>"
+        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png' alt='985'/>"
         										}
         										if (universitiesAttributes[f] == "211"){
         											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png'/>"
@@ -575,14 +575,14 @@
 												 "</table></div>" +
 												 //[录取分表格   start]
 												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
-                                        	
 									//[院校扩展表list 院校录取分数线] 
 									if(list[i].universRelationList == null){
 										universities += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
-										var universRelationList = list[i].universRelationList;
-										for(var j=0; j<list[i].universRelationList.length; j++){
-											var collegeScoreLine = universRelationList[j].collegeScoreLine;
+										var universRelationList = list[i].universRelationList;		
+										for(var j=0; j<universRelationList.length; j++){
+											console.log(universRelationList[j]);
+											var collegeScoreLine = universRelationList[j].collegeScoreLine;											
 											if($.isEmptyObject(collegeScoreLine) == false){
 												if(collegeScoreLine.startsWith("[")){
 													var lines = JSON.parse(collegeScoreLine);
@@ -594,7 +594,7 @@
 												}													
 											} 												
 										}
-									}							
+									}									
                                         	//[录取分表格   end]
                                         	universities += "</table>" + operate + "</li></ul>";
                                         	
@@ -641,7 +641,8 @@
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
 								var universities = "";
-								for (var i=0; i<list.length; i++){									
+								for (var i=0; i<list.length; i++){		
+									console.log(list[i]);
 									var admission_lot = "";//录取批次
 									var admissionLotList = JSON.parse(list[i].admissionLot);
 									for (var j=0; j<admissionLotList.length; j++){

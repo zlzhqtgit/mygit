@@ -639,7 +639,7 @@
 							<div class="">
 								<h4 class="fontwei text-primary">课程</h4>
 								<ul class="row_list clearfix">
-									<li><a href=""><span class="glyphicon glyphicon-film"></span> 知识课堂</a></li>
+									<li><a href="${pageContext.request.contextPath}/online/xgk_online_index.do"><span class="glyphicon glyphicon-film"></span> 知识课堂</a></li>
 								</ul>
 							</div>
 						</li>

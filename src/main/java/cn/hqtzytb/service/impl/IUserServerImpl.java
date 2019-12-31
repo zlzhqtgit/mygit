@@ -238,6 +238,7 @@ public class IUserServerImpl implements IUserServer {
 		Subject subject = SecurityUtils.getSubject();
 		Session session = subject.getSession();
 		ResponseResult<Void> rr = null;
+		System.err.println("1111111");
 		if	(session.getAttribute("phone") == null || session.getAttribute("code") == null ){
 			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,"请先获取手机验证码");
 		}
