@@ -54,7 +54,7 @@
 					</ul> -->
 
 					<div class="page_step step2 margin_top padding-side2" style="width: 100%;">
-						<form class="user1" action=""<!--  method="post" onsubmit="return " -->
+						<form class="user1" action="">
 							<fieldset id="">
 								<legend class="">
 									<h4 class="text-primary margin_bot1 fontwei">注册新用户
