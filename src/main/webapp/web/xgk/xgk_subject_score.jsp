@@ -575,7 +575,7 @@
 
 				<div class="comprehensive padding-side2">
 					<p class="text-right">
-						<a class="btn btn-primary fontwei" href="">下一步</a>
+						<a class="btn btn-primary fontwei" href="${pageContext.request.contextPath}/cp/xgk_choice.do">下一步</a>
 					</p>
 				</div>
 			</div>

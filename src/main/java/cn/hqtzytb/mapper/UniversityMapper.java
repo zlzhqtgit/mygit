@@ -53,4 +53,5 @@ public interface UniversityMapper {
                                       @Param("offset")Integer offset,
                                       @Param("countPerPage")Integer countPerPage);
 
+
 }

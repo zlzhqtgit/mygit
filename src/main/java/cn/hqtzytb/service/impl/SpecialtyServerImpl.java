@@ -157,8 +157,8 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 			map.addAttribute("specialty", specialtyList.get(0));
 			map.addAttribute("majorCourses", specialtyList.get(0).getMajorCourses().split(";"));
 			//考生生源地
-			map.addAttribute("er_provinceList", enrollmentRequirementsMapper.geyProvince(specialtyId));
-			map.addAttribute("er_yaerList", enrollmentRequirementsMapper.geyYear(specialtyId));
+			/*map.addAttribute("er_provinceList", enrollmentRequirementsMapper.geyProvince(specialtyId));
+			map.addAttribute("er_yaerList", enrollmentRequirementsMapper.geyYear(specialtyId));*/
 			//院校省份
 			map.addAttribute("sch_provinceList", universityMapper.selectUniversityProvince());
 			//就业职业方向
@@ -175,47 +175,35 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 	@Override
 	public ResponseResult<List<University>> getSpecialtySchool(String specialtyId, String er_year, String er_province, String sch_province, HttpServletRequest request) {
 		try{
-			String where = "";
-			boolean andTrue = false;//是否需要AND链接SQL
-			if(StringUtils.isNotEmpty(sch_province) && !"全部".equals(sch_province)){
-				where += " u.province = '" + sch_province + "' ";
-				andTrue = true;
-			}
-			if(StringUtils.isNotEmpty(er_province)){
-				if(andTrue){
+			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "'",null,null,null);
+			if(!specialtyList.isEmpty()){
+				String where = " u.universities_name  IN ("  + specialtyList.get(0).getOpenCollege().replaceAll("、",",") + ")";
+				if(StringUtils.isNotEmpty(sch_province) && !"全部".equals(sch_province)){
+					where += " AND u.province = '" + sch_province + "' ";
+				}
+				if(StringUtils.isNotEmpty(er_province)){
 					where += " AND er.e_province = '" + er_province + "' ";
-				} else {
-					where += " er.e_province = '" + er_province + "' ";
-					andTrue = true;
 				}
-			}
-			if (StringUtils.isNotEmpty(er_year)) {
-				if(andTrue){
+				if (StringUtils.isNotEmpty(er_year)) {
 					where += " AND er.e_year = '" + er_year + "' ";
-				} else {
-					where += " er.e_year = '" + er_year + "' ";
-					andTrue = true;
+
 				}
-			}
-			if (StringUtils.isNotEmpty(specialtyId)) {
-				if (andTrue) {
-					where += " AND LOCATE('" + specialtyId + "',include_major) ";
-				} else {
-					where += " LOCATE('" + specialtyId + "',include_major) ";
+				System.out.println("where：" + where);
+				List<University> universityList = universityMapper.selectUniversityList(where, null, null, null);
+				for(University university : universityList){
+					for(UniversityRelation relation : university.getUniversRelationList()){
+						relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(),request));
+					}
 				}
+				SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
+				return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,universityList);
 			}
-			List<University> universityList = universityMapper.selectUniversityList(where, null, null, null);
-			for(University university : universityList){
-	    		for(UniversityRelation relation : university.getUniversRelationList()){
-	    			relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(),request));
-	    		}
-	    	}
-			SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
-			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,universityList);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
 		}catch(Exception e){
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 查询专业详情信息   错误信息：" + e);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
 		}
-		return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+
 	}
 	@Override
 	public ResponseResult<Map<String, Object>> getSpecialtyList2(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
