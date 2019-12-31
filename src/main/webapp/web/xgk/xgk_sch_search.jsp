@@ -274,28 +274,72 @@
 					var schName=$(obj).parents('li').attr('pname');
 					var schLogo=$(obj).parents('li').find(".sh_logo img").attr("src");
 					var schCode=$(obj).parents('li').find(".sch_info .schCode").text();
+					console.log(schName);
+					console.log(schLogo);
+					console.log(schCode);
 					if ($(obj).find('input').is(":checked")) {
 						$(obj).removeClass("btn-primary");
 						$(obj).addClass("cancel");
 						$(obj).find('span').text("取消收藏");
+
+						love(obj);
 					}else{
 						$(obj).removeClass("cancel");
 						$(obj).addClass("btn-primary");
 						$(obj).find('span').text("收藏学校");
-						var where;
-						$.ajax({
-							url: "${pageContext.request.contextPath}/school/xgk_school_query.do",
-							data: where,
-							async:true,
-							type: "POST",
-							dataType: "json",							
-							success: function (obj){
-								console.log(obj);
-							}
-						})
+						unlove(obj);
+
 					}
 				}
-				 /* $('.contrast').show(); */
+				function love(obj){
+					if('${uid}' != ''){
+						var schName=$(obj).parents('li').attr('pname');
+						var schLogo=$(obj).parents('li').find(".sh_logo img").attr("src");
+						var schCode=$(obj).parents('li').find(".sch_info .schCode").text();
+						var data = "eCode=" + schCode + "&eName=" + schName + "&eLogo=" + schLogo + "&eType=0";
+						$.ajax({
+							url: "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
+							data:data,
+							type:"POST",
+							dataType:"json",
+							success:function(obj){
+								if(obj.state == 0){
+									console.log(obj.message);
+									layer.msg(obj.message,{icon:2,time:1000});
+								}else{
+									console.log(obj.message);
+									$(obj).attr("id",obj.data.eId);
+									layer.msg(obj.message,{icon:6,time:1000});
+
+								}
+							}
+						});
+					}
+				}
+				function unlove(obj){
+					if($(obj).attr("id") != ''){
+						console.log( $(obj).attr("id"));
+						$.ajax({
+							url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
+							data: "eId=" + $(obj).attr("id"),
+							type: "POST",
+							dataType:"json",
+							success:function(obj){
+								if(obj.state == 0){
+									console.log(obj.message);
+									layer.msg(obj.message,{icon:2,time:1000});
+								}else{
+									console.log(obj.message);
+									layer.msg(obj.message,{icon:6,time:1000});
+								}
+							}
+						});
+					}
+				}
+
+
+
+				/* $('.contrast').show(); */
 				var flag=false;
 				//结果列表的加入对比
 				function btn_check(obj){
@@ -456,7 +500,7 @@
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
 								var universities = "";
-								for (var i=0; i<list.length; i++){									
+								for (var i=0; i<list.length; i++){
 									var admission_lot = "";//录取批次
 									var admissionLotList = JSON.parse(list[i].admissionLot);
 									for (var j=0; j<admissionLotList.length; j++){
@@ -505,10 +549,17 @@
         									}
                                         	}
 									var box_head = '<ul classs="search_result list-group" id="universities">';
-									var id = "";
-									var operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>收藏学校</span><input type="checkbox" name="" id="" value=""/></a></p>'+
-											    '<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
-											    '<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+
+									var operate = "";
+									if(list[i].eId == null){
+										operate = '<div class="operate_box padding-side"> <p class="text-center"><a id="" class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>收藏学校</span><input type="checkbox" name="" id="" value=""/></a></p>'+
+												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
+												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+									} else {
+										operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn cancel" id="' + list[i].eId + '" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value="" checked="checked"/></a></p>'+
+												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
+												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+									}
 									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
 												 "<div class='sh_logo'>" +
@@ -640,10 +691,17 @@
                                         	}
 									var box_head = '<ul classs="search_result list-group" id="universities">';
 									var id = "";
-									var operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value=""/></a></p>'+
-											    '<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
-											    '<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
-									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='复旦大学'>" +
+									var operate = "";
+									if(list[i].eId == null){
+										operate = '<div class="operate_box padding-side"> <p class="text-center"><a id="" class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>收藏学校</span><input type="checkbox" name="" id="" value=""/></a></p>'+
+												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
+												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+									} else {
+										operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn cancel" id="' + list[i].eId + '" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value="" checked="checked"/></a></p>'+
+												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
+												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+									}
+									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
 												 "<div class='sh_logo'>" +
 												 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
@@ -653,7 +711,7 @@
 												 "<p class=''>综合评级（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
 												 "</div>" +
 												 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
-												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
+												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
 												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span>" + list[i].universitiesNature + "</span></td><td><span>" + doctor + "</span></td></tr>" +
 												 "</table></div>" +
 												 //[录取分表格   start]

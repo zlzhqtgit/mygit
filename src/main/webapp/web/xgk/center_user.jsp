@@ -703,6 +703,10 @@
 					function updatephone(){
 						var phone = $("#new_phone").val();	
 						var verifyCode = $("#verify_code").val();
+						if(phone == ""){
+							layer.msg('手机号不能为空',{icon:2,time:1000});
+							return;
+						}
 						$.ajax({
 							url: "${pageContext.request.contextPath}/user/hqt_update_phone.do",
 							data:"phone=" + phone + "&verifyCode=" + verifyCode,

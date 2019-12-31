@@ -46,7 +46,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">0.02</span> 元/年
+											<span class="price">0.01</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>
@@ -71,7 +71,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">0.03</span> 元/年
+											<span class="price">0.02</span> 元/年
 										</div>
 										<p class="fsize12">这是一句话</p>
 									</div>

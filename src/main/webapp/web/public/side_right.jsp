@@ -7,7 +7,7 @@
  <meta charset=utf-8>
 <title>Insert title here</title>
 <script type="text/javascript">
-window.onload = function() {
+/*window.onload = function() {
 	var url = "../admin/side_right.do";
 	var data ="";
 	$.ajax({
@@ -27,7 +27,7 @@ window.onload = function() {
 			}				
 		}
 	}); 
-}
+}*/
 function chat2(id) {	
 	window.open ('${pageContext.request.contextPath}/web/hqt_chat.do?id='+id,'好前途在线咨询平台', 'height=630, width=800, top=200px, left=520px, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') 
 }
