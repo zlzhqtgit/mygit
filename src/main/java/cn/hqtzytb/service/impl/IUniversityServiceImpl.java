@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -49,9 +50,20 @@ public class IUniversityServiceImpl implements IUniversityService {
     public ResponseResult<Map<String, Object>> getUniversityList(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
     	Map<String, Object> resultMap = new HashMap<>();
     	try {
-    		SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
+			Subject subject = SecurityUtils.getSubject();
+			Session session = subject.getSession();
+			session.setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
     		List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(where) ? null : where ," ur.ur_year DESC ",offset == null ? 0 : offset ,countPerPage == null ? 3 : countPerPage);
     		Integer count = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(where) ? null : where);
+    		if(subject.isAuthenticated()){//若用户已登录
+				for(University university : universityList){
+					List<Enshrine> enshrineList = enshrineMapper.select(" e_code = '" + university.getUniversitiesCode() + "'", null, null, null);
+					if(!enshrineList.isEmpty()){
+						university.seteId(enshrineList.get(0).geteId());
+					}
+					System.out.println( "enshrineList:" + enshrineList);
+				}
+			}
     		resultMap.put("list", universityList);
     		resultMap.put("count", count);
 		} catch (Exception e) {

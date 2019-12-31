@@ -47,11 +47,14 @@ public class IEnshrineServiceImpl implements IEnshrineService {
 					enshrineMapper.insert(enshrine);
 				}
 				return new ResponseResult<>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS,enshrine);
+			} else {
+				return new ResponseResult<>(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_FAIL);
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 用户添加收藏异常   错误信息：" + e);
+			return new ResponseResult<>(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_FAIL);
 		}
-		return new ResponseResult<>(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_FAIL);
+
 	}
 
 

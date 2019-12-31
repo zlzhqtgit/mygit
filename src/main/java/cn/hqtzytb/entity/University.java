@@ -232,7 +232,12 @@ public class University implements Serializable{
      * 院校收藏数
      */
     private Integer enshrineCount;
-    
+
+	/**
+	 * 当前用户收藏院校id
+	 */
+	private Integer eId;
+
 	public University() {
 		super();
 	}
@@ -771,6 +776,14 @@ public class University implements Serializable{
 	public University setEnshrineCount(Integer enshrineCount) {
 		this.enshrineCount = enshrineCount;
 		return this;
+	}
+
+	public Integer geteId() {
+		return eId;
+	}
+
+	public void seteId(Integer eId) {
+		this.eId = eId;
 	}
 
 	@Override
