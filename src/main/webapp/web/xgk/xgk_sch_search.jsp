@@ -282,6 +282,17 @@
 						$(obj).removeClass("cancel");
 						$(obj).addClass("btn-primary");
 						$(obj).find('span').text("收藏学校");
+						var where;
+						$.ajax({
+							url: "${pageContext.request.contextPath}/school/xgk_school_query.do",
+							data: where,
+							async:true,
+							type: "POST",
+							dataType: "json",							
+							success: function (obj){
+								console.log(obj);
+							}
+						})
 					}
 				}
 				 /* $('.contrast').show(); */
@@ -291,8 +302,6 @@
 					var rowId=$(obj).parents('li').attr('id');
 					//var rowName=$(obj).parents('li').attr('pname');
 					var imgUrl=$(obj).parents('li').find(".sh_logo img").attr("src");
-					console.log($(obj).parents('li').find(".sch_slice").html());
-					console.log(imgUrl);
 					if(flag==false){
 						$('.contrast').show();
 					}
@@ -551,13 +560,10 @@
 								    limits: [1,2,3,4,5,6,7,8,9],
 								    layout: ['prev', 'page', 'next', 'limit', 'refresh', 'skip'],
 								    jump: function(obj,first){
-								    		console.log(first);
-								    		console.log(obj);
 								      	var offset = parseInt(obj.limit)*(parseInt(obj.curr)-1);
 								      	var countPerPage = parseInt(obj.limit);
 								      	var end_where =  "&offset=" + offset + "&countPerPage=" + countPerPage;
 								      	if(!first && where != ""){
-								      		console.log(end_where);
 								      		current = obj.curr;
 								      		schoolSearch2(where + end_where);
 								      	}
