@@ -242,13 +242,13 @@
 			
 			//就读省份
 			var sProvince=$("#study_provinces");
-			var options=''
+			var options='';
 			for (var i=0;i<province.length;i++) {
 				options+='<option value="'+province[i].name+'">'+province[i].name+'</option>'
 			}
-			sProvince.html(options)
+			sProvince.html(options);
 			sProvince.on("change",function() {
-				console.log($(this).val())
+				console.log($(this).val());
 			})
 			
 			//这里是选择框初始化
