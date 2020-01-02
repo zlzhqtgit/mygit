@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,7 +100,9 @@ $(function(){
 });
 </script>
 	<section class="row">
-		<p class="text-right"><a class="downloadReport btn btn-primary" href="javascript:;"">打印报告</a></p>
+		<%-- <shiro:hasPermission name="qncp:print"> --%>
+			<p class="text-right"><a class="downloadReport btn btn-primary" href="javascript:;"">打印报告</a></p>
+		<%-- </shiro:hasPermission> --%>		
 		<h1 class="text-primary fontwei">学科分析报告</h1>
 		<div class="panel panel-default" id="report_cont">
 			<div class="padding-side2 margin_top margin_bot">
@@ -308,8 +310,10 @@ $(function(){
 							</tbody>
 						</table>
 						<div class="open-btn">
-			                <a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
-			            </div>
+							<%-- <shiro:hasPermission name="qncp_more:query"> --%>
+								<a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
+							<%-- </shiro:hasPermission> --%>			                
+			           	</div>
 			            <script>
 							//学科分析报告
 							var report = ${evaluationFraction};

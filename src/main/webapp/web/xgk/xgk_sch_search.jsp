@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -15,8 +16,7 @@
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/area_json.js"></script> 
-		<script src="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/layui.js" charset="utf-8"></script>
-		
+		<script src="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/layui.js" charset="utf-8"></script>		
 	</head>
 
 	<body>
@@ -25,10 +25,13 @@
 			<section class="sch_search container">
 				<div style="padding: 1em 100px 1em;">
 				    <form class="bs-example bs-example-form" role="form" id="universities_name">
-				        <div class="input-group input-group-lg">
-				            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
-				        </div>
+				    		<%-- <shiro:hasPermission name="gxzy_yxcx:query"> --%>
+				    			<div class="input-group input-group-lg">
+					            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
+					            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
+				        		</div>
+				    		<%-- </shiro:hasPermission> --%>
+				        
 				    </form>
 				</div>
 
@@ -141,7 +144,9 @@
 				    
 				</div>
 				<p class="text-center margin_bot margin_top">
-					<input class="btn btn-primary fontwei begin_btn disabled" type="button" value="开始查询" id="sch_query_select">
+					<%-- <shiro:hasPermission name="gxzy_yxcx:query"> --%>
+						<input class="btn btn-primary fontwei begin_btn disabled" type="button" value="开始查询" id="sch_query_select">
+					<%-- </shiro:hasPermission> --%>
 				</p>
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
@@ -274,9 +279,6 @@
 					var schName=$(obj).parents('li').attr('pname');
 					var schLogo=$(obj).parents('li').find(".sh_logo img").attr("src");
 					var schCode=$(obj).parents('li').find(".sch_info .schCode").text();
-					console.log(schName);
-					console.log(schLogo);
-					console.log(schCode);
 					if ($(obj).find('input').is(":checked")) {
 						$(obj).removeClass("btn-primary");
 						$(obj).addClass("cancel");
@@ -304,10 +306,8 @@
 							dataType:"json",
 							success:function(obj){
 								if(obj.state == 0){
-									console.log(obj.message);
 									layer.msg(obj.message,{icon:2,time:1000});
 								}else{
-									console.log(obj.message);
 									$(obj).attr("id",obj.data.eId);
 									layer.msg(obj.message,{icon:6,time:1000});
 
@@ -318,7 +318,6 @@
 				}
 				function unlove(obj){
 					if($(obj).attr("id") != ''){
-						console.log( $(obj).attr("id"));
 						$.ajax({
 							url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
 							data: "eId=" + $(obj).attr("id"),
@@ -326,10 +325,8 @@
 							dataType:"json",
 							success:function(obj){
 								if(obj.state == 0){
-									console.log(obj.message);
 									layer.msg(obj.message,{icon:2,time:1000});
 								}else{
-									console.log(obj.message);
 									layer.msg(obj.message,{icon:6,time:1000});
 								}
 							}
@@ -548,17 +545,17 @@
         										}
         									}
                                         	}
-									var box_head = '<ul classs="search_result list-group" id="universities">';
+									var box_head = "<ul classs='search_result list-group' id='universities'>";
 
 									var operate = "";
 									if(list[i].eId == null){
-										operate = '<div class="operate_box padding-side"> <p class="text-center"><a id="" class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>收藏学校</span><input type="checkbox" name="" id="" value=""/></a></p>'+
-												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
-												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p></shiro:hasPermission>" +
+												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
 									} else {
-										operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn cancel" id="' + list[i].eId + '" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value="" checked="checked"/></a></p>'+
-												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
-												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p></shiro:hasPermission>"+
+												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
 									}
 									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
@@ -581,7 +578,6 @@
 									}else{
 										var universRelationList = list[i].universRelationList;		
 										for(var j=0; j<universRelationList.length; j++){
-											console.log(universRelationList[j]);
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;											
 											if($.isEmptyObject(collegeScoreLine) == false){
 												if(collegeScoreLine.startsWith("[")){
@@ -641,13 +637,16 @@
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
 								var universities = "";
-								for (var i=0; i<list.length; i++){		
-									console.log(list[i]);
+								for (var i=0; i<list.length; i++){
 									var admission_lot = "";//录取批次
 									var admissionLotList = JSON.parse(list[i].admissionLot);
-									for (var j=0; j<admissionLotList.length; j++){
-										admission_lot += " " + admissionLotList[j];
-									}
+									if(admissionLotList != null){
+										for (var j=0; j<admissionLotList.length; j++){
+											admission_lot += " " + admissionLotList[j];
+										}
+									}else{
+										admission_lot += "";
+									}									
 									var master = "";//硕士点数
 									var doctor = "";//博士点数
 									var teaching_research = JSON.parse(list[i].teachingResearch);
@@ -661,14 +660,17 @@
 									}
 	                                        var admissionLots = "";// 录取批次
 	                                        var admissionLotList = JSON.parse(list[i].admissionLot);
-	                                        for (var j=0; j<admissionLotList.length; j++){
-	                                            if (j == admissionLotList.length-1) {
-	                                                admissionLots += admissionLotList[j];
-	                                            }else {
-	                                                admissionLots += admissionLotList[j] + " ";
-	                                            }
-	                                        }
-									
+	                                        if(admissionLotList != null){
+	                                        	for (var j=0; j<admissionLotList.length; j++){
+		                                            if (j == admissionLotList.length-1) {
+		                                                admissionLots += admissionLotList[j];
+		                                            }else {
+		                                                admissionLots += admissionLotList[j] + " ";
+		                                            }
+		                                        }
+	                                        }else{
+	                                        	admissionLotList = "";
+	                                        }  
                                         	var attrImg = "";//院校属性图片
                                         	var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
                                         	if(universitiesAttributes != null){
@@ -694,13 +696,13 @@
 									var id = "";
 									var operate = "";
 									if(list[i].eId == null){
-										operate = '<div class="operate_box padding-side"> <p class="text-center"><a id="" class="store btn btn-primary" onclick="store(this)" href="javascript:void(0)"><span>收藏学校</span><input type="checkbox" name="" id="" value=""/></a></p>'+
-												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
-												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p></shiro:hasPermission>" +
+												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
 									} else {
-										operate = '<div class="operate_box padding-side"> <p class="text-center"><a class="store btn cancel" id="' + list[i].eId + '" onclick="store(this)" href="javascript:void(0)"><span>取消收藏</span><input type="checkbox" name="" id="" value="" checked="checked"/></a></p>'+
-												'<p class="text-center"><a href="javascript:void(0)" onclick="btn_check(this)" class="add_contrast btn btn-primary"><span>加入对比</span>'+
-												'<input type="checkbox" name="" id="btnid'+(i+1)+'"/></a></p> </div>';
+										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p></shiro:hasPermission>"+
+												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
 									}
 									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo

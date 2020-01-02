@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
 		 pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +35,11 @@
 						</div>
 					</div>
 					<div class="col-md-4 col-lg-4 col-sm-4 collection margin_top">
-						<div class="">
-							<a href="javascript:void(0)" onclick="test()"><span class=""><img src="${pageContext.request.contextPath}/img/xgk/ic3.png"/></span>测评选专业</a>
-						</div>
+						<%-- <shiro:hasPermission name="zy_cpxzy"> --%>						
+							<div class="">
+								<a href="javascript:void(0)" onclick="test()"><span class=""><img src="${pageContext.request.contextPath}/img/xgk/ic3.png"/></span>测评选专业</a>
+							</div>
+						<%-- </shiro:hasPermission> --%>
 						<script type="text/javascript">
 							function test(){
 								layer.confirm('请在以下测评内容，选择一项进行测评！', {
@@ -51,27 +54,35 @@
 								});
 							}
 						</script>
-						<div class="like">
-							<c:if test="${school_like != null}">
-								<a id="${school_like.eId}" href="javascript:;" onclick="like(this)" >测评专业喜欢
+						<%-- <shiro:hasPermission name="zy_sc:add"> --%>
+						<div class="like">							
+								<c:if test="${school_like != null}">
+								<a id="${school_like.eId}" href="javascript:;" onclick="like(this)" >&emsp;&emsp;喜欢
 									<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>
 								</a>
 							</c:if>
 							<c:if test="${school_like == null}">
-								<a id="" href="javascript:;" onclick="like(this)">测评专业喜欢
+								<a id="" href="javascript:;" onclick="like(this)">&emsp;&emsp;喜欢
 									<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
 								</a>
-							</c:if>
+							</c:if>													
 						</div>
+						<%-- </shiro:hasPermission> --%>	
 					</div>
 				</div>
 				<p class="" id="specialty_id" name="${specialty.specialtyId}">国际代码：${specialty.specialtyId}（不可用于填报）</p>
 			</div>
 			<div class="tab_list">
 				<ul class="tab_head margin_top clearfix">
-					<li class="cur">专业概况</li>
-					<li>开设院校</li>
-					<li class="">就业概况</li>
+					<%-- <shiro:hasPermission name="zy_zygk:query"> --%>
+						<li class="cur">专业概况</li>
+					<%-- </shiro:hasPermission> --%>					
+					<%-- <shiro:hasPermission name="zy_ksyx:query"> --%>
+						<li>开设院校</li>
+					<%-- </shiro:hasPermission> --%>					
+					<%-- <shiro:hasPermission name="zy_jygk:query"> --%>
+						<li class="">就业概况</li>
+					<%-- </shiro:hasPermission> --%>					
 				</ul>
 				<div class="tab_body padding-side2">
 					<div class="tab_b1 cur">
@@ -178,7 +189,7 @@
 								<div class="panel panel-default" style="padding: 1em 2em;">
 									<h2 class="text-primary fontwei">
 										<span style="background-image: url(../../img/xgk/1.png);"></span>开设此专业的学校(推荐)
-									</h2>
+									</h2>																	
 									<div class="">
 										<div class="margin_top">
 											考生生源地：
@@ -231,7 +242,9 @@
 										</div>
 									</div>
 								</div>
-								<p class="text-center margin_top"><a class="btn btn-primary" href="javascript:;" onclick="queryschool()">开始推荐</a></p>
+								<%-- <shiro:hasPermission name="zy_yxtj"> --%>										
+									<p class="text-center margin_top"><a class="btn btn-primary" href="javascript:;" onclick="queryschool()">开始推荐</a></p>
+								<%-- </shiro:hasPermission> --%>
 								<script type="text/javascript">
 									//给院校省份点击事件
 									$(document).ready(function(){

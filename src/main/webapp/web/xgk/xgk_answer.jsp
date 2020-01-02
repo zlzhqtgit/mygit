@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,9 +68,16 @@
 								<div id="tmxs"> </div>
 							</div>
 							<p class="text-right margin_top" style="padding-right:2em">
-								<a id="syt" onclick="syt()" class="btn btn-default" role="button">上一题</a>
-								<a id="xyt" onclick="xyt()" class="btn btn-default btn-primary" role="button">下一题</a>
-								<a id="tjda" onclick="tjda()" class="btn btn-primary" >提交</a>
+								<%-- <shiro:hasPermission name="rzcp_syt:query"> --%>
+									<a id="syt" onclick="syt()" class="btn btn-default" role="button">上一题</a>
+								<%-- </shiro:hasPermission> --%>								
+								<%-- <shiro:hasPermission name="rzcp_xyd:query"> --%>
+									<a id="xyt" onclick="xyt()" class="btn btn-default btn-primary" role="button">下一题</a>
+								<%-- </shiro:hasPermission> --%>								
+								<%-- <shiro:hasPermission name="rzcp_tj:add"> --%>
+									<a id="tjda" onclick="tjda()" class="btn btn-primary" >提交</a>
+								<%-- </shiro:hasPermission> --%>
+								
 							</p>
 							<p class="text-right"><span id="current">1</span>/<span id="total">60</span></p>
 							<input id="num" type="hidden" value="0" />							

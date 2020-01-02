@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +27,9 @@
 				    <form class="bs-example bs-example-form" role="form">
 				        <div class="input-group input-group-lg">
 				            <span class="input-group-addon"  onclick="querySpecialty(1)" ><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的专业" id="search_content">
+				            <%-- <shiro:hasPermission name="zy_list:query"> --%>
+				            	<input type="text" class="form-control" placeholder="搜索你感兴趣的专业" id="search_content">
+				            <%-- </shiro:hasPermission> --%>				            
 				        </div>
 				    </form>
 				</div>
@@ -93,7 +96,9 @@
 				    </ul>
 				    
 				</div>
-				<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="querySpecialty(2)">开始查询</a></p>
+				<%-- <shiro:hasPermission name="zy_list:query"> --%>
+					<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="querySpecialty(2)">开始查询</a></p>
+				<%-- </shiro:hasPermission> --%>
 				<script type="text/javascript">
 					function querySpecialty(e){
 						var c = $("li dd a.active");
@@ -227,11 +232,16 @@
 				<div class="panel panel-default">
 				    <div class="tab_list padding-side2">
 				    	<ul class="tab_head clearfix">
-				    		<li class="cur">本科专业</li>
-				    		<li>专科专业</li>
+				    		<%-- <shiro:hasPermission name="bkzy:query"> --%>
+				    			<li class="cur">本科专业</li>
+				    		<%-- </shiro:hasPermission> --%>
+				    		<%-- <shiro:hasPermission name="zkzy:query"> --%>
+				    			<li>专科专业</li>
+				    		<%-- </shiro:hasPermission> --%>				    		
 				    	</ul>
 				    	<div class="tab_body">
 				    		<div class="tab_b1 cur">
+				    		<%-- <shiro:hasPermission name="bkzy:query"> --%>
 				    			<div class="major_info" id="bklist">
 				    				<!-- <div class="clearfix major_info_head">
 				    					<span class="pull-left"><h3>哲学(01)</h3></span>
@@ -248,8 +258,10 @@
 					    				<li class=""><a >宗教学</a></li>
 					    			</ul> -->
 				    			</div>
+				    		<%-- </shiro:hasPermission> --%>
 				    		</div>	
 				    		<div class="tab_b2">
+				    		<%-- <shiro:hasPermission name="zkzy:query"> --%>
 				    			<div class="major_info" id="zklist">
 				    				<!-- <div class="clearfix major_info_head" >
 				    					<span class="pull-left"><h3>哲学(02)</h3></span>
@@ -266,6 +278,7 @@
 					    				<li class=""><a href="sch_major_info.html">宗教学</a></li>
 					    			</ul> -->
 				    			</div>
+				    		<%-- </shiro:hasPermission> --%>
 				    		</div>
 				    	</div>
 				    	

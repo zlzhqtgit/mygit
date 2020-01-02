@@ -18,50 +18,75 @@
 				</div>
 				<nav id="navdh" class="clearfix">
 					<ul class="clearfix margin0" style="width: 47em;">
-						<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
-						<li class=""><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
-						<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
-						<li class=""><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
-						<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/voc/xgk_job_blank.do">职业库</a></li>
-						<li class="">
-							<a id="xgk6" name="dh" href="javascript:void(0)">高校专业&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
-							<ul class="list-unstyled">
-								<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>
-								<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>
-							</ul>
-						</li>
-						<li class="">
-							<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
-							<ul class="list-unstyled">
-								<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>
-								<li><a id="xgk10" name="dh" href="${pageContext.request.contextPath}/web//hqt_business_cooperation.do">商务合作</a></li>
-								<li class="">
-									<a href="javascript:void(0)">立学道社群</a>
-									<div class="community wow bounceInRight">
-										<div class="text-right text-white padding-side fontwei ctit" style="padding:.4em 1em">立学道社群</div>
-										<div class="cont_wrap">
-											<div class="clearfix">
-												<div class="pull-left">
-													<div class="padding-side"><h5 class="fontwei">官方微信</h5></div>
-													<div class="">
-														<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
-													</div>
-												</div>
-												<div class="pull-left">
-													<div class="padding-side"><h5 class="fontwei">志愿填报群</h5></div>
-													<div class="text-left">
-														<p class="">QQ群1：6424323</p>
-														<p class="">QQ群2：5453433</p>
-														<p class="">QQ群3：2456354(已满)</p>
-														<p class="">QQ群4：3321354(已满)</p>
+						<%-- <shiro:hasPermission name="web_index:query"> --%>
+							<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
+						<%-- </shiro:hasPermission> --%>
+						<%-- <shiro:hasPermission name="web_xkts:query"> --%>
+							<li class=""><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
+						<%-- </shiro:hasPermission> --%>
+						<%-- <shiro:hasPermission name="web_rzcp:query"> --%>
+							<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
+						<%-- </shiro:hasPermission> --%>
+						<%-- <shiro:hasPermission name="web_xkzd:query"> --%>
+							<li class=""><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
+						<%-- </shiro:hasPermission> --%>
+						<%-- <shiro:hasPermission name="web_zyk:query"> --%>
+							<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/voc/xgk_job_blank.do">职业库</a></li>
+						<%-- </shiro:hasPermission> --%>
+						<%-- <shiro:hasPermission name="web_gxzy:query"> --%>
+							<li class="">
+								<a id="xgk6" name="dh" href="javascript:void(0)">高校专业&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
+								<ul class="list-unstyled">
+									<%-- <shiro:hasPermission name="gxzy_yxcx:query"> --%>
+										<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>
+									<%-- </shiro:hasPermission> --%>
+									<%-- <shiro:hasPermission name="gxzy_zy:query"> --%>
+										<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>
+									<%-- </shiro:hasPermission> --%>
+								</ul>
+							</li>
+						<%-- </shiro:hasPermission> --%>
+						<shiro:lacksPermission name="web_more:query">
+							<li class="">
+								<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
+								<ul class="list-unstyled">
+									<%-- <shiro:hasPermission name="more_xsjc:query"> --%>
+										<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>
+									<%-- </shiro:hasPermission> --%>
+									<%-- <shiro:hasPermission name="more_swhz:query"> --%>
+										<li><a id="xgk10" name="dh" href="${pageContext.request.contextPath}/web//hqt_business_cooperation.do">商务合作</a></li>
+									<%-- </shiro:hasPermission> --%>
+									<%-- <shiro:hasPermission name="more_lxdsq:query"> --%>
+										<li class="">
+											<a href="javascript:void(0)">立学道社群</a>
+											<div class="community wow bounceInRight">
+												<div class="text-right text-white padding-side fontwei ctit" style="padding:.4em 1em">立学道社群</div>
+												<div class="cont_wrap">
+													<div class="clearfix">
+														<div class="pull-left">
+															<div class="padding-side"><h5 class="fontwei">官方微信</h5></div>
+															<div class="">
+																<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+															</div>
+														</div>
+														<div class="pull-left">
+															<div class="padding-side"><h5 class="fontwei">志愿填报群</h5></div>
+															<div class="text-left">
+																<p class="">QQ群1：6424323</p>
+																<p class="">QQ群2：5453433</p>
+																<p class="">QQ群3：2456354(已满)</p>
+																<p class="">QQ群4：3321354(已满)</p>
+															</div>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</li>
+										</li>
+									<%-- </shiro:hasPermission> --%>
+									
+								</ul>
+							</li>
+						</shiro:lacksPermission>
 					</ul>
 				</nav>
 			</div>
@@ -97,17 +122,21 @@
 						<span class=""><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
 					</shiro:guest>
 					
-					<shiro:user>  
-						<a href="${pageContext.request.contextPath}/user/hqt_user_info.do">
-							<c:if test="${headImg != null && headImg != ''}">
-								<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" />
-							</c:if>
-							<c:if test="${headImg == null || headImg == ''}">
-								<img src="${pageContext.request.contextPath}/img/xgk/user.png" />
-							</c:if>
-						</a>
-						<span class="padding-side"><a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
-					</shiro:user> 
+						<shiro:user>	
+							<%-- <shiro:hasPermission name="grzx:query"> --%>					
+								<a href="${pageContext.request.contextPath}/user/hqt_user_info.do">
+									<c:if test="${headImg != null && headImg != ''}">
+										<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" />
+									</c:if>
+									<c:if test="${headImg == null || headImg == ''}">
+										<img src="${pageContext.request.contextPath}/img/xgk/user.png" />
+									</c:if>
+								</a>
+							<%-- </shiro:hasPermission> --%>
+							<span class="padding-side"><a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
+						</shiro:user> 
+					
+					
 				</div>
 			</div>
 		</header>

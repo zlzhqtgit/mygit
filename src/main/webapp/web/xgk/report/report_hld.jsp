@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,9 @@
 </head>
 <body>
 		<main class="container">
-			<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
+			<%-- <shiro:hasPermission name="rzcp:print"> --%>
+				<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
+			<%-- </shiro:hasPermission> --%>
 			<section class="row" id="report_cont">
 				<div class="panel panel-default">
 					<div class="panel-heading">

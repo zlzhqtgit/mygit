@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -70,11 +70,20 @@
 			
 			<section class="container panel panel-default">
 				<div class="tab_list padding-side2 row">
+				
 			    	<ul class="tab_head">
-			    		<li class="cur">学校介绍</li>
-			    		<li>招生录取</li>
-			    		<li>教研教学</li>
-			    		<li>招生简章</li>
+			    		<%-- <shiro:hasPermission name="yxcx_xxjs:query"> --%>
+			    			<li class="cur">学校介绍</li>
+			    		<%-- </shiro:hasPermission> --%>
+			    		<%-- <shiro:hasPermission name="yxcx_zslq:query"> --%>
+			    			<li>招生录取</li>
+			    		<%-- </shiro:hasPermission> --%>
+			    		<%-- <shiro:hasPermission name="yxcx_jyjx:query"> --%>
+			    			<li>教研教学</li>
+			    		<%-- </shiro:hasPermission> --%>
+			    		<%-- <shiro:hasPermission name="yxcx_zsjz:query"> --%>
+			    			<li>招生简章</li>
+			    		<%-- </shiro:hasPermission> --%>			    		
 			    	</ul>
 			    	<div class="tab_body col-lg-9 col-sm-9 col-md-9">
 			    		<div class="tab_b1 cur">
@@ -86,7 +95,9 @@
 		    								${school.universitiesIntroduction}
 			    						</div>
 			    						<div class="open-btn" style="height: 100px;">
-											<a class="show_more btn btn-primary" onclick="showMore(this)" style="text-align:center; bottom: 3em; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;"> 查看更多 <div class="light"></div> </a>
+			    								<%-- <shiro:hasPermission name="xxjs_more:query"> --%>
+			    									<a class="show_more btn btn-primary" onclick="showMore(this)" style="text-align:center; bottom: 3em; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;"> 查看更多 <div class="light"></div> </a>
+			    								<%-- </shiro:hasPermission> --%>											
 							            </div>
 		    						</div>
 			    					<!--<p class="text-center margin_top"><a class="btn btn-default" href="">展开更多</a></p>-->
@@ -646,7 +657,9 @@
 		    					<li>隶属于：<span>${school.belongTo}</span></li>
 		    					<li>地址：<span>${school.address}</span></li>
 		    				</ul>
-		    				<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址',$('#positonBox'),1)">查看地图</a></p>
+		    				<%-- <shiro:hasPermission name="yxcx_zsjz:query"> --%>
+		    					<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址',$('#positonBox'),1)">查看地图</a></p>
+		    				<%-- </shiro:hasPermission> --%>		    				
 		    			</div>
 		    		</div>
 			    </div>

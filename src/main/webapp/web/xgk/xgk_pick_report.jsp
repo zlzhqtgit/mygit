@@ -183,13 +183,17 @@
 							<p class="">这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制</p>
 							<div class="">
 								<h4 class="fontwei">根据你所测评的各项数据及分析结果来看，我们为您推荐如下三种更适合您的学科选科组合方式：</h4>
-								<ul class="combile1 clearfix" style="list-style: amharic;padding-left: 2em;">
-									<li class=""><div class="border-primary">物理+化学+生物</div></li>
-									<li class=""><div class="border-primary">物理+化学+生物</div></li>
-									<li class=""><div class="border-primary">物理+化学+生物</div></li>
-								</ul>
+								<%-- <shiro:hasPermission name="xkzd_bczh:add"> --%>
+									<ul class="combile1 clearfix" style="list-style: amharic;padding-left: 2em;">
+										<li class=""><div class="border-primary">物理+化学+生物</div></li>
+										<li class=""><div class="border-primary">物理+化学+生物</div></li>
+										<li class=""><div class="border-primary">物理+化学+生物</div></li>
+									</ul>
+								<%-- </shiro:hasPermission> --%>
 								<div class="open-btn margin_top margin_bot" style="height: 50px;position: relative;background: inherit;">
-									<a class="downloadReport show_more btn btn-primary" onclick="downloadReport()" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>
+									<%-- <shiro:hasPermission name="xkzd:print"> --%>
+										<a class="downloadReport show_more btn btn-primary" onclick="downloadReport()" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>
+									<%-- </shiro:hasPermission> --%>									
 		          				</div>
 		          			</div>
 						</div>
