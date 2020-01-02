@@ -166,6 +166,11 @@ public class IUserServerImpl implements IUserServer {
 				MyUsernamePasswordToken token = new MyUsernamePasswordToken(account, password);
 				subject.login(token);
 				Session session = subject.getSession();
+				if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {// 好前途平台用户
+					session.setAttribute(Constants.HQT_USER, 1);
+				} else {
+					session.setAttribute(Constants.HQT_USER, 0);
+				}
 				session.setAttribute(Constants.SYSTEM_USER, user);
 				session.setAttribute("uid", user.getId());
 				session.setAttribute("username", user.getUsername());
@@ -442,18 +447,21 @@ public class IUserServerImpl implements IUserServer {
 				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
 				if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {
 					if (user.getDownloadCount() <= 0) {// 使用次数已用完
+						resultMap.put("status", 1);// 次数使用完 提示充值下载
 						resultMap.put("count", user.getDownloadCount());
 						resultMap.put("expirationTime",
 								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
 						return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！", resultMap);
 					}
-					if (currentTime.after(user.getExpirationTime())) {// 使用次数已用完
+					if (currentTime.after(user.getExpirationTime())) {// 已过期
+						resultMap.put("status", 2);// 过期 提示充值下载、续费Vip
 						resultMap.put("count", user.getDownloadCount());
 						resultMap.put("expirationTime",
 								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
 						return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
 					}
 					// 正常下载测评报告
+					resultMap.put("status", 0);// 正常
 					resultMap.put("count", user.getDownloadCount());
 					resultMap.put("expirationTime",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));

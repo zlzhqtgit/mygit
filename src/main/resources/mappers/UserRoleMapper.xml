@@ -12,11 +12,10 @@
 		
 		<select id="queryRoleBySystemName" parameterType="java.lang.String" resultType="cn.hqtzytb.entity.Role">
 			SELECT 
-				role_id, cid, role_name, role_authority,role_description 
+				role.role_id, role.cid, role.role_name, role.role_authority,role.role_description 
 			FROM 
 				role	
-			LFET JOIN admin_system ON admin_system.sysnub = role.id
-			WHERE 
+			LEFT JOIN admin_system ON admin_system.sysnub = role.role_id
 				admin_system.sysname = #{sysname};
 		</select>
 		
