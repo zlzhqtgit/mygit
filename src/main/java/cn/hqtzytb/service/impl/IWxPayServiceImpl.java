@@ -44,6 +44,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import cn.hqtzytb.entity.AdminSystem;
 import cn.hqtzytb.entity.Order;
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Role;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.WxpayConfig;
@@ -159,11 +160,10 @@ public class IWxPayServiceImpl implements IWxPayService {
 							image.setRGB(x, y, bitMatrix.get(x, y) ? Constants.BLACK : Constants.WHITE);
 						}
 					}
-					url = "E:/workspace/hqtzytb/src/main/webapp/img/public/logo.jpg";
 					// url =
-					// this.getClass().getResource("/").getPath().replaceFirst("/",
-					// "").replace("WEB-INF/classes/",
-					// "webapp/img/public/logo.jpg");
+					// "D:/workspace/hqtzytb/src/main/webapp/img/public/logo.jpg";
+					url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/",
+							"webapp/img/public/logo.jpg");
 					System.err.println(url);
 					File file = new File(url);
 					Image logo = ImageIO.read(file);
@@ -209,7 +209,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 	}
 
 	@Override
-	public void weixinNotify(HttpServletRequest request, HttpServletResponse response) {
+	public ResponseResult<Void> weixinNotify(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			Date currentTime = new Date();
 			String inputLine;
@@ -281,8 +281,6 @@ public class IWxPayServiceImpl implements IWxPayService {
 									expirationTime.setTime(userList.get(0).getExpirationTime());
 									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
 								}
-								// userList.get(0).setRid(4);//成为个人vip用户
-								// userList.get(0).setAuthority(role.getRoleAuthority());//个人vip授权
 								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
 								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
 							}
@@ -310,12 +308,15 @@ public class IWxPayServiceImpl implements IWxPayService {
 							}
 						}
 						userMapper.updateById(userList.get(0));
+						return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS);
 					} catch (Exception e) {
 						logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  用户id:" + detail[1] + " 充值类型："
 								+ ("1".equals(detail[2]) ? Constants.TYPE_BECOME_VIP : Constants.TYPE_COUNSELOR_VIP)
 								+ " 错误信息: " + e);
+						return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
 					}
 				}
+				return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
 			} else {
 				resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
 						+ "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
@@ -325,9 +326,11 @@ public class IWxPayServiceImpl implements IWxPayService {
 				out.close();
 				logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  异常数据：" + map.get("out_trade_no"));
 				System.out.println("通知微信.异步确认交易失败");
+				return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付回掉异常     错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
 		}
 	}
 
