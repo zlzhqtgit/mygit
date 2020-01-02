@@ -9,36 +9,151 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title>贵州好前途教育科技有限公司</title>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/css/layui.css"  media="all">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
-		<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+ 		<script src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/html2canvas.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/jspdf.debug.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>	
+		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>	
 	</head>	
 <body>
 	<c:import url="header.jsp"></c:import>
-			<script type="text/javascript">	
+		<main class="container">
+			<p class="text-right"><a class="btn btn-primary" href="javascript:history.go(-1)">返回</a></p>
+			<div class="report_content container" id="report_content">
+				<section class="row">
+					<h2 class="text-primary fontwei">选科报告</h2>
+					<div class="panel panel-default border-radius box-shadow">
+						<div class="panel-body padding-side2">
+							<div class="margin_top margin_bot">
+								<div class="">
+									<shiro:guest><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/></shiro:guest>
+									<shiro:user><img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 3em;"/></shiro:user>
+									<span class="padding-side">你好！</span>
+								</div>
+								<div class="padding-side2 margin_top1">
+									这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍
+									这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="row">
+					<div class="padding-side2">
+						<h3 class="title_wrap text-primary fontwei"> 
+							<span style="background-image: url(../../img/xgk/1.png);"></span>数据分析
+						</h3>
+						<div class="">
+							<div class="">
+								<p class="">这是根据您所填写的成绩计算出来的成绩分析图，图中包含了您6科成绩所占的比例，你可用清楚地看出来每科成绩所占的比例</p>
+								<div class="flex_Al_c">
+									<div class="" id="analyse_score" style="width: 440px;height:400px;"></div>
+								</div>
+							</div>
+							<div class="">
+								<p class="">这是根据你所填写的测评计算出来的潜能分析结果，图中包含了您的6科成绩所占的比例，你可可以清楚地看出来每科的能力象限大小。</p>
+								<div class="flex_Al_c">
+									<div class="" id="analyse_score1" style="width: 440px;height:400px;"></div>
+								</div>
+							</div>
+							<div class="">
+								<p class="">这是根据你所填写的测评计算出来的潜能分析结果，图中包含了您的6科成绩所占的比例，你可可以清楚地看出来每科的能力象限大小。</p>
+								<div class="flex_Al_c">
+									<div class="" id="analyse_score2" style="width: 640px;height:400px;"></div>
+								</div>
+							</div>
+							<div class="">
+								<h4 class="fontwei">通过测评结果对比分析，根据您的结果我们对20种组合方式的排序如下表：</h4>
+								<div class="padding-side2">
+									<table class="combile_xuank width100" border="" cellspacing="" cellpadding="" id="recommend_combination">
+										<tr><td>1 物化生</td><td>1 物化生</td><td>1 物化生</td><td>1 物化生</td></tr>
+										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
+									</table>
+								</div>
+							</div>
+							<p class="margin_top1">综合分析的一段话综合分析的一段话综合分析的一段话综合分析的一段话综合分析的一段话综合分析的一段话</p>
+						</div>
+							
+					</div>
+					<div class="padding-side2">
+						<h3 class="title_wrap text-primary fontwei"> 
+							<span style="background-image: url(../../img/xgk/2.png);"></span>限报限考
+						</h3>
+						<div class="">
+							<div class="">
+								<p class="padding-side2">根据<span>【${choose_year}】年</span>的高考政策以及高等院校在<span>【${choose_province}】</span>的招生考试及您所选择的理想专业，我们依照<span>【${choose_enrollment_major.specialtyName}】</span>专业的招生考试要求，为您列举如下几种报考本专业的学科组合方式：
+									<c:if test="${intersection == 0}">
+										[${choose_province}部分院校可选以下学科组合方式]
+									</c:if>
+									<c:if test="${intersection == 2}">
+										[${choose_province}暂无高考招生政策]
+									</c:if>
+								</p>
+								<ul class="combile clearfix" id="policy_combination">
+									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
+									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
+									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
+									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
+									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
+									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
+								</ul>
+							</div>	
+							<p class="">这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制</p>
+							<div class="">
+								<h4 class="fontwei">根据你所测评的各项数据及分析结果来看，我们为您推荐如下三种更适合您的学科选科组合方式：</h4>						
+									<ul class="combile1 clearfix" style="list-style: amharic;padding-left: 2em;">
+										<li class=""><div class="border-primary">物理+化学+生物</div></li>
+										<li class=""><div class="border-primary">物理+化学+生物</div></li>
+										<li class=""><div class="border-primary">物理+化学+生物</div></li>
+									</ul>								
+								<div class="open-btn margin_top margin_bot" style="height: 50px;position: relative;background: inherit;">
+									<a class="downloadReport show_more btn btn-primary" onclick="downloadReport()" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>																		
+		          				</div>
+		          			</div>
+						</div>
+					</div>
+				</section>
+			</div>
+				
+			</script>
+</main>		
+<!--<p class="text-center margin_bot"><a class="downloadReport btn btn-primary" href="javascript:void(0)">下载报告</a></p>-->
+<!-- 右侧边栏-->
+<c:import url="../public/side_right.jsp"></c:import>
+<!-- 页面底部-->
+<c:import url="footer.jsp"></c:import>
+		<script type="text/javascript">	
+		
 			function downloadReport(){
-				 $.ajax({
-					url: "${pageContext.request.contextPath}/user/hqt_download_count.do",
-					data:"",
-					type:"POST",
-					dataType:"json",
-					success:function(obj){
-						if(obj.state == 0){
-							console.log(obj.data);
-							alert(obj.message);
-							layer.msg(obj.message,{icon:2,time:1000});					
-						}else{
-							alert(obj.message);
-							layer.msg(obj.message,{icon:6,time:1000});
-							download();
-						}
-					}	
-				}); 
+				 var hqt_user = '${hqt_user}';
+				 if(hqt_user == 1){
+					 $.ajax({
+							url: "${pageContext.request.contextPath}/user/hqt_download_count.do",
+							data:"",
+							type:"POST",
+							dataType:"json",
+							success:function(obj){
+								console.log(obj);
+								if(obj.state == 0){									
+									alert(obj.message);
+									layer.msg(obj.message,{icon:2,time:1000});					
+								}else{
+									alert(obj.message);
+									layer.msg(obj.message,{icon:6,time:1000});
+									download();
+								}
+							}	
+						}); 
+				 }else{
+					 download();
+				 }
 			}
 				
 					function download(){
@@ -97,116 +212,6 @@
 					  })
 					}		
 </script>
-		<main class="container">
-			<p class="text-right"><a class="btn btn-primary" href="javascript:history.go(-1)">返回</a></p>
-			<div class="report_content container" id="report_content">
-				<section class="row">
-					<h2 class="text-primary fontwei">选科报告</h2>
-					<div class="panel panel-default border-radius box-shadow">
-						<div class="panel-body padding-side2">
-							<div class="margin_top margin_bot">
-								<div class="">
-									<shiro:guest><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/></shiro:guest>
-									<shiro:user><img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 3em;"/></shiro:user>
-									<span class="padding-side">你好！</span>
-								</div>
-								<div class="padding-side2 margin_top1">
-									这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍
-									这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍这是一个选科报告的说明介绍
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
-				<section class="row">
-					<div class="padding-side2">
-						<h3 class="title_wrap text-primary fontwei"> 
-							<span style="background-image: url(img/1.png);"></span>数据分析
-						</h3>
-						<div class="">
-							<div class="">
-								<p class="">这是根据您所填写的成绩计算出来的成绩分析图，图中包含了您6科成绩所占的比例，你可用清楚地看出来每科成绩所占的比例</p>
-								<div class="flex_Al_c">
-									<div class="" id="analyse_score" style="width: 440px;height:400px;"></div>
-								</div>
-							</div>
-							<div class="">
-								<p class="">这是根据你所填写的测评计算出来的潜能分析结果，图中包含了您的6科成绩所占的比例，你可可以清楚地看出来每科的能力象限大小。</p>
-								<div class="flex_Al_c">
-									<div class="" id="analyse_score1" style="width: 440px;height:400px;"></div>
-								</div>
-							</div>
-							<div class="">
-								<p class="">这是根据你所填写的测评计算出来的潜能分析结果，图中包含了您的6科成绩所占的比例，你可可以清楚地看出来每科的能力象限大小。</p>
-								<div class="flex_Al_c">
-									<div class="" id="analyse_score2" style="width: 640px;height:400px;"></div>
-								</div>
-							</div>
-							<div class="">
-								<h4 class="fontwei">通过测评结果对比分析，根据您的结果我们对20种组合方式的排序如下表：</h4>
-								<div class="padding-side2">
-									<table class="combile_xuank width100" border="" cellspacing="" cellpadding="" id="recommend_combination">
-										<tr><td>1 物化生</td><td>1 物化生</td><td>1 物化生</td><td>1 物化生</td></tr>
-										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-										<tr><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-									</table>
-								</div>
-							</div>
-							<p class="margin_top1">综合分析的一段话综合分析的一段话综合分析的一段话综合分析的一段话综合分析的一段话综合分析的一段话</p>
-						</div>
-							
-					</div>
-					<div class="padding-side2">
-						<h3 class="title_wrap text-primary fontwei"> 
-							<span style="background-image: url(img/2.png);"></span>限报限考
-						</h3>
-						<div class="">
-							<div class="">
-								<p class="padding-side2">根据<span>【${choose_year}】年</span>的高考政策以及高等院校在<span>【${choose_province}】</span>的招生考试及您所选择的理想专业，我们依照<span>【${choose_enrollment_major.specialtyName}】</span>专业的招生考试要求，为您列举如下几种报考本专业的学科组合方式：
-									<c:if test="${intersection == 0}">
-										[${choose_province}部分院校可选以下学科组合方式]
-									</c:if>
-									<c:if test="${intersection == 2}">
-										[${choose_province}暂无高考招生政策]
-									</c:if>
-								</p>
-								<ul class="combile clearfix" id="policy_combination">
-									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
-									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
-									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
-									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
-									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
-									<li class="fontwei text-primary"><div class="border-primary">物理+化学+生物</div></li>
-								</ul>
-							</div>	
-							<p class="">这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制这是一个关于报告的解读说明，里面介绍了关于不同学科组合报考的类别限制</p>
-							<div class="">
-								<h4 class="fontwei">根据你所测评的各项数据及分析结果来看，我们为您推荐如下三种更适合您的学科选科组合方式：</h4>
-								<%-- <shiro:hasPermission name="xkzd_bczh:add"> --%>
-									<ul class="combile1 clearfix" style="list-style: amharic;padding-left: 2em;">
-										<li class=""><div class="border-primary">物理+化学+生物</div></li>
-										<li class=""><div class="border-primary">物理+化学+生物</div></li>
-										<li class=""><div class="border-primary">物理+化学+生物</div></li>
-									</ul>
-								<%-- </shiro:hasPermission> --%>
-								<div class="open-btn margin_top margin_bot" style="height: 50px;position: relative;background: inherit;">
-									<%-- <shiro:hasPermission name="xkzd:print"> --%>
-										<a class="downloadReport show_more btn btn-primary" onclick="downloadReport()" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>
-									<%-- </shiro:hasPermission> --%>									
-		          				</div>
-		          			</div>
-						</div>
-					</div>
-				</section>
-			</div>
-</main>		
-<!--<p class="text-center margin_bot"><a class="downloadReport btn btn-primary" href="javascript:void(0)">下载报告</a></p>-->
-<!-- 右侧边栏-->
-<c:import url="../public/side_right.jsp"></c:import>
-<!-- 页面底部-->
-<c:import url="footer.jsp"></c:import>
-
 </body>
 	<script type="text/javascript">
 								//最终推荐学科组合	
@@ -223,8 +228,6 @@
 											result += "<li class=''><div class='border-primary' onclick='saveReport(this)'>" + combination[i].key + "</div></li>";	
 										}
 									}
-									
-									
 									$(".combile1").html(result);
 								}); 
 								
@@ -552,5 +555,4 @@
 				    }
 				});					
 			</script>
-	
 </html>

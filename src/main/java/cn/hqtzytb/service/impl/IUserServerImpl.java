@@ -438,44 +438,53 @@ public class IUserServerImpl implements IUserServer {
 
 	@Override
 	public ResponseResult<Map<String, Object>> reduceDownloadCount(HttpServletRequest request) {
-		try {
-			Subject subject = SecurityUtils.getSubject();
-			Map<String, Object> resultMap = new HashMap<>();
-			if (subject.isAuthenticated()) {// 好前途平台用户下载报告有限制
-				Date currentTime = new Date();
-				Integer uid = (Integer) subject.getSession().getAttribute("uid");
-				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
-				if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {
-					if (user.getDownloadCount() <= 0) {// 使用次数已用完
-						resultMap.put("status", 1);// 次数使用完 提示充值下载
-						resultMap.put("count", user.getDownloadCount());
-						resultMap.put("expirationTime",
-								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-						return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！", resultMap);
-					}
-					if (currentTime.after(user.getExpirationTime())) {// 已过期
-						resultMap.put("status", 2);// 过期 提示充值下载、续费Vip
-						resultMap.put("count", user.getDownloadCount());
-						resultMap.put("expirationTime",
-								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-						return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
-					}
-					// 正常下载测评报告
-					resultMap.put("status", 0);// 正常
+		// try {
+		Subject subject = SecurityUtils.getSubject();
+		Map<String, Object> resultMap = new HashMap<>();
+		if (subject.isAuthenticated()) {// 好前途平台用户下载报告有限制
+			Date currentTime = new Date();
+			Integer uid = (Integer) subject.getSession().getAttribute("uid");
+			User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
+
+			if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {
+				if (user.getDownloadCount() <= 0) {// 使用次数已用完
+					resultMap.put("status", 1);// 次数使用完 提示充值下载
 					resultMap.put("count", user.getDownloadCount());
+					if (user.getExpirationTime() != null) {
+						resultMap.put("expirationTime",
+								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+					}
+					return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！", resultMap);
+				}
+				if (user.getExpirationTime() != null && currentTime.after(user.getExpirationTime())) {// 已过期
+					resultMap.put("status", 2);// 过期 提示充值下载、续费Vip
+					resultMap.put("count", user.getDownloadCount());
+					if (user.getExpirationTime() != null) {
+						resultMap.put("expirationTime",
+								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+					}
+					return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
+				}
+				// 正常下载测评报告
+				resultMap.put("status", 0);// 正常
+				resultMap.put("count", user.getDownloadCount());
+				if (user.getExpirationTime() != null) {
 					resultMap.put("expirationTime",
 							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-					user.setDownloadCount(user.getDownloadCount() - 1);
-					userMapper.updateById(user);
 				}
-				return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
-			} else {
-				return new ResponseResult<>(ResponseResult.ERR, "请登录后,再行打印报告", resultMap);
+				user.setDownloadCount(user.getDownloadCount() - 1);
+				userMapper.updateById(user);
 			}
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：查看用户是否能够下载测评报告异常   错误信息: " + e);
-			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
+			return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
+		} else {
+			return new ResponseResult<>(ResponseResult.ERR, "请登录后,再行打印报告", resultMap);
 		}
+		// } catch (Exception e) {
+		// logger.error("访问路径：" + request.getRequestURI() + "操作：查看用户是否能够下载测评报告异常
+		// 错误信息: " + e);
+		// return new ResponseResult<>(ResponseResult.ERR,
+		// Constants.RESULT_MESSAGE_FAIL);
+		// }
 
 	}
 
