@@ -65,7 +65,7 @@ public class Constants {
 	/**
 	 * 院校图片前缀
 	 */
-	public static final String COLLEGE_PHOTO_PREFIX = "..";
+	public static final String COLLEGE_PHOTO_PREFIX = "http://main.sxghfwzx.com/";
 
 	/**
 	 * 错误信息字符串头
