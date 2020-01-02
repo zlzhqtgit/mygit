@@ -29,7 +29,7 @@
 				<img src="${pageContext.request.contextPath}/img/xgk/vip_tit1.png" class="img-responsive"/>
 				<div class="">
 					<div class="">
-						<h2 class="fontwei wow bounceInLeft">全平台VIP特权</h2>
+						<h2 class="fontwei wow bounceInLeft">全平台VIP6666特权</h2>
 						<p class="wow bounceInRight">尽你所想</p>
 					</div>
 				</div>

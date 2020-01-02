@@ -734,9 +734,6 @@
 							}
 						}
 					}); */
-				    
-				    
-					
 					
 				   /*  */
 			    	$(document).ready(function() {			    		

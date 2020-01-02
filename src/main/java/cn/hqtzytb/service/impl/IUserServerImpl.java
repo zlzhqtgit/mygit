@@ -189,7 +189,8 @@ public class IUserServerImpl implements IUserServer {
 	@Override
 	public ResponseResult<Void> handlephotoyzm(String phone, HttpServletRequest request) {
 		Session session = SecurityUtils.getSubject().getSession();
-		ResponseResult<Void> rr;		     
+		ResponseResult<Void> rr;		
+		System.err.println("dalshkjdashkjldhaskjhdakjsghdkjashdkjashekjashkjdhakj ");
 		try {
 			String code = Integer.toString(Photo.getNewcode());	  
 			User user = userMapper.queryUser(phone);
