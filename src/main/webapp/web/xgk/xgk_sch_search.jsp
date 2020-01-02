@@ -26,13 +26,10 @@
 			<section class="sch_search container">
 				<div style="padding: 1em 100px 1em;">
 				    <form class="bs-example bs-example-form" role="form" id="universities_name">
-				    		<%-- <shiro:hasPermission name="gxzy_yxcx:query"> --%>
 				    			<div class="input-group input-group-lg">
 					            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
 					            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
 				        		</div>
-				    		<%-- </shiro:hasPermission> --%>
-				        
 				    </form>
 				</div>
 
@@ -58,15 +55,16 @@
 				        	</dl>
 				        	<dl class="pull-left item_body" >
 				        		<dd><a class="active" href="javascript:void(0)"  name="universities_type">全部</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="universities_type">综合类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">理工类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">师范类</a></dd>
-				        		<dd><a href="javascript:void(0)"  name="universities_type">农林类</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="universities_type">农业类</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="universities_type">林业类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">政法类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">医药类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">财经类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">民族类</a></dd>
-				        		<dd><a href="javascript:void(0)"  name="universities_type">语言类</a></dd>
-				        		<dd><a href="javascript:void(0)"  name="universities_type">旅游类</a></dd>
+				        		<dd><a href="javascript:void(0)"  name="universities_type">语言类</a></dd>				        		
 				        		<dd><a href="javascript:void(0)"  name="universities_type">体育类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">艺术类</a></dd>
 				        		<dd><a href="javascript:void(0)"  name="universities_type">军事类</a></dd>
@@ -145,9 +143,7 @@
 				    
 				</div>
 				<p class="text-center margin_bot margin_top">
-					<%-- <shiro:hasPermission name="gxzy_yxcx:query"> --%>
 						<input class="btn btn-primary fontwei begin_btn disabled" type="button" value="开始查询" id="sch_query_select">
-					<%-- </shiro:hasPermission> --%>
 				</p>
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
@@ -550,13 +546,13 @@
 
 									var operate = "";
 									if(list[i].eId == null){
-										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p></shiro:hasPermission>" +
-												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
+										operate = "<div class='operate_box padding-side'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p>" +
+												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
 									} else {
-										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p></shiro:hasPermission>"+
-												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
+										operate = "<div class='operate_box padding-side'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p>"+
+												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
 									}
 									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
@@ -659,51 +655,51 @@
 											doctor = teaching_research[j][0] + "数 :" + teaching_research[j][1];
 										}
 									}
-	                                        var admissionLots = "";// 录取批次
-	                                        var admissionLotList = JSON.parse(list[i].admissionLot);
-	                                        if(admissionLotList != null){
-	                                        	for (var j=0; j<admissionLotList.length; j++){
-		                                            if (j == admissionLotList.length-1) {
-		                                                admissionLots += admissionLotList[j];
-		                                            }else {
-		                                                admissionLots += admissionLotList[j] + " ";
-		                                            }
-		                                        }
-	                                        }else{
-	                                        	admissionLotList = "";
-	                                        }  
-                                        	var attrImg = "";//院校属性图片
-                                        	var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
-                                        	if(universitiesAttributes != null){
-        									for (var f=0; f<universitiesAttributes.length; f++){
-        										if (universitiesAttributes[f] == "985"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png'/>"
-        										}
-        										if (universitiesAttributes[f] == "211"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png'/>"
-        										}
-        										if (universitiesAttributes[f] == "双一流"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png'/>"
-        										}
-        										if (universitiesAttributes[f] == "行业领军"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png'/>"
-        										}
-        										if (universitiesAttributes[f] == "研究生院"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png'/>"
-        										}
-        									}
-                                        	}
+	                               	var admissionLots = "";// 录取批次
+	                               	var admissionLotList = JSON.parse(list[i].admissionLot);
+	                                if(admissionLotList != null){
+	                                	for (var j=0; j<admissionLotList.length; j++){
+		                                    if (j == admissionLotList.length-1) {
+		                                        admissionLots += admissionLotList[j];
+		                                    }else {
+		                                        admissionLots += admissionLotList[j] + " ";
+		                                    }
+		                                }
+	                                 }else{
+	                                       admissionLotList = "";
+	                                }  
+                                    var attrImg = "";//院校属性图片
+                                    var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
+                                    if(universitiesAttributes != null){
+	        							for (var f=0; f<universitiesAttributes.length; f++){
+	        								if (universitiesAttributes[f] == "985"){
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png'/>"
+	        								}
+	        								if (universitiesAttributes[f] == "211"){
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png'/>"
+	        								}
+	        								if (universitiesAttributes[f] == "双一流"){
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png'/>"
+	        								}
+	        								if (universitiesAttributes[f] == "行业领军"){
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png'/>"
+	        								}
+	        								if (universitiesAttributes[f] == "研究生院"){
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png'/>"
+	        								}
+	        							}
+                                    }
 									var box_head = '<ul classs="search_result list-group" id="universities">';
 									var id = "";
 									var operate = "";
 									if(list[i].eId == null){
-										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p></shiro:hasPermission>" +
-												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
+										operate = "<div class='operate_box padding-side'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p>" +
+												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
 									} else {
-										operate = "<div class='operate_box padding-side'><shiro:hasPermission name='ycxc_sc:add'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p></shiro:hasPermission>"+
-												"<p class='text-center'><shiro:hasPermission name='yxcx_db:query'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></shiro:hasPermission></p> </div>";
+										operate = "<div class='operate_box padding-side'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p>" +
+												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
+												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
 									}
 									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
@@ -740,8 +736,8 @@
 											} 												
 										}
 									}							
-                                        	//[录取分表格   end]
-                                        	universities += "</table>" + operate + "</li></ul>";
+                                    //[录取分表格   end]
+                                    universities += "</table>" + operate + "</li></ul>";
                                         	
 								}
 							 	$("#search_result").html(universities);	 

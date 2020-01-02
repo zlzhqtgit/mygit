@@ -98,11 +98,9 @@ $(function(){
 	  })
 	}
 });
-</script>
+</script><
 	<section class="row">
-		<%-- <shiro:hasPermission name="qncp:print"> --%>
-			<p class="text-right"><a class="downloadReport btn btn-primary" href="javascript:;"">打印报告</a></p>
-		<%-- </shiro:hasPermission> --%>		
+		<p class="text-right"><a class="downloadReport btn btn-primary" href="javascript:;"">打印报告</a></p>
 		<h1 class="text-primary fontwei">学科分析报告</h1>
 		<div class="panel panel-default" id="report_cont">
 			<div class="padding-side2 margin_top margin_bot">
@@ -309,10 +307,13 @@ $(function(){
 								<tr><td>自信</td><td>Data</td><td>你的化学学科自信在成都分数为欸15.0，处于同类人群的25%--75%之间，说明你的化学学科自信程度处于中等水平，说明你在学习化学学科的过程中，偶有不自信的表现。如果能够客服消极心理状态，树立“我能学好化学”的信心和勇气，就会帮助你提升化学成绩。在化学学科上，哪怕是成绩上一点小进步，也是一次成功的学习体验，要牢记这种体验。</td></tr>
 							</tbody>
 						</table>
-						<div class="open-btn">
-							<%-- <shiro:hasPermission name="qncp_more:query"> --%>
+						<div class="open-btn">	
+							<shiro:hasPermission name="qncp_more:query">
 								<a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
-							<%-- </shiro:hasPermission> --%>			                
+							</shiro:hasPermission>			
+							<shiro:lacksPermission name="qncp_more:query">
+								<a class="show_more btn btn-primary">查看更多</a>
+							</shiro:lacksPermission>                
 			           	</div>
 			            <script>
 							//学科分析报告

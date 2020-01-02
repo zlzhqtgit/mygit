@@ -30,9 +30,7 @@
 				    <form class="bs-example bs-example-form" role="form">
 				        <div class="input-group input-group-lg" onclick="vocationSearch(1)">
 				            <span class="input-group-addon"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            	<%-- <shiro:hasPermission name="zyk_list:query"> --%>
-				            		<input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">
-				            	<%-- </shiro:hasPermission> --%>				            
+				            		<input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">				            			            
 				        </div>
 				    </form>
 				</div>
@@ -97,12 +95,8 @@
 					        	<div class="clearfix"></div>
 					        </li>
 					    </ul>
-					    <%-- <shiro:hasPermission name="zyk_list:query"> --%>
-							<p class="text-center margin_bot1 margin_top1"><a class="btn btn-primary fontwei begin_btn" href="javascript:;" onclick="vocationSearch(0)">开始查询</a></p>
-						<%-- </shiro:hasPermission> --%>
+							<p class="text-center margin_bot1 margin_top1"><a class="btn btn-primary fontwei begin_btn" href="javascript:;" onclick="vocationSearch(0)">开始查询</a></p>				
 					</div>
-					
-				
 					<div class="panel panel-default col-md-3 col-lg-3 col-sm-3">
 						<div class="padding-side rank">
 							<h4 class="fontwei border_bot">热门薪酬排行榜<span class="text-danger">TOP10</span></h4>
@@ -121,8 +115,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
-					
+				</div>					
 				<div class="panel panel-default margin_top1">
 					
 					<div class="padding-side">
@@ -202,16 +195,20 @@
 							var like = false;
 							var eId = "";
 							console.log(i +''+like);
-							console.log(data);
 							for(var j=0; j<data[0].enshrineList.length; j++){
 								console.log(data[0].enshrineList[j].eCode);
 								console.log(data[i].vocationId);
 								if(data[0].enshrineList[j].eCode == data[i].vocationId){
 									like = true;
 									eId = data[0].enshrineList[j].eId;
+							if(data[0].enshrineList != null){
+								for(var j=0; j<data[0].enshrineList.length; j++){									
+									if(data[0].enshrineList[j].eCode == data[i].vocationId){
+										like = true;
+										eId = data[0].enshrineList[j].eId;
+									}
 								}
 							}
-							vocationList += '<shiro:hasPermission name="zyk_sc:add">';
 							if(like == true){
 								vocationList += '<a id="' + eId + '" class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
 								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
@@ -220,7 +217,6 @@
 								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
 							}
 							vocationList += '<span class="">喜欢</span></a>';	
-							vocationList += '</shiro:hasPermission>';
 							vocationList += '</div></li>';	
 						}
 						$("#search_count").html(data.length);

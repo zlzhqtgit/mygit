@@ -17,46 +17,24 @@
 					<a href="${pageContext.request.contextPath}/cp/xgk_index.do"><img src="${pageContext.request.contextPath}/img/xgk/logo.png" style="width: 8em;"/></a>
 				</div>
 				<nav id="navdh" class="clearfix">
-					<ul class="clearfix margin0" style="width: 47em;">
-						<%-- <shiro:hasPermission name="web_index:query"> --%>
-							<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="web_xkts:query"> --%>
+					<ul class="clearfix margin0" style="width: 47em;">						
+							<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>						
 							<li class=""><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="web_rzcp:query"> --%>
-							<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="web_xkzd:query"> --%>
+							<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>					
 							<li class=""><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="web_zyk:query"> --%>
 							<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/voc/xgk_job_blank.do">职业库</a></li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="web_gxzy:query"> --%>
 							<li class="">
 								<a id="xgk6" name="dh" href="javascript:void(0)">高校专业&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
-								<ul class="list-unstyled">
-									<%-- <shiro:hasPermission name="gxzy_yxcx:query"> --%>
-										<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>
-									<%-- </shiro:hasPermission> --%>
-									<%-- <shiro:hasPermission name="gxzy_zy:query"> --%>
-										<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>
-									<%-- </shiro:hasPermission> --%>
+								<ul class="list-unstyled">									
+										<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>								
+										<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>									
 								</ul>
-							</li>
-						<%-- </shiro:hasPermission> --%>
-						<shiro:lacksPermission name="web_more:query">
+							</li>						
 							<li class="">
 								<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
-								<ul class="list-unstyled">
-									<%-- <shiro:hasPermission name="more_xsjc:query"> --%>
-										<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>
-									<%-- </shiro:hasPermission> --%>
-									<%-- <shiro:hasPermission name="more_swhz:query"> --%>
-										<li><a id="xgk10" name="dh" href="${pageContext.request.contextPath}/web//hqt_business_cooperation.do">商务合作</a></li>
-									<%-- </shiro:hasPermission> --%>
-									<%-- <shiro:hasPermission name="more_lxdsq:query"> --%>
+								<ul class="list-unstyled">									
+										<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>									
+										<li><a id="xgk10" name="dh" href="${pageContext.request.contextPath}/web//hqt_business_cooperation.do">商务合作</a></li>								
 										<li class="">
 											<a href="javascript:void(0)">立学道社群</a>
 											<div class="community wow bounceInRight">
@@ -82,11 +60,8 @@
 												</div>
 											</div>
 										</li>
-									<%-- </shiro:hasPermission> --%>
-									
 								</ul>
 							</li>
-						</shiro:lacksPermission>
 					</ul>
 				</nav>
 			</div>
@@ -97,8 +72,6 @@
 					<div class="search_slideDown">
 						<div style="padding: 1em 18em 1em;">
 							<p class="padding-side2"> <a class="padding-side" href="">高校</a> <a class="padding-side" href="">职业</a> <a class="padding-side" href="">专业</a> <a class="padding-side" href="">测评</a> </p>
-						   <!--  <form class="bs-example bs-example-form" role="form">
-						    </form> -->
 						        <div class="input-group input-group-lg">
 						            <span class="input-group-addon" style="cursor: pointer;" onclick="search_content()"><span class="glyphicon glyphicon-search text-muted"></span></span>
 						            <input type="text" class="form-control" placeholder="请输入您要查找的内容" id="search_content">						        </div>
@@ -122,8 +95,7 @@
 						<span class=""><a href="javascript:;" onclick="xgkLogin()">登陆</a> / <a href="javascript:;" onclick="xgkRegister()">注册</a></span>
 					</shiro:guest>
 					
-						<shiro:user>	
-							<%-- <shiro:hasPermission name="grzx:query"> --%>					
+						<shiro:user>									
 								<a href="${pageContext.request.contextPath}/user/hqt_user_info.do">
 									<c:if test="${headImg != null && headImg != ''}">
 										<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" />
@@ -132,7 +104,6 @@
 										<img src="${pageContext.request.contextPath}/img/xgk/user.png" />
 									</c:if>
 								</a>
-							<%-- </shiro:hasPermission> --%>
 							<span class="padding-side"><a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 						</shiro:user> 
 					

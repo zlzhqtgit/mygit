@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-
 <script src="${pageContext.request.contextPath}/js/web/xgk/itempool.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
@@ -67,17 +66,10 @@
 							<div class="choise margin_top padding-side2" style=" margin-left: 2em;">
 								<div id="tmxs"> </div>
 							</div>
-							<p class="text-right margin_top" style="padding-right:2em">
-								<%-- <shiro:hasPermission name="rzcp_syt:query"> --%>
+							<p class="text-right margin_top" style="padding-right:2em">								
 									<a id="syt" onclick="syt()" class="btn btn-default" role="button">上一题</a>
-								<%-- </shiro:hasPermission> --%>								
-								<%-- <shiro:hasPermission name="rzcp_xyd:query"> --%>
-									<a id="xyt" onclick="xyt()" class="btn btn-default btn-primary" role="button">下一题</a>
-								<%-- </shiro:hasPermission> --%>								
-								<%-- <shiro:hasPermission name="rzcp_tj:add"> --%>
+									<a id="xyt" onclick="xyt()" class="btn btn-default btn-primary" role="button">下一题</a>								
 									<a id="tjda" onclick="tjda()" class="btn btn-primary" >提交</a>
-								<%-- </shiro:hasPermission> --%>
-								
 							</p>
 							<p class="text-right"><span id="current">1</span>/<span id="total">60</span></p>
 							<input id="num" type="hidden" value="0" />							

@@ -3,6 +3,8 @@ package cn.hqtzytb.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.hqtzytb.entity.ResponseResult;
+
 /**
  * @ClassName: IWxPayService
  * @Description: TODO
@@ -15,9 +17,9 @@ public interface IWxPayService {
 
 	Object wxpay(HttpServletRequest request, String out_trade_no, String total_fee, String body);
 
-	void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, Double rechargeMoney) throws Exception ;
+	void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, Double rechargeMoney)
+			throws Exception;
 
-	void weixinNotify(HttpServletRequest request, HttpServletResponse response);
-	
+	ResponseResult<Void> weixinNotify(HttpServletRequest request, HttpServletResponse response);
 
 }

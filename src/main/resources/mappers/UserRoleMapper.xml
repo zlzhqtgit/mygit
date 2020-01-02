@@ -9,6 +9,24 @@
 		 		<if test="orderBy != null">order by  ${orderBy}</if> 
 		 		<if test="offset != null">limit   ${offset},${countPerPage}</if>		
 		</select>		
+		
+		<select id="queryRoleBySystemName" parameterType="java.lang.String" resultType="cn.hqtzytb.entity.Role">
+			SELECT 
+				role.role_id, role.cid, role.role_name, role.role_authority,role.role_description 
+			FROM 
+				role	
+			LEFT JOIN admin_system ON admin_system.sysnub = role.role_id
+				admin_system.sysname = #{sysname};
+		</select>
+		
+		<select id="queryAdminSystemByRoleId" parameterType="java.lang.Integer" resultType="cn.hqtzytb.entity.AdminSystem">
+			SELECT 
+				sid,sysname,sysnub,syscommet,ctime
+			FROM 
+				admin_system
+			WHERE 
+				admin_system.sysnub = #{roleId};
+		</select>
 	</mapper>
 	
 	

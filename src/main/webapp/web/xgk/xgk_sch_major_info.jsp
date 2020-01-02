@@ -35,12 +35,10 @@
 							<span>${specialty.specialtyMajorName}&emsp;&emsp;</span><span>${specialty.specialtyDisciplines }</span>
 						</div>
 					</div>
-					<div class="col-md-4 col-lg-4 col-sm-4 collection margin_top">
-						<%-- <shiro:hasPermission name="zy_cpxzy"> --%>						
+					<div class="col-md-4 col-lg-4 col-sm-4 collection margin_top">										
 							<div class="">
 								<a href="javascript:void(0)" onclick="test()"><span class=""><img src="${pageContext.request.contextPath}/img/xgk/ic3.png"/></span>测评选专业</a>
-							</div>
-						<%-- </shiro:hasPermission> --%>
+							</div>						
 						<script type="text/javascript">
 							function test(){
 								layer.confirm('请在以下测评内容，选择一项进行测评！', {
@@ -55,7 +53,6 @@
 								});
 							}
 						</script>
-						<%-- <shiro:hasPermission name="zy_sc:add"> --%>
 						<div class="like">							
 								<c:if test="${school_like != null}">
 								<a id="${school_like.eId}" href="javascript:;" onclick="like(this)" >&emsp;&emsp;喜欢
@@ -68,22 +65,15 @@
 								</a>
 							</c:if>													
 						</div>
-						<%-- </shiro:hasPermission> --%>	
 					</div>
 				</div>
 				<p class="" id="specialty_id" name="${specialty.specialtyId}">国际代码：${specialty.specialtyId}（不可用于填报）</p>
 			</div>
 			<div class="tab_list">
 				<ul class="tab_head margin_top clearfix">
-					<%-- <shiro:hasPermission name="zy_zygk:query"> --%>
 						<li class="cur">专业概况</li>
-					<%-- </shiro:hasPermission> --%>					
-					<%-- <shiro:hasPermission name="zy_ksyx:query"> --%>
 						<li>开设院校</li>
-					<%-- </shiro:hasPermission> --%>					
-					<%-- <shiro:hasPermission name="zy_jygk:query"> --%>
-						<li class="">就业概况</li>
-					<%-- </shiro:hasPermission> --%>					
+						<li class="">就业概况</li>				
 				</ul>
 				<div class="tab_body padding-side2">
 					<div class="tab_b1 cur">
@@ -242,10 +232,8 @@
 
 										</div>
 									</div>
-								</div>
-								<%-- <shiro:hasPermission name="zy_yxtj"> --%>										
+								</div>								
 									<p class="text-center margin_top"><a class="btn btn-primary" href="javascript:;" onclick="queryschool()">开始推荐</a></p>
-								<%-- </shiro:hasPermission> --%>
 								<script type="text/javascript">
 									//给院校省份点击事件
 									$(document).ready(function(){

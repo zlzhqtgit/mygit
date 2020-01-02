@@ -27,7 +27,7 @@
 		<banner class="p_relative">
 			<div class="login_form">
 			<shiro:guest>
-				<form action="" method="post" >
+				<form action="" method="post">
 					<fieldset id="" class="">
 						<legend class="text-primary margin0"><h3 class="margin0" style="padding-bottom:1em;">立学道综合改革云平台</h3></legend>
 						<div class="form-group">
@@ -79,139 +79,6 @@
 			    <div class="swiper-button-next"></div>
 			    <div class="swiper-button-prev"></div>
 			</div>
-			<script>
-			    var swiperBanner = new Swiper('banner .swiper-container', {
-			      autoplay:false,
-			      slidesPerView: 1,
-			      spaceBetween: 30,
-			      loop: true,
-			      effect : 'fade',
-			      fadeEffect: {
-				    crossFade: true,
-				  },
-			      pagination: {
-			        el: '.swiper-pagination',
-			        clickable: true,
-			      },
-			      navigation: {
-			        nextEl: '.swiper-button-next',
-			        prevEl: '.swiper-button-prev',
-			      },
-			    });
-			    $('banner .swiper-slide').mouseenter(function () {
-		    	   swiperBanner.autoplay.stop();
-		    	})
-		    	$('banner .swiper-slide').mouseleave(function () {
-		    	   swiperBanner.autoplay.start();
-		    	})
-		    	
-		    	
-		    	function login(){
-					var nowUrl="${nowUrl}";
-					if(nowUrl==null||nowUrl==""){
-						nowUrl="${pageContext.request.contextPath}/cp/xgk_index.do";
-					}
-					var tip1=$('#tip1').text();
-					var mobile=$("#mobile").val();
-					var pwd_tip=$('#tip2').text();
-					var pwd=$("#password").val();
-					if (mobile=='') {
-						$('#tip1').text('手机号不能为空')
-					} else if(mobile.length == 11 && !(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
-						$('#tip1').text('手机号码有误，请重新输入');
-				    } else if (pwd=='') {
-						$('#tip2').text('密码不能为空');
-					} else if(!(/^(\w){6,20}$/).test(pwd)){
-						//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
-						$('#tip2').text('密码只能输入6-20个字母、数字、下划线_ ');		
-					}else{
-						var url = "${pageContext.request.contextPath}/user/xgk_userLogin.do";
-						var phone=$("#mobile").val();
-						var password=$("#password").val();		
-						var data = "account="+phone+"&password="+password;		
-						$.ajax({
-							"url" : url,
-							"data" : data,
-							"type" : "POST",
-							"dataType" : "json",
-							"success" : function(obj) {
-								if (obj.state == 0) {
-									alert(obj.message);
-									$(".login_form").hide;
-									return;
-								}else{
-									location.href = nowUrl;
-								}
-							}
-						});  
-				    }
-				}
-		    	
-		    	function xgkRegister() {
-					var nowUrl=window.location.href;
-					location.href = "${pageContext.request.contextPath}/user/register.do?nowUrl="+nowUrl;
-				}
-			    
-			    function wechatQRCode() {
-					var weixin = '<div id="weixin" ></div>';
-					layer.open({
-						type: 1,
-						area: ['300px', '420px'],
-						// fix: false, //不固定
-						// maxmin: true,
-						shade:false,
-						title: false,
-						content: weixin,
-						scrollbar: false
-					});
-					drawingQRCode();
-				}
-				function drawingQRCode() {
-					//生成微信二维码,工具类
-					var obj = new WxLogin({
-						id:"weixin",
-						appid:"wx7287a60bb700fd21",
-						scope:"snsapi_login",
-						redirect_uri:"http://www.txjava.cn/loginServlet"
-					});
-				}
-
-				//登录规则部分，防止XSS注入
-				/**
-				 * 手机号规则
-				 */
-				function check_mobile () {
-					var tip1=$('#tip1').text();
-					var mobile=$("#mobile").val();
-					if (mobile=='') {
-						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号不能为空')
-					} else if(mobile.length == 11 && !(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
-						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号码有误，请重新输入');
-				        return false; 
-				    } else{
-				    	$('#tip1').html('');
-				    }
-					
-				}
-				
-				/**
-				 * 密码规则
-				 */
-				function check_pwd () {
-					var pwd_tip=$('#tip2').text();
-					var pwd=$("#password").val();
-					if (pwd=='') {
-						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码不能为空');
-					} else if(!(/^(\w){6,20}$/).test(pwd)){
-						//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
-						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码只能由6-20个字母、数字、和特殊字符组成');
-						return false; 
-					}else{
-						$('#tip1').html('');
-					}
-				}
-			</script>
-			
 		</banner>
 		<main class="index">
 			<section class="container">
@@ -351,4 +218,136 @@
 		<c:import url="../public/side_right.jsp"></c:import>
 		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
+				<script>
+			    var swiperBanner = new Swiper('banner .swiper-container', {
+			      autoplay:false,
+			      slidesPerView: 1,
+			      spaceBetween: 30,
+			      loop: true,
+			      effect : 'fade',
+			      fadeEffect: {
+				    crossFade: true,
+				  },
+			      pagination: {
+			        el: '.swiper-pagination',
+			        clickable: true,
+			      },
+			      navigation: {
+			        nextEl: '.swiper-button-next',
+			        prevEl: '.swiper-button-prev',
+			      },
+			    });
+			    $('banner .swiper-slide').mouseenter(function () {
+		    	   swiperBanner.autoplay.stop();
+		    	})
+		    	$('banner .swiper-slide').mouseleave(function () {
+		    	   swiperBanner.autoplay.start();
+		    	})
+		    	
+		    	
+		    	function login(){
+					var nowUrl="${nowUrl}";
+					if(nowUrl==null||nowUrl==""){
+						nowUrl="${pageContext.request.contextPath}/cp/xgk_index.do";
+					}
+					var tip1=$('#tip1').text();
+					var mobile=$("#mobile").val();
+					var pwd_tip=$('#tip2').text();
+					var pwd=$("#password").val();
+					if (mobile=='') {
+						$('#tip1').text('手机号不能为空')
+					} else if(mobile.length == 11 && !(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+						$('#tip1').text('手机号码有误，请重新输入');
+				    } else if (pwd=='') {
+						$('#tip2').text('密码不能为空');
+					} else if(!(/^(\w){6,20}$/).test(pwd)){
+						//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+						$('#tip2').text('密码只能输入6-20个字母、数字、下划线_ ');		
+					}else{
+						var url = "${pageContext.request.contextPath}/user/xgk_userLogin.do";
+						var phone=$("#mobile").val();
+						var password=$("#password").val();		
+						var data = "account="+phone+"&password="+password;		
+						$.ajax({
+							"url" : url,
+							"data" : data,
+							"type" : "POST",
+							"dataType" : "json",
+							"success" : function(obj) {
+								if (obj.state == 0) {
+									layer.msg(obj.message,{icon:2,time:1000});
+									$(".login_form").hide;
+									return;
+								}else{
+									location.href = nowUrl;
+								}
+							}
+						});  
+				    }
+				}
+		    	
+		    	function xgkRegister() {
+					var nowUrl=window.location.href;
+					location.href = "${pageContext.request.contextPath}/user/register.do?nowUrl="+nowUrl;
+				}
+			    
+			    function wechatQRCode() {
+					var weixin = '<div id="weixin" ></div>';
+					layer.open({
+						type: 1,
+						area: ['300px', '420px'],
+						// fix: false, //不固定
+						// maxmin: true,
+						shade:false,
+						title: false,
+						content: weixin,
+						scrollbar: false
+					});
+					drawingQRCode();
+				}
+				function drawingQRCode() {
+					//生成微信二维码,工具类
+					var obj = new WxLogin({
+						id:"weixin",
+						appid:"wx7287a60bb700fd21",
+						scope:"snsapi_login",
+						redirect_uri:"http://www.txjava.cn/loginServlet"
+					});
+				}
+
+				//登录规则部分，防止XSS注入
+				/**
+				 * 手机号规则
+				 */
+				function check_mobile () {
+					var tip1=$('#tip1').text();
+					var mobile=$("#mobile").val();
+					if (mobile=='') {
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号不能为空')
+					} else if(mobile.length == 11 && !(/^1(3|4|5|6|7|8|9)\d{9}$/.test(mobile))){
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 手机号码有误，请重新输入');
+				        return false; 
+				    } else{
+				    	$('#tip1').html('');
+				    }
+					
+				}
+				
+				/**
+				 * 密码规则
+				 */
+				function check_pwd () {
+					var pwd_tip=$('#tip2').text();
+					var pwd=$("#password").val();
+					if (pwd=='') {
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码不能为空');
+					} else if(!(/^(\w){6,20}$/).test(pwd)){
+						//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+						$('#tip1').html('<span class="glyphicon glyphicon-exclamation-sign"></span> 密码只能由6-20个字母、数字、和特殊字符组成');
+						return false; 
+					}else{
+						$('#tip1').html('');
+					}
+				}
+			</script>
 </html>

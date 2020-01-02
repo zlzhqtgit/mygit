@@ -124,7 +124,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>				
 				<script type="text/javascript">
 					//选择套餐生成微信支付二维码
 					function choice_combo(e){
