@@ -308,10 +308,10 @@ $(function(){
 							</tbody>
 						</table>
 						<div class="open-btn">	
-							<shiro:hasPermission name="qnbg_ckgd:query">
+							<shiro:hasPermission name="qncp_more:query">
 								<a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
 							</shiro:hasPermission>			
-							<shiro:lacksPermission name="qnbg_ckgd:query">
+							<shiro:lacksPermission name="qncp_more:query">
 								<a class="show_more btn btn-primary">查看更多</a>
 							</shiro:lacksPermission>                
 			           	</div>
