@@ -46,7 +46,7 @@
 								</ul>
 							</li>
 						<%-- </shiro:hasPermission> --%>
-						<shiro:lacksPermission name="web_more:query">
+						<%-- <shiro:lacksPermission name="web_more:query"> --%>
 							<li class="">
 								<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 								<ul class="list-unstyled">
@@ -86,7 +86,7 @@
 									
 								</ul>
 							</li>
-						</shiro:lacksPermission>
+						<%-- </shiro:lacksPermission> --%>
 					</ul>
 				</nav>
 			</div>

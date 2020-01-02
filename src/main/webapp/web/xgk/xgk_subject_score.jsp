@@ -35,7 +35,7 @@
 						<h3 class="margin_top1">学科推荐</h3>
 						<p class="padding-side2 margin_bot margin_top1">通过成绩分析、学科潜能测评，我们可以得到一个适合您的一项报告，报告将从几个方面来呈现学科特点，请认真测评并如实填写相关测评数据。</p>
 					</div>
-				<shiro:hasPermission name="xkts_cjfx:query">	
+				<%-- <shiro:hasPermission name="xkts_cjfx:query">	 --%>
 					<div class="margin_top">
 						<h3 class="">成绩分析</h3>
 						<p class="padding-side2 margin_bot margin_top1">
@@ -304,12 +304,16 @@
 							<p class="score_ts_p">低分(平均)：是指根据的满分取平均分，再根据你的成绩的平均分所在范围值。处于及格一下属于低分。如果只输入了一次就按一次计算。</p>
 						</div>
 					</div>
-				</shiro:hasPermission>
+				<%-- </shiro:hasPermission> --%>
 										
 					<p class="text-right  margin_bot">					
 						<shiro:hasPermission name="qncp_xyb:query">
 							<a class="btn btn-primary" onclick="haveYouSubjectExploration()" href="javascript:void(0)">下一步</a>
 						</shiro:hasPermission>
+						<shiro:lacksPermission name="qncp_xyb:query">
+							<!-- vip图片 -->
+							<a class="btn btn-primary" href="javascript:void(0)"><img alt="" src="">下一步</a>
+						</shiro:lacksPermission>
 					</p>
 					<script type="text/javascript">
 						var cjfx = "${CJFX.featureId}";
