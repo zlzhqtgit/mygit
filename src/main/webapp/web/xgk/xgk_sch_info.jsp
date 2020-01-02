@@ -11,7 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/sch_search.css"/>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" /> 
-		<%-- <script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script> --%>
+		<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script> 
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/swper5.0.1.js"></script>		
@@ -71,19 +71,11 @@
 			<section class="container panel panel-default">
 				<div class="tab_list padding-side2 row">
 				
-			    	<ul class="tab_head">
-			    		<%-- <shiro:hasPermission name="yxcx_xxjs:query"> --%>
-			    			<li class="cur">学校介绍</li>
-			    		<%-- </shiro:hasPermission> --%>
-			    		<%-- <shiro:hasPermission name="yxcx_zslq:query"> --%>
-			    			<li>招生录取</li>
-			    		<%-- </shiro:hasPermission> --%>
-			    		<%-- <shiro:hasPermission name="yxcx_jyjx:query"> --%>
-			    			<li>教研教学</li>
-			    		<%-- </shiro:hasPermission> --%>
-			    		<%-- <shiro:hasPermission name="yxcx_zsjz:query"> --%>
-			    			<li>招生简章</li>
-			    		<%-- </shiro:hasPermission> --%>			    		
+			    	<ul class="tab_head">			    		
+			    			<li class="cur">学校介绍</li>			    		
+			    			<li>招生录取</li>			    		
+			    			<li>教研教学</li>			    		
+			    			<li>招生简章</li>			    			    		
 			    	</ul>
 			    	<div class="tab_body col-lg-9 col-sm-9 col-md-9">
 			    		<div class="tab_b1 cur">
@@ -94,10 +86,8 @@
 		    							<div class="tindent " style="height: 100px; overflow: hidden;">
 		    								${school.universitiesIntroduction}
 			    						</div>
-			    						<div class="open-btn" style="height: 100px;">
-			    								<%-- <shiro:hasPermission name="xxjs_more:query"> --%>
-			    									<a class="show_more btn btn-primary" onclick="showMore(this)" style="text-align:center; bottom: 3em; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;"> 查看更多 <div class="light"></div> </a>
-			    								<%-- </shiro:hasPermission> --%>											
+			    						<div class="open-btn" style="height: 100px;">			    								
+			    									<a class="show_more btn btn-primary" onclick="showMore(this)" style="text-align:center; bottom: 3em; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;"> 查看更多 <div class="light"></div> </a>			    															
 							            </div>
 		    						</div>
 			    					<!--<p class="text-center margin_top"><a class="btn btn-default" href="">展开更多</a></p>-->
@@ -656,10 +646,8 @@
 		    					<li>办学性质：<span>${school.universitiesNature }</span></li>
 		    					<li>隶属于：<span>${school.belongTo}</span></li>
 		    					<li>地址：<span>${school.address}</span></li>
-		    				</ul>
-		    				<%-- <shiro:hasPermission name="yxcx_zsjz:query"> --%>
-		    					<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址',$('#positonBox'),1)">查看地图</a></p>
-		    				<%-- </shiro:hasPermission> --%>		    				
+		    				</ul>	    				
+		    					<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址',$('#positonBox'),1)">查看地图</a></p>		    				  				
 		    			</div>
 		    		</div>
 			    </div>

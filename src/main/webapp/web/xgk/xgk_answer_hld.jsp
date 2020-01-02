@@ -35,14 +35,11 @@
 									<li>为了让你对自己有真实的认识，答题时请依据你的日常实际表现，而不是你期望的理想表现作答，这会为你将来的专业，职业选择提供重要的参考。</li>
 								</ol>
 							</div>
-							<%-- <shiro:hasPermission name="hld_list:query"> --%>
-								<p class="text-right margin_top margin_bot padding-side2"><a href="${pageContext.request.contextPath}/cp/xgk_answer.do?cpid=1" class="btn btn-primary" role="button">开始答题</a></p>
-							<%-- </shiro:hasPermission> --%>							
+								<p class="text-right margin_top margin_bot padding-side2"><a href="${pageContext.request.contextPath}/cp/xgk_answer.do?cpid=1" class="btn btn-primary" role="button">开始答题</a></p>							
 						</div>
 					</div>
 				</div>
 			</section>
-			
 		</main>	
 <!-- 页面底部-->
 <c:import url="../public/side_right.jsp"></c:import>	

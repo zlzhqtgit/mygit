@@ -10,9 +10,12 @@
 </head>
 <body>	
 		<main class="container">
-			<%-- <shiro:hasPermission name="rzcp:print"> --%>
+			<shiro:hasPermission name="rzcp:print">
 				<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
-			<%-- </shiro:hasPermission> --%>			
+			</shiro:hasPermission>
+			<shiro:lacksPermission name = "rzcp:print">	
+				<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
+			</shiro:lacksPermission>
 			<section class="row" id="report_content">
 				<div class="panel panel-default">
 					<div class="panel-heading">

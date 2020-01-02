@@ -31,7 +31,7 @@
 						if(obj.state == 0){
 							console.log(obj.data);
 							alert(obj.message);
-							layer.msg(obj.message,{icon:2,time:1000});							
+							layer.msg(obj.message,{icon:2,time:1000});					
 						}else{
 							alert(obj.message);
 							layer.msg(obj.message,{icon:6,time:1000});

@@ -119,9 +119,7 @@
 							</div>
 						</div>
 					</div>
-					<%-- <shiro:hasPermission name="xkzd_scbk:add"> --%>
-						<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a></p>
-					<%-- </shiro:hasPermission> --%>					
+						<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a></p>				
 				</div>
 			</section>
 		</main>

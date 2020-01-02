@@ -1,8 +1,5 @@
 package cn.hqtzytb.utils;
 
-
-
-
 /**
  * @ClassName: Constants
  * @Description: 静态常量工具类
@@ -11,7 +8,7 @@ package cn.hqtzytb.utils;
  * @Copyright:好前途教育
  * @Version V1.0
  */
-public class Constants{
+public class Constants {
 
 	/**
 	 * 系统用户
@@ -29,7 +26,7 @@ public class Constants{
 	public static final String EVALUATION_NAME_SCORE_ANALYSIS = "成绩分析";
 	public static final String EVALUATION_TYPE_MBTI_ANALYSIS = "MBTI";
 	public static final String EVALUATION_TYPE_HOLLAND_ANALYSIS = "霍兰德";
-	
+
 	/**
 	 * 好前途平台用户
 	 */
@@ -38,31 +35,17 @@ public class Constants{
 	 * 好前途科技有限公司编码
 	 */
 	public static final String HQT_COMPANY_NUMBER = "201910001";
-	
+
 	/**
 	 * 成为VIP套餐
 	 */
 	public static final String TYPE_BECOME_VIP = "立学道0.01元臻选套餐";
-	
+
 	/**
 	 * 成为咨询师套餐
 	 */
 	public static final String TYPE_COUNSELOR_VIP = "立学道0.02元臻选套餐";
-	
-	
-	/**
-	 * 普通用户
-	 */
-	public static final Integer ROLE_TYPE_USER = 5;
-	/**
-	 * 个人VIP
-	 */
-	public static final Integer ROLE_TYPE_USER_VIP = 4;
-	/**
-	 * 个人咨询师VIP
-	 */
-	public static final Integer ROLE_TYPE_COUNSELOR_VIP = 6;
-	
+
 	/**
 	 * 加密方式
 	 */
@@ -70,9 +53,9 @@ public class Constants{
 	public static final String MD5 = "MD5";
 	public static final String SHA1 = "SHA1";
 
-    // 二维码颜色
+	// 二维码颜色
 	public static final int BLACK = 0xFF000000;
-    // 二维码颜色
+	// 二维码颜色
 	public static final int WHITE = 0xFFFFFFFF;
 	/**
 	 * 初始密码
@@ -83,7 +66,7 @@ public class Constants{
 	 * 院校图片前缀
 	 */
 	public static final String COLLEGE_PHOTO_PREFIX = "..";
-	
+
 	/**
 	 * 错误信息字符串头
 	 */
