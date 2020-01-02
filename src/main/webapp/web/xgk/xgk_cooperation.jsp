@@ -4,8 +4,9 @@
  <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
 <!DOCTYPE html>
 <html>
-<head>
+	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=0.3">
 		<title>商务合作</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/animate.css"/>

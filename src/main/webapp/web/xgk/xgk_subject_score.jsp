@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta charset=utf-8>
-<title>新高考-学科探索</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=0.3">
+<title>新高考-学科探索</title>
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/xgk/index.css" />
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/xgk/xgk_subject.css" />
@@ -576,7 +576,7 @@
 					</table>
 					<p class="text-right">
 						<shiro:hasPermission name="qncp:query">
-							<a class="btn btn-primary fontwei"  href="${pageContext.request.contextPath}/sub/xgk_potential_report.do">查看潜能报告</a>
+							<a href="${pageContext.request.contextPath}/sub/xgk_potential_report.do" class="btn btn-primary fontwei">查看潜能报告</a>
 						</shiro:hasPermission>						
 					</p>
 				</div>
@@ -588,7 +588,7 @@
 
 				<div class="comprehensive padding-side2">
 					<p class="text-right">
-						<a class="btn btn-primary fontwei" href="${pageContext.request.contextPath}/cp/xgk_choice.do">下一步</a>
+						<a href="${pageContext.request.contextPath}/cp/xgk_choice.do" class="btn btn-primary fontwei">下一步</a>
 					</p>
 				</div>
 			</div>

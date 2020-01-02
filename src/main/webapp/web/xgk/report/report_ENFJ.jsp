@@ -11,7 +11,7 @@
 <body>	
 		<main class="container">
 			<%-- <shiro:hasPermission name="rzcp:print"> --%>
-				<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
+				<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary vipLimite"><img src="${pageContext.request.contextPath}/img/public/vipet.png" title="vip专享"/>打印报告</a></p>
 			<%-- </shiro:hasPermission> --%>			
 			<section class="row" id="report_content">
 				<div class="panel panel-default">

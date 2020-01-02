@@ -192,7 +192,7 @@
 								<%-- </shiro:hasPermission> --%>
 								<div class="open-btn margin_top margin_bot" style="height: 50px;position: relative;background: inherit;">
 									<%-- <shiro:hasPermission name="xkzd:print"> --%>
-										<a class="downloadReport show_more btn btn-primary" onclick="downloadReport()" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>
+										<a class="downloadReport show_more btn btn-primary vipLimite" onclick="downloadReport()" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;"><img src="${pageContext.request.contextPath}/img/public/vipet.png" title="vip专享"/>下载报告 <div class="light"></div> </a>
 									<%-- </shiro:hasPermission> --%>									
 		          				</div>
 		          			</div>

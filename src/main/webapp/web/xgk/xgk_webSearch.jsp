@@ -5,8 +5,11 @@
 <html>
 
 	<head>
-		<title>贵州好前途教育科技有限公司</title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=0.3">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="" />
+		<title>贵州好前途教育科技有限公司</title>
  		<link rel="stylesheet" href="${pageContext.request.contextPath}/js/layui-v2.5.5/layui/css/layui.css"  media="all">
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />

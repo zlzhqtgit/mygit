@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=0.1">
+		<meta name="viewport" content="width=device-width, initial-scale=0.2">
 		<title>贵州好前途教育科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" />
@@ -29,7 +29,7 @@
 				<img src="${pageContext.request.contextPath}/img/xgk/vip_tit1.png" class="img-responsive"/>
 				<div class="">
 					<div class="">
-						<h2 class="fontwei wow bounceInLeft">全平台VIP6666特权</h2>
+						<h2 class="fontwei wow bounceInLeft">全平台VIP特权</h2>
 						<p class="wow bounceInRight">尽你所想</p>
 					</div>
 				</div>

@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=0.1">
+		<meta name="viewport" content="width=device-width, initial-scale=0.3">
 		<title>贵州好前途教育科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />	
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/swiper.min.css" />
@@ -29,7 +29,7 @@
 			<shiro:guest>
 				<form action="" method="post" >
 					<fieldset id="" class="">
-						<legend class="text-primary margin0"><h3 class="">立学道综合改革云平台</h3></legend>
+						<legend class="text-primary margin0"><h3 class="margin0" style="padding-bottom:1em;">立学道综合改革云平台</h3></legend>
 						<div class="form-group">
 							<input id="mobile" onblur="check_mobile()" type="text" value="" placeholder="手机号"/>
 							<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
