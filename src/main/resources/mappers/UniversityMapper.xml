@@ -467,7 +467,7 @@
 			<if test="where != null">where ${where}</if>
 			<if test="offset != null">limit ${offset},${countPerPage}</if>
 			 ) AS  u
-		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code AND (ur.ur_year = YEAR(CURDATE()) OR (ur.ur_year = YEAR(CURDATE())-1))
+		LEFT JOIN university_relation ur ON ur.universities_code = u.universities_code AND (ur.ur_year = YEAR(CURDATE()) OR (ur.ur_year = YEAR(CURDATE())-1) OR (ur.ur_year = YEAR(CURDATE())-2))
 		<if test="orderBy != null">order by ${orderBy}</if>	
 	</select>
 	<select id="selectUniversityListCount2" resultType="java.lang.Integer">

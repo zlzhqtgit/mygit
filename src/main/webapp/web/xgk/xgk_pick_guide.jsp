@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -118,7 +119,9 @@
 							</div>
 						</div>
 					</div>
-					<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a></p>
+					<%-- <shiro:hasPermission name="xkzd_scbk:add"> --%>
+						<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a></p>
+					<%-- </shiro:hasPermission> --%>					
 				</div>
 			</section>
 		</main>

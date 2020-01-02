@@ -219,22 +219,47 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 				Double total_score = 0d;//成绩分析总分
 				for (int i = 0; i < stringList.size(); i++) {
 					if (Combination.物化生.one.equals(stringList.get(i).get(0))) {
-						wu = Double.valueOf(stringList.get(i).get(1));//物理
+						if(StringUtils.isEmpty(stringList.get(i).get(0))){
+							wu = 0d;
+						} else {
+							wu = Double.valueOf(stringList.get(i).get(1));//物理
+						}						
 					}
 					if (Combination.物化生.two.equals(stringList.get(i).get(0))) {
-						hua = Double.valueOf(stringList.get(i).get(1));//化学
-									}
+						if(StringUtils.isEmpty(stringList.get(i).get(0))){
+							hua = 0d;
+						} else {
+							hua = Double.valueOf(stringList.get(i).get(1));//化学
+						}						
+					}
 					if (Combination.物化生.three.equals(stringList.get(i).get(0))) {
-						sheng = Double.valueOf(stringList.get(i).get(1));//生物
+						if(StringUtils.isEmpty(stringList.get(i).get(0))){
+							sheng = 0d;
+						} else {
+							sheng = Double.valueOf(stringList.get(i).get(1));//生物
+						}						
 					}
 					if (Combination.政历地.one.equals(stringList.get(i).get(0))) {
-						zheng = Double.valueOf(stringList.get(i).get(1));//政治
+						if(StringUtils.isEmpty(stringList.get(i).get(0))){
+							zheng = 0d;
+						} else {
+							zheng = Double.valueOf(stringList.get(i).get(1));//政治
+						}						
 					}
 					if (Combination.政历地.two.equals(stringList.get(i).get(0))) {
-						li = Double.valueOf(stringList.get(i).get(1));//历史
+						if(StringUtils.isEmpty(stringList.get(i).get(0))){
+							li = 0d;
+						} else {
+							li = Double.valueOf(stringList.get(i).get(1));//历史
+						}						
 					}
 					if (Combination.政历地.three.equals(stringList.get(i).get(0))) {
-						di = Double.valueOf(stringList.get(i).get(1));//地理
+						if(StringUtils.isEmpty(stringList.get(i).get(0))){
+							di = 0d;
+						} else {
+							di = Double.valueOf(stringList.get(i).get(1));//地理
+						}
+						
 					}
 					total_score += Double.valueOf(stringList.get(i).get(1));
 				}

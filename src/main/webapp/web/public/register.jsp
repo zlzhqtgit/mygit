@@ -48,13 +48,8 @@
 				</div>
 
 				<div class="status margin_bot">
-					<!-- <ul class="page_step step1 margin_bot margin_top">
-						<li><a class="active wow bounceInLeft" id="class1" href="javascript:void(0)" onclick="next_step(this)">个人用户</a></li>
-						<li class="margin_top"><a class="wow bounceInRight" id="class2" href="javascript:void(0)" onclick="next_step(this)">我是咨询师</a></li>
-					</ul> -->
-
 					<div class="page_step step2 margin_top padding-side2" style="width: 100%;">
-						<form class="user1" action="">
+						<from class="user1">
 							<fieldset id="">
 								<legend class="">
 									<h4 class="text-primary margin_bot1 fontwei">注册新用户
@@ -117,45 +112,7 @@
 										<span class="glyphicon padding-side"> </span>
 									</div>
 									
-								</div>
-
-								<!-- <h4 class="text-primary fontwei">完善学生信息
-									<span class="small text-muted padding-side">为使您享受更优质的服务体验，请确保各项信息的准确性</span>
-								</h4>
-								<div class="padding-side2 margin_top1 margin_bot" style="position: relative;">								
-									<div class="form-group">
-										<label for="pc_number">&emsp;身份证号：</label>
-										<input id="pc_number" type="text" placeholder="请填写你的身份证号码"/>
-										<span class="padding-side glyphicon"></span>
-									</div>
-									<div class="form-group">
-										<label for="school">&emsp;就读学校：</label>
-										<input id="school" type="text" placeholder="请填写你的学校名称"/>
-									</div>
-									<div class="form-group">
-										<label for="school_address">&emsp;学校地址：</label>
-										<input id="school_address" type="text" placeholder="请填写你的学校地址"/>
-									</div>
-									<div class="form-group">
-										<label for="grade">&emsp;年&emsp;&emsp;级：</label>
-										<input id="grade" type="text" placeholder="请填写你的年级"/>
-										<span class="padding-side glyphicon"></span>
-									</div>
-									<div class="form-group">
-										<label for="class_name">&emsp;班&emsp;&emsp;级：</label>
-										<input id="class_name" type="text" placeholder="请填写你的班级"/>
-									</div>
-									<div class="form-group">
-										<label for="student_id">&emsp;学&emsp;&emsp;号：</label>
-										<input id="student_id" type="text" placeholder="请填写你的学号"/>
-									</div>
-									<div class="reg_tip">
-										<h4 class="text-danger fontwei">温馨提示：</h4>
-										<div class="padding-side2">
-											本栏中的和官方的说法的呵呵和人合伙二号合法的和任何人还不如新色版额
-										</div>
-									</div>
-								</div> -->
+								</div>								
 							</fieldset>
 							<div class="padding-side2">
 								<input type="checkbox" name="" id="checkbox" onclick="agree('checkbox','submit')"/>
@@ -164,7 +121,7 @@
 							<div class="reg_submit padding-side2 margin_top1 margin_bot">
 								<input class="btn btn-default" type="button" onclick="register(0)" value="注册" id="submit" disabled="true"/>
 							</div>
-						</form>
+						</from>
 
 						<!-- <form class="user2" action="" method="post" onsubmit="return ">
 							<fieldset id="">
@@ -230,7 +187,6 @@
 			</div>
 		</section>
 		<script type="text/javascript">
-		console.log("11111")
 			new WOW().init();
 			var wow = new WOW({
 			    boxClass: 'wow',

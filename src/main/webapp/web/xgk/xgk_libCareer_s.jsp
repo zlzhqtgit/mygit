@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 
@@ -29,7 +30,9 @@
 				    <form class="bs-example bs-example-form" role="form">
 				        <div class="input-group input-group-lg" onclick="vocationSearch(1)">
 				            <span class="input-group-addon"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">
+				            	<%-- <shiro:hasPermission name="zyk_list:query"> --%>
+				            		<input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">
+				            	<%-- </shiro:hasPermission> --%>				            
 				        </div>
 				    </form>
 				</div>
@@ -94,7 +97,9 @@
 					        	<div class="clearfix"></div>
 					        </li>
 					    </ul>
-						<p class="text-center margin_bot1 margin_top1"><a class="btn btn-primary fontwei begin_btn" href="javascript:;" onclick="vocationSearch(0)">开始查询</a></p>
+					    <%-- <shiro:hasPermission name="zyk_list:query"> --%>
+							<p class="text-center margin_bot1 margin_top1"><a class="btn btn-primary fontwei begin_btn" href="javascript:;" onclick="vocationSearch(0)">开始查询</a></p>
+						<%-- </shiro:hasPermission> --%>
 					</div>
 					
 				
@@ -205,15 +210,17 @@
 									eId = data[0].enshrineList[j].eId;
 								}
 							}
-							console.log(like);
+							vocationList += '<shiro:hasPermission name="zyk_sc:add">';
 							if(like == true){
 								vocationList += '<a id="' + eId + '" class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
 								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
 							}else{
 								vocationList += '<a id=""  class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
 								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
-							}							
-							vocationList += '<span class="">喜欢</span></a></div></li>';		
+							}
+							vocationList += '<span class="">喜欢</span></a>';	
+							vocationList += '</shiro:hasPermission>';
+							vocationList += '</div></li>';	
 						}
 						$("#search_count").html(data.length);
 						$("#search_result").html(vocationList);

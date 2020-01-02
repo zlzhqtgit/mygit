@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +35,7 @@
 						<h3 class="margin_top1">学科推荐</h3>
 						<p class="padding-side2 margin_bot margin_top1">通过成绩分析、学科潜能测评，我们可以得到一个适合您的一项报告，报告将从几个方面来呈现学科特点，请认真测评并如实填写相关测评数据。</p>
 					</div>
+				<shiro:hasPermission name="xkts_cjfx:query">	
 					<div class="margin_top">
 						<h3 class="">成绩分析</h3>
 						<p class="padding-side2 margin_bot margin_top1">
@@ -302,9 +304,12 @@
 							<p class="score_ts_p">低分(平均)：是指根据的满分取平均分，再根据你的成绩的平均分所在范围值。处于及格一下属于低分。如果只输入了一次就按一次计算。</p>
 						</div>
 					</div>
-					<p class="text-right  margin_bot">
-						<a class="btn btn-primary" onclick="haveYouSubjectExploration()"
-							href="javascript:void(0)">下一步</a>
+				</shiro:hasPermission>
+										
+					<p class="text-right  margin_bot">					
+						<shiro:hasPermission name="qncp_xyb:query">
+							<a class="btn btn-primary" onclick="haveYouSubjectExploration()" href="javascript:void(0)">下一步</a>
+						</shiro:hasPermission>
 					</p>
 					<script type="text/javascript">
 						var cjfx = "${CJFX.featureId}";
@@ -393,7 +398,9 @@
 		<p class="text-right">
 			<a class="btn btn-primary" href="javascript:;" onclick="sectshow(0);">返回</a>
 		</p>
-		<h1 class="text-primary fontwei">学科潜能测评</h1>
+		
+		<h1 class="text-primary fontwei">学科潜能测评</h1>	
+		<shiro:hasPermission name="xkts_qncp:query">
 		<div class="panel panel-default">
 			<div class="text-muted padding-side2 margin_top margin_bot1">
 				<img src="${pageContext.request.contextPath}/img/xgk/user.png"
@@ -407,8 +414,10 @@
 				<li>第二部分一共30道题，请认真阅读题目，并选出正确答案。</li>
 			</ul>
 			<p class="text-right padding-side2 margin_bot">
-				<a class="btn btn-primary" href="javascript:;"
-					onclick="answer();">开始答题</a>
+				<shiro:hasPermission name="qncp_dt:query">
+					<a class="btn btn-primary" href="javascript:;" onclick="answer();">开始答题</a>
+				</shiro:hasPermission>
+				
 			</p>
 			<script type="text/javascript">
 				//答题
@@ -464,6 +473,7 @@
 				}
 			</script>
 		</div>
+	</shiro:hasPermission>
 	</section>
 	<section class="row">
 		<p class="text-right">
@@ -495,6 +505,7 @@
 			<a class="btn btn-primary" href="javascript:;" onclick="sectshow(2);">返回</a>
 		</p>
 		<h1 class="text-primary">分析结果</h1>
+		<shiro:hasPermission name="xkts_fxjg:query">
 		<div class="panel panel-default">
 			<div class="padding-side2 margin_top margin_bot">
 				<p class="padding-side2">根据您所填写的成绩及所做的潜能测评来看，您学科单科的能力、潜能分析及两者的综合分析如下</p>
@@ -564,7 +575,9 @@
 						</tbody>
 					</table>
 					<p class="text-right">
-						<a class="btn btn-primary fontwei"  href="${pageContext.request.contextPath}/sub/xgk_potential_report.do">查看潜能报告</a>
+						<shiro:hasPermission name="qncp:query">
+							<a class="btn btn-primary fontwei"  href="${pageContext.request.contextPath}/sub/xgk_potential_report.do">查看潜能报告</a>
+						</shiro:hasPermission>						
 					</p>
 				</div>
 
@@ -580,6 +593,7 @@
 				</div>
 			</div>
 		</div>
+		</shiro:hasPermission>
 	</section>
 	</main>
 	<!-- 页面右侧-->

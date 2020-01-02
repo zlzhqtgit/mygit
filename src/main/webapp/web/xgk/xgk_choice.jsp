@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +18,14 @@
 
 <body>
 	<!-- 页面顶部-->
-	<c:import url="header.jsp"></c:import>	
+	<c:import url="header.jsp"></c:import>
+		<%-- <shiro:hasPermission name="web_rzcp:query"> --%>
 		<main class="container margin_top margin_bot">
+		
 			<div class="test_instruction margin_top">
 				<section class="row">
 					<!-- thumbnail -->
+					<%-- <shiro:hasPermission name="rzcp_hld:query"> --%>
 					<div class="col-md-6 leftLoop" style="padding:0">
 						<img style="width: 100%;" src="${pageContext.request.contextPath}/img/xgk/car.jpg" >
 						<div class="caption">
@@ -31,6 +34,8 @@
 							<p class="text-right margin_top margin_bot"><a href="javascript:;" onclick="login('hld')" class="btn btn-primary" role="button">开始测试 >></a></p>
 						</div>
 					</div>
+					<%-- </shiro:hasPermission> --%>
+					<%-- <shiro:hasPermission name="rzcp_mbti:query"> --%>					
 					<div class="col-md-6 rightLoop" style="padding:0">
 						<img style="width: 100%;" src="${pageContext.request.contextPath}/img/xgk/car.jpg" >
 						<div class="caption">
@@ -38,10 +43,12 @@
 							<p class="margin_top1 texts_hide">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
 							<p class="text-right margin_top margin_bot"><a href="javascript:;" onclick="login('mbti')" class="btn btn-primary" role="button">开始测试 >></a></p>
 						</div>
-					</div>					
+					</div>	
+					<%-- </shiro:hasPermission> --%>				
 				</section>
 			</div>
 		</main>
+		<%-- </shiro:hasPermission> --%>
 	<!-- 右侧边栏-->
 	<c:import url="../public/side_right.jsp"></c:import>
 	<!-- 页面底部-->
