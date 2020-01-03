@@ -21,6 +21,8 @@
 		<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 		<script src="${pageContext.request.contextPath}/js/common.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+	
+	
 	<body>
 		<!-- 页面顶部-->
 		<c:import url="header.jsp"></c:import>
@@ -128,16 +130,53 @@
 				<script type="text/javascript">
 					//选择套餐生成微信支付二维码
 					function choice_combo(e){
+						 var outTradeNo="";  //订单号
 						 $("#show_money").html($(e).parents(".series_item").find(".series_item_tit .price").text());
 						 $("#show_name").html($(e).parents(".series_item").find(".series_item_tit .price").attr("name"));
 						 var body = $(e).parents(".series_item").find(".series_item_tit .price").attr("id");
 						 var nowUrl=window.location.href;
+						 for(var i=0;i<4;i++){ //4位随机数，用以加在时间戳后面。
+							 outTradeNo += Math.floor(Math.random()*10);
+						 }
+						 outTradeNo = new Date().getTime() + outTradeNo;  //时间戳，用来生成订单号。
 						 if('${uid}' != ""){
 							 modelshow(false,$('#pay_info'),1);
-							 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?body=" + body + "&nowUrl=" + nowUrl);	 
+							 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?body=" + body + "&outTradeNo=" + outTradeNo);	 
+							 settime(outTradeNo,nowUrl);
 						 }else{
 							 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
 						 }
+					}
+					var countdown = 60;//查询60次
+					function settime(order,url) { //发送验证码倒计时
+					    if (countdown == 0) { 
+					    	layer.msg('超过二分钟未支付，二维码已超时！', {icon: 5,time:2000});
+					    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+					    		//window.location.reload();//页面刷新
+					    		location.href = "${pageContext.request.contextPath}/api/wx_pay_fail.do?nowUrl=" + url;
+					    		countdown = 60;
+					    	},2000);
+						} else {							
+							$.ajax({
+								type:"POST",
+								url:"${pageContext.request.contextPath}/api/query_wx_is_pay.do",
+								data:"outTradeNo=" + order,
+								datatype:'json',
+								success:function(obj){
+									if(obj.state == 1){
+										layer.msg('支付成功', {icon: 5,time:2000});
+								    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+								    		//window.location.reload();//页面刷新
+								    		location.href = "${pageContext.request.contextPath}/api/wx_pay_sucees.do?nowUrl=" + url;
+								    	},2000);
+									}
+									countdown -- ;
+								}
+							});
+						} 
+						setTimeout(function() { 
+						    settime(order,url) }
+						    ,2000) 
 					}
 				</script>
 				<div class="row">

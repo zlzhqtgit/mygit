@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.service.IWxPayService;
 
 /**
@@ -56,10 +57,10 @@ public class WXpayController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/weixinQRCode.do")
-	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String nowUrl)
+	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String outTradeNo)
 			throws Exception {
 
-		iWxPayService.generateQRCode(request, response, body, nowUrl);
+		iWxPayService.generateQRCode(request, response, body, outTradeNo);
 	}
 
 	/**
@@ -70,5 +71,35 @@ public class WXpayController {
 	public void weixin_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		iWxPayService.weixinNotify(request, response);
+	}
+
+	/**
+	 * 查询微信是否扫码支付成功
+	 */
+	@RequestMapping(value = "/query_wx_is_pay.do")
+	@ResponseBody
+	public ResponseResult<Void> queryWxIsPay(HttpServletRequest request, HttpServletResponse response,
+			String outTradeNo) throws Exception {
+
+		return iWxPayService.queryWxIsPay(request, response, outTradeNo);
+	}
+
+	/**
+	 * 查询微信扫码支付成功
+	 */
+	@RequestMapping(value = "/wx_pay_sucees.do")
+	public String wxPaySucees(HttpServletRequest request, HttpServletResponse response, String nowUrl)
+			throws Exception {
+
+		return iWxPayService.wxPaySucees(request, response, nowUrl);
+	}
+
+	/**
+	 * 查询微信扫码支付失败
+	 */
+	@RequestMapping(value = "/wx_pay_fail.do")
+	public String wxPayFail(HttpServletRequest request, HttpServletResponse response, String nowUrl) throws Exception {
+
+		return iWxPayService.wxPayFail(request, response, nowUrl);
 	}
 }

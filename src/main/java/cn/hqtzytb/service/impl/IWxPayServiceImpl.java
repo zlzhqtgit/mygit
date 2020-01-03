@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetAddress;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,6 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +42,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import cn.hqtzytb.entity.AdminSystem;
 import cn.hqtzytb.entity.Order;
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Role;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.WxpayConfig;
@@ -104,19 +105,19 @@ public class IWxPayServiceImpl implements IWxPayService {
 	}
 
 	@Override
-	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String nowUrl)
+	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String outTradeNo)
 			throws Exception {
 		try {
 			Session session = SecurityUtils.getSubject().getSession();
 			Integer uid = (Integer) session.getAttribute("uid");
-			request.getServletContext().setAttribute(Constants.PAY_CALLBACK + uid, nowUrl);
 			AdminSystem adminSystem = userRoleMapper.queryAdminSystemByName(body);
-			String out_trade_no = generateOrderTradeNo() + "_" + uid + "_" + adminSystem.getSid();
+			String out_trade_no = outTradeNo + "_" + uid + "_" + adminSystem.getSid();
 			int total_fee = (new Double(Double.parseDouble(adminSystem.getSysnub()) * 100)).intValue();
 			// 调用pay工程的微信支付接口
 			Map<String, Object> paramMap = new ConcurrentHashMap<String, Object>();
-			String url = "http://localhost/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee
-					+ "&body=" + body;
+			String url = "http://xgk.sxghfwzx.com/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee
+					+ "&body=" + adminSystem.getSyscommet();
+			System.err.println("url：" + url);
 			// pay工程微信支付接口返回的json字符串
 			String result = HttpClientUtils.doPost(url, paramMap);
 			// 获取到code_url，将其生成二维码显示到页面 ;
@@ -124,6 +125,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 			JSONObject jsonObject = JSONObject.parseObject(result);
 			// 获取return_code
 			String return_code = jsonObject.getString("return_code");
+			System.err.println("111111111111111111111");
 			// 判断通信是否成功
 			if (Constants.SUCCESS.equals(return_code)) {
 				// 获取result_code业务处理的结果
@@ -154,8 +156,13 @@ public class IWxPayServiceImpl implements IWxPayService {
 							image.setRGB(x, y, bitMatrix.get(x, y) ? Constants.BLACK : Constants.WHITE);
 						}
 					}
-					url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/",
-							"img/public/logo.jpg");
+					/*
+					 * url =
+					 * this.getClass().getResource("/").getPath().replaceFirst(
+					 * "/", "").replace("WEB-INF/classes/",
+					 * "img/public/logo.jpg");
+					 */
+					url = this.getClass().getResource("/").getPath().replace("WEB-INF/classes/", "img/public/logo.jpg");
 					System.err.println(url);
 					File file = new File(url);
 					Image logo = ImageIO.read(file);
@@ -178,7 +185,10 @@ public class IWxPayServiceImpl implements IWxPayService {
 					outputStream.close();
 				}
 			}
-		} catch (Exception e) {
+
+		} catch (
+
+		Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付生成二维码异常     错误信息: " + e);
 		}
 
@@ -190,7 +200,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 			Date currentTime = new Date();
 			String inputLine;
 			String notityXml = "";
-			ServletContext application = request.getSession().getServletContext();
+			ServletContext application = request.getServletContext();
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("text/html;charset=UTF-8");
@@ -235,9 +245,15 @@ public class IWxPayServiceImpl implements IWxPayService {
 				order.setCreateTime(currentTime);
 				orderMapper.insert(order);
 				// 销毁全局支付成功跳转路径
-				String nowUrl = (String) request.getServletContext().getAttribute(Constants.PAY_CALLBACK + detail[1]);
-				request.getServletContext().removeAttribute(Constants.PAY_CALLBACK + detail[1]);
-				SecurityUtils.getSubject().getSession().setAttribute("nowUrl", nowUrl);
+				/*
+				 * String nowUrl = (String)
+				 * request.getServletContext().getAttribute(Constants.
+				 * PAY_CALLBACK + detail[1]);
+				 * request.getServletContext().removeAttribute(Constants.
+				 * PAY_CALLBACK + detail[1]);
+				 * SecurityUtils.getSubject().getSession().setAttribute(
+				 * "nowUrl", nowUrl);
+				 */
 				List<User> userList = userMapper.select(" id = '" + detail[1] + "'", null, null, null);
 				if (!userList.isEmpty()) {
 					try {
@@ -290,11 +306,9 @@ public class IWxPayServiceImpl implements IWxPayService {
 							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
 						}
 						userMapper.updateById(userList.get(0));
-						response.sendRedirect("web/public/pay_success");
 					} catch (Exception e) {
 						logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  用户id:" + detail[1] + " 充值类型："
 								+ adminSystem.getSyscommet() + " 错误信息: " + e);
-						response.sendRedirect("web/public/pay_failed");
 					}
 				}
 
@@ -308,22 +322,67 @@ public class IWxPayServiceImpl implements IWxPayService {
 				logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  异常数据：" + map.get("out_trade_no"));
 				System.out.println("通知微信.异步确认交易失败");
 				response.sendRedirect("web/public/pay_failed");
+				return;
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付回掉异常     错误信息: " + e);
 			response.sendRedirect("web/public/pay_failed");
+			return;
 		}
 	}
 
-	/**
-	 * 生成时间戳订单id
-	 * 
-	 * @return
-	 */
-	private String generateOrderTradeNo() {
-		String current_time = Long.toString(System.currentTimeMillis());
-		String date = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		return date + current_time.substring(current_time.length() - 4);
+	/*	*//**
+			 * 生成时间戳订单id
+			 * 
+			 * @return
+			 *//*
+			 * private String generateOrderTradeNo() { String current_time =
+			 * Long.toString(System.currentTimeMillis()); String date = new
+			 * SimpleDateFormat("yyyyMMddHHmmss").format(new Date()); return
+			 * date + current_time.substring(current_time.length() - 4); }
+			 */
+
+	@Override
+	public ResponseResult<Void> queryWxIsPay(HttpServletRequest request, HttpServletResponse response,
+			String outTradeNo) {
+		try {
+			Subject subject = SecurityUtils.getSubject();
+			if (subject.isAuthenticated()) {
+				Integer uid = (Integer) subject.getSession().getAttribute("uid");
+				List<Order> orderList = orderMapper
+						.select("out_trade_no = '" + outTradeNo + "' AND uid = '" + uid + "'", null, null, null);
+				if (orderList.isEmpty()) {
+					return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
+				} else {
+					return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS);
+				}
+			}
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付订单查询异常     错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
+		}
+	}
+
+	@Override
+	public String wxPaySucees(HttpServletRequest request, HttpServletResponse response, String nowUrl) {
+		try {
+			SecurityUtils.getSubject().getSession().setAttribute("nowUrl", nowUrl);
+			return "web/public/pay_success";
+		} catch (Exception e) {
+			return "web/xgk/xgk_error_404";
+		}
+
+	}
+
+	@Override
+	public String wxPayFail(HttpServletRequest request, HttpServletResponse response, String nowUrl) {
+		try {
+			SecurityUtils.getSubject().getSession().setAttribute("nowUrl", nowUrl);
+			return "web/public/pay_failed";
+		} catch (Exception e) {
+			return "web/xgk/xgk_error_404";
+		}
 	}
 
 }
