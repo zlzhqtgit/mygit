@@ -1,9 +1,9 @@
 package cn.hqtzytb.service;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import cn.hqtzytb.entity.ResponseResult;
 
 /**
  * @ClassName: IWxPayService
@@ -17,9 +17,9 @@ public interface IWxPayService {
 
 	Object wxpay(HttpServletRequest request, String out_trade_no, String total_fee, String body);
 
-	void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, Double rechargeMoney,
-			String type) throws Exception;
+	void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String nowUrl)
+			throws Exception;
 
-	ResponseResult<Void> weixinNotify(HttpServletRequest request, HttpServletResponse response);
+	void weixinNotify(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
 }
