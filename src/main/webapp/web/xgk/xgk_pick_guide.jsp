@@ -127,8 +127,8 @@
 								<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a></p>				
 							</shiro:hasPermission>
 							<shiro:lacksPermission name="xkzd_scbk:add">
-							<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;">生成报告</a></p>	
-						</shiro:lacksPermission>
+								<p class="text-center margin_top"><a class="btn btn-default cancel margin0" href="javascript:;">生成报告</a></p>	
+							</shiro:lacksPermission>
 						</shiro:user>						
 				</div>
 			</section>

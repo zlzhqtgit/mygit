@@ -58,9 +58,10 @@ public class WXpayController {
 	 */
 	@RequestMapping(value = "/weixinQRCode.do")
 	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body,
-			@RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney) throws Exception {
+			@RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney, String type)
+			throws Exception {
 
-		iWxPayService.generateQRCode(request, response, body, rechargeMoney);
+		iWxPayService.generateQRCode(request, response, body, rechargeMoney, type);
 	}
 
 	/**

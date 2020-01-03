@@ -108,7 +108,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 
 	@Override
 	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body,
-			Double rechargeMoney) throws Exception {
+			Double rechargeMoney, String type) throws Exception {
 		try {
 			String vipType = generateVipType(body);
 			body = URLEncoder.encode(body, "ISO8859-1");

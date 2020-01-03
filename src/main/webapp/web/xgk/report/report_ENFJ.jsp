@@ -6,12 +6,14 @@
 <head>
  <meta charset=utf-8>
 <title>Insert title here</title>
-
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 </head>
 <body>	
-		<main class="container">			
+	<script type="text/javascript">
+	</script>
+		<main class="container">
 			<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
-
 			<section class="row" id="report_content">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -234,7 +236,28 @@
 			</section>
 			<script type="text/javascript">
 					$(".downloadReport").click(function(){
-						download();
+						var hqt_user = '${hqt_user}';
+						if(hqt_user == 1){
+							$.ajax({
+								url: "${pageContext.request.contextPath}/user/hqt_download_count.do",
+								data:"",
+								type:"POST",
+								dataType:"json",
+								success:function(obj){
+									console.log(obj);
+									if(obj.state == 0){									
+										alert(obj.message);
+										layer.msg(obj.message,{icon:2,time:1000});					
+									}else{
+										alert(obj.message);
+										layer.msg(obj.message,{icon:6,time:1000});
+										download();
+									}
+								}	
+							}); 
+						}else{
+							download();
+						}
 					})
 					function download(){
 					   var element = $("#report_content");    // 这个dom元素是要导出pdf的div容器
