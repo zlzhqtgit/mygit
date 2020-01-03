@@ -311,8 +311,8 @@ $(function(){
 							<shiro:hasPermission name="qncp_more:query">
 								<a class="show_more btn btn-primary" onclick="showMore()">查看更多</a>
 							</shiro:hasPermission>			
-							<shiro:lacksPermission name="qncp_more:query">
-								<a class="show_more btn btn-primary">查看更多</a>
+							<shiro:lacksPermission name="qncp_more:query">								
+									<a class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 下载报告 </a>					      
 							</shiro:lacksPermission>                
 			           	</div>
 			            <script>

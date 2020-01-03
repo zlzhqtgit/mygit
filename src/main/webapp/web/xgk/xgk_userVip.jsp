@@ -46,9 +46,9 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">0.01</span> 元/年
+											<span class="price" id="${VIPRECHAARGE.sysname}" name="${VIPRECHAARGE.syscommet}">${VIPRECHAARGE.sysnub}</span> 元/年
 										</div>
-										<p class="fsize12">这是一句话</p>
+										<p class="fsize12">${VIPRECHAARGE.syscommet}</p>
 									</div>
 								</div>
 								<div class="series_item_tit1"></div>
@@ -71,9 +71,9 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price">0.02</span> 元/年
+											<span class="price" id="${COUNSELORRECHAARGE.sysname}" name="${COUNSELORRECHAARGE.syscommet}">${COUNSELORRECHAARGE.sysnub}</span> 元/年
 										</div>
-										<p class="fsize12">这是一句话</p>
+										<p class="fsize12">${COUNSELORRECHAARGE.syscommet}</p>
 									</div>
 								</div>
 								<div class="series_item_tit1"></div>
@@ -92,7 +92,7 @@
 				<div class="" id="pay_info" style="display: none;">
 					<div class="pay">
 						<div class="margin_bot">
-							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
+							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei" id="show_name">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
 						</div>
 						<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
 							<thead>
@@ -128,12 +128,13 @@
 				<script type="text/javascript">
 					//选择套餐生成微信支付二维码
 					function choice_combo(e){
-						 var recharge_money = $(e).parents(".series_item").find(".series_item_tit .price").text();
-						 var body = $(e).parents(".series_item_con").find(".series_summary").html();
-						 var body = "立学道" + recharge_money + "元臻选套餐";
+						 $("#show_money").html($(e).parents(".series_item").find(".series_item_tit .price").text());
+						 $("#show_name").html($(e).parents(".series_item").find(".series_item_tit .price").attr("name"));
+						 var body = $(e).parents(".series_item").find(".series_item_tit .price").attr("id");
+						 var nowUrl=window.location.href;
 						 if('${uid}' != ""){
 							 modelshow(false,$('#pay_info'),1);
-							 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?rechargeMoney=" + recharge_money + "&body=" + body);	 
+							 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?body=" + body + "&nowUrl=" + nowUrl);	 
 						 }else{
 							 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
 						 }

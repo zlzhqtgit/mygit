@@ -8,10 +8,9 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +18,6 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
@@ -44,7 +42,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import cn.hqtzytb.entity.AdminSystem;
 import cn.hqtzytb.entity.Order;
-import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Role;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.entity.WxpayConfig;
@@ -107,15 +104,15 @@ public class IWxPayServiceImpl implements IWxPayService {
 	}
 
 	@Override
-	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body,
-			Double rechargeMoney, String type) throws Exception {
+	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String nowUrl)
+			throws Exception {
 		try {
-			String vipType = generateVipType(body);
-			body = URLEncoder.encode(body, "ISO8859-1");
 			Session session = SecurityUtils.getSubject().getSession();
-			String out_trade_no = generateOrderTradeNo() + "_" + session.getAttribute("uid") + "_" + vipType;
-			System.err.println(out_trade_no);
-			int total_fee = (new Double(rechargeMoney * 100)).intValue();
+			Integer uid = (Integer) session.getAttribute("uid");
+			request.getServletContext().setAttribute(Constants.PAY_CALLBACK + uid, nowUrl);
+			AdminSystem adminSystem = userRoleMapper.queryAdminSystemByName(body);
+			String out_trade_no = generateOrderTradeNo() + "_" + uid + "_" + adminSystem.getSid();
+			int total_fee = (new Double(Double.parseDouble(adminSystem.getSysnub()) * 100)).intValue();
 			// 调用pay工程的微信支付接口
 			Map<String, Object> paramMap = new ConcurrentHashMap<String, Object>();
 			String url = "http://localhost/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee
@@ -140,9 +137,6 @@ public class IWxPayServiceImpl implements IWxPayService {
 					int width = 250;
 					int height = 250;
 					// 创建一个map集合
-					// Map<EncodeHintType, Object> hints = new
-					// HashMap<EncodeHintType, Object>();
-					// hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
 					@SuppressWarnings("rawtypes")
 					Hashtable<EncodeHintType, Comparable> hints = new Hashtable<EncodeHintType, Comparable>();
 					hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
@@ -160,10 +154,8 @@ public class IWxPayServiceImpl implements IWxPayService {
 							image.setRGB(x, y, bitMatrix.get(x, y) ? Constants.BLACK : Constants.WHITE);
 						}
 					}
-					// url =
-					// "D:/workspace/hqtzytb/src/main/webapp/img/public/logo.jpg";
 					url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/",
-							"webapp/img/public/logo.jpg");
+							"img/public/logo.jpg");
 					System.err.println(url);
 					File file = new File(url);
 					Image logo = ImageIO.read(file);
@@ -178,22 +170,6 @@ public class IWxPayServiceImpl implements IWxPayService {
 					graph.setStroke(new BasicStroke(3f));
 					graph.draw(shape);
 					graph.dispose();
-
-					// //创建字节数组输出流
-					// ByteArrayOutputStream imageOut = new
-					// ByteArrayOutputStream();
-					// // 将矩阵对象转换为响应到页面
-					// MatrixToImageWriter.writeToStream(bitMatrix, "jpg",
-					// imageOut);
-					// // 创建一个字节输入流
-					// ByteArrayInputStream imageIn = new
-					// ByteArrayInputStream(imageOut.toByteArray());
-					// // 创建一个图片缓存对象
-					// BufferedImage bImage = ImageIO.read(imageIn);
-					// // 输出流对象
-					// OutputStream outputStream = response.getOutputStream();
-					// ImageIO.write(bImage, "jpg", outputStream);
-					// bImage.flush();
 					OutputStream outputStream = response.getOutputStream();
 					// 输出流对象
 					ImageIO.write(image, "jpg", outputStream);
@@ -209,7 +185,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 	}
 
 	@Override
-	public ResponseResult<Void> weixinNotify(HttpServletRequest request, HttpServletResponse response) {
+	public void weixinNotify(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			Date currentTime = new Date();
 			String inputLine;
@@ -247,29 +223,31 @@ public class IWxPayServiceImpl implements IWxPayService {
 				out.close();
 				application.setAttribute(map.get("out_trade_no") + "SUCCESS", "SUCCESS");
 				System.out.println("通知微信.异步确认成功");
-				for (Entry<String, String> entry : map.entrySet()) {
-					System.err.println("key:" + entry.getKey() + "    value:" + entry.getValue());
-				}
 				// 订单详情
 				String[] detail = map.get("out_trade_no").split("_");
+				// VIP套餐
+				AdminSystem adminSystem = userRoleMapper.queryAdminSystemById(detail[2]);
 				Order order = new Order();
 				order.setUid(Integer.valueOf(detail[1]));
 				order.setOutTradeNo(detail[0]);
-				order.setRechargeMoney(Double.valueOf(Integer.valueOf(map.get("total_fee")) / 100));
-				order.setBody("1".equals(detail[2]) ? Constants.TYPE_BECOME_VIP : Constants.TYPE_COUNSELOR_VIP);
+				order.setRechargeMoney(Double.valueOf(adminSystem.getSysnub()));
+				order.setBody(adminSystem.getSyscommet());
 				order.setCreateTime(currentTime);
 				orderMapper.insert(order);
-				// TOD VIP 操作
+				// 销毁全局支付成功跳转路径
+				String nowUrl = (String) request.getServletContext().getAttribute(Constants.PAY_CALLBACK + detail[1]);
+				request.getServletContext().removeAttribute(Constants.PAY_CALLBACK + detail[1]);
+				SecurityUtils.getSubject().getSession().setAttribute("nowUrl", nowUrl);
 				List<User> userList = userMapper.select(" id = '" + detail[1] + "'", null, null, null);
 				if (!userList.isEmpty()) {
 					try {
 						Calendar expirationTime = Calendar.getInstance();
 						expirationTime.setTime(currentTime);
 						expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-						if ("1".equals(detail[2])) {// vip充值
-							// vip角色
+						if ("VIPRECHAARGE".equals(adminSystem.getSysname())) {// vip充值
+							// 获得VIP角色
 							Role role = userRoleMapper.queryRoleBySystemName("SYSTEMVIP");
-							AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
+							adminSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
 							if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 普通用户升级成为vip
 								userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
 								userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
@@ -284,9 +262,10 @@ public class IWxPayServiceImpl implements IWxPayService {
 								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
 								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
 							}
-						} else if ("2".equals(detail[2])) {// 咨询师充值
+						} else if ("COUNSELORRECHAARGE".equals(adminSystem.getSysname())) {// 咨询师充值
+							// 获得咨询师角色
 							Role role = userRoleMapper.queryRoleBySystemName("SYSTEMCOUNSELOR");
-							AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
+							adminSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
 							if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 普通用户升级成为vip
 								expirationTime = Calendar.getInstance();
 								expirationTime.setTime(currentTime);
@@ -306,17 +285,19 @@ public class IWxPayServiceImpl implements IWxPayService {
 								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
 								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
 							}
+						} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
+							// 单独购买1次下载报告
+							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
 						}
 						userMapper.updateById(userList.get(0));
-						return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS);
+						response.sendRedirect("web/public/pay_success");
 					} catch (Exception e) {
 						logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  用户id:" + detail[1] + " 充值类型："
-								+ ("1".equals(detail[2]) ? Constants.TYPE_BECOME_VIP : Constants.TYPE_COUNSELOR_VIP)
-								+ " 错误信息: " + e);
-						return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
+								+ adminSystem.getSyscommet() + " 错误信息: " + e);
+						response.sendRedirect("web/public/pay_failed");
 					}
 				}
-				return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
+
 			} else {
 				resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
 						+ "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
@@ -326,11 +307,11 @@ public class IWxPayServiceImpl implements IWxPayService {
 				out.close();
 				logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  异常数据：" + map.get("out_trade_no"));
 				System.out.println("通知微信.异步确认交易失败");
-				return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
+				response.sendRedirect("web/public/pay_failed");
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付回掉异常     错误信息: " + e);
-			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_SUCCESS);
+			response.sendRedirect("web/public/pay_failed");
 		}
 	}
 
@@ -345,27 +326,4 @@ public class IWxPayServiceImpl implements IWxPayService {
 		return date + current_time.substring(current_time.length() - 4);
 	}
 
-	/**
-	 * 获得VIP类型[1-vip 2-咨询师]
-	 * 
-	 * @param body
-	 * @return
-	 */
-	private String generateVipType(String body) {
-		String vipType = "";
-		try {
-			vipType = new String(body.toString().getBytes("ISO8859-1"), "UTF-8");
-			System.err.println("vip套餐：" + vipType);
-			if (Constants.TYPE_BECOME_VIP.equals(vipType)) {// 成为VIP
-				vipType = "1";
-			} else if (Constants.TYPE_COUNSELOR_VIP.equals(vipType)) {// 成为咨询师
-				vipType = "2";
-			}
-			return vipType;
-		} catch (UnsupportedEncodingException e) {
-			logger.error("获取VIP套餐类型异常    错误信息: " + e);
-			return "";
-		}
-
-	}
 }

@@ -15,4 +15,8 @@ public interface UserRoleMapper {
 	Role queryRoleBySystemName(@Param("sysname") String sysname);
 
 	AdminSystem queryAdminSystemByRoleId(@Param("roleId") Integer roleId);
+
+	AdminSystem queryAdminSystemByName(@Param("sysname") String sysname);
+
+	AdminSystem queryAdminSystemById(@Param("sid") String sid);
 }

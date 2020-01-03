@@ -119,17 +119,21 @@
 							</div>
 						</div>
 					</div>
+					<div>
+					</div>
+					<p class="text-center margin_top">
 						<shiro:guest>
-							<p class="text-center margin_top"><a class="btn btn-default cancel margin0 vipLimite" href="javascript:;" onclick="generateReport()"><label class="padding-side fontwei">VIP</label>生成报告</a></p>	
+							<a class="btn btn-default cancel margin0 vipLimite" href="javascript:;"><label class="padding-side fontwei">VIP</label>生成报告</a>
 						</shiro:guest>
 						<shiro:user>
 							<shiro:hasPermission name="xkzd_scbk:add">
-								<p class="text-center margin_top"><a class="btn btn-default cancel margin0 vipLimite" href="javascript:;" onclick="generateReport()"><label class="padding-side fontwei">VIP</label>生成报告</a></p>				
+								<a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a>		
 							</shiro:hasPermission>
 							<shiro:lacksPermission name="xkzd_scbk:add">
-							<p class="text-center margin_top"><a class="btn btn-default cancel margin0 vipLimite" href="javascript:;"><label class="padding-side fontwei">VIP</label>生成报告</a></p>	
-						</shiro:lacksPermission>
-						</shiro:user>						
+								<a class="btn btn-default cancel margin0 vipLimite" href="javascript:;"><label class="padding-side fontwei">VIP</label>生成报告</a>
+							</shiro:lacksPermission>
+						</shiro:user>
+					</p>						
 				</div>
 			</section>
 		</main>

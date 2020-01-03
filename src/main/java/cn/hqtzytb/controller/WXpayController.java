@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.service.IWxPayService;
 
 /**
@@ -57,11 +56,10 @@ public class WXpayController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/weixinQRCode.do")
-	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body,
-			@RequestParam(value = "rechargeMoney", required = true) Double rechargeMoney, String type)
+	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String nowUrl)
 			throws Exception {
 
-		iWxPayService.generateQRCode(request, response, body, rechargeMoney, type);
+		iWxPayService.generateQRCode(request, response, body, nowUrl);
 	}
 
 	/**
@@ -69,9 +67,8 @@ public class WXpayController {
 	 * 映射到微信本地
 	 */
 	@RequestMapping(value = "/callback.do")
-	public ResponseResult<Void> weixin_notify(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public void weixin_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		return iWxPayService.weixinNotify(request, response);
+		iWxPayService.weixinNotify(request, response);
 	}
 }

@@ -24,25 +24,84 @@
 <c:import url="../public/side_right.jsp"></c:import>
 <!-- 页面底部-->
 <c:import url="footer.jsp"></c:import>	
+<div class="" id="pay_info" style="display: none;">
+					<div class="pay">
+						<div class="margin_bot">
+							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
+						</div>
+						<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
+							<thead>
+								<tr><th></th><th>下载次数</th><th>使用期限</th></tr>
+							</thead>
+							<tboody>
+								<tr><td>套餐权益</td><td>1次</td><td>立即生效</td></tr>
+							</tboody>
+						</table>
+						<div class="tab_list">
+							<ul class="tab_head clearfix">
+								<!--<div class="pull-left" style="height: 3.1em;line-height: 3em;">支付方式：</div>-->
+								<li class="cur">微信支付</li>
+								<li>支付宝支付</li>
+							</ul>
+							<div class="tab_body">
+								<div class="cur">
+									<div class="">
+										<img id="qr_code"  src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+										<div class="text-center"> 微信扫码 </div>
+									</div>
+								</div>
+								<div class="">
+									<div class="">
+										<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+										<div class="text-center"> 支付宝扫码 </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>		
 </body> 
 <script type="text/javascript">
 $(function(){
 	$(".downloadReport").click(function(){
-		$.ajax({
-			url: "${pageContext.request.contextPath}/user/hqt_download_count.do",
-			data:"",
-			type:"POST",
-			dataType:"json",
-			success:function(obj){
-				if(obj.state == 0){
-					layer.msg(obj.message,{icon:2,time:1000});
-				}else{
-					layer.msg(obj.message,{icon:6,time:1000});
-					download();
-				}
-			}	
-		});
-		
+		var hqt_user = '${hqt_user}';
+		if(hqt_user == 1){
+			$.ajax({
+				url: "${pageContext.request.contextPath}/user/hqt_download_count.do",
+				data:"",
+				type:"POST",
+				dataType:"json",
+				success:function(obj){
+					if(obj.state == 1){//正常下载									
+						download();				
+					}else{
+						var status = obj.data.status;
+						if(status == 1){
+							download();
+						} else {
+							layer.confirm(obj.message, {
+								  btn: ['单独购买', 'VIP续费', '取消'] //可以无限个按钮
+								  ,btn3: function(index, layero){
+								    layer.close(index);
+								  }
+								}, function(index, layero){
+									 if('${uid}' != ""){
+										 modelshow(false,$('#pay_info'),1);
+										 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?rechargeMoney=" + recharge_money + "&body=" + body);	 
+									 }else{
+										 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
+									 }								   
+								   layer.close(index);
+								}, function(index){
+									location.href = '${pageContext.request.contextPath}/web/hqt_vip_index.do';
+								});
+						}
+					}
+				}	
+			}); 
+		}else{
+			download();
+		}
 	})
 	function download(){
 	   var element = $("#report_cont");    // 这个dom元素是要导出pdf的div容器

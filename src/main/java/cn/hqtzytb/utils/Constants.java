@@ -26,6 +26,10 @@ public class Constants {
 	public static final String EVALUATION_NAME_SCORE_ANALYSIS = "成绩分析";
 	public static final String EVALUATION_TYPE_MBTI_ANALYSIS = "MBTI";
 	public static final String EVALUATION_TYPE_HOLLAND_ANALYSIS = "霍兰德";
+	/**
+	 * 支付后回调路径前缀
+	 */
+	public static final String PAY_CALLBACK = "pay_callback_";
 
 	/**
 	 * 好前途平台用户
@@ -35,16 +39,6 @@ public class Constants {
 	 * 好前途科技有限公司编码
 	 */
 	public static final String HQT_COMPANY_NUMBER = "201910001";
-
-	/**
-	 * 成为VIP套餐
-	 */
-	public static final String TYPE_BECOME_VIP = "立学道0.01元臻选套餐";
-
-	/**
-	 * 成为咨询师套餐
-	 */
-	public static final String TYPE_COUNSELOR_VIP = "立学道0.02元臻选套餐";
 
 	/**
 	 * 加密方式

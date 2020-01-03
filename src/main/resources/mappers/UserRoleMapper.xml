@@ -27,6 +27,24 @@
 			WHERE 
 				admin_system.sysnub = #{roleId};
 		</select>
+		
+		<select id="queryAdminSystemByName" parameterType="java.lang.String" resultType="cn.hqtzytb.entity.AdminSystem">
+			SELECT 
+				sid,sysname,sysnub,syscommet,ctime
+			FROM 
+				admin_system
+			WHERE 
+				sysname = #{sysname};
+		</select>
+		
+		<select id="queryAdminSystemById" parameterType="java.lang.String" resultType="cn.hqtzytb.entity.AdminSystem">
+			SELECT 
+				sid,sysname,sysnub,syscommet,ctime
+			FROM 
+				admin_system
+			WHERE 
+				sid = #{sid};
+		</select>
 	</mapper>
 	
 	
