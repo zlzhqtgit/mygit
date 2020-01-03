@@ -179,34 +179,13 @@
 			</div>
 			
 			<div class="padding-side2" id="Modal1" style="display: none;">
-					<!-- <ul class="list-unstyled">
-						<li>
-							<div class="compareScoreItem">
-								<div class="clogo">
-									sdfasd
-								</div>
-								<div class="ctable">
-								</div>
-							</div>
-						</li>
-					</ul> -->
-					<div class="margin_top1 table_wrap">
-						<table class="table table-hover table-bordered">
-							<tr><th rowspan="7"><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></th><th rowspan="2">年份</th><th colspan="5">录取分数</th><th colspan="2">计划招生</th></tr>
-							<tr><td>最低分</td><td>平均分</td><td>最高分</td><td>投档线</td><td>线差</td><td>今年</td><td>往年</td></tr>
-							<tr><td>2019</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-							<tr><td>2018</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-							<tr><td>2017</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-							<tr><td>2016</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-							<tr><td>平均分</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-						</table>
-					</div>
-				</div>
+				<ul class="list-unstyled"></ul>
+			</div>
 			<!--/模态框-->
 			<script type="text/javascript">
-				//弹框
+				
 				/**
-				 * 
+				 * 弹框
 				 * @param {Object} title
 				 * @param {Object} content
 				 * @param {Object} type
@@ -346,18 +325,16 @@
 				 * @param {Object} id 被加入对比中的item的id
 				 */
 				function fatch_BaseInfo(id) {
-					//基本情况对比
 					var row=[
 						{ filed:"院校", value:[] },
 						{ filed:"", value:[] },//name
 						{ filed:"录取批次", value:[] },
-						{ filed:"标签属性", value:[] },
+						/* { filed:"标签属性", value:[] }, */
 						{ filed:"综合排名", value:[] },
 						{ filed:"学校类型", value:[] },
 						{ filed:"硕士点个数", value:[] },
 						{ filed:"博士点个数", value:[] }
 					];
-					console.log("11111")
 					var list=$('.contrast_list li');
 					var table='<table class="table-bordered table-bordered margin_top1"><tbody>';
 					for (var i=0;i<row.length;i++) {
@@ -367,11 +344,11 @@
 							row[0].value[j]=$("#"+wrapId).find(".sh_logo").html();
 							row[1].value[j]=$("#"+wrapId).attr("pname");
 							row[2].value[j]=$("#"+wrapId).find(".sch_info .admission_lot").text();
-							row[3].value[j]=$("#"+wrapId).find(".sch_info .schoolTag img").attr("alt");
-							row[4].value[j]=$("#"+wrapId).find(".sch_info .admitRank").text();
-							row[5].value[j]=$("#"+wrapId).find(".sch_info .schType").text();
-							row[6].value[j]=$("#"+wrapId).find(".sch_info .masterNum").text();
-							row[7].value[j]=$("#"+wrapId).find(".sch_info .doctorNum").text();
+							/* row[3].value[j]=$("#"+wrapId).find(".sch_info .schoolTag img").attr("alt"); */
+							row[3].value[j]=$("#"+wrapId).find(".sch_info .admitRank").text();
+							row[4].value[j]=$("#"+wrapId).find(".sch_info .schType").text();
+							row[5].value[j]=$("#"+wrapId).find(".sch_info .masterNum").text();
+							row[6].value[j]=$("#"+wrapId).find(".sch_info .doctorNum").text();
 							table+='<td><div>'+row[i].value[j]+'</div></td>';
 						}
 						table +="</tr>";
@@ -379,7 +356,25 @@
 					table+='</tbody></table>';
 					$("#Modal").html(table);
 				}
-				
+				 
+				 /**
+				  * 录取分数对比
+				  * @param {Object} id rowId
+				  */
+				 function fatch_admitScore(id) {
+				 	var schlogo=$("#"+id).find(".sh_logo").html();
+				 	var table=$("#"+id).find(".sch_slice").prop("outerHTML");
+				 	var list='<li id=cp'+id+'><div class="compareScoreItem"><div class="clogo">'+ schlogo+'</div><div class="ctable">'+table+'</div></div></li>';
+				 	$("#Modal1 ul").append(list);
+				 }
+				  
+				 /**
+				  * 取消对比
+				  * @param {Object} id rowId
+				  */
+				 function delScroeCompare(id){
+				 	$("#cp"+id).remove();
+				 }
 				
 				//加入对比
 				function add_contrast(row_id,itemImg){
@@ -394,6 +389,7 @@
 						}
 						$('.contrast_list').append('<li id="comp'+row_id+'"><a href="javascript:void(0)"><img src="'+itemImg+'"/></a><p class="text-center margin_top1"><a href="javascript:void(0)" onclick="del_compare(this)" class="btn btn-primary">取消对比</a></p></li>');
 						fatch_BaseInfo(row_id);
+						fatch_admitScore(row_id);
 					} else{
 						$("#btnid"+row_id).parent().removeClass("cancel text-white");
 						$("#btnid"+row_id).parent().addClass("btn-primary");
@@ -414,7 +410,7 @@
 					$("#btnid"+rowId).parent().find('span').text("加入对比");
 					document.getElementById("btnid"+rowId).checked=false;
 					fatch_BaseInfo(rowId);
-					
+					delScroeCompare(rowId);
 					if ($(".contrast_list li").length==0) {
 						 close_conbox();
 					}
@@ -427,10 +423,11 @@
 					$('.add_contrast>input[type="checkbox"]').parent().addClass("btn-primary");
 					$('.add_contrast>input[type="checkbox"]').parent().find('span').text("加入对比")
 					
-					for (var i=0;i<all_check.length;i++) {
+					for (var i=0;i<all_check.length;i++){
 						all_check[i].checked=false;
 					}
 					$(".contrast_list").children().remove();
+					$("#Modal1 ul").children().remove();
 					setTimeout(close_conbox(),2500);
 				} 
 				
@@ -445,18 +442,6 @@
 					$('.contrast').hide();
 					flag = false;
 				}
-				
-				//院校基本情况对比
- 				function show_contrast_intro(){
- 					$('.tip_box').css('display','block');
- 				}
-				//院校录取分数对比
- 				function show_contrast_score(){
- 					$('.tip_box').css('display','block');
- 					$('.tit_docaration h2').text('院校录取分数对比');
- 					$('.tit_docaration').next().children().remove();
- 					$('.tit_docaration').next().append('噶三歌曲歌曲干旱气候')
- 				}
 				
  				//点击选中
  				function  clickActive(e) {
@@ -562,16 +547,16 @@
         											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png' alt='985'/>"
         										}
         										if (universitiesAttributes[f] == "211"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png'/>"
+        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png' alt='211'/>"
         										}
         										if (universitiesAttributes[f] == "双一流"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png'/>"
+        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png' alt='双一流'/>"
         										}
         										if (universitiesAttributes[f] == "行业领军"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png'/>"
+        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png' alt='行业领军'/>"
         										}
         										if (universitiesAttributes[f] == "研究生院"){
-        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png'/>"
+        											attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png' alt='研究生院'/>"
         										}
         									}
                                         	}
@@ -706,19 +691,19 @@
                                     if(universitiesAttributes != null){
 	        							for (var f=0; f<universitiesAttributes.length; f++){
 	        								if (universitiesAttributes[f] == "985"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png'/>"
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png' alt='985'/>"
 	        								}
 	        								if (universitiesAttributes[f] == "211"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png'/>"
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png' alt='211'/>"
 	        								}
 	        								if (universitiesAttributes[f] == "双一流"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png'/>"
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png' alt='双一流'/>"
 	        								}
 	        								if (universitiesAttributes[f] == "行业领军"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png'/>"
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png' alt='行业领军'/>"
 	        								}
 	        								if (universitiesAttributes[f] == "研究生院"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png'/>"
+	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png' alt='研究生院'/>"
 	        								}
 	        							}
                                     }

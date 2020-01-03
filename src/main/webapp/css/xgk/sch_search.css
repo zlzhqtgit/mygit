@@ -40,9 +40,14 @@
 	display: inline-block;
 	padding: 0 .5em;
 }
-.sch_info div img{
+.sch_info .schoolTag>img{
 	width: 3em;
 }
+#positonBox .BMap_cpyCtrl.anchorBL,
+#positonBox .anchorBL>a{display: none;}
+#positonBox .BMap_omCtrl{
+	display: none;
+} 
 dl,dt,dd{
 	margin: 0;
 	padding: 0;
@@ -118,7 +123,7 @@ dt{
 #universities .btn.cancel:focus{
 	color: #fff;
 }
-.sch_info div img {
+.sch_info .percentage>div>img {
     width: 2.2em;
 }
 .flex_jcstart .sch_info{
@@ -273,7 +278,6 @@ footer{
 .sch_slice th{
 	background-color: #75b5ff;
 	color: white;
-	border:1px solid #3b8bec;
 }
 .tab_head{
 	border-bottom: 2px solid #2480ed;
@@ -283,8 +287,18 @@ footer{
 	cursor: pointer;
 	padding: .4em 1em;
 }
+.sch_label span:hover,
+.sch_label span:active,
+.sch_label span:focus,
+.sch_label span:focus:active,
+.sch_label span:active:hover{
+	background-color: #fff;
+	box-shadow:none;
+	color:#333;
+}
 .sch_label span{
 	margin-left:.6em;
+	cursor: auto;
 }
 .tab_head li.cur{
 	background-color: #3b8bec;
@@ -363,7 +377,7 @@ footer{
 }
 .sch_info .tab_head{
 	position: absolute;
-	top: -4.2em;
+	top: -5.2em;
 }
 .sch_info .tab_head{
 	border-bottom: none;
@@ -548,9 +562,24 @@ select{
     margin-left: auto;
 	margin-right: auto;
 }
+#Modal1>ul>li:hover{
+	background-color: #f8fafb;
+}
 #Modal{ position: relative; }
 #Modal>table td{
 	width: 130px;
+}
+#Modal>table>tbody>tr:nth-of-type(1),
+#Modal>table>tbody>tr:nth-of-type(2){
+	background-color:#fbfbff;
+}
+#Modal>table>tbody>tr:nth-of-type(1):hover,
+#Modal>table>tbody>tr:nth-of-type(2):hover{
+	background-color:#fbfbff;
+	color:#111;
+}
+#Modal>table>tbody>tr:hover{
+	background-color:#def4e3;
 }
 #Modal>table>tbody>tr>td:nth-of-type(1){
 	font-weight: bold;

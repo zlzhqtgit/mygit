@@ -76,7 +76,7 @@
 						<a href=""><img src="${pageContext.request.contextPath}/img/xgk/couseBanner.jpg" /></a>
 					</div>
 					<div class="swiper-slide">
-						<a href=""><img src="${pageContext.request.contextPath}/img/xgk/bg-banner-1.jpg" /></a>
+						<a href=""><img src="${pageContext.request.contextPath}/img/xgk/courseOnline.jpg" /></a>
 					</div>
 				</div>
 				<!-- Add Pagination -->
@@ -362,7 +362,7 @@
 			<div class="wow fadeInUp" id="con3">
 				<div class="padding-side flex_jc_sb">
 					<span class="flex_jc_sb">
-						<h3>预习课程</h3>
+						<h3>归纳梳理</h3>
 						<span class="text-muted flex_Al_c">&ensp;共128个视频</span>
 					</span> 
 					<a href="${pageContext.request.contextPath}/online/xgk_online_more.do">查看更多课程&raquo;</a>
@@ -421,16 +421,6 @@
 					<span class="glyphicon glyphicon-refresh"></span> 换一组</a>
 				</p>
 			</div>
-			<script type="text/javascript">
-				new WOW().init();
-				var wow = new WOW({
-				    boxClass: 'wow', //需要执行动画的class
-				    animateClass: 'animated',  //animate.css的class
-				    offset: 0,  //距可视区域多少开始执行动画
-				    mobile: true,  //是否在移动设备上执行动画
-				    live: true  //一部加载的内容是否有效
-				});
-			</script>
 		</main>
 		<script type="text/javascript">
 			var distance=$("main").offset().left
