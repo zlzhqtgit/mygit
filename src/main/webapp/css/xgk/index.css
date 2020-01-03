@@ -969,6 +969,7 @@ background: #9f0303;
 }
 #tmxs input[type="radio"]{
 	margin-right: 10px;
+	cursor: pointer;
 }
 #tmxs input[type="radio"]:active{
 	color: red;
@@ -1023,14 +1024,14 @@ background: #9f0303;
 	right: 0;
 	z-index: 11;
 }
-.Modal_box{
+/* .Modal_box{
 	width:40vw;
 	position: fixed;
 	z-index: 9999;
 	left: 30%;
 	top: 20%;
 	background-color: #fff;
-}
+} */
 .Modal_box>div{
 	/* width: 30em; */
 	/* height: 30em; */
@@ -1523,31 +1524,15 @@ textarea{
 	position: absolute;
 	width: 100%;
 	bottom: 0;
-	height: 300px;
-	background: linear-gradient(180deg,rgba(255,255,255,0.3),#fff);/*实现渐变效果，遮罩效果*/
-}
-.open-btn .show_more{
-	position: absolute;
-	bottom: 44px;
-	left: 44%;
-	text-decoration: none;
-	color: #fff;
-	display: inline-block;
-	overflow: hidden;
-}
-.open-btn{
-	position: absolute;
-	width: 100%;
-	bottom: 0;
-	height: 300px;
-	background: linear-gradient(180deg,rgba(255,255,255,0.3),#fff);/*实现渐变效果，遮罩效果*/
+	height: 10em;
+	color:#fff;
+	background: linear-gradient(180deg,rgba(255,255,255,0),#fff);/*实现渐变效果，遮罩效果*/
 	}
 .open-btn .show_more{
 	position: absolute;
 	bottom: 44px;
 	left: 44%;
 	text-decoration: none;
-	color: #999;
 	display: inline-block;
 	text-align:center; 
 	bottom: 3em; 
@@ -1559,6 +1544,8 @@ textarea{
 
 .vipLimite{
 	position: relative;
+	padding: .6em 4em;
+	color: #999;
 }
 .vipLimite>img{
 	width: 100%;
@@ -1568,6 +1555,7 @@ textarea{
 	top: 0;
 	opacity: .5;
 }
+.vipLimite>label,
 .show_more>label{
 	width: 100%;
 	color: red;
@@ -2587,12 +2575,13 @@ table.combile_xuank{
 }
 
 /*分页*/
-.holder1,.holder2{
+.holder1,.holder2,.holder3{
 	margin-top:2em;
 }
 .holder>a,
 .holder1>a,
-.holder2>a{
+.holder2>a,
+.holder3>a{
 	display:inline-block;
 	padding:.4em .8em;
 	border:1px solid #ddd;
@@ -2604,18 +2593,21 @@ a.jp-disabled{
 }
 .holder > a:hover,
 .holder1 > a:hover,
-.holder2 > a:hover{
+.holder2 > a:hover,
+.holder3 > a:hover{
 	text-decoration:none;
 	border:1px solid #fb660c;
 }
 .holder>a.jp-disabled:hover,
 .holder1>a.jp-disabled:hover,
-.holder2>a.jp-disabled:hover{
+.holder2>a.jp-disabled:hover,
+.holder3>a.jp-disabled:hover{
 	border:1px solid #ddd;
 }
 .holder>a.jp-current,
 .holder1>a.jp-current,
-.holder2>a.jp-current{
+.holder2>a.jp-current,
+.holder3>a.jp-current{
 	border:1px solid #3b8bec;
 	background-color:#3b8bec;
 	color:#fff;
@@ -2653,4 +2645,7 @@ a.jp-disabled{
 	right: .2em;
 	top: 0;
 }
-
+#report_cont .panel-heading{
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}

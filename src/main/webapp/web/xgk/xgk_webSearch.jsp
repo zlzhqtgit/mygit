@@ -54,7 +54,7 @@
 													<div class="padding-side">
 														<div class="">
 															<div class="sch_tit">
-																<a href=""><h4 class="fontwei">${item.universitiesName}</h4></a>
+																<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.universitiesCode}"><h4 class="fontwei">${item.universitiesName}</h4></a>
 																<div class="">
 																	<c:if test="${item.universitiesAttributes.contains('985')}">
 																		<span style><img src="${pageContext.request.contextPath}/img/xgk/attr/985.png" class="img-responsive"/></span>
@@ -118,7 +118,28 @@
 										web_search();								
 									}
 								});
-							
+								
+								//点赞
+								 function like(obj) {
+									var y;
+									var o = $(obj).find('img').attr('src');
+									switch(o) {
+										case '${pageContext.request.contextPath}/img/xgk/like.png':
+											y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
+											$(obj).find('span').text('喜欢');
+											break;
+										case '${pageContext.request.contextPath}/img/xgk/unlike.png':
+											y = '${pageContext.request.contextPath}/img/xgk/like.png';
+											$(obj).find('span').text('取消喜欢');
+											break;
+											default:
+											y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
+											$(obj).find('span').text('喜欢');
+											break;
+									}
+									$(obj).find('img').attr('src', y);
+								}
+								
 								//搜索
 								function web_search(){
 									location.href = "${pageContext.request.contextPath}/web/hqt_search.do?content=" + $("#search_info").val();
@@ -204,7 +225,7 @@
 																sch_search += '<div class="">';
 																sch_search += '<div class="sch_tit">';
 																//院校名字
-																sch_search += '<a href=""><h4 class="fontwei">' + list[i].universitiesName + '</h4></a>';
+																sch_search += '<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode="' + list[i].universitiesCode + '"><h4 class="fontwei">' + list[i].universitiesName + '</h4></a>';
 																sch_search += '<div class="">';
 																//院校属性图片
 																sch_search += attrImg;

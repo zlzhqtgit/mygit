@@ -39,18 +39,7 @@
 	function showMore(obj) {
 		$(obj).parent('.open-btn').prev().height("auto"); //取消文字容器高度限制
 		$(obj).parent().parent().find(".open-btn").hide(); //隐藏查看更多按钮
-		var datas = '';
-		var ajaxurl = '';
-		$.ajax({
-			type: "post",
-			url: "",
-			async: true,
-			data: datas,
-			dataType: 'json',
-			ssuccess: function(res) {
-				console.log(res)
-			}
-		});
+		$(obj).parents("section").css({"height":"auto","overflow":"atuo"});
 	}
 $(function(){
 	//选项卡				

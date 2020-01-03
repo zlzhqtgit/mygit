@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 <script src="${pageContext.request.contextPath}/js/web/xgk/itempool.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
@@ -22,10 +23,9 @@
 		<main class="container" style="height: 500px;margin-bottom:2em;">
 			<section class="row">
 				<!--/模态框-->
-			    <div class="" id="Modal">
-					<div class="bg-model"></div>
+			    <div class="" id="Modal" style="display:none;">
 					<div class="Modal_box">
-						<div class=""><img style="width:100%" alt="" src="${pageContext.request.contextPath}/img/xgk/model.png"/></div>
+						<div class=""><img style="width:100%" alt="" src="${pageContext.request.contextPath}/img/xgk/tipImg.jpg"/></div>
 						<p id="un_complate" class="modal-body" style="word-wrap : break-word;width: 100%;"></p >
 				        <p class="modal-footer">
 				        	<a class="btn btn-primary" >继续答题</a>
@@ -102,9 +102,25 @@
 				var cont=0;//未答题数量
 				var strone;//未答题数
 				
-				$("#Modal a").on('click',closeModal);//点击模态框或 a标签 隐藏Modal模态框
+				/* $("#Modal a").on('click',closeModal);//点击模态框或 a标签 隐藏Modal模态框
 				function closeModal(){
 					$("#Modal").css("display","none");//隐藏 Modal 模态框
+				} */
+				//弹框
+				function modelshow(title, content, type) {
+					layer.open({
+						type: type,
+						area: ['800px', '660px'],
+						fix: true, //是否随跟页面滚动
+						maxmin: false,
+						shadeClose: true, //点击阴影开关
+						shade: 0.4, //阴影透明度
+						move: 'false', //默认：.layui-layer-title
+						moveOut: false, //是否允许拖拽到窗口外
+						title: title,
+						content: content,
+						scrollbar: true
+					});
 				}
 
 				//点击提交实现的方法
@@ -144,7 +160,8 @@
 					    	 $("#Modal").css("display","none");//隐藏
 					      }else{
 					    	 $("#un_complate").html(items);//显示未答题a标签
-					    	 $("#Modal").css("display","block");//显示
+					    	 //$("#Modal").css("display","block");//显示
+					    	 modelshow(false,$('#Modal'),1);	
 					      }
 					    
 						/* alert("你还有相关的测评题目没做，题目编号为：" + cpname); */

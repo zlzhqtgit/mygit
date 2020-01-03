@@ -8,11 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script src="${pageContext.request.contextPath}/js/common.js"></script>
 		<main class="container">
 			<%-- <shiro:hasPermission name="rzcp:print"> --%>
 				<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
 			<%-- </shiro:hasPermission> --%>
-			<section class="row" id="report_cont">
+			<section class="row p_relative" id="report_cont">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="text-primary">霍兰德职业兴趣测试报告</h3>
@@ -29,7 +30,7 @@
 					</div>
 				</div>
 
-				<div class="panel panel-default">
+				<div class="panel panel-default margin0">
 					<!-- Default panel contents -->
 					<div class="panel-heading fontwei">霍兰德职业兴趣测试报告</div>
 					<div class="panel-body report" style="padding: 2em 4em;">
@@ -289,8 +290,14 @@
 								</table>
 							</ul>
 					</div>
+					<div class="open-btn">
+						<a onclick="showMore(this)" class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 查看更多 </a>
+		            </div>
 			</section>
-			
+			<script src="${pageContext.request.contextPath}/js/common.js"></script>
+			<script type="text/javascript">
+				$(".open-btn").parents("section").css({"height":"920","overflow":"hidden"})
+			</script>
 		</main>
 </body>
 </html>

@@ -202,7 +202,7 @@
 						<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-list-alt"></span> 我的测评</a></li>
 					<%-- </shiro:hasPermission> --%>				
 					<%-- <shiro:hasPermission name="grzx_sub:query"> --%>
-						<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-th-large"></span> 我的学科</a></li>
+						<!-- <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-th-large"></span> 我的学科</a></li> -->
 					<%-- </shiro:hasPermission> --%>
 					<%-- <shiro:hasPermission name="grzx_wdxk:query"> --%>
 					<li class="p_relative">
@@ -220,7 +220,7 @@
 						<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-record"></span> 我的关注 </a> </li>
 					<%-- </shiro:hasPermission> --%>
 					<%-- <shiro:hasPermission name="grzx_kstd:query"> --%>
-						<li><liclass="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
+						<li class="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
 					<%-- </shiro:hasPermission> --%>					
 				</ul>
 				
@@ -483,9 +483,9 @@
 							</li>
 						<%-- </shiro:hasPermission> --%>
 					</ul>
-					<ul>
+					<!-- <ul>
 						<li>是的噶山豆根爱上公司的111</li>
-					</ul>
+					</ul> -->
 					<ul>
 						<li class="myXuanke">
 							<div class="" onload="showModel()">

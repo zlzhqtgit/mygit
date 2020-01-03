@@ -29,7 +29,7 @@
 			<shiro:guest>
 				<form action="" method="post">
 					<fieldset id="" class="">
-						<legend class="text-primary margin0"><h3 class="margin0" style="padding-bottom:1em;">立学道综合改革云平台</h3></legend>
+						<legend class="text-primary margin0"><h3 class="margin0" style="padding-top:.6em;padding-bottom:1em;">立学道综合改革云平台</h3></legend>
 						<div class="form-group">
 							<input id="mobile" onblur="check_mobile()" type="text" value="" placeholder="手机号"/>
 							<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
@@ -69,9 +69,9 @@
 				<!-- Swiper -->
 			    <div class="swiper-wrapper">
 				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner_login1.png"/></a></div>
-				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
+				   <%--  <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
 				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner1.jpg"/></a></div>
-				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div>
+				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div> --%>
 			    </div>
 			    <!-- Add Pagination -->
 			    <div class="swiper-pagination"></div>

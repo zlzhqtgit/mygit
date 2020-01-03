@@ -125,7 +125,10 @@ dt{
 	width: auto;
 }
 .sh_logo{
-	width:16%
+	width:16%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .sch_info {
 	/* width:30% */
@@ -546,6 +549,47 @@ select{
 	margin-right: auto;
 }
 #Modal{ position: relative; }
+#Modal>table td{
+	width: 130px;
+}
+#Modal>table>tbody>tr>td:nth-of-type(1){
+	font-weight: bold;
+}
+#Modal>table>tbody>tr:nth-of-type(1)>td{
+	vertical-align: bottom;
+	border-bottom: 0;
+}
+#Modal>table>tbody>tr:nth-of-type(2)>td{
+	border-top: 0;
+	padding: 0;
+}
+#Modal1 table th img{
+	width: 4em;
+}
+#Modal1 .compareScoreItem{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #3b8bec;
+}
+#Modal1 .compareScoreItem .clogo{
+	display: flex;
+	width: 10%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+}
+#Modal1 .compareScoreItem .clogo img{
+	width: 4em;
+}
+#Modal1 .compareScoreItem .ctable{
+	width: 90%;
+	height: 100%;
+}
+#Modal1 .compareScoreItem .ctable table{
+	width: 100%;
+}
+
 .Modal_box{border-radius: 8px;}
 .Modal_box .glyphicon{
 	position: absolute;

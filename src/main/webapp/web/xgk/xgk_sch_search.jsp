@@ -148,9 +148,7 @@
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
 					<!-- 查询结果 -->
-					<div id="search_result">
-						
-					</div>
+					<div id="search_result"></div>
 					<!-- 分页 -->
 					<div id="search_page"></div>
 					</section>
@@ -165,8 +163,8 @@
 				 	<ul class="contrast_list clearfix"></ul>
 					<div class="btn_group">
 				 		<span class="padding-side">
-				 			<p class="text-center"><a href="javascript:void(0)" onclick="modelshow($('#Modal .modal_tit').html(),$('#Modal .modal_content').html())" class="btn btn-primary">院校基本情况对比</a></p>
-					 		<p class="text-center"><a href="javascript:void(0)" onclick="modelshow($('#Modal1 .modal_tit').html(),$('#Modal1 .modal_content').html())" class="btn btn-primary">院校录取分数对比</a></p>
+				 			<p class="text-center"><a href="javascript:void(0)" onclick="baseCompare(this)" class="btn btn-primary">院校基本情况对比</a></p>
+					 		<p class="text-center"><a href="javascript:void(0)" onclick="admitScoreCompare(this)" class="btn btn-primary">院校录取分数对比</a></p>
 					 		<p class="text-center"><a href="javascript:void(0)" onclick="clear_contrast(this)" class="btn btn-primary">清空对比</a></p>
 				 		</span>
 				 	</div>
@@ -174,46 +172,27 @@
 			</div>
 			<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
 			<!--模态框-->
-			<div class="tip_box" id="Modal">
-				<div class="bg-model"></div>
-				<div class="Modal_box padding-side2">
-					<a  class="glyphicon glyphicon-remove text-muted" href="javascript:void(0)" onclick="close_model(this)"></a>
-					<h2 class="modal_tit text-left margin_top1 fontwei">院校基本情况对比</h2>
-					<div class="modal_content margin_top margin_bot padding-side2">
-						<table class="table table-bordered table-bordered marginauto">
-							<thead>
-								<tr><th style="vertical-align: middle;">院校</th>
-									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
-									<th><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/><div>上海外国语大学</div></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr><td>录取批次</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>标签属性</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>综合排名</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>学校类型</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>硕士点个数</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>博士点个数</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>一流学科个数</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								<tr><td>一流学科</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
-								
-							</tbody>
-						</table>
-					</div>
+			<div class="padding-side2" id="Modal" style="display: none;">
+				<div class="margin_top1 table_wrap">
+					<table class="table table-bordered table-bordered marginauto"></table>
 				</div>
 			</div>
 			
-			<div class="tip_box" id="Modal1" style="display: none;">
-				<div class="bg-model"></div>
-				<div class="Modal_box padding-side2">
-					<a  class="glyphicon glyphicon-remove text-muted" href="javascript:void(0)" onclick="close_model(this)"></a>
-					<h2 class="modal_tit text-left margin_top1 fontwei">院校录取分数对比</h2>
-					<div class="modal_content margin_top margin_bot padding-side2">
-						<table class="table table-hover table-bordered marginauto">
-							<tr><td rowspan="7" style="width: 10em;"><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></td><td rowspan="2">年份</td><td colspan="6">录取分数</td><td colspan="2">计划招生</td></tr>
+			<div class="padding-side2" id="Modal1" style="display: none;">
+					<!-- <ul class="list-unstyled">
+						<li>
+							<div class="compareScoreItem">
+								<div class="clogo">
+									sdfasd
+								</div>
+								<div class="ctable">
+								</div>
+							</div>
+						</li>
+					</ul> -->
+					<div class="margin_top1 table_wrap">
+						<table class="table table-hover table-bordered">
+							<tr><th rowspan="7"><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></th><th rowspan="2">年份</th><th colspan="5">录取分数</th><th colspan="2">计划招生</th></tr>
 							<tr><td>最低分</td><td>平均分</td><td>最高分</td><td>投档线</td><td>线差</td><td>今年</td><td>往年</td></tr>
 							<tr><td>2019</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
 							<tr><td>2018</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td></tr>
@@ -223,22 +202,27 @@
 						</table>
 					</div>
 				</div>
-			</div>
 			<!--/模态框-->
 			<script type="text/javascript">
 				//弹框
-				function modelshow(title,content){
+				/**
+				 * 
+				 * @param {Object} title
+				 * @param {Object} content
+				 * @param {Object} type
+				 */
+				function modelshow(title,content,type) {
 					layer.open({
-						type: 1,
-						area: ['960px','560px'],
+						type: type,
+						area: ['888px', '500px'],
 						fix: true, //是否跟随页面滚动
-						maxmin: true,
-						shadeClose: true,//点击阴影开关
-						shade:0.4,//阴影透明度
-						move: 'false',//默认：.layui-layer-title
-						moveOut: false,//是否允许拖拽到窗口外
+						Btn: 0,
+						shadeClose: true, //点击阴影开关
+						shade: 0.4, //阴影透明度
+						move: 'false', //默认：.layui-layer-title
+						moveOut: false, //是否允许拖拽到窗口外
 						title: title,
-						content:content,
+						content: content,
 						scrollbar: true
 					});
 				}
@@ -348,7 +332,55 @@
 						close_conbox();
 					}
 				}
-
+				
+				//基本情况对比
+				function baseCompare(obj) {
+					modelshow('院校基本情况对比',$('#Modal'),1);	
+				}
+		    	function admitScoreCompare(obj) {
+					modelshow('院校录取分数对比',$('#Modal1'),1);	
+				}
+		    	
+				/**
+				 * 渲染基本信息表
+				 * @param {Object} id 被加入对比中的item的id
+				 */
+				function fatch_BaseInfo(id) {
+					//基本情况对比
+					var row=[
+						{ filed:"院校", value:[] },
+						{ filed:"", value:[] },//name
+						{ filed:"录取批次", value:[] },
+						{ filed:"标签属性", value:[] },
+						{ filed:"综合排名", value:[] },
+						{ filed:"学校类型", value:[] },
+						{ filed:"硕士点个数", value:[] },
+						{ filed:"博士点个数", value:[] }
+					];
+					console.log("11111")
+					var list=$('.contrast_list li');
+					var table='<table class="table-bordered table-bordered margin_top1"><tbody>';
+					for (var i=0;i<row.length;i++) {
+						table+='<tr><td>'+row[i].filed+'</td>';
+						for (var j=0;j<list.length;j++){
+							wrapId=list[j].id.substr(4,id.length);
+							row[0].value[j]=$("#"+wrapId).find(".sh_logo").html();
+							row[1].value[j]=$("#"+wrapId).attr("pname");
+							row[2].value[j]=$("#"+wrapId).find(".sch_info .admission_lot").text();
+							row[3].value[j]=$("#"+wrapId).find(".sch_info .schoolTag img").attr("alt");
+							row[4].value[j]=$("#"+wrapId).find(".sch_info .admitRank").text();
+							row[5].value[j]=$("#"+wrapId).find(".sch_info .schType").text();
+							row[6].value[j]=$("#"+wrapId).find(".sch_info .masterNum").text();
+							row[7].value[j]=$("#"+wrapId).find(".sch_info .doctorNum").text();
+							table+='<td><div>'+row[i].value[j]+'</div></td>';
+						}
+						table +="</tr>";
+					}
+					table+='</tbody></table>';
+					$("#Modal").html(table);
+				}
+				
+				
 				//加入对比
 				function add_contrast(row_id,itemImg){
 					if ($("#btnid"+row_id).is(":checked")) {
@@ -361,6 +393,7 @@
 							return false;
 						}
 						$('.contrast_list').append('<li id="comp'+row_id+'"><a href="javascript:void(0)"><img src="'+itemImg+'"/></a><p class="text-center margin_top1"><a href="javascript:void(0)" onclick="del_compare(this)" class="btn btn-primary">取消对比</a></p></li>');
+						fatch_BaseInfo(row_id);
 					} else{
 						$("#btnid"+row_id).parent().removeClass("cancel text-white");
 						$("#btnid"+row_id).parent().addClass("btn-primary");
@@ -380,7 +413,7 @@
 					$("#btnid"+rowId).parent().addClass("btn-primary");
 					$("#btnid"+rowId).parent().find('span').text("加入对比");
 					document.getElementById("btnid"+rowId).checked=false;
-					
+					fatch_BaseInfo(rowId);
 					
 					if ($(".contrast_list li").length==0) {
 						 close_conbox();
@@ -560,12 +593,12 @@
 												 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
 												 "</div>" +
 												 //院校名字   + 院校属性  + 录取批次  + 综合评级
-												 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4><span class=''>" + list[i].universitiesName + "</span><span class='schoolTag'>" + attrImg + "</span></h4>" +
-												 "<p class=''>综合评级（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
+												 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<label class='schoolName fontwei'>"+list[i].universitiesName+"</label>" +"<span class='schoolTag'>" + attrImg + "</span>"+
+												 "<p class=''>综合评级（<span class='admission_lot'>"+admissionLots+ "</span>）<span class='admitRank text-danger'>" + list[i].totalRanking + "</span></p>" +
 												 "</div>" +
 												 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
 												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
-												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span>" + list[i].universitiesNature + "</span></td><td><span>" + doctor + "</span></td></tr>" +
+												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
 												 "</table></div>" +
 												 //[录取分表格   start]
 												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
@@ -707,16 +740,16 @@
 												 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
 												 "</div>" +
 												 //院校名字   + 院校属性  + 录取批次  + 综合评级
-												 "<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<h4><span class=''>" + list[i].universitiesName + "</span><span class=''>" + attrImg + "</span></h4>" +
-												 "<p class=''>综合评级（" + admissionLots + "）<span class='text-danger'>" + list[i].totalRanking + "</span></p>" +
+												"<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<label class='schoolName fontwei'>"+list[i].universitiesName+"</label>" +"<span class='schoolTag'>" + attrImg + "</span>"+
+												 "<p class=''>综合评级（<span class='admission_lot'>"+admissionLots+ "</span>）<span class='admitRank text-danger'>" + list[i].totalRanking + "</span></p>" +
 												 "</div>" +
 												 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
 												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
-												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span>" + list[i].universitiesNature + "</span></td><td><span>" + doctor + "</span></td></tr>" +
+												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
 												 "</table></div>" +
 												 //[录取分表格   start]
 												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
-                                        	
+												 
 									//[院校扩展表list 院校录取分数线] 
 									if(list[i].universRelationList == null){
 										universities += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";

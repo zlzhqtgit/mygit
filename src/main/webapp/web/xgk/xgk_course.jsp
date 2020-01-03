@@ -73,7 +73,7 @@
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide">
-						<a href=""><img src="${pageContext.request.contextPath}/img/xgk/bannerBg.png" /></a>
+						<a href=""><img src="${pageContext.request.contextPath}/img/xgk/couseBanner.jpg" /></a>
 					</div>
 					<div class="swiper-slide">
 						<a href=""><img src="${pageContext.request.contextPath}/img/xgk/bg-banner-1.jpg" /></a>
