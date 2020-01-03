@@ -29,15 +29,15 @@
  
 		<main class="sch_info margin_bot">
 			<p class="text-right container"><a class="btn btn-primary" href="javascript:history.go(-1)">< 返回</a></p>
-			<section class="" style="background: url(${pageContext.request.contextPath}/img/xgk/bannerBg.png) no-repeat;background-size: inherit;background-position: 0 -238px;padding-bottom: 2em;">
+			<section class="" style="background: url(${pageContext.request.contextPath}/img/xgk/sch_info.jpg) no-repeat;background-size: inherit;background-position: 0 -238px;padding-bottom: 2em;">
 				<div class="container">
 					<div class="row sch_info_head">
 						<div class="col-lg-2  col-sm-2 col-md-2 sch_logo">		
 								<img src="${COLLEGE_PHOTO_PREFIX}/${school.universitiesLogo}" style="width: 100%;border-radius: 10px;"/>
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
-							<h3 class="text-white margin_top1">${school.universitiesName }</h3>10001
-							
+							<h3 class="text-white margin_top1">${school.universitiesName }</h3>
+							<div class="text-white"><span>院校代码：</span>10001</div>
 							<p class="margin_top sch_label" id="universities_attributes">
 								<span class="btn btn-default">本科</span>
 								<span class="btn btn-default">双一流</span>
@@ -51,7 +51,7 @@
 						<div class="col-lg-4  col-sm-4 col-md-4" style="display: flex;align-items: center;justify-content: center;">
 							<div class="like">
 									<c:if test="${school_like != null}">
-										<a id="${school_like.eId}" href="javascript:;" onclick="like(this)" >喜欢
+										<a class="text-white" id="${school_like.eId}" href="javascript:;" onclick="like(this)" >喜欢
 											<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>
 										</a>
 									</c:if>
@@ -648,9 +648,15 @@
 		    					<li>隶属于：<span>${school.belongTo}</span></li>
 		    					<li>地址：<span>${school.address}</span></li>
 		    				</ul>	    				
-		    					<p class="text-center"><a class="text-primary" href="javascript:void(0)" onclick="modelshow('公司地址',$('#positonBox'),1)">查看地图</a></p>		    				  				
+		    					<p class="text-center"><a class="text-primary" href="javascript:void(0)">查看地图</a></p>		    				  				
 		    			</div>
+		    			<div class="" id="positionBox" style="">
+							<!--百度地图容器onclick="modelshow('学校地址',$('#positionBox'),1)"-->
+							<div style="width:100%;height:366px;border:#ccc solid 1px;" id="dituContent"></div>
+							<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+						</div>
 		    		</div>
+		    		
 			    </div>
 			    <script type="text/javascript">
 			    function like(obj){
@@ -773,11 +779,8 @@
 			    	})
 			    </script>
 			</section>
+			<div class="school_address hide">${school.address}</div>
 		</main>
-		<div class="" id="positonBox" style="display:none;">
-			<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
-			<!--百度地图容器-->
-			<div style="width:796px;height:456px;border:#ccc solid 1px;" id="dituContent"></div>
 			<script type="text/javascript">
 			//创建和初始化地图函数：
 			function initMap() {
@@ -791,9 +794,10 @@
 			function createMap() {
 				var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
 				// 创建地址解析器实例     
-				var myGeo = new BMap.Geocoder();      
-				// 将地址解析结果显示在地图上，并调整地图视野    
-				myGeo.getPoint("${school.address}", function(point){
+				var myGeo = new BMap.Geocoder();    
+				console.log("${school.address}")
+				// 将地址解析结果显示在地图上，并调整地图视野   
+				myGeo.getPoint("${school.address}", function(point){ //${school.address}
 //							console.log(Position)
 				          if (point) {      
 				              map.centerAndZoom(point, 16);
@@ -835,7 +839,7 @@
 			}
 	
 			//标注点数组
-			var markerArr = [{
+			/* var markerArr = [{
 				title: "贵州好前途教育科技有限公司",
 				content: "我的备注",
 				point: "106.649734|26.617006",
@@ -848,7 +852,7 @@
 					x: 6,
 					lb: 5
 				}
-			}];
+			}]; */
 			//创建marker
 			function addMarker() {
 				for(var i = 0; i < markerArr.length; i++) {
@@ -913,8 +917,6 @@
 	
 			initMap(); //创建和初始化地图
 		</script>
-	</div>
-			</div>
 		<!-- 右侧边栏-->
 		<c:import url="../public/side_right.jsp"></c:import>
 		<!-- 页面底部-->

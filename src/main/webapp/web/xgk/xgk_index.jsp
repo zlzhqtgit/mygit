@@ -69,9 +69,9 @@
 				<!-- Swiper -->
 			    <div class="swiper-wrapper">
 				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner_login1.png"/></a></div>
-				   <%--  <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner.jpg"/></a></div>
-				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner1.jpg"/></a></div>
-				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div> --%>
+				   	<div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner2.jpg"/></a></div>
+				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner3.jpg"/></a></div>
+				   <%--<div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div> --%>
 			    </div>
 			    <!-- Add Pagination -->
 			    <div class="swiper-pagination"></div>

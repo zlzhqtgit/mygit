@@ -239,7 +239,7 @@
 											<label for="phone">手机号：</label>
 											<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true"/>
 											<%-- <shiro:hasPermission name="wdzl_xgsh:update"> --%>
-												<label for="phone"><a onclick="open_pws_div()">修改手机号</a></label>
+												<label class="padding-side" for="phone"><a class="btn btn-default" onclick="open_pws_div()">修改手机号</a></label>
 											<%-- </shiro:hasPermission> --%>																						
 										</div>
 										<div class="form-group">
@@ -378,11 +378,11 @@
 							</div>
 							<div id="update_pwsd" style="display: none;">
 								<fieldset id="">
-										<legend class="text-primary">修改手机号</legend>									
-										<div class="form-group">
+										<legend class="text-primary margin0" style="padding:1em;padding-bottom:.4em;">修改手机号</legend>									
+										<div class="form-group margin_top">
 											<label for="new_phone">新手机号：</label>
 											<input id="new_phone" name="new_phone" type="text" placeholder="请输入手机号"/>
-											<label><a id="verify_phone" class="get_verify btn btn-default" onclick="sendMobileMessage()">获取手机验证码</a></label>											
+											<label class="padding-side"><a id="verify_phone" class="get_verify btn btn-default" onclick="sendMobileMessage()">获取手机验证码</a></label>											
 										</div>
 										<div class="form-group">
 											<label for="verify_code">验证码：</label>
