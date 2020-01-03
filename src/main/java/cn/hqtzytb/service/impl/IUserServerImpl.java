@@ -365,7 +365,6 @@ public class IUserServerImpl implements IUserServer {
 
 	@Override
 	public String showUserCenterInfo(HttpServletRequest request) {
-
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			if (subject.isAuthenticated()) {
@@ -442,56 +441,61 @@ public class IUserServerImpl implements IUserServer {
 
 	@Override
 	public ResponseResult<Map<String, Object>> reduceDownloadCount(HttpServletRequest request) {
-		// try {
-		Subject subject = SecurityUtils.getSubject();
-		Map<String, Object> resultMap = new HashMap<>();
-		if (subject.isAuthenticated()) {// 好前途平台用户下载报告有限制
-			Date currentTime = new Date();
-			Integer uid = (Integer) subject.getSession().getAttribute("uid");
-			User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
-			System.err.println("user：" + user);
-			AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(user.getRid());
-			resultMap.put("USER_TYPE", adminSystem.getSysname());
-			if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {
-				if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 您还不是VIP无法使用
+		try {
+			Subject subject = SecurityUtils.getSubject();
+			Map<String, Object> resultMap = new HashMap<>();
+			if (subject.isAuthenticated()) {// 好前途平台用户下载报告有限制
+				Date currentTime = new Date();
+				Integer uid = (Integer) subject.getSession().getAttribute("uid");
+				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
+				System.err.println("user：" + user);
+				AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(user.getRid());
+				resultMap.put("USER_TYPE", adminSystem.getSysname());
+				if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {
+					if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 您还不是VIP无法使用
 
-					resultMap.put("count", user.getDownloadCount());
-					if (user.getExpirationTime() != null) {
-						resultMap.put("expirationTime",
-								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-					}
-					return new ResponseResult<>(ResponseResult.ERR, "您还不是VIP无法下载报告，是否成为VIP用户？或单独购买本次服务?", resultMap);
-
-				} else {
-					if (user.getDownloadCount() != null && user.getDownloadCount() <= 0) {// 下载次数用完
-						return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！或单独购买本次服务?",
-								resultMap);
-					}
-					if (user.getExpirationTime() != null && currentTime.after(user.getExpirationTime())) {// vip过期
-						return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！或单独购买本次服务?");
-					} else {
-						resultMap.put("count", user.getDownloadCount());
-						if (user.getExpirationTime() != null) {
-							resultMap.put("expirationTime",
-									new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+						if (user.getDownloadCount() != null && user.getDownloadCount() <= 0) {// 下载次数用完
+							return new ResponseResult<>(ResponseResult.ERR, "您还不是VIP无法下载报告，是否成为VIP用户？或单独购买本次服务?",
+									resultMap);
+						} else {
+							resultMap.put("count", user.getDownloadCount());
+							if (user.getExpirationTime() != null) {
+								resultMap.put("expirationTime",
+										new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+							}
+							user.setDownloadCount(user.getDownloadCount() - 1);
+							userMapper.updateById(user);
+							return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS,
+									resultMap);
 						}
-						user.setDownloadCount(user.getDownloadCount() - 1);
-						userMapper.updateById(user);
-						return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS,
-								resultMap);
+					} else {
+						if (user.getDownloadCount() != null && user.getDownloadCount() <= 0) {// 下载次数用完
+							return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！或单独购买本次服务?",
+									resultMap);
+						}
+						if (user.getExpirationTime() != null && currentTime.after(user.getExpirationTime())) {// vip过期
+							return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！或单独购买本次服务?");
+						} else {
+							resultMap.put("count", user.getDownloadCount());
+							if (user.getExpirationTime() != null) {
+								resultMap.put("expirationTime",
+										new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+							}
+							user.setDownloadCount(user.getDownloadCount() - 1);
+							userMapper.updateById(user);
+							return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS,
+									resultMap);
+						}
 					}
 				}
+				return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
+			} else {
+				return new ResponseResult<>(ResponseResult.ERR, "请登录后,再行打印报告", resultMap);
 			}
-			return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
-		} else {
-			return new ResponseResult<>(ResponseResult.ERR, "请登录后,再行打印报告", resultMap);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：查看用户是否能够下载测评报告异常 错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
 		}
-		// } catch (Exception e) {
-		// logger.error("访问路径：" + request.getRequestURI() + "操作：查看用户是否能够下载测评报告异常
-		// 错误信息: " + e);
-		// return new ResponseResult<>(ResponseResult.ERR,
-		// Constants.RESULT_MESSAGE_FAIL);
-		// }
 
 	}
 

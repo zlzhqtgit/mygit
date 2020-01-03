@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h5><a href="">支付失败</a></h5>
+	<h5>支付失败</h5><h5><a href="${nowUrl}">返回</a></h5>
 </body>
 </html>
