@@ -229,9 +229,17 @@
 								</li>
 							</ul>
 					</div>
-					<div class="open-btn">
-						<a onclick="showMore(this)" class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 查看更多 </a>
+					<div class="open-btn">						
+						<shiro:hasPermission name="mbti_more:query">
+							<a onclick="showMore(this)" class="show_more btn btn-primary vipLimite"> 查看更多 </a>
+						</shiro:hasPermission>
+						<shiro:lacksPermission name="mbti_more:query">
+							<a class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 查看更多 </a>
+						</shiro:lacksPermission>						
 		            </div>
+					<!-- <div class="open-btn">
+						<a onclick="showMore(this)" class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 查看更多 </a>
+		            </div> -->
 			</section>
 			<script src="${pageContext.request.contextPath}/js/common.js"></script>
 			<script type="text/javascript">

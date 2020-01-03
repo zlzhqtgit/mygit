@@ -10,9 +10,7 @@
 <body>
 <script src="${pageContext.request.contextPath}/js/common.js"></script>
 		<main class="container">
-			<%-- <shiro:hasPermission name="rzcp:print"> --%>
-				<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
-			<%-- </shiro:hasPermission> --%>
+			<p class="text-right row"><a href="javascript:void(0)" class="downloadReport btn btn-primary">打印报告</a></p>
 			<section class="row p_relative" id="report_cont">
 			
 			<script type="text/javascript">
@@ -109,7 +107,6 @@
 					}
 			</script>
 			<section class="row" id="report_cont">
->>>>>>> branch 'master' of https://github.com/zlzhqtgit/mygit.git
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="text-primary">霍兰德职业兴趣测试报告</h3>
@@ -386,8 +383,14 @@
 								</table>
 							</ul>
 					</div>
+					<shirasaa
 					<div class="open-btn">
-						<a onclick="showMore(this)" class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 查看更多 </a>
+						<shiro:hasPermission name="hld_more:query">
+							<a onclick="showMore(this)" class="show_more btn btn-primary vipLimite"> 查看更多 </a>
+						</shiro:hasPermission>
+						<shiro:lacksPermission name="hld_more:query">
+							<a class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 查看更多 </a>
+						</shiro:lacksPermission>						
 		            </div>
 			</section>
 			<script src="${pageContext.request.contextPath}/js/common.js"></script>
