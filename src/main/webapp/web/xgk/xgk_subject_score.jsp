@@ -565,10 +565,8 @@
 							</tr>
 						</tbody>
 					</table>
-					<p class="text-right">
-						<shiro:hasPermission name="qncp:query">
-							<a href="${pageContext.request.contextPath}/sub/xgk_potential_report.do" class="btn btn-primary fontwei">查看潜能报告</a>
-						</shiro:hasPermission>						
+					<p class="text-right">						
+							<a href="${pageContext.request.contextPath}/sub/xgk_potential_report.do" class="btn btn-primary fontwei">查看潜能报告</a>					
 					</p>
 				</div>
 

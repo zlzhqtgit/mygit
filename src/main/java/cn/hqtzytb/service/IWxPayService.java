@@ -17,8 +17,8 @@ public interface IWxPayService {
 
 	Object wxpay(HttpServletRequest request, String out_trade_no, String total_fee, String body);
 
-	void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, Double rechargeMoney)
-			throws Exception;
+	void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, Double rechargeMoney,
+			String type) throws Exception;
 
 	ResponseResult<Void> weixinNotify(HttpServletRequest request, HttpServletResponse response);
 

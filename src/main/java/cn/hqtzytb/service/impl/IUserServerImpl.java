@@ -23,6 +23,7 @@ import org.springframework.ui.ModelMap;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 
+import cn.hqtzytb.entity.AdminSystem;
 import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.PhotoConfig;
 import cn.hqtzytb.entity.ResponseResult;
@@ -38,6 +39,7 @@ import cn.hqtzytb.mapper.TaskMapper;
 import cn.hqtzytb.mapper.UserFeatureMapper;
 import cn.hqtzytb.mapper.UserMapper;
 import cn.hqtzytb.mapper.UserResultReportMapper;
+import cn.hqtzytb.mapper.UserRoleMapper;
 import cn.hqtzytb.service.IUserServer;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.utils.GetCommonUser;
@@ -59,6 +61,8 @@ public class IUserServerImpl implements IUserServer {
 	private TaskMapper taskMapper;
 	@Autowired
 	private EnshrineMapper enshrineMapper;
+	@Autowired
+	private UserRoleMapper userRoleMapper;
 
 	@Override
 	public List<User> getuserAll() {
@@ -445,35 +449,38 @@ public class IUserServerImpl implements IUserServer {
 			Date currentTime = new Date();
 			Integer uid = (Integer) subject.getSession().getAttribute("uid");
 			User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
-
+			System.err.println("user：" + user);
+			AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(user.getRid());
+			resultMap.put("USER_TYPE", adminSystem.getSysname());
 			if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {
-				if (user.getDownloadCount() <= 0) {// 使用次数已用完
-					resultMap.put("status", 1);// 次数使用完 提示充值下载
+				if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 您还不是VIP无法使用
+
 					resultMap.put("count", user.getDownloadCount());
 					if (user.getExpirationTime() != null) {
 						resultMap.put("expirationTime",
 								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
 					}
-					return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！", resultMap);
-				}
-				if (user.getExpirationTime() != null && currentTime.after(user.getExpirationTime())) {// 已过期
-					resultMap.put("status", 2);// 过期 提示充值下载、续费Vip
-					resultMap.put("count", user.getDownloadCount());
-					if (user.getExpirationTime() != null) {
-						resultMap.put("expirationTime",
-								new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+					return new ResponseResult<>(ResponseResult.ERR, "您还不是VIP无法下载报告，是否成为VIP用户？或单独购买本次服务?", resultMap);
+
+				} else {
+					if (user.getDownloadCount() != null && user.getDownloadCount() <= 0) {// 下载次数用完
+						return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！或单独购买本次服务?",
+								resultMap);
 					}
-					return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！");
+					if (user.getExpirationTime() != null && currentTime.after(user.getExpirationTime())) {// vip过期
+						return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！或单独购买本次服务?");
+					} else {
+						resultMap.put("count", user.getDownloadCount());
+						if (user.getExpirationTime() != null) {
+							resultMap.put("expirationTime",
+									new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+						}
+						user.setDownloadCount(user.getDownloadCount() - 1);
+						userMapper.updateById(user);
+						return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS,
+								resultMap);
+					}
 				}
-				// 正常下载测评报告
-				resultMap.put("status", 0);// 正常
-				resultMap.put("count", user.getDownloadCount());
-				if (user.getExpirationTime() != null) {
-					resultMap.put("expirationTime",
-							new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
-				}
-				user.setDownloadCount(user.getDownloadCount() - 1);
-				userMapper.updateById(user);
 			}
 			return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
 		} else {
