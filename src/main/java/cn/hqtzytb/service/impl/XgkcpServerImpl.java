@@ -4,13 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import cn.hqtzytb.service.IUserFeatureServer;
-import cn.hqtzytb.service.IXgkcpResultServer;
-import cn.hqtzytb.service.IXgkcpServer;
-import cn.hqtzytb.utils.GetCommonUser;
-import net.sf.json.JSONArray;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -18,45 +15,54 @@ import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
+
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.UserFeature;
 import cn.hqtzytb.entity.Xgkcp;
 import cn.hqtzytb.entity.XgkcpResult;
+import cn.hqtzytb.mapper.UserRoleMapper;
 import cn.hqtzytb.mapper.XgkcpMapper;
+import cn.hqtzytb.service.IUserFeatureServer;
+import cn.hqtzytb.service.IXgkcpResultServer;
+import cn.hqtzytb.service.IXgkcpServer;
+import cn.hqtzytb.utils.GetCommonUser;
+import net.sf.json.JSONArray;
 
 /**
-* @Title: XgkcpServerImpl.java
-* @Package cn.hqtzytb.service
-* @Description:(测评结果信息查询业务层实现类)
-* @author: ZhouLingZhang
-* @date 2019年9月5日
-* @Copyright:好前途教育
-* @version V1.0
-*/
+ * @Title: XgkcpServerImpl.java
+ * @Package cn.hqtzytb.service
+ * @Description:(测评结果信息查询业务层实现类)
+ * @author: ZhouLingZhang
+ * @date 2019年9月5日
+ * @Copyright:好前途教育
+ * @version V1.0
+ */
 
 @Service
 public class XgkcpServerImpl implements IXgkcpServer {
-	private  static final Logger logger = LogManager.getLogger(XgkcpServerImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(XgkcpServerImpl.class.getName());
 	@Autowired
 	public XgkcpMapper xgkcpMapper;
 	@Autowired
 	private IXgkcpResultServer iXgkcpResultServer;
 	@Autowired
 	private IUserFeatureServer userFeatureServer;
+	@Autowired
+	private UserRoleMapper userRoleMapper;
 
 	public List<Xgkcp> getCpResult(String cpName) {
-		String where="cp_name ='" + cpName + "'";
+		String where = "cp_name ='" + cpName + "'";
 		return xgkcpMapper.select(where, null, null, null);
 	}
 
 	public List<Xgkcp> getCpType(String cpName) {
-		String where="cp_name ='" + cpName + "'";
+		String where = "cp_name ='" + cpName + "'";
 		return xgkcpMapper.selectType(where, null, null, null);
 	}
 
-	
 	@Override
-	public String showhqtCpAnswer(ModelMap map, Integer cpid, HttpServletRequest request,HttpServletResponse response){
+	public String showhqtCpAnswer(ModelMap map, Integer cpid, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
 			Session session = SecurityUtils.getSubject().getSession();
 			map.addAttribute("cpid", cpid);
@@ -135,7 +141,8 @@ public class XgkcpServerImpl implements IXgkcpServer {
 				String[][] str = { { "R", "0", "现实型" }, { "I", "0", "研究型" }, { "A", "0", "艺术型" }, { "S", "0", "社会型" },
 						{ "E", "0", "企业型" }, { "C", "0", "常规型" } };
 				String fs = "";
-				// Iterator iter = cpFengshu.entrySet().iterator(); //获得map的Iterator
+				// Iterator iter = cpFengshu.entrySet().iterator();
+				// //获得map的Iterator
 				for (int i = 0; i < str.length; i++) {
 					str[i][1] = cpFengshu.get(str[i][0]).toString();
 					fs += str[i][0] + "," + str[i][1] + "," + str[i][2] + "-";
@@ -146,12 +153,14 @@ public class XgkcpServerImpl implements IXgkcpServer {
 				System.err.println("reportResult:" + reportResult);
 				map.addAttribute("cpFengshu", fs);
 				map.addAttribute("hldreport", reportResult);
-				map.addAttribute("report", "report_hld");		
-				for(int i=0; i<reportResult.size(); i++){
-					//专业列表
-					map.addAttribute("specialty" + i,GetCommonUser.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalitySpecialty()), request));
-					//职业列表
-					map.addAttribute("vocation" + i,GetCommonUser.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalityVocation()), request));
+				map.addAttribute("report", "report_hld");
+				for (int i = 0; i < reportResult.size(); i++) {
+					// 专业列表
+					map.addAttribute("specialty" + i, GetCommonUser
+							.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalitySpecialty()), request));
+					// 职业列表
+					map.addAttribute("vocation" + i, GetCommonUser
+							.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalityVocation()), request));
 				}
 			} else {
 				cpresult = get.getMbti(cpFengshu);
@@ -167,23 +176,24 @@ public class XgkcpServerImpl implements IXgkcpServer {
 	}
 
 	@Override
-	public ResponseResult<Void> handleCpResult(Integer id,String cpda, HttpServletRequest request) {
+	public ResponseResult<Void> handleCpResult(Integer id, String cpda, HttpServletRequest request) {
 		ResponseResult<Void> rr;
 		try {
 			Session session = SecurityUtils.getSubject().getSession();
 			System.err.println("uid:" + session.getAttribute("uid"));
-			List<UserFeature> userFeatureList = userFeatureServer.getUserFeatureByUid(Integer.valueOf(session.getAttribute("uid").toString()));
+			List<UserFeature> userFeatureList = userFeatureServer
+					.getUserFeatureByUid(Integer.valueOf(session.getAttribute("uid").toString()));
 			GetCommonUser get = new GetCommonUser();
 			Map<String, Integer> cpResult = new HashMap<String, Integer>();
 			// 判断测评类型
 			String cpName = "霍兰德";
-			if (id == 2){
+			if (id == 2) {
 				cpName = "MBTI";
 			}
 			UserFeature userFeature = new UserFeature();
-			boolean hasTest = false;//是否做过认知测评
+			boolean hasTest = false;// 是否做过认知测评
 			for (UserFeature feature : userFeatureList) {
-				if (cpName.equals(feature.getEvaluationType())){
+				if (cpName.equals(feature.getEvaluationType())) {
 					hasTest = true;
 				}
 			}
@@ -210,20 +220,20 @@ public class XgkcpServerImpl implements IXgkcpServer {
 			// 存入session,在渲染页面时候调用计算结果
 			session.setAttribute("cpName", cpName);
 			session.setAttribute("cpResult", cpResult);
-			if(id==1){
-				List<String> mobileList=get.gethld(cpResult);
-				userFeature.setEvaluationName(mobileList.get(0)+mobileList.get(1)+mobileList.get(2));
-			}else{
+			if (id == 1) {
+				List<String> mobileList = get.gethld(cpResult);
+				userFeature.setEvaluationName(mobileList.get(0) + mobileList.get(1) + mobileList.get(2));
+			} else {
 				userFeature.setEvaluationName(get.getMbti(cpResult));
-			}			
-			userFeature.setUid((int)session.getAttribute("uid"));
+			}
+			userFeature.setUid((int) session.getAttribute("uid"));
 			userFeature.setEvaluationType(cpName);
 			userFeature.setEvaluationFraction(cpResult.toString());
-			Date now= new Date();
+			Date now = new Date();
 			userFeature.setEvaluationTime(now);
-			if (hasTest){ //已经做过认知测评 更新
+			if (hasTest) { // 已经做过认知测评 更新
 				userFeatureServer.update(userFeature);
-			} else {//新增测评记录
+			} else {// 新增测评记录
 				userFeatureServer.insert(userFeature);
 			}
 			rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "题目答案已提交，正在为你生成报告......");
@@ -238,15 +248,12 @@ public class XgkcpServerImpl implements IXgkcpServer {
 
 	@Override
 	public ResponseResult<Void> haveYouCognitionEvaluation(Integer uid, String type) {
-		return userFeatureServer.haveYouCognitionEvaluation(uid,type);
+		return userFeatureServer.haveYouCognitionEvaluation(uid, type);
 	}
 
 	@Override
 	public String showUserResultReport(String cpResult, HttpServletRequest request) {
-		return iXgkcpResultServer.showUserResultReport(cpResult,request);
+		return iXgkcpResultServer.showUserResultReport(cpResult, request);
 	}
-
-	
-	
 
 }
