@@ -116,13 +116,13 @@
 						</div>
 					</div>
 				</div>					
-				<div class="panel panel-default margin_top1">
+				<div class="search_resultBox panel panel-default margin_top1" style="display:none;">
 					
 					<div class="padding-side">
 						<h4 class="fontwei">共找到<b id="search_count">2</b>条结果</h4>
 					</div>
 				    <ul class="list-group search_result list_career padding-side2" id="search_result">
-				        <li class="list-group-item width100">
+				        <%-- <li class="list-group-item width100">
 				        	<a class="width100" href="javascript:void(0)">
 				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>
 				        		<div class="text-muted o_row_brif width100">
@@ -149,15 +149,12 @@
 				        			<span class="">喜欢</span>
 				        		</a>
 				        	</div>
-				        </li>
+				        </li> --%>
 				    </ul>
-				    <script type="text/javascript">
-								
-					        	</script>
 				    <!--分页-->
 				    <div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
 						<div class="holder" style="text-align: center;"></div>
-						</div>
+					</div>
 				</div>
 				
 			</section>
@@ -195,43 +192,38 @@
 						var like = false;
 						var eId = "";
 						console.log(i +''+like);
-						for(var j=0; j<data[0].enshrineList.length; j++){
-							console.log(data[0].enshrineList[j].eCode);
-							console.log(data[i].vocationId);
-							if(data[0].enshrineList[j].eCode == data[i].vocationId){
-								like = true;
-								eId = data[0].enshrineList[j].eId;
-								if(data[0].enshrineList != null){
-									for(var j=0; j<data[0].enshrineList.length; j++){									
-										if(data[0].enshrineList[j].eCode == data[i].vocationId){
-											like = true;
-											eId = data[0].enshrineList[j].eId;
-										}
-									}
+						if(data[0].enshrineList != null){
+							for(var j=0; j<data[0].enshrineList.length; j++){									
+								if(data[0].enshrineList[j].eCode == data[i].vocationId){
+									like = true;
+									eId = data[0].enshrineList[j].eId;
 								}
-								if(like == true){
-									vocationList += '<a id="' + eId + '" class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
-									vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
-								}else{
-									vocationList += '<a id=""  class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
-									vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
-								}
-								vocationList += '<span class="">喜欢</span></a>';	
-								vocationList += '</div></li>';	
 							}
-							$("#search_count").html(data.length);
-							$("#search_result").html(vocationList);
-							$("div.holder").jPages({
-								containerID : "search_result",
-								perPage     : 5,
-								first       : "首页",
-								previous    : "上一页",
-								next        : "下一页",
-								last        : "尾页"
-							});
 						}
+						if(like == true){
+							vocationList += '<a id="' + eId + '" class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
+							vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
+						}else{
+							vocationList += '<a id=""  class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
+							vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+						}
+						vocationList += '<span class="">喜欢</span></a>';	
+						vocationList += '</div></li>';	
+						}
+						$("#search_count").html(data.length);
+						$("#search_result").html(vocationList);
+						$(".search_resultBox").css("display","block");
+						$("div.holder").jPages({
+							containerID : "search_result",
+							perPage     : 5,
+							first       : "首页",
+							previous    : "上一页",
+							next        : "下一页",
+							last        : "尾页"
+						});
+						
 					}
-				}
+				
 			});
    		}
    					

@@ -307,10 +307,8 @@
 					//var rowName=$(obj).parents('li').attr('pname');
 					var imgUrl=$(obj).parents('li').find(".sh_logo img").attr("src");
 					if(flag==false){
-						console.log(flag)
 						$('.contrast').css("display","block"); 
 					}
-					console.log(flag)
 					add_contrast(rowId,imgUrl);
 					if ($('.contrast_list li').length==0) {
 						close_conbox();
@@ -383,7 +381,6 @@
 				
 				//加入对比
 				function add_contrast(row_id,itemImg){
-					console.log(row_id)
 					if ($("#btnid"+row_id).is(":checked")) {
 						$("#btnid"+row_id).parent().removeClass("btn-primary")
 						$("#btnid"+row_id).parent().addClass("cancel text-white");
@@ -596,12 +593,14 @@
 												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
 									
 												 //[院校扩展表list 院校录取分数线] 
-									console.log(list[i].universRelationList);		 
 									if(list[i].universRelationList == null){
 										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;		
-										for(var j=0; j<4;j++){
+										for(var j=0; j<universRelationList.length;j++){
+											if(j>4){
+												break;
+											}
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;											
 											if($.isEmptyObject(collegeScoreLine) == false){
 												if(collegeScoreLine.startsWith("[")){
@@ -748,7 +747,10 @@
 										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;
-										for(var j=0; j<4;j++){
+										for(var j=0; j<universRelationList.length;j++){
+											if(j>4){
+												break;
+											}
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;
 											if($.isEmptyObject(collegeScoreLine) == false){
 												if(collegeScoreLine.startsWith("[")){

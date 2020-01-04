@@ -136,13 +136,16 @@ dt{
 	align-items: center;
 }
 .sch_info {
-	/* width:30% */
+	/* width:30%  */
 }
 .sch_info>table tr>td,
 .sch_info>table tr>td div,
 .sch_info>table tr>td span{
 	font-size:12px;
 	text-align:left;
+}
+.sch_info>table tr>td{
+	width:12em;
 }
 .sch_slice{
 	width:42%
@@ -153,6 +156,7 @@ dt{
 .operate_box{
 	width:12%
 }
+
 .add_contrast,.store{
 	position: relative;
 }
@@ -186,11 +190,14 @@ section{
 	margin-bottom: 0;
 	box-shadow:inherit;
 }
+.sch_search {
+	margin-bottom:4em;
+}
 .contrast{
 	display: none;
 	width: 1200px;
 	position: absolute;
-	bottom: -2em;
+	bottom: -4em;
 	left: 50%;
 	z-index: 4;
 	margin-left:-600px;
@@ -513,9 +520,13 @@ footer{
 	align-items: center;
 	justify-content: flex-end;
 }
+#sch_province{
+	width: 18em;
+	text-align:right;
+}
 .flex_jcstart{
 	display: flex;
-	width: 86%;
+	/* width: 86%; */
 }
 .like{
 	/*width: 14%;*/
@@ -562,9 +573,16 @@ select{
     margin-left: auto;
 	margin-right: auto;
 }
+#Modal1>ul>li>div{
+	height:133.3px;
+}
+.clogo{
+	border-right:1px solid #3b8bec;
+}
 #Modal1>ul>li:hover{
 	background-color: #f8fafb;
 }
+
 #Modal{ position: relative; }
 #Modal>table td{
 	width: 130px;
