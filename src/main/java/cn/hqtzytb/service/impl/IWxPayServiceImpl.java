@@ -245,15 +245,6 @@ public class IWxPayServiceImpl implements IWxPayService {
 				order.setCreateTime(currentTime);
 				orderMapper.insert(order);
 				// 销毁全局支付成功跳转路径
-				/*
-				 * String nowUrl = (String)
-				 * request.getServletContext().getAttribute(Constants.
-				 * PAY_CALLBACK + detail[1]);
-				 * request.getServletContext().removeAttribute(Constants.
-				 * PAY_CALLBACK + detail[1]);
-				 * SecurityUtils.getSubject().getSession().setAttribute(
-				 * "nowUrl", nowUrl);
-				 */
 				List<User> userList = userMapper.select(" id = '" + detail[1] + "'", null, null, null);
 				if (!userList.isEmpty()) {
 					try {
@@ -318,7 +309,6 @@ public class IWxPayServiceImpl implements IWxPayService {
 								+ adminSystem.getSyscommet() + " 错误信息: " + e);
 					}
 				}
-
 			} else {
 				resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
 						+ "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
@@ -328,13 +318,9 @@ public class IWxPayServiceImpl implements IWxPayService {
 				out.close();
 				logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  异常数据：" + map.get("out_trade_no"));
 				System.out.println("通知微信.异步确认交易失败");
-				response.sendRedirect("web/public/pay_failed");
-				return;
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付回掉异常     错误信息: " + e);
-			response.sendRedirect("web/public/pay_failed");
-			return;
 		}
 	}
 

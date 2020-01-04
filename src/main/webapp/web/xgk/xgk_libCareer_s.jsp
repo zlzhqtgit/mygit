@@ -229,10 +229,12 @@
 								next        : "下一页",
 								last        : "尾页"
 							});
-						//}}
-   				});
-   			}
-		
+						}
+					}
+				}
+			});
+   		}
+   					
 		//查询职业详情	
     		function search_detail(e){
     			 var vocationId = $(e).attr('id');

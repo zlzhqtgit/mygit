@@ -256,10 +256,9 @@
 								    ,2000) 
 							}
 			function download(){
-			   var element = $("#report_cont");    // 这个dom元素是要导出pdf的div容器
+			   var element = $("#report_content");    // 这个dom元素是要导出pdf的div容器
 			   var w = element.width();    // 获得该容器的宽
 			   var h = element.height();    // 获得该容器的高
-			   console.log("111111")
 			   var offsetTop = element.offset().top;    // 获得该容器到文档顶部的距离
 			   var offsetLeft = element.offset().left;    // 获得该容器到文档最左的距离
 			   var canvas = document.createElement("canvas");
