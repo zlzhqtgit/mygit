@@ -33,7 +33,7 @@
 				<div class="container">
 					<div class="row sch_info_head">
 						<div class="col-lg-2  col-sm-2 col-md-2 sch_logo">		
-								<img src="${COLLEGE_PHOTO_PREFIX}/${school.universitiesLogo}" style="width: 100%;border-radius: 10px;"/>
+								<img src="${COLLEGE_PHOTO_PREFIX}${school.universitiesLogo}" style="width: 100%;border-radius: 10px;"/>
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
 							<h3 class="text-white margin_top1">${school.universitiesName }</h3>
@@ -666,13 +666,11 @@
 				    		case '${pageContext.request.contextPath}/img/xgk/like.png':
 				    			y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
 				    			$(obj).find('span').text('取消喜欢');
-				    			console.log("取消喜欢");
 				    			unlove(obj);		    			
 				    			break;
 				    		case '${pageContext.request.contextPath}/img/xgk/unlike.png':
 				    			y = '${pageContext.request.contextPath}/img/xgk/like.png';
 				    			$(obj).find('span').text('喜欢');	
-				    			console.log("喜欢");
 				    			love(obj);				    			
 				    			break;
 				    		default:
@@ -693,10 +691,8 @@
 		    				dataType:"json",
 		    				success:function(obj){
 		    					if(obj.state == 0){
-		    						console.log(obj.message);
 		    						layer.msg(obj.message,{icon:2,time:1000});
 		    					}else{
-		    						console.log(obj.message);
 		    						$(obj).attr("id",obj.data.eId);
 		    						layer.msg(obj.message,{icon:6,time:1000});
 		    						
@@ -714,10 +710,8 @@
 			    				dataType:"json",
 			    				success:function(obj){
 			    					if(obj.state == 0){
-			    						console.log(obj.message);
 			    						layer.msg(obj.message,{icon:2,time:1000});
 			    					}else{
-			    						console.log(obj.message);
 			    						layer.msg(obj.message,{icon:6,time:1000});
 			    					}
 			    				}	
