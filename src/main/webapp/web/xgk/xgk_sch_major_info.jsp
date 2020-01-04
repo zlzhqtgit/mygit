@@ -234,7 +234,85 @@
 									</div>
 								</div>								
 									<p class="text-center margin_top"><a class="btn btn-primary" href="javascript:;" onclick="queryschool()">开始推荐</a></p>
-								<script type="text/javascript">
+							</div>
+
+							<div class="panel panel-default">
+								<div class="panel_head padding-side">
+									<h4 class="fontwei">共找到<a id="shc_count">8</a>条结果</h4>
+								</div>
+								<ul class="list-group search_result" id="sch_data">
+									<%-- <li class="list-group-item row">
+                                        <div class="flex_jcstart">
+                                            <div class="inline_block">
+                                                <a href="xgk_sch_info.jsp"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a>
+                                            </div>
+                                            <div class="sch_info inline_block">
+                                                <div class="padding-side">
+                                                    <div class="">
+                                                        <a class="inline_block" href="">
+                                                            <h4>上海外国语大学</h4>
+                                                        </a>
+                                                        <span class=""><img src="${pageContext.request.contextPath}/img/xgk/label.png"/></span>
+                                                        <a class="inline_block" href="">
+                                                            <span class="text-muted"><img src="${pageContext.request.contextPath}/img/xgk/position.png"/>上海</span></a>
+                                                    </div>
+                                                    <p class="">录取平均分排行（本科一批）<span class="text-danger fontwei">34</span></p>
+                                                    <div class="">
+                                                        <span class="">隶属：教育部</span>
+                                                        <span class="">院校类型：语言类</span>
+                                                        <span class="">硕士点数：43个</span>
+                                                        <span class="">博士点数：17个</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center like">
+                                            <a class="" onclick="like(this)" href="javascript:">
+                                                <img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
+                                                <span class="">喜欢</span>
+                                            </a>
+                                            <div class="">喜欢人数：22W</div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item row">
+                                        <div class="flex_jcstart">
+                                            <div class="inline_block">
+                                                <a href="xgk_sch_info.jsp"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a>
+                                            </div>
+                                            <div class="sch_info inline_block">
+                                                <div class="padding-side">
+                                                    <div class="">
+                                                        <a class="inline_block" href=""><h4>上海外国语大学</h4></a>
+                                                        <span class=""><img src="${pageContext.request.contextPath}/img/xgk/label.png"/></span>
+                                                        <a class="inline_block" href=""><span class="text-muted"><img src="${pageContext.request.contextPath}/img/xgk/position.png"/>上海</span></a>
+                                                    </div>
+                                                    <p class="">录取平均分排行（本科一批）<span class="text-danger fontwei">34</span></p>
+                                                    <div class="">
+                                                        <span class="">隶属：教育部</span>
+                                                        <span class="">院校类型：语言类</span>
+                                                        <span class="">硕士点数：43个</span>
+                                                        <span class="">博士点数：17个</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="text-center like">
+                                            <a class="" onclick="like(this)" href="javascript:">
+                                                <img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/><span class="">喜欢</span>
+                                            </a>
+                                            <div class="">喜欢人数：22W</div>
+                                        </div>
+                                    </li> --%>
+
+								</ul>
+								<!--  分页      -->
+								<div class="bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+									<div class="holder" style="text-align: center;"></div>
+								</div>
+								
+							</div>
+						</div>
+						<script type="text/javascript">
 									//给院校省份点击事件
 									$(document).ready(function(){
 										$("#sch_ur li").click(function() {
@@ -256,10 +334,12 @@
 											data: data,
 											dataType: "JSON",
 											success: function(obj) {
+												console.log(obj)
 												if(obj.state == 1){
 													var list = obj.data;
 													$("#shc_count").html(list.length);
 													var sch_data = "";
+													console.log(list)
 													for(var i=0; i<list.length; i++){
 														var admission_lot = "";//录取批次
 														var admissionLotList = JSON.parse(list[i].admissionLot);
@@ -340,6 +420,7 @@
 														sch_data += '<div class="">喜欢人数：22W</div>';
 														sch_data += '</li>';
 													}
+													console.log(sch_data)
 													$("#sch_data").html(sch_data);
 												}
 												$("div.holder").jPages({
@@ -353,84 +434,7 @@
 											}
 										});
 									}
-								</script>
-							</div>
-
-
-							<div class="panel panel-default">
-								<div class="panel_head padding-side">
-									<h4 class="fontwei">共找到<a id="shc_count">8</a>条结果</h4>
-								</div>
-								<ul class="list-group search_result" id="sch_data">
-									<%-- <li class="list-group-item row">
-                                        <div class="flex_jcstart">
-                                            <div class="inline_block">
-                                                <a href="xgk_sch_info.jsp"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a>
-                                            </div>
-                                            <div class="sch_info inline_block">
-                                                <div class="padding-side">
-                                                    <div class="">
-                                                        <a class="inline_block" href="">
-                                                            <h4>上海外国语大学</h4>
-                                                        </a>
-                                                        <span class=""><img src="${pageContext.request.contextPath}/img/xgk/label.png"/></span>
-                                                        <a class="inline_block" href="">
-                                                            <span class="text-muted"><img src="${pageContext.request.contextPath}/img/xgk/position.png"/>上海</span></a>
-                                                    </div>
-                                                    <p class="">录取平均分排行（本科一批）<span class="text-danger fontwei">34</span></p>
-                                                    <div class="">
-                                                        <span class="">隶属：教育部</span>
-                                                        <span class="">院校类型：语言类</span>
-                                                        <span class="">硕士点数：43个</span>
-                                                        <span class="">博士点数：17个</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-center like">
-                                            <a class="" onclick="like(this)" href="javascript:">
-                                                <img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
-                                                <span class="">喜欢</span>
-                                            </a>
-                                            <div class="">喜欢人数：22W</div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item row">
-                                        <div class="flex_jcstart">
-                                            <div class="inline_block">
-                                                <a href="xgk_sch_info.jsp"><img alt="学校logo" src="${pageContext.request.contextPath}/img/xgk/sch_logo.png"/></a>
-                                            </div>
-                                            <div class="sch_info inline_block">
-                                                <div class="padding-side">
-                                                    <div class="">
-                                                        <a class="inline_block" href=""><h4>上海外国语大学</h4></a>
-                                                        <span class=""><img src="${pageContext.request.contextPath}/img/xgk/label.png"/></span>
-                                                        <a class="inline_block" href=""><span class="text-muted"><img src="${pageContext.request.contextPath}/img/xgk/position.png"/>上海</span></a>
-                                                    </div>
-                                                    <p class="">录取平均分排行（本科一批）<span class="text-danger fontwei">34</span></p>
-                                                    <div class="">
-                                                        <span class="">隶属：教育部</span>
-                                                        <span class="">院校类型：语言类</span>
-                                                        <span class="">硕士点数：43个</span>
-                                                        <span class="">博士点数：17个</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-center like">
-                                            <a class="" onclick="like(this)" href="javascript:">
-                                                <img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/><span class="">喜欢</span>
-                                            </a>
-                                            <div class="">喜欢人数：22W</div>
-                                        </div>
-                                    </li> --%>
-
-								</ul>
-								<!--  分页      -->
-								<div class="bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
-									<div class="holder" style="text-align: center;"></div>
-								</div>
-								<script type="text/javascript">
+									
 									//点赞
 									function like(obj) {
 										var y;
@@ -497,9 +501,8 @@
 									}
 
 								</script>
-							</div>
-						</div>
 					</div>
+					
 					<div class="tab_b2 ">
 						<div class="major_info">
 							<div class="items margin_top">
@@ -748,6 +751,5 @@
 	}
 	//$("#er_province").append(options);
 	$("#hhhprovince").html(options);
-	console.log(options);
 </script>
 </html>
