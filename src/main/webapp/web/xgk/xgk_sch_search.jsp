@@ -596,11 +596,12 @@
 												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
 									
 												 //[院校扩展表list 院校录取分数线] 
+									console.log(list[i].universRelationList);		 
 									if(list[i].universRelationList == null){
 										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;		
-										for(var j=0; j<universRelationList.length; j++){
+										for(var j=0; j<4;j++){
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;											
 											if($.isEmptyObject(collegeScoreLine) == false){
 												if(collegeScoreLine.startsWith("[")){
@@ -626,8 +627,8 @@
 								  laypage.render({
 								    elem: 'search_page',
 								    count: obj.data.count,
-								    limit: 10,
-								    limits: [1,2,3,4,5,6,7,8,9],
+								    limit: 5,
+								    limits: [1,3,5,7,9,11],
 								    layout: ['prev', 'page', 'next', 'limit', 'refresh', 'skip'],
 								    jump: function(obj,first){
 								      	var offset = parseInt(obj.limit)*(parseInt(obj.curr)-1);
@@ -747,7 +748,7 @@
 										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;
-										for(var j=0; j<list[i].universRelationList.length; j++){
+										for(var j=0; j<4;j++){
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;
 											if($.isEmptyObject(collegeScoreLine) == false){
 												if(collegeScoreLine.startsWith("[")){
