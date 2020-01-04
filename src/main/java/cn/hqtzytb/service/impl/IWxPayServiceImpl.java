@@ -156,13 +156,11 @@ public class IWxPayServiceImpl implements IWxPayService {
 							image.setRGB(x, y, bitMatrix.get(x, y) ? Constants.BLACK : Constants.WHITE);
 						}
 					}
-					/*
-					 * url =
-					 * this.getClass().getResource("/").getPath().replaceFirst(
-					 * "/", "").replace("WEB-INF/classes/",
-					 * "img/public/logo.jpg");
-					 */
-					url = this.getClass().getResource("/").getPath().replace("WEB-INF/classes/", "img/public/logo.jpg");
+					url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/",
+							"img/public/logo.jpg");
+					// url =
+					// this.getClass().getResource("/").getPath().replace("WEB-INF/classes/",
+					// "img/public/logo.jpg");
 					System.err.println(url);
 					File file = new File(url);
 					Image logo = ImageIO.read(file);
@@ -197,6 +195,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 	@Override
 	public void weixinNotify(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
+			System.err.println("开始回调！");
 			Date currentTime = new Date();
 			String inputLine;
 			String notityXml = "";
@@ -247,67 +246,66 @@ public class IWxPayServiceImpl implements IWxPayService {
 				// 销毁全局支付成功跳转路径
 				List<User> userList = userMapper.select(" id = '" + detail[1] + "'", null, null, null);
 				if (!userList.isEmpty()) {
-					try {
-						Calendar expirationTime = Calendar.getInstance();
-						expirationTime.setTime(currentTime);
-						expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-						if ("VIPRECHAARGE".equals(adminSystem.getSysname())) {// vip充值
-							// 获得VIP角色
-							Role role = userRoleMapper.queryRoleBySystemName("SYSTEMVIP");
-							adminSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-							if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 普通用户升级成为vip
-								userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
-								userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
-								userList.get(0).setDownloadCount(9);// 新增9次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-							} else {// vip续费
-								if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-									expirationTime = Calendar.getInstance();
-									expirationTime.setTime(userList.get(0).getExpirationTime());
-									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-								}
-								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-							}
-						} else if ("COUNSELORRECHAARGE".equals(adminSystem.getSysname())) {// 咨询师充值
-							// 获得咨询师角色
-							Role role = userRoleMapper.queryRoleBySystemName("SYSTEMCOUNSELOR");
-							adminSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-							if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 普通用户升级成为vip
-								expirationTime = Calendar.getInstance();
-								expirationTime.setTime(currentTime);
-								expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-								userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-								userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-								userList.get(0).setDownloadCount(100);// 新增100次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-							} else {// 咨询师续费
-								if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-									expirationTime = Calendar.getInstance();
-									expirationTime.setTime(userList.get(0).getExpirationTime());
-									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-								}
-								userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-								userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-							}
-						} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
-							// 单独购买1次下载报告
-							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
-							if (userList.get(0).getExpirationTime() != null
-									&& currentTime.before(userList.get(0).getExpirationTime())) {
+					Calendar expirationTime = Calendar.getInstance();
+					expirationTime.setTime(currentTime);
+					expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
+					if ("VIPRECHAARGE".equals(adminSystem.getSysname())) {// vip充值
+						System.err.println("获得VIP角色");
+						// 获得VIP角色
+						Role role = userRoleMapper.queryRoleBySystemName("SYSTEMVIP");
+						AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
+						if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
+							userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
+							userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
+							userList.get(0).setDownloadCount(9);// 新增9次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+						} else {// vip续费
+							if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
 								expirationTime = Calendar.getInstance();
 								expirationTime.setTime(userList.get(0).getExpirationTime());
 								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
 							}
-							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
 						}
-						userMapper.updateById(userList.get(0));
-					} catch (Exception e) {
-						logger.error("访问路径：" + request.getRequestURI() + "操作：用户充值VIP异常  用户id:" + detail[1] + " 充值类型："
-								+ adminSystem.getSyscommet() + " 错误信息: " + e);
+					} else if ("COUNSELORRECHAARGE".equals(adminSystem.getSysname())) {// 咨询师充值
+						System.err.println("获得咨询师角色");
+						// 获得咨询师角色
+						Role role = userRoleMapper.queryRoleBySystemName("SYSTEMCOUNSELOR");
+						AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
+						if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
+							expirationTime = Calendar.getInstance();
+							expirationTime.setTime(currentTime);
+							expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
+							userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
+							userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
+							userList.get(0).setDownloadCount(100);// 新增100次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+						} else {// 咨询师续费
+							if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+								expirationTime = Calendar.getInstance();
+								expirationTime.setTime(userList.get(0).getExpirationTime());
+								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+							}
+							userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
+							userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
+							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+						}
+					} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
+						System.err.println("单独购买1次下载报告");
+						// 单独购买1次下载报告
+						userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
+						if (userList.get(0).getExpirationTime() != null
+								&& currentTime.before(userList.get(0).getExpirationTime())) {
+							expirationTime = Calendar.getInstance();
+							expirationTime.setTime(userList.get(0).getExpirationTime());
+							expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+						}
+						userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
 					}
+					Integer row = userMapper.updateById(userList.get(0));
+					System.err.println("修改行数：" + row);
 				}
 			} else {
 				resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
