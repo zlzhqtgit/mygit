@@ -41,7 +41,7 @@
 	padding: 0 .5em;
 }
 .sch_info .schoolTag>img{
-	width: 3em;
+	width: 2.6em;
 }
 #positonBox .BMap_cpyCtrl.anchorBL,
 #positonBox .anchorBL>a{display: none;}
@@ -804,4 +804,13 @@ select{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+.BMap_omCtrl.BMap_noprint{
+	display:none;
+}
+.anchorBL{
+	display:none;
+}
+.BMap_cpyCtrl .anchorBL{
+	display:none;
 }

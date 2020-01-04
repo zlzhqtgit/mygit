@@ -648,9 +648,9 @@
 		    					<li>隶属于：<span>${school.belongTo}</span></li>
 		    					<li>地址：<span>${school.address}</span></li>
 		    				</ul>	    				
-		    					<p class="text-center"><a class="text-primary" href="javascript:void(0)">查看地图</a></p>		    				  				
+		    					<p class="text-center"><!-- <a class="text-primary" href="javascript:void(0)">查看地图</a> --></p>		    				  				
 		    			</div>
-		    			<div class="" id="positionBox" style="">
+		    			<div class="margin_top1" id="positionBox" style="">
 							<!--百度地图容器onclick="modelshow('学校地址',$('#positionBox'),1)"-->
 							<div style="width:100%;height:366px;border:#ccc solid 1px;" id="dituContent"></div>
 							<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
@@ -789,15 +789,16 @@
 				addMapControl(); //向地图添加控件
 				addMarker(); //向地图中添加marker
 			}
-	
+			//str = str.replace(/[\r\n]/g,"");
 			//创建地图函数：
 			function createMap() {
 				var map = new BMap.Map("dituContent"); //在百度地图容器中创建一个地图
 				// 创建地址解析器实例     
 				var myGeo = new BMap.Geocoder();    
-				console.log("${school.address}")
-				// 将地址解析结果显示在地图上，并调整地图视野   
-				myGeo.getPoint("${school.address}", function(point){ //${school.address}
+				// 将地址解析结果显示在地图上，并调整地图视野  
+				var aa=$(".school_address").text();
+				bb=aa.replace(/[\r\n]/g,"");
+				myGeo.getPoint(bb, function(point){ //${school.address}
 //							console.log(Position)
 				          if (point) {      
 				              map.centerAndZoom(point, 16);
@@ -839,7 +840,7 @@
 			}
 	
 			//标注点数组
-			/* var markerArr = [{
+			var markerArr = [{
 				title: "贵州好前途教育科技有限公司",
 				content: "我的备注",
 				point: "106.649734|26.617006",
@@ -852,7 +853,7 @@
 					x: 6,
 					lb: 5
 				}
-			}]; */
+			}];
 			//创建marker
 			function addMarker() {
 				for(var i = 0; i < markerArr.length; i++) {
