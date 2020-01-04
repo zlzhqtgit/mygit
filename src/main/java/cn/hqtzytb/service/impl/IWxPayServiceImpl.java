@@ -115,8 +115,11 @@ public class IWxPayServiceImpl implements IWxPayService {
 		int total_fee = (new Double(Double.parseDouble(adminSystem.getSysnub()) * 100)).intValue();
 		// 调用pay工程的微信支付接口
 		Map<String, Object> paramMap = new ConcurrentHashMap<String, Object>();
-		String url = "http://xgk.sxghfwzx.com/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee
-				+ "&body=" + adminSystem.getSyscommet();
+		// String url = "http://xgk.sxghfwzx.com/api/wxpay.do?out_trade_no=" +
+		// out_trade_no + "&total_fee=" + total_fee
+		// + "&body=" + adminSystem.getSyscommet();
+		String url = "http://127.0.0.1/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee + "&body="
+				+ adminSystem.getSyscommet();
 		System.err.println("url：" + url);
 		// pay工程微信支付接口返回的json字符串
 		String result = HttpClientUtils.doPost(url, paramMap);
