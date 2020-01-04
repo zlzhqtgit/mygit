@@ -148,12 +148,12 @@
 						 }
 					}
 					var countdown = 60;//查询60次
-					function settime(order,url) { //发送验证码倒计时
+					function settime(order,url) {
 					    if (countdown == 0) { 
-					    	layer.msg('超过二分钟未支付，二维码已超时！', {icon: 5,time:2000});
+					    	layer.msg('超过二分钟未支付，二维码已超时！', {icon: 5,time:1000});
 					    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
-					    		//window.location.reload();//页面刷新
-					    		location.href = "${pageContext.request.contextPath}/api/wx_pay_fail.do?nowUrl=" + url;
+					    		window.location.reload();//页面刷新
+					    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_fail.do?nowUrl=" + url;
 					    		countdown = 60;
 					    	},2000);
 						} else {							
@@ -164,10 +164,10 @@
 								datatype:'json',
 								success:function(obj){
 									if(obj.state == 1){
-										layer.msg('支付成功', {icon: 5,time:2000});
+										layer.msg('支付成功', {icon: 5,time:1000});
 								    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
-								    		//window.location.reload();//页面刷新
-								    		location.href = "${pageContext.request.contextPath}/api/wx_pay_sucees.do?nowUrl=" + url;
+								    		window.location.reload();//页面刷新
+								    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_sucees.do?nowUrl=" + url;
 								    	},2000);
 									}
 									countdown -- ;

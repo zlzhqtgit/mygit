@@ -177,7 +177,7 @@
 									</table> 
 								</div>
 							</h4>
-							<%-- <shiro:hasPermission name="grzx_rw:query"> --%>
+							<shiro:hasPermission name="grzx_rw:query"> 
 								<div class="text-muted" >
 									<c:if test="${hqt_user == 0}">
 										<a href="javascript:;" onclick="open_task()">我的任务<span class="layui-badge">${task_count}</span></a>
@@ -186,7 +186,7 @@
 										<a href="javascript:;">我的任务<span class="layui-badge-dot"></span></a>
 									</c:if>
 								</div>
-							<%-- </shiro:hasPermission> --%>							
+							</shiro:hasPermission> 							
 						</div>
 					</div>
 				</div>
@@ -195,33 +195,34 @@
 		<main class="container">
 			<div class="flex_jc_sb border_major margin_bot1 tab_box" style="height:722px">
 				<ul class="center_nav padding-side">
-					<%-- <shiro:hasPermission name="grzx_wdzl:query"> --%>
+					<shiro:hasPermission name="grzx_wdzl:query"> 
 						<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-align-left"></span> 我的资料</a></li>
-					<%-- </shiro:hasPermission> --%>	
-					<%-- <shiro:hasPermission name="grzx_wdcp:query"> --%>
+					</shiro:hasPermission> 	
+					<shiro:hasPermission name="grzx_wdcp:query"> 
 						<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-list-alt"></span> 我的测评</a></li>
-					<%-- </shiro:hasPermission> --%>				
-					<%-- <shiro:hasPermission name="grzx_sub:query"> --%>
+					</shiro:hasPermission> 				
+					<shiro:hasPermission name="grzx_sub:query"> 
 						<!-- <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-th-large"></span> 我的学科</a></li> -->
-					<%-- </shiro:hasPermission> --%>
-					<%-- <shiro:hasPermission name="grzx_wdxk:query"> --%>
+					</shiro:hasPermission> 
+					<shiro:hasPermission name="grzx_wdxk:query"> 
 					<li class="p_relative">
 						<a href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> 
 							我的选科<!-- <span class="badge pull-right text-danger">3</span> -->
 						</a>
-						<%-- <ul class="sublist">
+						<ul class="sublist">
+							<%-- 
 							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/noDone.jsp')" href="javascript:void(0)">待完成</a></li> 
 							<li class="cur"><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/done.jsp')" href="javascript:void(0)">已完成</a></li> 
-							<%-- <li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li> 
-						</ul>--%>
+							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li>  --%>
+						</ul>
 					</li>
-					<%-- </shiro:hasPermission> --%>
-					<%-- <shiro:hasPermission name="grzx_wdgz:query"> --%>
+					</shiro:hasPermission> 
+					<shiro:hasPermission name="grzx_wdgz:query"> 
 						<li><a href="javascript:void(0)"><span class="glyphicon glyphicon-record"></span> 我的关注 </a> </li>
-					<%-- </shiro:hasPermission> --%>
-					<%-- <shiro:hasPermission name="grzx_kstd:query"> --%>
+					</shiro:hasPermission> 
+					<shiro:hasPermission name="grzx_kstd:query"> 
 						<li class="current"><a href="javascript:void(0)"><span class="glyphicon glyphicon-road"></span> 快速通道</a></li>
-					<%-- </shiro:hasPermission> --%>					
+					</shiro:hasPermission> 					
 				</ul>
 				
 				<div class="center_cont">
@@ -238,9 +239,9 @@
 										<div class="form-group">
 											<label for="phone">手机号：</label>
 											<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true"/>
-											<%-- <shiro:hasPermission name="wdzl_xgsh:update"> --%>
+											<shiro:hasPermission name="wdzl_xgsh:update"> 
 												<label class="padding-side" for="phone"><a class="btn btn-default" onclick="open_pws_div()">修改手机号</a></label>
-											<%-- </shiro:hasPermission> --%>																						
+											</shiro:hasPermission> 																						
 										</div>
 										<div class="form-group">
 											<label for="pcNumber">身份证号：</label>
@@ -316,9 +317,9 @@
 									<div class="form-group">
 										<label for="phone">手机号：</label>
 										<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true" />
-										<%-- <shiro:hasPermission name="wdzl_xgsh:update"> --%>
+										<shiro:hasPermission name="wdzl_xgsh:update">
 											<label class="padding-side"><a class="btn btn-default" onclick="open_pws_div()">修改手机号</a></label>
-										<%-- </shiro:hasPermission> --%>																				
+										</shiro:hasPermission>																		
 									</div>
 									<div class="form-group">
 										<label for="pcNumber">身份证号：</label>
@@ -372,9 +373,9 @@
 									</div>
 									</c:if>
 								</fieldset>
-								<%-- <shiro:hasPermission name="wdzl_xgxx:update"> --%>								
+								<shiro:hasPermission name="wdzl_xgxx:update"> 								
 									<p class="text-center margin_top"><input class="btn btn-primary" type="button" value="保存" onclick="update()"/></p>
-								<%-- </shiro:hasPermission> --%>
+								</shiro:hasPermission> 
 							</div>
 							<div id="update_pwsd" style="display: none;">
 								<fieldset id="">
@@ -396,7 +397,7 @@
 					
 					<!-- 成绩分析  -->
 					<ul id="user_evaluation">
-						<%-- <shiro:hasPermission name="wdcp_cjfx:query"> --%>						
+						<shiro:hasPermission name="wdcp_cjfx:query"> 						
 							<li style="border-bottom: 1px solid #ddd;">
 								<c:if test="${CJFX != null}">
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
@@ -416,10 +417,10 @@
 									</div>	
 								</c:if>
 							</li>
-						<%-- </shiro:hasPermission> --%>							
+						</shiro:hasPermission>			
 						<!-- 潜能分析  -->
-						<%-- <shiro:hasPermission name="wdcp_qnfx:query"> --%>
-							<li style=" border-bottom: 1px solid #ddd;" >
+						<shiro:hasPermission name="wdcp_qnfx:query"> 
+							<li style=" border-bottom: 1px solid #ddd;" >							
 								<c:if test="${QNFX != null}">
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
 										<!-- 跳转潜能分析测评页面  -->
@@ -438,9 +439,9 @@
 									</div>	
 								</c:if>
 							</li>
-						<%-- </shiro:hasPermission> --%>
+						</shiro:hasPermission> 
 						<!-- MBTI -->
-						<%-- <shiro:hasPermission name="wdcp_mbti:query"> --%>						
+						<shiro:hasPermission name="wdcp_mbti:query"> 						
 							<li style="border-bottom: 1px solid #ddd;">
 								<c:if test="${MBTI != null}">
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
@@ -459,9 +460,9 @@
 									</div>	
 								</c:if>
 							</li>
-						<%-- </shiro:hasPermission> --%>
+						</shiro:hasPermission> 
 						<!-- 霍兰德  -->
-						<%-- <shiro:hasPermission name="wdcp_hld:query"> --%>						
+						<shiro:hasPermission name="wdcp_hld:query"> 						
 							<li style="border-bottom: 1px solid #ddd;">
 								<c:if test="${霍兰德  != null}">
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
@@ -481,7 +482,7 @@
 									</div>	
 								</c:if>
 							</li>
-						<%-- </shiro:hasPermission> --%>
+						</shiro:hasPermission> 
 					</ul>
 					<!-- <ul>
 						<li>是的噶山豆根爱上公司的111</li>
@@ -522,7 +523,7 @@
 										<p class="text-center"><a class="btn btn-primary" onclick="getPage('${pageContext.request.contextPath}/web/userCenter/el_result.jsp')" href="javascript:void(0)">参与选科排课</a></p>
 									</div>
 								</div>
-							</div> --%>
+							</div>  --%>
 						</li>
 					</ul>
 					<ul>
@@ -530,20 +531,20 @@
 							<div class="focusStore">
 								<div class="tab_list">
 									<ul class="tab_head clearfix">
-										<%-- <shiro:hasPermission name="wdgz_yxsc:query"> --%>
+										<shiro:hasPermission name="wdgz_yxsc:query"> 
 											<li class="cur">院校收藏</li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="wdgz_zysc:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="wdgz_zysc:query"> 
 											<li>专业收藏</li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="wdgz_zysc:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="wdgz_zysc:query"> 
 											<li>职业收藏</li>
-										<%-- </shiro:hasPermission> --%>										
+										</shiro:hasPermission> 										
 									</ul>
 									
 									<div class="tab_body">									
 										<div class="cur">
-										<%-- <shiro:hasPermission name="wdgz_yxsc:query"> --%>
+										<shiro:hasPermission name="wdgz_yxsc:query"> 
 											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
 												<thead>
 													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
@@ -559,22 +560,22 @@
 													</tr>
 													</c:forEach>
 													
-													<%-- <tr>
+													<tr>
 														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
 														<td>101001</td><td>立学道大学</td>
 														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
-													</tr> --%>
+													</tr> 
 												</tbody>												
 											</table>
 											<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
 												<div class="holder1" style="text-align: center;"></div>
 											</div>
-											<%-- </shiro:hasPermission> --%>
+											</shiro:hasPermission> 
 										</div>
 										
 										<div class="">
-											<%-- <shiro:hasPermission name="wdgz_zysc:query"> --%>
+											<shiro:hasPermission name="wdgz_zysc:query"> 
 											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
 												<thead>
 													<tr><th>序号</th><th>专业代码</th><th>专业名称</th><th colspan="2">操作</th></tr>
@@ -586,9 +587,9 @@
 														<td>${item.eCode}</td><td>${item.eName}</td>
 														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td>
-															<%-- <shiro:hasPermission name="wdgz_qxsc:delete"> --%>
+															<shiro:hasPermission name="wdgz_qxsc:delete"> 
 																<a id="${item.eId}"  href="javascript:;" onclick="unlove(this)">取消关注</a>
-															<%-- </shiro:hasPermission> --%>															
+															</shiro:hasPermission> 															
 														</td>
 													</tr>
 													</c:forEach>
@@ -598,10 +599,10 @@
 											<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
 												<div class="holder2" style="text-align: center;"></div>
 											</div>
-											<%-- </shiro:hasPermission> --%>
+											</shiro:hasPermission> 
 										</div>
 										<div class="">
-											<%-- <shiro:hasPermission name="wdgz_zysc:query"> --%>
+											<shiro:hasPermission name="wdgz_zysc:query"> 
 											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
 												<thead>
 													<tr><th>序号</th><th>职业代码</th><th>职业名称</th><th colspan="2">操作</th></tr>
@@ -613,9 +614,9 @@
 														<td>${item.eCode}</td><td>${item.eName}</td>
 														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td>
-															<%-- <shiro:hasPermission name="wdgz_qxsc:delete"> --%>
+															<shiro:hasPermission name="wdgz_qxsc:delete"> 
 																<a id="${item.eId}"  href="javascript:;" onclick="unlove(this)">取消关注
-															<%-- </shiro:hasPermission> --%>
+															</shiro:hasPermission> 
 															</a></td>
 														</tr>
 													</c:forEach>													
@@ -624,7 +625,7 @@
 											<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
 												<div class="holder3" style="text-align: center;"></div>
 											</div>
-											<%-- </shiro:hasPermission> --%>
+											</shiro:hasPermission> 
 										</div>
 									</div>
 								</div>
@@ -634,87 +635,87 @@
 					
 									
 					<ul class="padding-side current">
-						<%-- <shiro:hasPermission name="kstd_zsj:query"> --%>
+						<shiro:hasPermission name="kstd_zsj:query"> 
 							<li>
 								<div class="">
 									<h4 class="fontwei text-primary">找数据</h4>
 									<ul class="row_list clearfix">
-										<%-- <shiro:hasPermission name="zsj_zdx:query"> --%>
+										<shiro:hasPermission name="zsj_zdx:query"> 
 											<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do"><span class="glyphicon glyphicon-search"></span> 找大学</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="zsj_czy:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="zsj_czy:query"> 
 											<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do"><span class="glyphicon glyphicon-list"></span> 查专业</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="zsj_kzy:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="zsj_kzy:query"> 
 											<li><a href="${pageContext.request.contextPath}/voc/xgk_job_blank.do"><span class="glyphicon glyphicon-briefcase"></span> 看职业</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="zsj_tqp:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="zsj_tqp:query"> 
 											<li><a href="javascript:;"><span class="glyphicon glyphicon-log-in"></span> 提前批</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="zsj_fsx:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="zsj_fsx:query"> 
 											<li><a href="javascript:;"><span class="glyphicon glyphicon-indent-left"></span> 分数线</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="zsj_lnbk:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="zsj_lnbk:query"> 
 											<li><a href="javascript:;"><span class="glyphicon glyphicon-eye-open"></span> 历年报考</a></li>
-										<%-- </shiro:hasPermission> --%>										
+										</shiro:hasPermission> 										
 									</ul>
 								</div>
 							</li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="kstd_cp:query"> --%>
+						</shiro:hasPermission> 
+						<shiro:hasPermission name="kstd_cp:query"> 
 							<li>
 								<div class="">
 									<h4 class="fontwei text-primary">测评</h4>
 									<ul class="row_list clearfix">
-										<%-- <shiro:hasPermission name="cp_cjfx:query"> --%>
+										<shiro:hasPermission name="cp_cjfx:query"> 
 											<li><a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=CJFX"><span class="glyphicon glyphicon-align-right"></span> 成绩分析</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="cp_qncp:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="cp_qncp:query"> 
 											<li><a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=QNFX"><span class="glyphicon glyphicon-road"></span> 潜能测评</a></li>							
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="cp_mbti:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="cp_mbti:query"> 
 											<li><a href="${pageContext.request.contextPath}/cp/xgk_answer_hld.do"><span class="glyphicon glyphicon-tasks"></span> 霍兰德测评</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="cp_hld:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="cp_hld:query"> 
 											<li><a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do"><span class="glyphicon glyphicon-cloud"></span> MBTI测评</a></li>
-										<%-- </shiro:hasPermission> --%>										
+										</shiro:hasPermission> 										
 									</ul>
 								</div>
 							</li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="grzx_zytb:query"> --%>						
+						</shiro:hasPermission> 
+						<shiro:hasPermission name="grzx_zytb:query"> 						
 							<li>
 								<div class="">
 									<h4 class="fontwei text-primary">志愿填报</h4>
 									<ul class="row_list clearfix">
-										<%-- <shiro:hasPermission name="zytb_yxyx:query"> --%>
+										<shiro:hasPermission name="zytb_yxyx:query"> 
 											<li><a href=""><span class="glyphicon glyphicon-globe"></span> 院校优先</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="zytb_zyyx:query"> --%>
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="zytb_zyyx:query"> 
 											<li><a href=""><span class="glyphicon glyphicon-open"></span> 专业优先</a></li>
-										<%-- </shiro:hasPermission> --%>									
-										<%-- <shiro:hasPermission name="zytb_zzcx:query"> --%>
+										</shiro:hasPermission> 									
+										<shiro:hasPermission name="zytb_zzcx:query"> 
 											<li><a href=""><span class="glyphicon glyphicon-zoom-in"></span> 自主择校</a></li>
-										<%-- </shiro:hasPermission> --%>
-										<%-- <shiro:hasPermission name="zytb_yjpp:query"> --%>										
+										</shiro:hasPermission> 
+										<shiro:hasPermission name="zytb_yjpp:query"> 										
 											<li><a href=""><span class="glyphicon glyphicon-screenshot"></span> 一件匹配</a></li>
-										<%-- </shiro:hasPermission> --%>
+										</shiro:hasPermission> 
 									</ul>
 								</div>
 							</li>
-						<%-- </shiro:hasPermission> --%>
-						<%-- <shiro:hasPermission name="kstd_kc:query"> --%>						
+						</shiro:hasPermission> 
+						<shiro:hasPermission name="kstd_kc:query"> 						
 							<li>
 								<div class="">
 									<h4 class="fontwei text-primary">课程</h4>
 									<ul class="row_list clearfix">
-										<%-- <shiro:hasPermission name="kc_zskt:qury"> --%>
+										<shiro:hasPermission name="kc_zskt:qury"> 
 											<li><a href="${pageContext.request.contextPath}/online/xgk_online_index.do"><span class="glyphicon glyphicon-film"></span> 知识课堂</a></li>
-										<%-- </shiro:hasPermission> --%>
+										</shiro:hasPermission> 
 									</ul>
 								</div>
 							</li>
-						<%-- </shiro:hasPermission> --%>
+						</shiro:hasPermission> 
 					</ul>
 				</div>
 			</div>

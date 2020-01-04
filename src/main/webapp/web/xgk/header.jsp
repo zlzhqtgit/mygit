@@ -104,7 +104,7 @@
 										<img src="${pageContext.request.contextPath}/img/xgk/user.png" />
 									</c:if>
 								</a>
-							<span class="padding-side"><a href="${pageContext.request.contextPath}/web/xgk/center_user.jsp">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
+							<span class="padding-side"><a href="${pageContext.request.contextPath}/user/hqt_user_info.do">${username}</a> / <a href="javascript:;" onclick="loginOut()">退出</a></span>
 						</shiro:user> 
 					
 					

@@ -304,6 +304,13 @@ public class IWxPayServiceImpl implements IWxPayService {
 						} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
 							// 单独购买1次下载报告
 							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
+							if (userList.get(0).getExpirationTime() != null
+									&& currentTime.before(userList.get(0).getExpirationTime())) {
+								expirationTime = Calendar.getInstance();
+								expirationTime.setTime(userList.get(0).getExpirationTime());
+								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+							}
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
 						}
 						userMapper.updateById(userList.get(0));
 					} catch (Exception e) {

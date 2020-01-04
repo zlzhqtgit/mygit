@@ -114,7 +114,7 @@
 										<li class=""><div class="border-primary">物理+化学+生物</div></li>
 									</ul>	
 								<div class="open-btn margin_top margin_bot" style="height: 50px;position: relative;background: inherit;">
-									<a class="downloadReport show_more btn btn-primary" onclick="downloadReport()" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>																		
+									<a class="downloadReport show_more btn btn-primary" style="position: relative;top: 0; text-align:center; margin: 0;overflow: hidden;box-shadow: 0 0 4px #ddd;">下载报告 <div class="light"></div> </a>																		
 		          				</div>
 		          				<!-- <div class="open-btn">
 									<a onclick="showMore(this)" class="show_more btn btn-primary vipLimite"><label class="padding-side fontwei">VIP</label> 下载报告 </a>
@@ -124,99 +124,196 @@
 					</div>
 				</section>
 			</div>
-				
-			</script>
-</main>		
-<!--<p class="text-center margin_bot"><a class="downloadReport btn btn-primary" href="javascript:void(0)">下载报告</a></p>-->
-<!-- 右侧边栏-->
-<c:import url="../public/side_right.jsp"></c:import>
-<!-- 页面底部-->
-<c:import url="footer.jsp"></c:import>
+			
+		</main>	
+<div class="" id="pay_info" style="display: none;">
+				<div class="pay">
+					<div class="margin_bot">
+						<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei" id="show_name">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
+					</div>
+					<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
+						<thead>
+							<tr><th></th><th>下载次数</th><th>使用期限</th></tr>
+						</thead>
+						<tboody>
+							<tr><td>套餐权益</td><td>1次</td><td>立即生效</td></tr>
+						</tboody>
+					</table>
+					<div class="tab_list">
+						<ul class="tab_head clearfix">
+							<!--<div class="pull-left" style="height: 3.1em;line-height: 3em;">支付方式：</div>-->
+							<li class="cur">微信支付</li>
+							<li>支付宝支付</li>
+						</ul>
+						<div class="tab_body">
+							<div class="cur">
+								<div class="">
+									<img id="qr_code"  src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+									<div class="text-center"> 微信扫码 </div>
+								</div>
+							</div>
+							<div class="">
+								<div class="">
+									<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+									<div class="text-center"> 支付宝扫码 </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
 		<script type="text/javascript">	
 		
-			function downloadReport(){
-				 var hqt_user = '${hqt_user}';
-				 if(hqt_user == 1){
-					 $.ajax({
-							url: "${pageContext.request.contextPath}/user/hqt_download_count.do",
-							data:"",
-							type:"POST",
-							dataType:"json",
-							success:function(obj){
-								console.log(obj);
-								if(obj.state == 0){									
-									//alert(obj.message);
-									layer.msg(obj.message,{icon:2,time:1000});					
-								}else{
-									//alert(obj.message);
-									layer.msg(obj.message,{icon:6,time:1000});
+		$(function(){
+			$(".downloadReport").click(function(){
+				var hqt_user = '${hqt_user}';
+				if(hqt_user == 1){
+					$.ajax({
+						url: "${pageContext.request.contextPath}/user/hqt_download_count.do",
+						data:"",
+						type:"POST",
+						dataType:"json",
+						success:function(obj){
+							$("#show_name").html(obj.data.DOWNLOADRECHAARGE.syscommet);
+							$("#show_money").html(obj.data.DOWNLOADRECHAARGE.sysnub);
+							console.log(obj.data.DOWNLOADRECHAARGE.syscommet);
+							if(obj.state == 1){//正常下载									
+								download();				
+							}else{
+								var status = obj.data.status;
+								if(status == 1){
 									download();
+								} else {
+									
+									setTimeout(function(){
+										$(".layer-anim").css("top","");
+									}, 500)									
+									layer.confirm(obj.message, {
+										  btn: ['单独购买', 'VIP续费', '取消'] //可以无限个按钮
+										  ,btn3: function(index, layero){
+										    layer.close(index);
+										  }
+										}, function(index, layero){
+											 var nowUrl=window.location.href;
+											 var outTradeNo = "";
+											 for(var i=0;i<4;i++){ //4位随机数，用以加在时间戳后面。
+												 outTradeNo += Math.floor(Math.random()*10);
+											 }
+											 outTradeNo = new Date().getTime() + outTradeNo;  //时间戳，用来生成订单号。
+											 if('${uid}' != ""){
+												 modelshow(false,$('#pay_info'),1);
+												 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?body=DOWNLOADRECHAARGE&outTradeNo=" + outTradeNo);	 
+												 settime(outTradeNo,nowUrl);												 
+											 }else{
+												 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
+											 }								   
+										   layer.close(index);
+										}, function(index){
+											location.href = '${pageContext.request.contextPath}/web/hqt_vip_index.do';
+										});
 								}
-							}	
-						}); 
-				 }else{
-					 download();
-				 }
+							}
+						}	
+					}); 
+				}else{
+					download();
+				}
+			})
+							var countdown = 60;//查询60次
+							function settime(order,url) {
+								if(countdown == 60){
+									setTimeout(function(){
+										$(".layer-anim").css("top","");
+									}, 500)	
+								}
+							    if (countdown == 0) { 
+							    	layer.msg('超过二分钟未支付，二维码已超时！', {icon: 5,time:1000});
+							    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+							    		window.location.reload();//页面刷新
+							    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_fail.do?nowUrl=" + url;
+							    		countdown = 60;
+							    	},2000);
+								} else {							
+									$.ajax({
+										type:"POST",
+										url:"${pageContext.request.contextPath}/api/query_wx_is_pay.do",
+										data:"outTradeNo=" + order,
+										datatype:'json',
+										success:function(obj){
+											if(obj.state == 1){
+												layer.msg('支付成功', {icon: 5,time:1000});
+										    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+										    		window.location.reload();//页面刷新
+										    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_sucees.do?nowUrl=" + url;
+										    	},2000);
+											}
+											countdown -- ;
+										}
+									});
+								} 
+								setTimeout(function() { 
+								    settime(order,url) }
+								    ,2000) 
+							}
+			function download(){
+			   var element = $("#report_cont");    // 这个dom元素是要导出pdf的div容器
+			   var w = element.width();    // 获得该容器的宽
+			   var h = element.height();    // 获得该容器的高
+			   console.log("111111")
+			   var offsetTop = element.offset().top;    // 获得该容器到文档顶部的距离
+			   var offsetLeft = element.offset().left;    // 获得该容器到文档最左的距离
+			   var canvas = document.createElement("canvas");
+			   var abs = 0;
+			   var win_i = $(window).width();    // 获得当前可视窗口的宽度（不包含滚动条）
+			   var win_o = window.innerWidth;    // 获得当前窗口的宽度（包含滚动条）
+			   if(win_o>win_i){
+			     abs = (win_o - win_i)/2;     
+			     // 获得滚动条长度的一半
+			   }
+			   canvas.width = w * 2;    // 将画布宽&&高放大两倍
+			   canvas.height = h * 2;
+			   var context = canvas.getContext("2d");
+			   context.scale(2, 2);
+			   context.translate(-offsetLeft-abs,-offsetTop);
+			   // 这里默认横向没有滚动条的情况，因为offset.left(),有无滚动条的时候存在差值，因此        
+			   // translate的时候，要把这个差值去掉
+			   element.css("background-color","#f9f9f9");
+			   html2canvas(element).then(function(canvas) {
+			    var contentWidth = canvas.width;
+			    var contentHeight = canvas.height;
+			    //一页pdf显示html页面生成的canvas高度;
+			    var pageHeight = contentWidth / 595.28 * 841.89;
+			    //未生成pdf的html页面高度
+			    var leftHeight = contentHeight;
+			    //页面偏移
+			    var position = 0;
+			    //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+			    var imgWidth = 595.28;
+			    var imgHeight = 592.28/contentWidth * contentHeight;
+			    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+			    var pdf = new jsPDF('', 'pt', 'a4');
+			
+			    //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+			    //当内容未超过pdf一页显示的范围，无需分页
+			    if (leftHeight < pageHeight) {
+			    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+			    } else {    // 分页
+			        while(leftHeight > 0) {
+			            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+			            leftHeight -= pageHeight;
+			            position -= 841.89;
+			            //避免添加空白页
+			            if(leftHeight > 0) {
+			              pdf.addPage();
+			            }
+			        }
+			    }
+			    pdf.save('我的选科报告.pdf');        
+			  })
 			}
-				
-					function download(){
-					   var element = $("#report_content");    // 这个dom元素是要导出pdf的div容器
-					   var w = element.width();    // 获得该容器的宽
-					   var h = element.height();    // 获得该容器的高
-					   var offsetTop = element.offset().top;    // 获得该容器到文档顶部的距离
-					   var offsetLeft = element.offset().left;    // 获得该容器到文档最左的距离
-					   var canvas = document.createElement("canvas");
-					   var abs = 0;
-					   var win_i = $(window).width();    // 获得当前可视窗口的宽度（不包含滚动条）
-					   var win_o = window.innerWidth;    // 获得当前窗口的宽度（包含滚动条）
-					   if(win_o>win_i){
-					     abs = (win_o - win_i)/2;     
-					     // 获得滚动条长度的一半
-					   }
-					   canvas.width = w * 2;    // 将画布宽&&高放大两倍
-					   canvas.height = h * 2;
-					   var context = canvas.getContext("2d");
-					   context.scale(2, 2);
-					   context.translate(-offsetLeft-abs,-offsetTop);
-					   // 这里默认横向没有滚动条的情况，因为offset.left(),有无滚动条的时候存在差值，因此        
-					   // translate的时候，要把这个差值去掉
-					   element.css("background-color","#f9f9f9");
-					   html2canvas(element).then(function(canvas) {
-					    var contentWidth = canvas.width;
-					    var contentHeight = canvas.height;
-					    //一页pdf显示html页面生成的canvas高度;
-					    var pageHeight = contentWidth / 595.28 * 841.89;
-					    //未生成pdf的html页面高度
-					    var leftHeight = contentHeight;
-					    //页面偏移
-					    var position = 0;
-					    //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-					    var imgWidth = 595.28;
-					    var imgHeight = 592.28/contentWidth * contentHeight;
-					    var pageData = canvas.toDataURL('image/jpeg', 1.0);
-					    var pdf = new jsPDF('', 'pt', 'a4');
-				
-					    //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-					    //当内容未超过pdf一页显示的范围，无需分页
-					    if (leftHeight < pageHeight) {
-					    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-					    } else {    // 分页
-					        while(leftHeight > 0) {
-					            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
-					            leftHeight -= pageHeight;
-					            position -= 841.89;
-					            //避免添加空白页
-					            if(leftHeight > 0) {
-					              pdf.addPage();
-					            }
-					        }
-					    }
-					    pdf.save('我的选科报告.pdf');        
-					  })
-					}		
+		});
 		</script>
 
-</body>
 	<script type="text/javascript">
 								//最终推荐学科组合	
 								$(function(){
@@ -559,4 +656,10 @@
 				    }
 				});					
 			</script>
+	<!--<p class="text-center margin_bot"><a class="downloadReport btn btn-primary" href="javascript:void(0)">下载报告</a></p>-->
+	<!-- 右侧边栏-->
+	<c:import url="../public/side_right.jsp"></c:import>
+	<!-- 页面底部-->
+	<c:import url="footer.jsp"></c:import>
+	</body>
 </html>

@@ -27,7 +27,7 @@
 <div class="" id="pay_info" style="display: none;">
 					<div class="pay">
 						<div class="margin_bot">
-							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
+							<span class="">已选商品名称：</span><span class="text-danger padding-side fontwei" id="show_name">立学臻选套餐</span><span class="padding-side"><span id="show_money">599</span>元</span>
 						</div>
 						<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
 							<thead>
@@ -72,6 +72,9 @@ $(function(){
 				type:"POST",
 				dataType:"json",
 				success:function(obj){
+					$("#show_name").html(obj.data.DOWNLOADRECHAARGE.syscommet);
+					$("#show_money").html(obj.data.DOWNLOADRECHAARGE.sysnub);
+					console.log(obj.data.DOWNLOADRECHAARGE.syscommet);
 					if(obj.state == 1){//正常下载									
 						download();				
 					}else{
@@ -79,15 +82,23 @@ $(function(){
 						if(status == 1){
 							download();
 						} else {
+							console.log(obj);
 							layer.confirm(obj.message, {
 								  btn: ['单独购买', 'VIP续费', '取消'] //可以无限个按钮
 								  ,btn3: function(index, layero){
 								    layer.close(index);
 								  }
 								}, function(index, layero){
+									 var nowUrl=window.location.href;
+									 var outTradeNo = "";
+									 for(var i=0;i<4;i++){ //4位随机数，用以加在时间戳后面。
+										 outTradeNo += Math.floor(Math.random()*10);
+									 }
+									 outTradeNo = new Date().getTime() + outTradeNo;  //时间戳，用来生成订单号。
 									 if('${uid}' != ""){
 										 modelshow(false,$('#pay_info'),1);
-										 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?rechargeMoney=" + recharge_money + "&body=" + body);	 
+										 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?body=DOWNLOADRECHAARGE&outTradeNo=" + outTradeNo);	 
+										 settime(outTradeNo,nowUrl);
 									 }else{
 										 layer.msg('您未登录立学道平台,无法购买vip特权！', {icon: 5,time:2000});
 									 }								   
@@ -103,6 +114,37 @@ $(function(){
 			download();
 		}
 	})
+					var countdown = 60;//查询60次
+					function settime(order,url) {
+					    if (countdown == 0) { 
+					    	layer.msg('超过二分钟未支付，二维码已超时！', {icon: 5,time:1000});
+					    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+					    		window.location.reload();//页面刷新
+					    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_fail.do?nowUrl=" + url;
+					    		countdown = 60;
+					    	},2000);
+						} else {							
+							$.ajax({
+								type:"POST",
+								url:"${pageContext.request.contextPath}/api/query_wx_is_pay.do",
+								data:"outTradeNo=" + order,
+								datatype:'json',
+								success:function(obj){
+									if(obj.state == 1){
+										layer.msg('支付成功', {icon: 5,time:1000});
+								    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
+								    		window.location.reload();//页面刷新
+								    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_sucees.do?nowUrl=" + url;
+								    	},2000);
+									}
+									countdown -- ;
+								}
+							});
+						} 
+						setTimeout(function() { 
+						    settime(order,url) }
+						    ,2000) 
+					}
 	function download(){
 	   var element = $("#report_cont");    // 这个dom元素是要导出pdf的div容器
 	   var w = element.width();    // 获得该容器的宽

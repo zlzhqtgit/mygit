@@ -381,6 +381,7 @@ public class IUserServerImpl implements IUserServer {
 				}
 				List<UserFeature> userFeatureList = userFeatureMapper.select(" uid = '" + uid + "' ", null, null, null);
 				for (UserFeature userFeature : userFeatureList) {
+					System.err.println("userFeature: " + userFeature);
 					if (Constants.EVALUATION_TYPE_SCORE_ANALYSIS.equals(userFeature.getEvaluationType())) {
 						session.setAttribute(Constants.EVALUATION_TYPE_SCORE_ANALYSIS, userFeature);// 成绩分析
 					}
@@ -394,6 +395,7 @@ public class IUserServerImpl implements IUserServer {
 						session.setAttribute(Constants.EVALUATION_TYPE_MBTI_ANALYSIS, userFeature);// MBTI测评
 					}
 				}
+
 				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "' ", null,
 						null, null);
 				if (!resultReportList.isEmpty()) {
@@ -449,6 +451,8 @@ public class IUserServerImpl implements IUserServer {
 				Integer uid = (Integer) subject.getSession().getAttribute("uid");
 				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
 				System.err.println("user：" + user);
+				AdminSystem DOWNLOADRECHAARGE = userRoleMapper.queryAdminSystemByName("DOWNLOADRECHAARGE");
+				resultMap.put("DOWNLOADRECHAARGE", DOWNLOADRECHAARGE);
 				AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(user.getRid());
 				resultMap.put("USER_TYPE", adminSystem.getSysname());
 				if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {

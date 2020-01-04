@@ -250,7 +250,7 @@
 			<script type="text/javascript">
 				$(".open-btn").parents("section").css({"height":"920","overflow":"hidden"})
 			</script>
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 					$(".downloadReport").click(function(){
 						var hqt_user = '${hqt_user}';
 						if(hqt_user == 1){
@@ -330,7 +330,7 @@
 					    pdf.save('我的选科报告.pdf');        
 					  })
 					}
-			</script>
+			</script> -->
 		</main>
 </body>
 </html>
