@@ -143,33 +143,36 @@
 				    
 				</div>
 				<p class="text-center margin_bot margin_top">
-						<input class="btn btn-primary fontwei begin_btn disabled" type="button" value="开始查询" id="sch_query_select">
+						<input class="btn btn-primary fontwei begin_btn cancel disabled" type="button" value="开始查询" id="sch_query_select">
 				</p>
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
 					<!-- 查询结果 -->
-					<div id="search_result"></div>
+					<div id="search_result"><ul classs='search_result list-group' id='universities'></ul></div>
 					<!-- 分页 -->
 					<div id="search_page"></div>
 					</section>
 				</div>
-			<div class="contrast panel" id="contrast" >
-				<div class="text-right text-primary padding-side2">
-					<label class="slide_down">
-						隐藏<span class="glyphicon glyphicon-chevron-down"></span>
-					</label>
-				</div>
-				<div class="contrast_tools">
-				 	<ul class="contrast_list clearfix"></ul>
-					<div class="btn_group">
-				 		<span class="padding-side">
-				 			<p class="text-center"><a href="javascript:void(0)" onclick="baseCompare(this)" class="btn btn-primary">院校基本情况对比</a></p>
-					 		<p class="text-center"><a href="javascript:void(0)" onclick="admitScoreCompare(this)" class="btn btn-primary">院校录取分数对比</a></p>
-					 		<p class="text-center"><a href="javascript:void(0)" onclick="clear_contrast(this)" class="btn btn-primary">清空对比</a></p>
-				 		</span>
-				 	</div>
+			<div class="compare_boxs">
+				<div class="contrast panel" id="contrast" >
+					<div class="text-right text-primary padding-side2">
+						<label class="slide_down">
+							隐藏<span class="glyphicon glyphicon-chevron-down"></span>
+						</label>
+					</div>
+					<div class="contrast_tools">
+					 	<ul class="contrast_list clearfix"></ul>
+						<div class="btn_group">
+					 		<span class="padding-side">
+					 			<p class="text-center"><a href="javascript:void(0)" onclick="baseCompare(this)" class="btn btn-primary">院校基本情况对比</a></p>
+						 		<p class="text-center"><a href="javascript:void(0)" onclick="admitScoreCompare(this)" class="btn btn-primary">院校录取分数对比</a></p>
+						 		<p class="text-center"><a href="javascript:void(0)" onclick="clear_contrast(this)" class="btn btn-primary">清空对比</a></p>
+					 		</span>
+					 	</div>
+					</div>
 				</div>
 			</div>
+			
 			<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js" type="text/javascript" charset="utf-8"></script>
 			<!--模态框-->
 			<div class="padding-side2" id="Modal" style="display: none;">
@@ -304,8 +307,10 @@
 					//var rowName=$(obj).parents('li').attr('pname');
 					var imgUrl=$(obj).parents('li').find(".sh_logo img").attr("src");
 					if(flag==false){
-						$('.contrast').show();
+						console.log(flag)
+						$('.contrast').css("display","block"); 
 					}
+					console.log(flag)
 					add_contrast(rowId,imgUrl);
 					if ($('.contrast_list li').length==0) {
 						close_conbox();
@@ -378,6 +383,7 @@
 				
 				//加入对比
 				function add_contrast(row_id,itemImg){
+					console.log(row_id)
 					if ($("#btnid"+row_id).is(":checked")) {
 						$("#btnid"+row_id).parent().removeClass("btn-primary")
 						$("#btnid"+row_id).parent().addClass("cancel text-white");
@@ -464,10 +470,10 @@
 						if(canQuery){
 							$("#sch_query_select").removeAttr("onclick");
 							$("#sch_query_select").attr("onclick","schoolSearch(2)");
-							$("#sch_query_select").removeClass("disabled");
+							$("#sch_query_select").removeClass("cancel disabled");
 						} else {
 							$("#sch_query_select").removeAttr("onclick");
-							$("#sch_query_select").addClass("disabled")
+							$("#sch_query_select").addClass("cancel disabled")
 						}
 					}
  				
@@ -511,7 +517,8 @@
 								$("#result_count").css("display","block");//显示搜索结果数量
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
-								var universities = "";
+								//var universities = "<ul classs='search_result list-group' id='universities'>";
+								var lists="";
 								for (var i=0; i<list.length; i++){									
 									var admission_lot = "";//录取批次
 									var admissionLotList = JSON.parse(list[i].admissionLot);
@@ -560,19 +567,19 @@
         										}
         									}
                                         	}
-									var box_head = "<ul classs='search_result list-group' id='universities'>";
+									//var box_head = "<ul classs='search_result list-group' id='universities'>";
 
 									var operate = "";
 									if(list[i].eId == null){
 										operate = "<div class='operate_box padding-side'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p>" +
 												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
+												"<input type='checkbox' name='' id='btnid00" + (i+1) + "'/></a></p> </div>";
 									} else {
 										operate = "<div class='operate_box padding-side'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p>"+
 												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
+												"<input type='checkbox' name='' id='btnid00" + (i+1) + "'/></a></p> </div>";
 									}
-									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
+									lists +=  "<li class='list-group-item' id=00"+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
 												 "<div class='sh_logo'>" +
 												 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
@@ -587,9 +594,10 @@
 												 "</table></div>" +
 												 //[录取分表格   start]
 												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
-									//[院校扩展表list 院校录取分数线] 
+									
+												 //[院校扩展表list 院校录取分数线] 
 									if(list[i].universRelationList == null){
-										universities += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;		
 										for(var j=0; j<universRelationList.length; j++){
@@ -598,19 +606,19 @@
 												if(collegeScoreLine.startsWith("[")){
 													var lines = JSON.parse(collegeScoreLine);
 													if(lines.length > 0){
-														universities += "<tr><td>" + universRelationList[j].urYear + "</td><td>" + universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
+														lists += "<tr><td>" + universRelationList[j].urYear + "</td><td>" + universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
 													}	
 												}else {
-													universities += "<tr><td>" + (universRelationList[j].urYear == null ? "-" : universRelationList[j].urYear) + "</td><td>" + (universRelationList[j].subjectType == null ? "-" : universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+													lists += "<tr><td>" + (universRelationList[j].urYear == null ? "-" : universRelationList[j].urYear) + "</td><td>" + (universRelationList[j].subjectType == null ? "-" : universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 												}													
 											} 												
 										}
-									}									
-                                        	//[录取分表格   end]
-                                        	universities += "</table>" + operate + "</li></ul>";
+									}	
+									
+                                    lists += "</table>" + operate + "</li>";
                                         	
 								}
-							 	$("#search_result").html(universities);
+							 	$("#universities").html(lists);
 							 	//分页
 								layui.use(['laypage', 'layer'], function(){
 								  var laypage = layui.laypage
@@ -618,7 +626,7 @@
 								  laypage.render({
 								    elem: 'search_page',
 								    count: obj.data.count,
-								    limit: 3,
+								    limit: 10,
 								    limits: [1,2,3,4,5,6,7,8,9],
 								    layout: ['prev', 'page', 'next', 'limit', 'refresh', 'skip'],
 								    jump: function(obj,first){
@@ -648,10 +656,10 @@
 						dataType: "json",							
 						success: function (obj) {
 							if (obj.state == 1){
-								$("#result_count").css("display","inline-block");//显示搜索结果数量
+								$("#result_count").css("display","block");//显示搜索结果数量
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
-								var universities = "";
+								var lists = "";
 								for (var i=0; i<list.length; i++){
 									var admission_lot = "";//录取批次
 									var admissionLotList = JSON.parse(list[i].admissionLot);
@@ -707,19 +715,18 @@
 	        								}
 	        							}
                                     }
-									var box_head = '<ul classs="search_result list-group" id="universities">';
 									var id = "";
 									var operate = "";
 									if(list[i].eId == null){
 										operate = "<div class='operate_box padding-side'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p>" +
 												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
+												"<input type='checkbox' name='' id='btnid00" + (i+1) + "'/></a></p> </div>";
 									} else {
 										operate = "<div class='operate_box padding-side'><p class='text-center'><a class='store btn cancel' id='" + list[i].eId + "' onclick='store(this)' href='javascript:void(0)'><span>取消收藏</span><input type='checkbox' name='' id='' value='' checked='checked'/></a></p>" +
 												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
-												"<input type='checkbox' name='' id='btnid" + (i+1) + "'/></a></p> </div>";
+												"<input type='checkbox' name='' id='btnid00" + (i+1) + "'/></a></p> </div>";
 									}
-									universities += box_head + "<div><ur><li class='list-group-item' id="+(i+1)+" pname='" + list[i].universitiesName + "'>" +
+										lists += "<li class='list-group-item' id=00"+(i+1)+" pname='" + list[i].universitiesName + "'>" +
 											      //院校Logo
 												 "<div class='sh_logo'>" +
 												 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
@@ -737,7 +744,7 @@
 												 
 									//[院校扩展表list 院校录取分数线] 
 									if(list[i].universRelationList == null){
-										universities += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;
 										for(var j=0; j<list[i].universRelationList.length; j++){
@@ -746,19 +753,19 @@
 												if(collegeScoreLine.startsWith("[")){
 													var lines = JSON.parse(collegeScoreLine);
 													if(lines.length > 0){
-														universities += "<tr><td>" + universRelationList[j].urYear + "</td><td>" + universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
+														lists += "<tr><td>" + universRelationList[j].urYear + "</td><td>" + universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";
 													}	
 												}else {
-													universities += "<tr><td>" + (universRelationList[j].urYear == null ? "-" : universRelationList[j].urYear) + "</td><td>" + (universRelationList[j].subjectType == null ? "-" : universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+													lists += "<tr><td>" + (universRelationList[j].urYear == null ? "-" : universRelationList[j].urYear) + "</td><td>" + (universRelationList[j].subjectType == null ? "-" : universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 												}													
 											} 												
 										}
 									}							
                                     //[录取分表格   end]
-                                    universities += "</table>" + operate + "</li></ul>";
+                                    lists += "</table>" + operate + "</li></ul>";
                                         	
 								}
-							 	$("#search_result").html(universities);	 
+							 	$("#universities").html(lists);	 
 						}
 					}
 				});

@@ -200,7 +200,7 @@ $(function(){
 	  })
 	}
 });
-</script><
+</script>
 	<section class="row">
 		<p class="text-right"><a class="downloadReport btn btn-primary" href="javascript:;"">打印报告</a></p>
 		<h1 class="text-primary fontwei">学科分析报告</h1>
@@ -208,7 +208,7 @@ $(function(){
 			<div class="padding-side2 margin_top margin_bot">
 				<div class="report_box padding-side2">
 					<p class="">通过学科潜能测评结果对比分析，发现6门选考科目的适合度排序为：</p>
-					<p class="margin_top margin_bot"><a class="btn btn-primary" href="" id="one">物理</a><a class="btn btn-primary" href="" id="two">化学</a><a class="btn btn-primary" href="" id="three">生物</a></p>
+					<p class="margin_top margin_bot"><a class="btn btn-primary" href="javascript:;" id="one">物理</a><a class="btn btn-primary" href="javascript:;" id="two">化学</a><a class="btn btn-primary" href="javascript:;" id="three">生物</a></p>
 					<p class="">前三门科目是你的优势学科，你学习起来更感兴趣,也更容易学好，并且你对于学号这些科目更有信心；而后三门科目是你的非优势学科，在确定高考选考科目时，应当选择自己擅长的，回避自己的若是的科目。当然，你业可以根据上述各学科的发展建议提升自己想要选考科目的兴趣、能力、自信程度，并结合“学科推荐”系统中的其它维度统合分析，帮您做出最为科学、合理的决策。</p>
 					<div class="analyse_report margin_top">
 						<div id="xk_analyse_report1" class="" style="width: 600px;height:400px; margin: 3em auto;"></div>

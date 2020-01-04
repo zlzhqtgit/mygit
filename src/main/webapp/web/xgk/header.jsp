@@ -24,7 +24,7 @@
 							<li class=""><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
 							<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/voc/xgk_job_blank.do">职业库</a></li>
 							<li class="">
-								<a id="xgk6" name="dh" href="javascript:void(0)">高校专业&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
+								<a id="xgk6" name="dh" href="#">高校专业&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 								<ul class="list-unstyled">									
 										<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>								
 										<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>									
@@ -114,6 +114,17 @@
 </body>
 <script src="${pageContext.request.contextPath}/js/province.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+	$(function(){
+	    var myNav = $("nav>ul>li>a"),i;
+	        for(i=0;i<myNav.length;i++){
+	          var links = myNav.eq(i).attr("href").split(".")[0];
+	          var myURL = document.URL;
+	          if(myURL.indexOf(links) != -1) {
+	            myNav.eq(i).addClass('active');
+	          }
+	        }
+	});
+	
 	$('.nav_search').mouseenter(function() {
 		var w=$(window).width();
 		$('.search_slideDown').width(w)
