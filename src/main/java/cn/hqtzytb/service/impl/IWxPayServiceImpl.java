@@ -117,6 +117,9 @@ public class IWxPayServiceImpl implements IWxPayService {
 			Map<String, Object> paramMap = new ConcurrentHashMap<String, Object>();
 			String url = "http://xgk.sxghfwzx.com/api/wxpay.do?out_trade_no=" + out_trade_no + "&total_fee=" + total_fee
 					+ "&body=" + adminSystem.getSyscommet();
+			// String url = "http://127.0.0.1/api/wxpay.do?out_trade_no=" +
+			// out_trade_no + "&total_fee=" + total_fee + "&body="
+			// + adminSystem.getSyscommet();
 			System.err.println("url：" + url);
 			// pay工程微信支付接口返回的json字符串
 			String result = HttpClientUtils.doPost(url, paramMap);
@@ -125,7 +128,6 @@ public class IWxPayServiceImpl implements IWxPayService {
 			JSONObject jsonObject = JSONObject.parseObject(result);
 			// 获取return_code
 			String return_code = jsonObject.getString("return_code");
-			System.err.println("111111111111111111111");
 			// 判断通信是否成功
 			if (Constants.SUCCESS.equals(return_code)) {
 				// 获取result_code业务处理的结果
@@ -156,11 +158,11 @@ public class IWxPayServiceImpl implements IWxPayService {
 							image.setRGB(x, y, bitMatrix.get(x, y) ? Constants.BLACK : Constants.WHITE);
 						}
 					}
-					url = this.getClass().getResource("/").getPath().replaceFirst("/", "").replace("WEB-INF/classes/",
-							"img/public/logo.jpg");
 					// url =
-					// this.getClass().getResource("/").getPath().replace("WEB-INF/classes/",
+					// this.getClass().getResource("/").getPath().replaceFirst("/",
+					// "").replace("WEB-INF/classes/",
 					// "img/public/logo.jpg");
+					url = this.getClass().getResource("/").getPath().replace("WEB-INF/classes/", "img/public/logo.jpg");
 					System.err.println(url);
 					File file = new File(url);
 					Image logo = ImageIO.read(file);
@@ -183,10 +185,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 					outputStream.close();
 				}
 			}
-
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付生成二维码异常     错误信息: " + e);
 		}
 
@@ -195,7 +194,6 @@ public class IWxPayServiceImpl implements IWxPayService {
 	@Override
 	public void weixinNotify(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
-			System.err.println("开始回调！");
 			Date currentTime = new Date();
 			String inputLine;
 			String notityXml = "";
@@ -214,7 +212,12 @@ public class IWxPayServiceImpl implements IWxPayService {
 			Map<String, String> map = new HashMap<String, String>();
 			if (notityXml != "") {
 				// 把微信返回的XML转换成map
-				map = WXPayUtil.xmlToMap(notityXml);
+				try {
+					map = WXPayUtil.xmlToMap(notityXml);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			System.err.println(map.get("out_trade_no"));
 			// 定义一个返回给微信的变量
@@ -318,7 +321,7 @@ public class IWxPayServiceImpl implements IWxPayService {
 				System.out.println("通知微信.异步确认交易失败");
 			}
 		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付回掉异常     错误信息: " + e);
+			logger.error("访问路径：" + request.getRequestURI() + "操作：微信支付回掉异常 错误信息: " + e);
 		}
 	}
 

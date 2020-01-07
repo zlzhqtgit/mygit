@@ -50,7 +50,7 @@
 										<li>
 											<div class="padding-side2">
 												<div class="sch_info">
-													<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.universitiesCode}" class=""> <img src="${COLLEGE_PHOTO_PREFIX}/img/xgk/sch_logo.png" style="width: 7em;"/> </a>
+													<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.universitiesCode}" class=""> <img src="${COLLEGE_PHOTO_PREFIX}${item.universitiesLogo}" style="width: 7em;"/> </a>
 													<div class="padding-side">
 														<div class="">
 															<div class="sch_tit">
@@ -172,7 +172,6 @@
 														if(obj.state == 1){
 															var list = obj.data.list;
 															var sch_search = "";
-															console.log(list)
 															for(var i=0; i<list.length; i++){
 																var attrImg = "";//院校属性图片
 							                                        	var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
@@ -220,7 +219,7 @@
 																sch_search += '<div class="padding-side2">';
 																sch_search += '<div class="sch_info">';
 																//院校logo
-																sch_search += '<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode="' + list[i].universitiesCode + '" class=""> <img src="${COLLEGE_PHOTO_PREFIX}/img/xgk/sch_logo.png" style="width: 7em;"/></a>';
+																sch_search += '<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode="' + list[i].universitiesCode + '" class=""> <img src="${COLLEGE_PHOTO_PREFIX}' + list[i].universitiesLogo + '" style="width: 7em;"/></a>';
 																sch_search += '<div class="padding-side">';
 																sch_search += '<div class="">';
 																sch_search += '<div class="sch_tit">';
@@ -260,7 +259,6 @@
 																
 															}															
 														}
-														console.log(sch_search);
 														$("#search_university_list").html(sch_search);
 										      		}
 										    		});

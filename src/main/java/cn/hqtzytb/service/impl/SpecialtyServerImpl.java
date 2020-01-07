@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
-import cn.hqtzytb.service.ISpecialtyServer;
-import cn.hqtzytb.utils.Constants;
-import cn.hqtzytb.utils.GetCommonUser;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +15,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
+
 import com.alibaba.fastjson.JSON;
 
 import cn.hqtzytb.entity.Enshrine;
@@ -28,107 +28,113 @@ import cn.hqtzytb.mapper.EnrollmentRequirementsMapper;
 import cn.hqtzytb.mapper.EnshrineMapper;
 import cn.hqtzytb.mapper.SpecialtyMapper;
 import cn.hqtzytb.mapper.UniversityMapper;
-
-
+import cn.hqtzytb.service.ISpecialtyServer;
+import cn.hqtzytb.utils.Constants;
+import cn.hqtzytb.utils.GetCommonUser;
 
 /**
-* @Title: UserFeatureServerImpl.java
-* @Package cn.hqtzytb.service
-* @Description:(用户特征业务层实现类)
-* @author: ZhouLingZhang
-* @date 2019年9月27日
-* @Copyright:好前途教育
-* @version V1.0
+ * @Title: UserFeatureServerImpl.java
+ * @Package cn.hqtzytb.service
+ * @Description:(用户特征业务层实现类)
+ * @author: ZhouLingZhang
+ * @date 2019年9月27日
+ * @Copyright:好前途教育
+ * @version V1.0
  */
 @Service
 public class SpecialtyServerImpl implements ISpecialtyServer {
-	private  static final Logger logger = LogManager.getLogger(SpecialtyServerImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(SpecialtyServerImpl.class.getName());
 	@Autowired
 	private SpecialtyMapper specialtyMapper;
 	@Autowired
 	private EnrollmentRequirementsMapper enrollmentRequirementsMapper;
 	@Autowired
 	private UniversityMapper universityMapper;
-    @Autowired
-    private EnshrineMapper enshrineMapper;
-	
-	
+	@Autowired
+	private EnshrineMapper enshrineMapper;
+
 	@Override
 	public List<Specialty> getSpecialtyByPCode(String personalityCode) {
-		String where="e.personality_id='"+personalityCode+"'";
+		String where = "e.personality_id='" + personalityCode + "'";
 		return specialtyMapper.select(where, null, null, null);
 	}
+
 	@Override
 	public List<Specialty> getLargeClassByPCode(String personalityCode) {
-		String where="e.personality_id='"+personalityCode+"' LIMIT 6";
+		String where = "e.personality_id='" + personalityCode + "' LIMIT 6";
 		return specialtyMapper.selectLargeClass(where, null, null, null);
 	}
-	
+
 	@Override
 	public List<Specialty> getSpecialtyById(String specialtyId) {
-		String where="specialty_id='"+specialtyId+"'";
+		String where = "specialty_id='" + specialtyId + "'";
 		return specialtyMapper.selectId(where, null, null, null);
-	}	
+	}
+
 	@Override
-	public List<Specialty> getSpecialtyByvocation(String where) {		
+	public List<Specialty> getSpecialtyByvocation(String where) {
 		return specialtyMapper.selectvoction(where, null, null, null);
-	}	
+	}
+
 	@Override
-	public List<Specialty> getLargeClassByvocation(String where) {		
+	public List<Specialty> getLargeClassByvocation(String where) {
 		return specialtyMapper.selectLargeClassByvocation(where, null, null, null);
 	}
-	
+
 	@Override
-	public ResponseResult<Map<String,Object>> getSpecialtyList(String where, HttpServletRequest request) {
+	public ResponseResult<Map<String, Object>> getSpecialtyList(String where, HttpServletRequest request) {
 		try {
-			List<Specialty> list = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where ,null,null,null);
-			Map<String, SpecialtyOut> bkmap = new HashMap<>();//本科类专业对应专业数量
-			Map<String, SpecialtyOut> zkmap = new HashMap<>();//专科类专业对应专业数量
+			List<Specialty> list = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where, null, null, null);
+			Map<String, SpecialtyOut> bkmap = new HashMap<>();// 本科类专业对应专业数量
+			Map<String, SpecialtyOut> zkmap = new HashMap<>();// 专科类专业对应专业数量
 			List<String> bkList = new ArrayList<>();
 			List<String> zkList = new ArrayList<>();
-			for(Specialty sp : list){
+			for (Specialty sp : list) {
 				if ("本科".equals(sp.getSpecialtyEducation())) {
-					if(bkmap.containsKey(sp.getSpecialtyMajorName())){
+					if (bkmap.containsKey(sp.getSpecialtyMajorName())) {
 						SpecialtyOut out = bkmap.get(sp.getSpecialtyMajorName());
 						List<Specialty> specialtyList = out.getSpecialtyList();
 						specialtyList.add(sp);
-						out.setCount(out.getCount() +1 ).setSpecialtyList(specialtyList);
+						out.setCount(out.getCount() + 1).setSpecialtyList(specialtyList);
 						bkmap.put(sp.getSpecialtyMajorName(), out);
 					} else {
 						List<Specialty> specialtyList = new ArrayList<>();
 						specialtyList.add(sp);
-						SpecialtyOut out = new SpecialtyOut(1, sp.getSpecialtyMajorName(), sp.getSpecialtyDisciplines(), specialtyList);
+						SpecialtyOut out = new SpecialtyOut(1, sp.getSpecialtyMajorName(), sp.getSpecialtyDisciplines(),
+								specialtyList);
 						bkmap.put(sp.getSpecialtyMajorName(), out);
 						bkList.add(sp.getSpecialtyMajorName());
 					}
-				} else {//专科
-					if(zkmap.containsKey(sp.getSpecialtyMajorName())){
+				} else {// 专科
+					if (zkmap.containsKey(sp.getSpecialtyMajorName())) {
 						SpecialtyOut out = zkmap.get(sp.getSpecialtyMajorName());
 						List<Specialty> specialtyList = out.getSpecialtyList();
 						specialtyList.add(sp);
-						out.setCount(out.getCount() +1 ).setSpecialtyList(specialtyList);
+						out.setCount(out.getCount() + 1).setSpecialtyList(specialtyList);
 						zkmap.put(sp.getSpecialtyMajorName(), out);
 					} else {
 						List<Specialty> specialtyList = new ArrayList<>();
 						specialtyList.add(sp);
-						SpecialtyOut out = new SpecialtyOut(1, sp.getSpecialtyMajorName(), sp.getSpecialtyDisciplines(), specialtyList);
+						SpecialtyOut out = new SpecialtyOut(1, sp.getSpecialtyMajorName(), sp.getSpecialtyDisciplines(),
+								specialtyList);
 						zkmap.put(sp.getSpecialtyMajorName(), out);
 						zkList.add(sp.getSpecialtyMajorName());
 					}
 				}
 			}
-			Map<String,Object> resultMap = new HashMap<>();
-			resultMap.put("bk",bkmap);
-			resultMap.put("zk",zkmap);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("bk", bkmap);
+			resultMap.put("zk", zkmap);
 			resultMap.put("bkList", bkList);
 			resultMap.put("zkList", zkList);
-		    return new ResponseResult<Map<String,Object>>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
+			return new ResponseResult<Map<String, Object>>(Constants.RESULT_CODE_SUCCESS,
+					Constants.RESULT_MESSAGE_SUCCESS, resultMap);
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 查看专业列表信息   错误信息：" + e);
 		}
-		return new ResponseResult<>(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_FAIL);
+		return new ResponseResult<>(Constants.RESULT_CODE_FAIL, Constants.RESULT_MESSAGE_FAIL);
 	}
-	
+
 	@Override
 	public String getSpecialtySearchIndex(ModelMap map, HttpServletRequest request) {
 		try {
@@ -139,49 +145,67 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 		}
 		return "web/xgk/xgk_sch_major";
 	}
-	
+
 	@Override
 	public String getSpecialtyDetail(String specialtyId, HttpServletRequest request, ModelMap map) {
 		try {
 			Subject subject = SecurityUtils.getSubject();
-			if(subject.isAuthenticated()){
+			if (subject.isAuthenticated()) {
 				Object uid = SecurityUtils.getSubject().getSession().getAttribute("uid");
-				if(uid != null){
-					List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer)uid + "' AND e_code = '" + specialtyId + "'", null, null, null);
-					if(!enshrineList.isEmpty()){
+				if (uid != null) {
+					List<Enshrine> enshrineList = enshrineMapper.select(
+							" uid = '" + (Integer) uid + "' AND e_code = '" + specialtyId + "'", null, null, null);
+					if (!enshrineList.isEmpty()) {
 						map.addAttribute("school_like", enshrineList.get(0));
 					}
 				}
 			}
-			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "' ", null, null, null);
+			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "' ", null,
+					null, null);
 			map.addAttribute("specialty", specialtyList.get(0));
 			map.addAttribute("majorCourses", specialtyList.get(0).getMajorCourses().split(";"));
-			//考生生源地
-			/*map.addAttribute("er_provinceList", enrollmentRequirementsMapper.geyProvince(specialtyId));
-			map.addAttribute("er_yaerList", enrollmentRequirementsMapper.geyYear(specialtyId));*/
-			//院校省份
+			// 考生生源地
+			/*
+			 * map.addAttribute("er_provinceList",
+			 * enrollmentRequirementsMapper.geyProvince(specialtyId));
+			 * map.addAttribute("er_yaerList",
+			 * enrollmentRequirementsMapper.geyYear(specialtyId));
+			 */
+			// 院校省份
 			map.addAttribute("sch_provinceList", universityMapper.selectUniversityProvince());
-			//就业职业方向
-			map.addAttribute("employment_career_direction",JSON.toJSONString(GetCommonUser.getJson(specialtyList.get(0).getEmploymentCareerDirection(), request)));
-			map.addAttribute("employment_industry_distribution", GetCommonUser.getJson(specialtyList.get(0).getEmploymentIndustryDistribution(), request));
-			map.addAttribute("employment_area_distribution", GetCommonUser.getJson(specialtyList.get(0).getEmploymentAreaDistribution(), request));
+			// 就业职业方向
+			map.addAttribute("employment_career_direction", JSON
+					.toJSONString(GetCommonUser.getJson(specialtyList.get(0).getEmploymentCareerDirection(), request)));
+			map.addAttribute("employment_industry_distribution",
+					GetCommonUser.getJson(specialtyList.get(0).getEmploymentIndustryDistribution(), request));
+			map.addAttribute("employment_area_distribution",
+					GetCommonUser.getJson(specialtyList.get(0).getEmploymentAreaDistribution(), request));
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 查询专业详情信息   错误信息：" + e);
 		}
 		return "web/xgk/xgk_sch_major_info";
 	}
-	
-	
+
 	@Override
-	public ResponseResult<List<University>> getSpecialtySchool(String specialtyId, String er_year, String er_province, String sch_province, HttpServletRequest request) {
-		try{
-			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "'",null,null,null);
-			if(!specialtyList.isEmpty()){
-				String where = " u.universities_name  IN ("  + specialtyList.get(0).getOpenCollege().replaceAll("、",",") + ")";
-				if(StringUtils.isNotEmpty(sch_province) && !"全部".equals(sch_province)){
+	public ResponseResult<List<University>> getSpecialtySchool(String specialtyId, String er_year, String er_province,
+			String sch_province, HttpServletRequest request) {
+		try {
+			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "'", null,
+					null, null);
+			if (!specialtyList.isEmpty()) {
+				String[] splitList = specialtyList.get(0).getOpenCollege().split("、");
+				String where = " u.universities_name  IN (";
+				for (int i = 0; i < splitList.length; i++) {
+					if (i == splitList.length - 1) {
+						where += "'" + splitList[i] + "')";
+					} else {
+						where += "'" + splitList[i] + "',";
+					}
+				}
+				if (StringUtils.isNotEmpty(sch_province) && !"全部".equals(sch_province)) {
 					where += " AND u.province = '" + sch_province + "' ";
 				}
-				if(StringUtils.isNotEmpty(er_province)){
+				if (StringUtils.isNotEmpty(er_province) && !"全部".equals(er_province)) {
 					where += " AND er.e_province = '" + er_province + "' ";
 				}
 				if (StringUtils.isNotEmpty(er_year)) {
@@ -190,36 +214,40 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 				}
 				System.out.println("where：" + where);
 				List<University> universityList = universityMapper.selectUniversityList(where, null, null, null);
-				for(University university : universityList){
-					for(UniversityRelation relation : university.getUniversRelationList()){
-						relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(),request));
+				for (University university : universityList) {
+					for (UniversityRelation relation : university.getUniversRelationList()) {
+						relation.setCollegeScoreLineList(
+								GetCommonUser.getList(relation.getCollegeScoreLine(), request));
 					}
 				}
-				SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
-				return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,universityList);
+				SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX",
+						Constants.COLLEGE_PHOTO_PREFIX);
+				return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, universityList);
 			}
-			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
-		}catch(Exception e){
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
+		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 查询专业详情信息   错误信息：" + e);
-			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
 		}
 
 	}
+
 	@Override
-	public ResponseResult<Map<String, Object>> getSpecialtyList2(String where, Integer offset, Integer countPerPage, HttpServletRequest request) {
+	public ResponseResult<Map<String, Object>> getSpecialtyList2(String where, Integer offset, Integer countPerPage,
+			HttpServletRequest request) {
 		try {
-			Map<String,Object> resultMap = new HashMap<>();
-			//专业
-			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where, null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Map<String, Object> resultMap = new HashMap<>();
+			// 专业
+			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where, null,
+					offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
 			Integer specialtyCount = specialtyMapper.selectCount(StringUtils.isEmpty(where) ? null : where);
 			resultMap.put("specialtyList", specialtyList);
 			resultMap.put("specialtyCount", specialtyCount);
-			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);
+			return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：搜索框搜索专业信息异常   错误信息: " + e);
-			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
 		}
 	}
-
 
 }

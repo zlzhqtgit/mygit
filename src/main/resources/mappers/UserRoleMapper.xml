@@ -16,6 +16,7 @@
 			FROM 
 				role	
 			LEFT JOIN admin_system ON admin_system.sysnub = role.role_id
+			WHERE	
 				admin_system.sysname = #{sysname};
 		</select>
 		
