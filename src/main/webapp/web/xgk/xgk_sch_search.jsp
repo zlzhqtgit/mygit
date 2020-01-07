@@ -332,7 +332,7 @@
 						{ filed:"院校", value:[] },
 						{ filed:"", value:[] },//name
 						{ filed:"录取批次", value:[] },
-						/* { filed:"标签属性", value:[] }, */
+						//{ filed:"标签属性", value:[] },
 						{ filed:"综合排名", value:[] },
 						{ filed:"学校类型", value:[] },
 						{ filed:"硕士点个数", value:[] },
@@ -347,6 +347,12 @@
 							row[0].value[j]=$("#"+wrapId).find(".sh_logo").html();
 							row[1].value[j]=$("#"+wrapId).attr("pname");
 							row[2].value[j]=$("#"+wrapId).find(".sch_info .admission_lot").text();
+							/* var arr=$("#"+wrapId).find(".sch_info .schoolTag img");
+							var tags='';
+							for (var k=0;k<arr.length;k++) {
+								tags+=arr[k].alt+"/"
+							}
+							row[3].value[j]=tags; */
 							/* row[3].value[j]=$("#"+wrapId).find(".sch_info .schoolTag img").attr("alt"); */
 							row[3].value[j]=$("#"+wrapId).find(".sch_info .admitRank").text();
 							row[4].value[j]=$("#"+wrapId).find(".sch_info .schType").text();

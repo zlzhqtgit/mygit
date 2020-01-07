@@ -209,12 +209,11 @@
 						<a href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> 
 							我的选科<!-- <span class="badge pull-right text-danger">3</span> -->
 						</a>
-						<ul class="sublist">
-							<%-- 
+						<%--<ul class="sublist">
 							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/noDone.jsp')" href="javascript:void(0)">待完成</a></li> 
 							<li class="cur"><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/done.jsp')" href="javascript:void(0)">已完成</a></li> 
-							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li>  --%>
-						</ul>
+							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li>  
+						</ul>--%>
 					</li>
 					</shiro:hasPermission> 
 					<shiro:hasPermission name="grzx_wdgz:query"> 
@@ -544,33 +543,33 @@
 									
 									<div class="tab_body">									
 										<div class="cur">
-										<shiro:hasPermission name="wdgz_yxsc:query"> 
-											<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
-												<thead>
-													<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
-												</thead>
-												
-												<tbody id="search_result1">
-													<c:forEach items="${like_university_list}" var="item">
-														<tr>
-														<td><a href="javascript:;"><img src="${COLLEGE_PHOTO_PREFIX}${item.eLogo}" class="img-responsive"/></a></td>
-														<td>${item.eCode}</td><td>${item.eName}</td>
-														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
-														<td><a id="${item.eId}" href="javascript:;" onclick="unlove(this)">取消关注<!-- <span class="icon Hui-iconfont text-info">&#xe725;</span> --></a></td>
-													</tr>
-													</c:forEach>
+											<shiro:hasPermission name="wdgz_yxsc:query"> 
+												<table class="table table-hover table-striped margin_top" cellspacing="" cellpadding="">
+													<thead>
+														<tr><th>学校</th><th>院校代码</th><th>院校名称</th><th colspan="2">操作</th></tr>
+													</thead>
 													
-													<tr>
-														<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
-														<td>101001</td><td>立学道大学</td>
-														<td><a href=""><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
-														<td><a href=""><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
-													</tr> 
-												</tbody>												
-											</table>
-											<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
-												<div class="holder1" style="text-align: center;"></div>
-											</div>
+													<tbody id="search_result1">
+														<c:forEach items="${like_university_list}" var="item">
+															<tr>
+																<td><a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.eCode}"><img src="${COLLEGE_PHOTO_PREFIX}${item.eLogo}" class="img-responsive"/></a></td>
+																<td>${item.eCode}</td><td>${item.eName}</td>
+																<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+																<td><a id="${item.eId}" href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+															</tr>
+														</c:forEach>
+														
+														<%-- <tr>
+															<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
+															<td>101001</td><td>立学道大学</td>
+															<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+															<td><a href="javascript:;" onclick="javascript:;"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+														</tr> --%> 
+													</tbody>												
+												</table>
+												<div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
+													<div class="holder1" style="text-align: center;"></div>
+												</div>
 											</shiro:hasPermission> 
 										</div>
 										
@@ -582,15 +581,16 @@
 												</thead>
 												<tbody id="search_result2">
 													<c:forEach items="${like_specialty_list}" var="item" varStatus="vs">
-														<tr>
+													<tr>
 														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
 														<td>${item.eCode}</td><td>${item.eName}</td>
-														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
-														<td>
+														<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a id="${item.eId}" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+														<%-- <td>
 															<shiro:hasPermission name="wdgz_qxsc:delete"> 
-																<a id="${item.eId}"  href="javascript:;" onclick="unlove(this)">取消关注</a>
+																<a id="${item.eId}"  href="javascript:;">取消关注</a>
 															</shiro:hasPermission> 															
-														</td>
+														</td> --%>
 													</tr>
 													</c:forEach>
 													
@@ -613,11 +613,13 @@
 														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
 														<td>${item.eCode}</td><td>${item.eName}</td>
 														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
-														<td>
+														<td><a id="${item.eId}" href="${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
+														<%-- <td>
 															<shiro:hasPermission name="wdgz_qxsc:delete"> 
 																<a id="${item.eId}"  href="javascript:;" onclick="unlove(this)">取消关注
 															</shiro:hasPermission> 
-															</a></td>
+															</a>
+														</td> --%>
 														</tr>
 													</c:forEach>													
 												</tbody>
@@ -722,25 +724,26 @@
 		</main>
 		<script type="text/javascript">
 		 function unlove(obj){
-	    	 	console.log("取消喜欢")
-   			if($(obj).attr("id") != ''){					    			
-	    			$.ajax({
-	    				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
-	    				data: "eId=" + $(obj).attr("id"),
-	    				type: "POST",
-	    				dataType:"json",
-	    				success:function(obj){
-	    					if(obj.state == 0){
-	    						console.log(obj.message);
-	    						layer.msg(obj.message,{icon:2,time:1000});
-	    					}else{
-	    						console.log(obj.message);
-	    						layer.msg(obj.message,{icon:6,time:1000});
-	    					}
-	    				}	
-	    			});
-   			}	
-			} 	
+	    	console.log("取消喜欢")
+   			if($(obj).attr("id") != ''){
+    			$.ajax({
+    				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
+    				data: "eId=" + $(obj).attr("id"),
+    				type: "POST",
+    				dataType:"json",
+    				success:function(obj){
+    					if(obj.state == 0){
+    						console.log(obj.message);
+    						layer.msg(obj.message,{icon:2,time:1000});
+    					}else{
+    						console.log(obj.message);
+    						layer.msg(obj.message,{icon:6,time:1000});
+    					}
+    				}	
+    			});
+   			}
+	    	$(obj).parents("tr").remove();
+		} 	
 		 
 		 //院校分页
 		 $("div.holder1").jPages({

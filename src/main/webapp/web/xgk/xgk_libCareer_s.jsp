@@ -104,11 +104,11 @@
 								职业分类<span class="">年薪</span>
 							</div>
 							<ul class="padding-side" style="list-style: symbols;">
-								<li><a class="text-danger" href="">互联网<span class="">80-100w</span></a></li>
-								<li><a class="text-warning" href="">互联网<span class="">80-100w</span></a></li>
-								<li><a class="text-primary" href="">互联网<span class="">80-100w</span></a></li>
-								<li><a href="">互联网<span class="">80-100w</span></a></li>
-								<li><a href="">互联网<span class="">80-100w</span></a></li>
+								<li><a class="text-danger" href="javascript:;">基金/期货/投资<span class="">10-14w</span></a></li>
+								<li><a class="text-warning" href="javascript:;">互联网<span class="">8-11w</span></a></li>
+								<li><a class="text-primary" href="javascript:;">房地产/建筑<span class="">8-10w</span></a></li>
+								<li><a href="javascript:;">通信<span class="">7-9w</span></a></li>
+								<li><a href="javascript:;">医疗<span class="">7-8w</span></a></li>
 							</ul>
 							<div class="text-right">
 								<span class="text-danger">持续更新……</span>
