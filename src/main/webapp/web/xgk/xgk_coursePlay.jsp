@@ -39,7 +39,7 @@
 					<div class="col-md-9" style="">
 						<div id="video">
 							<video height="100%" poster="${pageContext.request.contextPath}/img/xgk/car.jpg" id="videoShow" style="object-fit:fill;">
-								<source src="${pageContext.request.contextPath}/img/xgk/video/2.mp4" type="video/mp4"></source>
+								<source src="${pageContext.request.contextPath}/img/xgk/video/1_0.mp4" type="video/mp4"></source>
 								<source src="myvideo.ogv" type="video/ogg"></source>
 								<source src="myvideo.webm" type="video/webm"></source>
 								<object width="" height="" type="application/x-shockwave-flash" data="myvideo.swf">
