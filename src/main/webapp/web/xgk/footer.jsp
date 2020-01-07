@@ -101,7 +101,7 @@
 			<div class="company-info container">
 				<div class="row">
 					<div class="col-md-6" style="padding-left: 4em;">
-						<p>微信：xdl6666</p>
+						<p>微信：jyxxh00001</p>
 						<p>邮箱：401375488@qq.com</p>
 						<p>电话：0851-84721064</p>
 						<p>时间：9：00-18：00</p>

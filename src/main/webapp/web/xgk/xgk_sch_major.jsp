@@ -146,7 +146,7 @@
 							data: "where=" + where,
 							dataType: "JSON",
 							success: function(obj) {
-								
+								$(".search_resultBox").css("display","block");
 								if(obj.state == 1){
 									var bk = obj.data.bk;
 									var bkList = obj.data.bkList;
@@ -226,11 +226,11 @@
 						},1000);
 					}
 				</script>
-				<div class="panel panel-default">
+				<div class="search_resultBox panel panel-default" style="display:none;">
 				    <div class="tab_list padding-side2">
 				    	<ul class="tab_head clearfix">
-				    			<li class="cur">本科专业</li>
-				    			<li>专科专业</li>				    		
+			    			<li class="cur">本科专业</li>
+			    			<li>专科专业</li>				    		
 				    	</ul>
 				    	<div class="tab_body">
 				    		<div class="tab_b1 cur">
@@ -277,7 +277,6 @@
 				    	<div style="color: #333;"> 销售、编辑、文案、秘书、销售、编辑、文案、秘书、销售、编辑、文案、秘书、销售、编辑、文案、秘书、 </div>
 				    </div>
 				    <!--/tips-->
-				    
 	
 				    <script type="text/javascript">
 				    	//弹框
@@ -307,7 +306,7 @@
 				    </script>
 				    
 				</div>
-				
+			</div>
 			<!-- -->
 		</main>
 
