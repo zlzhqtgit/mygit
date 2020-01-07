@@ -77,7 +77,7 @@
 					    	   			<dd><a href="javascript:void(0)">${item.specialtyMajorName}</a></dd>
 					    	   		</c:if>
 				    	   		</c:forEach>
-				        	</dl>
+				        	</dl>				        
 				        </li>
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
@@ -145,59 +145,62 @@
 							type: "POST",
 							data: "where=" + where,
 							dataType: "JSON",
-							success: function(obj) {
-								
+							success: function(obj) {								
 								if(obj.state == 1){
-									var bk = obj.data.bk;
-									var bkList = obj.data.bkList;
-									var zk = obj.data.zk;
-									var zkList = obj.data.zkList;
+									var list = obj.data;									
 									var bkdata = "";
-									for(var i=0; i<bkList.length; i++){
-										var sp = bk[bkList[i]];
-										bkdata += '<div class="major_info">';
-										bkdata += '<div class="clearfix major_info_head">';
-										bkdata += '<span class="pull-left"><h3 class="fontwei">' + sp.specialtyMajorName + '</h3></span>';
-										bkdata += '<span class="pull-right  text-muted">1个专业类>' + sp.count + '个本科专业</span>';
-										bkdata += '</div>';
-										bkdata += '<div class="clearfix major_info_sub">';
-										bkdata += '<span class="pull-left"><h4 class="fontwei">' + sp.specialtyDisciplines + '</h4></span>';
-										bkdata += '<span class="pull-right" style="color:#4b9f64;">' + sp.count + '个专业</span>';
-										bkdata += '</div>';
-										bkdata += '<ul class="major_list clearfix margin_top1" id="bk' + i + '">';
-										for(var j=0; j<sp.specialtyList.length; j++){
-											bkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + sp.specialtyList[j].specialtyId + '">' + sp.specialtyList[j].specialtyName + '</a></li>';
-										}
-										bkdata += '</ul>';
-										bkdata += '</div>';
-									}
-									bkdata += '<div class="" style="box-shadow: 0px 0px 0px #bdb8b8;display:block;">'
-									bkdata += '<div class="holder1" style="text-align: center;"></div>';
-									bkdata += '</div>';
-									$("#bklist").html(bkdata);//本科列表数据
-									
 									var zkdata = "";
-									for(var i=0; i<zkList.length; i++){
-										var sp = zk[zkList[i]];
-										zkdata += '<div class="major_info">';
-										zkdata += '<div class="clearfix major_info_head">';
-										zkdata += '<span class="pull-left"><h3 class="fontwei">' + sp.specialtyMajorName + '</h3></span>';
-										zkdata += '<span class="pull-right  text-muted">1个专业类>' + sp.count + '个专科专业</span>';
-										zkdata += '</div>';
-										zkdata += '<div class="clearfix major_info_sub">';
-										zkdata += '<span class="pull-left"><h4 class="fontwei">' + sp.specialtyDisciplines + '</h4></span>';
-										zkdata += '<span class="pull-right" style="color:#4b9f64;">' + sp.count + '个专业</span>';
-										zkdata += '</div>';
-										zkdata += '<ul class="major_list clearfix margin_top1" id="bk' + i + '">';
-										for(var j=0; j<sp.specialtyList.length; j++){
-											zkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + sp.specialtyList[j].specialtyId + '">' + sp.specialtyList[j].specialtyName + '</a></li>';
+									for(var i=0; i<list.length; i++){
+										if(list[i].education == '本科'){
+											var specialtyOutList = list[i].specialtyOutList;//专业大类
+											for(var j=0; j<specialtyOutList.length; j++){
+												bkdata += '<div class="major_info">';
+												bkdata += '<div class="clearfix major_info_head">';
+												bkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
+												bkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
+												bkdata += '</div>';												
+												var disciplinesList = specialtyOutList[j].disciplinesList;//专业分类
+												for(var k=0; k<disciplinesList.length; k++){
+													bkdata += '<div class="clearfix major_info_sub">';
+													bkdata += '<span class="pull-left"><h4 class="fontwei">' + disciplinesList[k].disciplines + '</h4></span>';
+													bkdata += '<span class="pull-right" style="color:#4b9f64;">' + disciplinesList[k].specialtyList.length + '个专业</span>';
+													bkdata += '</div>';
+													bkdata += '<ul class="major_list clearfix margin_top1">';
+													var specialtyList = disciplinesList[k].specialtyList;
+													for(var l=0; l<specialtyList.length; l++){
+														bkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + specialtyList[l].specialtyId + '">' + specialtyList[l].specialtyName + '</a></li>';
+													}
+													bkdata += '</ul>';
+												}
+												bkdata += '</div>';	
+											}									
 										}
-										zkdata += "</ul>"
-										zkdata += "</div>"
-									}
-									zkdata += '<div class="bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">'
-									zkdata += '<div class="holder2" style="text-align: center;"></div>';
-									zkdata += '</div>';
+										if(list[i].education == '专科'){
+											var specialtyOutList = list[i].specialtyOutList;//专业大类
+											for(var j=0; j<specialtyOutList.length; j++){
+												zkdata += '<div class="major_info">';
+												zkdata += '<div class="clearfix major_info_head">';
+												zkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
+												zkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
+												zkdata += '</div>';												
+												var disciplinesList = specialtyOutList[j].disciplinesList;//专业分类
+												for(var k=0; k<disciplinesList.length; k++){
+													zkdata += '<div class="clearfix major_info_sub">';
+													zkdata += '<span class="pull-left"><h4 class="fontwei">' + disciplinesList[k].disciplines + '</h4></span>';
+													zkdata += '<span class="pull-right" style="color:#4b9f64;">' + disciplinesList[k].specialtyList.length + '个专业</span>';
+													zkdata += '</div>';
+													zkdata += '<ul class="major_list clearfix margin_top1">';
+													var specialtyList = disciplinesList[k].specialtyList;
+													for(var l=0; l<specialtyList.length; l++){
+														zkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + specialtyList[l].specialtyId + '">' + specialtyList[l].specialtyName + '</a></li>';
+													}
+													zkdata += '</ul>';
+												}
+												zkdata += '</div>';	
+											}				
+										}
+									}									
+									$("#bklist").html(bkdata);//本科列表数据
 									$("#zklist").html(zkdata);//专科列表数据
 									
 									$("div.holder1").jPages({
@@ -248,8 +251,45 @@
 					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
 					    				<li class=""><a >伦理学</a></li>
 					    				<li class=""><a >宗教学</a></li>
+					    			</ul>
+					    			<div class="clearfix major_info_sub">
+				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
+				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
+					    			</div>
+					    			<ul class="major_list clearfix margin_top1">
+					    				<li class=""><a>哲学</a></li>
+					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
+					    				<li class=""><a >伦理学</a></li>
+					    				<li class=""><a >宗教学</a></li>
+					    			</ul>
+					    			<div class="clearfix major_info_head">
+				    					<span class="pull-left"><h3>不是哲学(01)</h3></span>
+				    					<span class="pull-right  text-muted">1个专业类>4个本科专业</span>
+				    				</div>
+					    			<div class="clearfix major_info_sub">
+				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
+				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
+					    			</div>
+					    			<ul class="major_list clearfix margin_top1">
+					    				<li class=""><a>哲学</a></li>
+					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
+					    				<li class=""><a >伦理学</a></li>
+					    				<li class=""><a >宗教学</a></li>
+					    			</ul>
+					    			<div class="clearfix major_info_sub">
+				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
+				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
+					    			</div>
+					    			<ul class="major_list clearfix margin_top1">
+					    				<li class=""><a>哲学</a></li>
+					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
+					    				<li class=""><a >伦理学</a></li>
+					    				<li class=""><a >宗教学</a></li>
 					    			</ul> -->
 				    			</div>
+				    			<div class="" style="box-shadow: 0px 0px 0px #bdb8b8;display:block;">
+								<div class="holder1" style="text-align: center;"></div>
+							</div>
 				    		</div>	
 				    		<div class="tab_b2">
 				    			<div class="major_info" id="zklist">
@@ -268,6 +308,9 @@
 					    				<li class=""><a href="sch_major_info.html">宗教学</a></li>
 					    			</ul> -->
 				    			</div>
+				    			<div class="bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
+								<div class="holder2" style="text-align: center;"></div>
+							</div>
 				    		</div>
 				    	</div>
 				    	

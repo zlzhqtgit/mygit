@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.ModelMap;
+
+import cn.hqtzytb.entity.Education;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.University;
@@ -17,7 +19,7 @@ public interface ISpecialtyServer{
 	List<Specialty> getLargeClassByvocation(String where);
 	List<Specialty> getSpecialtyById(String specialtyId);
 	List<Specialty> getSpecialtyByvocation(String where);
-	ResponseResult<Map<String,Object>> getSpecialtyList(String where, HttpServletRequest request);
+	ResponseResult<List<Education>> getSpecialtyList(String where, Integer offset, Integer countPerPage, String type, HttpServletRequest request);
 	String getSpecialtySearchIndex(ModelMap map, HttpServletRequest request);
 	String getSpecialtyDetail(String specialtyId, HttpServletRequest request, ModelMap map);
 	ResponseResult<List<University>> getSpecialtySchool(String specialtyId, String er_year, String er_province, String sch_province, HttpServletRequest request);

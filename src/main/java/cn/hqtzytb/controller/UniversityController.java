@@ -1,5 +1,6 @@
 package cn.hqtzytb.controller;
 
+import cn.hqtzytb.entity.Education;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.University;
 import cn.hqtzytb.service.ISpecialtyServer;
@@ -110,8 +111,8 @@ public class UniversityController {
      */
     @RequestMapping("/xgk_specialty_query.do")
     @ResponseBody
-    public ResponseResult<Map<String,Object>> getSpecialtyList(String where, HttpServletRequest request){
-        return iSpecialtyServer.getSpecialtyList(where, request);
+    public ResponseResult<List<Education>> getSpecialtyList(String where, Integer offset, Integer countPerPage, String type, HttpServletRequest request){
+        return iSpecialtyServer.getSpecialtyList(where, offset, countPerPage, type, request);
     }
     
     /**
@@ -142,7 +143,7 @@ public class UniversityController {
      */
     @RequestMapping("/xgk_specialty_list.do")
     @ResponseBody
-    public ResponseResult<Map<String,Object>> getSpecialtyList2(String where,Integer offset, Integer countPerPage ,HttpServletRequest request){
+    public ResponseResult<Map<String,Object>> getSpecialtyList2(String where, Integer offset, Integer countPerPage ,HttpServletRequest request){
         return iSpecialtyServer.getSpecialtyList2(where, offset, countPerPage, request);
     }
 }
