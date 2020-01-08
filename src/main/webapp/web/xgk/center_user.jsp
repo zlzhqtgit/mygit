@@ -395,9 +395,9 @@
 								<c:if test="${CJFX != null}">
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
 										<a class="text-mute" >成绩分析
-											<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+											<span class="glyphicon glyphicon-ok-sign text-success"></span>&nbsp;&nbsp;&nbsp;&nbsp;
 										</a>
-										<a>测评时间：<fmt:formatDate value="${CJFX.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?look=CJFX">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+										<a>测评时间：<fmt:formatDate value="${CJFX.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a class="text-info" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?look=CJFX">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 									</div>	
 								</c:if>
 								
@@ -418,9 +418,9 @@
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
 										<!-- 跳转潜能分析测评页面  -->
 										<a class="text-mute" >潜能分析
-											<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+											<span class="glyphicon glyphicon-ok-sign text-success"></span>&nbsp;&nbsp;&nbsp;&nbsp;
 										</a>
-										<a>测评时间：<fmt:formatDate value="${QNFX.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/sub/xgk_potential_report.do">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+										<a>测评时间：<fmt:formatDate value="${QNFX.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a class="text-info" href="${pageContext.request.contextPath}/sub/xgk_potential_report.do">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 									</div>	
 								</c:if>
 								<c:if test="${QNFX == null}">
@@ -439,9 +439,9 @@
 								<c:if test="${MBTI != null}">
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
 										<a class="text-mute" >MBTI测评 
-											<span class="glyphicon glyphicon-ok-sign"></span>&nbsp;&nbsp;
+											<span class="glyphicon glyphicon-ok-sign text-success"></span>&nbsp;&nbsp;
 										</a>
-										<a>测评时间：<fmt:formatDate value="${MBTI.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${MBTI.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+										<a>测评时间：<fmt:formatDate value="${MBTI.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a class="text-info" href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${MBTI.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 									</div>	
 								</c:if>
 								<c:if test="${MBTI == null}">
@@ -461,9 +461,9 @@
 									<div class="" style="display: flex;justify-content: space-between;align-items:center;">
 										<!-- 跳转潜能分析测评页面  -->
 										<a class="text-mute" >霍兰德测评
-											<span class="glyphicon glyphicon-ok-sign"></span>
+											<span class="glyphicon glyphicon-ok-sign text-success"></span>
 										</a>
-										<a>测评时间：<fmt:formatDate value="${霍兰德.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${霍兰德.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+										<a>测评时间：<fmt:formatDate value="${霍兰德.evaluationTime}" pattern="yyyy-MM-dd hh:mm:ss"/><a class="text-info" href="${pageContext.request.contextPath}/cp/xgk_user_report.do?cpResult=${霍兰德.evaluationName}">查看报告<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 									</div>	
 								</c:if>
 								<c:if test="${霍兰德  == null}">
@@ -500,7 +500,7 @@
 											<td>您未完成选科测评</td>
 										</c:if>
 										<c:if test="${resule_report.status == 1}">
-											<td><a href="${pageContext.request.contextPath}/xk//xgk_pick_report.do?province=${resule_report.province}&specialtyId=${resule_report.specialtyId}">下载</a></td>
+											<td><a class="text-info" href="${pageContext.request.contextPath}/xk//xgk_pick_report.do?province=${resule_report.province}&specialtyId=${resule_report.specialtyId}">下载</a></td>
 										</c:if>
 										<c:if test="${resule_report.status != 1}">
 											<td><a href="${pageContext.request.contextPath}/xk/xgk_guide_select.do" >进行选科</a></td>
