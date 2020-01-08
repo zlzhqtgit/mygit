@@ -167,6 +167,7 @@ public class IUserServerImpl implements IUserServer {
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "手机号不存在!请重新输入...");
 				logger.info("用户手机：" + account + " 模块名：登录模块 操作：登录  状态：Failed! ");
 			} else {
+				System.err.println("password:" + password);
 				MyUsernamePasswordToken token = new MyUsernamePasswordToken(account, password);
 				subject.login(token);
 				Session session = subject.getSession();
@@ -371,6 +372,7 @@ public class IUserServerImpl implements IUserServer {
 				Session session = subject.getSession();
 				Integer uid = (Integer) session.getAttribute("uid");
 				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
+				session.setAttribute("user", user);// 用户信息
 				List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid + "' ", null, null,
 						null);
 				if (!reportList.isEmpty()) {
@@ -420,20 +422,14 @@ public class IUserServerImpl implements IUserServer {
 						}
 					}
 					session.setAttribute("task_count", taskCount);// 未完成任务数
-					session.setAttribute("task_list", taskDetailsList);// 任务列表
-					System.err.println("task_cout:" + taskCount);
-					System.err.println("task_list:" + taskDetailsList);
+					session.setAttribute("task_list", taskDetailsList);// 任务列表					
 				}
-				List<Enshrine> universityList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '0' ", null,
-						null, null);
-				List<Enshrine> specialtyList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '1' ", null,
-						null, null);
-				List<Enshrine> voactionList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '2' ", null,
-						null, null);
-				session.setAttribute("like_university_list", universityList);// 未完成任务数
-				session.setAttribute("like_specialty_list", specialtyList);// 未完成任务数
-				session.setAttribute("like_voaction_list", voactionList);// 未完成任务数
-				session.setAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
+				List<Enshrine> universityList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '0' ", null,null, null);
+				List<Enshrine> specialtyList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '1' ", null,null, null);
+				List<Enshrine> voactionList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '2' ", null,null, null);
+				session.setAttribute("like_university_list", universityList);// 收藏的学校
+				session.setAttribute("like_specialty_list", specialtyList);// 收藏的专业
+				session.setAttribute("like_voaction_list", voactionList);// 收藏的职业
 			}
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：查看个人中心   错误信息: " + e);
