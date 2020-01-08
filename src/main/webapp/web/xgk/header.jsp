@@ -34,7 +34,7 @@
 								<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 								<ul class="list-unstyled">									
 										<li><a id="xgk9" name="dh" href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>									
-										<li><a id="xgk10" name="dh" href="${pageContext.request.contextPath}/web//hqt_business_cooperation.do">商务合作</a></li>								
+										<li><a id="xgk10" name="dh" href="${pageContext.request.contextPath}/web/hqt_business_cooperation.do">商务合作</a></li>								
 										<li class="">
 											<a href="javascript:void(0)">立学道社群</a>
 											<div class="community wow bounceInRight">

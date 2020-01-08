@@ -41,17 +41,14 @@
 						</div>
 						<ul>
 							<li>
-								<a href="">关于我们</a>
+								<a href="">产品介绍</a>
 							</li>
 							<li>
-								<a href="">团队介绍</a>
+								<a href="">用户社区</a>
 							</li>
 							<li>
-								<a href="">人才招聘</a>
-							</li>
-							<li>
-								<a href="">公司动态</a>
-							</li>
+								<a href="">业务介绍</a>
+							</li>							
 						</ul>
 					</div>
 					<div class="col-md-2 list">
@@ -61,17 +58,14 @@
 						</div>
 						<ul>
 							<li>
-								<a href="">关于我们</a>
+								<a href="${pageContext.request.contextPath}/web/hqt_vip_index.do">会员说明</a>
 							</li>
 							<li>
-								<a href="">团队介绍</a>
+								<a href="">场景定制</a>
 							</li>
 							<li>
-								<a href="">人才招聘</a>
-							</li>
-							<li>
-								<a href="">公司动态</a>
-							</li>
+								<a href="">广告投放</a>
+							</li>							
 						</ul>
 					</div>
 					<div class="col-md-2 list">
@@ -81,17 +75,14 @@
 						</div>
 						<ul>
 							<li>
-								<a href="">关于我们</a>
+								<a href="${pageContext.request.contextPath}/web/hqt_business_cooperation.do">商务合作</a>
 							</li>
 							<li>
-								<a href="">团队介绍</a>
+								<a href="">直播课程</a>
 							</li>
 							<li>
-								<a href="">人才招聘</a>
-							</li>
-							<li>
-								<a href="">公司动态</a>
-							</li>
+								<a href="">升学规划</a>
+							</li>							
 						</ul>
 					</div>
 				</div>
