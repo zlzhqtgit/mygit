@@ -20,64 +20,68 @@
 		<header class="padding-side login_head">
 			<nav class="">
 				<ul class="margin_top1">
-					<li><a href="">新手教程</a></li>
+					<li><a href="${pageContext.request.contextPath}/web/hqt_newbie_index.do">新手教程</a></li>
 					<li><a href="">志愿填报QQ群</a></li>
 					<li><a href="">官方微信</a></li>
-					<li><a href="">开通/激活VIP</a></li>
-					<li><a href="">商务合作</a></li>
+					<li><a href="${pageContext.request.contextPath}/web/hqt_vip_index.do">开通/激活VIP</a></li>
+					<li><a href="${pageContext.request.contextPath}/web//hqt_business_cooperation.do">商务合作</a></li>
 				</ul>
 			</nav>
 		</header>
 		
-		<section class="reset_pwd_box margin_top">
-			<ul class="step clearfix">
-				<li class="pull-left current">身份验证</li>
-				<li class="pull-left">重置密码</li>
-			</ul>
-			<div class="step_body">
-				<form class="verify">
-						<div class="" style="display: flex;justify-content: center;">
-							<div class="input_group" style="width: 30em;">
-								<div class="" style="">
-									<div class="">
-										<lable class="" for="">手机号码：</lable>
-										<input type="" name="" id="" value="" placeholder="请填写11位手机号码"/>
-										<span class="tip text-danger padding-side">手机号码错误</span>
+		<section>
+			<div style="height:33.2em;display:flex;justify-content: center;align-items: center;">
+				<div class="reset_pwd_box margin_top">
+					<ul class="step clearfix" style="overflow: hidden;">
+						<li class="pull-left current">身份验证</li>
+						<li class="pull-left">重置密码</li>
+					</ul>
+					<div class="step_body">
+						<form class="verify">
+								<div class="" style="display: flex;justify-content: center;">
+									<div class="input_group" style="width: 30em;">
+										<div class="" style="">
+											<div class="">
+												<lable class="" for="">手机号码：</lable>
+												<input type="" name="" id="" value="" placeholder="请填写11位手机号码"/>
+												<span class="tip text-danger padding-side">手机号码错误</span>
+											</div>
+										</div>	
+										<div class="margin_top1">
+											<lable class="" for="">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</lable>
+											<input type="" name="" id="" value="" placeholder="请填写验证码"/>
+											<label class="padding-side"><a class="btn btn-primary" href="">获取手机验证码</a></label>
+										</div>
 									</div>
-								</div>	
-								<div class="margin_top1">
-									<lable class="" for="">验&nbsp;&nbsp;证&nbsp;&nbsp;码：</lable>
-									<input type="" name="" id="" value="" placeholder="请填写验证码"/>
-									<a class="btn btn-primary" href="">获取手机验证码</a>
 								</div>
-							</div>
-						</div>
-						<div class="margin_top1 text-center">
-							<a class="btn btn-primary" href="javascript:history.go(-1)">返回</a>
-							<a class="btn btn-primary" href="javascript:void(0)" onclick="next_step(this)">下一步</a>
-						</div>
-				</form>
-				<form class="reset_pwd hide">
-						<div class="" style="display: flex;justify-content: center;">
-							<div class="input_group" style="width: 30em;">
-								<div class="">
-									<lable class="" for="">密&ensp;&ensp;&ensp;&ensp;码：</lable>
-									<input type="" name="" id="" value="" placeholder="请填写6-16位数字、字母或符号作为密码"/>
-									<span class="glyphicon glyphicon-ok-sign text-success"> 密码强度：弱</span>
+								<div class="margin_top1 text-center">
+									<a class="btn btn-primary" href="javascript:history.go(-1)">返回</a>
+									<a class="btn btn-primary" href="javascript:void(0)" onclick="next_step(this)">下一步</a>
 								</div>
-								<div class="margin_top1">
-									<lable class="" for="">确认密码：</lable>
-									<input type="" name="" id="" value="" placeholder="请再次输入密码"/>
-									<span class="glyphicon glyphicon-remove-sign text-danger"> 两次输入的密码不一致</span>
+						</form>
+						<form class="reset_pwd hide">
+								<div class="" style="display: flex;justify-content: center;">
+									<div class="input_group" style="width: 30em;">
+										<div class="">
+											<lable class="" for="">密&ensp;&ensp;&ensp;&ensp;码：</lable>
+											<input type="password" name="" id="" value="" placeholder="请填写6-16位数字、字母或符号作为密码"/>
+											<span class="glyphicon glyphicon-ok-sign text-success"> 密码强度：弱</span>
+										</div>
+										<div class="margin_top1">
+											<lable class="" for="">确认密码：</lable>
+											<input type="password" name="" id="" value="" placeholder="请再次输入密码"/>
+											<span class="glyphicon glyphicon-remove-sign text-danger"> 两次输入的密码不一致</span>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="margin_top1 text-center">
-							<a class="btn btn-primary" href="javascript:void(0)" onclick="prev_step(this)">上一步</a>
-							<input class="btn btn-primary" type="submit" name="" id="" value="重置" />
-						</div>
-				</form>
-			</div>
+								<div class="margin_top1 text-center">
+									<a class="btn btn-primary" href="javascript:void(0)" onclick="prev_step(this)">上一步</a>
+									<input class="btn btn-primary" type="submit" name="" id="" value="重置" />
+								</div>
+						</form>
+					</div>
+				</div>
+			</div>	
 			<script type="text/javascript">
 				var step=$(".step li");
 				function next_step(obj) {
@@ -107,7 +111,7 @@
 				
 			</script>
 		</section>
-		<c:import url="footer.jsp"></c:import>
+		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
 
 </html>

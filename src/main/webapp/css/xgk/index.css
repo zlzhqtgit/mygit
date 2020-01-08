@@ -1050,6 +1050,7 @@ background: #9f0303;
 .login_head>nav>ul>li>a{
 	width: initial;
 	font-size: 18px;
+	padding: 6px 10px;
 }
 .bg1{
 	position: relative;
@@ -1464,10 +1465,7 @@ textarea{
 /*重置密码*/
 .reset_pwd_box{
 	width: 800px;
-	margin-left: auto;
-	margin-right: auto;
-	/*box-shadow: 0 0 3px #999;*/
-	padding: 1em;
+	box-shadow: 0 0 8px #999;
 }
 .reset_pwd_box ul{
 	position: relative;
