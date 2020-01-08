@@ -340,7 +340,6 @@
 							if(uid == "" || uid == null){
 								onlogin();
 							}else{
-								console.log(score);
 								if(cjfx == ""){									
 									//未做过成绩分析
 									tip_input();

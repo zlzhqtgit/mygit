@@ -1,6 +1,7 @@
 package cn.hqtzytb.service.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -189,6 +190,7 @@ public class IUserServerImpl implements IUserServer {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			rr = new ResponseResult<Void>(ResponseResult.ERR, "数据存在异常，请联系工作人员处理！");
 			logger.error("访问路径：" + request.getRequestURI() + "操作：登录模块 操作 错误信息: " + e);
 		}
 		return rr;
@@ -342,7 +344,7 @@ public class IUserServerImpl implements IUserServer {
 			User user = userMapper.queryUser(phone);
 			if (user == null) {
 				rr = new ResponseResult<Void>(ResponseResult.ERR, "该手机号账户不存在，请重新输入");
-				logger.info("用户手机：" + phone + " 模块名：注册模块 操作：登录  状态：Failed! ");
+				logger.info("用户手机：" + phone + " 模块名：发送短信模块 操作：登录  状态：Failed! ");
 			} else {
 				SendSmsResponse response = Photo.sendSms(phone, code, photoConfig.getAccessKeyId(),
 						photoConfig.getAccessKeySecret(), photoConfig.getQm_name(), photoConfig.getQm_sms());
@@ -350,11 +352,11 @@ public class IUserServerImpl implements IUserServer {
 					session.setAttribute("code", code);
 					session.setAttribute("phone", phone);
 					rr = new ResponseResult<Void>(ResponseResult.STATE_OK, "短信验证码已成功发送");
-					logger.info("用户手机：" + phone + " 模块名：注册模块 操作：登录  状态：Success! ");
+					logger.info("用户手机：" + phone + " 模块名：发送短信模块 操作：登录  状态：Success! ");
 					System.out.println(code);
 				} else {
 					rr = new ResponseResult<Void>(ResponseResult.ERR, "短信验证码发送失败");
-					logger.info("用户手机：" + phone + " 模块名：注册模块 操作：登录  状态：Failed! ");
+					logger.info("用户手机：" + phone + " 模块名：发送短信模块 操作：登录  状态：Failed! ");
 				}
 			}
 		} catch (Exception e) {
@@ -529,21 +531,27 @@ public class IUserServerImpl implements IUserServer {
 			if (subject.isAuthenticated()) {
 				Session session = subject.getSession();
 				Integer uid = (Integer) session.getAttribute("uid");
-				List<User> users = userMapper
-						.select(" pc_number = '" + user.getPcNumber() + "' AND id != '" + uid + "' ", null, null, null);
-				if (!users.isEmpty()) {
-					return new ResponseResult<>(ResponseResult.ERR, "身份证号已存在,请重新输入!");
-				}
-				users = userMapper.select(" student_id = '" + user.getStudentId() + "' AND id != '" + uid + "' ", null,
-						null, null);
-				if (!users.isEmpty()) {
-					return new ResponseResult<>(ResponseResult.ERR, "学号已存在,请重新输入!");
-				}
 				user.setId(uid);
-				String uuid = UUID.randomUUID().toString().toUpperCase();
-				user.setUuid(uuid);
-				String md5Password = GetCommonUser.getEncrpytedPassword(Constants.MD5, user.getPassword(), uuid, 1024);
-				user.setPassword(md5Password);
+				List<User> users = new ArrayList<>();
+				if(StringUtils.isNotEmpty(user.getPcNumber())){
+					users = userMapper.select(" pc_number = '" + user.getPcNumber() + "' AND id != '" + uid + "' ", null, null, null);
+					if (!users.isEmpty()) {
+						return new ResponseResult<>(ResponseResult.ERR, "身份证号已存在,请重新输入!");
+					}
+				}
+				if(StringUtils.isNotEmpty(user.getStudentId())){
+					users = userMapper.select(" student_id = '" + user.getStudentId() + "' AND id != '" + uid + "' ", null,
+							null, null);
+					if (!users.isEmpty()) {
+						return new ResponseResult<>(ResponseResult.ERR, "学号已存在,请重新输入!");
+					}
+				}	
+				if(StringUtils.isNotEmpty(user.getPassword())){
+					String uuid = UUID.randomUUID().toString().toUpperCase();
+					user.setUuid(uuid);
+					String md5Password = GetCommonUser.getEncrpytedPassword(Constants.MD5, user.getPassword(), uuid, 1024);
+					user.setPassword(md5Password);
+				}				
 				Integer row = userMapper.updateById(user);
 				if (row > 0) {
 					session.setAttribute(Constants.SYSTEM_USER, user);
