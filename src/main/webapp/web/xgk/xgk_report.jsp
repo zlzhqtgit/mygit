@@ -72,6 +72,7 @@ $(function(){
 				type:"POST",
 				dataType:"json",
 				success:function(obj){
+					console.log(obj);
 					$("#show_name").html(obj.data.DOWNLOADRECHAARGE.syscommet);
 					$("#show_money").html(obj.data.DOWNLOADRECHAARGE.sysnub);
 					console.log(obj.data.DOWNLOADRECHAARGE.syscommet);

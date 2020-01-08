@@ -62,13 +62,18 @@ public class IUniversityServiceImpl implements IUniversityService {
 					countPerPage == null ? 5 : countPerPage);
 			Integer count = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(where) ? null : where);
 			if (subject.isAuthenticated()) {// 若用户已登录
+				List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + session.getAttribute("uid") + "' AND e_type = '0' ", null, null, null);
 				for (University university : universityList) {
-					List<Enshrine> enshrineList = enshrineMapper
-							.select(" e_code = '" + university.getUniversitiesCode() + "'", null, null, null);
+					/*List<Enshrine> enshrineList = enshrineMapper
+							.select(" e_code = '" + university.getUniversitiesCode() + "' AND uid = '" + session.getAttribute("uid") + "' ", null, null, null);
 					if (!enshrineList.isEmpty()) {
 						university.seteId(enshrineList.get(0).geteId());
+					}*/
+					for(Enshrine enshrine : enshrineList){
+						if(enshrine.geteCode().equals(university.getUniversitiesCode())){
+							university.seteId(enshrineList.get(0).geteId());
+						}
 					}
-					System.out.println("enshrineList:" + enshrineList);
 				}
 			}
 			resultMap.put("list", universityList);

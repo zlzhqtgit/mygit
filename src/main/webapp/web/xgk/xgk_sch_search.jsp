@@ -573,6 +573,7 @@
 									//var box_head = "<ul classs='search_result list-group' id='universities'>";
 
 									var operate = "";
+									console.log("list[i].eId: " + list[i].eId);
 									if(list[i].eId == null){
 										operate = "<div class='operate_box padding-side'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p>" +
 												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +

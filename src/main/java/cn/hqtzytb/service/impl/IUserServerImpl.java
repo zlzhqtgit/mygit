@@ -451,42 +451,37 @@ public class IUserServerImpl implements IUserServer {
 				System.err.println("user：" + user);
 				AdminSystem DOWNLOADRECHAARGE = userRoleMapper.queryAdminSystemByName("DOWNLOADRECHAARGE");
 				resultMap.put("DOWNLOADRECHAARGE", DOWNLOADRECHAARGE);
-				AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(user.getRid());
-				resultMap.put("USER_TYPE", adminSystem.getSysname());
+				//AdminSystem adminSystem = userRoleMapper.queryAdminSystemByRoleId(user.getRid());
+				//resultMap.put("USER_TYPE", adminSystem.getSysname());
+				AdminSystem SYSTEMVIP = userRoleMapper.queryAdminSystemByName("SYSTEMVIP");
+				AdminSystem SYSTEMCOUNSELOR = userRoleMapper.queryAdminSystemByName("SYSTEMCOUNSELOR");
 				if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {
-					if ("SYSTEMUSER".equals(adminSystem.getSysname())) {// 您还不是VIP无法使用
-
+					if (!user.getRid().equals(Integer.valueOf(SYSTEMVIP.getSysnub())) && !user.getRid().equals(Integer.valueOf(SYSTEMCOUNSELOR.getSysnub()))) {// 您还不是VIP无法使用
 						if (user.getDownloadCount() != null && user.getDownloadCount() <= 0) {// 下载次数用完
-							return new ResponseResult<>(ResponseResult.ERR, "您还不是VIP无法下载报告，是否成为VIP用户？或单独购买本次服务?",
-									resultMap);
+							return new ResponseResult<>(ResponseResult.ERR, "您还不是VIP无法下载报告，是否成为VIP用户？或单独购买本次服务?",resultMap);
 						} else {
 							resultMap.put("count", user.getDownloadCount());
 							if (user.getExpirationTime() != null) {
-								resultMap.put("expirationTime",
-										new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+								resultMap.put("expirationTime",new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
 							}
 							user.setDownloadCount(user.getDownloadCount() - 1);
 							userMapper.updateById(user);
-							return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS,
-									resultMap);
+							return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
 						}
 					} else {
 						if (user.getDownloadCount() != null && user.getDownloadCount() <= 0) {// 下载次数用完
-							return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！或单独购买本次服务?",
-									resultMap);
+							return new ResponseResult<>(ResponseResult.ERR, "您的下载测评报告次数已用完，请充值后再进行尝试！或单独购买本次服务?", resultMap);
 						}
 						if (user.getExpirationTime() != null && currentTime.after(user.getExpirationTime())) {// vip过期
 							return new ResponseResult<>(ResponseResult.ERR, "您的VIP权限已过期，请续费后再进行尝试下载测评报告！或单独购买本次服务?");
 						} else {
 							resultMap.put("count", user.getDownloadCount());
 							if (user.getExpirationTime() != null) {
-								resultMap.put("expirationTime",
-										new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
+								resultMap.put("expirationTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(user.getExpirationTime()));
 							}
 							user.setDownloadCount(user.getDownloadCount() - 1);
 							userMapper.updateById(user);
-							return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS,
-									resultMap);
+							return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
 						}
 					}
 				}
