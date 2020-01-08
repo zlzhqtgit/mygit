@@ -778,7 +778,7 @@
 			
 					//修改手机号
 					function updatephone(){
-						var phone = $("#new_phone").val();	
+						var phone = $("#new_phone").val();
 						var verifyCode = $("#verify_code").val();
 						if(phone == ""){
 							layer.msg('手机号不能为空',{icon:2,time:1000});
@@ -878,7 +878,6 @@
 									success:function(obj){
 										if (obj.state == 0) {
 											layer.msg(obj.message,{icon:2,time:1000});
-									
 										}else{											
 											layer.alert(obj.message,{icon:1,time:1000});
 											window.setTimeout(function() {window.location.reload(); },1000)																						

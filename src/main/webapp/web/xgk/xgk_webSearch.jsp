@@ -55,7 +55,7 @@
 														<div class="">
 															<div class="sch_tit">
 																<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.universitiesCode}"><h4 class="fontwei">${item.universitiesName}</h4></a>
-																<div class="">
+																<div class="" style="display:flex;align-items:center;">
 																	<c:if test="${item.universitiesAttributes.contains('985')}">
 																		<span style><img src="${pageContext.request.contextPath}/img/xgk/attr/985.png" class="img-responsive"/></span>
 																	</c:if>
@@ -68,8 +68,10 @@
 																	<c:if test="${item.universitiesAttributes.contains('研究生院')}">
 																		<span><img src="${pageContext.request.contextPath}/img/xgk/attr/yjsy.png" class="img-responsive"/></span>
 																	</c:if>
-																	<span class="glyphicon glyphicon-map-marker"></span>
-																	<span class="text-muted">${item.province}</span>
+																	<label class="text-muted padding-side margin0">
+																		<span class="glyphicon glyphicon-map-marker"></span>
+																		<span class="">${item.province}</span>
+																	</label>
 																</div>
 															</div>
 															<div class="text-muted">综合排行（
@@ -170,6 +172,7 @@
 													dataType: "json",							
 													success: function (obj) {
 														if(obj.state == 1){
+															console.log(obj)
 															var list = obj.data.list;
 															var sch_search = "";
 															for(var i=0; i<list.length; i++){
