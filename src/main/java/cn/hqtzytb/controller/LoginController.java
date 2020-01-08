@@ -1,10 +1,13 @@
 package cn.hqtzytb.controller;
 
 
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.service.ILoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.*;
 
 
@@ -76,7 +79,7 @@ public class LoginController {
     }
 
     /**
-     * 用戶重置密码
+     * 进入用戶重置密码首页
      * @param session
      * @return
      */
@@ -84,4 +87,24 @@ public class LoginController {
     public String resetPassword(HttpServletRequest request, HttpServletResponse response) {
     	return iLoginService.resetPassword(request,response);
     }
+    
+    /**
+	 * 用户重置密码验证手机号
+	 */
+	@RequestMapping("/hqt_verify_phone.do")
+	@ResponseBody
+	public ResponseResult<Void> verifyPhone(String phone,String verifyCode , HttpServletRequest request){
+		
+		return iLoginService.verifyPhone(phone, verifyCode, request);
+	}
+	
+    /**
+	 * 用户重置密码
+	 */
+	@RequestMapping("/hqt_update_password.do")
+	@ResponseBody
+	public ResponseResult<Void> updatePassword(String phone,String password , HttpServletRequest request){
+		
+		return iLoginService.updatePassword(phone, password, request);
+	}
 }

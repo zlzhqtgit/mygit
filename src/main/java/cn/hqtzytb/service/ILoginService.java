@@ -3,6 +3,8 @@ package cn.hqtzytb.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.hqtzytb.entity.ResponseResult;
+
 
 /**
  * @ClassName: LoginService
@@ -24,4 +26,8 @@ public interface ILoginService {
 	String logout();
 	
 	String resetPassword(HttpServletRequest request, HttpServletResponse response);
+
+	ResponseResult<Void> verifyPhone(String phone, String verifyCode, HttpServletRequest request);
+
+	ResponseResult<Void> updatePassword(String phone, String password, HttpServletRequest request);
 }

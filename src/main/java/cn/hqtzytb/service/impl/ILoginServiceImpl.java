@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -15,15 +15,15 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
-
+import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.User;
 import cn.hqtzytb.intercepter.MyUsernamePasswordToken;
 import cn.hqtzytb.mapper.UserMapper;
 import cn.hqtzytb.service.ILoginService;
 import cn.hqtzytb.utils.Constants;
+import cn.hqtzytb.utils.GetCommonUser;
 import cn.hqtzytb.utils.HttpClientUtils;
 import cn.hqtzytb.utils.PropsUtil;
 import cn.hqtzytb.utils.QQHttpClient;
@@ -183,8 +183,47 @@ public class ILoginServiceImpl implements ILoginService {
 		try {
 			return "web/public/reset_pwd";
 		} catch (Exception e) {
-			// TODO: handle exception
+			logger.error("访问路径：" + request.getRequestURI() + "操作：进入重置密码模块 异常   错误信息: " + e);
 		}
 		return "web/xgk/xgk_error_404";
+	}
+
+	@Override
+	public ResponseResult<Void> verifyPhone(String phone, String verifyCode, HttpServletRequest request) {
+		try {
+			Session session = SecurityUtils.getSubject().getSession();
+			String code = (String) session.getAttribute("code");
+			String mobile = (String) session.getAttribute("phone");
+			if (!verifyCode.equals(code)) {
+				return new ResponseResult<>(ResponseResult.ERR, "验证码输入错误,请重新输入!");
+			}
+			if (!phone.equals(mobile)) {
+				return new ResponseResult<>(ResponseResult.ERR, "手机号输入错误,请重新输入!");
+			}
+			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：进入重置密码验证手机号模块 异常   错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+		}
+		
+	}
+
+	@Override
+	public ResponseResult<Void> updatePassword(String phone, String password, HttpServletRequest request) {
+		try {
+			User user = userMapper.queryUser(phone);
+			if(user == null){
+				return new ResponseResult<>(ResponseResult.ERR, "账号信息不存在!");
+			}
+			String uuid = UUID.randomUUID().toString().toUpperCase();
+			user.setUuid(uuid);
+			String md5Password = GetCommonUser.getEncrpytedPassword(Constants.MD5, password, uuid, 1024);
+			user.setPassword(md5Password);
+			userMapper.updateById(user);
+			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：用户重置密码 异常   错误信息: " + e);
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
+		}		
 	}
 }

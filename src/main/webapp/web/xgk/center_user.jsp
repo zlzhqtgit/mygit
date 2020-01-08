@@ -723,8 +723,7 @@
 			$("#password").blur(function(){
 				var demoInput = document.getElementById("password");
 				demoInput.type = "password";
-			}); */
-	
+			}); */	
 		 function unlove(obj){	   
    			if($(obj).attr("id") != ''){
     			$.ajax({
