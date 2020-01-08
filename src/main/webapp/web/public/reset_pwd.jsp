@@ -112,7 +112,7 @@
 			$('.counter').countUp();
 		</script>
 		
-		<c:import url="footer.jsp"></c:import>	
+		<c:import url="footer.jsp"></c:import>
 	</body>
 
 </html>

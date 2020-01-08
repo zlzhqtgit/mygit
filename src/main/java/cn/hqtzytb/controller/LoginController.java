@@ -75,4 +75,13 @@ public class LoginController {
     	return iLoginService.logout();
     }
 
+    /**
+     * 用戶重置密码
+     * @param session
+     * @return
+     */
+    @RequestMapping("/reset_password.do")
+    public String resetPassword(HttpServletRequest request, HttpServletResponse response) {
+    	return iLoginService.resetPassword(request,response);
+    }
 }

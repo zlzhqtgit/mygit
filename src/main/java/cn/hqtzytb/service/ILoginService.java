@@ -22,4 +22,6 @@ public interface ILoginService {
     String wxLoginCallback(HttpServletRequest request, HttpServletResponse response);
 
 	String logout();
+	
+	String resetPassword(HttpServletRequest request, HttpServletResponse response);
 }

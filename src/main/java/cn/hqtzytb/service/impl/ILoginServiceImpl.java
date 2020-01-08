@@ -177,4 +177,14 @@ public class ILoginServiceImpl implements ILoginService {
 		}
 		return "web/xgk/xgk_index";
 	}
+
+	@Override
+	public String resetPassword(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			return "web/public/reset_pwd";
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "web/xgk/xgk_error_404";
+	}
 }

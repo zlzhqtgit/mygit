@@ -46,7 +46,7 @@
 						</div>
 						<div class="tip text-center text-danger margin_top1" id="tip1" style="height: 1em;"></div>
 						<div class="forget clearfix margin_top1">
-							<a href="${pageContext.request.contextPath}/web/public/reset_pwd.jsp" class="text-primary pull-left">忘记密码？</a>
+							<a href="${pageContext.request.contextPath}/reset_password.do" class="text-primary pull-left">忘记密码？</a>
 							<a href="javascript:void(0)" onclick="xgkRegister()" class="text-primary pull-right">免费注册</a>
 						</div>
 						<div class="">
