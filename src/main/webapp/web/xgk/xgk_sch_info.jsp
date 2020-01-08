@@ -69,7 +69,7 @@
 				</div>
 			</section>
 			
-			<section class="container panel panel-default">
+			<section class="container panel panel-default sch_info">
 				<div class="tab_list padding-side2 row">
 				
 			    	<ul class="tab_head">			    		
@@ -495,7 +495,7 @@
 			    						<thead>
 			    							<tr>
 			    								<td>国家特色专业<div>双一流专业</div></td>
-				    							<td>	
+				    							<td style="text-align:left;">	
 				    								<c:forEach items="${coreSpecialty}" var="item">
 				    									<a class="text-primary" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=${item[0]}" id="${item[0]}">${item[1]}&emsp;</a>
 				    								</c:forEach>
@@ -510,7 +510,7 @@
 			    					</h2>
 			    					<table class="table table-bordered">
 			    						<c:forEach items="${coreSubject}" var="item">
-			    							<tr><td>${item[0][0]}</td><td>
+			    							<tr><td>${item[0][0]}</td><td style="text-align:left;">
 										<c:forEach items="${item[1]}" var="it" >
 											<c:forEach items="${it}" var="i" >
 												<a>${i}&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -526,7 +526,8 @@
 			    					</h2>
 			    					<table class="table table-bordered" border="" cellspacing="" cellpadding="">
 			    						<c:forEach items="${coreLaboratoriesList}" var="item">
-			    							<tr><td>${item[0][0]}</td><td>
+			    							<tr><td>${item[0][0]}</td>
+			    						<td style="text-align:left;">
 										<c:forEach items="${item[1]}" var="it" >
 											<c:forEach items="${it}" var="i" >
 												<a>${i}&nbsp;&nbsp;&nbsp;&nbsp;</a>

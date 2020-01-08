@@ -159,16 +159,6 @@
 			    <!--/分页-->
 			</div>
 			</section>
-			<script type="text/javascript">
-				new WOW().init();
-				var wow = new WOW({
-				    boxClass: 'wow', //需要执行动画的class
-				    animateClass: 'animated',  //animate.css的class
-				    offset: 0,  //距可视区域多少开始执行动画
-				    mobile: true,  //是否在移动设备上执行动画
-				    live: true  //一部加载的内容是否有效
-				});
-			</script>
 		</main>
 
 	<!-- 页面右侧-->
