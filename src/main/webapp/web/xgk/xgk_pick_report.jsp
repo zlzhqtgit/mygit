@@ -32,7 +32,14 @@
 							<div class="margin_top margin_bot">
 								<div class="">
 									<shiro:guest><img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/></shiro:guest>
-									<shiro:user><img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 3em;"/></shiro:user>
+									<shiro:user>
+										<c:if test="${headImg != null}">
+											<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 3em;"/>
+										</c:if>
+										<c:if test="${headImg == null}">
+											<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/>
+										</c:if>
+									</shiro:user>
 									<span class="padding-side">你好！</span>
 								</div>
 								<div class="padding-side2 margin_top1">
@@ -45,7 +52,7 @@
 				<section class="row">
 					<div class="padding-side2">
 						<h3 class="title_wrap text-primary fontwei"> 
-							<span style="background-image: url(../../img/xgk/1.png);"></span>数据分析
+							<span style="background-image: url(../img/xgk/1.png);"></span>数据分析
 						</h3>
 						<div class="">
 							<div class="">
