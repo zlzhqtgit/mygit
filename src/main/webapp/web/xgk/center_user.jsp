@@ -548,7 +548,7 @@
 															<tr>
 																<td><a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.eCode}"><img src="${item.eLogo}" class="img-responsive"/></a></td>
 																<td>${item.eCode}</td><td>${item.eName}</td>
-																<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+																<td><a href="javascript:;" onclick="unlove(this)" id="${item.eId}"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 																<td><a id="${item.eId}" href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
 															</tr>
 														</c:forEach>														
@@ -577,7 +577,7 @@
 													<tr>
 														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
 														<td>${item.eCode}</td><td>${item.eName}</td>
-														<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href="javascript:;" onclick="unlove(this)" id="${item.eId}"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a id="${item.eId}" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
 														<%-- <td>
 															<shiro:hasPermission name="wdgz_qxsc:delete"> 
@@ -605,7 +605,7 @@
 														<tr>
 														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
 														<td>${item.eCode}</td><td>${item.eName}</td>
-														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href="javascript:;" onclick="unlove(this)" id="${item.eId}"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a id="${item.eId}" href="${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
 														<%-- <td>
 															<shiro:hasPermission name="wdgz_qxsc:delete"> 
