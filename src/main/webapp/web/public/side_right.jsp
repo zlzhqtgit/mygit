@@ -35,7 +35,7 @@ function chat2(id) {
 </head>
 <body>
 		<div class="side-right">
-			<div class="text-center mark-box online_server" href="">
+			<div class="text-center mark-box online_server">
 				<a href="javascript:void(0);"">
 					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside3.png" > </span>
 					<div class=""> 在线客服 </div>
@@ -45,7 +45,7 @@ function chat2(id) {
 						<div class="submenu_tit bg-primary"><span class="glyphicon glyphicon-headphones"></span> 在线客服 </div>
 						<div class="submenu_con">
 							<div class="">
-								<div style="font-size: 1em;border-bottom: 1px solid #ddd;">
+								<div style="font-size: 1em;">
 									<div class="text-left padding-side">服务时间：</div>
 									<div class="text-muted">9：00-18：00</div>
 								</div>
@@ -76,7 +76,7 @@ function chat2(id) {
 					<div class=""> VIP</div>
 				</a>
 			</div>
-			<div class="text-center mark-box tel_server" href="">
+			<div class="text-center mark-box tel_server">
 				<a href="javascript:void(0)">
 					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside3.png" > </span>
 					<div class=""> 电话咨询</div>
@@ -104,7 +104,7 @@ function chat2(id) {
 				</div>				
 			</div>
 			
-			<div class="text-center mark-box qq_server" href="">
+			<div class="text-center mark-box qq_server">
 				<a href="javascript:void(0)">
 					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside3.png" > </span>
 					<div class=""> QQ客服</div>
@@ -112,7 +112,7 @@ function chat2(id) {
 				<div class="submenu">
 					<div class="">
 						<div class="submenu_tit bg-primary" style="width: 100%;"><span class="glyphicon glyphicon-headphones"></span> QQ在线客服 </div>
-						<div class="submenu_con">
+						<div class="submenu_con qqsearve">
 							<div class="">
 								<div class="serve_class">精准教学</div>
 								<ul class="">
