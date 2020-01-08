@@ -235,13 +235,17 @@
 											<label for="username">用户名称：</label>
 											<input id="username" name="username" type="text" placeholder="请输入用户名" value="${user.username}"/>
 										</div>
+										<%-- <div class="form-group">										
+											<label for="password">用户密码：</label>
+											<input id="password" name="password" onclick="updatepassword()" type="password" placeholder="" value="${user.password}"/>
+										</div> --%>
 										<div class="form-group">
 											<label for="phone">手机号：</label>
-											<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true"/>
+											<input id="phone" name="phone" type="text" placeholder="请输入手机号"  value="${user.phone}" readonly="true"/>
 											<shiro:hasPermission name="wdzl_xgsh:update"> 
 												<label class="padding-side" for="phone"><a class="btn btn-default" onclick="open_pws_div()">修改手机号</a></label>
 											</shiro:hasPermission> 																						
-										</div>
+										</div>                       
 										<div class="form-group">
 											<label for="pcNumber">身份证号：</label>
 											<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}"/>
@@ -295,81 +299,71 @@
 									</c:if>
 									<c:if test="${hqt_user == 0}">
 										<legend class="text-primary">用户信息</legend>
-									<div class="form-group">
-										<label for="username">用户名称：</label>
-										<input id="username" name="username" type="text" placeholder="请输入用户名" value="${user.username}"/>
-									</div>
-									<div class="form-group">										
-										<label for="password">用户密码：</label>
-										<input id="password" name="password" onclick="updatepassword()" type="password" placeholder="" value="${user.password}"/>
-									</div>
-									<script type="text/javascript">
-										function updatepassword(){
-											var demoInput = document.getElementById("password");
-											demoInput.type = "text";
-										}
-										$("#password").blur(function(){
-											var demoInput = document.getElementById("password");
-											demoInput.type = "password";
-										});
-									</script>
-									<div class="form-group">
-										<label for="phone">手机号：</label>
-										<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true" />
-										<shiro:hasPermission name="wdzl_xgsh:update">
-											<label class="padding-side"><a class="btn btn-default" onclick="open_pws_div()">修改手机号</a></label>
-										</shiro:hasPermission>																		
-									</div>
-									<div class="form-group">
-										<label for="pcNumber">身份证号：</label>
-										<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}" />
-									</div>
-									<div class="form-group">
-										<label for="studentId">学号：</label>
-										<input id="studentId" name="studentId" type="text" placeholder="请输入学号" value="${user.studentId}" readonly="true"/>
-									</div>
-									<div class="form-group">
-										<label for="school">就读学校：</label>
-										<input id="school" name="school" type="text" placeholder="请输入就读学校" value="${user.school}" readonly="true"/>
-									</div>
-									<div class="form-group">
-										<label for="schoolAddress">就读学校地址：</label>
-										<input id="schoolAddress" name="schoolAddress" type="text" placeholder="请输入就读学校地址" value="${user.schoolAddress}" readonly="true"/>
-									</div>
-									<div class="form-group">
-										<label for="studyProvinces">就读省份：</label>
-										<select name="studyProvinces" id="studyProvinces" readonly="true" disabled="disabled"></select>
-										<span class="padding-side glyphicon"></span>
-									</div>
-									<div class="form-group">
-										<label for="educationalCircles">学届：</label>
-										<select name="educationalCircles" id="educationalCircles" disabled="disabled">
-											<option value="2021">2021届</option>
-											<option value="2020">2020届</option>
-											<option value="2019">2019届</option>
-											<option value="2018">2018届</option>
-											<option value="2017">2017届</option>
-											<option value="2016">2016届</option>
-											<option value="2015">2015届</option>
-										</select>
-										<span class="padding-side glyphicon"></span>
-									</div>
-									<div class="form-group">
-										<label for="grade">年级：</label>
-										<select name="grade" id="grade" disabled="disabled">
-											<option value="高一">高一</option>
-											<option value="高二">高二</option>
-											<option value="高三">高三</option>
-										</select>
-									</div>
-									<div class="form-group">
-										<label for="className">班级：</label>
-										<input id="className" name="className" type="text" placeholder="请输入班级" value="${user.className}" readonly="true"/>
-									</div>
-									<div class="form-group">
-										<label>账号创建时间：</label>
-										<span class=""><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span>
-									</div>
+										<div class="form-group">
+											<label for="username">用户名称：</label>
+											<input id="username" name="username" type="text" placeholder="请输入用户名" value="${user.username}"/>
+										</div>
+										<%-- <div class="form-group">										
+											<label for="password">用户密码：</label>
+											<input id="password" name="password" onclick="updatepassword()" type="password" placeholder="" value="${user.password}"/>
+										</div> --%>									
+										<div class="form-group">
+											<label for="phone">手机号：</label>
+											<input id="phone" name="phone" type="text" placeholder="请输入手机号" value="${user.phone}" readonly="true" />
+											<shiro:hasPermission name="wdzl_xgsh:update">
+												<label class="padding-side"><a class="btn btn-default" onclick="open_pws_div()">修改手机号</a></label>
+											</shiro:hasPermission>																		
+										</div>
+										<div class="form-group">
+											<label for="pcNumber">身份证号：</label>
+											<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}" />
+										</div>
+										<div class="form-group">
+											<label for="studentId">学号：</label>
+											<input id="studentId" name="studentId" type="text" placeholder="请输入学号" value="${user.studentId}" readonly="true"/>
+										</div>
+										<div class="form-group">
+											<label for="school">就读学校：</label>
+											<input id="school" name="school" type="text" placeholder="请输入就读学校" value="${user.school}" readonly="true"/>
+										</div>
+										<div class="form-group">
+											<label for="schoolAddress">就读学校地址：</label>
+											<input id="schoolAddress" name="schoolAddress" type="text" placeholder="请输入就读学校地址" value="${user.schoolAddress}" readonly="true"/>
+										</div>
+										<div class="form-group">
+											<label for="studyProvinces">就读省份：</label>
+											<select name="studyProvinces" id="studyProvinces" readonly="true" disabled="disabled"></select>
+											<span class="padding-side glyphicon"></span>
+										</div>
+										<div class="form-group">
+											<label for="educationalCircles">学届：</label>
+											<select name="educationalCircles" id="educationalCircles" disabled="disabled">
+												<option value="2021">2021届</option>
+												<option value="2020">2020届</option>
+												<option value="2019">2019届</option>
+												<option value="2018">2018届</option>
+												<option value="2017">2017届</option>
+												<option value="2016">2016届</option>
+												<option value="2015">2015届</option>
+											</select>
+											<span class="padding-side glyphicon"></span>
+										</div>
+										<div class="form-group">
+											<label for="grade">年级：</label>
+											<select name="grade" id="grade" disabled="disabled">
+												<option value="高一">高一</option>
+												<option value="高二">高二</option>
+												<option value="高三">高三</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="className">班级：</label>
+											<input id="className" name="className" type="text" placeholder="请输入班级" value="${user.className}" readonly="true"/>
+										</div>
+										<div class="form-group">
+											<label>账号创建时间：</label>
+											<span class=""><fmt:formatDate value="${user.creatTime}" pattern="yyyy-MM-dd hh:mm:ss"/></span>
+										</div>
 									</c:if>
 								</fieldset>
 								<shiro:hasPermission name="wdzl_xgxx:update"> 								
@@ -552,13 +546,12 @@
 													<tbody id="search_result1">
 														<c:forEach items="${like_university_list}" var="item">
 															<tr>
-																<td><a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.eCode}"><img src="${COLLEGE_PHOTO_PREFIX}${item.eLogo}" class="img-responsive"/></a></td>
+																<td><a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.eCode}"><img src="${item.eLogo}" class="img-responsive"/></a></td>
 																<td>${item.eCode}</td><td>${item.eName}</td>
-																<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+																<td><a href="javascript:;" onclick="unlove(this)" id="${item.eId}"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 																<td><a id="${item.eId}" href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
 															</tr>
-														</c:forEach>
-														
+														</c:forEach>														
 														<%-- <tr>
 															<td><a href=""><img src="${pageContext.request.contextPath}/img/xgk/sch_logo.png" class="img-responsive"/></a></td>
 															<td>101001</td><td>立学道大学</td>
@@ -584,7 +577,7 @@
 													<tr>
 														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
 														<td>${item.eCode}</td><td>${item.eName}</td>
-														<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href="javascript:;" onclick="unlove(this)" id="${item.eId}"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a id="${item.eId}" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
 														<%-- <td>
 															<shiro:hasPermission name="wdgz_qxsc:delete"> 
@@ -612,7 +605,7 @@
 														<tr>
 														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
 														<td>${item.eCode}</td><td>${item.eName}</td>
-														<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href="javascript:;" onclick="unlove(this)" id="${item.eId}"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a id="${item.eId}" href="${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
 														<%-- <td>
 															<shiro:hasPermission name="wdgz_qxsc:delete"> 
@@ -723,8 +716,16 @@
 			</div>
 		</main>
 		<script type="text/javascript">
-		 function unlove(obj){
-	    	console.log("取消喜欢")
+			/* function updatepassword(){
+				var demoInput = document.getElementById("password");
+				demoInput.type = "text";
+			}
+			$("#password").blur(function(){
+				var demoInput = document.getElementById("password");
+				demoInput.type = "password";
+			}); */
+	
+		 function unlove(obj){	   
    			if($(obj).attr("id") != ''){
     			$.ajax({
     				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
@@ -860,7 +861,7 @@
 					
 						function update(){
 							var data = "username=" + $("#username").val() + //用户名
-							           "&password=" + $("#password").val() + //用户密码
+							         //  "&password=" + $("#password").val() + //用户密码
 							   		 "&pcNumber=" + $("#pcNumber").val() + //身份证号
 							   		 "&studyProvinces=" + $("#studyProvinces").val() + //就读省份 
 							   		 "&school=" + $("#school").val()  + //学校

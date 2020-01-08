@@ -196,7 +196,6 @@ public class UserController {
 	@RequestMapping("/hqt_update_user.do")
 	@ResponseBody
 	public ResponseResult<Void> updateUserInfo(User user, HttpServletRequest request){
-		System.err.println(user);
 		return iUserServer.updateUserInfo(user, request);
 	}
 

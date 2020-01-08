@@ -42,6 +42,23 @@
 		<result column="above_b" property="aboveB" />
 		<result column="open_college" property="openCollege" />
 	</resultMap>
+	
+	<resultMap type="cn.hqtzytb.entity.Education" id="selectListResultMap">
+		<result column="specialty_education" property="education" />
+		<collection property="specialtyOutList" ofType="cn.hqtzytb.entity.SpecialtyOut">
+			<result column="specialty_major_name" property="majorName"/>
+			<collection property="disciplinesList" ofType="cn.hqtzytb.entity.Disciplines">
+				<result column="specialty_disciplines" property="disciplines"/>
+				<collection property="specialtyList" ofType="cn.hqtzytb.entity.Specialty">
+					<result column="specialty_id" property="specialtyId" />
+					<result column="specialty_name" property="specialtyName" />
+					<result column="specialty_major_name" property="specialtyMajorName" />
+					<result column="specialty_disciplines" property="specialtyDisciplines" />				
+				</collection>
+			</collection>
+		</collection>		
+	</resultMap>
+	
 	<sql id="Base_Column_List">
 		id, specialty_id, specialty_name, specialty_intro,
 		specialty_major_name, specialty_class_name, specialty_divided,
@@ -63,6 +80,33 @@
 	</sql>
 
 	<!--查询测评结果对应相关信息 -->
+	<select id="selectList" resultMap="selectListResultMap">
+		<!-- SELECT
+			b.specialty_major_name,
+			b.specialty_disciplines,
+			b.specialty_id,
+			b.specialty_name,
+			b.specialty_education
+		FROM
+		(SELECT
+				DISTINCT specialty_disciplines
+		FROM
+				specialty
+		) d
+		LEFT JOIN specialty b ON b.specialty_disciplines = d.specialty_disciplines -->
+		SELECT
+			b.specialty_id,
+			b.specialty_name,
+			b.specialty_major_name,
+			b.specialty_disciplines,
+			b.specialty_education
+		FROM 
+			specialty b
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
+	
 	<select id="select" resultType="cn.hqtzytb.entity.Specialty">
 		SELECT
 			<include refid="Base_Column_List" />

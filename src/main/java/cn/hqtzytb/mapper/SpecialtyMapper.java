@@ -3,7 +3,10 @@ package cn.hqtzytb.mapper;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Param;
+
+import cn.hqtzytb.entity.Education;
 import cn.hqtzytb.entity.Specialty;
+import cn.hqtzytb.entity.SpecialtyOut;
 
 
 /**
@@ -16,6 +19,8 @@ import cn.hqtzytb.entity.Specialty;
  * @version V1.0
  */
 public interface SpecialtyMapper {
+	List<Education> selectList(@Param("where") String where, @Param("orderBy") String orderBy,
+			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
 	List<Specialty> select(@Param("where") String where, @Param("orderBy") String orderBy,
 			@Param("offset") Integer offset, @Param("countPerPage") Integer countPerPage);
 	Integer selectCount(@Param("where") String where);

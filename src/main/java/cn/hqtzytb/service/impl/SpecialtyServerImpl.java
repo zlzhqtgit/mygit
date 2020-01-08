@@ -18,6 +18,8 @@ import org.springframework.ui.ModelMap;
 
 import com.alibaba.fastjson.JSON;
 
+import cn.hqtzytb.entity.Disciplines;
+import cn.hqtzytb.entity.Education;
 import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
@@ -82,53 +84,10 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 	}
 
 	@Override
-	public ResponseResult<Map<String, Object>> getSpecialtyList(String where, HttpServletRequest request) {
+	public ResponseResult<List<Education>> getSpecialtyList(String where, Integer offset, Integer countPerPage, String type, HttpServletRequest request) {
 		try {
-			List<Specialty> list = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where, null, null, null);
-			Map<String, SpecialtyOut> bkmap = new HashMap<>();// 本科类专业对应专业数量
-			Map<String, SpecialtyOut> zkmap = new HashMap<>();// 专科类专业对应专业数量
-			List<String> bkList = new ArrayList<>();
-			List<String> zkList = new ArrayList<>();
-			for (Specialty sp : list) {
-				if ("本科".equals(sp.getSpecialtyEducation())) {
-					if (bkmap.containsKey(sp.getSpecialtyMajorName())) {
-						SpecialtyOut out = bkmap.get(sp.getSpecialtyMajorName());
-						List<Specialty> specialtyList = out.getSpecialtyList();
-						specialtyList.add(sp);
-						out.setCount(out.getCount() + 1).setSpecialtyList(specialtyList);
-						bkmap.put(sp.getSpecialtyMajorName(), out);
-					} else {
-						List<Specialty> specialtyList = new ArrayList<>();
-						specialtyList.add(sp);
-						SpecialtyOut out = new SpecialtyOut(1, sp.getSpecialtyMajorName(), sp.getSpecialtyDisciplines(),
-								specialtyList);
-						bkmap.put(sp.getSpecialtyMajorName(), out);
-						bkList.add(sp.getSpecialtyMajorName());
-					}
-				} else {// 专科
-					if (zkmap.containsKey(sp.getSpecialtyMajorName())) {
-						SpecialtyOut out = zkmap.get(sp.getSpecialtyMajorName());
-						List<Specialty> specialtyList = out.getSpecialtyList();
-						specialtyList.add(sp);
-						out.setCount(out.getCount() + 1).setSpecialtyList(specialtyList);
-						zkmap.put(sp.getSpecialtyMajorName(), out);
-					} else {
-						List<Specialty> specialtyList = new ArrayList<>();
-						specialtyList.add(sp);
-						SpecialtyOut out = new SpecialtyOut(1, sp.getSpecialtyMajorName(), sp.getSpecialtyDisciplines(),
-								specialtyList);
-						zkmap.put(sp.getSpecialtyMajorName(), out);
-						zkList.add(sp.getSpecialtyMajorName());
-					}
-				}
-			}
-			Map<String, Object> resultMap = new HashMap<>();
-			resultMap.put("bk", bkmap);
-			resultMap.put("zk", zkmap);
-			resultMap.put("bkList", bkList);
-			resultMap.put("zkList", zkList);
-			return new ResponseResult<Map<String, Object>>(Constants.RESULT_CODE_SUCCESS,
-					Constants.RESULT_MESSAGE_SUCCESS, resultMap);
+			List<Education> list = specialtyMapper.selectList(StringUtils.isEmpty(where) ? null : where, null, null, null);
+			return new ResponseResult<>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS,list);
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 查看专业列表信息   错误信息：" + e);
 		}
