@@ -562,16 +562,17 @@ footer li:hover a{
 	display: none;
 	position: absolute;
 	top: 0;
-	left: -150px;
-	width: 150px;
+	left: -20em;
+	width: 20em;
 	overflow: inherit;
 	z-index: 100;
 }
 .submenu>div{
-	width: 140px;
+	width: 310px;
 	border: 1px solid #3b8bec;
 	background-color: #fff;
 	border-radius: 10px;
+	box-shadow: 0 0 8px #999;
 }
 .submenu::before{
 	position: absolute;
@@ -607,26 +608,38 @@ footer li:hover a{
 }
 .submenu_con{
 	padding: .4em 0;
+	display: flex;
+	justify-content: space-around;
+}
+.submenu_con>div{
+	width:9em;
 }
 .submenu_con ul{
 	margin: 0;
 	overflow: hidden;
 }
 .submenu_con ul li{
-	padding: 0 1.4em;
 	margin: .8em 0;
 }
 .submenu_con ul li a{
 	color: #fff;
 	display: block;
 	line-height: normal;
-	padding: .2em;
+	padding: .6em;
 	background-color: #ff6600;
 	border-radius: 8px;
 	font-size: 12px;
 }
+.submenu_con.qqsearve ul li a{
+	padding: .1em;
+	color: #333;
+	background-color: transparent;
+}
 .submenu_con ul li a:hover{
 	color: #fff;
+}
+.submenu_con.qqsearve ul li a:hover{
+	color: #3b8bec;
 }
 .online_server .submenu_con ul li{
 	margin: .2em 0;
@@ -677,11 +690,11 @@ footer li:hover a{
 .mark-box.backtop a{
 	color: white;
 }
-.mark-box a{
+.mark-box>a{
 	display: block;
 	text-decoration: none;
 	cursor: pointer;
-	padding: 7px 2px;
+	padding:.4em 0;
 }
 .mark-box a>div{
 	font-size: 12px;
@@ -1146,7 +1159,6 @@ background: #9f0303;
 	/*border: 1px solid #999;*/
 }
 .register_box .step2 input{
-	background-color: #e8e6e7;
 	border-radius: 1em;
 	padding: 6px 1em;
 	box-shadow: 0 1px 3px #999;
