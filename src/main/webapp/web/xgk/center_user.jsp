@@ -612,7 +612,7 @@
 														<tr>
 														<td><a href="javascript:;"><img src="" class="img-responsive"/>${vs.count}</a></td>
 														<td>${item.eCode}</td><td>${item.eName}</td>
-														<td><a href="javascript:;"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
+														<td><a href="javascript:;" onclick="unlove(this)"><span class="icon Hui-iconfont text-danger">&#xe648;</span></a></td>
 														<td><a id="${item.eId}" href="${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=${item.eCode}"><span class="icon Hui-iconfont text-info">&#xe725;</span></a></td>
 														<%-- <td>
 															<shiro:hasPermission name="wdgz_qxsc:delete"> 
@@ -777,7 +777,7 @@
 			
 					//修改手机号
 					function updatephone(){
-						var phone = $("#new_phone").val();	
+						var phone = $("#new_phone").val();
 						var verifyCode = $("#verify_code").val();
 						if(phone == ""){
 							layer.msg('手机号不能为空',{icon:2,time:1000});
@@ -877,7 +877,6 @@
 									success:function(obj){
 										if (obj.state == 0) {
 											layer.msg(obj.message,{icon:2,time:1000});
-									
 										}else{											
 											layer.alert(obj.message,{icon:1,time:1000});
 											window.setTimeout(function() {window.location.reload(); },1000)																						

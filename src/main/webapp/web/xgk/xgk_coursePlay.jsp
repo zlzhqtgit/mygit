@@ -229,16 +229,6 @@
 				<div class="border-primary padding-side"><h4 class="text-muted">课程评价</h4> </div>
 				<div class="flex_Al_c border-primary padding-side" style="height: 6em;">暂无相关评价 </div>
 			</div>
-			<script type="text/javascript">
-				new WOW().init();
-				var wow = new WOW({
-				    boxClass: 'wow', //需要执行动画的class
-				    animateClass: 'animated',  //animate.css的class
-				    offset: 0,  //距可视区域多少开始执行动画
-				    mobile: true,  //是否在移动设备上执行动画
-				    live: true  //一部加载的内容是否有效
-				});
-			</script>
 		</main>
 
 	<!-- 页面右侧-->

@@ -34,14 +34,14 @@
 								<input id="mobile" onblur="check_mobile()" type="text" value="" placeholder="手机号"/>
 								<label for="mobile"><span class="glyphicon glyphicon-phone text-muted"></span></label>
 							</div>
-							<div class="">
+							<div class="margin_top1">
 								<input id="password" onblur="check_pwd()" type="password" value="" placeholder="密码"/>
 								<label for="password"><span class="glyphicon glyphicon-tag text-muted"></span></label>
 							</div>
 						</fieldset>
 						
 						
-						<div class="text-center">
+						<div class="text-center margin_top1">
 							<input class="login_btn" type="button" name="" onclick="login()"  id="subm" value="登录" />
 						</div>
 						<div class="tip text-center text-danger margin_top1" id="tip1" style="height: 1em;"></div>
