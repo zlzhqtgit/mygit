@@ -55,10 +55,10 @@ var uid="${uid}";
 function login(e){
 	if(uid==null || uid==""){		
 		layer.confirm('未登陆状态，请先进行登陆？ 确定登陆',{icon: 1, btn: ['确定登陆', '取消']},function(index){
-			location.href ="../user/xgk_login.do?nowUrl="+window.location.href;
+			location.href ="${pageContext.request.contextPath}/user/xgk_login.do?nowUrl="+window.location.href;
 		}); 	
 	}else{
-		var url = "/cp/xgk_cognition_evaluation.do";
+		var url = "${pageContext.request.contextPath}/cp/xgk_cognition_evaluation.do";
 		var  data = "uid=" + uid + "&type=" + e;
 		$.ajax({
 			"url":url,
@@ -68,9 +68,9 @@ function login(e){
 			"success":function(obj){
 				var url = "";
 				if(e=="hld"){
-					url ="../cp/xgk_answer_hld.do";
+					url ="${pageContext.request.contextPath}/cp/xgk_answer_hld.do";
 				}else{
-					url ="../cp/xgk_answer_mbti.do";
+					url ="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do";
 				}
 				if(obj.state == 0){
 					//未做过认知测评

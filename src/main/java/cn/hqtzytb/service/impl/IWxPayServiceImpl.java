@@ -257,44 +257,64 @@ public class IWxPayServiceImpl implements IWxPayService {
 						// 获得VIP角色
 						Role role = userRoleMapper.queryRoleBySystemName("SYSTEMVIP");
 						AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-						if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
-							userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
-							userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
-							userList.get(0).setDownloadCount(9);// 新增9次下载报告次数
-							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-						} else {// vip续费
-							if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+						if(uSystem == null){
+							if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
 								expirationTime = Calendar.getInstance();
 								expirationTime.setTime(userList.get(0).getExpirationTime());
 								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
 							}
 							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
 							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+						}else{
+							if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
+								userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
+								userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
+								userList.get(0).setDownloadCount(9);// 新增9次下载报告次数
+								userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+							} else {// vip续费
+								if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+									expirationTime = Calendar.getInstance();
+									expirationTime.setTime(userList.get(0).getExpirationTime());
+									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+								}
+								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
+								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+							}
 						}
+						
 					} else if ("COUNSELORRECHAARGE".equals(adminSystem.getSysname())) {// 咨询师充值
-						System.err.println("获得咨询师角色");
 						// 获得咨询师角色
 						Role role = userRoleMapper.queryRoleBySystemName("SYSTEMCOUNSELOR");
 						AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-						if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
-							expirationTime = Calendar.getInstance();
-							expirationTime.setTime(currentTime);
-							expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-							userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-							userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-							userList.get(0).setDownloadCount(100);// 新增100次下载报告次数
-							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-						} else {// 咨询师续费
-							if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+						if(uSystem == null){
+							if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
 								expirationTime = Calendar.getInstance();
 								expirationTime.setTime(userList.get(0).getExpirationTime());
 								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
 							}
-							userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-							userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
+							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
 							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-						}
+						}else{
+							if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
+								expirationTime = Calendar.getInstance();
+								expirationTime.setTime(currentTime);
+								expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
+								userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
+								userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
+								userList.get(0).setDownloadCount(100);// 新增100次下载报告次数
+								userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+							} else {// 咨询师续费
+								if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+									expirationTime = Calendar.getInstance();
+									expirationTime.setTime(userList.get(0).getExpirationTime());
+									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+								}
+								userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
+								userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
+								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
+								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+							}
+						}						
 					} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
 						System.err.println("单独购买1次下载报告");
 						// 单独购买1次下载报告

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/index.css" />		
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/web/xgk/dropdown.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
@@ -25,7 +24,19 @@
 					<div class="thumbnail">
 						<div class="caption answer_temp  margin_top1">
 							<div class="user_say padding-side2">
-								<span class="glyphicon glyphicon-user text-muted"  style="font-size: 2em;margin-right:10px;line-height: 2em;"></span><span class="text-muted"><label style="color: #3b8bec;">${username}</label>&nbsp;&nbsp;您好！</span>
+								<!-- <span class="glyphicon glyphicon-user text-muted"  style="font-size: 2em;margin-right:10px;line-height: 2em;"></span> -->
+								<shiro:guest>
+									<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/>
+								</shiro:guest>
+								<shiro:user>
+									<c:if test="${headImg != null}">
+										<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 3em;"/>
+									</c:if>
+									<c:if test="${headImg == null}">
+										<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 3em;"/>
+									</c:if>
+								</shiro:user>
+								<span class="text-muted"><label style="color: #3b8bec;">${username}</label>&nbsp;&nbsp;您好！</span>
 							</div>
 							<h5 class="fontwei tindent padding-side2" >在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。沃尔沃S90豪华轿车，以斯堪的纳维亚设计诠释北欧豪华，满载人性化创新科技，以智能引领驾驶的未来。旅程的每一步，行车随心掌控，安全如影随性，风采自信彰显。Thumbnail label驭劲悍双擎，引燃驰骋豪情</h5>
 							<div class="padding-side2 margin_top1">
