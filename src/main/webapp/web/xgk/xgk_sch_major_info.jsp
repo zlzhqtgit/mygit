@@ -101,7 +101,7 @@
 						<div class="major_info">
 							<div class="items margin_top">
 								<h2 class="text-primary fontwei">
-									<span style="background-image: url(../../img/xgk/1.png);"></span>专业概览
+									<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>专业概览
 								</h2>
 								<div class="circle_list">
 									<div class="">
@@ -136,7 +136,7 @@
 							</div>
 							<div class="items margin_top">
 								<h2 class="text-primary fontwei">
-									<span style="background-image: url(../../img/xgk/2.png);"></span>专业介绍
+									<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/2.png);"></span>专业介绍
 								</h2>
 								<ul class="padding-side2" style="list-style: disc;">
 									<li>
@@ -163,7 +163,7 @@
 							</div>
 							<div class="items margin_top">
 								<h2 class="text-primary fontwei">
-									<span style="background-image: url(../../img/xgk/3.png);"></span>主要课程
+									<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>主要课程
 								</h2>
 								<div class="padding-side">
 									<c:if test="${not empty majorCourses}">
@@ -179,7 +179,7 @@
 							</div>
 							<div class="items margin_top">
 								<h2 class="text-primary fontwei">
-									<span style="background-image: url(../../img/xgk/4.png);"></span>考研方向
+									<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/4.png);"></span>考研方向
 								</h2>
 								<div class="padding-side2">${specialty.postgraduateDirection}</div>
 							</div>
@@ -190,7 +190,7 @@
 							<div class="items major_panhead margin_top">
 								<div class="panel panel-default" style="padding: 1em 2em;">
 									<h2 class="text-primary fontwei">
-										<span style="background-image: url(../../img/xgk/1.png);"></span>开设此专业的学校(推荐)
+										<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>开设此专业的学校(推荐)
 									</h2>
 									<div class="">
 										<div class="margin_top">
@@ -602,7 +602,7 @@
 						<div class="major_info">
 							<div class="items margin_top">
 								<h2 class="text-primary fontwei">
-									<span style="background-image: url(../../img/xgk/1.png);"></span>就业职业方向
+									<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>就业职业方向
 								</h2>
 								<div class="collection row" style="padding: 0 1em;">
 									<div class="col-md-4 border_major">
@@ -778,7 +778,7 @@
 							<div class="row job">
 								<div class="items margin_top col-md-6 col-lg-6 col-sm-6">
 									<h2 class="text-primary fontwei">
-										<span style="background-image: url(../../img/xgk/2.png);"></span>就业行业分布
+										<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/2.png);"></span>就业行业分布
 									</h2>
 									<ul class="border_major">
 										<c:if test="${not empty employment_industry_distribution }">
@@ -820,7 +820,7 @@
 								</div>
 								<div class="items margin_top col-md-6 col-lg-6 col-sm-6">
 									<h2 class="text-primary fontwei">
-										<span style="background-image: url(../../img/xgk/3.png);"></span>就业地区分布
+										<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>就业地区分布
 									</h2>
 									<ul class="border_major">
 										<c:if test="${not empty employment_area_distribution }">

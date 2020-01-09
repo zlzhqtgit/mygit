@@ -82,7 +82,7 @@
 			    		<div class="tab_b1 cur">
 			    			<div class="major_info margin_bot">
 			    				<div class="items margin_top">
-			    					<h2 class="text-primary fontwei"> <span style="background-image: url(../../img/xgk/1.png);"></span>学校介绍 </h2>
+			    					<h2 class="text-primary fontwei"> <span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>学校介绍 </h2>
 		    						<div class="p_relative">
 		    							<div class="tindent " style="height: 100px; overflow: hidden;">
 		    								${school.universitiesIntroduction}
@@ -95,7 +95,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/2.png);"></span>校园生活
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/2.png);"></span>校园生活
 			    					</h2>
 			    					<div class="margin_top1">
 										<style type="text/css">
@@ -209,7 +209,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/4.png);"></span>男女比例
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/4.png);"></span>男女比例
 			    					</h2>
 			    					
 			    					<div class="percentage margin_top">
@@ -243,7 +243,7 @@
 			    			<div class="major_info margin_bot tab2">
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/1.png);"></span>院校分数线
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>院校分数线
 			    					</h2>
 			    					<p class="">
 			    						<select name="">
@@ -342,7 +342,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/2.png);"></span>招生计划
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/2.png);"></span>招生计划
 			    					</h2>
 			    					<p class="">
 			    						<select name="">
@@ -410,7 +410,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei" style="display: block;">
-			    						<span style="background-image: url(../../img/xgk/3.png);"></span>专业录取分数线
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>专业录取分数线
 			    					</h2>
 			    					<p class="">
 			    						<select name="">
@@ -481,7 +481,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/2.png);"></span>师资力量
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/2.png);"></span>师资力量
 			    					</h2>
 			    					<div class="border_major">
 			    						${school.teachersResources}
@@ -489,7 +489,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点专业
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>重点专业
 			    					</h2>
 			    					<table class="table table-bordered">
 			    						<thead>
@@ -506,7 +506,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点学科
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>重点学科
 			    					</h2>
 			    					<table class="table table-bordered">
 			    						<c:forEach items="${coreSubject}" var="item">
@@ -522,7 +522,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei">
-			    						<span style="background-image: url(../../img/xgk/3.png);"></span>重点实验室及科研中心
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>重点实验室及科研中心
 			    					</h2>
 			    					<table class="table table-bordered" border="" cellspacing="" cellpadding="">
 			    						<c:forEach items="${coreLaboratoriesList}" var="item">
@@ -543,7 +543,7 @@
 			    			<div class="major_info margin_bot">
 				    			<div class="items margin_top">
 			    					<h2 class="text-primary fontwei margin_bot1">
-			    						<span style="background-image: url(../../img/xgk/1.png);"></span>招生简章
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>招生简章
 			    					</h2>
 			    					<p class="">
 				    					<select name="">
@@ -574,7 +574,7 @@
 			    				</div>
 			    				<div class="items margin_top">
 			    					<h2 class="text-primary fontwei margin_bot1">
-			    						<span style="background-image: url(../../img/xgk/2.png);"></span>招生章程
+			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/2.png);"></span>招生章程
 			    					</h2>
 			    					<p class="">
 			    			  			<select name="">
