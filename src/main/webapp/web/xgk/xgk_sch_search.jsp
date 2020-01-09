@@ -26,10 +26,10 @@
 			<section class="sch_search container">
 				<div style="padding: 1em 100px 1em;">
 				    <form class="bs-example bs-example-form" role="form" id="universities_name">
-				    			<div class="input-group input-group-lg">
-					            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
-					            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
-				        		</div>
+		    			<div class="input-group input-group-lg">
+			            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
+			            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
+		        		</div>
 				    </form>
 				</div>
 
@@ -485,7 +485,7 @@
 				function schoolSearch(e){
 					if (e == 1){
 						where = "where=";
-						var school_name = $(".form-control").val();
+						var school_name = $("form input.form-control").val();
 						if (school_name == ""){
 							layer.msg('请输入您感兴趣的学校名字！', {icon: 5});
 							return ;
@@ -514,7 +514,7 @@
 						data: where,
 						async:true,
 						type: "POST",
-						dataType: "json",							
+						dataType: "json",
 						success: function (obj) {
 							if (obj.state == 1){
 								$("#result_count").css("display","block");//显示搜索结果数量
@@ -525,20 +525,24 @@
 								for (var i=0; i<list.length; i++){									
 									var admission_lot = "";//录取批次
 									var admissionLotList = JSON.parse(list[i].admissionLot);
-									for (var j=0; j<admissionLotList.length; j++){
-										admission_lot += " " + admissionLotList[j];
+									console.log(admissionLotList)
+									if(admissionLotList!=null){
+										for (var j=0; j<admissionLotList.length; j++){
+											admission_lot += " " + admissionLotList[j];
+										}
 									}
+									
 									var master = "";//硕士点数
 									var doctor = "";//博士点数
 									var teaching_research = JSON.parse(list[i].teachingResearch);
-									for(var j=0; j<teaching_research.length; j++){
-										if(teaching_research[j][0] == "硕士点"){
-											master = teaching_research[j][0] + "数: " + teaching_research[j][1];
+										for(var j=0; j<teaching_research.length; j++){
+											if(teaching_research[j][0] == "硕士点"){
+												master = teaching_research[j][0] + "数: " + teaching_research[j][1];
+											}
+											if(teaching_research[j][0] == "博士点"){
+												doctor = teaching_research[j][0] + "数 :" + teaching_research[j][1];
+											}
 										}
-										if(teaching_research[j][0] == "博士点"){
-											doctor = teaching_research[j][0] + "数 :" + teaching_research[j][1];
-										}
-									}
 	                                        var admissionLots = "";// 录取批次
 	                                        var admissionLotList = JSON.parse(list[i].admissionLot);
 	                                        for (var j=0; j<admissionLotList.length; j++){

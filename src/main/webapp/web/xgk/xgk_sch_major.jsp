@@ -155,7 +155,7 @@
 										if(list[i].education == '本科'){
 											var specialtyOutList = list[i].specialtyOutList;//专业大类
 											for(var j=0; j<specialtyOutList.length; j++){
-												bkdata += '<div class="major_info">';
+												bkdata += '<div class="major_info margin_bot">';
 												bkdata += '<div class="clearfix major_info_head">';
 												bkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
 												bkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
@@ -179,7 +179,7 @@
 										if(list[i].education == '专科'){
 											var specialtyOutList = list[i].specialtyOutList;//专业大类
 											for(var j=0; j<specialtyOutList.length; j++){
-												zkdata += '<div class="major_info">';
+												zkdata += '<div class="major_info margin_bot">';
 												zkdata += '<div class="clearfix major_info_head">';
 												zkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
 												zkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
