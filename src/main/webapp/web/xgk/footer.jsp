@@ -100,7 +100,7 @@
 					</div>
 					<div class="copyright col-md-6">
 						<div id="" style="margin-top: 3em;">
-							<p><span class="glyphicon glyphicon-copyright-mark"></span>2019copyright All Rights Reserved 贵州好前途教育科技有限公司</p>
+							<p><span class="glyphicon glyphicon-copyright-mark"></span>2019 <a class="text-white text-sm" href="${pageContext.request.contextPath}/cp/xgk_index.do"><small>贵州好前途教育科技有限公司</small></a> copyright All Rights Reserved</p>
 							<p>电信与信息服务经营许可证：</p>
 						</div>
 					</div>
