@@ -694,7 +694,7 @@
 											<li><a href=""><span class="glyphicon glyphicon-zoom-in"></span> 自主择校</a></li>
 										</shiro:hasPermission> 
 										<shiro:hasPermission name="zytb_yjpp:query"> 										
-											<li><a href=""><span class="glyphicon glyphicon-screenshot"></span> 一件匹配</a></li>
+											<li><a href=""><span class="glyphicon glyphicon-screenshot"></span> 一键匹配</a></li>
 										</shiro:hasPermission> 
 									</ul>
 								</div>
