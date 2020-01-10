@@ -107,7 +107,7 @@
 										<span class="glyphicon glyphicon-remove-sign text-danger padding-side"> 请填写高考年度</span>
 									</div>
 									
-									<div class="reg_tip">
+									<div class="reg_tip hiden">
 										<h3 class="text-danger">温馨提示：</h3>
 										<div class="padding-side2">
 											本栏中的和官方的说法的呵呵和人合伙二号合法的和任何人还不如新色版额
@@ -163,7 +163,7 @@
 										<input id="confirm" type="text" placeholder="请输入您的职业名"/>
 									</div>
 									
-									<div class="reg_tip" >
+									<div class="reg_tip hiden" >
 										<h3 class="text-danger">温馨提示：</h3>
 										<div class="padding-side2">
 											本栏中的和官方的说法的呵呵和人合伙二号合法的和任何人还不如新色版额
