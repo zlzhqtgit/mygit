@@ -1,6 +1,7 @@
 package cn.hqtzytb.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @ClassName: Specialty
@@ -203,11 +204,21 @@ public class Specialty implements Serializable {
 	 * 开设院校
 	 */
 	private String openCollege;
+	
+	/**
+	 * 喜欢
+	 */
+	private List<Enshrine> enshrineList;
+	
+	/**
+	 * 喜欢的Id
+	 */
+	private Integer eId;
 
 	public Specialty() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+
 
 	public Specialty(Integer id, String specialtyId, String specialtyName, String specialtyIntro,
 			String specialtyMajorName, String specialtyClassName, String specialtyDivided, String specialtyDisciplines,
@@ -218,7 +229,8 @@ public class Specialty implements Serializable {
 			String specialtyEmployment, String specialtyRequirement, Double physicsPerformance,
 			Double chemistryPerformance, Double biologyPerformance, Double politicPerformance,
 			Double historyPerformance, Double geographyPerformance, Double chinesePerformance, Integer mathPerformance,
-			Double foreignPerformance, String aboveA, String equalA, String belowA, String aboveB, String openCollege) {
+			Double foreignPerformance, String aboveA, String equalA, String belowA, String aboveB, String openCollege,
+			List<Enshrine> enshrineList) {
 		super();
 		this.id = id;
 		this.specialtyId = specialtyId;
@@ -258,7 +270,10 @@ public class Specialty implements Serializable {
 		this.belowA = belowA;
 		this.aboveB = aboveB;
 		this.openCollege = openCollege;
+		this.enshrineList = enshrineList;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -564,6 +579,28 @@ public class Specialty implements Serializable {
 		this.openCollege = openCollege;
 	}
 
+	
+	public List<Enshrine> getEnshrineList() {
+		return enshrineList;
+	}
+
+
+	public void setEnshrineList(List<Enshrine> enshrineList) {
+		this.enshrineList = enshrineList;
+	}
+
+	
+
+	public Integer geteId() {
+		return eId;
+	}
+
+
+	public void seteId(Integer eId) {
+		this.eId = eId;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Specialty [id=" + id + ", specialtyId=" + specialtyId + ", specialtyName=" + specialtyName
@@ -583,7 +620,7 @@ public class Specialty implements Serializable {
 				+ ", geographyPerformance=" + geographyPerformance + ", chinesePerformance=" + chinesePerformance
 				+ ", mathPerformance=" + mathPerformance + ", foreignPerformance=" + foreignPerformance + ", aboveA="
 				+ aboveA + ", equalA=" + equalA + ", belowA=" + belowA + ", aboveB=" + aboveB + ", openCollege="
-				+ openCollege + "]";
+				+ openCollege + ", enshrineList=" + enshrineList + ", eId=" + eId + "]";
 	}
 
 }

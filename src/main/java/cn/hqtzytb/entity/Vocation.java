@@ -140,6 +140,8 @@ public class Vocation implements Serializable {
 	 */
 	private List<Enshrine> enshrineList;
 
+    private Integer eId;
+    
 	public Vocation() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -380,6 +382,15 @@ public class Vocation implements Serializable {
 		this.enshrineList = enshrineList;
 	}
 
+	
+	public Integer geteId() {
+		return eId;
+	}
+
+	public void seteId(Integer eId) {
+		this.eId = eId;
+	}
+
 	@Override
 	public String toString() {
 		return "Vocation [vId=" + vId + ", vocationId=" + vocationId + ", vocationName=" + vocationName
@@ -392,7 +403,7 @@ public class Vocation implements Serializable {
 				+ ", educationQualification=" + educationQualification + ", specialtyKnow=" + specialtyKnow
 				+ ", specialtySkill=" + specialtySkill + ", workYear=" + workYear + ", workAchieved=" + workAchieved
 				+ ", organizationAbility=" + organizationAbility + ", planAbility=" + planAbility + ", incomeInfo="
-				+ incomeInfo + ", enshrineList=" + enshrineList + "]";
+				+ incomeInfo + ", enshrineList=" + enshrineList + ", eId=" + eId + "]";
 	}
 
 }

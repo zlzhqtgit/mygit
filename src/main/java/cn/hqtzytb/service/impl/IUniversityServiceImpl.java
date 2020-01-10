@@ -64,16 +64,16 @@ public class IUniversityServiceImpl implements IUniversityService {
 			if (subject.isAuthenticated()) {// 若用户已登录
 				List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + session.getAttribute("uid") + "' AND e_type = '0' ", null, null, null);
 				for (University university : universityList) {
-					/*List<Enshrine> enshrineList = enshrineMapper
-							.select(" e_code = '" + university.getUniversitiesCode() + "' AND uid = '" + session.getAttribute("uid") + "' ", null, null, null);
-					if (!enshrineList.isEmpty()) {
-						university.seteId(enshrineList.get(0).geteId());
-					}*/
+					university.setEnshrineCount(enshrineMapper.selectCount("e_code ='" + university.getUniversitiesCode() + "' ") + 80);//学校收藏数
 					for(Enshrine enshrine : enshrineList){
 						if(enshrine.geteCode().equals(university.getUniversitiesCode())){
-							university.seteId(enshrineList.get(0).geteId());
+							university.seteId(enshrine.geteId());
 						}
 					}
+				}
+			} else {
+				for (University university : universityList) {
+					university.setEnshrineCount(enshrineMapper.selectCount("e_code ='" + university.getUniversitiesCode() + "' ") + 80);//学校收藏数					
 				}
 			}
 			resultMap.put("list", universityList);

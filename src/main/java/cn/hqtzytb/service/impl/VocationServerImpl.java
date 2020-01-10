@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSON;
 
 import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.ResponseResult;
+import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.Vocation;
 import cn.hqtzytb.mapper.EnshrineMapper;
 import cn.hqtzytb.mapper.VocationMapper;
@@ -186,6 +187,19 @@ public class VocationServerImpl implements IVocationServer {
 			//职业
 			List<Vocation> vocationList = vocationMapper.select(StringUtils.isEmpty(where) ? null : where, null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
 			Integer vocationCount = vocationMapper.selectCount(StringUtils.isEmpty(where) ? null : where);
+			Subject subject = SecurityUtils.getSubject();
+			if (subject.isAuthenticated() && !vocationList.isEmpty()) {
+				Session session = subject.getSession();
+				Integer uid = (Integer)session.getAttribute("uid");
+				List<Enshrine> eList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '2' ", null, null, null);
+				for(Vocation v : vocationList){
+					for(Enshrine e : eList){
+						if(v.getVocationId().equals(e.geteCode())){
+							v.seteId(e.geteId());
+						}
+					}
+				}	
+			}
 			resultMap.put("vocationList", vocationList);
 			resultMap.put("vocationCount", vocationCount);
 			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,resultMap);

@@ -48,16 +48,6 @@ public class WebController {
 	}
 		
 
-	/**
-	 * 搜索框搜索【职业、专业、院校】内容2
-	 * @return
-	 */
-	@RequestMapping("/hqt_search_2.do")
-	@ResponseBody
-	public ResponseResult<Map<String,Object>> browserSearch2(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request) {
-		
-		return iWebService.browserSearch2(content, offset, countPerPage, map, request );
-	}
 	
 	/**
 	 * 在线聊天图片传输

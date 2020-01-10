@@ -46,6 +46,7 @@ public class IEnshrineServiceImpl implements IEnshrineService {
 				if (list.isEmpty()) {
 					enshrineMapper.insert(enshrine);
 				}
+				System.err.println(enshrine);
 				return new ResponseResult<>(Constants.RESULT_CODE_SUCCESS,Constants.RESULT_MESSAGE_SUCCESS,enshrine);
 			} else {
 				return new ResponseResult<>(Constants.RESULT_CODE_FAIL,Constants.RESULT_MESSAGE_FAIL);

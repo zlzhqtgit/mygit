@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -112,15 +113,13 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 			if (subject.isAuthenticated()) {
 				Object uid = SecurityUtils.getSubject().getSession().getAttribute("uid");
 				if (uid != null) {
-					List<Enshrine> enshrineList = enshrineMapper.select(
-							" uid = '" + (Integer) uid + "' AND e_code = '" + specialtyId + "'", null, null, null);
+					List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer) uid + "' AND e_code = '" + specialtyId + "'", null, null, null);
 					if (!enshrineList.isEmpty()) {
 						map.addAttribute("school_like", enshrineList.get(0));
 					}
 				}
 			}
-			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "' ", null,
-					null, null);
+			List<Specialty> specialtyList = specialtyMapper.select(" b.specialty_id = '" + specialtyId + "' ", null, null, null);
 			map.addAttribute("specialty", specialtyList.get(0));
 			map.addAttribute("majorCourses", specialtyList.get(0).getMajorCourses().split(";"));
 			// 考生生源地
@@ -169,18 +168,35 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 				}
 				if (StringUtils.isNotEmpty(er_year)) {
 					where += " AND er.e_year = '" + er_year + "' ";
-
 				}
 				System.out.println("where：" + where);
 				List<University> universityList = universityMapper.selectUniversityList(where, null, null, null);
-				for (University university : universityList) {
-					for (UniversityRelation relation : university.getUniversRelationList()) {
-						relation.setCollegeScoreLineList(
-								GetCommonUser.getList(relation.getCollegeScoreLine(), request));
+				Subject subject = SecurityUtils.getSubject();
+				if(subject.isAuthenticated()){
+					Session session = subject.getSession();
+					List<Enshrine> eList = enshrineMapper.select(" uid = '" + session.getAttribute("uid") + "' AND e_type = '0' ", null, null, null);
+					for (University university : universityList) {
+						university.setEnshrineCount(enshrineMapper.selectCount("e_code ='" + university.getUniversitiesCode() + "' ") + 80);//学校收藏数		
+						for (UniversityRelation relation : university.getUniversRelationList()) {
+							relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(), request));
+						}						
+						for(Enshrine e : eList){
+							System.err.println("收藏ID: " + e.geteId());
+							if(university.getUniversitiesCode().equals(e.geteCode())){
+								university.seteId(e.geteId());//喜欢的学校
+							}
+						}
 					}
-				}
-				SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX",
-						Constants.COLLEGE_PHOTO_PREFIX);
+				} else {
+					for (University university : universityList) {
+						university.setEnshrineCount(enshrineMapper.selectCount("e_code ='" + university.getUniversitiesCode() + "' ") + 80);//学校收藏数		
+						for (UniversityRelation relation : university.getUniversRelationList()) {
+							relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(), request));
+						}
+					}
+				}		
+				System.err.println(universityList.get(0).geteId());
+				SecurityUtils.getSubject().getSession().setAttribute("COLLEGE_PHOTO_PREFIX",Constants.COLLEGE_PHOTO_PREFIX);
 				return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, universityList);
 			}
 			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
@@ -197,8 +213,20 @@ public class SpecialtyServerImpl implements ISpecialtyServer {
 		try {
 			Map<String, Object> resultMap = new HashMap<>();
 			// 专业
-			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where, null,
-					offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(where) ? null : where, null, offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Subject subject = SecurityUtils.getSubject();
+			if (subject.isAuthenticated() && !specialtyList.isEmpty()) {
+				Session session = subject.getSession();
+				Integer uid = (Integer)session.getAttribute("uid");
+				List<Enshrine> eList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '1' ", null, null, null);
+				for(Specialty s : specialtyList){
+					for(Enshrine e : eList){
+						if(s.getSpecialtyId().equals(e.geteCode())){
+							s.seteId(e.geteId());
+						}
+					}
+				}	
+			}
 			Integer specialtyCount = specialtyMapper.selectCount(StringUtils.isEmpty(where) ? null : where);
 			resultMap.put("specialtyList", specialtyList);
 			resultMap.put("specialtyCount", specialtyCount);

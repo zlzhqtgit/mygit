@@ -13,16 +13,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.hqtzytb.entity.AdminSystem;
+import cn.hqtzytb.entity.Enshrine;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.Specialty;
 import cn.hqtzytb.entity.University;
 import cn.hqtzytb.entity.Vocation;
+import cn.hqtzytb.mapper.EnshrineMapper;
 import cn.hqtzytb.mapper.SpecialtyMapper;
 import cn.hqtzytb.mapper.UniversityMapper;
 import cn.hqtzytb.mapper.UserRoleMapper;
@@ -50,6 +53,8 @@ public class IWebServiceImpl implements IWebService {
 	private SpecialtyMapper specialtyMapper;
 	@Autowired
 	private UserRoleMapper userRoleMapper;
+	@Autowired
+	private EnshrineMapper enshrineMapper;
 
 	@Override
 	public String browserSearch(String content, Integer offset, Integer countPerPage, ModelMap map,
@@ -58,29 +63,58 @@ public class IWebServiceImpl implements IWebService {
 			if (StringUtils.isNotEmpty(content)) {
 				System.err.println(content);
 				content = new String(content.toString().getBytes("ISO8859-1"), "UTF-8");
-			}
+			}			
 			// 高校
-			List<University> universityList = universityMapper.selectUniversityList2(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ",
-					" ur.ur_year DESC ", offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
-			for (University university : universityList) {
-				university.setTeachingResearchList(GetCommonUser.getJson(university.getTeachingResearch(), request));
-			}
-			Integer universityCount = universityMapper.selectUniversityListCount2(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ");
-
-			// 职业
-			List<Vocation> vocationList = vocationMapper.select(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ", null,
-					offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
-			Integer vocationCount = vocationMapper
-					.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ");
+			List<University> universityList = universityMapper.selectUniversityList2(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) "," ur.ur_year DESC ", offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);			
+			Integer universityCount = universityMapper.selectUniversityListCount2(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ");
 			// 专业
-			List<Specialty> specialtyList = specialtyMapper.select(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ", null,
-					offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
-			Integer specialtyCount = specialtyMapper
-					.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ");
+			List<Specialty> specialtyList = specialtyMapper.select(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ", null,offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Integer specialtyCount = specialtyMapper.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ");
+			// 职业
+			List<Vocation> vocationList = vocationMapper.select(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ", null,offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
+			Integer vocationCount = vocationMapper.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ");			
+			Subject subject = SecurityUtils.getSubject();
+			if (subject.isAuthenticated()) {
+				Session session = subject.getSession();
+				Integer uid = (Integer)session.getAttribute("uid");
+				List<Enshrine> eList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '0' ", null, null, null);
+				for (University university : universityList) {
+					university.setTeachingResearchList(GetCommonUser.getJson(university.getTeachingResearch(), request));//教研教学点
+					university.setEnshrineCount(enshrineMapper.selectCount("e_code ='" + university.getUniversitiesCode() + "' ") + 80);//学校收藏数
+					for(Enshrine e : eList){
+						if(university.getUniversitiesCode().equals(e.geteCode()) ){
+							university.seteId(e.geteId());
+						}
+					}
+				}
+				if(!specialtyList.isEmpty()){
+					eList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '1' ", null, null, null);
+					specialtyList.get(0).setEnshrineList(eList);
+					for(Specialty s : specialtyList){
+						for(Enshrine e : eList){
+							if(s.getSpecialtyId().equals(e.geteCode())){
+								s.seteId(e.geteId());
+							}
+						}
+					}					
+				}
+				if(!vocationList.isEmpty()){
+					eList = enshrineMapper.select(" uid = '" + uid + "' AND e_type = '2' ", null, null, null);
+					vocationList.get(0).setEnshrineList(eList);
+					for(Vocation v : vocationList){
+						for(Enshrine e : eList){
+							if(v.getVocationId().equals(e.geteCode())){
+								v.seteId(e.geteId());
+							}
+						}
+					}
+				}				
+			} else {
+				for (University university : universityList) {
+					university.setTeachingResearchList(GetCommonUser.getJson(university.getTeachingResearch(), request));//教研教学点
+					university.setEnshrineCount(enshrineMapper.selectCount("e_code ='" + university.getUniversitiesCode() + "' ") + 80);//学校收藏数
+				}
+			}
 			map.put("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
 			map.put("universityList", universityList);
 			map.put("universityCount", universityCount);
@@ -121,46 +155,6 @@ public class IWebServiceImpl implements IWebService {
 		return rr;
 	}
 
-	@Override
-	public ResponseResult<Map<String, Object>> browserSearch2(String content, Integer offset, Integer countPerPage,
-			ModelMap map, HttpServletRequest request) {
-		try {
-			Map<String, Object> resultMap = new HashMap<>();
-			// 高校
-			List<University> universityList = universityMapper.selectUniversityList2(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ",
-					" ur.ur_year DESC ", offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
-			for (University university : universityList) {
-				university.setTeachingResearchList(GetCommonUser.getJson(university.getTeachingResearch(), request));
-			}
-			Integer universityCount = universityMapper.selectUniversityListCount2(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',u.universities_name) ");
-			// 职业
-			List<Vocation> vocationList = vocationMapper.select(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ", null,
-					offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
-			Integer vocationCount = vocationMapper
-					.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.vocation_name) ");
-			// 专业
-			List<Specialty> specialtyList = specialtyMapper.select(
-					StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ", null,
-					offset == null ? 0 : offset, countPerPage == null ? 5 : countPerPage);
-			Integer specialtyCount = specialtyMapper
-					.selectCount(StringUtils.isEmpty(content) ? null : " LOCATE('" + content + "',b.specialty_name) ");
-			resultMap.put("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
-			resultMap.put("universityList", universityList);
-			resultMap.put("universityCount", universityCount);
-			resultMap.put("vocationList", vocationList);
-			resultMap.put("vocationCount", vocationCount);
-			resultMap.put("specialtyList", specialtyList);
-			resultMap.put("specialtyCount", specialtyCount);
-			resultMap.put("search_content", content);
-			return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：搜索框搜索院校/专业/职业信息异常   错误信息: " + e);
-			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
-		}
-	}
 
 	@Override
 	public String showVipIndex(HttpServletRequest request) {

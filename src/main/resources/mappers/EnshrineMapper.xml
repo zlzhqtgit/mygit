@@ -39,7 +39,7 @@
   
  
   
-  <insert id="insert" parameterType="cn.hqtzytb.entity.Enshrine" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="cn.hqtzytb.entity.Enshrine" useGeneratedKeys="true" keyProperty="eId">
     insert into enshrine
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="eId != null" >

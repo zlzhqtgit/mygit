@@ -327,36 +327,17 @@
 						</div>
 						<script type="text/javascript">
 							//给院校省份点击事件
-							$(document)
-									.ready(
-											function() {
-												$("#sch_ur li")
-														.click(
-																function() {
-																	$(this)
-																			.parents(
-																					"ul")
-																			.children()
-																			.removeClass(
-																					"cur");
-																	$(this)
-																			.addClass(
-																					"cur");
-																})
-											});
+							$(document).ready(function() {$("#sch_ur li").click(function() {
+										$(this).parents("ul").children().removeClass("cur");
+										$(this).addClass("cur");})
+							});
 							//通过专业查询学校
 							function queryschool() {
-								var er_year = $("#er_year option:selected")
-										.val();
-								var er_province = $(
-										"#er_province option:selected").val();
+								var er_year = $("#er_year option:selected").val();
+								var er_province = $("#er_province option:selected").val();
 								var sch_province = $("ul .cur a").text();
-								var specialtyId = $("#specialty_id").attr(
-										"name");
-								var data = "er_year=" + er_year
-										+ "&er_province=" + er_province
-										+ "&sch_province=" + sch_province
-										+ "&specialtyId=" + specialtyId;
+								var specialtyId = $("#specialty_id").attr("name");
+								var data = "er_year=" + er_year + "&er_province=" + er_province + "&sch_province=" + sch_province + "&specialtyId=" + specialtyId;
 								$.ajax({
 											url : "${pageContext.request.contextPath}/school/xgk_specialty_school.do",
 											type : "POST",
@@ -401,8 +382,7 @@
 														}
 														var master = "";//硕士点数
 														var doctor = "";//博士点数
-														var teaching_research = JSON
-																.parse(list[i].teachingResearch);
+														var teaching_research = JSON.parse(list[i].teachingResearch);
 														for (var j = 0; j < teaching_research.length; j++) {
 															if (teaching_research[j][0] == "硕士点") {
 																master = teaching_research[j][0]
@@ -415,64 +395,49 @@
 																		+ teaching_research[j][1];
 															}
 														}
-
 														sch_data += '<li class="list-group-item row">';
 														sch_data += '<div class="flex_jcstart">';
 														sch_data += '<div class="inline_block">';
 														//院校logo
-														sch_data += '<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode='
-																+ list[i].universitiesCode
-																+ '"><img alt="学校logo" src="${COLLEGE_PHOTO_PREFIX}' + list[i].universitiesLogo + '"/></a>';
+														sch_data += '<a href="${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=' + list[i].universitiesCode + '"><img class="schLogo" alt="学校logo" src="${COLLEGE_PHOTO_PREFIX}' + list[i].universitiesLogo + '"/></a>';
 														sch_data += '</div>';
 														sch_data += '<div class="sch_info inline_block">';
 														sch_data += '<div class="padding-side">';
 														sch_data += '<div class="">';
 														sch_data += '<a class="inline_block" href="">';
 														//院校名字
-														sch_data += '<h4>'
-																+ list[i].universitiesName
-																+ '</h4>';
+														sch_data += '<h4 class="schName" id="' + list[i].universitiesCode + '">' + list[i].universitiesName + '</h4>';
 														sch_data += '</a>';
 														//院校属性图片
-														sch_data += '<span class="">'
-																+ attrImg
-																+ '</span>';
+														sch_data += '<span class="">' + attrImg + '</span>';
 														sch_data += '<a class="inline_block" >';
 														//省份
-														sch_data += '<span class="text-muted"><img src="${pageContext.request.contextPath}/img/xgk/position.png" width="7%"/>'
-																+ list[i].province
-																+ '</span>';
+														sch_data += '<span class="text-muted"><img src="${pageContext.request.contextPath}/img/xgk/position.png" width="7%"/>' + list[i].province + '</span>';
 														sch_data += '</a>';
 														sch_data += '</div>';
 														//录取批次   + 综合评级
-														sch_data += '<p class="">综合评级（'
-																+ admission_lot
-																+ '）<span class="text-danger fontwei">'
-																+ list[i].totalRanking
-																+ '</span></p>';
+														sch_data += '<p class="">综合评级（'	+ admission_lot + '）<span class="text-danger fontwei">' + list[i].totalRanking + '</span></p>';
 														sch_data += '<div class="">';
-														sch_data += '<span class="">隶属：'
-																+ list[i].belongTo
-																+ '</span>&emsp;';
-														sch_data += '<span class="">院校类型：'
-																+ list[i].universitiesType
-																+ '</span>&emsp;';
-														sch_data += '<span class="">硕士点数：'
-																+ master
-																+ '个</span>&emsp;';
-														sch_data += '<span class="">博士点数：'
-																+ doctor
-																+ '个</span>&emsp;';
+														sch_data += '<span class="">隶属：'	+ list[i].belongTo + '</span>&emsp;';
+														sch_data += '<span class="">院校类型：' + list[i].universitiesType + '</span>&emsp;';
+														sch_data += '<span class="">硕士点数：' + master + '个</span>&emsp;';
+														sch_data += '<span class="">博士点数：' + doctor + '个</span>&emsp;';
 														sch_data += '</div>';
 														sch_data += '</div>';
 														sch_data += '</div>';
 														sch_data += '</div>';
 														sch_data += '<div class="text-center like">';
-														sch_data += '<a class="" onclick="like1(this)" href="javascript:">';
-														sch_data += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+														console.log("喜欢不喜欢：" + list[i].eId);
+														if(list[i].eId != null){
+															sch_data += '<a id="' + list[i].eId + '" class="" onclick="like1(this)" href="javascript:">';
+															sch_data += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
+														}else{
+															sch_data += '<a id="" class="" onclick="like1(this)" href="javascript:">';
+															sch_data += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+														}
 														sch_data += '<span class="">喜欢</span>';
 														sch_data += '</a>';
-														sch_data += '<div class="">喜欢人数：22W</div>';
+														sch_data += '<div class="">喜欢人数：' + list[i].enshrineCount + '</div>';
 														sch_data += '</li>';
 													}
 													$("#sch_data").html(sch_data);
@@ -489,7 +454,8 @@
 										});
 							}
 
-							//点赞
+							
+							//学校收藏
 							function like1(obj) {
 								var y;
 								var o = $(obj).find('img').attr('src');
@@ -497,10 +463,45 @@
 								case '${pageContext.request.contextPath}/img/xgk/like.png':
 									y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
 									$(obj).find('span').text('取消喜欢');
+									if ($(obj).attr("id") != '') {
+										$.ajax({
+													url : "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
+													data : "eId="+ $(obj).attr("id"),
+													type : "POST",
+													dataType : "json",
+													success : function(obj) {
+														if (obj.state == 0) {
+															layer.msg(obj.message,{icon : 2,time : 1000});
+														} else {
+															layer.msg(obj.message,{icon : 6,time : 1000});
+														}
+													}
+												});
+									} 
 									break;
 								case '${pageContext.request.contextPath}/img/xgk/unlike.png':
 									y = '${pageContext.request.contextPath}/img/xgk/like.png';
 									$(obj).find('span').text('喜欢');
+									if ('${uid}' != '') {
+										var schLogo=$(obj).parents("li").find(".schLogo").attr("src");									
+										var schName=$(obj).parents("li").find(".schName").text();
+										var schCode=$(obj).parents("li").find(".schName").attr("id");										
+										var data = "eCode=" + schCode + "&eName=" + schName + "&eLogo=" + schLogo + "&eType=0";
+										$.ajax({
+											url: "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
+											data:data,
+											type:"POST",
+											dataType:"json",
+											success:function(ob){
+												if(ob.state == 0){
+													layer.msg(ob.message,{icon:2,time:1000});
+												}else{
+													$(obj).attr("id",ob.data.eId);
+													layer.msg(ob.message,{icon:6,time:1000});				
+												}
+											}
+										});
+									} 
 									break;
 								default:
 									y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
@@ -509,7 +510,8 @@
 								}
 								$(obj).find('img').attr('src', y);
 							}
-							//点赞
+							
+							//专业收藏
 							function like(obj) {
 								var y;
 								var o = $(obj).find('img').attr('src');
@@ -517,7 +519,7 @@
 								case '${pageContext.request.contextPath}/img/xgk/like.png':
 									y = '${pageContext.request.contextPath}/img/xgk/unlike.png';
 									$(obj).find('span').text('取消喜欢');
-									unlove(obj);
+									 unlove(obj);
 									break;
 								case '${pageContext.request.contextPath}/img/xgk/unlike.png':
 									y = '${pageContext.request.contextPath}/img/xgk/like.png';
@@ -534,6 +536,7 @@
 							function love(obj) {
 								if ('${uid}' != '') {
 									var data = "eCode=${specialty.specialtyId}&eName=${specialty.specialtyName}&eType=1";
+									console.log("data: " + data)
 									$.ajax({
 												url : "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
 												data : data,
@@ -541,24 +544,12 @@
 												dataType : "json",
 												success : function(obj) {
 													if (obj.state == 0) {
-														console
-																.log(obj.message);
-														layer.msg(obj.message,
-																{
-																	icon : 2,
-																	time : 1000
-																});
+														console.log(obj.message);
+														layer.msg(obj.message,{icon : 2,time : 1000});
 													} else {
-														console
-																.log(obj.message);
-														$(obj).attr("id",
-																obj.data.eId);
-														layer.msg(obj.message,
-																{
-																	icon : 6,
-																	time : 1000
-																});
-
+														console.log(obj.message);
+														$(obj).attr("id",obj.data.eId);
+														layer.msg(obj.message,{icon : 6,time : 1000});
 													}
 												}
 											});
@@ -566,30 +557,18 @@
 							}
 							function unlove(obj) {
 								if ($(obj).attr("id") != '') {
-									$
-											.ajax({
+									$.ajax({
 												url : "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
-												data : "eId="
-														+ $(obj).attr("id"),
+												data : "eId="+ $(obj).attr("id"),
 												type : "POST",
 												dataType : "json",
 												success : function(obj) {
 													if (obj.state == 0) {
-														console
-																.log(obj.message);
-														layer.msg(obj.message,
-																{
-																	icon : 2,
-																	time : 1000
-																});
+														console.log(obj.message);
+														layer.msg(obj.message,{icon : 2,time : 1000});
 													} else {
-														console
-																.log(obj.message);
-														layer.msg(obj.message,
-																{
-																	icon : 6,
-																	time : 1000
-																});
+														console.log(obj.message);
+														layer.msg(obj.message,{icon : 6,time : 1000});
 													}
 												}
 											});

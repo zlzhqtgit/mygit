@@ -38,17 +38,6 @@ public interface IWebService {
 
 
 	/**
-	 * 搜索框搜索【职业、专业、院校】内容2
-	 * @param content
-	 * @param offset
-	 * @param countPerPage
-	 * @param map
-	 * @param request
-	 * @return
-	 */
-	ResponseResult<Map<String,Object>> browserSearch2(String content, Integer offset, Integer countPerPage, ModelMap map, HttpServletRequest request);
-
-	/**
 	 * 进入VIP页面
 	 * @param request
 	 * @return
