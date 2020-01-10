@@ -522,16 +522,7 @@
 								$("#page h4 a").html(obj.data.count);
 								//var universities = "<ul classs='search_result list-group' id='universities'>";
 								var lists="";
-								for (var i=0; i<list.length; i++){									
-									var admission_lot = "";//录取批次
-									var admissionLotList = JSON.parse(list[i].admissionLot);
-									console.log(admissionLotList)
-									if(admissionLotList!=null){
-										for (var j=0; j<admissionLotList.length; j++){
-											admission_lot += " " + admissionLotList[j];
-										}
-									}
-									
+								for (var i=0; i<list.length; i++){	
 									var master = "";//硕士点数
 									var doctor = "";//博士点数
 									var teaching_research = JSON.parse(list[i].teachingResearch);
@@ -544,15 +535,16 @@
 											}
 										}
 	                                        var admissionLots = "";// 录取批次
-	                                        var admissionLotList = JSON.parse(list[i].admissionLot);
-	                                        for (var j=0; j<admissionLotList.length; j++){
-	                                            if (j == admissionLotList.length-1) {
-	                                                admissionLots += admissionLotList[j];
-	                                            }else {
-	                                                admissionLots += admissionLotList[j] + " ";
-	                                            }
+	                                        if(list[i].admissionLot != null){
+	                                        	var admissionLotList = JSON.parse(list[i].admissionLot);
+		                                        for (var j=0; j<admissionLotList.length; j++){
+		                                            if (j == admissionLotList.length-1) {
+		                                                admissionLots += admissionLotList[j];
+		                                            }else {
+		                                                admissionLots += admissionLotList[j] + " ";
+		                                            }
+		                                        }
 	                                        }
-									
                                         	var attrImg = "";//院校属性图片
                                         	var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
                                         	if(universitiesAttributes != null){
@@ -575,9 +567,7 @@
         									}
                                         	}
 									//var box_head = "<ul classs='search_result list-group' id='universities'>";
-
 									var operate = "";
-									console.log("list[i].eId: " + list[i].eId);
 									if(list[i].eId == null){
 										operate = "<div class='operate_box padding-side'><p class='text-center'><a id='' class='store btn btn-primary' onclick='store(this)' href='javascript:void(0)'><span>收藏学校</span><input type='checkbox' name='' id='' value=''/></a></p>" +
 												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
@@ -607,7 +597,7 @@
 									if(list[i].universRelationList == null){
 										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
-										var universRelationList = list[i].universRelationList;		
+										var universRelationList = list[i].universRelationList;										
 										for(var j=0; j<universRelationList.length;j++){
 											if(j>4){
 												break;
@@ -671,16 +661,7 @@
 								var list = obj.data.list;
 								$("#page h4 a").html(obj.data.count);
 								var lists = "";
-								for (var i=0; i<list.length; i++){
-									var admission_lot = "";//录取批次
-									var admissionLotList = JSON.parse(list[i].admissionLot);
-									if(admissionLotList != null){
-										for (var j=0; j<admissionLotList.length; j++){
-											admission_lot += " " + admissionLotList[j];
-										}
-									}else{
-										admission_lot += "";
-									}									
+								for (var i=0; i<list.length; i++){																	
 									var master = "";//硕士点数
 									var doctor = "";//博士点数
 									var teaching_research = JSON.parse(list[i].teachingResearch);
@@ -692,40 +673,38 @@
 											doctor = teaching_research[j][0] + "数 :" + teaching_research[j][1];
 										}
 									}
-	                               	var admissionLots = "";// 录取批次
-	                               	var admissionLotList = JSON.parse(list[i].admissionLot);
-	                                if(admissionLotList != null){
-	                                	for (var j=0; j<admissionLotList.length; j++){
-		                                    if (j == admissionLotList.length-1) {
-		                                        admissionLots += admissionLotList[j];
-		                                    }else {
-		                                        admissionLots += admissionLotList[j] + " ";
+		                               	var admissionLots = "";// 录取批次	                               	
+			                              if(list[i].admissionLot != null){
+			                            		var admissionLotList = JSON.parse(list[i].admissionLot);
+			                                	for (var j=0; j<admissionLotList.length; j++){
+				                                    if (j == admissionLotList.length-1) {
+				                                        admissionLots += admissionLotList[j];
+				                                    }else {
+				                                        admissionLots += admissionLotList[j] + " ";
+				                                    }
+				                                }
+			                               }  
+		                                    var attrImg = "";//院校属性图片
+		                                    var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
+		                                    if(universitiesAttributes != null){
+			        							for (var f=0; f<universitiesAttributes.length; f++){
+			        								if (universitiesAttributes[f] == "985"){
+			        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png' alt='985'/>"
+			        								}
+			        								if (universitiesAttributes[f] == "211"){
+			        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png' alt='211'/>"
+			        								}
+			        								if (universitiesAttributes[f] == "双一流"){
+			        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png' alt='双一流'/>"
+			        								}
+			        								if (universitiesAttributes[f] == "行业领军"){
+			        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png' alt='行业领军'/>"
+			        								}
+			        								if (universitiesAttributes[f] == "研究生院"){
+			        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png' alt='研究生院'/>"
+			        								}
+			        							}
 		                                    }
-		                                }
-	                                 }else{
-	                                       admissionLotList = "";
-	                                }  
-                                    var attrImg = "";//院校属性图片
-                                    var universitiesAttributes = JSON.parse(list[i].universitiesAttributes);
-                                    if(universitiesAttributes != null){
-	        							for (var f=0; f<universitiesAttributes.length; f++){
-	        								if (universitiesAttributes[f] == "985"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/985.png' alt='985'/>"
-	        								}
-	        								if (universitiesAttributes[f] == "211"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/211.png' alt='211'/>"
-	        								}
-	        								if (universitiesAttributes[f] == "双一流"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/syl.png' alt='双一流'/>"
-	        								}
-	        								if (universitiesAttributes[f] == "行业领军"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/hylj.png' alt='行业领军'/>"
-	        								}
-	        								if (universitiesAttributes[f] == "研究生院"){
-	        									attrImg += "<img src='${pageContext.request.contextPath}/img/xgk/attr/yjsy.png' alt='研究生院'/>"
-	        								}
-	        							}
-                                    }
 									var id = "";
 									var operate = "";
 									if(list[i].eId == null){
@@ -737,33 +716,35 @@
 												"<p class='text-center'><a href='javascript:void(0)' onclick='btn_check(this)' class='add_contrast btn btn-primary'><span>加入对比</span>" +
 												"<input type='checkbox' name='' id='btnid00" + (i+1) + "'/></a></p> </div>";
 									}
-										lists += "<li class='list-group-item' id=00"+(i+1)+" pname='" + list[i].universitiesName + "'>" +
-											      //院校Logo
-												 "<div class='sh_logo'>" +
-												 "<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
-												 "</div>" +
-												 //院校名字   + 院校属性  + 录取批次  + 综合评级
-												"<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<label class='schoolName fontwei'>"+list[i].universitiesName+"</label>" +"<span class='schoolTag'>" + attrImg + "</span>"+
-												 "<p class=''>综合评级（<span class='admission_lot'>"+admissionLots+ "</span>）<span class='admitRank text-danger'>" + list[i].totalRanking + "</span></p>" +
-												 "</div>" +
-												 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
-												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
-												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
-												 "</table></div>" +
-												 //[录取分表格   start]
-												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
+									lists += 	"<li class='list-group-item' id=00"+(i+1)+" pname='" + list[i].universitiesName + "'>" +
+										     //院校Logo
+										 	"<div class='sh_logo'>" +
+											"<a href='${pageContext.request.contextPath}/school/xgk_university_info.do?universityCode=" + list[i].universitiesCode + "'><img alt='学校logo(暂无图片)' src='${COLLEGE_PHOTO_PREFIX}/" + list[i].universitiesLogo + "' id='" + list[i].universityCode + "'/></a>" +
+											"</div>" +
+											//院校名字   + 院校属性  + 录取批次  + 综合评级
+											"<div class='sch_info sch_search_info padding-side'>" +"<div class=''>" +"<label class='schoolName fontwei'>"+list[i].universitiesName+"</label>" +"<span class='schoolTag'>" + attrImg + "</span>"+
+											"<p class=''>综合评级（<span class='admission_lot'>"+admissionLots+ "</span>）<span class='admitRank text-danger'>" + list[i].totalRanking + "</span></p>" +
+											"</div>" +
+											//院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
+											"<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
+											"<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
+											"</table></div>" +
+											//[录取分表格   start]
+											"<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
 												 
 									//[院校扩展表list 院校录取分数线] 
 									if(list[i].universRelationList == null){
 										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;
+										console.log(universRelationList);
 										for(var j=0; j<universRelationList.length;j++){
 											if(j>4){
 												break;
 											}
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;
-											if($.isEmptyObject(collegeScoreLine) == false){
+											console.log("collegeScoreLine:" + collegeScoreLine);
+											if(!$.isEmptyObject(collegeScoreLine)){												
 												if(collegeScoreLine.startsWith("[")){
 													var lines = JSON.parse(collegeScoreLine);
 													if(lines.length > 0){
@@ -772,12 +753,13 @@
 												}else {
 													lists += "<tr><td>" + (universRelationList[j].urYear == null ? "-" : universRelationList[j].urYear) + "</td><td>" + (universRelationList[j].subjectType == null ? "-" : universRelationList[j].subjectType) + "</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 												}													
-											} 												
+											}else{
+												lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
+											}
 										}
 									}							
-                                    //[录取分表格   end]
-                                    lists += "</table>" + operate + "</li></ul>";
-                                        	
+	                                    	//[录取分表格   end]
+	                                    	lists += "</table>" + operate + "</li></ul>";                                        	
 								}
 							 	$("#universities").html(lists);	 
 						}
