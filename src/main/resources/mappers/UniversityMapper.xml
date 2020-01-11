@@ -11,18 +11,18 @@
 	    	<result column="established_time" property="establishedTime" />
 	    	<result column="universities_nature" property="universitiesNature" />
 	    	<result column="belong_to" property="belongTo" />
-	   	<result column="address" property="address" />
+	   		<result column="address" property="address" />
 	    	<result column="map_coordinates" property="mapCoordinates" />
 	    	<result column="universities_attributes" property="universitiesAttributes" />
 	    	<result column="universities_type" property="universitiesType" />
 	    	<result column="universities_logo" property="universitiesLogo" />
-	   	<result column="universities_image" property="universitiesImage" />
+	   		<result column="universities_image" property="universitiesImage" />
 	    	<result column="admission_lot" property="admissionLot" />
 	    	<result column="admission_probability" property="admissionProbability" />
 	    	<result column="universities_website" property="universitiesWebsite" />
 	    	<result column="universities_phone" property="universitiesPhone" />
 	    	<result column="alumni_association_ranking" property="alumniAssociationRanking" />
-	   	<result column="martial_book_association_ranking" property="martialBookAssociationRanking" />
+	   		<result column="martial_book_association_ranking" property="martialBookAssociationRanking" />
 	    	<result column="soft_science_ranking" property="softScienceRanking" />
 	    	<result column="quacquarelli_symonds_ranking" property="quacquarelliSymondsRanking" />
 	    	<result column="us_news_ranking" property="usNewsRanking" />
@@ -42,27 +42,26 @@
 	    	<result column="create_by" property="createBy" />
 	    	<result column="update_time" property="updateTime" />
 	    	<result column="update_by" property="updateBy" />
-		<collection property="universRelationList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityRelation">
-			<result column="ur_id" property="urId"/>
-		    	<result column="universities_code" property="universitiesCode" />
-		    	<result column="ur_year" property="urYear" />
-		    	<result column="ur_Province" property="urProvince" />
-		    	<result column="subject_type" property="subjectType" />
-		    	<result column="admission_batch" property="admissionBatch" />
-		    	<result column="college_score_line" property="collegeScoreLine" />
-		    	<result column="enrollment_plan" property="enrollmentPlan" />
-		    	<result column="professional_admission_score" property="professionalAdmissionScore" />
-		</collection>
-		<collection property="universityAdmissionList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityAdmission">
-			<result column="ua_id" property="uaId"/>
-		    	<result column="universities_code" property="universitiesCode" />
-		    	<result column="ua_year" property="uaYear" />
-		    	<result column="brochure_browse_count" property="brochureBrowseCount" />
-		    	<result column="regulations_browse_count" property="regulationsBrowseCount" />
+			<collection property="universRelationList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityRelation">
+				<result column="ur_id" property="urId"/>
+			    <result column="universities_code" property="universitiesCode" />
+			    <result column="ur_year" property="urYear" />
+			    <result column="ur_Province" property="urProvince" />
+			   	<result column="subject_type" property="subjectType" />
+			   	<result column="admission_batch" property="admissionBatch" />
+			   	<result column="college_score_line" property="collegeScoreLine" />
+			   	<result column="enrollment_plan" property="enrollmentPlan" />
+			   	<result column="professional_admission_score" property="professionalAdmissionScore" />
+			</collection>
+			<collection property="universityAdmissionList" column="universities_code" ofType="cn.hqtzytb.entity.UniversityAdmission">
+				<result column="ua_id" property="uaId"/>
+			   	<result column="universities_code" property="universitiesCode" />
+			   	<result column="ua_year" property="uaYear" />
+			   	<result column="brochure_browse_count" property="brochureBrowseCount" />
+			   	<result column="regulations_browse_count" property="regulationsBrowseCount" />
 		    	<result column="pubdate" property="pubdate" />
-		    	<result column="admissions_brochure" property="admissionsBrochure" />
-    			<result column="admissions_regulations" property="admissionsRegulations" />
-		</collection>
+		    	<result column="admissions_brochure" property="admissionsBrochure" />    			<result column="admissions_regulations" property="admissionsRegulations" />
+			</collection>
 	</resultMap>
 
 	<insert id="insertUniversity" parameterType="cn.hqtzytb.entity.University"
@@ -580,7 +579,7 @@
 
 	<select id="selectUniversityRelationList" resultType="cn.hqtzytb.entity.UniversityRelation">
 		SELECT
-			ur_ia, ur_year, ur_province, subject_type, admission_batch,universities_code, 
+			ur_id, ur_year, ur_province, subject_type, admission_batch,universities_code, 
 			college_score_line, enrollment_plan, professional_admission_score
 		FROM 
 			university_relation

@@ -36,8 +36,8 @@
 								<img src="${COLLEGE_PHOTO_PREFIX}${school.universitiesLogo}" style="width: 100%;border-radius: 10px;"/>
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 sch_title_info">
-							<h3 class="text-white margin_top1">${school.universitiesName }</h3>
-							<div class="text-white"><span>院校代码：</span>10001</div>
+							<h3 class="text-white margin_top1">${school.universitiesName}</h3>
+							<div class="text-white"><span class="sch_code" id="${school.universitiesCode}">院校代码：</span>${school.universitiesCode}</div>
 							<p class="margin_top sch_label" id="universities_attributes">
 								<span class="btn btn-default">本科</span>
 								<span class="btn btn-default">双一流</span>
@@ -50,12 +50,12 @@
 						</div>
 						<div class="col-lg-4  col-sm-4 col-md-4" style="display: flex;align-items: center;justify-content: center;">
 							<div class="like">
-									<c:if test="${school_like != null}">
-										<a class="text-white" id="${school_like.eId}" href="javascript:;" onclick="like(this)" >喜欢
+									<c:if test="${school.eId != null}">
+										<a class="text-white" id="${school.eId}" href="javascript:;" onclick="like(this)" >喜欢
 											<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>
 										</a>
 									</c:if>
-									<c:if test="${school_like == null}">	
+									<c:if test="${school.eId == null}">	
 										<a id="" href="javascript:;" onclick="like(this)">喜欢
 											<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
 										</a>											
@@ -120,7 +120,7 @@
 												<div class="swiper-pagination"></div>
 											</div>
 										</div>
-										<script>
+										<script type="text/javascript">
 											var schlive_swiper = new Swiper('.schlive .swiper-container', {
 											    autoplay:{
 												    delay: 2500,
@@ -149,7 +149,7 @@
 											  area: ['1000px', '600px'],
 											  anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
 											}); 
-										</script>
+										</script>									
 			    					</div>
 			    					<div class="clearfix sch_info_twobox margin_top1">
 			    						<a class="two_box pull-left border-primary" href="javascript:void(0)" onclick="modelshow('食宿条件',$('#room_and_board'),1)">
@@ -246,24 +246,24 @@
 			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/1.png);"></span>院校分数线
 			    					</h2>
 			    					<p class="">
-			    						<select name="">
-			    							<c:forEach items="${proviceOption}" var="item">
-			    								<option value="">${item }</option>
+			    						<select id="ur_province_yxfsx" onchange="select_relation('yxfsx')" >
+			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">			    								
+			    									<option value="${item}">${item}</option>			    								
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select id="subject_type_yxfsx" onchange="select_relation('yxfsx')">
 			    							<c:forEach items="${typeOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}" >${item}</option>
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select  id="ur_year_yxfsx" onchange="select_relation('yxfsx')">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}">${item}</option>
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select id="admission_batch_yxfsx" onchange="select_relation('yxfsx')">
 			    							<c:forEach items="${batchOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}">${item}</option>
 			    							</c:forEach>
 				    					</select>
 			    					</p>
@@ -271,6 +271,149 @@
 			    						<table class="table table-hover">
 			    					
 			    						<script type="text/javascript">
+			    						function select_relation(e){
+			    							var universities_code = $(".sch_code").attr("id");
+			    							var ur_province = $("#ur_province_" + e + " option:selected").val();
+			    							var subject_type = $("#subject_type_" + e + " option:selected").val();
+			    							var ur_year = $("#ur_year_" + e + " option:selected").val();
+			    							var admission_batch = $("#admission_batch_" + e + " option:selected").val();
+			    							var data = "universitiesCode=" + universities_code + "&urProvince=" + ur_province 
+			    									 + "&subjectType=" + subject_type + "&urYear=" + ur_year
+			    									 + "&admissionBatch=" + admission_batch + "&type=" + e; 
+			    							console.log(data);
+			    							$.ajax({
+			    								url: "${pageContext.request.contextPath}/school/xgk_university_relation.do",
+			    								data: data,
+			    								type: "POST",
+			    								dataType: "json",
+			    								success:function(obj){
+			    									console.log("e: " + e);
+			    									console.log("state: " + obj.state);
+			    									if(obj.state == 1){		
+			    										var content = "";
+		    											var list = obj.data;
+			    										if(e == "yxfsx"){			    											
+			    											for(var i=0; i<list.length; i++){
+			    												content += "<tr>";
+			    												content += "<td>" + list[i].urProvince + "</td>";
+			    												content += "<td>" + list[i].urYear + "</td>";
+			    												content += "<td>" + list[i].subjectType + "</td>";
+			    												content += "<td>" + list[i].admissionBatch + "</td>";
+			    												if(list[i].collegeScoreLineList == null || list[i].collegeScoreLineList.length == 0){
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    												} else {
+			    													content += "<td>" + list[i].collegeScoreLineList[0] + "</td>";
+			    													content += "<td>" + list[i].collegeScoreLineList[1] + "</td>";
+			    													content += "<td>" + list[i].collegeScoreLineList[2] + "</td>";
+			    													content += "<td>" + list[i].collegeScoreLineList[3] + "</td>";
+			    													content += "<td>" + list[i].collegeScoreLineList[4] + "</td>";
+			    													content += "<td>" + list[i].collegeScoreLineList[5] + "</td>";
+			    													content += "<td>" + list[i].collegeScoreLineList[6] + "</td>";
+			    													content += "<td>" + list[i].collegeScoreLineList[7] + "</td>";
+			    												}
+			    												content += "</tr>";
+			    											}	
+			    											$("#sshy2").html(content);
+			    											$("div.holder2").jPages({
+				    						    			       containerID : "sshy2",
+				    						    			       perPage     : 8,
+				    						    			       first       : "首页",
+				    						    			       previous    : "上一页",
+				    						    			       next        : "下一页",
+				    						    			       last        : "尾页"
+				    						    			 });
+			    										}
+			    										if(e == "zsjh"){
+			    											for(var i=0; i<list.length; i++){			    											
+			    												if(list[i].enrollmentPlanList == null || list[i].enrollmentPlanList.length == 0){
+			    													content += "<tr>";
+				    												content += "<td>" + list[i].urProvince + "</td>";
+				    												content += "<td>" + list[i].urYear + "</td>";
+				    												content += "<td>" + list[i].subjectType + "</td>";
+				    												content += "<td>" + list[i].admissionBatch + "</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "</tr>";
+			    												} else {
+			    													for(var j=0; j<list[i].enrollmentPlanList.length; j++){
+			    														content += "<tr>";
+					    												content += "<td>" + list[i].urProvince + "</td>";
+					    												content += "<td>" + list[i].urYear + "</td>";
+					    												content += "<td>" + list[i].subjectType + "</td>";
+					    												content += "<td>" + list[i].admissionBatch + "</td>";
+				    													content += "<td>" + list[i].enrollmentPlanList[j][1] + "</td>";
+				    													content += "<td>" + list[i].enrollmentPlanList[j][2] + "</td>";
+				    													content += "<td>" + list[i].enrollmentPlanList[j][3] + "</td>";
+				    													content += "<td>" + list[i].enrollmentPlanList[j][4] + "</td>";
+				    													content += "</tr>";
+			    													}			    													
+			    												}
+			    												
+			    											}
+			    											$("#sshy").html(content);
+			    											$("div.holder").jPages({
+				    						    			       containerID : "sshy",
+				    						    			       perPage     : 8,
+				    						    			       first       : "首页",
+				    						    			       previous    : "上一页",
+				    						    			       next        : "下一页",
+				    						    			       last        : "尾页"
+				    						    			 });
+			    										}
+			    										if(e == "zylqfsx"){
+			    											for(var i=0; i<list.length; i++){			    											
+			    												if(list[i].professionalAdmissionScoreList == null || list[i].professionalAdmissionScoreList.length == 0){
+			    													content += "<tr>";
+				    												content += "<td>" + list[i].urProvince + "</td>";
+				    												content += "<td>" + list[i].urYear + "</td>";
+				    												content += "<td>" + list[i].subjectType + "</td>";
+				    												content += "<td>" + list[i].admissionBatch + "</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";
+			    													content += "<td>-</td>";			    													
+			    													content += "</tr>";
+			    												} else {
+			    													for(var j=0; j<list[i].professionalAdmissionScoreList.length; j++){
+			    														content += "<tr>";
+					    												content += "<td>" + list[i].urProvince + "</td>";
+					    												content += "<td>" + list[i].urYear + "</td>";
+					    												content += "<td>" + list[i].subjectType + "</td>";
+					    												content += "<td>" + list[i].admissionBatch + "</td>";
+				    													content += "<td>" + list[i].professionalAdmissionScoreList[j][1] + "</td>";
+				    													content += "<td>" + list[i].professionalAdmissionScoreList[j][2] + "</td>";
+				    													content += "<td>" + list[i].professionalAdmissionScoreList[j][3] + "</td>";
+				    													content += "<td>" + list[i].professionalAdmissionScoreList[j][4] + "</td>";
+				    													content += "<td>" + list[i].professionalAdmissionScoreList[j][5] + "</td>";
+				    													content += "</tr>";
+			    													}			    													
+			    												}
+			    												
+			    											}
+			    											$("#sshy1").html(content);
+			    											$("div.holder1").jPages({
+				    						    			       containerID : "sshy1",
+				    						    			       perPage     : 8,
+				    						    			       first       : "首页",
+				    						    			       previous    : "上一页",
+				    						    			       next        : "下一页",
+				    						    			       last        : "尾页"
+				    						    			 });
+			    										}
+			    									}
+			    								}
+			    							});
+			    						}
 								
 								$(function(){								
 									var attributes  = '${school.universitiesAttributes}';
@@ -293,8 +436,6 @@
 										//console.log(universRelationList[i].year);//年份
 										//console.log(college.平均分);
 									}
-									
-									
 								});
 								
 								
@@ -345,26 +486,26 @@
 			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/2.png);"></span>招生计划
 			    					</h2>
 			    					<p class="">
-			    						<select name="">
-			    							<c:forEach items="${proviceOption}" var="item">
-			    								<option value="">${item }</option>
+			    					<select id="ur_province_zsjh" onchange="select_relation('zsjh')" >
+			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">			    								
+			    									<option value="${item}">${item}</option>			    								
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select id="subject_type_zsjh" onchange="select_relation('zsjh')">
 			    							<c:forEach items="${typeOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}" >${item}</option>
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select  id="ur_year_zsjh" onchange="select_relation('zsjh')">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}">${item}</option>
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select id="admission_batch_zsjh" onchange="select_relation('zsjh')">
 			    							<c:forEach items="${batchOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}">${item}</option>
 			    							</c:forEach>
-				    					</select>
+				    					</select>			    						
 			    					</p>
 			    					<div class="">
 			    						<table class="table table-hover" >
@@ -413,26 +554,26 @@
 			    						<span style="background-image: url(${pageContext.request.contextPath}/img/xgk/3.png);"></span>专业录取分数线
 			    					</h2>
 			    					<p class="">
-			    						<select name="">
-			    							<c:forEach items="${proviceOption}" var="item">
-			    								<option value="">${item }</option>
+			    						<select id="ur_province_zylqfsx" onchange="select_relation('zylqfsx')" >
+			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">			    								
+			    									<option value="${item}">${item}</option>			    								
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select id="subject_type_zylqfsx" onchange="select_relation('zylqfsx')">
 			    							<c:forEach items="${typeOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}" >${item}</option>
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select  id="ur_year_zylqfsx" onchange="select_relation('zylqfsx')">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}">${item}</option>
 			    							</c:forEach>
 				    					</select>
-				    					<select name="">
+				    					<select id="admission_batch_zylqfsx" onchange="select_relation('zylqfsx')">
 			    							<c:forEach items="${batchOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<option value="${item}">${item}</option>
 			    							</c:forEach>
-				    					</select>
+				    					</select>			    						
 			    					</p>
 			    					<div class="">
 			    						<table class="table table-hover">
@@ -441,9 +582,18 @@
 			    						
 			    						</thead>
 			    						<tbody id="sshy1">
-			    							<c:forEach items="${school.universRelationList}" var="item" >
-			    								<c:forEach items="${item.professionalAdmissionScoreList }" var="it">
-			    									<tr><td id="${it[0]}">${item.urProvince}</td><td>${item.urYear}</td><td>${item.subjectType}</td><td>${item.admissionBatch}</td><td>${it[1]}</td><td>${it[2]}</td><td>${it[3]}</td><td>${it[4]}</td><td>${it[5]}</td></tr>								
+			    							<c:forEach items="${school.universRelationList}" var="item" >		
+			    								<c:forEach items="${item.professionalAdmissionScoreList}" var="it">
+			    									<tr>
+				    									<td id="${it[0]}">${item.urProvince}</td>
+				    									<td>${item.urYear}</td><td>${item.subjectType}</td>
+				    									<td>${item.admissionBatch}</td>
+				    									<td>${it[1]}</td>
+				    									<td>${it[2]}</td>
+				    									<td>${it[3]}</td>
+				    									<td>${it[4]}</td>
+				    									<td>${it[5]}</td>
+			    									</tr>								
 			    								</c:forEach>
 			    							</c:forEach>
 			    						</tbody>
@@ -719,26 +869,8 @@
 			    			});
 		    			}	
 	    			} 	
-				   /*  $(function() {
-						var teachingResearchList = JSON.parse('${teaching_research}');
-						//教研教学点水球
-						for(var i=1; i<teachingResearchList.length+1; i++){
-							if(i == 1){
-								waterball('water' + i,teachingResearchList[i-1][1],'#ffad05');
-							}
-							if(i == 2){
-								waterball('water' + i,teachingResearchList[i-1][1],'#47cf66');
-							}
-							if(i == 3){
-								waterball('water' + i,teachingResearchList[i-1][1],'#3b8bec');
-							}
-							if(i == 4){
-								waterball('water' + i,teachingResearchList[i-1][1],'#fe5656');
-							}
-						}
-					}); */
+				   
 					
-				   /*  */
 			    	$(document).ready(function() {			    		
 			    		$('.tab_head li').click(function(){
 			    			$(this).parent().children().removeClass('cur');

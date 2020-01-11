@@ -95,18 +95,17 @@ public class IUniversityServiceImpl implements IUniversityService {
 	public String getUniversityInfo(String universityCode, ModelMap map, HttpServletRequest request) {
 		try {
 			if (StringUtils.isNotEmpty(universityCode)) {
-				List<University> universityList = universityMapper.selectUniversityList(
-						" u.universities_code = '" + universityCode + "' ", " ur.ur_year DESC ", null, null);
+				List<University> universityList = universityMapper.selectUniversityList(" u.universities_code = '" + universityCode + "' ", " ur.ur_year DESC ", null, null);
 				if (!universityList.isEmpty()) {
 					University university = universityList.get(0);
-					Object uid = SecurityUtils.getSubject().getSession().getAttribute("uid");
-					if (uid != null) {
-						List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer) uid
-								+ "' AND e_code = '" + university.getUniversitiesCode() + "'", null, null, null);
+					Subject subject = SecurityUtils.getSubject();
+					if (subject.isAuthenticated()) {
+						Integer uid = (Integer)SecurityUtils.getSubject().getSession().getAttribute("uid");
+						List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + uid + "' AND e_code = '" + university.getUniversitiesCode() + "'", null, null, null);
 						if (!enshrineList.isEmpty()) {
-							map.addAttribute("school_like", enshrineList.get(0));
+							university.seteId(enshrineList.get(0).geteId());
 						}
-					}
+					}					
 					Set<String> proviceOption = new HashSet<>();
 					Set<String> typeOption = new HashSet<>();
 					Set<String> yearOption = new HashSet<>();
@@ -116,11 +115,11 @@ public class IUniversityServiceImpl implements IUniversityService {
 						typeOption.add(relation.getSubjectType());
 						yearOption.add(relation.getUrYear());
 						batchOption.add(relation.getAdmissionBatch());
-						relation.setCollegeScoreLineList(
-								GetCommonUser.getList(relation.getCollegeScoreLine(), request));// 院校分数线
+						relation.setCollegeScoreLineList(GetCommonUser.getList(relation.getCollegeScoreLine(), request));// 院校分数线
 						relation.setEnrollmentPlanList(GetCommonUser.getJson(relation.getEnrollmentPlan(), request));// 招生计划
-						relation.setProfessionalAdmissionScoreList(
-								GetCommonUser.getJson(relation.getProfessionalAdmissionScore(), request));// 专业录取分数线
+						System.err.println("111: " + relation.getProfessionalAdmissionScore());
+						relation.setProfessionalAdmissionScoreList(GetCommonUser.getJson(relation.getProfessionalAdmissionScore(), request));// 专业录取分数线
+						System.err.println("222: " + GetCommonUser.getJson(relation.getProfessionalAdmissionScore(), request));
 					}
 					map.addAttribute("COLLEGE_PHOTO_PREFIX", Constants.COLLEGE_PHOTO_PREFIX);
 					map.addAttribute("proviceOption", proviceOption);// 省份集合
@@ -128,12 +127,9 @@ public class IUniversityServiceImpl implements IUniversityService {
 					map.addAttribute("yearOption", yearOption);// 年份集合
 					map.addAttribute("batchOption", batchOption);// 录取批次集合
 					map.addAttribute("school", university);// 学校信息
-					map.addAttribute("images", StringUtils.isEmpty(university.getUniversitiesLife()) ? null
-							: university.getUniversitiesLife().split(";"));// 院校生活图片
-					map.addAttribute("teachingResearch",
-							GetCommonUser.getJson(university.getTeachingResearch(), request));// 教学研究
-					map.addAttribute("teaching_research",
-							JSON.toJSONString(GetCommonUser.getJson(university.getTeachingResearch(), request)));// 教学研究
+					map.addAttribute("images", StringUtils.isEmpty(university.getUniversitiesLife()) ? null : university.getUniversitiesLife().split(";"));// 院校生活图片
+					map.addAttribute("teachingResearch", GetCommonUser.getJson(university.getTeachingResearch(), request));// 教学研究
+					map.addAttribute("teaching_research", JSON.toJSONString(GetCommonUser.getJson(university.getTeachingResearch(), request)));// 教学研究
 					map.addAttribute("coreSpecialty", GetCommonUser.getJson(university.getCoreSpecialty(), request));// 重点专业
 					List<List<List<String>>> coreSubjectList = new ArrayList<List<List<String>>>();
 					List<List<String>> subjectList = GetCommonUser.getJson(university.getCoreSubject(), request);
@@ -143,15 +139,13 @@ public class IUniversityServiceImpl implements IUniversityService {
 					}
 					map.addAttribute("coreSubject", coreSubjectList);// 重点学科
 					List<List<List<String>>> coreLaboratoriesList = new ArrayList<List<List<String>>>();
-					List<List<String>> coreList = GetCommonUser
-							.getJson(university.getCoreLaboratoriesAndResearchCenters(), request);
+					List<List<String>> coreList = GetCommonUser.getJson(university.getCoreLaboratoriesAndResearchCenters(), request);
 					for (int i = 0; i < coreList.size(); i++) {
 						List<List<String>> list = GetCommonUser.getJson(coreList.get(i).toString(), request);
 						coreLaboratoriesList.add(i, list);
 					}
 					map.addAttribute("coreLaboratoriesList", coreLaboratoriesList);// 重点实验室及科研中心
-					map.addAttribute("universityAdmissionList",
-							JSON.toJSONString(university.getUniversityAdmissionList()));
+					map.addAttribute("universityAdmissionList",JSON.toJSONString(university.getUniversityAdmissionList()));
 				}
 			}
 		} catch (Exception e) {
@@ -192,6 +186,44 @@ public class IUniversityServiceImpl implements IUniversityService {
 			logger.error("访问路径：" + request.getRequestURI() + "操作； 展示学院搜索页面  错误信息：" + e);
 		}
 		return "web/xgk/xgk_sch_search";
+	}
+
+	@Override
+	public ResponseResult<List<UniversityRelation>> getUniversityRelationList(String universitiesCode, String urProvince, String subjectType,String urYear, String admissionBatch ,String type, HttpServletRequest request) {
+		try {
+			String where = "universities_code = '" + universitiesCode + "' ";
+			if(StringUtils.isNotEmpty(urProvince)){
+				where += "AND ur_province = '" + urProvince + "' ";
+			}
+			if (StringUtils.isNotEmpty(subjectType)) {
+				where += "AND subject_type = '" + subjectType + "' ";
+			}
+			if (StringUtils.isNotEmpty(subjectType)) {
+				where += "AND ur_year = '" + urYear + "' ";
+			}
+			if (StringUtils.isNotEmpty(admissionBatch)) {
+				where += "AND admission_batch = '" + admissionBatch + "' ";
+			}
+			List<UniversityRelation> universityRelationList = universityMapper.selectUniversityRelationList(where, null, null, null);
+			for (UniversityRelation ur : universityRelationList) {
+				if("yxfsx".equals(type)){
+					ur.setCollegeScoreLineList(GetCommonUser.getList(ur.getCollegeScoreLine(), request));
+					continue;
+				}
+				if("zsjh".equals(type)){
+					ur.setEnrollmentPlanList(GetCommonUser.getJson(ur.getEnrollmentPlan(), request));
+					continue;
+				}
+				if("zylqfsx".equals(type)){
+					ur.setProfessionalAdmissionScoreList(GetCommonUser.getJson(ur.getProfessionalAdmissionScore(), request));
+					continue;
+				}
+			}
+			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,universityRelationList);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作； 展示学院搜索页面  错误信息：" + e);
+			return new ResponseResult<>(ResponseResult.ERR,Constants.RESULT_MESSAGE_FAIL);
+		}
 	}
 
 }

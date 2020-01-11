@@ -3,6 +3,7 @@ package cn.hqtzytb.controller;
 import cn.hqtzytb.entity.Education;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.University;
+import cn.hqtzytb.entity.UniversityRelation;
 import cn.hqtzytb.service.ISpecialtyServer;
 import cn.hqtzytb.service.IUniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,17 @@ public class UniversityController {
     }
     
     /**
+     * 查询院校招生录取信息
+     * @param where
+     * @return
+     */
+    @RequestMapping("/xgk_university_relation.do")
+    @ResponseBody
+    public ResponseResult<List<UniversityRelation>> getUniversityRelationList(String universitiesCode, String urProvince, String subjectType, String urYear, String admissionBatch ,String type, HttpServletRequest request){
+        return iUniversityService.getUniversityRelationList(universitiesCode, urProvince, subjectType, urYear, admissionBatch, type, request);
+    }
+    
+    /**
      * 点击游览招生简章/章程
      * @return
      */
@@ -146,4 +158,7 @@ public class UniversityController {
     public ResponseResult<Map<String,Object>> getSpecialtyList2(String where, Integer offset, Integer countPerPage ,HttpServletRequest request){
         return iSpecialtyServer.getSpecialtyList2(where, offset, countPerPage, request);
     }
+    
+    
+   
 }

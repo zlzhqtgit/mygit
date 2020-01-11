@@ -187,7 +187,6 @@
 												var sName = $(obj).parents("li").find(".sName").text();
 												var sCode = $(obj).parents("li").find(".sName").attr("id");
 												var data = "eCode=" + sCode + "&eName=" + sName + "&eType=1";
-												console.log(data);
 												$.ajax({
 													url: "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
 													data: data,
@@ -228,7 +227,6 @@
 												var sName = $(obj).parents("li").find(".vName").text();
 												var sCode = $(obj).parents("li").find(".vName").attr("id");
 												var data = "eCode=" + sCode + "&eName=" + sName + "&eType=2";
-												console.log(data);
 												$.ajax({
 													url: "${pageContext.request.contextPath}/ens/hqt_add_enshrine.do",
 													data: data,
@@ -254,8 +252,6 @@
 								}								 
 								 
 									function unlove(obj){
-										console.log(obj);
-										console.log("取消喜欢 eId:" + $(obj).attr("id") );
 										if($(obj).attr("id") != ''){
 											$.ajax({
 												url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
@@ -304,7 +300,6 @@
 													dataType: "json",							
 													success: function (obj) {
 														if(obj.state == 1){
-															console.log(obj)
 															var list = obj.data.list;
 															var sch_search = "";
 															for(var i=0; i<list.length; i++){
@@ -384,8 +379,7 @@
 																sch_search += '</div>';
 																sch_search += '</div>';
 																sch_search += '</div>';
-																sch_search += '<div class="text-center like">';		
-																console.log(list[i].eId)
+																sch_search += '<div class="text-center like">';
 																if(list[i].eId != null){
 																	sch_search += '<a id="' + list[i].eId + '" onclick="sch_like(this)" href="javascript:">';
 																	sch_search += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
@@ -399,8 +393,8 @@
 																sch_search += '<div class="text-center text-muted">喜欢人数：' + list[i].enshrineCount + '</div>';
 																sch_search += '</div>';
 																sch_search += '</div>';
-																sch_search += '</li>';																
-															}															
+																sch_search += '</li>';				
+															}					
 														}
 														$("#search_university_list").html(sch_search);
 										      		}
