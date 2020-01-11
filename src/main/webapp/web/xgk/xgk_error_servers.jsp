@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=0.3">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/xgk/dandelion.css"  media="screen" />
+<link rel="icon" href="${pageContext.request.contextPath}/web/xgk/favicon.ico" type="image/x-icon">
 </head>
 
 <body>

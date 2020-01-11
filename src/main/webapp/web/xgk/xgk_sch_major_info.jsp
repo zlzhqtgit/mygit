@@ -7,24 +7,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=0.3">
 <title>贵州好前途教育科技有限公司</title>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/xgk/index.css" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/xgk/sch_search.css" />
-<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"
-	type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/xgk/index.css" />
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/xgk/sch_search.css" />
+<link rel="icon" href="${pageContext.request.contextPath}/web/xgk/favicon.ico" type="image/x-icon">
+<script src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"	type="text/javascript" charset="utf-8"></script>
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js"
-	type="text/javascript" charset="utf-8"></script>
+<script	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script	src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js"	type="text/javascript" charset="utf-8"></script>
 <script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
 <script src="${pageContext.request.contextPath}/js/jPages.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/province.js"></script>
+<script type="text/javascript"	src="${pageContext.request.contextPath}/js/province.js"></script>
 </head>
 
 <body>

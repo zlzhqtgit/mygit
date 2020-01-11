@@ -116,15 +116,31 @@ function chat2(id) {
 							<div class="">
 								<div class="serve_class">精准教学</div>
 								<ul class="">
-									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
-									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+									<li>
+										<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=867187836&site=qq&menu=yes">
+											<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服
+										</a>
+									</li>
+									<li>
+										<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3303174399&site=qq&menu=yes">
+											<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服
+										</a>										
+									</li>
 								</ul>
 							</div>
 							<div class="">
 								<div class="serve_class">升学规划</div>
 								<ul class="">
-									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
-									<li><a href="tencent://message/?Site=baidu.com&uin=3303174399&Menu=yes"><img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服</a></li>
+									<li>
+									<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=401375488&site=qq&menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服
+									</a>									
+									</li>
+									<li>									
+									<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=210881296&site=qq&menu=yes">
+										<img src="${pageContext.request.contextPath}/img/public/qq_side.gif" style="max-width: 2em;"/>在线客服										
+									</a>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -145,11 +161,12 @@ function chat2(id) {
 			 * @param {Object} obj 目标子菜单类名
 			 */
 			function menuSwitch(obj) {
+				var timer = null;
 				$(obj).hover(function(){
-					timer=setTimeout(function(){
+					var timer =setTimeout(function(){
 						$(obj).find(".submenu").show(); 
 					},100);
-				},function(){
+				},function(){					
 					clearTimeout(timer);
 					 $(this).find(".submenu").hide(); 
 				});

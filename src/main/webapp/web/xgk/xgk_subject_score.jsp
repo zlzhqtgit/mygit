@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/xgk/index.css" />
 <link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/css/xgk/xgk_subject.css" />
+<link rel="icon" href="${pageContext.request.contextPath}/web/xgk/favicon.ico" type="image/x-icon">
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/web/xgk/echarts.min.js"></script>
 <script type="text/javascript"	src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>

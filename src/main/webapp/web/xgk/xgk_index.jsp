@@ -311,9 +311,9 @@
 					//生成微信二维码,工具类
 					var obj = new WxLogin({
 						id:"weixin",
-						appid:"wx7287a60bb700fd21",
+						appid:"wxf9d480d0ab316606",
 						scope:"snsapi_login",
-						redirect_uri:"http://www.txjava.cn/loginServlet"
+						redirect_uri:"http://xgk.sxghfwzx.com/connect.do"
 					});
 				}
 

@@ -85,6 +85,7 @@ public class XgkcpResultServerImpl implements IXgkcpResultServer {
 						strList[i][1] = cpFengshu.get(strList[i][0]).toString();
 						fs += strList[i][0] + "," + strList[i][1] + "," + strList[i][2] + "-";
 					}
+					
 					for(int i=0; i<reportResult.size(); i++){
 						//专业列表
 						session.setAttribute("specialty" + i,GetCommonUser.getJson(JSONArray.fromObject(reportResult.get(i).getPersonalitySpecialty()), request));

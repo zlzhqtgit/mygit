@@ -121,7 +121,6 @@ public class XgkcpController {
 	 * @param response 
 	 * @return String 
 	 */	
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/xgk_report.do")
 	public String showIndexno(ModelMap map, HttpServletRequest request) {
 		
