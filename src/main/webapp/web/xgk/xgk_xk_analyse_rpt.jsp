@@ -115,17 +115,17 @@ $(function(){
 	})
 					var countdown = 60;//查询60次
 					function settime(order,url) {
-					    if (countdown == 0) { 
+					    if (countdown == 0) {
 					    	layer.msg('超过二分钟未支付，二维码已超时！', {icon: 5,time:1000});
 					    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
 					    		window.location.reload();//页面刷新
 					    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_fail.do?nowUrl=" + url;
 					    		countdown = 60;
 					    	},2000);
-						} else {							
+						} else {					
 							$.ajax({
 								type:"POST",
-								url:"${pageContext.request.contextPath}/api/query_wx_is_pay.do",
+								url:"${pageContext.request.contextPath}/api/query_order_status.do",
 								data:"outTradeNo=" + order,
 								datatype:'json',
 								success:function(obj){
@@ -142,7 +142,7 @@ $(function(){
 						} 
 						setTimeout(function() { 
 						    settime(order,url) }
-						    ,2000) 
+						    ,3000) 
 					}
 	function download(){
 	   var element = $("#report_cont");    // 这个dom元素是要导出pdf的div容器

@@ -62,8 +62,8 @@ public class LoginController {
      * @param response
      * @return
      */
-    @RequestMapping("/loginServlet")
-//    @RequestMapping("/wxCallback.do")
+//    @RequestMapping("/loginServlet")
+    @RequestMapping("/wxLoginCallback.do")
     private String wxLoginCallback(HttpServletRequest request, HttpServletResponse response){
         return iLoginService.wxLoginCallback(request,response);
     }

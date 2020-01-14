@@ -15,7 +15,7 @@ import cn.hqtzytb.entity.ResponseResult;
  * @Copyright:好前途教育
  * @Version V1.0
  */
-public interface IWxPayService {
+public interface IPayService {
 
 	Object wxpay(HttpServletRequest request, String out_trade_no, String total_fee, String body);
 
@@ -29,5 +29,11 @@ public interface IWxPayService {
 	String wxPaySucees(HttpServletRequest request, HttpServletResponse response, String nowUrl);
 
 	String wxPayFail(HttpServletRequest request, HttpServletResponse response, String nowUrl);
+
+	void alipay(HttpServletRequest request, HttpServletResponse response, String body, String outTradeNo) throws Exception ;
+
+	String aliNotifyUrl(HttpServletRequest request, HttpServletResponse response);
+
+	String aliReturnUrl(HttpServletRequest request, HttpServletResponse response);
 
 }

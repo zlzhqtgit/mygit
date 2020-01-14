@@ -128,7 +128,7 @@ $(function(){
 						} else {							
 							$.ajax({
 								type:"POST",
-								url:"${pageContext.request.contextPath}/api/query_wx_is_pay.do",
+								url:"${pageContext.request.contextPath}/api/query_order_status.do",
 								data:"outTradeNo=" + order,
 								datatype:'json',
 								success:function(obj){
@@ -145,7 +145,7 @@ $(function(){
 						} 
 						setTimeout(function() { 
 						    settime(order,url) }
-						    ,2000) 
+						    ,3000) 
 					}
 	function download(){
 	   var element = $("#report_cont");    // 这个dom元素是要导出pdf的div容器

@@ -313,7 +313,7 @@
 						id:"weixin",
 						appid:"wxf9d480d0ab316606",
 						scope:"snsapi_login",
-						redirect_uri:"http://xgk.sxghfwzx.com/connect.do"
+						redirect_uri:"http://xgk.sxghfwzx.com/wxLoginCallback.do"
 					});
 				}
 

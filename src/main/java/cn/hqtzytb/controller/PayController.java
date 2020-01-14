@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePagePayRequest;
+
 import cn.hqtzytb.entity.ResponseResult;
-import cn.hqtzytb.service.IWxPayService;
+import cn.hqtzytb.service.IPayService;
 
 /**
- * @Title: WXpayController.java
+ * @Title: PayController.java
  * @Package cn.hqtzytb.controller
  * @Description:(微信支付控制层)
  * @author: ZhouLingZhang
@@ -23,10 +27,10 @@ import cn.hqtzytb.service.IWxPayService;
  */
 @Controller
 @RequestMapping("/api")
-public class WXpayController {
+public class PayController {
 
 	@Autowired
-	private IWxPayService iWxPayService;
+	private IPayService iPayService;
 
 	/**
 	 * 微信支付
@@ -44,7 +48,7 @@ public class WXpayController {
 			@RequestParam(value = "total_fee", required = true) String total_fee,
 			@RequestParam(value = "body", required = true) String body) {
 
-		return iWxPayService.wxpay(request, out_trade_no, total_fee, body);
+		return iPayService.wxpay(request, out_trade_no, total_fee, body);
 	}
 
 	/**
@@ -60,7 +64,7 @@ public class WXpayController {
 	public void generateQRCode(HttpServletRequest request, HttpServletResponse response, String body, String outTradeNo)
 			throws Exception {
 
-		iWxPayService.generateQRCode(request, response, body, outTradeNo);
+		iPayService.generateQRCode(request, response, body, outTradeNo);
 	}
 
 	/**
@@ -70,36 +74,69 @@ public class WXpayController {
 	@RequestMapping(value = "/callback.do")
 	public void weixin_notify(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		iWxPayService.weixinNotify(request, response);
+		iPayService.weixinNotify(request, response);
 	}
 
 	/**
 	 * 查询微信是否扫码支付成功
 	 */
-	@RequestMapping(value = "/query_wx_is_pay.do")
+	@RequestMapping(value = "/query_order_status.do")
 	@ResponseBody
 	public ResponseResult<Void> queryWxIsPay(HttpServletRequest request, HttpServletResponse response,
 			String outTradeNo) throws Exception {
 
-		return iWxPayService.queryWxIsPay(request, response, outTradeNo);
+		return iPayService.queryWxIsPay(request, response, outTradeNo);
 	}
 
 	/**
-	 * 查询微信扫码支付成功
+	 * 微信扫码支付成功页面
 	 */
 	@RequestMapping(value = "/wx_pay_sucees.do")
 	public String wxPaySucees(HttpServletRequest request, HttpServletResponse response, String nowUrl)
 			throws Exception {
 
-		return iWxPayService.wxPaySucees(request, response, nowUrl);
+		return iPayService.wxPaySucees(request, response, nowUrl);
 	}
 
 	/**
-	 * 查询微信扫码支付失败
+	 * 微信扫码支付失败页面
 	 */
 	@RequestMapping(value = "/wx_pay_fail.do")
 	public String wxPayFail(HttpServletRequest request, HttpServletResponse response, String nowUrl) throws Exception {
 
-		return iWxPayService.wxPayFail(request, response, nowUrl);
+		return iPayService.wxPayFail(request, response, nowUrl);
+	}
+	
+	/**
+	 * 支付宝支付
+	 * @param request
+	 * @param response
+	 * @param body
+	 * @param outTradeNo
+	 * @throws Exception
+	 */
+	@RequestMapping("/alipay.do")
+	public void alipay(HttpServletRequest request, HttpServletResponse response, String body, String outTradeNo)  throws Exception {
+		
+		iPayService.alipay(request, response, body, outTradeNo);		
+	}
+	
+	/**
+	 * 支付宝异步回调
+	 */
+	@RequestMapping(value = "/ali_notify_url.do")
+	@ResponseBody
+	public String aliNotifyUrl(HttpServletRequest request, HttpServletResponse response, String nowUrl)throws Exception {
+
+		return iPayService.aliNotifyUrl(request, response);
+	}
+
+	/**
+	 * 支付宝同步回调
+	 */
+	@RequestMapping(value = "/ali_return_url.do")
+	public String aliReturnUrl(HttpServletRequest request, HttpServletResponse response, String nowUrl)	throws Exception {
+
+		return iPayService.aliReturnUrl(request, response);
 	}
 }

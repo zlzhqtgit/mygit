@@ -49,7 +49,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price" id="${VIPRECHAARGE.sysname}" name="${VIPRECHAARGE.syscommet}">${VIPRECHAARGE.sysnub}</span> 元/年
+											<span class="price" id="${VIPRECHAARGE.sysname}" name="${VIPRECHAARGE.syscommet}" >${VIPRECHAARGE.sysnub}</span> 元/年
 										</div>
 										<p class="fsize12">${VIPRECHAARGE.syscommet}</p>
 									</div>
@@ -74,7 +74,7 @@
 										</div>
 										<h3 class="fontwei">套餐名称</h3>
 										<div class="">
-											<span class="price" id="${COUNSELORRECHAARGE.sysname}" name="${COUNSELORRECHAARGE.syscommet}">${COUNSELORRECHAARGE.sysnub}</span> 元/年
+											<span class="price" id="${COUNSELORRECHAARGE.sysname}" name="${COUNSELORRECHAARGE.syscommet}"  >${COUNSELORRECHAARGE.sysnub}</span> 元/年
 										</div>
 										<p class="fsize12">${COUNSELORRECHAARGE.syscommet}</p>
 									</div>
@@ -99,10 +99,10 @@
 						</div>
 						<table class="table table-hover table-bordered" cellspacing="" cellpadding="">
 							<thead>
-								<tr><th> </th><th>下载次数</th><th>xx个数</th><th>使用期限</th></tr>
+								<tr><th> </th><th>下载次数</th><!-- <th>xx个数</th> --><th>使用期限</th></tr>
 							</thead>
 							<tboody>
-								<tr><td>套餐权益</td><td>Data</td><td>Data</td><td>Data</td></tr>
+								<tr><td>套餐权益</td><td id="download_count">9</td><!-- <td>Data</td> --><td>1年</td></tr>
 							</tboody>
 						</table>
 						<div class="tab_list">
@@ -120,27 +120,65 @@
 								</div>
 								<div class="">
 									<div class="">
-										<img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
-										<div class="text-center"> 支付宝扫码 </div>
+										<%-- <img src="${pageContext.request.contextPath}/img/xgk/1568099441.jpg" class="img-responsive"/>
+										<div class="text-center"> 支付宝扫码 </div> --%>
+										<form name="alipayment" action="${pageContext.request.contextPath}/api/alipay.do" method="post"  target="_blank" >
+											<div id="body1" class="show" name="divcontent">
+												<dl class="dl-horizontal">
+												  <dt>商户订单号: </dt>
+												  <dd><input id="out_trade_no" name="outTradeNo" readonly="readonly"/></dd>
+												</dl>
+												<dl class="dl-horizontal">
+												  <dt>订单名称 : </dt>
+												  <dd><input id="subject" name="body" readonly="readonly"/></dd>
+												</dl>
+												<dl class="dl-horizontal">
+												  <dt>付款金额 : </dt>
+												  <dd><input id="total_amount" readonly="readonly"/></dd>
+												</dl>
+												<dl class="dl-horizontal">
+												  <dt>商品描述 : </dt>
+												  <dd><input id="body" readonly="readonly"/></dd>
+												</dl>
+												<dl class="content">
+													<dd id="btn-dd">
+														<span class="new-btn-login-sp">
+															<button class="new-btn-login" type="submit" style="text-align: center;">付 款</button>
+														</span>
+													</dd>
+												</dl>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>				
+				</div>
 				<script type="text/javascript">
 					//选择套餐生成微信支付二维码
 					function choice_combo(e){
-						 var outTradeNo="";  //订单号
-						 $("#show_money").html($(e).parents(".series_item").find(".series_item_tit .price").text());
-						 $("#show_name").html($(e).parents(".series_item").find(".series_item_tit .price").attr("name"));
+						 var outTradeNo="";//订单号 
+						 var show_name = $(e).parents(".series_item").find(".series_item_tit .price").attr("name");						 
 						 var body = $(e).parents(".series_item").find(".series_item_tit .price").attr("id");
-						 var nowUrl=window.location.href;
+						 var total_amount = $(e).parents(".series_item").find(".series_item_tit .price").text();
+						 $("#show_money").html(total_amount);
+						 $("#show_name").html(show_name);
+						 if("VIPRECHAARGE" == body){
+							 $("#download_count").html("9");
+						 } else {
+							 $("#download_count").html("100");
+						 }
+						 var nowUrl = window.location.href;
 						 for(var i=0;i<4;i++){ //4位随机数，用以加在时间戳后面。
 							 outTradeNo += Math.floor(Math.random()*10);
 						 }
-						 outTradeNo = new Date().getTime() + outTradeNo;  //时间戳，用来生成订单号。
+						 outTradeNo = new Date().getTime() + outTradeNo; //时间戳，用来生成订单号。
 						 if('${uid}' != ""){
+							 $("#out_trade_no").val(outTradeNo);
+							 $("#subject").val(body);
+							 $("#total_amount").val(total_amount);
+							 $("#body").val(show_name);
 							 modelshow(false,$('#pay_info'),1);
 							 $("#qr_code").attr("src", "${pageContext.request.contextPath}/api/weixinQRCode.do?body=" + body + "&outTradeNo=" + outTradeNo);	 
 							 settime(outTradeNo,nowUrl);
@@ -160,7 +198,7 @@
 						} else {							
 							$.ajax({
 								type:"POST",
-								url:"${pageContext.request.contextPath}/api/query_wx_is_pay.do",
+								url:"${pageContext.request.contextPath}/api/query_order_status.do",
 								data:"outTradeNo=" + order,
 								datatype:'json',
 								success:function(obj){
@@ -177,7 +215,7 @@
 						} 
 						setTimeout(function() { 
 						    settime(order,url) }
-						    ,2000) 
+						    ,3000) 
 					}
 				</script>
 				<div class="row">

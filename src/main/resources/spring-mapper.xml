@@ -92,6 +92,9 @@
    <property name="charset" value="#{dbConf.charset}"/>
    <property name="gatewayUrl" value="#{dbConf.gatewayUrl}"/>
    <property name="log_path" value="#{dbConf.log_path}"/>
+   <property name="app_cert_path" value="#{dbConf.app_cert_path}"/>
+   <property name="alipay_cert_path" value="#{dbConf.alipay_cert_path}"/>
+   <property name="alipay_root_cert_path" value="#{dbConf.alipay_root_cert_path}"/>
    </bean>
 
     <!-- 持久层接口扫描 -->
