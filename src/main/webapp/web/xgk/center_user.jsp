@@ -35,13 +35,14 @@
 						<h3 class="fontwei">用户昵称</h3>
 					</shiro:guest>
 					<shiro:user>  
-						<c:if test="${headImg != null}">
+						<c:if test="${headImg != null}">							
 							<img src="${headImg}" style="border-radius: 50%; overflow: hidden; width: 100%; height: 100%" />
 						</c:if>
 						<c:if test="${headImg == null}">
 							<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 100%;"/>
-						</c:if>
+						</c:if>						
 						<h3 class="fontwei">${username}</h3>
+						
 					</shiro:user>
 				</div>
 				<div class="clearfix container">

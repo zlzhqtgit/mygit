@@ -31,7 +31,6 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSONObject;
-import com.alipay.api.AlipayClient;
 import com.alipay.api.CertAlipayRequest;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -58,7 +57,7 @@ import cn.hqtzytb.utils.HttpClientUtils;
 
 /**
  * @ClassName: IWxPayService
- * @Description: TODO
+ * @Description: 支付接口实现类
  * @Author: WuPeiLong
  * @Date: 2019年12月25日
  * @Copyright:好前途教育
@@ -199,7 +198,6 @@ public class IPayServiceImpl implements IPayService {
 	@Override
 	public void weixinNotify(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
-			Date currentTime = new Date();
 			String inputLine;
 			String notityXml = "";
 			request.setCharacterEncoding("UTF-8");
@@ -219,7 +217,6 @@ public class IPayServiceImpl implements IPayService {
 				try {
 					map = WXPayUtil.xmlToMap(notityXml);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -238,101 +235,9 @@ public class IPayServiceImpl implements IPayService {
 				out.flush();
 				out.close();				
 				System.out.println("通知微信.异步确认成功");
-				// 订单详情
-				String[] detail = map.get("out_trade_no").split("_");
-				// VIP套餐
-				AdminSystem adminSystem = userRoleMapper.queryAdminSystemById(detail[2]);
-				Order order = new Order();
-				order.setUid(Integer.valueOf(detail[1]));
-				order.setOutTradeNo(detail[0]);
-				order.setRechargeMoney(Double.valueOf(adminSystem.getSysnub()));
-				order.setBody(adminSystem.getSyscommet());
-				order.setCreateTime(currentTime);
-				orderMapper.insert(order);
-				// 销毁全局支付成功跳转路径
-				List<User> userList = userMapper.select(" id = '" + detail[1] + "'", null, null, null);
-				if (!userList.isEmpty()) {
-					Calendar expirationTime = Calendar.getInstance();
-					expirationTime.setTime(currentTime);
-					expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-					if ("VIPRECHAARGE".equals(adminSystem.getSysname())) {// vip充值
-						System.err.println("获得VIP角色");
-						// 获得VIP角色
-						Role role = userRoleMapper.queryRoleBySystemName("SYSTEMVIP");
-						AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-						if(uSystem == null){
-							if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-								expirationTime = Calendar.getInstance();
-								expirationTime.setTime(userList.get(0).getExpirationTime());
-								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-							}
-							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
-							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-						}else{
-							if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
-								userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
-								userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
-								userList.get(0).setDownloadCount(9);// 新增9次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-							} else {// vip续费
-								if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-									expirationTime = Calendar.getInstance();
-									expirationTime.setTime(userList.get(0).getExpirationTime());
-									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-								}
-								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-							}
-						}
-						
-					} else if ("COUNSELORRECHAARGE".equals(adminSystem.getSysname())) {// 咨询师充值
-						// 获得咨询师角色
-						Role role = userRoleMapper.queryRoleBySystemName("SYSTEMCOUNSELOR");
-						AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-						if(uSystem == null){
-							if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-								expirationTime = Calendar.getInstance();
-								expirationTime.setTime(userList.get(0).getExpirationTime());
-								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-							}
-							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
-							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-						}else{
-							if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
-								expirationTime = Calendar.getInstance();
-								expirationTime.setTime(currentTime);
-								expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-								userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-								userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-								userList.get(0).setDownloadCount(100);// 新增100次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-							} else {// 咨询师续费
-								if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-									expirationTime = Calendar.getInstance();
-									expirationTime.setTime(userList.get(0).getExpirationTime());
-									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-								}
-								userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-								userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-							}
-						}						
-					} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
-						System.err.println("单独购买1次下载报告");
-						// 单独购买1次下载报告
-						userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
-						if (userList.get(0).getExpirationTime() != null
-								&& currentTime.before(userList.get(0).getExpirationTime())) {
-							expirationTime = Calendar.getInstance();
-							expirationTime.setTime(userList.get(0).getExpirationTime());
-							expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-						}
-						userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-					}
-					Integer row = userMapper.updateById(userList.get(0));
-					System.err.println("修改行数：" + row);
-				}
+				String out_trade_no = map.get("out_trade_no");
+				//处理业务
+				processingService(out_trade_no,request);				
 			} else {
 				resXml = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>"
 						+ "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
@@ -354,8 +259,7 @@ public class IPayServiceImpl implements IPayService {
 			Subject subject = SecurityUtils.getSubject();
 			if (subject.isAuthenticated()) {
 				Integer uid = (Integer) subject.getSession().getAttribute("uid");
-				List<Order> orderList = orderMapper
-						.select("out_trade_no = '" + outTradeNo + "' AND uid = '" + uid + "'", null, null, null);
+				List<Order> orderList = orderMapper.select("out_trade_no = '" + outTradeNo + "' AND uid = '" + uid + "'", null, null, null);
 				if (orderList.isEmpty()) {
 					return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
 				} else {
@@ -392,81 +296,80 @@ public class IPayServiceImpl implements IPayService {
 
 	@Override
 	public void alipay(HttpServletRequest request, HttpServletResponse response, String body, String outTradeNo) throws Exception {
-		//构造client
-		CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
-		certAlipayRequest.setServerUrl(zFBpayConfig.getGatewayUrl());
-		certAlipayRequest.setAppId(zFBpayConfig.getApp_id());
-		certAlipayRequest.setPrivateKey(zFBpayConfig.getMerchant_private_key());
-		certAlipayRequest.setFormat("json");
-		certAlipayRequest.setCharset(zFBpayConfig.getCharset());
-		certAlipayRequest.setSignType(zFBpayConfig.getSign_type());
-		certAlipayRequest.setCertPath(zFBpayConfig.getApp_cert_path());
-		certAlipayRequest.setAlipayPublicCertPath(zFBpayConfig.getAlipay_cert_path());
-		certAlipayRequest.setRootCertPath(zFBpayConfig.getAlipay_root_cert_path());
-		System.err.println("App_cert_path() : " + zFBpayConfig.getApp_cert_path());
-		System.err.println("Alipay_cert_path() : " + zFBpayConfig.getAlipay_cert_path());
-		System.err.println("Alipay_root_cert_path() : " + zFBpayConfig.getAlipay_root_cert_path());
-		System.err.println("RootCertPath : " + certAlipayRequest.getRootCertPath());
-		System.err.println("CertPath : " + certAlipayRequest.getCertPath());
-		System.err.println("AlipayPublicCertPath : " + certAlipayRequest.getAlipayPublicCertPath());
-		DefaultAlipayClient alipayClient = new DefaultAlipayClient(certAlipayRequest);
-		//获得初始化的AlipayClient
-		//AlipayClient alipayClient = new DefaultAlipayClient(zFBpayConfig.getGatewayUrl(), zFBpayConfig.getApp_id(), zFBpayConfig.getMerchant_private_key(), "json", zFBpayConfig.getCharset(), zFBpayConfig.getAlipay_public_key(), zFBpayConfig.getSign_type());
-		//设置请求参数
-		AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-		alipayRequest.setReturnUrl(zFBpayConfig.getReturn_url());
-		alipayRequest.setNotifyUrl(zFBpayConfig.getNotify_url());
-		AdminSystem adminSystem = userRoleMapper.queryAdminSystemByName(body);
-		Integer uid = (Integer)SecurityUtils.getSubject().getSession().getAttribute("uid");
-		//商户订单号，商户网站订单系统中唯一订单号，必填
-		String out_trade_no = outTradeNo + "_" + uid + "_" + adminSystem.getSid();
-		//付款金额，必填
-		String total_amount = adminSystem.getSysnub();
-		//订单名称，必填
-		String subject = adminSystem.getSyscommet();
-		//商品描述，可空
-		body = adminSystem.getSyscommet();
-		
-		alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
-				+ "\"total_amount\":\""+ total_amount +"\"," 
-				+ "\"subject\":\""+ subject +"\"," 
-				+ "\"body\":\""+ body +"\"," 
-				+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-		
-		//若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
-		//alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
-		//		+ "\"total_amount\":\""+ total_amount +"\"," 
-		//		+ "\"subject\":\""+ subject +"\"," 
-		//		+ "\"body\":\""+ body +"\"," 
-		//		+ "\"timeout_express\":\"10m\"," 
-		//		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-		//请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
-		
-		//请求
-		String result = alipayClient.pageExecute(alipayRequest).getBody();
-		System.err.println("result : " + result);
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		//输出
-		out.println(result);
+		try {
+			//构造client
+			CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
+			certAlipayRequest.setServerUrl(zFBpayConfig.getGatewayUrl());
+			certAlipayRequest.setAppId(zFBpayConfig.getApp_id());
+			certAlipayRequest.setPrivateKey(zFBpayConfig.getMerchant_private_key());
+			certAlipayRequest.setFormat("json");
+			certAlipayRequest.setCharset(zFBpayConfig.getCharset());
+			certAlipayRequest.setSignType(zFBpayConfig.getSign_type());
+			certAlipayRequest.setCertPath(zFBpayConfig.getApp_cert_path());
+			certAlipayRequest.setAlipayPublicCertPath(zFBpayConfig.getAlipay_cert_path());
+			certAlipayRequest.setRootCertPath(zFBpayConfig.getAlipay_root_cert_path());		
+			DefaultAlipayClient alipayClient = new DefaultAlipayClient(certAlipayRequest);
+			//获得初始化的AlipayClient
+			//AlipayClient alipayClient = new DefaultAlipayClient(zFBpayConfig.getGatewayUrl(), zFBpayConfig.getApp_id(), zFBpayConfig.getMerchant_private_key(), "json", zFBpayConfig.getCharset(), zFBpayConfig.getAlipay_public_key(), zFBpayConfig.getSign_type());
+			//设置请求参数
+			AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+			alipayRequest.setReturnUrl(zFBpayConfig.getReturn_url());
+			alipayRequest.setNotifyUrl(zFBpayConfig.getNotify_url());
+			AdminSystem adminSystem = userRoleMapper.queryAdminSystemByName(body);
+			Integer uid = (Integer)SecurityUtils.getSubject().getSession().getAttribute("uid");
+			//商户订单号，商户网站订单系统中唯一订单号，必填
+			String out_trade_no = outTradeNo + "_" + uid + "_" + adminSystem.getSid();
+			//付款金额，必填
+			String total_amount = adminSystem.getSysnub();
+			//订单名称，必填
+			String subject = adminSystem.getSyscommet();
+			//商品描述，可空
+			body = adminSystem.getSyscommet();
+			
+			alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
+					+ "\"total_amount\":\""+ total_amount +"\"," 
+					+ "\"subject\":\""+ subject +"\"," 
+					+ "\"body\":\""+ body +"\"," 
+					+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+			
+			//若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
+			//alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
+			//		+ "\"total_amount\":\""+ total_amount +"\"," 
+			//		+ "\"subject\":\""+ subject +"\"," 
+			//		+ "\"body\":\""+ body +"\"," 
+			//		+ "\"timeout_express\":\"10m\"," 
+			//		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+			//请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
+			
+			//请求
+			String result = alipayClient.pageExecute(alipayRequest).getBody();
+			System.err.println("result : " + result);
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			//输出
+			out.println(result);
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：支付宝支付异常 错误信息: " + e);
+		}
+
 	}
 
 	@Override
-	public String aliNotifyUrl(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, String> params = new HashMap<String, String>();
-		Map<String, String[]> requestParams = request.getParameterMap();
-		for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();){
-			String name = (String) iter.next();
-			String[] values = (String[]) requestParams.get(name);
-			String valueStr = "";
-			for (int i = 0; i < values.length; i++){
-				valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
-			}
-			// 乱码解决，这段代码在出现乱码时使用
-			// valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-			params.put(name, valueStr);
-		}				
-		try{		
+	public String aliNotifyUrl(HttpServletRequest request, HttpServletResponse response) {		
+		try{	
+			Map<String, String> params = new HashMap<String, String>();
+			Map<String, String[]> requestParams = request.getParameterMap();
+			for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();){
+				String name = (String) iter.next();
+				String[] values = (String[]) requestParams.get(name);
+				String valueStr = "";
+				for (int i = 0; i < values.length; i++){
+					valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+				}
+				// 乱码解决，这段代码在出现乱码时使用
+				// valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+				params.put(name, valueStr);
+			}				
 			//boolean signVerified = AlipaySignature.rsaCheckV1(params, zFBpayConfig.getAlipay_public_key(),zFBpayConfig.getCharset(),zFBpayConfig.getSign_type());
 			boolean signVerified =  AlipaySignature.rsaCertCheckV1(params, zFBpayConfig.getAlipay_cert_path(), zFBpayConfig.getCharset(), zFBpayConfig.getSign_type());
 			System.err.println("signVerified : " + signVerified);
@@ -480,109 +383,14 @@ public class IPayServiceImpl implements IPayService {
 			 * 4、验证app_id是否为该商户本身。
 			 */
 			if (signVerified){// 验证成功
-				Date currentTime = new Date();
 				// 商户订单号
 				String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
 				// 交易状态
 				String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");				
 				if (trade_status.equals("TRADE_SUCCESS")){
 					logger.info("支付宝回调签名认证成功");	
-					// 订单详情
-					String[] detail = out_trade_no.split("_");
-					System.err.println(detail[0]+ " " + detail[1] + " " + detail[2]);
-					// VIP套餐
-					AdminSystem adminSystem = userRoleMapper.queryAdminSystemById(detail[2]);
-					Order order = new Order();
-					order.setUid(Integer.valueOf(detail[1]));
-					order.setOutTradeNo(detail[0]);
-					order.setRechargeMoney(Double.valueOf(adminSystem.getSysnub()));
-					order.setBody(adminSystem.getSyscommet());
-					order.setCreateTime(currentTime);
-					orderMapper.insert(order);
-					List<User> userList = userMapper.select(" id = '" + detail[1] + "'", null, null, null);
-					System.err.println("userList: " + userList);
-					if (!userList.isEmpty()) {
-						Calendar expirationTime = Calendar.getInstance();
-						expirationTime.setTime(currentTime);
-						expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-						if ("VIPRECHAARGE".equals(adminSystem.getSysname())) {// vip充值
-							System.err.println("获得VIP角色");
-							// 获得VIP角色
-							Role role = userRoleMapper.queryRoleBySystemName("SYSTEMVIP");
-							AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-							if(uSystem == null){
-								if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-									expirationTime = Calendar.getInstance();
-									expirationTime.setTime(userList.get(0).getExpirationTime());
-									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-								}
-								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-							}else{
-								if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
-									userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
-									userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
-									userList.get(0).setDownloadCount(9);// 新增9次下载报告次数
-									userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-								} else {// vip续费
-									if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-										expirationTime = Calendar.getInstance();
-										expirationTime.setTime(userList.get(0).getExpirationTime());
-										expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-									}
-									userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
-									userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-								}
-							}
-							
-						} else if ("COUNSELORRECHAARGE".equals(adminSystem.getSysname())) {// 咨询师充值
-							// 获得咨询师角色
-							Role role = userRoleMapper.queryRoleBySystemName("SYSTEMCOUNSELOR");
-							AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
-							if(uSystem == null){
-								if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-									expirationTime = Calendar.getInstance();
-									expirationTime.setTime(userList.get(0).getExpirationTime());
-									expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-								}
-								userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
-								userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-							}else{
-								if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
-									expirationTime = Calendar.getInstance();
-									expirationTime.setTime(currentTime);
-									expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
-									userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-									userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-									userList.get(0).setDownloadCount(100);// 新增100次下载报告次数
-									userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-								} else {// 咨询师续费
-									if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
-										expirationTime = Calendar.getInstance();
-										expirationTime.setTime(userList.get(0).getExpirationTime());
-										expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-									}
-									userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
-									userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
-									userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
-									userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
-								}
-							}						
-						} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
-							System.err.println("单独购买1次下载报告");
-							// 单独购买1次下载报告
-							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
-							if (userList.get(0).getExpirationTime() != null
-									&& currentTime.before(userList.get(0).getExpirationTime())) {
-								expirationTime = Calendar.getInstance();
-								expirationTime.setTime(userList.get(0).getExpirationTime());
-								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
-							}
-							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
-						}
-						Integer row = userMapper.updateById(userList.get(0));
-						System.err.println("修改行数：" + row);
-					}	
+					//处理业务
+					processingService(out_trade_no,request);
 					return "success";
 				}else{
 					return "fail";
@@ -594,6 +402,7 @@ public class IPayServiceImpl implements IPayService {
 			}
 		} catch (Exception e){		
 			e.printStackTrace();
+			logger.error("访问路径：" + request.getRequestURI() + "操作：支付宝支付回调异常 错误信息: " + e);
 			return "fail";
 		}
 		
@@ -605,4 +414,109 @@ public class IPayServiceImpl implements IPayService {
 		return "web/public/pay_success";
 	}
 
+	private void processingService(String out_trade_no, HttpServletRequest request){
+		try {
+			Date currentTime = new Date();
+			// 订单详情
+			String[] detail = out_trade_no.split("_");
+			System.err.println(detail[0]+ " " + detail[1] + " " + detail[2]);
+			// VIP套餐
+			AdminSystem adminSystem = userRoleMapper.queryAdminSystemById(detail[2]);
+			Order order = new Order();
+			order.setUid(Integer.valueOf(detail[1]));
+			order.setOutTradeNo(detail[0]);
+			order.setRechargeMoney(Double.valueOf(adminSystem.getSysnub()));
+			order.setBody(adminSystem.getSyscommet());
+			order.setCreateTime(currentTime);
+			orderMapper.insert(order);
+			List<User> userList = userMapper.select(" id = '" + detail[1] + "'", null, null, null);
+			System.err.println("userList: " + userList);
+			if (!userList.isEmpty()) {
+				Calendar expirationTime = Calendar.getInstance();
+				expirationTime.setTime(currentTime);
+				expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
+				if ("VIPRECHAARGE".equals(adminSystem.getSysname())) {// vip充值
+					System.err.println("获得VIP角色");
+					// 获得VIP角色
+					Role role = userRoleMapper.queryRoleBySystemName("SYSTEMVIP");
+					AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
+					if(uSystem == null){
+						if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+							expirationTime = Calendar.getInstance();
+							expirationTime.setTime(userList.get(0).getExpirationTime());
+							expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+						}
+						userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
+						userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+					}else{
+						if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
+							userList.get(0).setRid(role.getRoleId());// 成为个人vip用户
+							userList.get(0).setAuthority(role.getRoleAuthority());// 个人vip授权
+							userList.get(0).setDownloadCount(9);// 新增9次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+						} else {// vip续费
+							if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+								expirationTime = Calendar.getInstance();
+								expirationTime.setTime(userList.get(0).getExpirationTime());
+								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+							}
+							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+						}
+					}
+					
+				} else if ("COUNSELORRECHAARGE".equals(adminSystem.getSysname())) {// 咨询师充值
+					// 获得咨询师角色
+					Role role = userRoleMapper.queryRoleBySystemName("SYSTEMCOUNSELOR");
+					AdminSystem uSystem = userRoleMapper.queryAdminSystemByRoleId(userList.get(0).getRid());
+					if(uSystem == null){
+						if (userList.get(0).getExpirationTime() != null && currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+							expirationTime = Calendar.getInstance();
+							expirationTime.setTime(userList.get(0).getExpirationTime());
+							expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+						}
+						userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 9);// 新增9次下载报告次数
+						userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+					}else{
+						if ("SYSTEMUSER".equals(uSystem.getSysname())) {// 普通用户升级成为vip
+							expirationTime = Calendar.getInstance();
+							expirationTime.setTime(currentTime);
+							expirationTime.add(Calendar.YEAR, 1);// 1年后后过期
+							userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
+							userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
+							userList.get(0).setDownloadCount(100);// 新增100次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+						} else {// 咨询师续费
+							if (currentTime.before(userList.get(0).getExpirationTime())) {// 未过期
+								expirationTime = Calendar.getInstance();
+								expirationTime.setTime(userList.get(0).getExpirationTime());
+								expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+							}
+							userList.get(0).setRid(role.getRoleId());// 成为个人咨询师
+							userList.get(0).setAuthority(role.getRoleAuthority());// 个人咨询师授权
+							userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 100);// 新增100次下载报告次数
+							userList.get(0).setExpirationTime(expirationTime.getTime());// 增加1年后后过期
+						}
+					}						
+				} else if ("DOWNLOADRECHAARGE".equals(adminSystem.getSysname())) {
+					System.err.println("单独购买1次下载报告");
+					// 单独购买1次下载报告
+					userList.get(0).setDownloadCount(userList.get(0).getDownloadCount() + 1);
+					if (userList.get(0).getExpirationTime() != null
+							&& currentTime.before(userList.get(0).getExpirationTime())) {
+						expirationTime = Calendar.getInstance();
+						expirationTime.setTime(userList.get(0).getExpirationTime());
+						expirationTime.add(Calendar.YEAR, 1);// 增加1年过期时间
+					}
+					userList.get(0).setExpirationTime(expirationTime.getTime());// 1年后后过期
+				}
+				Integer row = userMapper.updateById(userList.get(0));
+				System.err.println("修改行数：" + row);
+			}	
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：支付回调处理充值业务异常 错误信息: " + e);
+			throw new RuntimeException();
+		}
+		
+	}
 }

@@ -3,7 +3,9 @@ package cn.hqtzytb.service.impl;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.UserFeature;
+import cn.hqtzytb.entity.UserResultReport;
 import cn.hqtzytb.mapper.UserFeatureMapper;
+import cn.hqtzytb.mapper.UserResultReportMapper;
 import cn.hqtzytb.service.IXgkSubjectService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -32,8 +34,9 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
 	private  static final Logger logger = LogManager.getLogger(IXgkSubjectServiceImpl.class.getName());
     @Autowired
     private UserFeatureMapper userFeatureMapper;
+    @Autowired
+    private UserResultReportMapper userResultReportMapper;
     
-
     public ResponseResult<Void> addPotentialAnalysis(String evaluationFraction, HttpServletRequest request) {
     	try {
     		Session session = SecurityUtils.getSubject().getSession();

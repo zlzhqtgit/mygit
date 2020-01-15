@@ -375,14 +375,20 @@ public class IUserServerImpl implements IUserServer {
 				Integer uid = (Integer) session.getAttribute("uid");
 				User user = userMapper.select(" id = '" + uid + "' ", null, null, null).get(0);
 				session.setAttribute("user", user);// 用户信息
-				List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid + "' ", null, null,
-						null);
+				List<UserResultReport> reportList = userResultReportMapper.select(" uid = '" + uid + "' ", null, null, null);
 				if (!reportList.isEmpty()) {
 					session.setAttribute("result_report", reportList.get(0));// 测评结果报告
 					session.setAttribute("assignment", reportList.get(0).getStatus());// 是否存在测评任务
+					if ("1".equals(reportList.get(0).getStatus())) {
+						session.setAttribute("whether_done", 1);// 已做过选科指导
+					} else {
+						session.setAttribute("whether_done", 0);// 未完成选科指导
+					}
+					session.setAttribute("resule_report", reportList.get(0));// 测评结果报告
 				} else {
 					session.setAttribute("assignment", 3);// 不存在测评任务
 				}
+
 				List<UserFeature> userFeatureList = userFeatureMapper.select(" uid = '" + uid + "' ", null, null, null);
 				for (UserFeature userFeature : userFeatureList) {
 					System.err.println("userFeature: " + userFeature);
@@ -398,17 +404,6 @@ public class IUserServerImpl implements IUserServer {
 					if (Constants.EVALUATION_TYPE_MBTI_ANALYSIS.equals(userFeature.getEvaluationType())) {
 						session.setAttribute(Constants.EVALUATION_TYPE_MBTI_ANALYSIS, userFeature);// MBTI测评
 					}
-				}
-
-				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "' ", null,
-						null, null);
-				if (!resultReportList.isEmpty()) {
-					if ("1".equals(resultReportList.get(0).getStatus())) {
-						session.setAttribute("whether_done", 1);// 已做过选科指导
-					} else {
-						session.setAttribute("whether_done", 0);// 已做过选科指导
-					}
-					session.setAttribute("resule_report", resultReportList.get(0));// 测评结果报告
 				}
 
 				if (Constants.HQT_COMPANY_NUMBER.equals(user.getCompanyNumber())) {// 好前途平台用户
@@ -502,8 +497,7 @@ public class IUserServerImpl implements IUserServer {
 		try {
 			if (subject.isAuthenticated()) {
 				Integer uid = (Integer) subject.getSession().getAttribute("uid");
-				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "'", null,
-						null, null);
+				List<UserResultReport> resultReportList = userResultReportMapper.select(" uid = '" + uid + "'", null, null, null);
 				if (!resultReportList.isEmpty()) {
 					TaskDetails task = new TaskDetails();
 					task.setTaskId(taskId);
