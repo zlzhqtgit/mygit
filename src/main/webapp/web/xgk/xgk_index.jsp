@@ -70,9 +70,9 @@
 			<div class="swiper-container">
 				<!-- Swiper -->
 			    <div class="swiper-wrapper">
-				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner_login1.png"/></a></div>
-				   	<div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner2.jpg"/></a></div>
-				    <div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/banner3.jpg"/></a></div>
+				    <div class="swiper-slide"><a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do"><img class="" src="${pageContext.request.contextPath}/img/xgk/banner_login1.png"/></a></div>
+				   	<div class="swiper-slide"><a href="javascript:;"><img class="" src="${pageContext.request.contextPath}/img/xgk/banner2.jpg"/></a></div>
+				    <div class="swiper-slide"><a href="javascript:;"><img class="" src="${pageContext.request.contextPath}/img/xgk/banner3.jpg"/></a></div>
 				   <%--<div class="swiper-slide"><a href=""><img class="" src="${pageContext.request.contextPath}/img/xgk/timg.jpg"/></a></div> --%>
 			    </div>
 			    <!-- Add Pagination -->
@@ -80,7 +80,7 @@
 			    <!-- Add Arrows -->
 			    <div class="swiper-button-next"></div>
 			    <div class="swiper-button-prev"></div>
-			</div>
+			</div>			
 		</banner>
 		<main class="index">
 			<section class="container">
@@ -99,19 +99,19 @@
 							<li class="">
 								<div class="">
 									<div class="fontwei"> 1 </div>
-									<div class=""> MBTI职业性格测评 </div>
+									<div class=""> 成绩分析 </div>
 								</div>
 							</li>
 							<li class="">
 								<div class="">
 									<div class="fontwei"> 2 </div>
-									<div class=""> MBTI职业性格测评 </div>
+									<div class=""> 学科潜能测评 </div>
 								</div>
 							</li>
 							<li class="">
 								<div class="">
 									<div class="fontwei"> 3 </div>
-									<div class=""> MBTI职业性格测评 </div>
+									<div class=""> 霍兰德职业兴趣测评 </div>
 								</div>
 							</li>
 							<li class="">

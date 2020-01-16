@@ -50,7 +50,7 @@
 														<div class="pull-left">
 															<div class="padding-side"><h5 class="fontwei">志愿填报群</h5></div>
 															<div class="text-left">
-																<p class="">QQ群1：6424323</p>
+																<p class="">QQ群1：  </p>
 																<p class="">QQ群2：5453433</p>
 																<p class="">QQ群3：2456354(已满)</p>
 																<p class="">QQ群4：3321354(已满)</p>
@@ -132,16 +132,18 @@
 		$('.search_slideDown').css("left",-offsetLeft)
 		
 	})
-	var options='';
+	var options='';	
 	for (var i=0;i<province.length;i++) {		
 		if(province[i].name.search('${province}') != -1){
-			options+='<option value="'+province[i].name+'">'+province[i].name+'</option>'
+			console.log('${province}');
+			console.log("当前省份：" + province[i].name);
+			options+='<option value="' + province[i].name + '" selected="selected">' + province[i].name + '</option>';
 		}else{
-			options+='<option value="'+province[i].name+'">'+province[i].name+'</option>'
+			options+='<option value="' + province[i].name + '">'+province[i].name + '</option>';
 		}		
 	}
 	$("#province").html(options);
-	$("#province").find("option").first().attr("selected","true");
+	//$("#province").find("option").first().attr("selected","true");
 	$("#province").change(function() {
 		console.log($(this).val())
 	})
