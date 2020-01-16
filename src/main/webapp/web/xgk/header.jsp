@@ -135,8 +135,6 @@
 	var options='';	
 	for (var i=0;i<province.length;i++) {		
 		if(province[i].name.search('${province}') != -1){
-			console.log('${province}');
-			console.log("当前省份：" + province[i].name);
 			options+='<option value="' + province[i].name + '" selected="selected">' + province[i].name + '</option>';
 		}else{
 			options+='<option value="' + province[i].name + '">'+province[i].name + '</option>';

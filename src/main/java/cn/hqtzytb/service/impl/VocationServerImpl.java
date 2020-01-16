@@ -94,6 +94,7 @@ public class VocationServerImpl implements IVocationServer {
 				List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer)uid + "' AND e_type = '2'", null, null, null);
 				vocationList.get(0).setEnshrineList(enshrineList);
 			}
+			System.err.println("vocationList" + vocationList);
 			return new ResponseResult<>(ResponseResult.STATE_OK,Constants.RESULT_MESSAGE_SUCCESS,vocationList);
 		} catch (Exception e) {
 			logger.error("模块： 职业库  操作：搜索职业库信息异常    状态：FAIL!" + e);

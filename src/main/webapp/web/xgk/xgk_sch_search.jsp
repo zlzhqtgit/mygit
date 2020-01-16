@@ -26,12 +26,12 @@
 		<main class="sch_search">
 			<section class="sch_search container">
 				<div style="padding: 1em 100px 1em;">
-				    <form class="bs-example bs-example-form" role="form" id="universities_name">
+				    <div class="bs-example bs-example-form"  id="universities_name">
 		    			<div class="input-group input-group-lg">
-			            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
-			            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" >
+				            <input type="text" class="form-control" placeholder="搜索你感兴趣的学校" id="search_info">
+				            <span class="input-group-addon" style="cursor: pointer;" onclick="schoolSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>
 		        		</div>
-				    </form>
+				    </div>
 				</div>
 
 				<div class="panel panel-default">
@@ -480,13 +480,19 @@
 							$("#sch_query_select").addClass("cancel disabled")
 						}
 					}
+ 				$('#search_info').bind('keypress',function(event){
+ 					if(event.keyCode == "13"){
+ 						schoolSearch(1);							
+ 					}
+ 				});	
  				
 				//院校查询
 				var where = "";
-				function schoolSearch(e){
+				function schoolSearch(e){					
 					if (e == 1){
 						where = "where=";
-						var school_name = $("form input.form-control").val();
+						var school_name = $("#search_info").val();
+						console.log(school_name);
 						if (school_name == ""){
 							layer.msg('请输入您感兴趣的学校名字！', {icon: 5});
 							return ;

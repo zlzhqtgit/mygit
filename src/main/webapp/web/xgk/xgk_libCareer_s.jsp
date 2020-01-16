@@ -28,12 +28,12 @@
 			<section class="sch_search container">
 				
 				<div style="padding: 1em 100px 1em;">
-				    <form class="bs-example bs-example-form" role="form">
-				        <div class="input-group input-group-lg" onclick="vocationSearch(1)">
-				            <span class="input-group-addon"><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            		<input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">				            			            
+				    <div class="bs-example bs-example-form" >
+				        <div class="input-group input-group-lg" >
+				            <input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">
+				            <span class="input-group-addon" onclick="vocationSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>			            			            
 				        </div>
-				    </form>
+				    </div>
 				</div>
 
 				<div class="flex_jc_sb">
@@ -161,6 +161,12 @@
 			</section>
 			
 	<script type="text/javascript">
+		$('#search_info').bind('keypress',function(event){
+			if(event.keyCode == "13"){
+				vocationSearch(1);							
+			}
+		});
+		
 		//职业信息查询
    		function vocationSearch(e){
    			var industry = "";
@@ -171,18 +177,18 @@
 				industry = industry == "全部" ? "" : industry;
     			education = education == "全部" ? "" : education;
 			}else{
-				industry = $("#search_info").val();
-				console.log(industry)
+				industry = $("#search_info").val();				
 			}
    			var data = "industry=" + industry + "&education=" + education;
+   			console.log("data : " + data)
    			$.ajax({
 				url: "${pageContext.request.contextPath}/voc/xgk_voc_query.do",
 				data: data,
 				type: "POST",
 				dataType: "json",
 				success: function (obj) {
-					console.log(obj.data);
 					var data = obj.data;
+					console.log(data);
 					var vocationList = "";
 					for(var i=0; i<data.length; i++){
 						vocationList += '<li class="list-group-item width100">';
@@ -192,7 +198,6 @@
 						vocationList += '<div class="text-center like">';
 						var like = false;
 						var eId = "";
-						console.log(i +''+like);
 						if(data[0].enshrineList != null){
 							for(var j=0; j<data[0].enshrineList.length; j++){									
 								if(data[0].enshrineList[j].eCode == data[i].vocationId){
@@ -229,14 +234,14 @@
    		}
    					
 		//查询职业详情	
-    		function search_detail(e){
-    			 var vocationId = $(e).attr('id');
-    			 location.href = "${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=" + vocationId;
-    		}
+    	function search_detail(e){
+    		 var vocationId = $(e).attr('id');
+    		 location.href = "${pageContext.request.contextPath}/voc/xgk_voc_detail.do?vocationId=" + vocationId;
+    	}
 		
-    		//职业列表初始化
-    		var industry_name =  JSON.parse('${industry_name}');
-    		var industry_list = '<dd><a class="active" href="javascript:;">全部</a></dd>';
+   		//职业列表初始化
+    	var industry_name =  JSON.parse('${industry_name}');
+    	var industry_list = '<dd><a class="active" href="javascript:;">全部</a></dd>';
 		for(var i=0; i<industry_name.length; i++){
 			industry_list += '<dd><a href="javascript:;">' + industry_name[i] + '</a></dd>';
 		}
@@ -275,10 +280,8 @@
 	    				dataType:"json",
 	    				success:function(obj){
 	    					if(obj.state == 0){
-	    						console.log(obj.message);
 	    						layer.msg(obj.message,{icon:2,time:1000});
 	    					}else{
-	    						console.log(obj.message);
 	    						$(obj).attr("id",obj.data.eId);
 	    						layer.msg(obj.message,{icon:6,time:1000});
 	    						
@@ -288,7 +291,6 @@
 					}		
 	    		}
 		     function unlove(obj){
-		    	 	console.log("取消喜欢")
 	    			if($(obj).attr("id") != ''){					    			
 		    			$.ajax({
 		    				url: "${pageContext.request.contextPath}/ens/hqt_delete_enshrine.do",
@@ -297,10 +299,8 @@
 		    				dataType:"json",
 		    				success:function(obj){
 		    					if(obj.state == 0){
-		    						console.log(obj.message);
 		    						layer.msg(obj.message,{icon:2,time:1000});
 		    					}else{
-		    						console.log(obj.message);
 		    						layer.msg(obj.message,{icon:6,time:1000});
 		    					}
 		    				}	

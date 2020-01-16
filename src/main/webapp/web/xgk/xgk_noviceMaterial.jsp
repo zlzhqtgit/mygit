@@ -92,7 +92,7 @@
 				</li>
 				<li>
 					<div class="">
-						<a href="${pageContext.request.contextPath}/school/xgk_school_search.do">高校专业</a>
+						<a href="${pageContext.request.contextPath}/school/xgk_school_search.do" >高校专业</a>
 						<div class="sub_nav">
 							<div class="apart_line"><img src="${pageContext.request.contextPath}/img/xgk/apart1.png" class="img-responsive"/></div>
 							<div class="third_apart">
@@ -114,4 +114,19 @@
 		<c:import url="../public/side_right.jsp"></c:import>
 		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
+	<style type="text/css">
+		.course_navlist >li>div>a {
+	    display: inline-block;
+	    width: 100%;
+	    height: 100%;
+	    line-height: 86.4px;
+	    color: #000000;
+	    transition: all 0.3s ease-out 0s;
+	    font-weight: bold;
+	    font-size: 15px;
+    }
+    .course_navlist >li>div>span{
+    	
+    }
+	</style>	
 </html>

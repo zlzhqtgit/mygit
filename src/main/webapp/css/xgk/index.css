@@ -2135,6 +2135,7 @@ table.combile_xuank{
 	width: 5em;
 	font-size: 14px;
 	line-height: 1em;
+	color:#000000;
 }
 .lc{
 	left: -2em;
@@ -2186,6 +2187,8 @@ table.combile_xuank{
 .single_item>a>div>span{
 	width: 4em;
 	font-size: 14px;
+	color:#000000;
+	font-weight: bold;
 }
 .course_navlist >li:nth-of-type(4) .single_item>a{
 	background-position: -.5em -17.4em;
@@ -2281,7 +2284,7 @@ table.combile_xuank{
 .series_item:nth-of-type(2) .series_item_titcon{
 	background: url(../../img/xgk/vip_bg2.jpg) no-repeat;
 	background-position: 0 -5em;
-	background-size: 182%;
+	background-size: 182%;	
 }
 .vip_icon_tit{
 	display: inline-block;
