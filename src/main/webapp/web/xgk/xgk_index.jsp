@@ -262,9 +262,9 @@
 						$('#tip1').text('手机号码有误，请重新输入');
 				    } else if (pwd=='') {
 						$('#tip2').text('密码不能为空');
-					} else if(!(/^(\w){6,20}$/).test(pwd)){
+					/* } else if(!(/^(\w){6,20}$/).test(pwd)){
 						//最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
-						$('#tip2').text('密码只能输入6-20个字母、数字、下划线_ ');		
+						$('#tip2').text('密码只能输入6-20个字母、数字、下划线_ ');	 */	
 					}else{
 						var url = "${pageContext.request.contextPath}/user/xgk_userLogin.do";
 						var phone=$("#mobile").val();

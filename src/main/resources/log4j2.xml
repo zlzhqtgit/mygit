@@ -5,10 +5,9 @@
 	<!-- 文件路径 -->
 	<properties>
 		<!--设置日志在硬盘上输出的目录${log4j:configParentLocation}使用此查找将日志文件放在相对于log4j配置文件的目录中 -->
-		 <!--<property name="Log_Home">${web:rootDir}/hqtxgk_log</property>-->
-		<property name="Log_Home">D:/hqtzytb_logs</property>
-		<Property name="patternLayout">[%d{yyyy-MM-dd HH:mm:ss,SSS} %-10r %-5p
-			%class{36}.%M @%L %m]%n</Property>
+		<property name="Log_Home">${web:rootDir}/hqtxgk_log</property>
+		<!-- <property name="Log_Home">D:/hqtzytb_logs</property> -->
+		<Property name="patternLayout">[%d{yyyy-MM-dd HH:mm:ss,SSS} %-10r %-5p %class{36}.%M @%L %m]%n</Property>
 	</properties>
 
 	<!--先定义所有的appender -->
@@ -43,14 +42,11 @@
 			filePattern="${Log_Home}/debug/$${date:yyyy-MM}/debug-%d{MM-dd-yyyy}-%i.log.gz">
 			<PatternLayout pattern="${patternLayout}" />
 			<filters>
-				<ThresholdFilter level="info" onMatch="DENY"
-					onMismatch="NEUTRAL" />
-				<ThresholdFilter level="debug" onMatch="ACCEPT"
-					onMismatch="NEUTRAL" />
+				<ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL" />
+				<ThresholdFilter level="debug" onMatch="ACCEPT"	onMismatch="NEUTRAL" />
 			</filters>
 			<Policies>
-				<TimeBasedTriggeringPolicy modulate="true"
-					interval="1" />
+				<TimeBasedTriggeringPolicy modulate="true" interval="1" />
 				<SizeBasedTriggeringPolicy size="10MB" />
 			</Policies>
 		</RollingFile>
@@ -60,11 +56,9 @@
 			immediateFlush="true"
 			filePattern="${Log_Home}/error/$${date:yyyy-MM}/error-%d{MM-dd-yyyy}-%i.log.gz">
 			<PatternLayout pattern="${patternLayout}" />
-			<ThresholdFilter level="error" onMatch="ACCEPT"
-				onMismatch="DENY" />
+			<ThresholdFilter level="error" onMatch="ACCEPT"	onMismatch="DENY" />
 			<Policies>
-				<TimeBasedTriggeringPolicy modulate="true"
-					interval="1" />
+				<TimeBasedTriggeringPolicy modulate="true" interval="1" />
 				<SizeBasedTriggeringPolicy size="10MB" />
 			</Policies>
 		</RollingFile>
