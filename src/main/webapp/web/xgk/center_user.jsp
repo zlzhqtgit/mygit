@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html>
@@ -181,12 +182,21 @@
 							</h4>
 							<shiro:hasPermission name="grzx_rw:query"> 
 								<div class="text-muted" >
-									<c:if test="${hqt_user == 0}">
-										<a href="javascript:;" onclick="open_task()">我的任务<span class="layui-badge">${task_count}</span></a>
-									</c:if>
+									<%-- <c:if test="${hqt_user == 0}"> --%>
+										<a href="javascript:;" onclick="open_task()">我的任务
+											<span class="layui-badge">
+												<c:if test="${task_count != null}">
+													${task_count}
+												</c:if>
+												<c:if test="${task_count == null}">
+													0
+												</c:if>
+											</span>
+										</a>
+									<%-- </c:if>
 									<c:if test="${hqt_user == 1}">
 										<a href="javascript:;">我的任务<span class="layui-badge-dot"></span></a>
-									</c:if>
+									</c:if> --%>
 								</div>
 							</shiro:hasPermission> 							
 						</div>
@@ -250,7 +260,8 @@
 										</div>                       
 										<div class="form-group">
 											<label for="pcNumber">身份证号：</label>
-											<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}"/>
+											<input id="pcNumber1" name="pcNumber1" type="text"  placeholder="请输入身份证号" value="" onfocus="getFocus()" onblur="lostFocus()"  />										
+											<input id="pcNumber" name="pcNumber" style="display:none" type="text" placeholder="请输入身份证号" value="" />										
 										</div>
 										<div class="form-group">
 											<label for="studentId">学号：</label>
@@ -717,7 +728,27 @@
 				</div>
 			</div>
 		</main>
-		<script type="text/javascript">
+	<script type="text/javascript">
+		//身份证号遮掩
+		var pcNumber = '${user.pcNumber}';
+		//截取字段
+		var capture = pcNumber.substring(6,15);
+		var pcNumber1 = pcNumber.replace(capture,"*********");
+		$("#pcNumber").val(pcNumber);
+		$("#pcNumber1").val(pcNumber1);
+		//获得焦点事件
+		function getFocus(){
+			$("#pcNumber1").val($("#pcNumber").val());
+		}
+		//失去焦点事件
+		function lostFocus(){
+			var pcNumber = $("#pcNumber1").val();
+			$("#pcNumber").val(pcNumber);
+			var capture = pcNumber.substring(6,15);
+			var pcNumber1 = pcNumber.replace(capture,"*********");
+			$("#pcNumber1").val(pcNumber1);
+		}
+		
 			/* function updatepassword(){
 				var demoInput = document.getElementById("password");
 				demoInput.type = "text";
@@ -871,6 +902,7 @@
 							   		 "&grade=" + $("#grade").val() + //年级
 							   	 	 "&className=" + $("#className").val() + //班级
 							   		 "&studentId=" + $("#studentId").val(); //学号
+							   console.log(data);
 							   $.ajax({
 									type: "POST",
 									url : "${pageContext.request.contextPath}/user/hqt_update_user.do",
@@ -878,16 +910,16 @@
 									datatype:'json',
 									success:function(obj){
 										if (obj.state == 0) {
-											layer.msg(obj.message,{icon:2,time:1000});
+											layer.alert(obj.message,{icon:2,time:2000});
 										}else{											
-											layer.alert(obj.message,{icon:1,time:1000});
+											layer.alert(obj.message,{icon:1,time:2000});
 											window.setTimeout(function() {window.location.reload(); },1000)																						
 										}
 									}
 								});
 						}
 					
-					</script>
+		</script>
 		<script type="text/javascript">
 			var options='';
 			for (var i=0;i<province.length;i++) {		

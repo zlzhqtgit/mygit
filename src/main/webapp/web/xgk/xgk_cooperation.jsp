@@ -187,12 +187,12 @@
 								<p class=""><i class="icon Hui-iconfont">&#xe6a7;</i></p>
 							</div>
 							<div class="border0">
-								<p class=""><i class="icon Hui-iconfont">&#xe6a7;</i></p>
-								<p class=""><i class="icon Hui-iconfont">&#xe6a7;</i></p>
-								<p class=""><i class="icon Hui-iconfont">&#xe6a7;</i></p>
-								<p class=""><i class="icon Hui-iconfont">&#xe6a7;</i></p>
-								<p class=""><i class="icon Hui-iconfont">&#xe6a7;</i></p>
-								<p class=""><i class="icon Hui-iconfont">&#xe6a7;</i></p>
+								<p class=""><i class="icon Hui-iconfont">&#xe6a6;</i></p>
+								<p class=""><i class="icon Hui-iconfont">&#xe6a6;</i></p>
+								<p class=""><i class="icon Hui-iconfont">&#xe6a6;</i></p>
+								<p class=""><i class="icon Hui-iconfont">&#xe6a6;</i></p>
+								<p class=""><i class="icon Hui-iconfont">&#xe6a6;</i></p>
+								<p class=""><i class="icon Hui-iconfont">&#xe6a6;</i></p>
 							</div>
 							<div class="item_label_wrap">
 								<div class="item_label fontwei">特惠</div>

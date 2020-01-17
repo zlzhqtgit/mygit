@@ -144,7 +144,8 @@
 				    
 				</div>
 				<p class="text-center margin_bot margin_top">
-						<input class="btn btn-primary fontwei begin_btn cancel disabled" type="button" value="开始查询" id="sch_query_select">
+					<input class="btn btn-primary fontwei begin_btn" onclick="schoolSearch(2)" type="button" value="开始查询" id="sch_query_select">
+						<!-- <input class="btn btn-primary fontwei begin_btn cancel disabled" type="button" value="开始查询" id="sch_query_select"> -->
 				</p>
 				<div class="panel panel-default" style="display: none" id="result_count">
 					<div class="panel_head padding-side2" id="page"><h4 class="fontwei">共找到<a>'+list.length+'</a>条结果</h4></div>
@@ -460,9 +461,9 @@
  				}
 
  				//判断查询按钮是否可以点击查询
- 				$(document).ready(function(){
+ 				/* $(document).ready(function(){
  					$("#search-ui li dl dd a").attr("onclick","trem()");
- 			     });
+ 			     }); 
  				function trem(){
 						var condition  = $("#search-ui li dl dd a.active");
 						var canQuery = false;
@@ -479,7 +480,7 @@
 							$("#sch_query_select").removeAttr("onclick");
 							$("#sch_query_select").addClass("cancel disabled")
 						}
-					}
+					}*/
  				$('#search_info').bind('keypress',function(event){
  					if(event.keyCode == "13"){
  						schoolSearch(1);							
@@ -492,7 +493,6 @@
 					if (e == 1){
 						where = "where=";
 						var school_name = $("#search_info").val();
-						console.log(school_name);
 						if (school_name == ""){
 							layer.msg('请输入您感兴趣的学校名字！', {icon: 5});
 							return ;
@@ -595,7 +595,7 @@
 												 "</div>" +
 												 //院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
 												 "<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
-												 "<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
+												 "<tr><td>隶属：<span>" + (list[i].belongTo == null ? "暂无数据" : list[i].belongTo) + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
 												 "</table></div>" +
 												 //[录取分表格   start]
 												 "<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
@@ -734,7 +734,7 @@
 											"</div>" +
 											//院校代码 + 录取概率 + 隶属 + 硕士点 + 博士点
 											"<table border='0' cellspacing='' cellpadding=''><tr><td> 院校代号：<span class='schCode'>" + list[i].universitiesCode + "</span></td><td> <div>录取概率：<span class='text-danger'>" + list[i].admissionProbability + "</span></div> </td></tr>" +
-											"<tr><td>隶属：<span>" + list[i].belongTo + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
+											"<tr><td>隶属：<span>" + (list[i].belongTo == null ? "暂无数据" : list[i].belongTo) + "</span></td><td><span class='masterNum'>" + master + "</span></td></tr>" +"<tr><td>院校类型：<span class='schType'>" + list[i].universitiesNature + "</span></td><td><span class='doctorNum'>" + doctor + "</span></td></tr>" +
 											"</table></div>" +
 											//[录取分表格   start]
 											"<table class='sch_slice' border='' cellspacing='' cellpadding=''>" +"<tr><th rowspan='2'>年份</th><th colspan='7'>录取分</th><th colspan='2'>计划人数</th></tr><tr><th>类型</th><th>最低分</th><th>平均分</th><th>最高分</th><th>投档线</th><th>线差</th><th>提档位次</th><th>计划人数</th><th>录取人数</th></tr>";
@@ -744,13 +744,11 @@
 										lists += "<tr><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>";
 									}else{
 										var universRelationList = list[i].universRelationList;
-										console.log(universRelationList);
 										for(var j=0; j<universRelationList.length;j++){
 											if(j>4){
 												break;
 											}
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;
-											console.log("collegeScoreLine:" + collegeScoreLine);
 											if(!$.isEmptyObject(collegeScoreLine)){												
 												if(collegeScoreLine.startsWith("[")){
 													var lines = JSON.parse(collegeScoreLine);

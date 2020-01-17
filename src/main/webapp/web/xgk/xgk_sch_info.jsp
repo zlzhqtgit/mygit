@@ -248,23 +248,31 @@
 			    					</h2>
 			    					<p class="">
 			    						<select id="ur_province_yxfsx" onchange="select_relation('yxfsx')" >
-			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">			    								
-			    									<option value="${item}">${item}</option>			    								
+			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">
+			    									<c:if test="${item != null}">
+			    										<option value="${item}">${item}</option>
+			    									</c:if>			    								
 			    							</c:forEach>
 				    					</select>
 				    					<select id="subject_type_yxfsx" onchange="select_relation('yxfsx')">
 			    							<c:forEach items="${typeOption}" var="item">
-			    								<option value="${item}" >${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}" >${item}</option>
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>
 				    					<select  id="ur_year_yxfsx" onchange="select_relation('yxfsx')">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="${item}">${item}</option>
+				    							<c:if test="${item != null}">
+				    								<option value="${item}">${item}</option>
+				    							</c:if>	
 			    							</c:forEach>
 				    					</select>
 				    					<select id="admission_batch_yxfsx" onchange="select_relation('yxfsx')">
 			    							<c:forEach items="${batchOption}" var="item">
-			    								<option value="${item}">${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>
+			    								</c:if>	
 			    							</c:forEach>
 				    					</select>
 			    					</p>
@@ -280,16 +288,13 @@
 			    							var admission_batch = $("#admission_batch_" + e + " option:selected").val();
 			    							var data = "universitiesCode=" + universities_code + "&urProvince=" + ur_province 
 			    									 + "&subjectType=" + subject_type + "&urYear=" + ur_year
-			    									 + "&admissionBatch=" + admission_batch + "&type=" + e; 
-			    							console.log(data);
+			    									 + "&admissionBatch=" + admission_batch + "&type=" + e;
 			    							$.ajax({
 			    								url: "${pageContext.request.contextPath}/school/xgk_university_relation.do",
 			    								data: data,
 			    								type: "POST",
 			    								dataType: "json",
 			    								success:function(obj){
-			    									console.log("e: " + e);
-			    									console.log("state: " + obj.state);
 			    									if(obj.state == 1){		
 			    										var content = "";
 		    											var list = obj.data;
@@ -488,23 +493,31 @@
 			    					</h2>
 			    					<p class="">
 			    					<select id="ur_province_zsjh" onchange="select_relation('zsjh')" >
-			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">			    								
-			    									<option value="${item}">${item}</option>			    								
+			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">		
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>		    								
 			    							</c:forEach>
 				    					</select>
 				    					<select id="subject_type_zsjh" onchange="select_relation('zsjh')">
 			    							<c:forEach items="${typeOption}" var="item">
-			    								<option value="${item}" >${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>
 				    					<select  id="ur_year_zsjh" onchange="select_relation('zsjh')">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="${item}">${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>
 				    					<select id="admission_batch_zsjh" onchange="select_relation('zsjh')">
 			    							<c:forEach items="${batchOption}" var="item">
-			    								<option value="${item}">${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>			    						
 			    					</p>
@@ -557,22 +570,30 @@
 			    					<p class="">
 			    						<select id="ur_province_zylqfsx" onchange="select_relation('zylqfsx')" >
 			    							<c:forEach items="${proviceOption}" var="item" varStatus="vs">			    								
-			    									<option value="${item}">${item}</option>			    								
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>			    								
 			    							</c:forEach>
 				    					</select>
 				    					<select id="subject_type_zylqfsx" onchange="select_relation('zylqfsx')">
 			    							<c:forEach items="${typeOption}" var="item">
-			    								<option value="${item}" >${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>
 				    					<select  id="ur_year_zylqfsx" onchange="select_relation('zylqfsx')">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="${item}">${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>
 				    					<select id="admission_batch_zylqfsx" onchange="select_relation('zylqfsx')">
 			    							<c:forEach items="${batchOption}" var="item">
-			    								<option value="${item}">${item}</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>	
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>			    						
 			    					</p>
@@ -699,7 +720,9 @@
 			    					<p class="">
 				    					<select name="">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>
 				    					
@@ -730,7 +753,9 @@
 			    					<p class="">
 			    			  			<select name="">
 			    							<c:forEach items="${yearOption}" var="item">
-			    								<option value="">${item }</option>
+			    								<c:if test="${item != null}">
+			    									<option value="${item}">${item}</option>
+			    								</c:if>
 			    							</c:forEach>
 				    					</select>
 			    					</p>

@@ -29,7 +29,7 @@
 						<div class=""><img style="width:100%" alt="" src="${pageContext.request.contextPath}/img/xgk/tipImg.jpg"/></div>
 						<p id="un_complate" class="modal-body" style="word-wrap : break-word;width: 100%;"></p >
 				        <p class="modal-footer">
-				        	<a class="btn btn-primary" >继续答题</a>
+				        	<a class="btn btn-primary" onclick="jxdt()">继续答题</a>
 				        </p>
 					</div>
 				</div>
@@ -123,7 +123,13 @@
 						scrollbar: true
 					});
 				}
-
+				
+				//继续提交
+				function jxdt(){
+					var val = $('input[name="cpda"]:checked').val();//选中题目的题目编号
+					console.log(val);
+				}
+					
 				//点击提交实现的方法
 				function tjda() {
 					$('#myModal').show();

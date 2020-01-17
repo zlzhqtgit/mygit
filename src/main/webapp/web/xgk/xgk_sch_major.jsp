@@ -23,15 +23,14 @@
 		<c:import url="header.jsp"></c:import>
 
 		<main class="">
-			<section class="sch_search container">
-				
+			<section class="sch_search container">				
 				<div style="padding: 1em 100px 1em;">
-				    <form class="bs-example bs-example-form" role="form">
+				    <div class="bs-example bs-example-form">
 				        <div class="input-group input-group-lg">
-				            <span class="input-group-addon"  onclick="querySpecialty(1)" ><span class="glyphicon glyphicon-search text-muted"></span></span>
-				            	<input type="text" class="form-control" placeholder="搜索你感兴趣的专业" id="search_content">		            
+				            <input id="search_info" type="text" class="search_info form-control" placeholder="搜索你感兴趣的专业" >
+				            <span class="input-group-addon"  onclick="querySpecialty(1)" ><span class="glyphicon glyphicon-search text-muted"></span></span>				            	            
 				        </div>
-				    </form>
+				    </div>
 				</div>
 
 				<div class="panel panel-default">
@@ -98,6 +97,13 @@
 				</div>
 					<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="querySpecialty(2)">开始查询</a></p>
 				<script type="text/javascript">
+					
+					$('#search_info').bind('keypress',function(event){
+	 					if(event.keyCode == "13"){
+	 						querySpecialty(1);	 						
+	 					}
+	 				});
+				
 					function querySpecialty(e){
 						var c = $("li dd a.active");
 						var where = "";
@@ -135,12 +141,12 @@
 								
 							}
 						}else{
-							var search_content = $("#search_content").val();
-							if(search_content != ""){
-								where += " LOCATE('" + search_content  + "',b.specialty_name) OR LOCATE('" + search_content + "',b.specialty_major_name) OR LOCATE('" + search_content + "', b.specialty_disciplines)";
+							var search_info = $("#search_info").val();
+							if(search_info != ""){
+								where += " LOCATE('" + search_info  + "',b.specialty_name) OR LOCATE('" + search_info + "',b.specialty_major_name) OR LOCATE('" + search_info + "', b.specialty_disciplines)";
 							}
 						}
-						console.log(where);
+						console.log("where:" + where);
 						$.ajax({
 							url: "${pageContext.request.contextPath}/school/xgk_specialty_query.do",
 							type: "POST",

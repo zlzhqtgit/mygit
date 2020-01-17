@@ -281,7 +281,7 @@
 									$(".login_form").hide;
 									return;
 								}else{
-									location.href = nowUrl;
+									location.href = "${pageContext.request.contextPath}/sub/xgk_subject_score.do";
 								}
 							}
 						});  

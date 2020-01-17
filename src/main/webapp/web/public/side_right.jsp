@@ -88,15 +88,15 @@ function chat2(id) {
 							<div class="">
 								<div class="serve_class">精准教学</div>
 								<ul class="">
-									<li><a href="">在线客服</a></li>
-									<li><a href="">在线客服</a></li>
+									<li><a href="javascript:void(0)">付老师：17585728282</a></li>
+									<li><a href="javascript:void(0)">刘老师：18286758419</a></li>
 								</ul>
 							</div>
 							<div class="">
 								<div class="serve_class">升学规划</div>
 								<ul class="">
-									<li><a href="">在线客服</a></li>
-									<li><a href="">在线客服</a></li>
+									<li><a href="javascript:void(0)">张老师：18085107264</a></li>
+									<li><a href="javascript:void(0)">胡老师：15885105016</a></li>
 								</ul>
 							</div>
 						</div>

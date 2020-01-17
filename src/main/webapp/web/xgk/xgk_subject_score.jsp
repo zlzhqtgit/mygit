@@ -92,6 +92,7 @@
 									<td><select id="wuli" name="wuli" onchange="fxshuj(this)">
 											<option value="150">150</option>
 											<option value="120">120</option>
+											<option value="110">110</option>
 											<option value="100">100</option>
 									</select></td>
 									<td><input type="" name="huax" maxlength="3"
@@ -109,7 +110,8 @@
 										onchange="fxshuj(this)">
 											<option value="150">150</option>
 											<option value="120">120</option>
-											<option value="100">100</option>
+											<option value="100">100</option>											
+											<option value="90">90</option>
 									</select></td>
 									<td><input type="" name="zhengz" maxlength="3"
 										oninput="this.value=this.value.replace(/[^0-9]/g,'');"
@@ -145,6 +147,7 @@
 									<td><select id="wuli" name="wuli" onchange="fxshuj(this)">
 											<option value="150">150</option>
 											<option value="120">120</option>
+											<option value="110">110</option>
 											<option value="100">100</option>
 									</select></td>
 									<td><input type="" name="huax" maxlength="3"
@@ -163,6 +166,7 @@
 											<option value="150">150</option>
 											<option value="120">120</option>
 											<option value="100">100</option>
+											<option value="90">90</option>
 									</select></td>
 									<td><input type="" name="zhengz" maxlength="3"
 										oninput="this.value=this.value.replace(/[^0-9]/g,'');"
@@ -198,6 +202,7 @@
 									<td><select id="wuli" name="wuli" onchange="fxshuj(this)">
 											<option value="150">150</option>
 											<option value="120">120</option>
+											<option value="110">110</option>
 											<option value="100">100</option>
 									</select></td>
 									<td><input type="" name="huax" maxlength="3"
@@ -216,6 +221,7 @@
 											<option value="150">150</option>
 											<option value="120">120</option>
 											<option value="100">100</option>
+											<option value="90">90</option>
 									</select></td>
 									<td><input type="" name="zhengz" maxlength="3"
 										oninput="this.value=this.value.replace(/[^0-9]/g,'');"
