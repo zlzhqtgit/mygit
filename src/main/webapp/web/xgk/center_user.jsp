@@ -72,10 +72,10 @@
 							</c:if>
 						&ensp;
 						下载次数：
-							<c:if test="hqt_user == 1">
+							<c:if test="${hqt_user == 1}">
 								${user.downloadCount}
 							</c:if>
-							<c:if test="hqt_user != 1">
+							<c:if test="${hqt_user == 0}">
 								无次数限制
 							</c:if>
 						</span>
