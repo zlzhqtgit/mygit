@@ -167,70 +167,83 @@
 			}
 		});
 		
+		//判断登录后才能查询
+		function onlogin() {
+			layer.confirm('未登陆状态，请先进行登陆？', {
+				icon : 1,
+				btn : [ '确定登陆', '取消' ]
+			}, function(index) {
+				location.href = "../user/xgk_login.do?nowUrl="+ window.location.href;
+			});
+		}
+		
 		//职业信息查询
    		function vocationSearch(e){
-   			var industry = "";
-   			var education = "";
-			if(e == 0){
-				industry = $("#industry_list dd a[class=active]").html();
-				education = $("#education dd a[class=active]").html();
-				industry = industry == "全部" ? "" : industry;
-    			education = education == "全部" ? "" : education;
+			console.log("uid : " + '${uid}');
+			if('${uid}' == ''){
+				onlogin();				
 			}else{
-				industry = $("#search_info").val();				
-			}
-   			var data = "industry=" + industry + "&education=" + education;
-   			console.log("data : " + data)
-   			$.ajax({
-				url: "${pageContext.request.contextPath}/voc/xgk_voc_query.do",
-				data: data,
-				type: "POST",
-				dataType: "json",
-				success: function (obj) {
-					var data = obj.data;
-					console.log(data);
-					var vocationList = "";
-					for(var i=0; i<data.length; i++){
-						vocationList += '<li class="list-group-item width100">';
-						vocationList += '<a class="width100" href="javascript:;"  onclick="search_detail(this)" id="' + data[i].vocationId + '">';
-						vocationList += '<h4 class="fontwei">' + data[i].vocationName + '<span class="text-muted padding-side">' + data[i].industryName + '</span></h4>';
-						vocationList += '<div class="text-muted more_row_brif width100">' + data[i].vocationBrief + '</div></a>';
-						vocationList += '<div class="text-center like">';
-						var like = false;
-						var eId = "";
-						if(data[0].enshrineList != null){
-							for(var j=0; j<data[0].enshrineList.length; j++){									
-								if(data[0].enshrineList[j].eCode == data[i].vocationId){
-									like = true;
-									eId = data[0].enshrineList[j].eId;
+				var industry = "";
+	   			var education = "";
+				if(e == 0){
+					industry = $("#industry_list dd a[class=active]").html();
+					education = $("#education dd a[class=active]").html();
+					industry = industry == "全部" ? "" : industry;
+	    			education = education == "全部" ? "" : education;
+				}else{
+					industry = $("#search_info").val();				
+				}
+	   			var data = "industry=" + industry + "&education=" + education;
+	   			$.ajax({
+					url: "${pageContext.request.contextPath}/voc/xgk_voc_query.do",
+					data: data,
+					type: "POST",
+					dataType: "json",
+					success: function (obj) {
+						var data = obj.data;
+						var vocationList = "";
+						for(var i=0; i<data.length; i++){
+							vocationList += '<li class="list-group-item width100">';
+							vocationList += '<a class="width100" href="javascript:;"  onclick="search_detail(this)" id="' + data[i].vocationId + '">';
+							vocationList += '<h4 class="fontwei">' + data[i].vocationName + '<span class="text-muted padding-side">' + data[i].industryName + '</span></h4>';
+							vocationList += '<div class="text-muted more_row_brif width100">' + data[i].vocationBrief + '</div></a>';
+							vocationList += '<div class="text-center like">';
+							var like = false;
+							var eId = "";
+							if(data[0].enshrineList != null){
+								for(var j=0; j<data[0].enshrineList.length; j++){									
+									if(data[0].enshrineList[j].eCode == data[i].vocationId){
+										like = true;
+										eId = data[0].enshrineList[j].eId;
+									}
 								}
 							}
+							if(like == true){
+								vocationList += '<a id="' + eId + '" class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
+								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
+							}else{
+								vocationList += '<a id=""  class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
+								vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
+							}
+							vocationList += '<span class="">喜欢</span></a>';	
+							vocationList += '</div></li>';	
+							}
+							$("#search_count").html(data.length);
+							$("#search_result").html(vocationList);
+							$(".search_resultBox").css("display","block");
+							$("div.holder").jPages({
+								containerID : "search_result",
+								perPage     : 5,
+								first       : "首页",
+								previous    : "上一页",
+								next        : "下一页",
+								last        : "尾页"
+							});
+							
 						}
-						if(like == true){
-							vocationList += '<a id="' + eId + '" class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
-							vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/like.png"/>';
-						}else{
-							vocationList += '<a id=""  class="' + data[i].vocationId + '" name="' + data[i].vocationName + '" onclick="like(this)" href="javascript:">';
-							vocationList += '<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>';
-						}
-						vocationList += '<span class="">喜欢</span></a>';	
-						vocationList += '</div></li>';	
-						}
-						$("#search_count").html(data.length);
-						$("#search_result").html(vocationList);
-						$(".search_resultBox").css("display","block");
-						$("div.holder").jPages({
-							containerID : "search_result",
-							perPage     : 5,
-							first       : "首页",
-							previous    : "上一页",
-							next        : "下一页",
-							last        : "尾页"
-						});
-						
-					}
-				
-			});
+					
+				});
+			}
    		}
    					
 		//查询职业详情	

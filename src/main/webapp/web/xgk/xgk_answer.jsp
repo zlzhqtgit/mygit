@@ -43,7 +43,7 @@
 					霍兰德职业兴趣测评
 					</c:if>
 					<c:if test="${cpid==2}">
-					MBTI职业兴趣测评
+					MBTI性格测评
 					</c:if>
 					</h1>
 					<div class="thumbnail">

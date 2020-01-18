@@ -41,7 +41,7 @@
 											<div class="flex_Al_c yline_wrap p_relative">
 												<div class="yline"></div>
 											</div>
-											<div class="flex_Al_c">
+											<div class="flex_Al_c" id="cjfx">
 												<div class="circle bg-primary" style="display: flex;align-items: center;">
 													<div class="analyze1">
 														<p class="fontwei">成绩分析</p>
@@ -59,7 +59,7 @@
 											<div class="flex_Al_c yline_wrap">
 												<div class="yline"></div>
 											</div>
-											<div class="flex_Al_c">
+											<div class="flex_Al_c" id="xkqn">
 												<div class="circle bg-warning" style="display: flex;align-items: center;">
 													<div class="analyze2">
 														<p class="fontwei">学科潜能</p>
@@ -80,7 +80,7 @@
 											<div class="flex_Al_c">
 												<div class="circle bg-danger" style="display: flex;align-items: center;">
 													<div class="analyze3">
-														<p class="fontwei">认知测评</p>
+														<p class="fontwei" id="rzcp">认知测评</p>
 														<span class="glyphicon glyphicon-remove"></span>
 													</div>
 												</div>
@@ -175,6 +175,7 @@
 											$(".analyze1").html(type_start + "成绩分析" + type_end + err);
 											$(".analyze1").parents(".flex_Al_c").next().show();
 											$(".analyze1").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/sub/xgk_subject_score.do');
+											$("#cjfx").attr('onclick','window.open("${pageContext.request.contextPath}/sub/xgk_subject_score.do")');
 										}
 										if(potentail == 1){
 											$(".analyze2").html(type_start + "学科潜能" + type_end + ok);
@@ -183,6 +184,7 @@
 											$(".analyze2").html(type_start + "学科潜能" + type_end + err);
 											$(".analyze2").parents(".flex_Al_c").next().show();
 											$(".analyze2").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/sub/xgk_subject_score.do');
+											$("#xkqn").attr('onclick','window.open("${pageContext.request.contextPath}/sub/xgk_subject_score.do")');
 										}
 										if(cognize == 1){
 											$(".analyze3").html(type_start + "认知测评" + type_end + ok);
@@ -191,6 +193,7 @@
 											$(".analyze3").html(type_start + "认知测评" + type_end + err);
 											$(".analyze3").parents(".flex_Al_c").next().show();
 											$(".analyze3").parents(".flex_Al_c").next().children().attr('href','${pageContext.request.contextPath}/cp/xgk_choice.do');
+											$("#rzcp").attr('onclick','window.open("${pageContext.request.contextPath}/cp/xgk_choice.do")');
 										}
 										
 										var vocationLargeClass = "<option value=''>请选择一种心仪 的职业大类</option>";

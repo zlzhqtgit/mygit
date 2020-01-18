@@ -249,8 +249,8 @@
 		    	
 		    	function login(){
 					var nowUrl="${nowUrl}";
-					if(nowUrl==null||nowUrl==""){
-						nowUrl="${pageContext.request.contextPath}/cp/xgk_index.do";
+					if(nowUrl==null || nowUrl==""){
+						nowUrl="${pageContext.request.contextPath}/sub/xgk_subject_score.do";
 					}
 					var tip1=$('#tip1').text();
 					var mobile=$("#mobile").val();
@@ -281,7 +281,7 @@
 									$(".login_form").hide;
 									return;
 								}else{
-									location.href = "${pageContext.request.contextPath}/sub/xgk_subject_score.do";
+									location.href = nowUrl;
 								}
 							}
 						});  

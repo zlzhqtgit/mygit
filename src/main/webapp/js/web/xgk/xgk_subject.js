@@ -175,7 +175,7 @@
 	};
 	//用于判断当前是否有用户登录，采用layer框架提示
 	function onlogin() {
-		layer.confirm('未登陆状态，请先进行登陆？ 确定登陆', {
+		layer.confirm('未登陆状态，请先进行登陆？', {
 			icon : 1,
 			btn : [ '确定登陆', '取消' ]
 		}, function(index) {
@@ -188,7 +188,7 @@
 	//用于点击成绩分析模块里的下一步，判断是否输入了成绩，并计算学科的得分
 	function tip_input() {
 		var uid = "${uid}";
-		if(uid==""){
+		if(uid == ""){
 			onlogin();
 		}else{
 			var wl = document.querySelectorAll("input[name='wuli']");

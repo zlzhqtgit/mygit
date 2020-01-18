@@ -63,7 +63,7 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
 
 
     public String showPotentialReport(HttpServletRequest request) {
-    	try {
+//    	try {
     		Session session = SecurityUtils.getSubject().getSession();
             Integer uid = (Integer) session.getAttribute("uid");
             UserFeature feature = userFeatureMapper.selectPotentialAnalyseByUid(uid);
@@ -96,10 +96,10 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
             session.setAttribute("list", JSON.toJSONString(list));
             session.setAttribute("evaluationFraction",feature.getEvaluationFraction());
             return "web/xgk/xgk_xk_analyse_rpt";
-		} catch (Exception e) {
-			logger.error("访问路径：" + request.getRequestURI() + "操作：查看潜能分析报告异常   错误信息: " + e);
-			return "web/xgk/xgk_error_404";
-		}
+//		} catch (Exception e) {
+//			logger.error("访问路径：" + request.getRequestURI() + "操作：查看潜能分析报告异常   错误信息: " + e);
+//			return "web/xgk/xgk_error_404";
+//		}
     }
 
   

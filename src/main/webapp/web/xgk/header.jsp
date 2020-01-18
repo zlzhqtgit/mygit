@@ -20,8 +20,7 @@
 					<ul class="clearfix margin0" style="width: 47em;">						
 							<li class=""><a id="xgk1" name="dh" href="${pageContext.request.contextPath}/cp/xgk_index.do">首页</a></li>						
 							<li class=""><a id="xgk2" name="dh" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do">学科探索</a></li>
-							<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>					
-							<li class=""><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>
+							<li class=""><a id="xgk3" name="dh" href="${pageContext.request.contextPath}/cp/xgk_choice.do">认知测评</a></li>
 							<li class=""><a id="xgk5" name="dh" href="${pageContext.request.contextPath}/voc/xgk_job_blank.do">职业库</a></li>
 							<li class="">
 								<a id="xgk6" name="dh" href="#">高校专业&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
@@ -29,7 +28,8 @@
 										<li><a href="${pageContext.request.contextPath}/school/xgk_school_search.do">院校查询</a></li>								
 										<li><a href="${pageContext.request.contextPath}/school/xgk_specialty_search.do">专业查询</a></li>									
 								</ul>
-							</li>						
+							</li>
+							<li class=""><a id="xgk4" name="dh" href="${pageContext.request.contextPath}/xk/xgk_guide_select.do">选科指导</a></li>					
 							<li class="">
 								<a id="xgk8" name="dh" href="#">更多&ensp;<span class="glyphicon glyphicon-chevron-down"></span></a>
 								<ul class="list-unstyled">									
@@ -61,7 +61,7 @@
 											</div>
 										</li>
 								</ul>
-							</li>
+							</li>							
 					</ul>
 				</nav>
 			</div>

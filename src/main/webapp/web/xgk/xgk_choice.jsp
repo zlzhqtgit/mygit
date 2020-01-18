@@ -37,7 +37,7 @@
 					<div class="col-md-6 rightLoop" style="padding:0">
 						<img style="width: 100%;" src="${pageContext.request.contextPath}/img/xgk/xingge.jpg" >
 						<div class="caption">
-							<h3 class="text-center fontwei margin_top1">MBTI职业性格测评</h3>
+							<h3 class="text-center fontwei margin_top1">MBTI性格测评</h3>
 							<p class="margin_top1 texts_hide">在行色匆匆的世界里，懂得如何从容；面对莫测的变化和以外，总能有所预测；任凭外界喧嚣浮华，始终坚守本心。人生的每一步，张弛有度，且游刃有余。</p>
 							<p class="text-right margin_top margin_bot"><a href="javascript:;" onclick="login('mbti')" class="btn btn-primary" role="button">开始测试 >></a></p>
 						</div>

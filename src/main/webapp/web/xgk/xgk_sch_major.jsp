@@ -97,144 +97,155 @@
 				</div>
 					<p class="text-center margin_bot margin_top"><a class="btn btn-primary fontwei begin_btn" href="javascript:void(0)" onclick="querySpecialty(2)">开始查询</a></p>
 				<script type="text/javascript">
-					
+					//判断登录后才能查询
+					function onlogin() {
+						layer.confirm('未登陆状态，请先进行登陆？', {
+							icon : 1,
+							btn : [ '确定登陆', '取消' ]
+						}, function(index) {
+							location.href = "../user/xgk_login.do?nowUrl="+ window.location.href;
+						});
+					}	
+				
 					$('#search_info').bind('keypress',function(event){
 	 					if(event.keyCode == "13"){
 	 						querySpecialty(1);	 						
 	 					}
 	 				});
 				
+					
 					function querySpecialty(e){
-						var c = $("li dd a.active");
-						var where = "";
-						if( e == 2){
-							var specialty_education = c[0].text.replace("专业","");
-							var specialty_major_name1 = c[1].text;
-							var specialty_major_name2 = c[2].text;
-							var flag = false;
-							if(specialty_education != "全部"){
-								where += " b.specialty_education='" + specialty_education + "' ";
-								flag = true;
-							}
-							if(specialty_major_name1 != "全部" && specialty_major_name2 != "全部"){
-								if(flag){	 
-									where += " AND (LOCATE('" + specialty_major_name1  +"',b.specialty_major_name) OR LOCATE('" + specialty_major_name2 + "',b.specialty_major_name))";
-								} else {
-									where += " LOCATE('" + specialty_major_name1  +"',b.specialty_major_name) OR LOCATE('" + specialty_major_name2 + "',b.specialty_major_name)";
-								}
-								
-							}
-							if(specialty_major_name1 != "全部" && specialty_major_name2 == "全部"){
-								if(flag){	 
-									where += " AND LOCATE('" + specialty_major_name1  +"',b.specialty_major_name)";
-								} else {
-									where += " LOCATE('" + specialty_major_name1  +"',b.specialty_major_name)";
-								}
-								
-							}
-							if(specialty_major_name1 == "全部" && specialty_major_name2 != "全部"){
-								if(flag){	 
-									where += " AND LOCATE('" + specialty_major_name2  +"',b.specialty_major_name)";
-								} else {
-									where += " LOCATE('" + specialty_major_name2  +"',b.specialty_major_name)";
-								}
-								
-							}
+						var uid = "${uid}";
+						if(uid == ""){
+							onlogin();
 						}else{
-							var search_info = $("#search_info").val();
-							if(search_info != ""){
-								where += " LOCATE('" + search_info  + "',b.specialty_name) OR LOCATE('" + search_info + "',b.specialty_major_name) OR LOCATE('" + search_info + "', b.specialty_disciplines)";
-							}
-						}
-						console.log("where:" + where);
-						$.ajax({
-							url: "${pageContext.request.contextPath}/school/xgk_specialty_query.do",
-							type: "POST",
-							data: "where=" + where,
-							dataType: "JSON",
-							success: function(obj) {
-								$(".search_resultBox").css("display","block");
-								if(obj.state == 1){
-									var list = obj.data;									
-									var bkdata = "";
-									var zkdata = "";
-									for(var i=0; i<list.length; i++){
-										if(list[i].education == '本科'){
-											var specialtyOutList = list[i].specialtyOutList;//专业大类
-											for(var j=0; j<specialtyOutList.length; j++){
-												bkdata += '<div class="major_info margin_bot">';
-												bkdata += '<div class="clearfix major_info_head">';
-												bkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
-												bkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
-												bkdata += '</div>';												
-												var disciplinesList = specialtyOutList[j].disciplinesList;//专业分类
-												for(var k=0; k<disciplinesList.length; k++){
-													bkdata += '<div class="clearfix major_info_sub">';
-													bkdata += '<span class="pull-left"><h4 class="fontwei">' + disciplinesList[k].disciplines + '</h4></span>';
-													bkdata += '<span class="pull-right" style="color:#4b9f64;">' + disciplinesList[k].specialtyList.length + '个专业</span>';
-													bkdata += '</div>';
-													bkdata += '<ul class="major_list clearfix margin_top1">';
-													var specialtyList = disciplinesList[k].specialtyList;
-													for(var l=0; l<specialtyList.length; l++){
-														bkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + specialtyList[l].specialtyId + '">' + specialtyList[l].specialtyName + '</a></li>';
-													}
-													bkdata += '</ul>';
-												}
-												bkdata += '</div>';	
-											}									
-										}
-										if(list[i].education == '专科'){
-											var specialtyOutList = list[i].specialtyOutList;//专业大类
-											for(var j=0; j<specialtyOutList.length; j++){
-												zkdata += '<div class="major_info margin_bot">';
-												zkdata += '<div class="clearfix major_info_head">';
-												zkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
-												zkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
-												zkdata += '</div>';												
-												var disciplinesList = specialtyOutList[j].disciplinesList;//专业分类
-												for(var k=0; k<disciplinesList.length; k++){
-													zkdata += '<div class="clearfix major_info_sub">';
-													zkdata += '<span class="pull-left"><h4 class="fontwei">' + disciplinesList[k].disciplines + '</h4></span>';
-													zkdata += '<span class="pull-right" style="color:#4b9f64;">' + disciplinesList[k].specialtyList.length + '个专业</span>';
-													zkdata += '</div>';
-													zkdata += '<ul class="major_list clearfix margin_top1">';
-													var specialtyList = disciplinesList[k].specialtyList;
-													for(var l=0; l<specialtyList.length; l++){
-														zkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + specialtyList[l].specialtyId + '">' + specialtyList[l].specialtyName + '</a></li>';
-													}
-													zkdata += '</ul>';
-												}
-												zkdata += '</div>';	
-											}				
-										}
-									}									
-									$("#bklist").html(bkdata);//本科列表数据
-									$("#zklist").html(zkdata);//专科列表数据
+							var c = $("li dd a.active");
+							var where = "";
+							if( e == 2){
+								var specialty_education = c[0].text.replace("专业","");
+								var specialty_major_name1 = c[1].text;
+								var specialty_major_name2 = c[2].text;
+								var flag = false;
+								if(specialty_education != "全部"){
+									where += " b.specialty_education='" + specialty_education + "' ";
+									flag = true;
+								}
+								if(specialty_major_name1 != "全部" && specialty_major_name2 != "全部"){
+									if(flag){	 
+										where += " AND (LOCATE('" + specialty_major_name1  +"',b.specialty_major_name) OR LOCATE('" + specialty_major_name2 + "',b.specialty_major_name))";
+									} else {
+										where += " LOCATE('" + specialty_major_name1  +"',b.specialty_major_name) OR LOCATE('" + specialty_major_name2 + "',b.specialty_major_name)";
+									}
 									
-									$("div.holder1").jPages({
-					    			       containerID : "bklist",
-					    			       perPage     : 3,
-					    			       first       : "首页",
-					    			       previous    : "上一页",
-					    			       next        : "下一页",
-					    			       last        : "尾页"
-					    				 });
-						    			$("div.holder2").jPages({
-						    			       containerID : "zklist",
+								}
+								if(specialty_major_name1 != "全部" && specialty_major_name2 == "全部"){
+									if(flag){	 
+										where += " AND LOCATE('" + specialty_major_name1  +"',b.specialty_major_name)";
+									} else {
+										where += " LOCATE('" + specialty_major_name1  +"',b.specialty_major_name)";
+									}
+									
+								}
+								if(specialty_major_name1 == "全部" && specialty_major_name2 != "全部"){
+									if(flag){	 
+										where += " AND LOCATE('" + specialty_major_name2  +"',b.specialty_major_name)";
+									} else {
+										where += " LOCATE('" + specialty_major_name2  +"',b.specialty_major_name)";
+									}
+									
+								}
+							}else{
+								var search_info = $("#search_info").val();
+								if(search_info != ""){
+									where += " LOCATE('" + search_info  + "',b.specialty_name) OR LOCATE('" + search_info + "',b.specialty_major_name) OR LOCATE('" + search_info + "', b.specialty_disciplines)";
+								}
+							}
+							console.log("where:" + where);
+							$.ajax({
+								url: "${pageContext.request.contextPath}/school/xgk_specialty_query.do",
+								type: "POST",
+								data: "where=" + where,
+								dataType: "JSON",
+								success: function(obj) {
+									$(".search_resultBox").css("display","block");
+									if(obj.state == 1){
+										var list = obj.data;									
+										var bkdata = "";
+										var zkdata = "";
+										for(var i=0; i<list.length; i++){
+											if(list[i].education == '本科'){
+												var specialtyOutList = list[i].specialtyOutList;//专业大类
+												for(var j=0; j<specialtyOutList.length; j++){
+													bkdata += '<div class="major_info margin_bot">';
+													bkdata += '<div class="clearfix major_info_head">';
+													bkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
+													bkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
+													bkdata += '</div>';												
+													var disciplinesList = specialtyOutList[j].disciplinesList;//专业分类
+													for(var k=0; k<disciplinesList.length; k++){
+														bkdata += '<div class="clearfix major_info_sub">';
+														bkdata += '<span class="pull-left"><h4 class="fontwei">' + disciplinesList[k].disciplines + '</h4></span>';
+														bkdata += '<span class="pull-right" style="color:#4b9f64;">' + disciplinesList[k].specialtyList.length + '个专业</span>';
+														bkdata += '</div>';
+														bkdata += '<ul class="major_list clearfix margin_top1">';
+														var specialtyList = disciplinesList[k].specialtyList;
+														for(var l=0; l<specialtyList.length; l++){
+															bkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + specialtyList[l].specialtyId + '">' + specialtyList[l].specialtyName + '</a></li>';
+														}
+														bkdata += '</ul>';
+													}
+													bkdata += '</div>';	
+												}									
+											}
+											if(list[i].education == '专科'){
+												var specialtyOutList = list[i].specialtyOutList;//专业大类
+												for(var j=0; j<specialtyOutList.length; j++){
+													zkdata += '<div class="major_info margin_bot">';
+													zkdata += '<div class="clearfix major_info_head">';
+													zkdata += '<span class="pull-left"><h3>' + specialtyOutList[j].majorName + '</h3></span>';
+													zkdata += '<span class="pull-right  text-muted">1个专业类>' + specialtyOutList[j].disciplinesList.length + '个本科专业</span>';
+													zkdata += '</div>';												
+													var disciplinesList = specialtyOutList[j].disciplinesList;//专业分类
+													for(var k=0; k<disciplinesList.length; k++){
+														zkdata += '<div class="clearfix major_info_sub">';
+														zkdata += '<span class="pull-left"><h4 class="fontwei">' + disciplinesList[k].disciplines + '</h4></span>';
+														zkdata += '<span class="pull-right" style="color:#4b9f64;">' + disciplinesList[k].specialtyList.length + '个专业</span>';
+														zkdata += '</div>';
+														zkdata += '<ul class="major_list clearfix margin_top1">';
+														var specialtyList = disciplinesList[k].specialtyList;
+														for(var l=0; l<specialtyList.length; l++){
+															zkdata += '<li class=""><a id="" href="${pageContext.request.contextPath}/school/xgk_specialty_detail.do?specialtyId=' + specialtyList[l].specialtyId + '">' + specialtyList[l].specialtyName + '</a></li>';
+														}
+														zkdata += '</ul>';
+													}
+													zkdata += '</div>';	
+												}				
+											}
+										}									
+										$("#bklist").html(bkdata);//本科列表数据
+										$("#zklist").html(zkdata);//专科列表数据
+										
+										$("div.holder1").jPages({
+						    			       containerID : "bklist",
 						    			       perPage     : 3,
 						    			       first       : "首页",
 						    			       previous    : "上一页",
 						    			       next        : "下一页",
 						    			       last        : "尾页"
-						    			 });
-								} 
-							}
-						}); 
-						
-						//点击1秒收显示分页
-						 setTimeout(function(){
-							$(".holder1").parent().show();
-						},1000);
+						    				 });
+							    			$("div.holder2").jPages({
+							    			       containerID : "zklist",
+							    			       perPage     : 3,
+							    			       first       : "首页",
+							    			       previous    : "上一页",
+							    			       next        : "下一页",
+							    			       last        : "尾页"
+							    			 });
+									} 
+								}
+							}); 
+							
+						}
 					}
 				</script>
 				<div class="search_resultBox panel panel-default" style="display:none;">
