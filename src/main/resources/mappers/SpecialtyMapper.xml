@@ -721,6 +721,18 @@
 		WHERE specialty_education = '专科'
 	</select>
 
+	<select id="selectSpecialtyListByIndustryName" resultType="cn.hqtzytb.entity.Specialty">
+		SELECT
+			s.specialty_id,
+			s.specialty_name
+		FROM
+			specialty s
+		LEFT JOIN vocation_specialty vs ON vs.specialty_id = s.specialty_id
+		LEFT JOIN vocation v ON v.vocation_id = vs.vocation_id
+		<if test="where != null">where ${where}</if>
+		<if test="orderBy != null">order by ${orderBy}</if>
+		<if test="offset != null">limit ${offset},${countPerPage}</if>
+	</select>
 </mapper>
 	
 	

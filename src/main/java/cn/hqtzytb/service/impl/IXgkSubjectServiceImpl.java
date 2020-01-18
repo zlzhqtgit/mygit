@@ -3,9 +3,7 @@ package cn.hqtzytb.service.impl;
 import cn.hqtzytb.utils.Constants;
 import cn.hqtzytb.entity.ResponseResult;
 import cn.hqtzytb.entity.UserFeature;
-import cn.hqtzytb.entity.UserResultReport;
 import cn.hqtzytb.mapper.UserFeatureMapper;
-import cn.hqtzytb.mapper.UserResultReportMapper;
 import cn.hqtzytb.service.IXgkSubjectService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -34,8 +32,7 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
 	private  static final Logger logger = LogManager.getLogger(IXgkSubjectServiceImpl.class.getName());
     @Autowired
     private UserFeatureMapper userFeatureMapper;
-    @Autowired
-    private UserResultReportMapper userResultReportMapper;
+
     
     public ResponseResult<Void> addPotentialAnalysis(String evaluationFraction, HttpServletRequest request) {
     	try {
@@ -63,7 +60,7 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
 
 
     public String showPotentialReport(HttpServletRequest request) {
-//    	try {
+    	try {
     		Session session = SecurityUtils.getSubject().getSession();
             Integer uid = (Integer) session.getAttribute("uid");
             UserFeature feature = userFeatureMapper.selectPotentialAnalyseByUid(uid);
@@ -96,13 +93,13 @@ public class IXgkSubjectServiceImpl implements IXgkSubjectService {
             session.setAttribute("list", JSON.toJSONString(list));
             session.setAttribute("evaluationFraction",feature.getEvaluationFraction());
             return "web/xgk/xgk_xk_analyse_rpt";
-//		} catch (Exception e) {
-//			logger.error("访问路径：" + request.getRequestURI() + "操作：查看潜能分析报告异常   错误信息: " + e);
-//			return "web/xgk/xgk_error_404";
-//		}
+		} catch (Exception e) {
+			logger.error("访问路径：" + request.getRequestURI() + "操作：查看潜能分析报告异常   错误信息: " + e);
+			return "web/xgk/xgk_error_404";
+		}
     }
 
-  
+   
 
     public ResponseResult<Void> haveYouSubjectExploration(HttpServletRequest request) {
     	try {

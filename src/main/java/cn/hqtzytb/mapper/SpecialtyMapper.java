@@ -69,6 +69,12 @@ public interface SpecialtyMapper {
 	 */
 	List<Specialty> selectSpecialtyClass();
 	
-	
-
+	/**
+	 * 依据职业大类名字查询专业列表
+	 * @return
+	 */
+	List<Specialty> selectSpecialtyListByIndustryName(@Param("where") String where, 
+													  @Param("orderBy") String orderBy,
+													  @Param("offset") Integer offset, 
+												 	  @Param("countPerPage") Integer countPerPage);
 }

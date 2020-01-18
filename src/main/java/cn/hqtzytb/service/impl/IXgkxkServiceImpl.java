@@ -132,15 +132,17 @@ public class IXgkxkServiceImpl implements IXgkxkService {
 	}
 
 	@Override
-	public ResponseResult<List<Vocation>> getVocationList(String industryName, HttpServletRequest request) {
+	public ResponseResult<Map<String,Object>> getVocationList(String industryName, HttpServletRequest request) {
 		try {
-			List<Vocation> vocationList = vocationMapper.select(" b.industry_name = '" + industryName + "'", null, null,
-					null);
-			return new ResponseResult<List<Vocation>>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS,
-					vocationList);
+			Map<String,Object> resultMap = new HashMap<>();
+			List<Vocation> vocationList = vocationMapper.select(" b.industry_name = '" + industryName + "'", null, null, null);
+			List<Specialty> specialtyList = specialtyMapper.selectSpecialtyListByIndustryName(" v.industry_name = '" + industryName + "'", null, null, null);
+			resultMap.put("sList", specialtyList);
+			resultMap.put("vList", vocationList);
+			return new ResponseResult<>(ResponseResult.STATE_OK, Constants.RESULT_MESSAGE_SUCCESS, resultMap);
 		} catch (Exception e) {
 			logger.error("访问路径：" + request.getRequestURI() + "操作：依据职业大类查询职业详情清单   错误信息: " + e);
-			return new ResponseResult<List<Vocation>>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
+			return new ResponseResult<>(ResponseResult.ERR, Constants.RESULT_MESSAGE_FAIL);
 		}
 	}
 

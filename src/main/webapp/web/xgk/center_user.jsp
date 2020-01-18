@@ -22,6 +22,36 @@
 		<script src="${pageContext.request.contextPath}/js/common.js"></script>
 		<script src="${pageContext.request.contextPath}/js/province.js"></script>
 		<script src="${pageContext.request.contextPath}/js/jPages.js"></script>
+		<style type="text/css">
+			.vipLimite{
+				width:4em;
+			    display: inline-block;
+				position:absolute;
+				left:78px;
+				top:42px;
+				box-shadow:0;
+				height: 3em;
+			}
+			.vipLimite:hover{
+				/* background-color:transparent; */
+			}
+			.vipLimite>label{
+				display: inline-block;
+				font-size:1.4em;
+				top:8px;
+				left:26px;
+				border-radius: 4px;
+				margin:0;
+				text-align:center;
+				background-color: #01b2ca;
+			}
+			.vipLimite>span{
+				position:absolute;
+				top:8px;
+				left:26px;
+				color:red;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -30,7 +60,26 @@
 		<div class="p_relative">
 			<div class=""><img src="${pageContext.request.contextPath}/img/xgk/bannerBg.png"/></div>
 			<div class="user_info">
-				<div class="text-center cenUser_head" style="width: 6em;">
+				<div class="text-center cenUser_head" style="width: 6em;position:absolute;">
+					<a class="show_more vipLimite"><label class="fontwei">${user.roleName}</label>						
+						<span class="">
+						到期时间：
+							<c:if test="${user.expirationTime != null}">
+								<fmt:formatDate value="${user.expirationTime}" pattern="yyyy-MM-dd"/>
+							</c:if>
+							<c:if test="${user.expirationTime == null}">
+								无
+							</c:if>
+						&ensp;
+						下载次数：
+							<c:if test="hqt_user == 1">
+								${user.downloadCount}
+							</c:if>
+							<c:if test="hqt_user != 1">
+								无次数限制
+							</c:if>
+						</span>
+					</a>
 					<shiro:guest> 
 						<img src="${pageContext.request.contextPath}/img/xgk/user.png" style="width: 100%;"/>
 						<h3 class="fontwei">用户昵称</h3>
@@ -329,7 +378,8 @@
 										</div>
 										<div class="form-group">
 											<label for="pcNumber">身份证号：</label>
-											<input id="pcNumber" name="pcNumber" type="text" placeholder="请输入身份证号" value="${user.pcNumber}" />
+											<input id="pcNumber1" name="pcNumber1" type="text"  placeholder="请输入身份证号" value="" onfocus="getFocus()" onblur="lostFocus()"  />										
+											<input id="pcNumber" name="pcNumber" style="display:none" type="text" placeholder="请输入身份证号" value="" />										
 										</div>
 										<div class="form-group">
 											<label for="studentId">学号：</label>

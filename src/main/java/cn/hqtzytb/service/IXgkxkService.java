@@ -2,6 +2,8 @@ package cn.hqtzytb.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.ui.ModelMap;
@@ -35,7 +37,7 @@ public interface IXgkxkService {
 	 * @param request
 	 * @return
 	 */
-	ResponseResult<List<Vocation>> getVocationList(String industryName, HttpServletRequest request);
+	ResponseResult<Map<String,Object>> getVocationList(String industryName, HttpServletRequest request);
 
 	/**
 	 * 依据职业id查询相关专业信息

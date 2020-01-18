@@ -3,6 +3,8 @@ package cn.hqtzytb.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +63,7 @@ public class XgkxkController {
 	 */
 	@RequestMapping("/xgk_guide_vocation_list.do")
 	@ResponseBody
-	public ResponseResult<List<Vocation>> getVocationList(String industryName, HttpServletRequest request){
+	public ResponseResult<Map<String,Object>> getVocationList(String industryName, HttpServletRequest request){
 		
 		return iXgkxkService.getVocationList(industryName,request);
 	}

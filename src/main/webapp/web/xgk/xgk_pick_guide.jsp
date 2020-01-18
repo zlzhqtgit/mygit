@@ -214,19 +214,25 @@
 											success:function(obj){
 												//console.log(obj.data[0])
 												if(obj.state == 1){
-													var data = obj.data;
+													var vList = obj.data.vList;
 													var vocationList = "<tr>";
-													var id = "";
-													var name = "";
-													for(var j=0; j<data.length; j++){
+													for(var j=0; j<vList.length; j++){
 														if (j%5 == 0 && j>0){
-															vocationList += "</tr><tr>";//
+															vocationList += "</tr><tr>";
 														}
-														id = data[j].vocationId;
-														name = data[j].vocationName;
-														vocationList += '<td onclick="getSpecialtyList(this)" id="' + id + '">' + name + '</td>';
+														vocationList += '<td onclick="getSpecialtyList(this)" id="' + vList[j].vocationId + '">' + vList[j].vocationName + '</td>';
 													}
 													$("#vocation_list").html(vocationList + "</tr>");
+													var sList = obj.data.sList;
+													var specialtyList = "";
+													if(sList.length <= 0){
+														specialtyList += "<option value='0'>暂无专业数据</option>";
+													}else{
+														for(var i=0; i<sList.length; i++){
+															specialtyList += "<option value='" + sList[i].specialtyId + "'>" + sList[i].specialtyName + "</option>";
+														}
+													}
+													$(".specialty_list").html(specialtyList);
 												}
 											}
 										});
