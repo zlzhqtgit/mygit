@@ -29,7 +29,8 @@
 						<div class=""><img style="width:100%" alt="" src="${pageContext.request.contextPath}/img/xgk/tipImg.jpg"/></div>
 						<p id="un_complate" class="modal-body" style="word-wrap : break-word;width: 100%;"></p >
 				        <p class="modal-footer">
-				        	<a class="btn btn-primary" onclick="jxdt()">继续答题</a>
+				        	<a class="btn btn-primary" onclick="jxdt('jxdt')">继续答题</a>
+				        	<!-- <a class="btn btn-primary">继续答题</a> -->
 				        </p>
 					</div>
 				</div>
@@ -103,10 +104,10 @@
 				var cont=0;//未答题数量
 				var strone;//未答题数
 				
-				/* $("#Modal a").on('click',closeModal);//点击模态框或 a标签 隐藏Modal模态框
+				/*  $("#Modal a").on('click',closeModal);//点击模态框或 a标签 隐藏Modal模态框
 				function closeModal(){
 					$("#Modal").css("display","none");//隐藏 Modal 模态框
-				} */
+				}  */
 				//弹框
 				function modelshow(title, content, type) {
 					layer.open({
@@ -124,12 +125,26 @@
 					});
 				}
 				
-				//继续提交
-				function jxdt(){
-					var val = $('input[name="cpda"]:checked').val();//选中题目的题目编号
-					console.log(val);
-				}
+				//继续答题
+				function jxdt(e){
+					layer.closeAll();
+					var nu = "";
+					if(e == 'jxdt'){
+						nu = strone - 1;	
+					}else{
+						var nu = e - 1;
+					}				
+					if(len >= nu) {
+						ti(nu);
+						tu(nu, nu-1);
+						$('#current').text(nu+1);
+					} else {
+						return;
+					}
+					$("#progress").css("width",100/len*(nu)+"%"); 				
+				}				
 					
+				
 				//点击提交实现的方法
 				function tjda() {
 					$('#myModal').show();
@@ -161,7 +176,7 @@
 					      var items='';
 					      for (i=0;i<question.length-1;i++) {
 					       //console.log(question[i]);
-					       items +='<a>'+question[i]+'</ a>' ;
+					       items +='<a href="javascript:void(0);" onclick="jxdt(' + question[i] + ')">'+question[i]+'</sa>' ;
 					      }
 					     if(items==''){
 					    	 $("#Modal").css("display","none");//隐藏
@@ -190,7 +205,7 @@
 									alert(obj.message);
 									return;
 								}
-								alert(obj.message);
+								//alert(obj.message);
 								location.href = "${pageContext.request.contextPath}/cp/xgk_report.do";
 							}
 						});

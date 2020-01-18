@@ -480,7 +480,7 @@
 		<h1 class="text-primary fontwei">学科潜能测评</h1>
 		<div class="panel panel-default content" style="height: 433.7px;">
 			<div class="padding-side2 margin_top">
-				<p class="tm" style="font-family: '楷体';">1、老师在课堂上讲述的地理知识，我基本全部能理解。</p>
+				<p class="tm" style="font-family: '楷体';font-size: 24px;font-weight: bold;">1、老师在课堂上讲述的地理知识，我基本全部能理解。</p>
 				<input id="num" type="hidden" value="0" />
 				<div class="choise margin_top1" style="height: 210px;"></div>
 			</div>
