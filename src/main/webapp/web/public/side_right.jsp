@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,10 +65,16 @@ function chat2(id) {
 				</div>
 			</div>
 			<div class="text-center mark-box course_server">
-				<a href="${pageContext.request.contextPath}/online/xgk_online_index.do">
-					<span class="btn-mark"> <img src="${pageContext.request.contextPath}/img/xgk/rside1.png" > </span>
-					<div class=""> 在线课程</div>
-				</a>
+				<shiro:hasPermission name="web_zxkc:query">
+				    <a href="${pageContext.request.contextPath}/online/xgk_online_index.do">
+						<span class="btn-mark">
+							<img src="${pageContext.request.contextPath}/img/xgk/rside1.png" >
+						</span>
+						<div class=""> 在线课程</div>
+					</a>
+				</shiro:hasPermission>
+				<shiro:lacksPermission name="org:create">				    
+				</shiro:lacksPermission>				
 			</div>
 			<div class="text-center mark-box vip_server">
 				<a href="${pageContext.request.contextPath}/web/hqt_vip_index.do">
@@ -155,23 +161,20 @@ function chat2(id) {
 			</div>
 		</div>
 </body>
-<script type="text/javascript">
-			/**
-			 * 右侧边栏子菜单显示隐藏控制
-			 * @param {Object} obj 目标子菜单类名
-			 */
+<script type="text/javascript">		
+			//右侧边栏子菜单显示隐藏控制
+			// @param {Object} obj 目标子菜单类名
 			function menuSwitch(obj) {
 				var timer = null;
 				$(obj).hover(function(){
-					var timer =setTimeout(function(){
-						$(obj).find(".submenu").show(); 
+					var timer = setTimeout(function(){
+						$(obj).find(".submenu").show();
 					},100);
-				},function(){					
-					clearTimeout(timer);
-					 $(this).find(".submenu").hide(); 
+					},function(){					
+						clearTimeout(timer);
+					 	$(this).find(".submenu").hide(); 
 				});
 			}
-			
 			menuSwitch(".qq_server");
 			menuSwitch(".tel_server");
 			menuSwitch(".online_server");

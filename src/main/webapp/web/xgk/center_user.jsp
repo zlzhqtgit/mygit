@@ -45,11 +45,15 @@
 				text-align:center;
 				background-color: #01b2ca;
 			}
-			.vipLimite>span{
-				position:absolute;
-				top:8px;
-				left:26px;
-				color:red;
+			
+			.vipLimite>span {
+			    position: absolute;
+			    top: 20px;
+			    left: 42px;
+			    color: #111;
+			    width: 520px;
+			    font-weight: bold;
+			    font-size: 15px;
 			}
 		</style>
 	</head>

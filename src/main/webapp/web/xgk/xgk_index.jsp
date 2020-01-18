@@ -114,10 +114,10 @@
 									<div class=""> 霍兰德职业兴趣测评 </div>
 								</div>
 							</li>
-							<li class="">
-								<div class="">
+							<li class="" href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do" οnclick="adc()">
+								<div class="mbti">
 									<div class="fontwei"> 4 </div>
-									<div class=""> MBTI职业性格测评 </div>
+									<div class=""> MBTI性格测评 </div>
 								</div>
 							</li>
 						</ul>
@@ -220,7 +220,7 @@
 		<c:import url="../public/side_right.jsp"></c:import>
 		<c:import url="../xgk/footer.jsp"></c:import>
 	</body>
-				<script>
+			<script>			
 			    var swiperBanner = new Swiper('banner .swiper-container', {
 			      autoplay:false,
 			      slidesPerView: 1,
