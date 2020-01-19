@@ -203,7 +203,7 @@
 								datatype:'json',
 								success:function(obj){
 									if(obj.state == 1){
-										layer.msg('支付成功', {icon: 5,time:1000});
+										layer.msg('支付成功', {icon: 5,time:10000});
 								    	setTimeout(function(){  //使用  setTimeout（）方法设定定时2000毫秒
 								    		window.location.reload();//页面刷新
 								    		//location.href = "${pageContext.request.contextPath}/api/wx_pay_sucees.do?nowUrl=" + url;
