@@ -273,12 +273,7 @@
 					<li class="p_relative">
 						<a href="javascript:void(0)"><span class="glyphicon glyphicon-check"></span> 
 							我的选科<!-- <span class="badge pull-right text-danger">3</span> -->
-						</a>
-						<%--<ul class="sublist">
-							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/noDone.jsp')" href="javascript:void(0)">待完成</a></li> 
-							<li class="cur"><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/done.jsp')" href="javascript:void(0)">已完成</a></li> 
-							<li class=""><a onclick="getPage('${pageContext.request.contextPath}/web/userCenter/myCourse.jsp')" href="javascript:void(0)">我的课表</a></li>  
-						</ul>--%>
+						</a>						
 					</li>
 					</shiro:hasPermission> 
 					<shiro:hasPermission name="grzx_wdgz:query"> 
@@ -336,22 +331,72 @@
 										<div class="form-group">
 											<label for="educationalCircles">学届：</label>
 											<select name="educationalCircles" id="educationalCircles">
-												<option value="2021">2021届</option>
-												<option value="2020">2020届</option>
-												<option value="2019">2019届</option>
-												<option value="2018">2018届</option>
-												<option value="2017">2017届</option>
-												<option value="2016">2016届</option>
-												<option value="2015">2015届</option>
+												<c:if test="${user.educationalCircles == 2021}">
+													<option value="2021" selected="selected">2021届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2021}">
+													<option value="2021">2021届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2020}">
+													<option value="2020" selected="selected">2020届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2020}">
+													<option value="2020">2020届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2019}">
+													<option value="2019" selected="selected">2019届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2019}">
+													<option value="2019">2019届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2018}">
+													<option value="2018" selected="selected">2018届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2018}">
+													<option value="2018">2018届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2017}">
+													<option value="2017" selected="selected">2017届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2017}">
+													<option value="2017">2017届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2016}">
+													<option value="2016" selected="selected">2016届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2016}">
+													<option value="2016">2016届</option>
+												</c:if>												
+												<c:if test="${user.educationalCircles == 2015}">
+													<option value="2015" selected="selected">2015届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2015}">
+													<option value="2015">2015届</option>
+												</c:if>
 											</select>
 											<span class="padding-side glyphicon"></span>
 										</div>
 										<div class="form-group">
 											<label for="grade">年级：</label>
 											<select name="grade" id="grade">
-												<option value="高一">高一</option>
-												<option value="高二">高二</option>
-												<option value="高三">高三</option>
+												<c:if test="${user.grade == '高一'}">
+													<option value="高一" selected="selected">高一</option>
+												</c:if>
+												<c:if test="${user.grade != '高一'}">
+													<option value="高一">高一</option>
+												</c:if>
+												<c:if test="${user.grade == '高二'}">
+													<option value="高二" selected="selected">高二</option>
+												</c:if>
+												<c:if test="${user.grade != '高二'}">
+													<option value="高二">高二</option>
+												</c:if>
+												<c:if test="${user.grade == '高三'}">
+													<option value="高三" selected="selected">高三</option>
+												</c:if>
+												<c:if test="${user.grade != '高三'}">
+													<option value="高三">高三</option>
+												</c:if>												
 											</select>
 										</div>
 										<div class="form-group">
@@ -405,13 +450,48 @@
 										<div class="form-group">
 											<label for="educationalCircles">学届：</label>
 											<select name="educationalCircles" id="educationalCircles" disabled="disabled">
-												<option value="2021">2021届</option>
-												<option value="2020">2020届</option>
-												<option value="2019">2019届</option>
-												<option value="2018">2018届</option>
-												<option value="2017">2017届</option>
-												<option value="2016">2016届</option>
-												<option value="2015">2015届</option>
+												<c:if test="${user.educationalCircles == 2021}">
+													<option value="2021" selected="selected">2021届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2021}">
+													<option value="2021">2021届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2020}">
+													<option value="2020" selected="selected">2020届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2020}">
+													<option value="2020">2020届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2019}">
+													<option value="2019" selected="selected">2019届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2019}">
+													<option value="2019">2019届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2018}">
+													<option value="2018" selected="selected">2018届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2018}">
+													<option value="2018">2018届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2017}">
+													<option value="2017" selected="selected">2017届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2017}">
+													<option value="2017">2017届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles == 2016}">
+													<option value="2016" selected="selected">2016届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2016}">
+													<option value="2016">2016届</option>
+												</c:if>												
+												<c:if test="${user.educationalCircles == 2015}">
+													<option value="2015" selected="selected">2015届</option>
+												</c:if>
+												<c:if test="${user.educationalCircles != 2015}">
+													<option value="2015">2015届</option>
+												</c:if>
 											</select>
 											<span class="padding-side glyphicon"></span>
 										</div>
@@ -495,7 +575,7 @@
 										<a class="text-mute" >潜能分析
 											<span class="glyphicon glyphicon-remove"></span>
 										</a>
-										<a>您还未进行潜能测评,是否去测评？<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=QNFX">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+										<a>您还未进行潜能分析测评,是否去测评？<a href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?test=QNFX">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 									</div>	
 								</c:if>
 							</li>
@@ -516,7 +596,7 @@
 										<a class="text-mute" >MBTI测评
 											<span class="glyphicon glyphicon-remove"></span>
 										</a>
-										<a>您还未进行MBTI测评,是否去测评？<a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
+										<a>您还未进行MBTI性格测评,是否去测评？<a href="${pageContext.request.contextPath}/cp/xgk_answer_mbti.do">测评<span class="glyphicon glyphicon-chevron-right"></span></a></a>
 									</div>	
 								</c:if>
 							</li>
@@ -567,7 +647,7 @@
 											<td>您未完成选科测评</td>
 										</c:if>
 										<c:if test="${resule_report.status == 1}">
-											<td><a class="text-info" href="${pageContext.request.contextPath}/xk//xgk_pick_report.do?province=${resule_report.province}&specialtyId=${resule_report.specialtyId}">下载</a></td>
+											<td><a class="text-info" href="${pageContext.request.contextPath}/xk//xgk_pick_report.do?province=${resule_report.province}&specialtyId=${resule_report.specialtyId}">查看</a></td>
 										</c:if>
 										<c:if test="${resule_report.status != 1}">
 											<td><a href="${pageContext.request.contextPath}/xk/xgk_guide_select.do" >进行选科</a></td>

@@ -19,6 +19,12 @@
 		<script src="${pageContext.request.contextPath}/js/web/xgk/wow.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/web/xgk/area_json.js" type="text/javascript" charset="utf-8"></script>
 		<script src="${pageContext.request.contextPath}/js/layer/2.4/layer.js"></script>
+		<style type="text/css">
+							 #vocation_list tr td{
+									width: 20%;
+									margin-bottom:.5em;
+								}
+							</style>
 	</head>
 
 	<body>
@@ -77,10 +83,10 @@
 											<div class="flex_Al_c yline_wrap">
 												<div class="yline"></div>
 											</div>
-											<div class="flex_Al_c">
+											<div class="flex_Al_c" id="rzcp">
 												<div class="circle bg-danger" style="display: flex;align-items: center;">
 													<div class="analyze3">
-														<p class="fontwei" id="rzcp">认知测评</p>
+														<p class="fontwei">认知测评</p>
 														<span class="glyphicon glyphicon-remove"></span>
 													</div>
 												</div>
@@ -99,24 +105,36 @@
 							<div class="">请在下列表格中选择一种您心仪的职业</div>
 							<div class="margin_top1">
 								<select name="" class="large_class" onclick='selectVocation()'>
-									<option value="">请选择一种心仪 的职业大类</option>
+									<option value="">职业大类</option>
 									<option value="">工程师</option>
 									<option value="">设计师</option>
 								</select>
 							</div>
-							<table class="table-bordered margin_top1 width100" style="text-align: center;" id="vocation_list">
-								<tr><td>报刊发行员</td><td>编辑</td><td>编曲家</td><td>导演</td><td>雕刻师</td></tr>
-								<tr><td>歌手</td><td>教练</td><td>记者</td><td>录音师</td><td>漫画家</td></tr>
-							</table>
+							<div class="margin_top1" id="vocation_list">
+								<span class="padding-side05"><a class="btn btn-primary">报刊发行员</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">编辑</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">编曲家</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">导演</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">雕刻师</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">歌手</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">教练</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">记者</a></span>
+								<span class="padding-side05"><a class="btn btn-primary">录音师</a></span>
+								<span class="padding-side05 margin_top1" style="display:inline-block;"><a class="btn btn-primary">漫画家</a></span>
+							</div>
+							<!-- <table class="margin_top1 width100" style="text-align: center;" id="vocation_list">							
+								<tr><td class="btn">报刊发行员</td><td class="btn">编辑</td><td class="btn">编曲家</td><td class="btn">导演</td><td class="btn">雕刻师</td></tr>
+								<tr><td class="btn">歌手</td><td class="btn">教练</td><td class="btn">记者</td><td class="btn">录音师</td><td class="btn">漫画家</td></tr>
+							</table> -->
+							
 						</div>
-						<div class="margin_top">
+						<div class="margin_top" >
 							<h3 class="text-muted fontwei">理想专业</h3>
 							<div class="">根据您选择的职业，我们为您推荐了以下专业，请从中选择一种您心仪的专业。</div>
 							<div class="text-center margin_top1">
 								<select name="" class="specialty_list">
 									<option value="0" selected="selected">请选择专业</option>
 								</select>
-								
 							</div>
 						</div>
 					</div>
@@ -128,7 +146,7 @@
 						</shiro:guest>
 						<shiro:user>
 							<shiro:hasPermission name="xkzd_scbk:add">
-								<a class="btn btn-default cancel margin0" href="javascript:;" onclick="generateReport()">生成报告</a>		
+								<a class="btn btn-default btn-primary margin0" href="javascript:;" onclick="generateReport()">生成报告</a>		
 							</shiro:hasPermission>
 							<shiro:lacksPermission name="xkzd_scbk:add">
 								<a class="btn btn-default cancel margin0 vipLimite" href="javascript:;"><label class="padding-side fontwei">VIP</label>生成报告</a>
@@ -196,7 +214,7 @@
 											$("#rzcp").attr('onclick','window.open("${pageContext.request.contextPath}/cp/xgk_choice.do")');
 										}
 										
-										var vocationLargeClass = "<option value=''>请选择一种心仪 的职业大类</option>";
+										var vocationLargeClass = "<option value=''>职业大类</option>";
 										for(var i=0; i<largeClass.length; i++){
 											vocationLargeClass += "<option value=''>"+ largeClass[i].industryName + "</option>";
 										}
@@ -215,14 +233,12 @@
 												//console.log(obj.data[0])
 												if(obj.state == 1){
 													var vList = obj.data.vList;
-													var vocationList = "<tr>";
+													var vocationList = "";
 													for(var j=0; j<vList.length; j++){
-														if (j%5 == 0 && j>0){
-															vocationList += "</tr><tr>";
-														}
-														vocationList += '<td onclick="getSpecialtyList(this)" id="' + vList[j].vocationId + '">' + vList[j].vocationName + '</td>';
+														vocationList += '<span class="padding-side05 margin_top1" style="display:inline-block;"><a onclick="getSpecialtyList(this)" class="btn btn-primary"  id="' + vList[j].vocationId + '">' + vList[j].vocationName + '</a></span>'
+														//vocationList += '<td onclick="getSpecialtyList(this)" class="btn" id="' + vList[j].vocationId + '"></td>';
 													}
-													$("#vocation_list").html(vocationList + "</tr>");
+													$("#vocation_list").html(vocationList);
 													var sList = obj.data.sList;
 													var specialtyList = "";
 													if(sList.length <= 0){

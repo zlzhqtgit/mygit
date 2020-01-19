@@ -89,7 +89,7 @@ public class VocationServerImpl implements IVocationServer {
 			paramMap.put("educationQualification", StringUtils.isEmpty(education) ? null : education);
 			vocationList = vocationMapper.selectVocationListByMap(paramMap);
 			Subject subject = SecurityUtils.getSubject();
-			if (subject.isAuthenticated()) {
+			if (subject.isAuthenticated() && !vocationList.isEmpty()) {
 				Integer uid = (Integer)subject.getSession().getAttribute("uid");
 				List<Enshrine> enshrineList = enshrineMapper.select(" uid = '" + (Integer)uid + "' AND e_type = '2'", null, null, null);
 				vocationList.get(0).setEnshrineList(enshrineList);

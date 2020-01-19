@@ -251,15 +251,19 @@
 
 				//点击下一題按钮
 				function xyt() {
-					var nu = Number($("#num").val()) + 1;					
-					if(len >= nu) {
-						ti(nu);
-						tu(nu, id);
-						$('#current').text(nu+1);
-					} else {
-						return;
-					}
-					$("#progress").css("width",100/len*(nu)+"%");
+					//1秒后执行
+					setTimeout(function(){
+						var nu = Number($("#num").val()) + 1;					
+						if(len >= nu) {
+							ti(nu);
+							tu(nu, id);
+							$('#current').text(nu+1);
+						} else {
+							return;
+						}
+						$("#progress").css("width",100/len*(nu)+"%");
+						},1000);
+					
 				}
 				//点击上一题按钮
 				function syt() {
@@ -324,14 +328,14 @@
 					}
 					var tmxsname = "";
 					if(cpda[nu][2] == 1 && cpda[nu][1] == 1) {
-						tmxsname += '<input type="radio" name="cpda" value="1" checked="checked" /><span id="da_a"> </span><br />' +
-							'<input type="radio" name="cpda" value="2" /><span id="da_b"> </span><br />';
+						tmxsname += '<input type="radio" name="cpda" style="zoom: 150%;" value="1" checked="checked" /><span id="da_a"> </span><br />' +
+							'<input type="radio" style="zoom: 150%;" name="cpda" value="2" /><span id="da_b"> </span><br />';
 					} else if(cpda[nu][2] == 1 && cpda[nu][1] == 2) {
-						tmxsname += '<input type="radio" name="cpda" value="1"  /><span id="da_a"> </span><br />' +
-							'<input type="radio" name="cpda" value="2" checked="checked" /><span id="da_b"> </span><br />';
+						tmxsname += '<input type="radio" style="zoom: 150%;" name="cpda" value="1"  /><span id="da_a"> </span><br />' +
+							'<input type="radio" style="zoom: 150%;" name="cpda" value="2" checked="checked" /><span id="da_b"> </span><br />';
 					} else {
-						tmxsname += '<input type="radio" name="cpda" value="1" onchange="xyt()"/><span id="da_a"> </span><br />' +
-							'<input type="radio" name="cpda" value="2" onchange="xyt()"/><span id="da_b"> </span><br />';
+						tmxsname += '<input type="radio" style="zoom: 150%;" name="cpda" value="1" onchange="xyt()"/><span id="da_a"> </span><br />' +
+							'<input type="radio" style="zoom: 150%;" name="cpda" value="2" onchange="xyt()"/><span id="da_b"> </span><br />';
 					}
 					$("#tmxs").html(tmxsname);
 

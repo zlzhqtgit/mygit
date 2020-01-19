@@ -18,41 +18,41 @@
 				{num: '16',title: '我确认我有信心学好化老师讲的每一个知识点。',subject: '化', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '17',title: '上化课特别高兴。',subject: '化', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '18',title: '我相信自己能够在化考试时获得一个理想的分数。',subject: '化', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
-				{num: '19',title: '喜欢看厉题材的影视剧。',	subject: '厉', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '19',title: '喜欢看厉题材的影视剧。',	subject: '历', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '20',title: '喜欢观察自然界中的各种生，并尝试采集、制作一些动植物标本。',subject: '生', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '21',title: '不管遇到什么样的政学习方面的问题，我相信我都能解决它们。',	subject: '政', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
-				{num: '22',title: '旅行时喜欢了解发生在当地的厉故事。',subject: '厉', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '22',title: '旅行时喜欢了解发生在当地的厉故事。',subject: '历', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '23',title: '我有信心根据微粒（原子、分子、离子等）物质的量、数目、气体体积（标准状况下）之间的相互关系正确进行有关计算。',subject: '化', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '24',title: '与其他学科相比，我认为我学习物更有优势。',	subject: '物', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '25',title: '即使我的物成绩不好，也不影响我学习物的信心。',subject: '物', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '26',title: '我觉得学习政这门课很有意思。',subject: '政', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '27',title: '喜欢观察自然界中的各种地现象。',	subject: '地', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '28',title: '我从没有怀疑过我在学习地方面的能力。',subject: '地', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
-				{num: '29',title: '当我遇到厉问题时，我相信我可以通过努力解决它们。',	subject: '厉', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '29',title: '当我遇到厉问题时，我相信我可以通过努力解决它们。',	subject: '历', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '30',title: '其他同学的政成绩比我好时，我相信我今后一定能够超越他们。',	subject: '政', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '31',title: '与其他学科相比，我认为地是我的优势学科。',subject: '地', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '32',title: '喜欢观看有关生命科学的电影或电视节目。',subject: '生', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '33',title: '我相信自己能够很好的完成化作业。',subject: '生', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '34',title: '关注日常生活中的化现象和知识。',	subject: '化', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '35',title: '虽然政中的有些模块很枯燥，但我相信我能够坚持下来。',subject: '政', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
-				{num: '36',title: '比起其他的学科，我认为厉算是我的优势学科。',subject: '厉', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '36',title: '比起其他的学科，我认为厉算是我的优势学科。',subject: '历', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '37',title: '我认为自己能够学好物。',	subject: '物', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '38',title: '喜欢上物课。',subject: '物', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '39',title: '希望自己将来可以从事与地相关的工作。',subject: '地', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '40',title: '我有信心做好运动的合成与分解方法相关计算。',	subject: '物', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '41',title: '我认为我有学习地的天分。',subject: '地', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
-				{num: '42',title: '喜欢听长辈讲过去的真实故事。',	subject: '厉', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
-				{num: '43',title: '喜欢阅读厉类书籍。',subject: '厉', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '42',title: '喜欢听长辈讲过去的真实故事。',	subject: '历', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '43',title: '喜欢阅读厉类书籍。',subject: '历', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '44',title: '对我国的经济制度有较强的好奇心。',subject: '政', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '45',title: '对地前沿知识和相关新闻报道感兴趣。',subject: '地', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '46',title: '对物学前沿知识或物科学史很感兴趣。',subject: '物', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
-				{num: '47',title: '对自己感兴趣的厉问题，会主动查阅厉资料寻找答案。',subject: '厉', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
-				{num: '48',title: '学习厉对我来说不是一种负担。',subject: '厉', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '47',title: '对自己感兴趣的厉问题，会主动查阅厉资料寻找答案。',subject: '历', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '48',title: '学习厉对我来说不是一种负担。',subject: '历', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '49',title: '在化学习方面我给自己设立了较高的目标。',	subject: '化', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '50',title: '花在化学习上的时间较多。',subject: '化', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '51',title: '每次上完生课，我都能很好地串联知识点，同时也能帮助其他同学。',subject: '生', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
-				{num: '52',title: '在每次厉考试前，我有信心能取得一个不错的成绩。',	subject: '厉', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
-				{num: '53',title: '学习过的厉知识我都能回答出来，学习厉很有天赋。',subject: '厉', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '52',title: '在每次厉考试前，我有信心能取得一个不错的成绩。',	subject: '历', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
+				{num: '53',title: '学习过的厉知识我都能回答出来，学习厉很有天赋。',subject: '历', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }] },
 				{num: '54',title: '在家中，我经常关注一些时政信息或者与政相关的书籍。',subject: '政', character: '自信', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '55',title: '喜欢阅读化类书籍。',subject: '化', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
 				{num: '56',title: '对发生在自己身边的地学现象能够做一些深入的了解和调查。',subject: '地', character: '兴趣', options: [ {da: '符合',sc: '5'	},{ da: '大致符合', sc: '4' } ,{ da: '一般', sc: '3' },{ da: '不太符合', sc: '2' },{ da: '不符合', sc: '1' }]},
@@ -67,7 +67,7 @@
 				{num: '63',title: '人体红细胞主要进行需氧呼吸。',
 																					subject: '生', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }] },
 				{num: '64',title: '抗日战争发展为全民族的抗战是在1936年西安事变之后。',
-																					subject: '厉', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }] },
+																					subject: '历', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }] },
 				{num: '65',title: '与索尔维制碱法相比，侯德榜制碱法最突出的优点是原料利用率高。',
 																					subject: '化', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }] },
 				{num: '66',title: '“1851年，正当伦敦世博会召开，宣布资本主义工业革命正以雷霆万钧之力重塑欧洲及至全球经济和社会形态时，已经有人在解剖它的病灶，预备提前宣判它的死刑了。”该事件是指马克思发表《共产党宣言》',
@@ -81,7 +81,7 @@
 				{num: '70',title: '蝌蚪发育成蛙的过程中，对尾部消失起主要作用的细胞器是溶酶体。',
 																					subject: '化', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
 				{num: '71',title: '孙中山就任临时大总统次日，即电告各省都督：“中华民国，改用阳历，以黄帝纪元四千六百零九年十一月十三日，为中华民国元年元旦。”此时，清朝统治已经结束。',
-																					subject: '厉', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
+																					subject: '历', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
 				{num: '72',title: '人站在台秤上先下蹲后起立，台秤示数先变小后变大。',
 																					subject: '物', character: '能力', options: [ {da: '对',sc: '0'	},{ da: '错', sc: '5' }]},
 				{num: '73',title: '糖蛋白只存在细胞膜的外表面，其它生膜结构几乎没有糖蛋白。',
@@ -91,7 +91,7 @@
 				{num: '75',title: '结合常识，我们只需要知道地球半径，就可以估算出月球到地心的距离。',
 																					subject: '地', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]  },
 				{num: '76',title: '太平天国颁布的《资政新篇》是中国人首次提出的在中国发展资本主义的改革方案。',
-																					subject: '厉', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
+																					subject: '历', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
 				{num: '77',title: '停止分裂的体细胞不可能变成癌细胞。',
 																					subject: '化', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
 				{num: '78',title: '公有制经济包括国有经济、集体经济及混合所有制经济。',
@@ -107,7 +107,7 @@
 				{num: '83',title: '已知两个力F₁与F₂的大小分别为10N和30N，则它们的合力大小不可能等于20N。',
 																					subject: '物', character: '能力', options: [ {da: '对',sc: '0'	},{ da: '错', sc: '5' }]},
 				{num: '84',title: '元朝中央设置中书省，其职能与唐朝三省制的中书省职权相同。',
-																					subject: '厉', character: '能力', options: [ {da: '对',sc: '0'	},{ da: '错', sc: '5' }]},
+																					subject: '历', character: '能力', options: [ {da: '对',sc: '0'	},{ da: '错', sc: '5' }]},
 				{num: '85',title: '线粒体内膜蛋白质和脂质的比值大于外膜。',
 																					subject: '生', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }] },
 				{num: '86',title: '元素是同一种类的原子的总称，不同元素的原子根本区别在于原子核内的质子数不同。',
@@ -119,7 +119,7 @@
 				{num: '89',title: '至2012年，中国在非洲已援建3000多千米铁路，100多所学校，减免其200多亿元人民币债务，谱写了中非友好新篇章。新中国与非洲友好开端最早可见于第26届联合国大会。',
 																					subject: '政', character: '能力', options: [ {da: '对',sc: '0'	},{ da: '错', sc: '5' }]},
 				{num: '90',title: '伏尔泰曾说：“我不能同意你说的每一个字，但是我誓死捍卫你说话的权利。”这表明他提倡言论自由',
-																					subject: '厉', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
+																					subject: '历', character: '能力', options: [ {da: '对',sc: '5'	},{ da: '错', sc: '0' }]},
 
 				
 	   ]
@@ -428,15 +428,29 @@
 
 	}
 
-
+	 //学科全称
+    var name_items = [
+        {title:"物",name:"物理"},
+        {title:"化",name:"化学"},
+        {title:"生",name:"生物"},
+        {title:"政",name:"政治"},
+        {title:"历",name:"历史"},
+        {title:"地",name:"地理"},
+    ]
 	function analysis() {
 		for(var i=0;i<option.series[0].data.length;i++){
 			option.series[0].data[i].value=score[i][1];
-			option.series[0].data[i].name=score[i][0];
+			for(var j=0; j<name_items.length; j++){
+				if(score[i][0] == name_items[j].title){
+					option.series[0].data[i].name=name_items[j].name;
+				}
+				
+			}
+			
 		}
 		var myChart = echarts.init(document.getElementById('major'));
+		//成绩分析
 		myChart.setOption(option);
-		// alert(total_sc); 
 		for(var i=0;i<score.length;i++){
 			for(var j=0;j<total_sc.length;j++){
 				if(score[i][0]==total_sc[j][0]){
@@ -445,7 +459,7 @@
 			}
 
 		}
-
+		
 		var tr = "<tr><td >自信</td>";
 		var tr1 = "<tr><td >兴趣</td>";
 		var tr2 = "<tr><td >能力</td>";

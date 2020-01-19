@@ -516,6 +516,7 @@ public class IUserServerImpl implements IUserServer {
 	@Override
 	public ResponseResult<Void> updateUserInfo(User user, HttpServletRequest request) {
 		Subject subject = SecurityUtils.getSubject();
+		System.err.println(user);
 		try {
 			if (subject.isAuthenticated()) {
 				Session session = subject.getSession();

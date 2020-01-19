@@ -612,6 +612,7 @@
 											var collegeScoreLine = universRelationList[j].collegeScoreLine;											
 											if($.isEmptyObject(collegeScoreLine) == false){
 												if(collegeScoreLine.startsWith("[")){
+													console.log("collegeScoreLine : " + collegeScoreLine);
 													var lines = JSON.parse(collegeScoreLine);
 													if(lines.length > 0){
 														lists += "<tr><td>" + universRelationList[j].urYear + "</td><td>" + universRelationList[j].subjectType + "</td><td>" + lines[0] + "</td><td>" + lines[1] + "</td><td>" + lines[2] + "</td><td>" + lines[3] + "</td><td>" + lines[4] + "</td><td>" + lines[5] + "</td><td>" + lines[6] + "</td><td>" + lines[7] + "</td></tr>";

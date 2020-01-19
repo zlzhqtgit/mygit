@@ -28,10 +28,10 @@
 			<section class="sch_search container">
 				
 				<div style="padding: 1em 100px 1em;">
-				    <div class="bs-example bs-example-form" >
+				    <div class="bs-example bs-example-form" >				    
 				        <div class="input-group input-group-lg" >
-				            <input type="text" class="form-control" placeholder="搜索你感兴趣的职业" id="search_info">
-				            <span class="input-group-addon" onclick="vocationSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>			            			            
+				            <input type="text" class="form-control " placeholder="搜索你感兴趣的职业" id="search_info">
+				            <span class="input-group-addon" style="cursor: pointer;" onclick="vocationSearch(1)"><span class="glyphicon glyphicon-search text-muted"></span></span>			            			            
 				        </div>
 				    </div>
 				</div>
@@ -122,35 +122,7 @@
 					<div class="padding-side">
 						<h4 class="fontwei">共找到<b id="search_count">2</b>条结果</h4>
 					</div>
-				    <ul class="list-group search_result list_career padding-side2" id="search_result">
-				        <%-- <li class="list-group-item width100">
-				        	<a class="width100" href="javascript:void(0)">
-				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>
-				        		<div class="text-muted o_row_brif width100">
-				        			利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务
-				        		</div>
-				        	</a>
-				        	<div class="text-center like">
-				        		<a class="" onclick="like(this)" href="javascript:void(0)">
-				        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
-				        			<span class="">喜欢</span>
-				        		</a>
-				        	</div>
-				        </li>
-				        <li class="list-group-item width100">
-				        	<a class="width100" href="javascript:void(0)">
-				        		<h4 class="fontwei">银行清算员<span class="text-muted padding-side">金融/银行/金融业务</span></h4>
-				        		<div class="text-muted o_row_brif width100">
-				        			利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务利用资金清算网络业务
-				        		</div>
-				        	</a>
-				        	<div class="text-center like">
-				        		<a class="" onclick="like(this)" href="javascript:;">
-				        			<img src="${pageContext.request.contextPath}/img/xgk/unlike.png"/>
-				        			<span class="">喜欢</span>
-				        		</a>
-				        	</div>
-				        </li> --%>
+				    <ul class="list-group search_result list_career padding-side2" id="search_result">				        
 				    </ul>
 				    <!--分页-->
 				    <div class="margin_bot margin_top bg-white p-10 m-t-10 t-a-c padding-side2" style="box-shadow: 0px 0px 0px #bdb8b8;">
@@ -227,17 +199,17 @@
 							}
 							vocationList += '<span class="">喜欢</span></a>';	
 							vocationList += '</div></li>';	
-							}
-							$("#search_count").html(data.length);
-							$("#search_result").html(vocationList);
-							$(".search_resultBox").css("display","block");
-							$("div.holder").jPages({
-								containerID : "search_result",
-								perPage     : 5,
-								first       : "首页",
-								previous    : "上一页",
-								next        : "下一页",
-								last        : "尾页"
+						}
+						$("#search_count").html(data.length);
+						$("#search_result").html(vocationList);
+						$(".search_resultBox").css("display","block");
+						$("div.holder").jPages({
+							containerID : "search_result",
+							perPage     : 5,
+							first       : "首页",
+							previous    : "上一页",
+							next        : "下一页",
+							last        : "尾页"
 							});
 							
 						}

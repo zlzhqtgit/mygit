@@ -197,19 +197,29 @@ $(function(){
 	            }
 	        }
 	    }
-	    pdf.save('我的选科报告.pdf');        
+	    pdf.save('学科分析报告.pdf');        
 	  })
 	}
 });
 </script>
 	<section class="row">
-		<p class="text-right"><a class="downloadReport btn btn-primary" href="javascript:;"">打印报告</a></p>
+		<p class="text-right">
+			<a class="btn btn-primary" href="${pageContext.request.contextPath}/sub/xgk_subject_score.do?look=CJFX" >返回</a>
+			<a class="downloadReport btn btn-primary" href="javascript:;"">打印报告</a>
+		</p>
 		<h1 class="text-primary fontwei">学科分析报告</h1>
 		<div class="panel panel-default" id="report_cont">
 			<div class="padding-side2 margin_top margin_bot">
 				<div class="report_box padding-side2">
 					<p class="">通过学科潜能测评结果对比分析，发现6门选考科目的适合度排序为：</p>
-					<p class="margin_top margin_bot"><a class="btn btn-primary" href="javascript:;" id="one">物理</a><a class="btn btn-primary" href="javascript:;" id="two">化学</a><a class="btn btn-primary" href="javascript:;" id="three">生物</a></p>
+					<p class="margin_top margin_bot">
+						<a class="btn btn-primary" href="javascript:;" id="one">物理</a>
+						<a class="btn btn-primary" href="javascript:;" id="two">化学</a>
+						<a class="btn btn-primary" href="javascript:;" id="three">生物</a>
+						<a class="btn btn-primary" href="javascript:;" id="four">政治</a>
+						<a class="btn btn-primary" href="javascript:;" id="five">历史</a>
+						<a class="btn btn-primary" href="javascript:;" id="six">地理</a>
+					</p>
 					<p class="">前三门科目是你的优势学科，你学习起来更感兴趣,也更容易学好，并且你对于学号这些科目更有信心；而后三门科目是你的非优势学科，在确定高考选考科目时，应当选择自己擅长的，回避自己的若是的科目。当然，你业可以根据上述各学科的发展建议提升自己想要选考科目的兴趣、能力、自信程度，并结合“学科推荐”系统中的其它维度统合分析，帮您做出最为科学、合理的决策。</p>
 					<div class="analyse_report margin_top">
 						<div id="xk_analyse_report1" class="" style="width: 600px;height:400px; margin: 3em auto;"></div>
@@ -232,6 +242,7 @@ $(function(){
 						                        {
 						                            type: 'category',
 						                            data: ['物理','化学','生物']
+						                            // data: ['物理','化学','生物','政治','历史','地理']
 						                        }
 						                    ],
 						                    yAxis: [
@@ -282,7 +293,8 @@ $(function(){
 						                                   /* color:'#c4cddc'*/
 						                                }
 						                            },
-						                            data:[20, 36, 40, ]
+						                            data:[20, 30, 40]
+						                            // data:[20, 30, 40, 50, 60, 70]
 						                        }
 						                    ]
 						            };
@@ -305,6 +317,24 @@ $(function(){
 											option1.series[0].data[2] = list[2].value;
 											option1.series[1].data[2] = parseInt(list[2].value)/3;
 											$("#three").html(subject_name_items[i].name);
+										}										
+										if (list[3].key == subject_name_items[i].title){
+											//option1.xAxis[0].data[3] = subject_name_items[i].name;
+											//option1.series[0].data[3] = list[3].value;
+											//option1.series[1].data[3] = parseInt(list[3].value)/3;
+											$("#four").html(subject_name_items[i].name);
+										}
+										if (list[4].key == subject_name_items[i].title){
+											//option1.xAxis[0].data[4] = subject_name_items[i].name;
+											//option1.series[0].data[4] = list[4].value;
+											//option1.series[1].data[4] = parseInt(list[4].value)/3;
+											$("#five").html(subject_name_items[i].name);
+										}
+										if (list[5].key == subject_name_items[i].title){
+											//option1.xAxis[0].data[5] = subject_name_items[i].name
+											//option1.series[0].data[5] = list[5].value;
+											//option1.series[1].data[5] = parseInt(list[5].value)/3;
+											$("#six").html(subject_name_items[i].name);
 										}
 									}
 									var myChart1 = echarts.init(document.getElementById('xk_analyse_report1'));
@@ -467,6 +497,12 @@ $(function(){
 				</div>
 			</div>
 		</div>
+		<p class="text-right">
+			<strong>您已完成学科分析报告，马上去完成认知测评吧！</strong>
+		</p>
+		<p class="text-right">
+			<a class="btn btn-primary" href="${pageContext.request.contextPath}/cp/xgk_choice.do">下一步</a>
+		</p>
 	</section>
 </main>
 

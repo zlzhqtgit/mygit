@@ -263,15 +263,6 @@
 									<td id="dildfl" colspan="2"></td>
 								</tr>
 								<tr>
-									<td>良好(平均)</td>
-									<td id="wulilh" colspan="2"></td>
-									<td id="huaxlh" colspan="2"></td>
-									<td id="sengwlh" colspan="2"></td>
-									<td id="zhengzlh" colspan="2"></td>
-									<td id="lislh" colspan="2"></td>
-									<td id="dillh" colspan="2"></td>
-								</tr>
-								<tr>
 									<td>优秀(平均)</td>
 									<td id="wuliyx" colspan="2"></td>
 									<td id="huaxyx" colspan="2"></td>
@@ -279,6 +270,15 @@
 									<td id="zhengzyx" colspan="2"></td>
 									<td id="lisyx" colspan="2"></td>
 									<td id="dilyx" colspan="2"></td>
+								</tr>
+								<tr>
+									<td>良好(平均)</td>
+									<td id="wulilh" colspan="2"></td>
+									<td id="huaxlh" colspan="2"></td>
+									<td id="sengwlh" colspan="2"></td>
+									<td id="zhengzlh" colspan="2"></td>
+									<td id="lislh" colspan="2"></td>
+									<td id="dillh" colspan="2"></td>
 								</tr>
 								<tr>
 									<td>低分(平均)</td>
@@ -291,12 +291,12 @@
 								</tr>
 							</tbody>
 						</table>
-						<div class="score_ts">
-							<p>
-								良好(平均):<label></label>
-							</p>
+						<div class="score_ts">							
 							<p>
 								优秀(平均):<label style="background: #e8bb0d;"></label>
+							</p>
+							<p>
+								良好(平均):<label></label>
 							</p>
 							<p>
 								低分(平均):<label style="background: #ce0d0d;"></label>

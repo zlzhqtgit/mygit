@@ -28,7 +28,7 @@
 				    <div class="bs-example bs-example-form">
 				        <div class="input-group input-group-lg">
 				            <input id="search_info" type="text" class="search_info form-control" placeholder="搜索你感兴趣的专业" >
-				            <span class="input-group-addon"  onclick="querySpecialty(1)" ><span class="glyphicon glyphicon-search text-muted"></span></span>				            	            
+				            <span class="input-group-addon" style="cursor: pointer;"  onclick="querySpecialty(1)" ><span class="glyphicon glyphicon-search text-muted"></span></span>				            	            
 				        </div>
 				    </div>
 				</div>
@@ -45,27 +45,7 @@
 				        		<dd><a href="javascript:void(0)" >专科专业</a></dd>
 				        	</dl>
 				        	<div class="clearfix"></div>
-				        </li>
-				       <!--  <li class="list-group-item">
-				        	<dl class="pull-left item_tit">
-				        		<dt>学科要求</dt>
-				        	</dl>
-				        	<dl class="pull-left item_body">
-				        		<dd><a class="active" href="javascript:void(0)">综合类</a></dd>
-				        		<dd><a href="javascript:void(0)">理工类</a></dd>
-				        		<dd><a href="javascript:void(0)">师范类</a></dd>
-				        		<dd><a href="javascript:void(0)">农林类</a></dd>
-				        		<dd><a href="javascript:void(0)">政法类</a></dd>
-				        		<dd><a href="javascript:void(0)">医药类</a></dd>
-				        		<dd><a href="javascript:void(0)">财经类</a></dd>
-				        		<dd><a href="javascript:void(0)">民族类</a></dd>
-				        		<dd><a href="javascript:void(0)">语言类</a></dd>
-				        		<dd><a href="javascript:void(0)">旅游类</a></dd>
-				        		<dd><a href="javascript:void(0)">体育类</a></dd>
-				        		<dd><a href="javascript:void(0)">艺术类</a></dd>
-				        		<dd><a href="javascript:void(0)">军事类</a></dd>
-				        	</dl>
-				        </li> -->
+				        </li>				      
 				        <li class="list-group-item">
 				        	<dl class="pull-left item_tit">
 				        		<dt>本科专业类别</dt>
@@ -224,7 +204,26 @@
 										}									
 										$("#bklist").html(bkdata);//本科列表数据
 										$("#zklist").html(zkdata);//专科列表数据
-										
+										//$("#zklist").text("zkdata");//专科列表数据
+										console.log("zkdata ： " + zkdata);
+										if(c[0].text == '本科专业'){
+											$("#cur_bkzy").show();
+											$("#cur_zkzy").hide();
+											$("#cur_zklit").removeClass("cur");
+											$("#cur_bklit").addClass("cur");	
+										}
+										if(c[0].text == '专科专业'){
+											$("#cur_bkzy").hide();
+											$("#cur_zkzy").show();
+											$("#cur_bklit").removeClass("cur");
+											$("#cur_zklit").addClass("cur");										
+										}
+										if(c[0].text == '全部'){
+											$("#cur_bkzy").show();
+											$("#cur_zkzy").show();
+											$("#cur_zklit").removeClass("cur");
+											$("#cur_bklit").addClass("cur");
+										}
 										$("div.holder1").jPages({
 						    			       containerID : "bklist",
 						    			       perPage     : 3,
@@ -251,81 +250,19 @@
 				<div class="search_resultBox panel panel-default" style="display:none;">
 				    <div class="tab_list padding-side2">
 				    	<ul class="tab_head clearfix">
-			    			<li class="cur">本科专业</li>
-			    			<li>专科专业</li>				    		
+			    			<li class="cur" id="cur_bkzy">本科专业</li>
+			    			<li id="cur_zkzy">专科专业</li>				    		
 				    	</ul>
 				    	<div class="tab_body">
-				    		<div class="tab_b1 cur">
-				    			<div class="major_info" id="bklist">
-				    				<!-- <div class="clearfix major_info_head">
-				    					<span class="pull-left"><h3>哲学(01)</h3></span>
-				    					<span class="pull-right  text-muted">1个专业类>4个本科专业</span>
-				    				</div>
-					    			<div class="clearfix major_info_sub">
-				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
-				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
-					    			</div>
-					    			<ul class="major_list clearfix margin_top1">
-					    				<li class=""><a>哲学</a></li>
-					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
-					    				<li class=""><a >伦理学</a></li>
-					    				<li class=""><a >宗教学</a></li>
-					    			</ul>
-					    			<div class="clearfix major_info_sub">
-				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
-				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
-					    			</div>
-					    			<ul class="major_list clearfix margin_top1">
-					    				<li class=""><a>哲学</a></li>
-					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
-					    				<li class=""><a >伦理学</a></li>
-					    				<li class=""><a >宗教学</a></li>
-					    			</ul>
-					    			<div class="clearfix major_info_head">
-				    					<span class="pull-left"><h3>不是哲学(01)</h3></span>
-				    					<span class="pull-right  text-muted">1个专业类>4个本科专业</span>
-				    				</div>
-					    			<div class="clearfix major_info_sub">
-				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
-				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
-					    			</div>
-					    			<ul class="major_list clearfix margin_top1">
-					    				<li class=""><a>哲学</a></li>
-					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
-					    				<li class=""><a >伦理学</a></li>
-					    				<li class=""><a >宗教学</a></li>
-					    			</ul>
-					    			<div class="clearfix major_info_sub">
-				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
-				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
-					    			</div>
-					    			<ul class="major_list clearfix margin_top1">
-					    				<li class=""><a>哲学</a></li>
-					    				<li class=""><a onmouseover="tips($('.tipsbox').html(),this,1)">逻辑学</a></li>
-					    				<li class=""><a >伦理学</a></li>
-					    				<li class=""><a >宗教学</a></li>
-					    			</ul> -->
+				    		<div class="tab_b1 cur" id="cur_bklit">
+				    			<div class="major_info" id="bklist">				    				
 				    			</div>
 				    			<div class="" style="box-shadow: 0px 0px 0px #bdb8b8;display:block;">
 								<div class="holder1" style="text-align: center;"></div>
 							</div>
 				    		</div>	
-				    		<div class="tab_b2">
-				    			<div class="major_info" id="zklist">
-				    				<!-- <div class="clearfix major_info_head" >
-				    					<span class="pull-left"><h3>哲学(02)</h3></span>
-				    					<span class="pull-right text-muted">1个专业类>4个本科专业</span>
-				    				</div>
-					    			<div class="clearfix major_info_sub">
-				    					<span class="pull-left"><h4 class="fontwei">哲学类（0101）</h4></span>
-				    					<span class="pull-right" style="color:#4b9f64;">4个专业</span>
-					    			</div>
-					    			<ul class="major_list clearfix margin_top1">
-					    				<li class=""><a href="sch_major_info.html" class="tooltip-test">哲学</a></li>
-					    				<li class=""><a href="sch_major_info.html">逻辑学</a></li>
-					    				<li class=""><a href="sch_major_info.html">伦理学</a></li>
-					    				<li class=""><a href="sch_major_info.html">宗教学</a></li>
-					    			</ul> -->
+				    		<div class="tab_b2" id="cur_zklit">
+				    			<div class="major_info" id="zklist">				    				
 				    			</div>
 				    			<div class="bg-white p-10 m-t-10 t-a-c"style="box-shadow: 0px 0px 0px #bdb8b8;">
 								<div class="holder2" style="text-align: center;"></div>
